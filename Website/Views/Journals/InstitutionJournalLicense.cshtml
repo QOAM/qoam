@@ -1,0 +1,52 @@
+﻿@using RU.Uci.OAMarket.Website.Models
+@using RU.Uci.OAMarket.Website.Resources
+@model RU.Uci.OAMarket.Website.ViewModels.Journals.InstitutionJournalLicenseViewModel
+
+@{
+    ViewBag.Title = ViewStrings.Journals_InstitutionJournalLicense_Title;
+}
+
+<div class="container main">
+    
+    <h2>@ViewBag.Title</h2>
+    
+    <p>@ViewStrings.Journals_InstitutionJournalPrice_SetQuotedPrice <a href="@Model.JournalLink" title="@Strings.ViewOnline">@Model.JournalTitle</a></p>
+    
+    @using (Html.BeginForm("InstitutionJournalLicense", "Journals", FormMethod.Post, new { role = "form" }))
+    {
+        <fieldset>
+            <legend>@ViewBag.Title</legend>
+            
+            @Html.HiddenFor(m => m.RefererUrl)
+            
+            <div class="form-group">
+                @Html.LabelFor(m => m.Link, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.Link, new { placeholder = Strings.Link, @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Link, null, new { @class = "control-label" })
+                </div>
+            </div>
+            
+            @if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UpdateAllJournalsOfPublisher, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.CheckBoxFor(m => m.UpdateAllJournalsOfPublisher, new { placeholder = Strings.Link, @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UpdateAllJournalsOfPublisher, null, new { @class = "control-label" })
+                    </div>
+                </div>
+            }
+
+            <div class="col-lg-10 col-md-offset-2">
+                <input type="submit" value="@Strings.Submit" class="btn btn-primary" />
+            </div>
+        </fieldset>
+    }
+
+</div>
+
+@section scripts
+{
+    @{ this.Html.RenderPartial("_FormScripts"); }
+}

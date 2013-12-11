@@ -1,0 +1,29 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+
+@{
+    ViewBag.Title = ViewStrings.Account_Login_Title;
+}
+
+<div class="container">
+    <div class="col-md-3">
+        <h2>@ViewBag.Title</h2>
+        <p>@ViewStrings.Account_Login_Instructions_Part1</p>
+        <p>@ViewStrings.Account_Login_Instructions_Part2 </p>
+    </div>
+
+    <div class="col-md-9">
+        @using (Html.BeginForm("ExternalLogin", "Account", new { ViewBag.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend>@ViewStrings.Account_Login_Help</legend>
+
+                <p>
+                    <button type="submit" name="provider" value="@ViewBag.SurfContextClientData.AuthenticationClient.ProviderName" title="@ViewStrings.Account_Login_Help">
+                        <img src="~/Content/images/surfcontext.png" alt="@ViewStrings.Account_Login_Help" title="@ViewStrings.Account_Login_Help" />
+                    </button>
+                </p>
+            </fieldset>
+        }
+    </div>
+</div>

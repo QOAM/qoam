@@ -1,0 +1,21 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+@model string
+
+@helper GetClass(string tabName)
+{
+    if (tabName == Model)
+    {
+        <text> class="active"</text>
+    }
+}
+<img src="~/Content/images/@(Model.ToLowerInvariant()).png" alt="@Model" title="@Model" style="width:50px" class="icon">
+<ul class="nav nav-list bs-docs-sidenav">
+    <!--<li class="text-center"><img src="~/Content/images/@(Model.ToLowerInvariant()).png" alt="@Model" title="@Model" style="width:50px"></li>-->
+    <li @GetClass("About")><a href="@Url.Action("About", "Home")"><i class="glyphicon glyphicon-chevron-right"></i>@Strings.About</a></li>
+    <li @GetClass("Contact")><a href="@Url.Action("Contact", "Home")" ><i class="glyphicon glyphicon-chevron-right"></i>@Strings.Contact</a></li>
+    <li @GetClass("Faq")><a href="@Url.Action("Faq", "Home")"><i class="glyphicon glyphicon-chevron-right"></i>@Strings.FAQ</a></li>
+    <li @GetClass("JournalScoreCard")><a href="@Url.Action("JournalScoreCard", "Home")"><i class="glyphicon glyphicon-chevron-right"></i>@Strings.JournalScoreCard</a></li>
+    <li @GetClass("Organisation")><a href="@Url.Action("Organisation", "Home")"><i class="glyphicon glyphicon-chevron-right"></i>@Strings.Organisation</a></li>
+    <li @GetClass("Press")><a href="@Url.Action("Press", "Home")"><i class="glyphicon glyphicon-chevron-right"></i>@Strings.Press</a></li>
+</ul>
+

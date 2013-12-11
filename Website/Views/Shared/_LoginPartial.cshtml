@@ -1,0 +1,24 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+
+@if (User.Identity.IsAuthenticated)
+{
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Details", "Profiles", new { id = ViewBag.User.Id })">@ViewBag.User.DisplayName <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink(Strings.Profile, "Details", "Profiles", new { id = ViewBag.User.Id }, null)</li>
+            <li class="divider"></li>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">@Strings.LogOff</a>
+
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                }
+            </li>
+        </ul>
+    </li>
+}
+else
+{
+    <li><a href="@Url.Action("Login", "Account")">@Strings.LogIn</a></li>
+}

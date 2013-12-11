@@ -1,0 +1,56 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+@model RU.Uci.OAMarket.Website.ViewModels.Profiles.EditViewModel
+
+@{
+    ViewBag.Title = ViewStrings.Profiles_Edit_Title;
+}
+
+<div class="container main">
+    
+    <h2>@ViewBag.Title</h2>
+    
+    <p>@ViewStrings.Profiles_Edit_EditTheProfileOf: @Html.ActionLink(Model.UserProfile.DisplayName, "Details", new { Model.UserProfile.Id })</p>
+    
+    @using (Html.BeginForm("Edit", "Profiles", FormMethod.Post, new { role = "form" }))
+    {
+        <fieldset>
+            <legend>@ViewBag.Title</legend>
+            
+            @Html.HiddenFor(m => m.ReturnUrl)
+            
+            <div class="form-group row">
+                @Html.LabelFor(m => m.IsAdmin, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2">
+                    @Html.CheckBoxFor(m => m.IsAdmin, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.IsAdmin, null, new { @class = "control-label" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(m => m.IsInstitutionAdmin, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2">
+                    @Html.CheckBoxFor(m => m.IsInstitutionAdmin, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.IsInstitutionAdmin, null, new { @class = "control-label" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(m => m.IsDataAdmin, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2">
+                    @Html.CheckBoxFor(m => m.IsDataAdmin, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.IsDataAdmin, null, new { @class = "control-label" })
+                </div>
+            </div>
+
+            <div class="col-lg-10 col-md-offset-2">
+                <input type="submit" value="@Strings.Submit" class="btn btn-primary" />
+            </div>
+        </fieldset>
+    }
+
+</div>
+
+@section scripts
+{
+    @{ this.Html.RenderPartial("_FormScripts"); }
+}

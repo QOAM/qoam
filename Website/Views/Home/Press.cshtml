@@ -1,0 +1,21 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+@{
+    ViewBag.Title = ViewStrings.Home_Press_Title;
+}
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-3">
+            @{ Html.RenderPartial("_SidebarMenu", "Press"); }
+        </div>
+        <div class="col-md-9">
+            <h2>@ViewBag.Title</h2>
+
+            <h3>@ViewStrings.Home_Press_InterestingLinks</h3>
+            
+            <ul>
+                <li><a href="http://www.sciencemag.org/content/338/6110/1018.summary" title="As Open Access Explodes, How to Tell the Good From the Bad and the Ugly?">As Open Access Explodes, How to Tell the Good From the Bad and the Ugly?</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

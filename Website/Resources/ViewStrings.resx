@@ -1,0 +1,713 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account_ExternalLoginFailure_Title" xml:space="preserve">
+    <value>Log in failure</value>
+  </data>
+  <data name="Account_Login_Help" xml:space="preserve">
+    <value>Log in using your institutional account</value>
+  </data>
+  <data name="Account_Login_Instructions_Part1" xml:space="preserve">
+    <value>In order to publish score cards, you need to log in. You can log in by using your own institutional credentials. You cannot create an account, you have to have an institutional account to log in.</value>
+  </data>
+  <data name="Account_Login_Instructions_Part2" xml:space="preserve">
+    <value>To log in, just click on the image on the right, select your institution and login using your own institutional credentials. After succesfully logging in, you will automatically be returned to this website.</value>
+  </data>
+  <data name="Account_Login_Title" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="Carousel_HelpsPublish_Text" xml:space="preserve">
+    <value>The Quality Open Access Market helps you publish in serious, transparant OA journals, and avoid the predatory ones.</value>
+  </data>
+  <data name="Carousel_HelpsPublish_Title" xml:space="preserve">
+    <value>Help publish</value>
+  </data>
+  <data name="Carousel_LoginToCompare_Text" xml:space="preserve">
+    <value>Login to see if your institute has bargained a better price.</value>
+  </data>
+  <data name="Carousel_LoginToCompare_Title" xml:space="preserve">
+    <value>Compare discount</value>
+  </data>
+  <data name="Carousel_ScoreJournal_Text" xml:space="preserve">
+    <value>Contribute to the website by scoring a journal</value>
+  </data>
+  <data name="Carousel_ScoreJournal_Title" xml:space="preserve">
+    <value>Score a journal</value>
+  </data>
+  <data name="Error_Text" xml:space="preserve">
+    <value>An error occurred while processing your request.</value>
+  </data>
+  <data name="Error_Title" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Home_Organisation_Involvement_Text" xml:space="preserve">
+    <value>&lt;p&gt;
+	Over time several people have contributed in various roles. 
+&lt;/p&gt;
+
+&lt;ul&gt;
+	&lt;li&gt;&lt;strong&gt;Discussion partners:&lt;/strong&gt; Bas Savenije, Saskia de Vries, Sijbolt Noorda, Marc Dupuis, Margreet Bouma, Natalia Grygierczyk, Wim Liebrand, Astrid van Wesenbeeck, Henk Wals, Wijnandt Mijnhardt, Maurits van der Graaf.&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Funding contributions:&lt;/strong&gt; SURF, NWO, CWTS, KNAW, Radboud University.&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Prototyping the Editorial Board Indicator:&lt;/strong&gt; Paul Wouters, Rodrigo Costas.&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Developing the Journal Score Card:&lt;/strong&gt; Jelte Wicherts.&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Testers of the Transparancy Indicator (predecessor of the Journal Score Card):&lt;/strong&gt; Leon Osinski, Birte Kristiansen, Wouter Gerritsma, Teunis van Lopik, Gemma Indemans, Thijs Severens, D. Jonkheer, Erika Manten, Jaap de Lange, Eric Rumondor, Astrid van Wesenbeeck, Leen Seekles, Jorden Esser, Corry Stuyts, Marike van Dorsser, Marijke van der Ploeg, Saskia de Vries, Saskia Franken, Saskia van Putten, Leo Waaijers.&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Co-organizers of the Rotterdam colloquium:&lt;/strong&gt; Saskia de Vries, Marc Dupuis, Annemiek van der Kuil, Tom Olijhoek.&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Attendees of the Rotterdam Colloquium:&lt;/strong&gt; Celina Ramjoue (&lt;a href="http://ec.europa.eu/research/index.cfm"&gt;European Commission&lt;/a&gt;), Robert Kiley (&lt;a href="http://www.wellcome.ac.uk/"&gt;Wellcome Trust&lt;/a&gt;), Franciska de Jong (&lt;a href=""http://www.nwo.nl/en&gt;Netherlands Organisation for Scientific Research&lt;/a&gt;), Falk Reckling (&lt;a href="http://www.fwf.ac.at/en/index.asp"&gt;Austrian Science Fund&lt;/a&gt;), Paul Boyle (&lt;a href="http://www.fwf.ac.at/en/index.asp"&gt;Science Europe&lt;/a&gt;), Peder Andersen (&lt;a href="http://fivu.dk/en/"&gt;Ministry of Science, Innovation and Higher Education&lt;/a&gt;), Hans Bennis (&lt;a href="https://www.knaw.nl/en"&gt;Royal Netherlands Academy of Arts and Sciences&lt;/a&gt;), Deborah Kahn (&lt;a href="http://www.biomedcentral.com/"&gt;BioMedCentral&lt;/a&gt;), Martin Rasmussen (&lt;a href="http://publications.copernicus.org/"&gt;Copernicus&lt;/a&gt;), Wim van der Stelt (&lt;a href="http://www.springer.com/?SGWID=5-102-0-0-0"&gt;Springer&lt;/a&gt;), Paul Peters (&lt;a href="http://www.hindawi.com/"&gt;Hindawi&lt;/a&gt;), Cameron Neylon (&lt;a href="http://www.plosone.org/home.action"&gt;PloS&lt;/a&gt;), James Butcher (&lt;a href="http://www.nature.com/"&gt;Nature Publishing Group&lt;/a&gt;), Frank van Laerhoven (&lt;a href="http://www.thecommonsjournal.org/index.php/ijc/about/editorialPolicies"&gt;International Journal of the Commons&lt;/a&gt;), Leonie de Goei (&lt;a href="http://www.bmgn-lchr.nl/index.php/bmgn/about"&gt;BMGN - Low Countries Historical Review&lt;/a&gt;), Aad Blok (&lt;a href="http://www.iisg.nl/irsh/"&gt;International Review of Social History&lt;/a&gt;), Marcel Hommel (&lt;a href="http://www.malariajournal.com/"&gt;Malaria Journal&lt;/a&gt;), Jacintha Ellers (&lt;a href="http://www.journals.elsevier.com/journal-of-insect-physiology/"&gt;Journal of Insect Physiology&lt;/a&gt;), Mark van Loosdrecht (&lt;a href="http://www.iwaponline.com/wr/default.htm"&gt;Water Research&lt;/a&gt;), Jack Middelburg (&lt;a href="http://www.biogeosciences.net/home.html"&gt;Biogeosciences&lt;/a&gt;), Jeffrey Beall (&lt;a href="http://scholarlyoa.com/individual-journals/"&gt;Predatory journals&lt;/a&gt;), Lars Bjørnshauge (&lt;a href="http://sparceurope.org/"&gt;SPARC Europe&lt;/a&gt;), Jan Velterop (&lt;a href="http://aqnowledge.com/"&gt;Aqnowledge&lt;/a&gt;), Martin Enserink (&lt;a href="http://www.sciencemag.org/"&gt;Freelance journalist (Science)&lt;/a&gt;), Jelte Wicherts (&lt;a href="http://www.tilburguniversity.edu/"&gt;Tilburg University&lt;/a&gt;), Paul Wouters (&lt;a href="http://www.cwts.nl/"&gt;CWTS, Leiden University&lt;/a&gt;), Saskia de Vries (Co-organiser), Tom Olijhoek (Co-organiser), Marc Dupuis (&lt;a href="http://www.surf.nl/en/Pages/default.aspx"&gt;SURF&lt;/a&gt;), Leo Waaijers.&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Developers QOAM web site:&lt;/strong&gt; Erik Schierboom, Maurice Vanderfeesten, Marlon van Haren.&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Federated authentication for the Netherlands academic community:&lt;/strong&gt; Pim Slot&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Licencing OA deals for the Dutch Universities:&lt;/strong&gt; Pim Slot&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Supervisor:&lt;/strong&gt; Leo Waaijers.&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="Home_Organisation_Involvement" xml:space="preserve">
+    <value>Involvement in QOAM</value>
+  </data>
+  <data name="Home_About_Introduction" xml:space="preserve">
+    <value>Quality Open Access Market is primarily for authors who want to publish their article in open access in a high quality journal and for a reasonable price.</value>
+  </data>
+  <data name="Home_About_Title" xml:space="preserve">
+    <value>About QOAM</value>
+  </data>
+  <data name="Home_ContactSent_Text" xml:space="preserve">
+    <value>Your message was successfully sent to us!</value>
+  </data>
+  <data name="Home_ContactSent_Title" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Home_Contact_ContactPerson" xml:space="preserve">
+    <value>Contact person</value>
+  </data>
+  <data name="Home_Contact_Form_Error" xml:space="preserve">
+    <value>An error occured while trying to process the contact form. Please try again.</value>
+  </data>
+  <data name="Home_Contact_Form_Legend" xml:space="preserve">
+    <value>Please fill in the contact information and then submit the form.</value>
+  </data>
+  <data name="Home_Contact_OfficeLocation" xml:space="preserve">
+    <value>Office Radboudhof (4th floor)</value>
+  </data>
+  <data name="Home_Contact_PostalDelivery" xml:space="preserve">
+    <value>Postal delivery</value>
+  </data>
+  <data name="Home_Contact_Text" xml:space="preserve">
+    <value>You can contact Leo through the form below:</value>
+  </data>
+  <data name="Home_Contact_Title" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Home_Contact_VisitingAddress" xml:space="preserve">
+    <value>Visiting address</value>
+  </data>
+  <data name="Home_Faq_Framing_Text" xml:space="preserve">
+    <value>&lt;p&gt;
+                To avoid unqualified contributions to QOAM, only members of the academic community may publish Journal Score Cards. Membership will be controlled by federated authentication via trusted third parties like SURFconext in the Netherlands. Per person only one JSC may be published for a specific journal. Published Journal Score Cards are non-anonymous. Their authors can be contacted by other members of the academic community via the &lt;a href="{0}" title="Profiles section"&gt;Profiles section&lt;/a&gt; of QOAM.&lt;br/&gt;
+                Currently, QOAM has no resources to organise any form of social control or moderation. We have to rely on academic vigilance. Jeffrey Beall’s &lt;a href="http://scholarlyoa.com/individual-journals/" title="list of predatory journals"&gt;list of predatory journals&lt;/a&gt; and John Bohannon’s article &lt;a href="http://www.sciencemag.org/content/342/6154/60.full" title="Who is Afraid of Peer Review?"&gt;Who is Afraid of Peer Review?&lt;/a&gt; are examples of this. 
+            &lt;/p&gt;</value>
+  </data>
+  <data name="Home_Faq_Framing_Title" xml:space="preserve">
+    <value>Is QOAM prone to improper use?</value>
+  </data>
+  <data name="Home_Faq_HybridJournalsIncluded_Text" xml:space="preserve">
+    <value>&lt;p&gt;Author centric, QOAM provides all journals that offer open access publishing. This entails hybrid journals. Some hybrid journals manage to generate a double income by charging both readers (via full library subscriptions) and authors (via full publication fees).&lt;br/&gt;
+The initiators of QOAM despise this ‘double dipping’ but QOAM is not the instrument to combat this directly. However, if institutions succeed in negotiating journal licenses that end these practices, the license results and more specifically their effect on the publication fees will be mentioned on QOAM’s web site (be it that in most cases one has to log in with their institutional account to see if this applies to one’s institute). For example, SURFmarket succeeded to settle such deals with SAGE and the Royal Society of Chemistry on behalf of UKB, the Dutch consortium of university libraries and the National Library.&lt;/p&gt;</value>
+  </data>
+  <data name="Home_Faq_HybridJournalsIncluded_Title" xml:space="preserve">
+    <value>Why are hybrid journals also included in QOAM?</value>
+  </data>
+  <data name="Home_Faq_NoMetrics_Text" xml:space="preserve">
+    <value>&lt;p&gt;Metrics for QOAM must apply to young journals because most  journals which are born OA are in their infancy. Therefore, the Journal Impact Factor is not included. The Leiden institute CWTS developed an Editorial Board Indicator, a metric for the scientific impact of the editorial board. The main obstacle for applying it is the problem of identifying the board members; just a name and an affiliation are not enough for that. The importance of having a clear identification of the Editorial Board members of scientific journals (i.e. their full names, affiliations, e-mail and even their ORCID identifier) can be also considered as an element of transparency and quality. Should these data be more transparent and accessible, indicators on the scientific impact of the editorial board could then be extensively developed and included in QOAM. See &lt;a href="http://www.surf.nl/en/publicaties/Pages/CWTSrapport.aspx"&gt;SURF&lt;/a&gt;. Other straightforward young journal metrics would be welcomed by QOAM as well.&lt;/p&gt;</value>
+  </data>
+  <data name="Home_Faq_NoMetrics_Title" xml:space="preserve">
+    <value>Why does QOAM not include metrics as a quality proxy?</value>
+  </data>
+  <data name="Home_Faq_Title" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
+  <data name="Home_Index_Score" xml:space="preserve">
+    <value>I want to publish a&lt;br/&gt; Journal Score Card</value>
+  </data>
+  <data name="Home_Index_Search" xml:space="preserve">
+    <value>I am looking for an&lt;br /&gt;Open Access Journal</value>
+  </data>
+  <data name="Home_Index_Title" xml:space="preserve">
+    <value>Quality Open Access Market</value>
+  </data>
+  <data name="Home_Organisation_Text" xml:space="preserve">
+    <value>In its operational stage QOAM must be run by an independent robust service provider. &lt;a href="http://www.surfmarket.nl/Over/Paginas/Dienstverlening.aspx" title="SURFmarket"&gt;SURFmarket&lt;/a&gt;, already the licensee for the national package deals with the subscription publishers, has shown an interest to operate it. The organisation of QOAM is under construction.</value>
+  </data>
+  <data name="Home_Organisation_Title" xml:space="preserve">
+    <value>Organisation</value>
+  </data>
+  <data name="Home_Press_Description" xml:space="preserve">
+    <value>This website has gathered the following press reviews...</value>
+  </data>
+  <data name="Home_Press_Title" xml:space="preserve">
+    <value>Press</value>
+  </data>
+  <data name="Journals_Index_AvailableAtYourInstitution" xml:space="preserve">
+    <value>available at your institution</value>
+  </data>
+  <data name="Journals_Index_InJournalWithScore" xml:space="preserve">
+    <value>in Journal with Base Score</value>
+  </data>
+  <data name="Journals_Index_InstitutionsThatOfferDiscount" xml:space="preserve">
+    <value>Institutions that offer a discount</value>
+  </data>
+  <data name="Journals_Index_PublishedJournalScoreCards" xml:space="preserve">
+    <value>Published JSCs</value>
+  </data>
+  <data name="Journals_Index_PublishFor" xml:space="preserve">
+    <value>Publish for only</value>
+  </data>
+  <data name="Journals_Index_ScoreText" xml:space="preserve">
+    <value>The &lt;strong&gt;Base Score&lt;/strong&gt; and the &lt;strong&gt;Valuation Score&lt;/strong&gt; are the outcomes of one or more &lt;a href="{0}" title="Journal Score Cards"&gt;Journal Score Cards&lt;/a&gt; published for this journal</value>
+  </data>
+  <data name="Journals_Index_Title" xml:space="preserve">
+    <value>OA Journals</value>
+  </data>
+  <data name="Journals_Index_ToPublishInThisJournal" xml:space="preserve">
+    <value>to publish in this journal</value>
+  </data>
+  <data name="Layout_BackToTop" xml:space="preserve">
+    <value>Back to top</value>
+  </data>
+  <data name="Layout_Project_Name" xml:space="preserve">
+    <value>Quality Open Access Market</value>
+  </data>
+  <data name="Layout_Title_Postfix" xml:space="preserve">
+    <value>Quality Open Access Market</value>
+  </data>
+  <data name="Profile_Badges_Title" xml:space="preserve">
+    <value>Badges of {0}</value>
+  </data>
+  <data name="Profile_Details_BadgesReceived" xml:space="preserve">
+    <value>Badges received</value>
+  </data>
+  <data name="Profile_Details_RateAnotherJournal" xml:space="preserve">
+    <value>Rate another journal</value>
+  </data>
+  <data name="Profile_Details_ScoreCardsExpired" xml:space="preserve">
+    <value>Score card(s) expired</value>
+  </data>
+  <data name="Profile_Details_ScoreCardsPublished" xml:space="preserve">
+    <value>Score card(s) published</value>
+  </data>
+  <data name="Profile_Details_ScoreCardsUnfinished" xml:space="preserve">
+    <value>Score card(s) unfinished</value>
+  </data>
+  <data name="Profile_Details_Title" xml:space="preserve">
+    <value>Profile of {0}</value>
+  </data>
+  <data name="Profile_Index_Title" xml:space="preserve">
+    <value>Profiles</value>
+  </data>
+  <data name="Profile_Notifications_Title" xml:space="preserve">
+    <value>Notifications of {0}</value>
+  </data>
+  <data name="Profile_ScoreCards_Title" xml:space="preserve">
+    <value>Score cards of {0}</value>
+  </data>
+  <data name="Score_Index_Title" xml:space="preserve">
+    <value>Score a journal</value>
+  </data>
+  <data name="Score_Journal_AdditionalComments" xml:space="preserve">
+    <value>Additional comments</value>
+  </data>
+  <data name="Score_Journal_AdditionalCommentsYouWantToShare" xml:space="preserve">
+    <value>Other additional comments you like to share</value>
+  </data>
+  <data name="Score_Journal_AllOtherCases" xml:space="preserve">
+    <value>all other cases</value>
+  </data>
+  <data name="Score_Journal_OpenAccessCategoryDescription" xml:space="preserve">
+    <value>&lt;p class="text-left"&gt;Does the journal publish articles with:&lt;/p&gt; 
+
+&lt;ul class="text-left"&gt;
+	&lt;li&gt;A standard CC BY license? If affirmative, please tick 5.&lt;/li&gt;
+	&lt;li&gt;A qualified CCBY license (e.g CC BY-NC)? If affirmative, please tick 3.&lt;/li&gt;
+	&lt;li&gt;In all other cases, please tick 1.&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="Score_Journal_Published_BadgeReceived" xml:space="preserve">
+    <value>This effort will be rewarded. You have received a new badge:</value>
+  </data>
+  <data name="Score_Journal_Published_Summary" xml:space="preserve">
+    <value>&lt;p&gt;Thank you very much for publishing a score card.&lt;/p&gt;
+&lt;p&gt;Your contribution helps us to display the transparency of Open Access journals and will help editors and publishers improve their journals.&lt;p&gt;
+&lt;p&gt;Read more about &lt;a href="{0}" title="Journal Score Cards"&gt;Journal Score Cards&lt;/a&gt;.&lt;/p&gt;</value>
+  </data>
+  <data name="Score_Journal_QualifiedCCBYLicence" xml:space="preserve">
+    <value>qualified CC-BY licence</value>
+  </data>
+  <data name="Score_Journal_StandardCCBYLicence" xml:space="preserve">
+    <value>standard CC-BY licence</value>
+  </data>
+  <data name="Score_Journal_TellYourFriendsAndColleagues" xml:space="preserve">
+    <value>Tell your friends and colleagues</value>
+  </data>
+  <data name="Score_Journal_Title" xml:space="preserve">
+    <value>Score card</value>
+  </data>
+  <data name="Shared_BadgeAwardedAt" xml:space="preserve">
+    <value>Badge awarded at {0}</value>
+  </data>
+  <data name="Journals_Index_LearnToGetDiscount" xml:space="preserve">
+    <value>Learn how to get your discount?</value>
+  </data>
+  <data name="Journals_Index_LoginToSeeDiscount" xml:space="preserve">
+    <value>Login to see the discount at your institution</value>
+  </data>
+  <data name="Journals_Index_ContactInstitution" xml:space="preserve">
+    <value>Contact your institution</value>
+  </data>
+  <data name="Journals_Index_ContactJournal" xml:space="preserve">
+    <value>Contact journal</value>
+  </data>
+  <data name="Journals_Comments_NoComments" xml:space="preserve">
+    <value>No comments have been made on this journal</value>
+  </data>
+  <data name="Home_JournalScoreCard_Title" xml:space="preserve">
+    <value>Journal Score Card</value>
+  </data>
+  <data name="Home_Press_InterestingLinks" xml:space="preserve">
+    <value>Interesting links</value>
+  </data>
+  <data name="Shared_NoJournalsFound" xml:space="preserve">
+    <value>&lt;p class="text-warning"&gt;No journals could be found. This outcome is adressed in the FAQ &lt;a href="{0}" title="Why don't I find a specific journal in QOAM?"&gt;Why don't I find a specific journal in QOAM?&lt;/a&gt;&lt;/p&gt;</value>
+  </data>
+  <data name="Journals_Prices_NoInstitutionPrices" xml:space="preserve">
+    <value>There are no institutions with a discount for this journal.</value>
+  </data>
+  <data name="Score_Journal_APCDescription" xml:space="preserve">
+    <value>APC's or Article Processing Charges are calculated in various different ways. Publishers often use a default APC, or ask for chargers depending on the different variables accompanied by a calculation formula. To compare prices we use a standardised calculation.</value>
+  </data>
+  <data name="Score_Journal_YourDiscountPrice" xml:space="preserve">
+    <value>Your discount price</value>
+  </data>
+  <data name="Journals_Prices_NoPaidPrices" xml:space="preserve">
+    <value>There are no paid prices for this journal.</value>
+  </data>
+  <data name="Journals_Prices_ForStandardPriceSeeWebsite" xml:space="preserve">
+    <value>For the standard price see the &lt;a href="{0}" title="Journal website"&gt;web site of this journal&lt;/a&gt;</value>
+  </data>
+  <data name="Journals_Prices_InstitutionPriceForInstitution" xml:space="preserve">
+    <value>Your institution has a special license for this journal.</value>
+  </data>
+  <data name="Journals_Prices_InstitutionPricesForJournal" xml:space="preserve">
+    <value>Currently, {0} institution(s) have a special license for this journal. View &lt;a id="{1}-viewInstitutionJournalPrices" title="View the institutional prices"&gt;the list of institution prices&lt;/a&gt;.</value>
+  </data>
+  <data name="Journals_Prices_ViewPaidPrices" xml:space="preserve">
+    <value>View all paid prices</value>
+  </data>
+  <data name="Journals_Prices_NoInstitutionPriceForInstitution" xml:space="preserve">
+    <value>Your institution does not have a special license for this journal.</value>
+  </data>
+  <data name="Journals_Prices_NoInstitutionPricesForJournal" xml:space="preserve">
+    <value>Currently, there are no institutions with a special license for this journal.</value>
+  </data>
+  <data name="Journals_InstitutionJournalLicense_Title" xml:space="preserve">
+    <value>Edit the institution's journal license</value>
+  </data>
+  <data name="Journals_JournalPrice_Title" xml:space="preserve">
+    <value>Edit the journal's price</value>
+  </data>
+  <data name="Journals_Prices_EditJournalPrice" xml:space="preserve">
+    <value>Edit the journal's price</value>
+  </data>
+  <data name="Journals_Prices_EditInstitutionJournalLicense" xml:space="preserve">
+    <value>Edit the institution's journal license</value>
+  </data>
+  <data name="Journals_JournalPrice_SetPerceivedPrice" xml:space="preserve">
+    <value>Here you can set the perceived price of the journal</value>
+  </data>
+  <data name="Score_Journal_OptionalQuestionPriceJournal" xml:space="preserve">
+    <value>Optional question: What do you think the price of publishing an article in this journal is?</value>
+  </data>
+  <data name="Journals_Prices_NoJournalPricesForJournal" xml:space="preserve">
+    <value>Currently there is no actual price evidence for this journal.</value>
+  </data>
+  <data name="Journals_InstitutionJournalPrice_SetQuotedPrice" xml:space="preserve">
+    <value>Here you can set the institution price of the journal</value>
+  </data>
+  <data name="Profiles_Edit_EditTheProfileOf" xml:space="preserve">
+    <value>Edit the profile of</value>
+  </data>
+  <data name="Profiles_Edit_Title" xml:space="preserve">
+    <value>Edit the profile</value>
+  </data>
+  <data name="Journals_Prices_ForInstitutionPriceSeeWebsite" xml:space="preserve">
+    <value>For the institution's price see the &lt;a href="{0}" title="Journal website"&gt;web site&lt;/a&gt;</value>
+  </data>
+  <data name="Home_JournalScoreCard_ShowIt_Title" xml:space="preserve">
+    <value>Show it!</value>
+  </data>
+  <data name="Home_JournalScoreCard_WhatIsJournalScoreCard_Text" xml:space="preserve">
+    <value>&lt;p&gt;
+                A Journal Score Card (JSC) is a questionnaire on five relevant journal aspects. Four of them – Editorial information, Peer review, Governance and Process - are based on the journal’s website. The fifth – Valuation – is a reality check, preferably based on experience with the submission of an article to the journal.  Every aspect has some bullets and each bullet can be rated from 1 to 5. The average of these ratings is called the subscore for this aspect. The lowest subscore of the four web site related aspects is called the &lt;strong&gt;Base Score&lt;/strong&gt; of the journal. The subscore of the fifth aspect is called the &lt;strong&gt;Valuation Score&lt;/strong&gt; of the jounal. 
+            &lt;/p&gt;</value>
+  </data>
+  <data name="Home_JournalScoreCard_WhatIsJournalScoreCard_Title" xml:space="preserve">
+    <value>What is a Journal Score Card?</value>
+  </data>
+  <data name="Home_About_BriefHistory_Text" xml:space="preserve">
+    <value>&lt;p&gt;
+                For long, SURF has been convinced that in the OA paradigm, next to price quality is a critical issue. For established journals the Journal Impact Factor, though controversial, is used as a proxy for quality but for young journals there is no such quality indicator whatsoever. This is a specific handicap for young OA journals whereas young subscription journals are often just included in Big Deal packages. The outcomes of the &lt;a href="http://project-soap.eu/report-from-the-soap-symposium/" title="EC-project SOAP"&gt;EC-project SOAP&lt;/a&gt; confirmed a growing urgency to address the quality issue for OA journals (later alarmingly demonstrated by  the emergence of &lt;a href="http://scholarlyoa.com/individual-journals/" title="predatory journals"&gt;predatory journals&lt;/a&gt; and John Bohannon’s article &lt;a href="http://www.sciencemag.org/content/342/6154/60.full" title="Who is Afraid of Peer Review?"&gt;Who is Afraid of Peer Review?&lt;/a&gt;)
+            &lt;/p&gt;
+
+            &lt;p&gt;
+                As early as 2009 SURF took the initiative to investigate the feasibility of an accreditation system for young OA journals. The idea was embraced by the European Commission but rejected by SURF’s OpenAIRE project partners (who stuck to the Green Road to OA). Publishers and funders reacted expectantly. SURF left this approach after all and, in hindsight, it might have been too ambitious.
+            &lt;/p&gt;
+
+            &lt;p&gt;
+                In autumn 2011 a new endeavour was started, this time aiming at tools that would enable a crowd sourced solution. For that purpose two indicators were prototyped: an Editorial Board Indicator, a metric for the scientific impact of the editorial board, and a Transparency Indicator, checking the transparency of the article admission process. Both indicators were presented, and the second one even tested, at an international expert colloquium in Rotterdam, October 2012. 
+            &lt;/p&gt;
+
+            &lt;p&gt;
+                The main obstacle for the first indicator was, and still is, the problem of identifying the board members; just a name and an affiliation are not enough for that. (See FAQ &lt;a href="{0}" title="Why does QOAM not include metrics as a quality proxy?"&gt;“Why does QOAM not include metrics as a quality proxy?”&lt;/a&gt;) The second indicator turned out to be more readily applicable as was demonstrated by the test in Rotterdam and subsequently by a group of Dutch university libraries. These encouraging results led to the development of the more comprehensive &lt;a href="{1}" title="Journal Score Card"&gt;Journal Score Card&lt;/a&gt; as a first measure of young journal quality. 
+            &lt;/p&gt;</value>
+  </data>
+  <data name="Home_About_BriefHistory_Title" xml:space="preserve">
+    <value>A brief history</value>
+  </data>
+  <data name="Home_About_EinsteinRazor_Text" xml:space="preserve">
+    <value>&lt;p&gt;Overall, the builders have tried to apply Einstein’s razor: “Make web sites as simple as possible, but not simpler.”&lt;/p&gt;</value>
+  </data>
+  <data name="Home_About_EinsteinRazor_Title" xml:space="preserve">
+    <value>Einstein’s razor</value>
+  </data>
+  <data name="Home_About_FilteringPerDiscipline_Text" xml:space="preserve">
+    <value>&lt;p&gt;QOAM allows filtering per discipline. Thus the varied recognition of the different aspects over the disciplines can be taken into account. E.g. if speed of publication is less important in a specific discipline all journals in this discipline will produce a low subscore for the aspect ‘process’, which might be their Base Score. As in QOAM journals are ranked by default according to their Base score, a general search would result in a place at the bottom of the list for this journals. Within their own discipline the other aspects are more profiling. &lt;/p&gt;</value>
+  </data>
+  <data name="Home_About_FilteringPerDiscipline_Title" xml:space="preserve">
+    <value>Filtering per discipline</value>
+  </data>
+  <data name="Home_About_JournalScoreCards_Text" xml:space="preserve">
+    <value>&lt;p&gt;
+	In QOAM quality of a journal is determined by the academic community itself via so called Journal Score Cards. A Journal Score Card is a questionnaire resulting in subscores for five critical aspects of a journal. Four of them – Editorial information, Peer review, Governance and Process - are based on the journal’s website. The fifth – Valuation – is a reality check, preferably based on experience with the submission of an article to the journal. The lowest subscore of the four web site related aspects is called the &lt;strong&gt;Base Score&lt;/strong&gt; of the journal. The subscore of the fifth aspect is called the &lt;strong&gt;Valuation score&lt;/strong&gt; of the jounal. 
+&lt;/p&gt;
+&lt;p&gt;
+	QOAM offers members of the academic community the opportunity to publish a Journal Score Card for one or more of the OA and hybrid journals in QOAM’s &lt;a href="{0}" title="scoring section"&gt;scoring section&lt;/a&gt;. (NB This section includes all &lt;a href="http://www.doaj.org/" title="DOAJ journals"&gt;DOAJ journals&lt;/a&gt;.) Although there may be afterthoughts about hybrid journals (see FAQ &lt;a href="{1}" title="Why are so called hybrid journals also included in QOAM?"&gt;“Why are so called hybrid journals also included in QOAM?”&lt;/a&gt;), from an author-centric point of view they may simply be prestigious journals in which one can publish articles in open access as well. (Read more about &lt;a href="{2}" title="Journal Score Card"&gt;Journal Score Card&lt;/a&gt;)
+&lt;/p&gt;</value>
+  </data>
+  <data name="Home_About_JournalScoreCards_Title" xml:space="preserve">
+    <value>Journal Score Cards</value>
+  </data>
+  <data name="Home_About_PriceInformation_Text" xml:space="preserve">
+    <value>&lt;p&gt;For standard price information QOAM links directly to the website of a journal. However, a growing number of institutions, and more specifically their libraries, succeed in negotiating better prices for their community via memberships, licences or other agreements. Unfortunately, publishers often include non-disclosure clauses in their contracts. Therefore, prices may not always be referred to directly on the QOAM website, but per journal QOAM will list the licensed institutes. Searching authors can see if their institute is on the list. In that case they can log in to their own institutional intranet and compare the institutional price to the standard price.&lt;/p&gt;
+            
+            &lt;p&gt;Currently, prices vary widely. According to &lt;a href="http://legacy.earlham.edu/~peters/fos/newsletter/11-02-06.htm#nofee" title="No-fee open-access journals"&gt;Peter Suber&lt;/a&gt; the vast majority of peer-reviewed OA journals are no-fee. Journals that do charge have an &lt;a href="http://www.openaccesspublishing.org/apc2/" title="A Study of Open Access Journals Using Article Processing Charges"&gt;average price of €700&lt;/a&gt; per article, but price quotations may mount to €3000 and up. In such a bewildering situation sharing price experiences might give some guidance. For that reason a question is included in the Valuation aspect asking for the actual publication price of a published article. The replies are shown in reverse chronological order behind the tab Price information next to the standard price and the institutional price.&lt;/p&gt;</value>
+  </data>
+  <data name="Home_About_PriceInformation_Title" xml:space="preserve">
+    <value>Price information</value>
+  </data>
+  <data name="Home_About_QualityOfService_Text" xml:space="preserve">
+    <value>&lt;p&gt;When scientific and scholarly publishing is no longer seen as copyright exploitation but as a service, as is the case in the OA paradigm, there is a need for a market where quality of the service can be matched against price. So, once the Journal Score Card was developed (see &lt;a href="#brief-history" title="A Brief History"&gt;A brief history&lt;/a&gt; below) it was a natural step to create a place where information about actual journal prices, that is publication fees, was available as well. The idea of the Quality Open Access Market – QOAM - was born. As QOAM will be operating in a nascent market, both its journal quality indicator and the information about pricing are in their infancy and may need further development. But one has to start somewhere. &lt;/p&gt;</value>
+  </data>
+  <data name="Home_About_QualityOfService_Title" xml:space="preserve">
+    <value>QOAM – quality of service matched against price</value>
+  </data>
+  <data name="Home_About_ForWhom_Text" xml:space="preserve">
+    <value>&lt;p&gt;
+                First and for all, QOAM aims at &lt;strong&gt;authors&lt;/strong&gt; who want to publish their article in open access in a high quality journal and for a reasonable price. Then there is the &lt;strong&gt;library community&lt;/strong&gt;. In the subscription period libraries were invaluable to  academia when building up high quality collections. The Big Deals with their take-it-or-leave-it approach seemed to make this capacity redundant. QOAM enables libraries to apply this competence anew in the open access world by publishing Journal Score Cards and give &lt;strong&gt;journals&lt;/strong&gt; feedback on how to improve. Last but not least, QOAM makes the world of academic publishing transparent to &lt;strong&gt;policy makers, journalists, and the public at large&lt;/strong&gt;.&lt;br/&gt;
+Therefore, QOAM is a public website. But academics have to log in with their institutional account for publishing a Journal Score Card (to avoid misuse) or if they want to check if their institution has bargained a good publication price (because of non-disclosure clauses of publishers).
+            &lt;/p&gt;</value>
+  </data>
+  <data name="Home_About_ForWhom_Title" xml:space="preserve">
+    <value>For whom is QOAM useful?</value>
+  </data>
+  <data name="Home_About_Why_Text" xml:space="preserve">
+    <value>&lt;p&gt;
+                Recently, Science Europe’s &lt;a href="http://www.scienceeurope.org/uploads/Public%20documents%20and%20speeches/SE_OA_Pos_Statement.pdf" title="Position Statement"&gt;Position Statement&lt;/a&gt; has reconfirmed the Open Access imperative. 
+            &lt;/p&gt;
+
+            &lt;blockquote&gt;“Research publications are one of the main results of the research process and the Research Performing and Research Funding Organisations that comprise Science Europe share the vision of increasing the impact and reducing the costs of research publications by moving to a system of Open Access.” &lt;/blockquote&gt;
+
+            &lt;p&gt;reads their statement, and also &lt;/p&gt;
+
+            &lt;blockquote&gt;“The Science Europe Member Organisations [..] require that as part of the publication services provided against the payment of Open Access publication fees, effective mechanisms are in place to ensure that the publication of research outputs is subject to rigorous quality assurance.”&lt;/blockquote&gt;        </value>
+  </data>
+  <data name="Home_About_Why_Title" xml:space="preserve">
+    <value>Why?</value>
+  </data>
+  <data name="Home_Faq_CantFindJournal_Text" xml:space="preserve">
+    <value>&lt;h4&gt;A. in QOAM’s &lt;a href="{0}" title="searching section"&gt;searching section?&lt;/a&gt;&lt;/h4&gt;
+
+            &lt;p&gt;
+                The reason is that for this journal a Journal Score Card has not been published yet. To remedy this, go to the “I want to publish a Journal Score Card” section on QOAM’s main page and publish a JSC for the journal in question. Alternatively, ask your library to do so.
+            &lt;/p&gt;
+
+            &lt;h4&gt;B. in QOAM’s &lt;a href="{1}" title="scoring section"&gt;scoring section?&lt;/a&gt;&lt;/h4&gt;
+            &lt;p&gt;We suggest to ask your library for advice. They know how to have a journal added to databases that underly QOAM and/or how to migrate a journal from there to QOAM. Once done the journal will pop up in QOAM (provided it is an OA or hybrid journal).&lt;/p&gt;
+
+            &lt;table id="qoamComposition" class="text-center"&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;&amp;nbsp;&lt;/th&gt;
+                        &lt;th&gt;&amp;nbsp;&lt;/th&gt;
+                        &lt;th class="text-center"&gt;QOAM’s scoring section&lt;/th&gt;
+                        &lt;th&gt;&amp;nbsp;&lt;/th&gt;
+                        &lt;th&gt;QOAM’s searching section&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                    &lt;tr&gt;
+                        &lt;td class="border"&gt;Underlying external databases&lt;/td&gt;
+                        &lt;td&gt;»&lt;/td&gt;
+                        &lt;td class="border"&gt;OA and hybrid journals in QOAM&lt;/td&gt;
+                        &lt;td&gt;»&lt;/td&gt;
+                        &lt;td class="border"&gt;Journal Score Cards in QOAM&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/tbody&gt;
+                &lt;tfoot&gt;
+                    &lt;tr&gt;
+                        &lt;td colspan="2"&gt;&amp;nbsp;&lt;/td&gt;
+                        &lt;td&gt;&lt;em&gt;The composition of QOAM&lt;/em&gt;&lt;/td&gt;
+                        &lt;td colspan="2"&gt;&amp;nbsp;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/tfoot&gt;
+            &lt;/table&gt;</value>
+  </data>
+  <data name="Home_Faq_CantFindJournal_Title" xml:space="preserve">
+    <value>Why don’t I find a specific journal in QOAM?</value>
+  </data>
+  <data name="Score_Journal_HaveSubmittedToThisJournal" xml:space="preserve">
+    <value>I have published an article in this journal less than a year ago &lt;small&gt;(If ‘Yes’, please tick the box) &lt;/small&gt;</value>
+  </data>
+  <data name="Score_Journal_PublicationCost" xml:space="preserve">
+    <value>Publication of my article in this journal did cost me</value>
+  </data>
+  <data name="Journals_Prices_IPaid" xml:space="preserve">
+    <value>I paid</value>
+  </data>
+  <data name="Home_JournalScoreCard_WhoMayPublish_Title" xml:space="preserve">
+    <value>Who may publish JSCs in QOAM?</value>
+  </data>
+  <data name="Home_JournalScoreCard_HowAreJournalScoreCardsUsed_Text" xml:space="preserve">
+    <value>&lt;p&gt;
+                In QOAM journals are ranked by default in order of their Base Score. So, a journal at the top of the list, i.e. with a high Base Score, has a web site that addresses all the journal aspects adequately. On the other hand, a journal with a low Base Score has at least one weak aspect, but may still be strong in other respects. In order to climb on the list a journal must address its weakest aspect.
+            &lt;/p&gt;
+            &lt;p&gt;
+                Next to the Base score the Valuation score of a journal is shown. This score reflects an appraisal of the journal, preferably based on a real submission. If this experience is lacking, circumstantial information may do and a free text box gives room for additional comments. NB Price information is only asked for when it is based on submission experience. In QOAM it is possible to limit a search to submission based Journal Score Cards only. 
+            &lt;/p&gt;
+            &lt;p&gt;
+                QOAM has the option to filter journals per title key word, ISSN, publisher, discipline and language. Filtering per discipline enables to take the varied recognition of different aspects over disciplines into account. E.g. if speed of publication is less important in a specific discipline all journals in this discipline will produce a low subscore for the aspect ‘process’, which might be their Base Score. In a general search this would result in a place at the bottom of the ranking. Within their own discipline the other aspects are more profiling.
+            &lt;/p&gt;
+
+            &lt;p&gt;
+                On top of that, every academic author can decide for herself which aspects she deems most relevant. Per journal all aspect subscores are produced.  
+            &lt;/p&gt;</value>
+  </data>
+  <data name="Home_JournalScoreCard_HowAreJournalScoreCardsUsed_Title" xml:space="preserve">
+    <value>How are JSCs used in QOAM?</value>
+  </data>
+  <data name="Home_JournalScoreCard_WhoMayPublish_Text" xml:space="preserve">
+    <value>&lt;p&gt;
+	Members of the academic community with a Higher Education (HE) institutional account can select open access and hybrid journals from QOAM’s &lt;a href="{0}" title="Scoring section"&gt;scoring section&lt;/a&gt;. (See the FAQ &lt;a href="{1}" title="Why are so called hybrid journals also included in QOAM?"&gt;“Why are so called hybrid journals also included in QOAM?”&lt;/a&gt;) Then QOAM offers the opportunity to publish a Journal Score Card for one or more of the selected journals. Per person only one JSC may be published for a specific journal. In case several people publish a JSC for the same journal the averaged subscores will be attributed to the journal. Thus QOAM is crowd sourced in a controlled way.
+&lt;/p&gt;
+
+&lt;p&gt;
+	Every JSC is presented in QOAM for a period of a year. Authors can edit their published JSC at any moment, e.g. in order to reflect new developments of the journal. Updated Journal Score Cards will be dealt with as newly published ones. Thus QOAM is kept up to date.
+&lt;/p&gt;
+
+&lt;p&gt;
+	A year after its publication a JSC expires and will be archived. It no longer plays a role in QOAM but its author will keep access to it via the Profile section of QOAM. A month before a JSC will be archived its author will be notified of the upcoming expiration and will be invited to update their JSC (provided they are still a member of the academic community.) Thus QOAM keeps in touch with people who committed themselves by publishing a JSC.
+&lt;/p&gt;
+
+&lt;p&gt;
+	The Journal Score Card as a format will be evaluated periodically and possibly adapted to new insights. However, changes will not be abrupt and draft versions will be circulated for comment prior to installation. As JSCs are archived after a year the migration period in which ‘old’ and ‘new’ subscores sit together lasts a year at most. Effectively the migration period could be shorter because everybody may edit their JSC any time. Thus, the JSC evolves organically. 
+&lt;/p&gt;</value>
+  </data>
+  <data name="Journals_Index_ReadMorePriceInformation" xml:space="preserve">
+    <value>Read more about &lt;a href="{0}" title="Price information"&gt;Price information&lt;/a&gt;.</value>
+  </data>
+  <data name="Home_Faq_CantFindJournal_Title_Short" xml:space="preserve">
+    <value>Why don’t I find a specific journal</value>
+  </data>
+  <data name="Journals_Scores_OnlyMembersPublish" xml:space="preserve">
+    <value>Only members of the academic community may publish a JSC. See FAQ &lt;a href="{0}" title="Is QOAM prone to improper use?"&gt;"Is QOAM prone to improper use?"&lt;/a&gt;</value>
+  </data>
+  <data name="Profiles_Details_NoScoreCards" xml:space="preserve">
+    <value>{0} has not yet published any Journal Score Cards.</value>
+  </data>
+  <data name="Profiles_Details_YouMayContact" xml:space="preserve">
+    <value>You may contact {0} if you are &lt;a href="{1}" title="Log in to contact {0}"&gt;logged in&lt;/a&gt;</value>
+  </data>
+  <data name="Home_Faq_SubscriptionJournalsNotIncluded_Text" xml:space="preserve">
+    <value>&lt;p&gt;
+                QOAM is in the overlap of three domains: (1) Quality, (2) Open Access, (3) Market. Do subscription journals fit into these domains?&lt;br /&gt;
+                Ad 1. Quality. Yes. The Journal Score Card is business model neutral.&lt;br /&gt;
+                Ad 2. Open Access. No. Subscription is at odds with Open Access.
+                &lt;br /&gt;
+                Ad 3. Market. No. The current Big Deal packages obscure any market idea.
+                &lt;br /&gt;
+                So, subscription journals do not fit in QOAM. Yet, the initiators of QOAM are convinced that quality control as such is equally well necessary for subscription journals. Especially for new journals which are simply included in existing packages. The Journal Score Card, or an adapted version of it, might be applicable here and the initiators of QOAM are open to discuss this. 
+            &lt;/p&gt;</value>
+  </data>
+  <data name="Home_Faq_SubscriptionJournalsNotIncluded_Title" xml:space="preserve">
+    <value>Why are subscription journals not included in QOAM?</value>
+  </data>
+  <data name="Admin_Index_ImportJournals" xml:space="preserve">
+    <value>Import journals</value>
+  </data>
+  <data name="Admin_Index_Text" xml:space="preserve">
+    <value>Here you can choose from several administrative tasks</value>
+  </data>
+  <data name="Admin_Index_Title" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="Admin_Index_UpdateJournals" xml:space="preserve">
+    <value>Update journals</value>
+  </data>
+  <data name="Admin_Import_Text" xml:space="preserve">
+    <value>In the text are below you can enter ISSNs of journals to be imported.</value>
+  </data>
+  <data name="Admin_Import_Title" xml:space="preserve">
+    <value>Import journals</value>
+  </data>
+  <data name="Score_Journal_IsEditorOfJournal" xml:space="preserve">
+    <value>I am an editor of this journal &lt;small&gt;(If ‘Yes’, please tick the box) &lt;/small&gt;</value>
+  </data>
+  <data name="Score_Journal_IsEditorOfJournalComment" xml:space="preserve">
+    <value>Does your journal have third party revenues? If so, is there any risk of a potential conflict of interest? Please elucidate.</value>
+  </data>
+  <data name="Admin_Imported_Failure" xml:space="preserve">
+    <value>The journal with the following ISSNs were not imported as they could not be found</value>
+  </data>
+  <data name="Admin_Imported_Success" xml:space="preserve">
+    <value>The journal with the following ISSNs were successfully imported</value>
+  </data>
+  <data name="Admin_Update_Text" xml:space="preserve">
+    <value>In the text are below you can enter ISSNs of journals to be updated. Please note that the existing information will be overwritten, which means that the publisher, language, country and disciplines will all be overwritten.</value>
+  </data>
+  <data name="Admin_Update_Title" xml:space="preserve">
+    <value>Update journals</value>
+  </data>
+  <data name="Admin_Imported_Title" xml:space="preserve">
+    <value>Journals import result</value>
+  </data>
+  <data name="Admin_Updated_Failure" xml:space="preserve">
+    <value>The journal with the following ISSNs were not updated as they could not be found</value>
+  </data>
+  <data name="Admin_Updated_Success" xml:space="preserve">
+    <value>The journal with the following ISSNs were successfully updated</value>
+  </data>
+  <data name="Admin_Updated_Title" xml:space="preserve">
+    <value>Journals update result</value>
+  </data>
+</root>

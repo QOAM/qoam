@@ -1,0 +1,32 @@
+﻿@model RU.Uci.OAMarket.Website.ViewModels.Import.ImportedViewModel
+
+@using RU.Uci.OAMarket.Website.Resources
+
+@{
+    ViewBag.Title = ViewStrings.Admin_Imported_Title;
+}
+
+<div class="container main">
+
+    <p>
+        @ViewStrings.Admin_Imported_Success:
+    </p>
+
+    <ul>
+        @foreach (var foundISSN in Model.FoundISSNs)
+        {
+            <li>@foundISSN</li>
+        }
+    </ul>
+
+    <p>
+        @ViewStrings.Admin_Imported_Failure:
+    </p>
+
+    <ul>
+        @foreach (var notFoundISSN in Model.NotFoundISSNs)
+        {
+            <li>@notFoundISSN</li>
+        }
+    </ul>
+</div>

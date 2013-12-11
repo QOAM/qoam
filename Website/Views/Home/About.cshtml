@@ -1,0 +1,52 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+@{
+    ViewBag.Title = ViewStrings.Home_About_Title;
+}
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-3">
+            @{ Html.RenderPartial("_SidebarMenu", "About"); }
+        </div>
+        <div class="col-md-9">
+            <h2>@ViewBag.Title</h2>
+
+            <p><strong>@ViewStrings.Home_About_Introduction</strong></p>
+
+            <ul class="list-unstyled">
+                <li><a href="#why">@ViewStrings.Home_About_Why_Title</a></li>
+                <li><a href="#quality-of-service">@ViewStrings.Home_About_QualityOfService_Title</a></li>
+                <li><a href="#target-groups">@ViewStrings.Home_About_ForWhom_Title</a></li>
+                <li><a href="#how">@ViewStrings.Home_About_JournalScoreCards_Title</a></li>
+                <li><a href="#filtering-per-discipline">@ViewStrings.Home_About_FilteringPerDiscipline_Title</a></li>
+                <li><a href="#price-information">@ViewStrings.Home_About_PriceInformation_Title</a></li>
+                <li><a href="#brief-history">@ViewStrings.Home_About_BriefHistory_Title</a></li>
+                <li><a href="#einsteins-razor">@ViewStrings.Home_About_EinsteinRazor_Title</a></li>
+            </ul>
+
+            <h3 id="why">@ViewStrings.Home_About_Why_Title</h3>
+            @Html.Raw(ViewStrings.Home_About_Why_Text)
+
+            <h3 id="quality-of-service">@ViewStrings.Home_About_QualityOfService_Title</h3>
+            @Html.Raw(ViewStrings.Home_About_QualityOfService_Text)
+
+            <h3 id="target-groups">@ViewStrings.Home_About_ForWhom_Title</h3>
+            @Html.Raw(ViewStrings.Home_About_ForWhom_Text)
+
+            <h3 id="how">@ViewStrings.Home_About_JournalScoreCards_Title</h3>
+            @Html.Raw(string.Format(ViewStrings.Home_About_JournalScoreCards_Text, Url.Action("Index", "Score"), Url.Action("Faq") + "#hybrid-journals", Url.Action("JournalScoreCard")))
+
+            <h3 id="filtering-per-discipline">@ViewStrings.Home_About_FilteringPerDiscipline_Title</h3>
+            @Html.Raw(ViewStrings.Home_About_FilteringPerDiscipline_Text)
+
+            <h3 id="price-information">@ViewStrings.Home_About_PriceInformation_Title</h3>
+            @Html.Raw(ViewStrings.Home_About_PriceInformation_Text)
+
+            <h3 id="brief-history">@ViewStrings.Home_About_BriefHistory_Title</h3>
+            @Html.Raw(string.Format(ViewStrings.Home_About_BriefHistory_Text, Url.Action("Faq") + "#no-metrics", Url.Action("JournalScoreCard")))
+
+            <h3 id="einsteins-razor">@ViewStrings.Home_About_EinsteinRazor_Title</h3>
+            @Html.Raw(ViewStrings.Home_About_EinsteinRazor_Text)
+        </div>
+    </div>
+</div>

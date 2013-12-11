@@ -1,0 +1,11 @@
+﻿@using RU.Uci.OAMarket.Domain
+@model Price
+
+@if (Model.Amount.HasValue && Model.Amount.Value == 0)
+{
+    @RU.Uci.OAMarket.Website.Resources.Strings.Free
+}
+else
+{
+    @Html.DisplayFor(m => m.Currency) @Model.Amount.ToString()    
+}

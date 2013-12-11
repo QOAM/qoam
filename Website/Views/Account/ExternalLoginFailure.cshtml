@@ -1,0 +1,17 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+@using RU.Uci.OAMarket.Website.Helpers;
+@model RU.Uci.OAMarket.Website.Models.LoginFailureReason
+
+@{
+    ViewBag.Title = ViewStrings.Account_ExternalLoginFailure_Title;
+}
+
+<div class="container">
+    <h1>@ViewBag.Title.</h1>
+    
+    @Bootstrap.Error(Model.GetName())
+    
+    <p>
+        @Html.ActionLink(Strings.LogIn, "Login", "Account", null, new { @class = "btn btn-success" })
+    </p>
+</div>

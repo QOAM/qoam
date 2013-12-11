@@ -1,0 +1,621 @@
+#iPicture{
+	font-family: 'Lucida Sans Unicode','Lucida Grande',Tahoma,Arial,san-serif;
+	font-size: 62.5%;
+	color: #ffffff;
+}
+.ip_slide{position: relative;}
+.ip_tooltip {
+    padding: 0;
+    position: absolute;
+    text-align: left;
+}
+.ip_img32 .ip_descr{
+/*     top:14px; */
+}
+.ip_bg24 .ip_descr{
+/*     top: 10px; */
+}
+.ip_descr:before{
+	width: 0;
+	height: 0;
+    content: "";
+    position: absolute;
+}
+.ip_descr.ltr-before:before{
+    border-left: 8px solid transparent;
+    top: 15px;
+	left: -8px;
+}
+.bgwhite.ltr-before:before{
+	border-top: 12px solid rgba(255,255,255, 0.9);
+}
+.bgblack.ltr-before:before{
+	border-top: 12px solid rgba(0, 0, 0, 0.8);
+}
+.ip_descr.rtl-before:before{
+    border-right: 8px solid transparent;
+    top: 15px;
+	right: -8px;
+}
+.bgwhite.rtl-before:before{
+	border-top: 12px solid rgba(255,255,255, 0.9);
+}
+.bgblack.rtl-before:before{
+	border-top: 12px solid rgba(0, 0, 0, 0.8);
+}
+.ip_descr.btt-before:before{
+    border-right: 12px solid transparent;
+	bottom: -8px;
+	left: 16px;
+}
+.bgwhite.btt-before:before{
+	border-top: 8px solid rgba(255,255,255, 0.9);
+}
+.bgblack.btt-before:before{
+	border-top: 8px solid rgba(0, 0, 0, 0.8);
+}
+.ip_descr.ttb-before:before{
+    border-right: 12px solid transparent;
+	top: -8px;
+	left: 16px;
+}
+.bgwhite.ttb-before:before{
+	border-bottom: 8px solid rgba(255,255,255, 0.9);
+}
+.bgblack.ttb-before:before{
+	border-bottom: 8px solid rgba(0, 0, 0, 0.8);
+}
+.ip_tooltip .ip_descr {
+    font: bold 13px Lucida Grande,Arial,sans-serif;
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+/*     min-width: 225px; */
+	transition: left 0.25s ease-out, opacity 0.25s ease-out, right 0.25s ease-out, bottom 0.25s ease-out, top 0.25s ease-out;
+	-moz-transition: left 0.25s ease-out, opacity 0.25s ease-out, right 0.25s ease-out, bottom 0.25s ease-out, top 0.25s ease-out;
+	-webkit-transition: left 0.25s ease-out, opacity 0.25s ease-out, right 0.25s ease-out, bottom 0.25s ease-out, top 0.25s ease-out;
+	z-index: -10;
+	display: block;
+	width: auto;
+    height:auto;
+    padding: 10px;
+    min-height: 15px;
+}
+.ip_descr p{
+	min-width:200px;
+}
+.ip_tooltip .ltr-before {
+	left: -3px;
+}
+.ip_tooltip .rtl-before {
+	right: -60px;
+}
+.ip_tooltip .ttb-before {
+	top: -3px;
+}
+.ip_tooltip .btt-before {
+	bottom: -60px;
+}
+.ltr-slide {
+	opacity: 1 !important;
+	left: 45px !important;
+	padding: 0;
+}
+.rtl-slide {
+	opacity: 1 !important;
+	right: 13px !important;
+	padding: 0;
+}
+.btt-slide {
+	opacity: 1 !important;
+	bottom: 13px !important;
+	padding: 0;
+}
+.ttb-slide {
+	opacity: 1 !important;
+	top: 45px !important;
+	padding: 0;
+}
+
+.pass-ltr{
+	display: block;
+    float: right;
+    height: 50px;
+    left: 30px;
+    position: absolute;
+    width: 20px;
+}
+.pass-rtl{
+	display: block;
+    float: right;
+    height: 50px;
+    right: -30px;
+    position: absolute;
+    width: 50px;
+}
+.pass-btt{
+	display: block;
+    float: right;
+    height: 50px;
+    bottom: -30px;
+    position: absolute;
+    width: 40px;
+}
+.pass-ttb{
+	display: block;
+    float: right;
+    height: 20px;
+    top: 30px;
+    position: absolute;
+    width: 50px;
+}
+.descrContainer {
+	width: 0;
+	height:0;
+	display: block;
+	visibility: hidden;
+}
+.show .descrContainer {
+	width:100%;
+	height:100%;
+	visibility: visible;
+}
+.ip_img32 .button{
+  width: 32px;
+  height: 32px;
+  float: left!important;
+  position: absolute;
+}
+.ip_img24 .button{
+  width: 24px;
+  height: 24px;
+  float: left!important;
+  position: absolute;
+  top: 18px;
+  left: 18px;
+}
+.bg32 .button{
+  width: 32px;
+  height: 32px;
+  float: left!important;
+  position: absolute;
+  top: 9px;
+  left: 9px;
+}
+.ip_bg24 .button{
+  width: 24px;
+  height: 24px;
+  float: left!important;
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  border-radius: 24px;
+}
+.bgblack{
+	background: rgba(0, 0, 0, 0.8);
+  	border-radius: 5px;
+  	-moz-border-radius: 5px;
+  	-webkit-border-radius: 5px;
+}
+
+.bgwhite{
+ 	background: rgba(255, 255, 255, 0.9);
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	color:#000000;
+}
+/* white round bg */
+.ip_img32 .roundBgW{
+	height: 50px;
+    width: 50px;
+    left: -9px;
+    position: absolute;
+    top: -9px;
+}
+.ip_img32 .roundBgWIn{
+	height: 42px;
+    width: 42px;
+    position: absolute;
+    left: -5px;
+    top: -5px;
+}
+.ip_img32 .roundBgWInner{
+	height: 36px;
+    width: 36px;
+    position:absolute;
+    left: -2px;
+    top: -2px;
+}
+.ip_img24 .roundBgW{
+	height: 56px;
+    width: 56px;
+}
+.ip_img24 .roundBgWIn{
+	height: 44px;
+    width: 44px;
+}
+.ip_img24 .roundBgWInner{
+	height: 34px;
+    width: 34px;
+}
+.ip_bg24 .roundBgW{
+	height: 42px;
+    width: 42px;
+}
+.ip_bg24 .roundBgWIn{
+	height: 34px;
+    width: 34px;
+}
+.ip_bg24 .roundBgWInner{
+	height: 28px;
+    width: 28px;
+}
+.roundBgW{
+	border-radius: 30px;
+	position: absolute;
+	animation: pulseW 1.5s 1s infinite alternate; 
+	-moz-animation: pulseW 1.5s 1s infinite alternate; /* Firefox */
+	-webkit-animation: pulseW 1.5s 1s infinite alternate;  /* Safari and Chrome */
+	-o-animation: pulseW 1.5s 1s infinite alternate; /* Opera */
+}
+.roundBgWIn{
+	border-radius: 30px;
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	animation: pulseWIn 1.5s 0.5s infinite alternate;
+	-moz-animation: pulseWIn 1.5s 0.5s infinite alternate; /* Firefox */
+	-webkit-animation: pulseWIn 1.5s 0.5s infinite alternate; /* Safari and Chrome */
+	-o-animation: pulseWIn 1.5s 0.5s infinite alternate; /* Opera */
+}
+.roundBgWInner{
+	border-radius: 30px;
+	position: absolute;
+	top: 7px;
+	left: 7px;
+	animation: pulseWInner 1.5s infinite alternate;
+	-moz-animation: pulseWInner 1.5s infinite alternate; /* Firefox */
+	-webkit-animation: pulseWInner 1.5s infinite alternate; /* Safari and Chrome */
+	-o-animation: pulseWInner 1.5s infinite alternate; /* Opera */
+}
+@keyframes pulseW
+{
+from {background: rgba(255,255,255, 0);}
+to {background: rgba(255,255,255, 0.2);}
+}
+
+@-moz-keyframes pulseW /* Firefox */
+{
+from {background: rgba(255,255,255, 0);}
+to {background: rgba(255,255,255, 0.2);}
+}
+
+@-webkit-keyframes pulseW /* Safari and Chrome */
+{
+from {background: rgba(255,255,255, 0);}
+to {background: rgba(255,255,255, 0.2);}
+}
+
+@-o-keyframes pulseW /* Opera */
+{
+from {background: rgba(255,255,255, 0);}
+to {background: rgba(255,255,255, 0.2);}
+}
+@keyframes pulseWIn
+{
+from {background: rgba(255,255,255, 0);}
+to {background: rgba(255,255,255, 0.3);}
+}
+
+@-moz-keyframes pulseWIn /* Firefox */
+{
+from {background: rgba(255,255,255, 0);}
+to {background: rgba(255,255,255, 0.3);}
+}
+
+@-webkit-keyframes pulseWIn /* Safari and Chrome */
+{
+from {background: rgba(255,255,255, 0);}
+to {background: rgba(255,255,255, 0.3);}
+}
+
+@-o-keyframes pulseWIn /* Opera */
+{
+from {background: rgba(255,255,255, 0);}
+to {background: rgba(255,255,255, 0.3);}
+}
+
+@keyframes pulseWInner
+{
+from {background: rgba(255,255,255, 0);}
+to {background: rgba(255,255,255, 0.6);}
+}
+
+@-moz-keyframes pulseWInner /* Firefox */
+{
+from {background: rgba(255,255,255, 0);}
+to {background: rgba(255,255,255, 0.6);}
+}
+
+@-webkit-keyframes pulseWInner /* Safari and Chrome */
+{
+from {background: rgba(255,255,255, 0);}
+to {background: rgba(255,255,255, 0.6);}
+}
+
+@-o-keyframes pulseWInner /* Opera */
+{
+from {background: rgba(255,255,255, 0);}
+to {background: rgba(255,255,255, 0.6);}
+}
+/* end white round bg */
+
+/* black round bg */
+.ip_img32 .roundBgB{
+	height: 50px;
+    width: 50px;
+    left: -9px;
+    position: absolute;
+    top: -9px;
+}
+.ip_img32 .roundBgBIn{
+	height: 42px;
+    width: 42px;
+    position: absolute;
+    left: -5px;
+    top: -5px;
+}
+.ip_img32 .roundBgBInner{
+	height: 36px;
+    width: 36px;
+    position: absolute;
+    left: -2px;
+    top: -2px;
+}
+.ip_img24 .roundBgB{
+	height: 56px;
+    width: 56px;
+}
+.ip_img24 .roundBgBIn{
+	height: 44px;
+    width: 44px;
+}
+.ip_img24 .roundBgBInner{
+	height: 34px;
+    width: 34px;
+}
+.ip_bg24 .roundBgB{
+	height: 42px;
+    width: 42px;
+}
+.ip_bg24 .roundBgBIn{
+	height: 34px;
+    width: 34px;
+}
+.ip_bg24 .roundBgBInner{
+	height: 28px;
+    width: 28px;
+}
+.roundBgB{
+	border-radius: 30px;
+	position: absolute;
+	animation: pulse 1.5s 1s infinite alternate; 
+	-moz-animation: pulseB 1.5s 1s infinite alternate; /* Firefox */
+	-webkit-animation: pulseB 1.5s 1s infinite alternate;  /* Safari and Chrome */
+	-o-animation: pulseB 1.5s 1s infinite alternate; /* Opera */
+}
+.roundBgBIn{
+	border-radius: 30px;
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	animation: pulseBIn 1.5s 0.5s infinite alternate;
+	-moz-animation: pulseBIn 1.5s 0.5s infinite alternate; /* Firefox */
+	-webkit-animation: pulseBIn 1.5s 0.5s infinite alternate; /* Safari and Chrome */
+	-o-animation: pulseBIn 1.5s 0.5s infinite alternate; /* Opera */
+}
+.roundBgBInner{
+	border-radius: 30px;
+	position: absolute;
+	top: 7px;
+	left: 7px;
+	animation: pulseBInner 1.5s infinite alternate;
+	-moz-animation: pulseBInner 1.5s infinite alternate; /* Firefox */
+	-webkit-animation: pulseBInner 1.5s infinite alternate; /* Safari and Chrome */
+	-o-animation: pulseBInner 1.5s infinite alternate; /* Opera */
+}
+@keyframes pulseB
+{
+from {background: rgba(0,0,0, 0);}
+to {background: rgba(0,0,0, 0.2);}
+}
+
+@-moz-keyframes pulseB /* Firefox */
+{
+from {background: rgba(0,0,0, 0);}
+to {background: rgba(0,0,0, 0.2);}
+}
+
+@-webkit-keyframes pulseB /* Safari and Chrome */
+{
+from {background: rgba(0,0,0, 0);}
+to {background: rgba(0,0,0, 0.2);}
+}
+
+@-o-keyframes pulseB /* Opera */
+{
+from {background: rgba(0,0,0, 0);}
+to {background: rgba(0,0,0, 0.2);}
+}
+@keyframes pulseBIn
+{
+from {background: rgba(0,0,0, 0);}
+to {background: rgba(0,0,0, 0.3);}
+}
+
+@-moz-keyframes pulseBIn /* Firefox */
+{
+from {background: rgba(0,0,0, 0);}
+to {background: rgba(0,0,0, 0.3);}
+}
+
+@-webkit-keyframes pulseBIn /* Safari and Chrome */
+{
+from {background: rgba(0,0,0, 0);}
+to {background: rgba(0,0,0, 0.3);}
+}
+
+@-o-keyframes pulseBIn /* Opera */
+{
+from {background: rgba(0,0,0, 0);}
+to {background: rgba(0,0,0, 0.3);}
+}
+
+@keyframes pulseBInner
+{
+from {background: rgba(0,0,0, 0);}
+to {background: rgba(0,0,0, 0.6);}
+}
+
+@-moz-keyframes pulseBInner /* Firefox */
+{
+from {background: rgba(0,0,0, 0);}
+to {background: rgba(0,0,0, 0.6);}
+}
+
+@-webkit-keyframes pulseBInner /* Safari and Chrome */
+{
+from {background: rgba(0,0,0, 0);}
+to {background: rgba(0,0,0, 0.6);}
+}
+
+@-o-keyframes pulseBInner /* Opera */
+{
+from {background: rgba(0,0,0, 0);}
+to {background: rgba(0,0,0, 0.6);}
+}
+/* end black round bg */
+/* ###################################################################
+
+                          buttons classes
+                          
+   ################################################################### */
+   
+.moregold{
+  background: url("../images/moregold/button.png") no-repeat scroll left center transparent;
+}
+.moregrey{
+  background: url("../images/moregrey/button.png") no-repeat scroll left center transparent;
+} 
+.moreblack{
+  background: url("../images/moreblack/button.png") no-repeat scroll left center transparent;
+}
+.moredarkblue{
+  background: url("../images/moredarkblue/button.png") no-repeat scroll left center transparent;
+}
+.moreblue{
+  background: url("../images/moreblue/button.png") no-repeat scroll left center transparent;
+} 
+.morelightblue{
+  background: url("../images/morelightblue/button.png") no-repeat scroll left center transparent;
+}
+.morelightblue2{
+  background: url("../images/morelightblue2/button.png") no-repeat scroll left center transparent;
+}
+.morewatergreen{
+  background: url("../images/morewatergreen/button.png") no-repeat scroll left center transparent;
+} 
+.morelightgreen{
+  background: url("../images/morelightgreen/button.png") no-repeat scroll left center transparent;
+} 
+.moregreen{
+  background: url("../images/moregreen/button.png") no-repeat scroll left center transparent;
+}
+.moreyellow{
+  background: url("../images/moreyellow/button.png") no-repeat scroll left center transparent;
+} 
+.moreorange{
+  background: url("../images/moreorange/button.png") no-repeat scroll left center transparent;
+} 
+.morered{
+  background: url("../images/morered/button.png") no-repeat scroll left center transparent;
+}
+.morepurple{
+  background: url("../images/morepurple/button.png") no-repeat scroll left center transparent;
+} 
+.moreviolet{
+  background: url("../images/moreviolet/button.png") no-repeat scroll left center transparent;
+} 
+.morelightviolet{
+  background: url("../images/morelightviolet/button.png") no-repeat scroll left center transparent;
+}
+.morefucsia{
+  background: url("../images/morefucsia/button.png") no-repeat scroll left center transparent;
+}
+.beadgold{
+  background: url("../images/beadgold/button.png") no-repeat scroll left center transparent;
+}
+.beadgrey{
+  background: url("../images/beadgrey/button.png") no-repeat scroll left center transparent;
+} 
+.beadblack{
+  background: url("../images/beadblack/button.png") no-repeat scroll left center transparent;
+}
+.beaddarkblue{
+  background: url("../images/beaddarkblue/button.png") no-repeat scroll left center transparent;
+}
+.beadblue{
+  background: url("../images/beadblue/button.png") no-repeat scroll left center transparent;
+} 
+.beadlightblue{
+  background: url("../images/beadlightblue/button.png") no-repeat scroll left center transparent;
+}
+.beadlightblue2{
+  background: url("../images/beadlightblue2/button.png") no-repeat scroll left center transparent;
+}
+.beadwatergreen{
+  background: url("../images/beadwatergreen/button.png") no-repeat scroll left center transparent;
+} 
+.beadlightgreen{
+  background: url("../images/beadlightgreen/button.png") no-repeat scroll left center transparent;
+} 
+.beadgreen{
+  background: url("../images/beadgreen/button.png") no-repeat scroll left center transparent;
+}
+.beadyellow{
+  background: url("../images/beadyellow/button.png") no-repeat scroll left center transparent;
+} 
+.beadorange{
+  background: url("../images/beadorange/button.png") no-repeat scroll left center transparent;
+} 
+.beadred{
+  background: url("../images/beadred/button.png") no-repeat scroll left center transparent;
+}
+.beadpurple{
+  background: url("../images/beadpurple/button.png") no-repeat scroll left center transparent;
+} 
+.beadviolet{
+  background: url("../images/beadviolet/button.png") no-repeat scroll left center transparent;
+} 
+.beadlightviolet{
+  background: url("../images/beadlightviolet/button.png") no-repeat scroll left center transparent;
+}
+.beadfucsia{
+  background: url("../images/beadfucsia/button.png") no-repeat scroll left center transparent;
+}
+.ipic-orange{
+background-image: linear-gradient(bottom, rgb(241,152,55) 8%, rgb(255,183,83) 54%);
+background-image: -o-linear-gradient(bottom, rgb(241,152,55) 8%, rgb(255,183,83) 54%);
+background-image: -moz-linear-gradient(bottom, rgb(241,152,55) 8%, rgb(255,183,83) 54%);
+background-image: -webkit-linear-gradient(bottom, rgb(241,152,55) 8%, rgb(255,183,83) 54%);
+background-image: -ms-linear-gradient(bottom, rgb(241,152,55) 8%, rgb(255,183,83) 54%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.08, rgb(241,152,55)),
+	color-stop(0.54, rgb(255,183,83))
+);
+	}

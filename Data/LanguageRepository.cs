@@ -1,0 +1,38 @@
+﻿namespace RU.Uci.OAMarket.Data
+{
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
+    using System.Linq;
+
+    using RU.Uci.OAMarket.Data.Helpers;
+    using RU.Uci.OAMarket.Domain;
+    using RU.Uci.OAMarket.Domain.Repositories;
+
+    public class LanguageRepository : Repository, ILanguageRepository
+    {
+        public LanguageRepository(ApplicationDbContext dbContext)
+            : base(dbContext)
+        {
+        }
+
+        public IList<Language> All
+        {
+            get
+            {
+                return this.DbContext.Languages.OrderBy(l => l.Name).ToList();
+            }
+        }
+
+        public void InsertBulk(IEnumerable<Language> languages)
+        {
+            using (var bulkCopy = new SqlBulkCopy(ConnectionString))
+            {
+                bulkCopy.ColumnMappings.Add("Id", "Id");
+                bulkCopy.ColumnMappings.Add("Name", "Name");
+
+                bulkCopy.DestinationTableName = this.DbContext.GetTableName<Language>();
+                bulkCopy.WriteToServer(languages.AsDataReader());
+            }
+        }
+    }
+}

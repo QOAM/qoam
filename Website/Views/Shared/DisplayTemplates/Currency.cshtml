@@ -1,0 +1,17 @@
+﻿@using RU.Uci.OAMarket.Domain
+@model Currency
+
+@switch (Model)
+{
+    case Currency.Dollar:
+        <text>$</text>
+        break;
+    case Currency.Euro:
+        <text>€</text>
+        break;
+    case Currency.Pound:
+        <text>£</text>
+        break;
+    default:
+        throw new ArgumentOutOfRangeException();
+}

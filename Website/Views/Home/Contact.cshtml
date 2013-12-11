@@ -1,0 +1,66 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+@model RU.Uci.OAMarket.Website.ViewModels.Home.ContactViewModel
+@{
+    ViewBag.Title = ViewStrings.Home_Contact_Title;
+}
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-3">
+            @{ Html.RenderPartial("_SidebarMenu", "Contact"); }
+        </div>
+        <div class="col-md-9">
+            <h2>@ViewBag.Title</h2>
+            <div id="contact">
+                <address>
+                    <strong>@ViewStrings.Home_Contact_ContactPerson:</strong><br />
+                    Leo Waaijers
+                </address>
+            </div>
+
+            <p>@ViewStrings.Home_Contact_Text</p>
+
+            @Html.ValidationSummary()
+
+            @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <fieldset>
+                    <legend>@ViewStrings.Home_Contact_Form_Legend</legend>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(m => m.Name, new { placeholder = Strings.Name, @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Name, null, new { @class = "control-label" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-lg-2 control-label" })
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(m => m.Email, new { placeholder = Strings.Email, @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "control-label" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Message, new { @class = "col-lg-2 control-label" })
+                        <div class="col-lg-10">
+                            @Html.TextAreaFor(m => m.Message, 5, 40, new { placeholder = Strings.Message, @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Message, null, new { @class = "control-label " })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-10 col-md-offset-2">
+                        <input type="submit" value="@Strings.Submit" class="btn btn-primary" />
+                    </div>
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @{ Html.RenderPartial("_FormScripts"); }
+}

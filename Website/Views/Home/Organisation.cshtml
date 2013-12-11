@@ -1,0 +1,22 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+@{
+    ViewBag.Title = ViewStrings.Home_Organisation_Title;
+}
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-3">
+            @{ Html.RenderPartial("_SidebarMenu", "Organisation"); }
+        </div>
+        <div class="col-md-9">
+            <h2>@ViewBag.Title</h2>
+
+            <p>
+                @Html.Raw(ViewStrings.Home_Organisation_Text)
+            </p>
+
+            <h3>@ViewStrings.Home_Organisation_Involvement</h3>
+            @Html.Raw(ViewStrings.Home_Organisation_Involvement_Text)
+        </div>
+    </div>
+</div>

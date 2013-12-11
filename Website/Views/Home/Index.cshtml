@@ -1,0 +1,60 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+@{
+    ViewBag.Title = ViewStrings.Home_Index_Title;
+}
+
+<div class="carousel">
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="~/Content/images/banner3.jpg" alt="@Strings.QualityOpenAccessMarket" title="@Strings.QualityOpenAccessMarket">
+
+            <div class="container">
+                <div class="carousel-caption">
+
+                    
+
+                    <!-- <h1>@Strings.QualityOpenAccessMarket</h1> 
+                        <p>@Html.ActionLink(Strings.LearnMore, "About", "Home", null, new { @class = "btn btn btn-primary topmargin" })</p>-->
+                    
+                    <button id="test-phase" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="QOAM is in its first test phase, starting at the beginning of November 2013. In the last weeks of 2013, all academics in the Netherlands will be able to score Journal Score Cards. Access to that part of the site (that is not open to everybody) is currently being provided for all universities in the Netherlands. If you work for a Dutch university, and you can not access the scoring part of QOAM, please contact your ICT department and ask them to open it up through SURFconext Dashboard.">TEST PHASE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container main">
+    <p class="text-center">@Html.ActionLink(Strings.LearnMore, "About", "Home", null, new { @class = "btn btn btn-primary topmargin" })</p>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+            <a href="@Url.Action("Index", "Journals")">
+                <div class="container-inner  text-center">
+                    <img class="" src="~/Images/zoom.png" title="@ViewStrings.Home_Index_Search" alt="@ViewStrings.Home_Index_Search" />
+                    <p class="lead">
+                        @Html.Raw(ViewStrings.Home_Index_Search)
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="@Url.Action("Index", "Score")">
+                <div class="container-inner text-center">
+                    <img class="" src="~/Images/scoresheet.png" title="@ViewStrings.Home_Index_Score" alt="@ViewStrings.Home_Index_Score" />
+                    <p class="lead">
+                        @Html.Raw(ViewStrings.Home_Index_Score)
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+@section scripts
+ {
+    <script type="text/javascript">
+        $(function () {
+            $('#test-phase').tooltip();
+        })
+    </script>
+}

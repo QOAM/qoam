@@ -1,0 +1,17 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+
+@{
+    ViewBag.Title = ViewStrings.Admin_Index_Title;
+}
+
+<div class="container main">
+
+    <p>
+        @ViewStrings.Admin_Index_Text
+    </p>
+
+    <ul>
+        <li>@Html.ActionLink(ViewStrings.Admin_Index_ImportJournals, "Import")</li>
+        <li>@Html.ActionLink(ViewStrings.Admin_Index_UpdateJournals, "Update")</li>
+    </ul>
+</div>

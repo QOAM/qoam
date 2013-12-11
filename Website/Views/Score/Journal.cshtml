@@ -1,0 +1,345 @@
+﻿@using Newtonsoft.Json
+@using RU.Uci.OAMarket.Domain
+@using RU.Uci.OAMarket.Website.Helpers;
+@using RU.Uci.OAMarket.Website.Models
+@using RU.Uci.OAMarket.Website.Resources
+@using Strings = RU.Uci.OAMarket.Website.Resources.Strings
+@model RU.Uci.OAMarket.Website.ViewModels.Score.ScoreViewModel
+
+@{
+    ViewBag.Title = ViewStrings.Score_Journal_Title;
+}
+
+@helper QuestionRating(QuestionKey questionKey)
+{
+    <div class="score">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-left">@questionKey.ToDescription()</p>
+
+                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Absent.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score"/>
+                @Score.Absent.GetValue(): @Score.Absent.GetName()
+                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Poor.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score"/>
+                @Score.Poor.GetValue(): @Score.Poor.GetName()
+                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Moderate.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score"/>
+                @Score.Moderate.GetValue(): @Score.Moderate.GetName()
+                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Good.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score"/>
+                @Score.Good.GetValue(): @Score.Good.GetName()
+                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Excellent.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score"/>
+                @Score.Excellent.GetValue(): @Score.Excellent.GetName()
+            </div>
+        </div>
+    </div>
+}
+
+@helper ScoreCardAspect(QuestionCategory questionCategory)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <small><a href="#@(questionCategory)ScoreTab" data-select-tab="true">@questionCategory.GetName()</a></small>
+        </div>
+        <div class="panel-body">
+            <a href="#@(questionCategory)ScoreTab" data-select-tab="true">
+                <h3 data-bind="text: categoryScores()[@questionCategory.GetValue()].score"></h3>
+            </a>
+        </div>
+    </div>
+}
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="scoreCardAspects well">
+                <h3>@Strings.ScoreCard </h3>
+                <div class="text-center">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @ScoreCardAspect(QuestionCategory.EditorialInformation)
+                        </div>
+                        <div class="col-md-6">
+                            @ScoreCardAspect(QuestionCategory.PeerReview)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            @ScoreCardAspect(QuestionCategory.Governance)
+                        </div>
+                        <div class="col-md-6">
+                            @ScoreCardAspect(QuestionCategory.Process)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-push-3">
+                            @ScoreCardAspect(QuestionCategory.Valuation)
+                        </div>
+                    </div>
+
+                    <div class="row topmargin">
+                        <div class="col-md-12">
+                            <div><strong>@Strings.Progress:</strong> <span data-bind="text: progress"></span>%</div>
+
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressPercentage() }, css: progressClass">
+                                    <span class="sr-only">@Strings.Progress: <span data-bind="text: progressPercentage"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">@Strings.BaseScoreForThisJournal:</div>
+                                <div class="panel-body">
+                                    <h1 data-bind="text: baseScore"></h1>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row topmargin">
+                        <div class="col-md-12">
+                            <div class="panel panel-secondary">
+                                <div class="panel-heading">@Strings.FinishedYourRating?</div>
+                                <div class="panel-body">
+                                    <i class="icon-ok"></i>
+                                    <button data-bind="enable: canPublish, click: publishScoreCard">@Strings.PublishYourScoreCard</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <h3>@Strings.ScoreCard</h3>
+            <div class="panel panel-primary">
+                <div class="panel-heading">@Model.Journal.Title</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="row">
+                                <label class="col-md-2">@Strings.ISSN:</label>
+                                <div class="col-md-10">@Model.Journal.ISSN</div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-2">@Strings.Publisher:</label>
+                                <div class="col-md-10">@Model.Journal.Publisher</div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-2">@Strings.Language:</label>
+                                <div class="col-md-10">@string.Join(", ", Model.Journal.Languages)</div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-2">@Strings.Disciplines:</label>
+                                <div class="col-md-10">@string.Join(", ", Model.Journal.Subjects)</div>
+                            </div>
+
+                            <div>
+                                <a href="@Model.Journal.Link" class="btn btn-success external" title="@Strings.GoToWebsite">@Strings.GoToWebsite</a>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                <img src="~/Images/scoresheet.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        @using (Html.BeginForm())
+                        {
+      
+                            <div class="tabbable">
+                                <ul id="scoreTabs" class="nav nav-tabs">
+                                    <li class="active"><a href="#@(QuestionCategory.EditorialInformation)ScoreTab" data-toggle="tab">@QuestionCategory.EditorialInformation.GetName()</a></li>
+                                    <li><a href="#@(QuestionCategory.PeerReview)ScoreTab" data-toggle="tab">@QuestionCategory.PeerReview.GetName()</a></li>
+                                    <li><a href="#@(QuestionCategory.Governance)ScoreTab" data-toggle="tab">@QuestionCategory.Governance.GetName()</a></li>
+                                    <li><a href="#@(QuestionCategory.Process)ScoreTab" data-toggle="tab">@QuestionCategory.Process.GetName()</a></li>
+                                    <li><a href="#@(QuestionCategory.Valuation)ScoreTab" data-toggle="tab">@QuestionCategory.Valuation.GetName()</a></li>
+                                    @*<li><a href="#OverviewTab" data-toggle="tab">[@Strings.Overview]</a></li>*@
+                                </ul>
+                                <div class="tab-content text-center">
+                                    <div class="tab-pane active" id="@(QuestionCategory.EditorialInformation)ScoreTab">
+                                        @QuestionRating(QuestionKey.WebsiteContainsAimsScopeAndReadership)
+                                        @QuestionRating(QuestionKey.WebsiteContainsNameAndAffiliationsOfMembersEditorialBoard)
+                                        @QuestionRating(QuestionKey.ReviewsCommentsArePublished)
+                                        @QuestionRating(QuestionKey.WebsiteContainsRoleOfMembersEditorialBoard)
+                                    </div>
+
+                                    <div class="tab-pane" id="@(QuestionCategory.PeerReview)ScoreTab">
+                                        @QuestionRating(QuestionKey.WebsiteContainsSubmissionsReviewDetails)
+                                        @QuestionRating(QuestionKey.WebsiteContainsCriteriaUsedByReviewers)
+                                        @QuestionRating(QuestionKey.AuthorsAllowedToIndicateDesiredReviewers)
+                                        @QuestionRating(QuestionKey.WebsiteAllowsRatingsAndCommentariesOfPapers)
+                                    </div>
+
+                                    <div class="tab-pane" id="@(QuestionCategory.Governance)ScoreTab">
+                                        @QuestionRating(QuestionKey.HasClearGuidelinesConcerningSharing)
+                                        @QuestionRating(QuestionKey.CopiesAreMadeInThirdPartyRepositories)
+                                        @QuestionRating(QuestionKey.TakesCareOfInclusionInRelevantIndexingServices)
+                                        @QuestionRating(QuestionKey.HighlightsIssuesOfPublicationEthics)
+                                    </div>
+
+                                    <div class="tab-pane" id="@(QuestionCategory.Process)ScoreTab">
+                                        @QuestionRating(QuestionKey.ProvidesTrackAndTraceService)
+                                        @QuestionRating(QuestionKey.PublishedPapersIncludeInformationOnDatesOfSubmissionAndAcceptance)
+                                        @QuestionRating(QuestionKey.ProvidesArticlesWithDigitalObjectIdentifier)
+                                        @QuestionRating(QuestionKey.DisclosesNumberOfSubmissionsPublicationsAndRejectionRates)
+                                    </div>
+
+                                    <div class="tab-pane" id="@(QuestionCategory.Valuation)ScoreTab">
+                                        <div class="score">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p class="text-left">
+                                                        <input type="checkbox" name="@Html.NameFor(m => m.Submitted)" data-bind="checked: Submitted" />
+                                                        @Html.Raw(ViewStrings.Score_Journal_HaveSubmittedToThisJournal)
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="score">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p class="text-left">
+                                                        <input type="checkbox" name="IsEditor" data-bind="checked: isEditor" />
+                                                        @Html.Raw(ViewStrings.Score_Journal_IsEditorOfJournal)
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @QuestionRating(QuestionKey.PeerReviewProcessTransparent)
+                                        @QuestionRating(QuestionKey.RecommendScholarsToSubmit)
+                                        @QuestionRating(QuestionKey.GoodValueForMoney)
+                                        <div id="publicationCost" class="score" data-bind="visible: Submitted">
+                                            <div class="row high">
+                                                <div class="col-md-12">
+                                                    <em>
+                                                        <label for="Price.Amount">@ViewStrings.Score_Journal_PublicationCost</label></em>
+                                                    <br />
+                                                    <select id="Price.Currency" data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency"></select>
+                                                    <input type="text" class="form-control inline" id="Price.Amount" name="Price.Amount" data-bind="value: Price.Amount" placeholder="Price of journal">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>@ViewStrings.Score_Journal_AdditionalCommentsYouWantToShare</p>
+                                                
+                                                <input type="hidden" id="isEditorComment" value="@ViewStrings.Score_Journal_IsEditorOfJournalComment" />
+                                                <textarea id="remarks" rows="3" class="form-control" data-bind="value: Remarks"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="tab-pane" id="OverviewTab">
+
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        @ScoreCardAspect(QuestionCategory.EditorialInformation)
+                                                        @ScoreCardAspect(QuestionCategory.Governance)
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @ScoreCardAspect(QuestionCategory.PeerReview)
+                                                        @ScoreCardAspect(QuestionCategory.Process)
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @ScoreCardAspect(QuestionCategory.Valuation)
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div><strong>@Strings.Progress:</strong> <span data-bind="text: progress"></span>%</div>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressPercentage() }, css: progressClass">
+                                                                <span class="sr-only">@Strings.Progress: <span data-bind="text: progressPercentage"></span></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="panel panel-primary">
+                                                            <div class="panel-heading">@Strings.BaseScoreForThisJournal:</div>
+                                                            <div class="panel-body">
+                                                                <h1 data-bind="text: baseScore"></h1>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row topmargin">
+                                                    <div class="col-md-12">
+                                                        <div class="panel panel-secondary">
+                                                            <div class="panel-heading">@Strings.FinishedYourRating?</div>
+                                                            <div class="panel-body">
+                                                                <i class="icon-ok"></i>
+                                                                <button data-bind="enable: canPublish, click: publishScoreCard">@Strings.PublishYourScoreCard</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="publishedModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="scoreCardPublishedLabel">@Strings.ScoreCardPublished</h3>
+                </div>
+                <div class="modal-body">
+                    @Html.Raw(string.Format(ViewStrings.Score_Journal_Published_Summary, Url.Action("JournalScoreCard", "Home")))
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">@Strings.Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/Controllers/ScoreController.js"></script>
+    <script type="text/javascript" src="~/Scripts/knockout-2.3.0.js"></script>
+    <script type="text/javascript" src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var scoreController = new ScoreController();
+            scoreController.journal(
+                @Html.Raw(JsonConvert.SerializeObject(Model)), 
+                '@Url.Action("Journal", new { id = Model.Id })', 
+                '@Url.Action("Details", "Profiles", new { id = ViewBag.User.Id })');
+        });
+    </script>
+}
+
+

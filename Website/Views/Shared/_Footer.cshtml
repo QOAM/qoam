@@ -1,0 +1,16 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+<div id="footer">
+    <div class="container text-muted">
+        <p class="pull-left dark">@DateTime.Now.Year @Strings.RadboudUniversityNijmegen</p>
+        <p class="pull-right dark"><a href="#">@ViewStrings.Layout_BackToTop <i class="glyphicon glyphicon-circle-arrow-up"></i></a></p>
+        <ul class="list-inline text-center" >
+            <li> @Html.ActionLink(Strings.About, "About", "Home")</li>
+            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink(Strings.Contact, "Contact", "Home")</li>
+            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink(Strings.FAQ, "Faq", "Home")</li>
+            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink(Strings.JournalScoreCard, "JournalScoreCard", "Home")</li>
+            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink(Strings.Organisation, "Organisation", "Home")</li>
+            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink(Strings.Press, "Press", "Home")</li>
+        </ul>
+
+    </div>
+</div>

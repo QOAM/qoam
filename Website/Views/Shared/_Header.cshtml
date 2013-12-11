@@ -1,0 +1,32 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+
+@helper MenuItemClass(string menuItem)
+{
+    if (menuItem == ViewBag.SelectedMenuItem)
+    {
+        <text>class="active"</text>
+    }
+}
+
+<div class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">@ViewStrings.Layout_Project_Name</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li @MenuItemClass("Journals")><a href="@Url.Action("Index", "Journals")"><i class="glyphicon glyphicon-search"></i> @Strings.SearchJournal</a></li>
+                <li @MenuItemClass("Score")><a href="@Url.Action("Index", "Score")"><i class="glyphicon glyphicon-list-alt"></i> @Strings.ScoreJournal</a></li>
+                <li @MenuItemClass("Profiles")><a href="@Url.Action("Index", "Profiles")"><i class="glyphicon glyphicon-user"></i> @Strings.Profiles</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @{ Html.RenderPartial("_LoginPartial"); }
+            </ul>
+        </div>
+    </div>
+</div>

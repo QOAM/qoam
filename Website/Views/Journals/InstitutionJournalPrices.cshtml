@@ -1,0 +1,23 @@
+﻿@using RU.Uci.OAMarket.Website.Models
+@using RU.Uci.OAMarket.Website.Resources
+@model PagedList.IPagedList<RU.Uci.OAMarket.Domain.InstitutionJournal>
+
+@foreach (var institutionJournal in Model)
+{
+    var nextPage = Model.IsLastPage ? (int?)null : (Model.PageNumber + 1);
+    var rowClass = User.Identity.IsAuthenticated && ViewBag.User.InstitutionId == institutionJournal.InstitutionId ? "highlighted" : null;
+    
+    <tr class="@rowClass" data-next-page="@nextPage">
+        <td><a href="@institutionJournal.Link" title="View website">@institutionJournal.Institution.Name</a></td>
+        @if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin))
+        {
+            <td>
+            @if (User.IsInRole(ApplicationRole.Admin) ||
+                (User.IsInRole(ApplicationRole.InstitutionAdmin) && institutionJournal.InstitutionId == ViewBag.User.InstitutionId))
+            {
+                @Html.ActionLink(Strings.Edit, "InstitutionJournalLicense", new { Id = institutionJournal.JournalId, ViewBag.RefererUrl })
+            }
+        </td>    
+        }
+    </tr>    
+}

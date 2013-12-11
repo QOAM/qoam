@@ -1,0 +1,12 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+@model HandleErrorInfo
+
+@{
+    ViewBag.Title = ViewStrings.Error_Title;
+}
+
+<div class="container">
+    <h1>@ViewBag.Title.</h1>
+    
+    @Bootstrap.Error(ViewStrings.Error_Text)
+</div>

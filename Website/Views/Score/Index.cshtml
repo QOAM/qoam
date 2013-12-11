@@ -1,0 +1,173 @@
+﻿@using System.Web.Mvc.Html5
+@using PagedList.Mvc
+@using RU.Uci.OAMarket.Website.Helpers
+@using RU.Uci.OAMarket.Website.Resources
+@model RU.Uci.OAMarket.Website.ViewModels.Score.IndexViewModel
+
+@{
+    ViewBag.Title = ViewStrings.Score_Index_Title;
+}
+
+<div class="container main">
+    <div class="row side">
+        <div class="col-md-3">
+            <div id="filter" class="well">
+                <h3>@Strings.Select <img src="~/Images/scoresheet.png" class="pull-right clearfix" style=height:30px; /></h3>
+                
+                @using (Html.BeginForm("Index", "Score", FormMethod.Get))
+                {
+                    <fieldset>
+                        <legend>@Strings.Search</legend>
+
+                        <div class="form-group editor-label-placeholder">
+                            @Html.LabelFor(m => m.Title, null, new { @class = "control-label" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Html5TextBoxFor(m => m.Title, InputTypes.InputType.Text, new { @class = "form-control" }, Strings.SearchByTitle)
+                            @Html.ValidationMessageFor(m => m.Title, null, new { @class = "control-label" })
+                        </div>
+
+                        <div class="form-group editor-label-placeholder">
+                            @Html.LabelFor(m => m.Issn, null, new { @class = "control-label" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Html5TextBoxFor(m => m.Issn, InputTypes.InputType.Text, new { @class = "form-control" }, Strings.SearchByISSN)
+                            @Html.ValidationMessageFor(m => m.Issn, null, new { @class = "control-label" })
+                        </div>
+
+                        <div class="form-group editor-label-placeholder">
+                            @Html.LabelFor(m => m.Publisher, null, new { @class = "control-label" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Html5TextBoxFor(m => m.Publisher, InputTypes.InputType.Text, new { @class = "form-control" }, Strings.SearchByPublisher)
+                            @Html.ValidationMessageFor(m => m.Publisher, null, new { @class = "control-label" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.Discipline, Model.Disciplines, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Discipline, null, new { @class = "control-label" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.Language, Model.Languages, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Language, null, new { @class = "control-label" })
+                        </div>
+
+                        <p>
+                            <input type="submit" value="@Strings.Search" class="btn btn-primary" />
+                        </p>
+                    </fieldset>
+                }
+
+            </div>
+        </div>
+
+        <div class="col-md-9">
+
+            <h3>@Strings.Journals: @Model.Journals.TotalItemCount</h3>
+
+            @if (Model.Journals.Any())
+            {
+                foreach (var journal in Model.Journals)
+                {
+                <div class="panel panel-primary">
+                    <div class="panel-heading">@journal.Title</div>
+                    <div class="panel-body">
+                        <div class="col-md-9">
+                            <div class="row">
+                                <label class="col-md-2">@Strings.ISSN:</label>
+                                <div class="col-md-10">@journal.ISSN</div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-2">@Strings.Publisher:</label>
+                                <div class="col-md-10">@Html.ActionLink(journal.Publisher.Name, "Index", new { Publisher = journal.Publisher.Name })</div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-2">@Strings.Language:</label>
+                                <div class="col-md-10">
+                                    @for (var i = 0; i < journal.Languages.Count; ++i)
+                                    {
+                                        var language = journal.Languages.ElementAt(i);
+
+                                        @Html.ActionLink(language.Name, "Index", new { Language = language.Id })
+
+                                        if (i < journal.Languages.Count - 1)
+                                        {
+                                        <text>,</text>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-2">@Strings.Discipline:</label>
+                                <div class="col-md-10">
+                                    @for (var i = 0; i < journal.Subjects.Count; ++i)
+                                    {
+                                        var subject = journal.Subjects.ElementAt(i);
+
+                                        @Html.ActionLink(subject.Name, "Index", new { Discipline = subject.Id })
+
+                                        if (i < journal.Subjects.Count - 1)
+                                        {
+                                        <text>,</text>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <div>
+                                <a href="@journal.Link" class="btn btn-success external" title="@Strings.GoToWebsite">@Strings.GoToWebsite</a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="row score">
+                                <div class="col-md-5 ">
+                                    <a class="" href="@Url.Action("Journal", new { id = journal.Id })">
+                                        <img src="~/Content/Images/rate.png" alt="@Strings.ScoreThisJournal" /></a>
+                                </div>
+                                <div class="col-md-7">
+                                    <a class="" href="@Url.Action("Journal", new { id = journal.Id })">@Strings.PublishScoreCardForThisJournal</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+                
+                @Html.PagedListPager(Model.Journals, page => Url.Action("Index", new { page, Model.Title, Model.Issn, Model.Publisher, Model.Discipline, Model.Language, Model.Sort, Model.SortBy }), Html.PagedListRenderOptions())
+            }
+            else
+            {
+                @Html.Raw(string.Format(ViewStrings.Shared_NoJournalsFound, Url.Action("Faq", "Home") + "#cant-find-journal"))
+            }
+
+        </div>
+    </div>
+</div>
+
+@section stylesheets
+{
+    <link href="~/Content/typeahead.js-bootstrap.min.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    @{ this.Html.RenderPartial("_FormScripts"); }
+
+    <script type="text/javascript" src="~/Scripts/Controllers/ScoreController.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/typeahead.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var scoreController = new ScoreController();
+            scoreController.index(
+                '@Url.Action("Titles", "Journals", null, this.Request.Url.Scheme)',
+                '@Url.Action("Issns", "Journals", null, this.Request.Url.Scheme)',
+                '@Url.Action("Publishers", "Journals", null, this.Request.Url.Scheme)'
+            );
+        });
+    </script>
+}
