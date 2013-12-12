@@ -119,11 +119,10 @@ google33968cad0cb9676c.html
 *.mdf
 *.ldf
 
-# App.config and Web.config transformations
-App.*.config
-Web.*.config
+# Configuration files that contain sensitive information (like credentions)
 ConnectionStrings.*.config
 SurfConext.*.config
 Contact.*.config
 Ulrichs.*.config
 ExpirationChecker.*.config
+MachineKey.*.config

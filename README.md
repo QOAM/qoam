@@ -6,12 +6,15 @@ Quality Open Access Market (QOAM) is primarily for authors who want to publish t
 ## Building
 Building QOAM requires the following steps to be followed:
 
-1. Get a local copy of this repository on your machine.
-2. Get a copy of the database at: https://www.dropbox.com/s/ryw8kt4koe7lawz/OAMarket.mdf It is important to use this preconfigured database as contains the correct triggers, keys and indexes that won't automatically be created by Entity Framework. The database also contains sample journals to jump-start development.
-3. In the `Web.config` file in the Website project, replace all "**TODO**" strings with suitable values (e.g. you should set the connection string and the SurfConext credentials.
+1. Get a local copy of this repository on your machine (e.g. using `git clone`).
+2. Get a copy of the database at: https://www.dropbox.com/s/ryw8kt4koe7lawz/OAMarket.mdf (the log can be found at  https://www.dropbox.com/s/x0cv6v3t4mvzrxk/OAMarket_log.ldf).
+Note: it is important to use this preconfigured database as it contains the correct triggers, keys and indexes that won't automatically be created by Entity Framework. The database also contains sample journals to jump-start development.
+3. Add local versions of config files that contain sensitive information. All configuration sections that contain sensitive information are defined in external files, not in the `Web.config` file themselves. For example, if you look at the `connectionStrings` section in the `Web.config` files of the Website project, you'll find the following:  
+`<connectionStrings configSource="ConnectionStrings.Debug.config" />`
+Here you can see that the connection strings configuration section is defined in an external file: `ConnectionStrings.Debug.config`. This file should be in the same directory as the `Web.config` file. You should thus create a `ConnectionStrings.Debug.config` file on your local machine that contains the connection strings you want to use. To ease this step, the following zip file contains sample files for every one of the external configuration files: https://www.dropbox.com/s/a8y16utfdtuju7y/Sample-config-files.zip Just extract this zip in your solution folder and then replace the contents of the config files with the values you want to use on your system.
 4. Run the application!
 
-If you want to run the console applications, follow the same steps but in step 3 you replace the "**TODO**" strings in the `App.config` file instead of the `Web.config` file.
+If you want to run the console applications, follow the same steps but in step 3 replace `Web.config` by `App.config`.
 
 ## License
 [Apache License 2.0](LICENSE.md)
