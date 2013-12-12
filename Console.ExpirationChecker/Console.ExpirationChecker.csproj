@@ -70,8 +70,8 @@
       <IsTransformFile>True</IsTransformFile>
     </None>
     <None Include="App.Staging.config">
-        <DependentUpon>App.config</DependentUpon>
-        <IsTransformFile>True</IsTransformFile>
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
     </None>
     <None Include="App.Release.config">
       <DependentUpon>App.config</DependentUpon>
