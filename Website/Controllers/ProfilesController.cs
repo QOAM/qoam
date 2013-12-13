@@ -79,6 +79,7 @@
 
         [POST("{id}/edit")]
         [Authorize(Roles = ApplicationRole.Admin)]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, EditViewModel model)
         {
             model.UserProfile = this.UserProfileRepository.Find(id);

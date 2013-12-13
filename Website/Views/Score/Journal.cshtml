@@ -154,8 +154,9 @@
                     </div>
                     <div class="row">
 
-                        @using (Html.BeginForm())
+                        @using (Html.BeginForm("Journal", "Score", FormMethod.Post, new { id = "journalScoreForm" }))
                         {
+                            @Html.AntiForgeryToken()
       
                             <div class="tabbable">
                                 <ul id="scoreTabs" class="nav nav-tabs">

@@ -141,6 +141,7 @@
 
         [POST("{id}/institutionjournallicense")]
         [Authorize(Roles = ApplicationRole.InstitutionAdmin)]
+        [ValidateAntiForgeryToken]
         public ActionResult InstitutionJournalLicense(int id, InstitutionJournalLicenseViewModel model)
         {
             // Ensure that only admin and institutional admin users can use the update all journals of a publisher

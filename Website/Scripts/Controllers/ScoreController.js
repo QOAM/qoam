@@ -85,19 +85,23 @@
 
             self.publishing = ko.observable(false);
             self.isEditor = ko.observable(false);
+            
+            self.getRequestVerificationToken = function() {
+                return $('#journalScoreForm input[name="__RequestVerificationToken"]').val();
+            },
 
             self.storeScoreCard = function () {
                 if (currentXhr != null) {
                     currentXhr.abort();
                 }
-
+                
                 currentXhr = $.ajax({
                     type: "POST",
                     url: saveScoreCardUrl,
-                    crossDomain: true,
                     contentType: 'application/json',
                     data: ko.utils.stringifyJson(ko.mapping.toJS(self)),
-                    dataType: 'json'
+                    dataType: 'json',
+                    headers: { '__RequestVerificationToken': self.getRequestVerificationToken() }
                 })
                 .done(function () {
                     $('#publishedModal')

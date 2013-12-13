@@ -24,6 +24,8 @@
 
             @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
             {
+                @Html.AntiForgeryToken()
+
                 <fieldset>
                     <legend>@ViewStrings.Home_Contact_Form_Legend</legend>
 

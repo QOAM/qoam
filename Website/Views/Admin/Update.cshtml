@@ -16,6 +16,8 @@
     
     @using (Html.BeginForm("Update", "Admin", FormMethod.Post, new { role = "form" }))
     {
+        @Html.AntiForgeryToken()
+
         <fieldset>
             <legend>@ViewBag.Title</legend>
             

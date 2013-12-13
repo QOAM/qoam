@@ -13,6 +13,8 @@
     
     @using (Html.BeginForm("Edit", "Profiles", FormMethod.Post, new { role = "form" }))
     {
+        @Html.AntiForgeryToken()
+
         <fieldset>
             <legend>@ViewBag.Title</legend>
             

@@ -54,6 +54,7 @@
         }
 
         [POST("import")]
+        [ValidateAntiForgeryToken]
         public ActionResult Import(ImportViewModel model)
         {
             if (ModelState.IsValid)
@@ -96,6 +97,7 @@
         }
 
         [POST("update")]
+        [ValidateAntiForgeryToken]
         public ActionResult Update(UpdateViewModel model)
         {
             if (ModelState.IsValid)

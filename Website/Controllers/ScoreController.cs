@@ -88,6 +88,7 @@
 
         [POST("journal/{id}")]
         [Authorize]
+        [ValidateJsonAntiForgeryTokenAttribute]
         public ActionResult Journal(int id, ScoreViewModel model)
         {
             var scoreCard = this.scoreCardRepository.Find(id);

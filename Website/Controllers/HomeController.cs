@@ -72,6 +72,7 @@
         }
 
         [POST("contact")]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Contact(ContactViewModel model)
         {
             if (this.ModelState.IsValid)
