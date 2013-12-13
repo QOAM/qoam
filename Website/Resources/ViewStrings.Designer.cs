@@ -597,6 +597,25 @@ namespace RU.Uci.OAMarket.Website.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;QOAM is a fully open web site but only academic staff may publish Journal Score Cards in QOAM. To avoid unauthorized publishing of such cards QOAM has been registered with eduGAIN. EduGAIN interconnects identity federations around the world, simplifying access to content, services and resources for the global research and education community. This will enable staff of your institute to simply log in to the scoring section of QOAM via their institutional account. &lt;br/&gt;
+        ///To effectuate this your institute h [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Home_Faq_Connect_Institute_Text {
+            get {
+                return ResourceManager.GetString("Home_Faq_Connect_Institute_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How to get my institute connected to QOAM’s scoring section?.
+        /// </summary>
+        public static string Home_Faq_Connect_Institute_Title {
+            get {
+                return ResourceManager.GetString("Home_Faq_Connect_Institute_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;p&gt;
         ///                To avoid unqualified contributions to QOAM, only members of the academic community may publish Journal Score Cards. Membership will be controlled by federated authentication via trusted third parties like SURFconext in the Netherlands. Per person only one JSC may be published for a specific journal. Published Journal Score Cards are non-anonymous. Their authors can be contacted by other members of the academic community via the &lt;a href=&quot;{0}&quot; title=&quot;Profiles section&quot;&gt;Profiles section&lt;/a&gt; [rest of string was truncated]&quot;;.
         /// </summary>

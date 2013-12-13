@@ -17,6 +17,7 @@
                 <li><a href="#cant-find-journal"><em>@ViewStrings.Home_Faq_CantFindJournal_Title</em></a></li>
                 <li><a href="#no-metrics"><em>@ViewStrings.Home_Faq_NoMetrics_Title</em></a></li>
                 <li><a href="#framing"><em>@ViewStrings.Home_Faq_Framing_Title</em></a></li>
+                <li><a href="#connect-institute"><em>@ViewStrings.Home_Faq_Connect_Institute_Title</em></a></li>
             </ul>
 
             <h3 id="hybrid-journals">@ViewStrings.Home_Faq_HybridJournalsIncluded_Title</h3>
@@ -33,6 +34,9 @@
 
             <h3 id="framing">@ViewStrings.Home_Faq_Framing_Title</h3>
             @Html.Raw(string.Format(ViewStrings.Home_Faq_Framing_Text, Url.Action("Index", "Profiles")))
+
+            <h3 id="connect-institute">@ViewStrings.Home_Faq_Connect_Institute_Title</h3>
+            @Html.Raw(ViewStrings.Home_Faq_Connect_Institute_Text)
         </div>
     </div>
 </div>

@@ -710,4 +710,12 @@ Therefore, QOAM is a public website. But academics have to log in with their ins
   <data name="Admin_Updated_Title" xml:space="preserve">
     <value>Journals update result</value>
   </data>
+  <data name="Home_Faq_Connect_Institute_Text" xml:space="preserve">
+    <value>&lt;p&gt;QOAM is a fully open web site but only academic staff may publish Journal Score Cards in QOAM. To avoid unauthorized publishing of such cards QOAM has been registered with eduGAIN. EduGAIN interconnects identity federations around the world, simplifying access to content, services and resources for the global research and education community. This will enable staff of your institute to simply log in to the scoring section of QOAM via their institutional account. &lt;br/&gt;
+To effectuate this your institute has to be registered as a QOAM participant. A registration request can be sent to Leo Waaijers, using the Contact option behind the ‘Learn more’ button in QOAM.  Don’t forget to include the name of your internet domain in this mail. The domain is the extension of your email address behind the @ sign. If you feel uncertain about the domain name of your institute please contact your ICT department. &lt;br/&gt;
+The registration will be confirmed by SURFconext, the Dutch eduGAIN partner. Once your institute is registered in QOAM, staff have access via their institutional account and may start publishing Journal Score Cards in QOAM.&lt;/p&gt;</value>
+  </data>
+  <data name="Home_Faq_Connect_Institute_Title" xml:space="preserve">
+    <value>How to get my institute connected to QOAM’s scoring section?</value>
+  </data>
 </root>
