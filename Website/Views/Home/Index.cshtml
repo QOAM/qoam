@@ -1,4 +1,5 @@
 ﻿@using RU.Uci.OAMarket.Website.Resources
+@model RU.Uci.OAMarket.Website.ViewModels.Home.IndexViewModel
 @{
     ViewBag.Title = ViewStrings.Home_Index_Title;
 }
@@ -11,12 +12,10 @@
             <div class="container">
                 <div class="carousel-caption">
 
-                    
-
                     <!-- <h1>@Strings.QualityOpenAccessMarket</h1> 
                         <p>@Html.ActionLink(Strings.LearnMore, "About", "Home", null, new { @class = "btn btn btn-primary topmargin" })</p>-->
                     
-                    <button id="test-phase" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="QOAM is in its first test phase, starting at the beginning of November 2013. In the last weeks of 2013, all academics in the Netherlands will be able to score Journal Score Cards. Access to that part of the site (that is not open to everybody) is currently being provided for all universities in the Netherlands. If you work for a Dutch university, and you can not access the scoring part of QOAM, please contact your ICT department and ask them to open it up through SURFconext Dashboard.">TEST PHASE</button>
+                    <button id="test-phase" type="button" class="btn btn-warning" data-toggle="tooltip" data-html="true" data-placement="bottom" title="<img src='@Url.Content("~/Images/Under-Construction.png")' />Only with a critical mass of several thousands quality checked journals QOAM becomes a real market place where authors may select a good journal for their open access article. Currently, QOAM has @Model.NumberOfJournalScoreCards checked journals. Please, help that number grow by publishing a Journal Score Card. See the item Journal Score Card behind the ‘Learn more’ button below.">TEST PHASE</button>
                 </div>
             </div>
         </div>

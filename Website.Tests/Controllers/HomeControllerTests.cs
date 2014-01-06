@@ -28,7 +28,7 @@
         {
             // Arrange
             var mailSenderMock = new Mock<IMailSender>();
-            var homeController = new HomeController(mailSenderMock.Object, CreateContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = new HomeController(Mock.Of<IScoreCardRepository>(), mailSenderMock.Object, CreateContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
 
             // Act
             await homeController.Contact(CreateContactViewModel());
@@ -46,7 +46,7 @@
         public async void ContactPostAfterSendingMailWillRedirectToContactSentAction()
         {
             // Arrange
-            var homeController = new HomeController(Mock.Of<IMailSender>(), new ContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = new HomeController(Mock.Of<IScoreCardRepository>(), Mock.Of<IMailSender>(), new ContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
 
             // Act
             var actionResult = (RedirectToRouteResult)await homeController.Contact(new ContactViewModel());
@@ -63,7 +63,7 @@
             var mailSenderMock = new Mock<IMailSender>();
             mailSenderMock.Setup(m => m.Send(It.IsAny<MailMessage>())).Throws<InvalidOperationException>();
 
-            var homeController = new HomeController(mailSenderMock.Object, new ContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = new HomeController(Mock.Of<IScoreCardRepository>(), mailSenderMock.Object, new ContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
 
             // Act
             await homeController.Contact(new ContactViewModel());
@@ -77,7 +77,7 @@
         {
             // Arrange
             var mailSenderMock = new Mock<IMailSender>();
-            var homeController = new HomeController(mailSenderMock.Object, new ContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = new HomeController(Mock.Of<IScoreCardRepository>(), mailSenderMock.Object, new ContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
             homeController.ModelState.AddModelError("key", "error message");
 
             // Act
@@ -91,7 +91,7 @@
         public async void ContactPostWithInvalidModelStateWillRenderView()
         {
             // Arrange
-            var homeController = new HomeController(Mock.Of<IMailSender>(), new ContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = new HomeController(Mock.Of<IScoreCardRepository>(), Mock.Of<IMailSender>(), new ContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
             homeController.ModelState.AddModelError("key", "error message");
 
             // Act

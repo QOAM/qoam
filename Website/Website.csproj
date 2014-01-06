@@ -269,6 +269,7 @@
       <DependentUpon>Questions.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Home\ContactViewModel.cs" />
+    <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportedViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportViewModel.cs" />
     <Compile Include="ViewModels\Import\UpdatedViewModel.cs" />
@@ -326,6 +327,7 @@
     <Content Include="Images\ScoreCards\journalscorecard-process.png" />
     <Content Include="Images\ScoreCards\journalscorecard-valuation-small.png" />
     <Content Include="Images\ScoreCards\journalscorecard-valuation.png" />
+    <Content Include="Images\Under-Construction.png" />
     <Content Include="Scripts\bootstrap-slider.js" />
     <Content Include="Scripts\Helpers\Ajax.js" />
     <Content Include="Scripts\Helpers\Ajax.min.js">

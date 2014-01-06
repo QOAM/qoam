@@ -18,13 +18,15 @@
     {
         private readonly IMailSender mailSender;
         private readonly ContactSettings contactSettings;
+        private readonly IScoreCardRepository scoreCardRepository;
 
-        public HomeController(IMailSender mailSender, ContactSettings contactSettings, IUserProfileRepository userProfileRepository, IAuthentication authentication)
+        public HomeController(IScoreCardRepository scoreCardRepository, IMailSender mailSender, ContactSettings contactSettings, IUserProfileRepository userProfileRepository, IAuthentication authentication)
             : base(userProfileRepository, authentication)
         {
             Requires.NotNull(mailSender, "mailSender");
             Requires.NotNull(contactSettings, "contactSettings");
 
+            this.scoreCardRepository = scoreCardRepository;
             this.mailSender = mailSender;
             this.contactSettings = contactSettings;
         }
@@ -32,7 +34,7 @@
         [GET("/")]
         public ViewResult Index()
         {
-            return this.View();
+            return this.View(new IndexViewModel { NumberOfJournalScoreCards = this.scoreCardRepository.PublishedScoreCardsCount() });
         }
 
         [GET("about")]
