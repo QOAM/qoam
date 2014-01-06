@@ -11,6 +11,7 @@
         public int Id { get; set; }
         public string Remarks { get; set; }
         public bool Submitted { get; set; }
+        public bool Editor { get; set; }
         public IList<QuestionScoreViewModel> QuestionScores { get; set; }
         public JournalViewModel Journal { get; set; }
         public JournalPriceViewModel Price { get; set; }
@@ -26,6 +27,7 @@
             scoreCard.Score = new ScoreCardScore(scoreCard.QuestionScores);
             scoreCard.Remarks = this.Remarks;
             scoreCard.Submitted = this.Submitted;
+            scoreCard.Editor = this.Editor;
             scoreCard.State = ScoreCardState.Published;
             scoreCard.DatePublished = DateTime.Now;
             scoreCard.DateExpiration = DateTime.Now + scoreCardLifeTime;

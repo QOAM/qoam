@@ -84,7 +84,6 @@
             }));
 
             self.publishing = ko.observable(false);
-            self.isEditor = ko.observable(false);
             
             self.getRequestVerificationToken = function() {
                 return $('#journalScoreForm input[name="__RequestVerificationToken"]').val();
@@ -184,7 +183,7 @@
                 }
             };
 
-            self.isEditor.subscribe(function (checked) {
+            self.Editor.subscribe(function (checked) {
                 var remarksElement = $('#remarks');
 
                 if (checked) {

@@ -21,6 +21,7 @@
         public ScoreCardScore Score { get; set; }
         public ScoreCardState State { get; set; }
         public bool Submitted { get; set; }
+        public bool Editor { get; set; }
         public virtual UserProfile UserProfile { get; set; }
         public virtual Journal Journal { get; set; }
         public virtual ScoreCardVersion Version { get; set; }
