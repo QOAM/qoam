@@ -104,11 +104,6 @@
                 .Where(s => s.State == ScoreCardState.Published && EntityFunctions.TruncateTime(s.DateExpiration) == EntityFunctions.TruncateTime(soonToBeArchivedDate)).ToList();
         }
 
-        public int PublishedScoreCardsCount()
-        {
-            return this.DbContext.ScoreCards.Count(s => s.State == ScoreCardState.Published);
-        }
-
         public void Insert(ScoreCard scoreCard)
         {
             this.DbContext.ScoreCards.Add(scoreCard);

@@ -2,6 +2,6 @@
 {
     public class IndexViewModel
     {
-        public int NumberOfJournalScoreCards { get; set; }
+        public int NumberOfScoredJournals { get; set; }
     }
 }

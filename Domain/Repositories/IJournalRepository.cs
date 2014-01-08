@@ -20,5 +20,7 @@
         void Update(Journal journal);
         void Insert(Journal journal);
         void Save();
+
+        int ScoredJournalsCount();
     }
 }

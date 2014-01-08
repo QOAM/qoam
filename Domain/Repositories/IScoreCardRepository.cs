@@ -19,6 +19,5 @@
         ScoreCardStats CalculateStats(int userProfileId);
         IList<ScoreCard> FindScoreCardsToBeArchived();
         IList<ScoreCard> FindScoreCardsThatWillBeArchived(TimeSpan toBeArchivedWindow);
-        int PublishedScoreCardsCount();
     }
 }

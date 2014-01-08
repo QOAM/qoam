@@ -150,6 +150,11 @@
             this.DbContext.Journals.Add(journal);
         }
 
+        public int ScoredJournalsCount()
+        {
+            return this.DbContext.Journals.Count(j => j.JournalScore.NumberOfReviewers > 0);
+        }
+
         public void Update(Journal journal)
         {
             this.DbContext.Entry(journal).State = EntityState.Modified;
