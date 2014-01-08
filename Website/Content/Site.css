@@ -320,6 +320,12 @@ th {
     border: 1px solid black;
     padding: 10px 20px;
 }
+/***************** frontpage ****************************/
+#under-construction {
+    position: relative;
+    display: block;
+    top: 50px;
+}
 /******************** iframe ************************************/
 #map {
 	height:100%;
