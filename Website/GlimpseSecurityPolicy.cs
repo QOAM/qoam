@@ -15,7 +15,14 @@ namespace RU.Uci.OAMarket.Website
 
         public RuntimePolicy Execute(IRuntimePolicyContext policyContext)
         {
-            return policyContext.GetHttpContext().User.IsInRole("Admin") ? RuntimePolicy.On : RuntimePolicy.Off;
+            var httpContextBase = policyContext.GetHttpContext();
+
+            if (httpContextBase == null || httpContextBase.User == null)
+            {
+                return RuntimePolicy.Off;
+            }
+
+            return httpContextBase.User.IsInRole("Admin") ? RuntimePolicy.On : RuntimePolicy.Off;
         }
     }
 }
