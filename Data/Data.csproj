@@ -78,6 +78,15 @@
     <Compile Include="Helpers\ContextExtensions.cs" />
     <Compile Include="JournalPriceRepository.cs" />
     <Content Include="Scripts\CleanupAfterUlrichs.sql" />
+    <Compile Include="Migrations\201401161051583_InitialCreate.cs" />
+    <Compile Include="Migrations\201401161051583_InitialCreate.Designer.cs">
+      <DependentUpon>201401161051583_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201401161057106_JSCEditorField.cs" />
+    <Compile Include="Migrations\201401161057106_JSCEditorField.Designer.cs">
+      <DependentUpon>201401161057106_JSCEditorField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Scripts\ResourceReader.cs" />
     <Compile Include="InstitutionJournalRepository.cs" />
     <Compile Include="QuestionRepository.cs" />
@@ -87,11 +96,16 @@
     <Compile Include="JournalRepository.cs" />
     <Compile Include="SubjectRepository.cs" />
     <Compile Include="LanguageRepository.cs" />
-    <Compile Include="MigrationsConfiguration.cs" />
     <Compile Include="PublisherRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScoreCardVersionRepository.cs" />
+    <EmbeddedResource Include="Migrations\201401161051583_InitialCreate.resx">
+      <DependentUpon>201401161051583_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401161057106_JSCEditorField.resx">
+      <DependentUpon>201401161057106_JSCEditorField.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Scripts\trigger_Scorecards.Published.sql" />
     <EmbeddedResource Include="Scripts\function_MinimumFloat.sql" />
     <Compile Include="UserProfileRepository.cs" />
