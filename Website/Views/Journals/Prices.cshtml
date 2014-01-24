@@ -72,7 +72,7 @@
             <div class="panel-heading">@Strings.StandardPrice</div>
             <div class="panel-body">
                 
-                @if (Model.Journal.ScoreCards.Count(x => !x.Submitted) > 0)
+                @if (Model.Journal.JournalPrice != null && Model.Journal.ScoreCards.Count(x => !x.Submitted) > 0)
                 {
                     <p>@Strings.LastStandardPrice: @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId != 0 && !x.ScoreCard.Submitted).Price)</p>
                 }
