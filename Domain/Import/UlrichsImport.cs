@@ -146,16 +146,6 @@
 
         private static bool IsJournal(XElement journalElement)
         {
-            var xElement = journalElement.Element("ISSN");
-
-            if (xElement != null)
-            {
-                if (xElement.Value == "1553-3514")
-                {
-                    Console.WriteLine();
-                }
-            }
-
             if (journalElement.Element("Title") == null || 
                 journalElement.Element("ISSN") == null || 
                 journalElement.Element("JournalWebsiteURL") == null || 

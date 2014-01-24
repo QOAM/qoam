@@ -17,7 +17,7 @@
         }
 
         [Required]
-        [StringLength(900)]
+        [StringLength(1024)]
         public string Title { get; set; }
 
         [Required]
