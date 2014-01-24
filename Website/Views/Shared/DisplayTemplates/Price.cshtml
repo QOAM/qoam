@@ -1,11 +1,23 @@
 ﻿@using RU.Uci.OAMarket.Domain
 @model Price
 
-@if (Model.Amount.HasValue && Model.Amount.Value == 0)
+@if (Model.FeeType == FeeType.NoFee)
+{
+    @RU.Uci.OAMarket.Website.Resources.Strings.NoFee
+}
+else if (Model.FeeType == FeeType.Absent)
+{
+    @RU.Uci.OAMarket.Website.Resources.Strings.Absent
+}
+else if (Model.Amount.HasValue && Model.Amount.Value == 0)
 {
     @RU.Uci.OAMarket.Website.Resources.Strings.Free
 }
+else if (Model.FeeType == FeeType.Page)
+{
+    @Html.DisplayFor(m => m.Currency) @Model.Amount.ToString() @RU.Uci.OAMarket.Website.Resources.Strings.PricePerPage
+}
 else
 {
-    @Html.DisplayFor(m => m.Currency) @Model.Amount.ToString()    
+    @Html.DisplayFor(m => m.Currency) @Model.Amount.ToString() @RU.Uci.OAMarket.Website.Resources.Strings.PricePerArticle
 }

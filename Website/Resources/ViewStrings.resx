@@ -415,6 +415,9 @@ The initiators of QOAM despise this ‘double dipping’ but QOAM is not the ins
   <data name="Journals_Prices_ViewPaidPrices" xml:space="preserve">
     <value>View all paid prices</value>
   </data>
+  <data name="Journals_Prices_ViewStandardPrices" xml:space="preserve">
+    <value>View all standard prices</value>
+  </data>
   <data name="Journals_Prices_NoInstitutionPriceForInstitution" xml:space="preserve">
     <value>Your institution does not have a special license for this journal.</value>
   </data>
@@ -587,7 +590,7 @@ Therefore, QOAM is a public website. But academics have to log in with their ins
     <value>Why don’t I find a specific journal in QOAM?</value>
   </data>
   <data name="Score_Journal_HaveSubmittedToThisJournal" xml:space="preserve">
-    <value>I have published an article in this journal less than a year ago &lt;small&gt;(If ‘Yes’, please tick the box) &lt;/small&gt;</value>
+    <value>I have published an article in this journal less than a year ago </value>
   </data>
   <data name="Score_Journal_PublicationCost" xml:space="preserve">
     <value>Publication of my article in this journal did cost me</value>
@@ -717,5 +720,21 @@ The registration will be confirmed by SURFconext, the Dutch eduGAIN partner. Ple
   </data>
   <data name="Home_Faq_Connect_Institute_Title" xml:space="preserve">
     <value>How to get my institute connected to QOAM’s scoring section?</value>
+  </data>
+  <data name="Score_Journal_Outdated_Publication" xml:space="preserve">
+    <value>What does the website of the journal tell about the publication fee?</value>
+  </data>
+  <data name="Score_Journal_Outdated_Publication_Absent" xml:space="preserve">
+    <value>Absent or diffuse</value>
+  </data>
+  <data name="Score_Journal_Outdated_Publication_Price_No_Fee" xml:space="preserve">
+    <value>No Fee</value>
+  </data>
+  <data name="Score_Journal_Outdated_Publication_Price_Per_Article" xml:space="preserve">
+    <value>Price per article</value>
+  </data>
+  <data name="Score_Journal_Outdated_Publication_Price_Per_Page" xml:space="preserve">
+    <value>Price per page
+</value>
   </data>
 </root>

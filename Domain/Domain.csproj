@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JournalFeeType.cs" />
     <Compile Include="Import\DoajSettings.cs" />
     <Compile Include="Import\GeneralImportSettings.cs" />
     <Compile Include="Import\JournalsImportMode.cs" />
@@ -170,6 +171,7 @@
     <EmbeddedResource Include="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

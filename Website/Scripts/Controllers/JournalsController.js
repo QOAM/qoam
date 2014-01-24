@@ -41,12 +41,17 @@
         });
     };
     
-    JournalsController.prototype.prices = function (viewJournalPricesElementId, viewJournalPricesModalElementId, viewInstitutionalPricesElementId, viewInstitutionalPricesModalElementId) {
-        $('#' + viewJournalPricesElementId).on('click', function () {
+    JournalsController.prototype.prices = function (viewJournalPricesElementId, viewJournalPricesModalElementId, viewInstitutionalPricesElementId, viewInstitutionalPricesModalElementId, viewJournalStandardPricesElementId, viewJournalStandardPricesModalElementId) {
+        $('#' + viewJournalPricesElementId).on('click', function () {            
             $('#' + viewJournalPricesModalElementId).modal();
             return false;
         });
         
+        $('#' + viewJournalStandardPricesElementId).on('click', function () {
+            $('#' + viewJournalStandardPricesModalElementId).modal();
+            return false;
+        });
+
         $('#' + viewInstitutionalPricesElementId).on('click', function () {
             $('#' + viewInstitutionalPricesModalElementId).modal();
             return false;

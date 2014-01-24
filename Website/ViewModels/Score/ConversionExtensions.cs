@@ -51,6 +51,7 @@
                 JournalPriceId = journalPrice.Id,
                 Amount = journalPrice.Price.Amount,
                 Currency = journalPrice.Price.Currency,
+                FeeType = journalPrice.Price.FeeType
             };
         }
 

@@ -201,14 +201,85 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <p class="text-left">
-                                                        <input type="checkbox" name="@Html.NameFor(m => m.Submitted)" data-bind="checked: Submitted" />
+                                                        @*<input type="checkbox" name="@Html.NameFor(m => m.Submitted)" />*@
                                                         @Html.Raw(ViewStrings.Score_Journal_HaveSubmittedToThisJournal)
                                                     </p>
+                                                    <p>
+                                                        <div>
+                                                            <input type="radio" id="@Html.NameFor(m => m.Submitted)-Yes" name="IsPublishedWithinYearRadio" value="true" />
+                                                            <label for="@Html.NameFor(m => m.Submitted)-Yes">Yes</label>
+                                                        </div>
+                                                        <div id="publicationCost" class="innerRow" data-bind="visible: IsPublishedWithinYear">
+                                                            <div class="row high">
+                                                                <div class="col-md-12">
+                                                                    <em>
+                                                                        <label for="Price.Amount">@ViewStrings.Score_Journal_PublicationCost</label></em>
+                                                                    <br />
+                                                                    <select id="Price.Currency" class="priceBox" data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency"></select>
+                                                                    <input type="text" class="form-control inline" id="Price.Amount" name="Price.Amount" data-bind="value: Price.Amount" placeholder="Price of journal">
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
+
+                                                        <div>
+                                                            <input type="radio" id="@Html.NameFor(m => m.Submitted)-No" name="IsPublishedWithinYearRadio" value="false" />
+                                                            <label for="@Html.NameFor(m => m.Submitted)-No">No</label>
+                                                        </div>
+
+                                                        <div id="publicationCostOutDated" class="innerRow" data-bind="visible: IsOutDatedPublication">
+                                                            <div class="row high">
+                                                                <div class="col-md-12">
+                                                                    <em>
+                                                                        <label for="Price.AmountPerArticle">@ViewStrings.Score_Journal_Outdated_Publication</label></em>
+                                                                    <div>
+                                                                        <input type="radio" id="outdatedPublication-article" name="outdatedPublication" value="Article" />
+                                                                        <em>
+                                                                            <label for="outdatedPublication-article">@ViewStrings.Score_Journal_Outdated_Publication_Price_Per_Article</label></em>
+                                                                        <input type="radio" id="outdatedPublication-page" name="outdatedPublication" value="Page" />
+                                                                        <em>
+                                                                            <label for="outdatedPublication-page">@ViewStrings.Score_Journal_Outdated_Publication_Price_Per_Page</label></em>
+                                                                        <input type="radio" id="outdatedPublication-nofee" name="outdatedPublication" value="NoFee" />
+                                                                        <em>
+                                                                            <label for="outdatedPublication-nofee">@ViewStrings.Score_Journal_Outdated_Publication_Price_No_Fee</label></em>
+                                                                        <input type="radio" id="outdatedPublication-absent" name="outdatedPublication" value="Absent" />
+                                                                        <em>
+                                                                            <label for="outdatedPublication-absent">@ViewStrings.Score_Journal_Outdated_Publication_Absent</label></em>
+                                                                    </div>
+                                                                    <div data-bind="visible: IsOutDatedPublicationArticle">
+                                                                        <select id="Price.CurrencyPerArticle" class="priceBox"
+                                                                            data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency">
+                                                                        </select>
+                                                                        <input type="text"
+                                                                            class="form-control inline"
+                                                                            id="Price.AmountPerArticle"
+                                                                            name="Price.AmountPerArticle"
+                                                                            data-bind="value: Price.Amount"
+                                                                            placeholder="Price per article" />
+                                                                    </div>
+                                                                    <div data-bind="visible: IsOutDatedPublicationPage">
+                                                                        <select id="Price.CurrencyPerPage"
+                                                                            class="priceBox"
+                                                                            data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency">
+                                                                        </select>
+                                                                        <input type="text"
+                                                                            class="form-control inline"
+                                                                            id="Price.AmountPerPage"
+                                                                            name="Price.AmountPerPage"
+                                                                            data-bind="value: Price.Amount"
+                                                                            placeholder="Price per page" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </p>
                                                 </div>
+
                                             </div>
                                         </div>
-                                        
+
+
                                         <div class="score">
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -224,22 +295,12 @@
                                         @QuestionRating(QuestionKey.PeerReviewProcessTransparent)
                                         @QuestionRating(QuestionKey.RecommendScholarsToSubmit)
                                         @QuestionRating(QuestionKey.GoodValueForMoney)
-                                        <div id="publicationCost" class="score" data-bind="visible: Submitted">
-                                            <div class="row high">
-                                                <div class="col-md-12">
-                                                    <em>
-                                                        <label for="Price.Amount">@ViewStrings.Score_Journal_PublicationCost</label></em>
-                                                    <br />
-                                                    <select id="Price.Currency" data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency"></select>
-                                                    <input type="text" class="form-control inline" id="Price.Amount" name="Price.Amount" data-bind="value: Price.Amount" placeholder="Price of journal">
-                                                </div>
-                                            </div>
-                                        </div>
+
 
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <p>@ViewStrings.Score_Journal_AdditionalCommentsYouWantToShare</p>
-                                                
+
                                                 <input type="hidden" id="isEditorComment" value="@ViewStrings.Score_Journal_IsEditorOfJournalComment" />
                                                 <textarea id="remarks" rows="3" class="form-control" data-bind="value: Remarks"></textarea>
                                             </div>

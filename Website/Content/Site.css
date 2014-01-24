@@ -125,6 +125,14 @@ fieldset legend {
 .row.side [class="span-content"] {
     padding: 0 5px 20px 20px !important;
 }
+.row label {
+    font-weight: normal;
+}
+
+
+.row .innerRow {
+    margin: 0 0 10px 15px;
+}
 /******************* search  **************************************/
 .resultdiv .col-md-n7 {
 	margin-top:0px;
@@ -401,6 +409,18 @@ a.home:hover, a.home, a.home:focus {
     height:auto;
     margin-bottom:10px;
 }
+
+.form-control.inline {
+    width:auto;
+    display: inline;
+    height: 2em;
+    margin-bottom: 5px;
+}
+
+.priceBox {
+    height: 2em;
+}
+
 .clear {
 	clear:both;
 }

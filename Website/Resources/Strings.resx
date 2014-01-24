@@ -219,6 +219,18 @@
   <data name="Free" xml:space="preserve">
     <value>Free</value>
   </data>
+  <data name="NoFee" xml:space="preserve">
+    <value>No Fee</value>
+  </data>
+  <data name="Absent" xml:space="preserve">
+    <value>Absent or diffuse</value>
+  </data>
+  <data name="PricePerPage" xml:space="preserve">
+    <value> per page</value>
+  </data>
+  <data name="PricePerArticle" xml:space="preserve">
+    <value> per article</value>
+  </data>
   <data name="None" xml:space="preserve">
     <value>None</value>
   </data>
@@ -230,7 +242,7 @@
   </data>
   <data name="Prices" xml:space="preserve">
     <value>Prices</value>
-  </data>
+  </data>  
   <data name="Reviews" xml:space="preserve">
     <value>Reviews</value>
   </data>
@@ -435,6 +447,9 @@
   <data name="LastPaidPrice" xml:space="preserve">
     <value>Last paid price</value>
   </data>
+  <data name="LastStandardPrice" xml:space="preserve">
+    <value>Last standard price</value>
+  </data>
   <data name="Select" xml:space="preserve">
     <value>Select</value>
   </data>
@@ -446,6 +461,9 @@
   </data>
   <data name="PaidPrices" xml:space="preserve">
     <value>Paid prices</value>
+  </data>
+  <data name="StandardPrices" xml:space="preserve">
+    <value>Standard prices</value>
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>Unknown</value>

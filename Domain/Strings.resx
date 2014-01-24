@@ -141,6 +141,18 @@
   <data name="Currency_Pound" xml:space="preserve">
     <value>UK Pound</value>
   </data>
+  <data name="FeeType_Article" xml:space="preserve">
+    <value>Article</value>
+  </data>  
+  <data name="FeeType_Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="FeeType_NoFee" xml:space="preserve">
+    <value>No Fee</value>
+  </data>
+  <data name="FeeType_Absent" xml:space="preserve">
+    <value>Absent or diffuse</value>
+  </data>
   <data name="JournalSortMode_BaseScore" xml:space="preserve">
     <value>Sort by Base Score</value>
   </data>
