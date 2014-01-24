@@ -70,12 +70,7 @@
     <div class="col-md-4">
         <div class="panel panel-primary text-center">
             <div class="panel-heading">@Strings.StandardPrice</div>
-            <div class="panel-body">
-                
-                @if (Model.Journal.JournalPrice != null && Model.Journal.ScoreCards.Count(x => !x.Submitted) > 0)
-                {
-                    <p>@Strings.LastStandardPrice: @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId != 0 && !x.ScoreCard.Submitted).Price)</p>
-                }
+            <div class="panel-body">                               
 
                 @if (Model.Journal.ScoreCards.Count(x => !x.Submitted) == 0)
                 {
@@ -83,6 +78,11 @@
                 }
                 else
                 {
+                    if (Model.Journal.JournalPrice != null && Model.Journal.ScoreCards.Count(x => !x.Submitted) > 0)
+                    {
+                        <p>@Strings.LastStandardPrice: @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId != 0 && !x.ScoreCard.Submitted).Price)</p>
+                    }
+                    
                     <p><a id="@Model.Id-viewJournalStandardPrices" title="@ViewStrings.Journals_Prices_ViewStandardPrices">@ViewStrings.Journals_Prices_ViewStandardPrices</a></p>
                 }
                 
@@ -176,11 +176,11 @@
                                 <tr>
                                     <td colspan="9">
                                         @this.Ajax.ActionLink(Strings.LoadMore, "JournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions
-                                        {
-                                            UpdateTargetId = this.Model.Id + "-journal-prices",
-                                            InsertionMode = InsertionMode.InsertAfter,
-                                            OnSuccess = "afterLoadMore(data, 'loadMoreJournalStandardPrices', 'loadMoreJournalPricesLink')"
-                                        }, new { id = "loadMoreJournalPricesLink" })
+                                   {
+                                       UpdateTargetId = this.Model.Id + "-journal-prices",
+                                       InsertionMode = InsertionMode.InsertAfter,
+                                       OnSuccess = "afterLoadMore(data, 'loadMoreJournalStandardPrices', 'loadMoreJournalPricesLink')"
+                                   }, new { id = "loadMoreJournalPricesLink" })
                                     </td>
                                 </tr>
                             }
