@@ -10,7 +10,7 @@
         <div class="panel panel-primary text-center">
             <div class="panel-heading">@ViewStrings.Journals_Prices_IPaid</div>
             <div class="panel-body">
-                @if (Model.Journal.JournalPrice != null)
+                @if (Model.Journal.JournalPrice != null && Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId == 0 || x.ScoreCard.Submitted) != null)
                 {
                     <p>@Strings.LastPaidPrice: @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId == 0 || x.ScoreCard.Submitted).Price)</p>
                 }
@@ -74,7 +74,7 @@
 
                 @if (Model.Journal.ScoreCards.Count(x => !x.Submitted) == 0)
                 {
-                    @Html.Raw(string.Format(ViewStrings.Journals_Prices_ForStandardPriceSeeWebsite, Model.Journal.Link))
+                    Html.Raw(string.Format(ViewStrings.Journals_Prices_ForStandardPriceSeeWebsite, Model.Journal.Link));
                 }
                 else
                 {

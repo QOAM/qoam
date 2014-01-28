@@ -144,6 +144,19 @@
 
                         this.journalRepository.Update(journal);
                     }
+                    else
+                    {
+                        var journalPrice = new JournalPrice();
+                        journalPrice.ScoreCardId = scoreCard.Id;
+                        journalPrice.UserProfileId = this.Authentication.CurrentUserId;
+                        journalPrice.DateAdded = DateTime.Now;
+                        journalPrice.Price.FeeType = model.Price.FeeType;
+                        journalPrice.Price.Amount = 0;
+                        journalPrice.JournalId = model.Journal.Id;
+                        journalPrice.Price.Currency = null;
+                        this.journalPriceRepository.Insert(journalPrice);
+
+                    }
                 }
                 else
                 {

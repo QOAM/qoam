@@ -81,7 +81,7 @@
             self.IsOutDatedPublication = ko.observable(data.Price.Amount != null && data ? !_isPublishedWithinYear : false); // we can't reuse the self.IsPublishedWithinYear for !IsPublishedWithinYear(), since it will set the corresponding question on visible on initialization            
             self.IsOutDatedPublicationArticle = ko.observable(data ? self.IsOutDatedPublicationArticle : false);
             self.IsOutDatedPublicationPage = ko.observable(data ? self.IsOutDatedPublicationPage : false);
-
+            self.IsPublishedWithinYearScored = ko.observable(false);
             self.IsPublishedWithinYearRadio = ko.computed({
                 read: function (v) {
                     return data.Submitted;
@@ -161,8 +161,8 @@
                 var numberOfScoredQuestions = ko.utils.arrayFilter(self.QuestionScores(), function (item) {
                     return item.Score() > 0;
                 }).length;
-                var totalNumberOfQuestions = self.QuestionScores().length;
-
+                
+                var totalNumberOfQuestions = self.QuestionScores().length;                
                 return Math.round((numberOfScoredQuestions / totalNumberOfQuestions) * 100.0);
             });
 
@@ -192,7 +192,7 @@
             });
 
             self.canPublish = ko.computed(function () {
-                return self.progress() >= 100 && !self.publishing();
+                return self.progress() >= 100 && !self.publishing() && self.IsPublishedWithinYearScored;
             });
 
             self.onRemarksFocus = function () {
@@ -221,8 +221,6 @@
                 }
             });
 
-            //self.IsOutDatedPublication(!v);
-
             // replacing this for the knockout version. For some reason i get checked event problems 
             $("input[type=radio][name=IsPublishedWithinYearRadio]").bind("click", function () {
                 var v = $(this).val() == "true";
@@ -230,12 +228,14 @@
                 self.Submitted(v);
                 self.IsPublishedWithinYear(v);
                 self.IsOutDatedPublication(!v);
+                self.IsPublishedWithinYearScored(v);
             });
 
             $("input[type=radio][name=outdatedPublication]").bind("click", function () {
                 var v = $(this).val();
                 self.Submitted(false);
                 self.Price.FeeType = v;
+                self.IsPublishedWithinYearScored(true);
                 switch (v) {
                     case "Article":
                         self.IsOutDatedPublicationArticle(true);
@@ -251,8 +251,9 @@
                         break;
                 }
             });
-            
-            if (data.Price.Amount != null) {
+
+            if (data.Price.Amount != null || self.progress() >= 100) {
+                console.log(data);
                 $("input[type=radio][name=IsPublishedWithinYearRadio]").each(function (index) {
                     if ($(this).val() == data.Submitted.toString()) {
                         $(this).prop('checked', true);
@@ -265,12 +266,10 @@
                         $(this).trigger("click");
                     }
                 });
-            }
-
+            }            
         };
 
         var viewModel = new scoreCardModel(data);
-        viewModel.stephen = function () { alert(5); },
         ko.applyBindings(viewModel);
     };
     return ScoreController;
