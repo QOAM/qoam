@@ -1160,11 +1160,20 @@ namespace RU.Uci.OAMarket.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View all prices found on web site.
+        ///   Looks up a localized string similar to View all prices found on the website.
         /// </summary>
         public static string Journals_Prices_ViewStandardPrices {
             get {
                 return ResourceManager.GetString("Journals_Prices_ViewStandardPrices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All prices found on the website.
+        /// </summary>
+        public static string Journals_Prices_ViewStandardPricesFound {
+            get {
+                return ResourceManager.GetString("Journals_Prices_ViewStandardPricesFound", resourceCulture);
             }
         }
         

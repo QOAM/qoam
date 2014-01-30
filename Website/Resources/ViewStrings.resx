@@ -415,8 +415,11 @@ The initiators of QOAM despise this ‘double dipping’ but QOAM is not the ins
   <data name="Journals_Prices_ViewPaidPrices" xml:space="preserve">
     <value>View all paid prices</value>
   </data>
+  <data name="Journals_Prices_ViewStandardPricesFound" xml:space="preserve">
+    <value>All prices found on the website</value>
+  </data>
   <data name="Journals_Prices_ViewStandardPrices" xml:space="preserve">
-    <value>View all prices found on web site</value>
+    <value>View all prices found on the website</value>
   </data>
   <data name="Journals_Prices_NoInstitutionPriceForInstitution" xml:space="preserve">
     <value>Your institution does not have a special license for this journal.</value>

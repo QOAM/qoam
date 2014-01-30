@@ -12,7 +12,7 @@
             <div class="panel-body">
                 @if (Model.Journal.JournalPrice != null && Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId == 0 || x.ScoreCard.Submitted) != null)
                 {
-                    <p>@Strings.LastPaidPrice: @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId == 0 || x.ScoreCard.Submitted).Price)</p>
+                    <p>@Strings.LastPaidPrice:<br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId == 0 || x.ScoreCard.Submitted).Price)</p>
                 }
                 
                 @if (Model.JournalPrices.TotalItemCount == 0)
@@ -80,7 +80,7 @@
                 {
                     if (Model.Journal.JournalPrice != null && Model.Journal.ScoreCards.Count(x => !x.Submitted) > 0)
                     {
-                        <p>@Strings.LastStandardPrice: @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId != 0 && !x.ScoreCard.Submitted).Price)</p>
+                        <p>@Strings.LastStandardPrice:<br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId != 0 && !x.ScoreCard.Submitted).Price)</p>
                     }
                     
                     <p><a id="@Model.Id-viewJournalStandardPrices" title="@ViewStrings.Journals_Prices_ViewStandardPrices">@ViewStrings.Journals_Prices_ViewStandardPrices</a></p>
@@ -100,7 +100,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3>@Strings.StandardPrices</h3>
+                <h3>@ViewStrings.Journals_Prices_ViewStandardPricesFound</h3>
             </div>
             <div class="modal-body">
                 @if (Model.JournalPrices.Count(x => x.ScoreCardId != 0 && !x.ScoreCard.Submitted) == 0)
