@@ -374,12 +374,7 @@
     <Content Include="Views\Admin\Imported.cshtml" />
     <Content Include="Views\Admin\Updated.cshtml" />
     <Content Include="Views\Admin\Update.cshtml" />
-    <Content Include="MachineKey.Debug.config" />
-    <Content Include="ConnectionStrings.Debug.config" />
-    <Content Include="Contact.Debug.config" />
     <None Include="Properties\PublishProfiles\Debug.pubxml" />
-    <Content Include="SurfConext.Debug.config" />
-    <Content Include="Ulrichs.Debug.config" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
