@@ -448,7 +448,7 @@
     <value>Last paid price</value>
   </data>
   <data name="LastStandardPrice" xml:space="preserve">
-    <value>Last standard price</value>
+    <value>Last price found on website</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>Select</value>
@@ -464,6 +464,9 @@
   </data>
   <data name="StandardPrices" xml:space="preserve">
     <value>Standard prices</value>
+  </data>
+  <data name="PriceOnWebsite" xml:space="preserve">
+    <value>Price on website</value>
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>Unknown</value>

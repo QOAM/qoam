@@ -520,7 +520,7 @@ namespace RU.Uci.OAMarket.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Last standard price.
+        ///   Looks up a localized string similar to Last price found on website.
         /// </summary>
         public static string LastStandardPrice {
             get {
@@ -777,6 +777,15 @@ namespace RU.Uci.OAMarket.Website.Resources {
         public static string PriceInformation {
             get {
                 return ResourceManager.GetString("PriceInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price on website.
+        /// </summary>
+        public static string PriceOnWebsite {
+            get {
+                return ResourceManager.GetString("PriceOnWebsite", resourceCulture);
             }
         }
         

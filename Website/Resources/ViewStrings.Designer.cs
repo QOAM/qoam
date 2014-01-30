@@ -1160,7 +1160,7 @@ namespace RU.Uci.OAMarket.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View all standard prices.
+        ///   Looks up a localized string similar to View all prices found on web site.
         /// </summary>
         public static string Journals_Prices_ViewStandardPrices {
             get {
