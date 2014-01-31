@@ -9,13 +9,13 @@
     <div class="col-md-4">
         <div class="panel panel-primary text-center">
             <div class="panel-heading">@ViewStrings.Journals_Prices_IPaid</div>
-            <div class="panel-body">
-                @if (Model.Journal.JournalPrice != null && Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId == 0 || x.ScoreCard.Submitted) != null)
+            <div class="panel-body">                
+                @if (Model.Journal.JournalPrice != null && Model.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard.Submitted) != null)
                 {
-                    <p>@Strings.LastPaidPrice:<br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId == 0 || x.ScoreCard.Submitted).Price)</p>
+                    <p>@Strings.LastPaidPrice:<br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard.Submitted).Price)</p>
                 }
                 
-                @if (Model.JournalPrices.TotalItemCount == 0)
+                @if (Model.JournalPrices.TotalItemCount == 0 || Model.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard.Submitted) == null)
                 {
                     <p>@ViewStrings.Journals_Prices_NoJournalPricesForJournal</p>
                 }
@@ -168,7 +168,7 @@
                             </tr>
                         </thead>
                         <tbody id="@this.Model.Id-journal-prices">
-                            @{ this.Html.RenderPartial("JournalPrices", this.Model.JournalPrices.Where(x => x.ScoreCardId == 0 || x.ScoreCard.Submitted).ToPagedList(Model.Page, Model.PageSize)); }
+                            @{ this.Html.RenderPartial("JournalPrices", this.Model.JournalPrices.Where(x => x.Price.FeeType == FeeType.Article && x.ScoreCard.Submitted).ToPagedList(Model.Page, Model.PageSize)); }
                         </tbody>
                         <tfoot id="loadMoreJournalStandardPrices">
                             @if (this.Model.JournalPrices.HasNextPage)
