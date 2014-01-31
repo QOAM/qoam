@@ -4,10 +4,16 @@
     using System.Data.Entity.Infrastructure;
     using System.Data.Objects;
 
+    using RU.Uci.OAMarket.Data.Migrations;
     using RU.Uci.OAMarket.Domain;
 
     public class ApplicationDbContext : DbContext
     {
+        static ApplicationDbContext()
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, ApplicationDbContextMigrationsConfiguration>());
+        }
+
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
