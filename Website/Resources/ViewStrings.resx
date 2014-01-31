@@ -404,7 +404,7 @@ The initiators of QOAM despise this ‘double dipping’ but QOAM is not the ins
     <value>There are no paid prices for this journal.</value>
   </data>
   <data name="Journals_Prices_ForStandardPriceSeeWebsite" xml:space="preserve">
-    <value>For the standard price see the &lt;a href="{0}" title="Journal website"&gt;web site of this journal&lt;/a&gt;</value>
+    <value>For the standard price see the web site of this journal</value>
   </data>
   <data name="Journals_Prices_InstitutionPriceForInstitution" xml:space="preserve">
     <value>Your institution has a special license for this journal.</value>

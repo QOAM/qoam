@@ -10,12 +10,12 @@
         <div class="panel panel-primary text-center">
             <div class="panel-heading">@ViewStrings.Journals_Prices_IPaid</div>
             <div class="panel-body">                
-                @if (Model.Journal.JournalPrice != null && Model.JournalPrices.FirstOrDefault(x => (x.Price.FeeType == FeeType.Article || x.Price.FeeType == null) && x.ScoreCard.Submitted) != null)
+                @if (Model.Journal.JournalPrice != null && Model.Journal.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted) != null)
                 {
-                    <p>@Strings.LastPaidPrice:<br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => (x.Price.FeeType == FeeType.Article || x.Price.FeeType == null) && x.ScoreCard.Submitted).Price)</p>
+                    <p>@Strings.LastPaidPrice:<br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted).Price)</p>
                 }
                 
-                @if (Model.JournalPrices.TotalItemCount == 0 || Model.JournalPrices.FirstOrDefault(x => (x.Price.FeeType == FeeType.Article || x.Price.FeeType == null) && x.ScoreCard.Submitted) == null)
+                @if (Model.JournalPrices.TotalItemCount == 0 || Model.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted) == null)
                 {
                     <p>@ViewStrings.Journals_Prices_NoJournalPricesForJournal</p>
                 }
@@ -70,20 +70,22 @@
     <div class="col-md-4">
         <div class="panel panel-primary text-center">
             <div class="panel-heading">@Strings.PriceOnWebsite</div>
-            <div class="panel-body">                               
-
-                @if (Model.Journal.ScoreCards.Count(x => !x.Submitted) == 0)
+            <div class="panel-body">
+                @if (Model.Journal.JournalPrices.Count(x => x.ScoreCard != null && !x.ScoreCard.Submitted) == 0)
                 {
-                    Html.Raw(string.Format(ViewStrings.Journals_Prices_ForStandardPriceSeeWebsite, Model.Journal.Link));
+                    <p>
+                @Html.Raw(string.Format(ViewStrings.Journals_Prices_ForStandardPriceSeeWebsite, Model.Journal.Link));
+                        </p>
                 }
                 else
                 {
-                    if (Model.Journal.JournalPrice != null && Model.Journal.ScoreCards.Count(x => !x.Submitted) > 0)
+                    if (Model.Journal.JournalPrice != null && Model.Journal.JournalPrices.Count(x => x.ScoreCard != null && !x.ScoreCard.Submitted) > 0)
                     {
-                        <p>@Strings.LastStandardPrice:<br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId != 0 && !x.ScoreCard.Submitted).Price)</p>
+                        <p>@Strings.LastStandardPrice: <br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId != 0 && x.ScoreCard != null && !x.ScoreCard.Submitted).Price)</p>
                     }
                     
                     <p><a id="@Model.Id-viewJournalStandardPrices" title="@ViewStrings.Journals_Prices_ViewStandardPrices">@ViewStrings.Journals_Prices_ViewStandardPrices</a></p>
+                    
                 }
                 
             </div>
@@ -103,7 +105,7 @@
                 <h3>@ViewStrings.Journals_Prices_ViewStandardPricesFound</h3>
             </div>
             <div class="modal-body">
-                @if (Model.JournalPrices.Count(x => x.ScoreCardId != 0 && !x.ScoreCard.Submitted) == 0)
+                @if (Model.JournalPrices.Count(x => x.ScoreCardId > 0 && !x.ScoreCard.Submitted) == 0)
                 {
                     <p>@ViewStrings.Journals_Prices_ForStandardPriceSeeWebsite</p>
                 }
@@ -118,7 +120,7 @@
                             </tr>
                         </thead>
                         <tbody id="@this.Model.Id-journal-standard-prices">
-                            @{ this.Html.RenderPartial("JournalPrices", this.Model.JournalPrices.Where(x => x.ScoreCardId != 0 && !x.ScoreCard.Submitted).ToPagedList(Model.Page, Model.PageSize)); }
+                            @{ this.Html.RenderPartial("JournalPrices", this.Model.JournalPrices.Where(x => x.ScoreCardId != 0 && x.ScoreCard != null && !x.ScoreCard.Submitted).ToPagedList(Model.Page, Model.PageSize)); }
                         </tbody>
                         <tfoot id="loadMoreJournalPrices">
                             @if (this.Model.JournalPrices.HasNextPage)
@@ -168,7 +170,7 @@
                             </tr>
                         </thead>
                         <tbody id="@this.Model.Id-journal-prices">
-                            @{ this.Html.RenderPartial("JournalPrices", this.Model.JournalPrices.Where(x => x.Price.FeeType == FeeType.Article && x.ScoreCard.Submitted).ToPagedList(Model.Page, Model.PageSize)); }
+                            @{ this.Html.RenderPartial("JournalPrices", this.Model.JournalPrices.Where(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted).ToPagedList(Model.Page, Model.PageSize)); }
                         </tbody>
                         <tfoot id="loadMoreJournalStandardPrices">
                             @if (this.Model.JournalPrices.HasNextPage)

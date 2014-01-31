@@ -1070,7 +1070,7 @@ namespace RU.Uci.OAMarket.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For the standard price see the &lt;a href=&quot;{0}&quot; title=&quot;Journal website&quot;&gt;web site of this journal&lt;/a&gt;.
+        ///   Looks up a localized string similar to For the standard price see the web site of this journal.
         /// </summary>
         public static string Journals_Prices_ForStandardPriceSeeWebsite {
             get {
