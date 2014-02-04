@@ -11,12 +11,6 @@
     <link href="~/Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/slider.css" rel="stylesheet" />
-    
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="~/Scripts/html5shiv.js"></script>
-      <script src="~/Scripts/respond.min.js"></script>
-    <![endif]-->
 
     @RenderSection("stylesheets", required: false)
 </head>
@@ -32,6 +26,13 @@
         <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
         <script type="text/javascript" src="~/Scripts/modernizr-2.6.2.js"></script>
         <script type="text/javascript" src="~/Scripts/Helpers/Compatibility.js"></script>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="~/Scripts/html5shiv.js"></script>
+          <script src="~/Scripts/respond.min.js"></script>
+        <![endif]-->
+
         @RenderSection("scripts", required: false)
         
         @Html.Partial("_GoogleAnalytics")
