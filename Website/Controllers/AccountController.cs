@@ -7,6 +7,8 @@
     using AttributeRouting;
     using AttributeRouting.Web.Mvc;
 
+    using DotNetOpenAuth.AspNet;
+
     using RU.Uci.OAMarket.Domain;
     using RU.Uci.OAMarket.Domain.Repositories;
     using RU.Uci.OAMarket.Website.Helpers;
@@ -60,13 +62,22 @@
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
-            var result = this.Authentication.VerifyAuthentication(this.Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            AuthenticationResult result;
+
+            try
+            {
+                result = this.Authentication.VerifyAuthentication(this.Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction("ExternalLoginFailure", new { reason = LoginFailureReason.ExternalAuthenticationFailed });
+            }
 
             if (!result.IsSuccessful)
             {
                 return this.RedirectToAction("ExternalLoginFailure", new { reason = LoginFailureReason.ExternalAuthenticationFailed });
             }
-
+            
             if (this.Authentication.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
             {
                 return this.RedirectToLocal(returnUrl);

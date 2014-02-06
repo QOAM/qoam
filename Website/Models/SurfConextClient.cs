@@ -64,7 +64,7 @@
 
                 var profileResponse = webClient.DownloadString(uriBuilder.Uri);
                 var profile = JsonConvert.DeserializeObject<SurfConextProfile>(profileResponse);
-          
+                
                 return new Dictionary<string, string>
                        {
                            { "id", profile.entry.id }, 
