@@ -37,15 +37,17 @@
 
         public JournalsImportResult ImportJournals(IList<Journal> journals, JournalsImportMode journalsImportMode)
         {
+            var distinctJournals = journals.Distinct(new JournalIssnEqualityComparer()).ToList();
+
             var allJournals = this.journalRepository.All;
-            var countries = ImportCountries(journals);
-            var languages = ImportLanguages(journals);
-            var subjects = ImportSubjects(journals);
-            var publishers = ImportPublishers(journals);
+            var countries = ImportCountries(distinctJournals);
+            var languages = ImportLanguages(distinctJournals);
+            var subjects = ImportSubjects(distinctJournals);
+            var publishers = ImportPublishers(distinctJournals);
             
             var currentJournalIssns = this.journalRepository.AllIssns;
-            var newJournals = journals.Where(j => !currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
-            var existingJournals = journals.Where(j => currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
+            var newJournals = distinctJournals.Where(j => !currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
+            var existingJournals = distinctJournals.Where(j => currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
 
             if (ShouldInsertJournals(journalsImportMode))
             {
@@ -64,7 +66,7 @@
                 }    
             }
 
-            return new JournalsImportResult { NumberOfImportedJournals = journals.Count, NumberOfNewJournals = newJournals.Count };
+            return new JournalsImportResult { NumberOfImportedJournals = distinctJournals.Count, NumberOfNewJournals = newJournals.Count };
         }
 
         private void UpdateJournalsInChunk(IList<Journal> existingJournalsChunk, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<Journal> allJournals)
