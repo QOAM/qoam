@@ -596,10 +596,10 @@ Therefore, QOAM is a public website. But academics have to log in with their ins
     <value>I have published an article in this journal less than a year ago </value>
   </data>
   <data name="Score_Journal_PublicationCost" xml:space="preserve">
-    <value>Publication of my article in this journal did cost me</value>
+    <value>Publication of my article in this journal did cost</value>
   </data>
-  <data name="Journals_Prices_IPaid" xml:space="preserve">
-    <value>I paid</value>
+  <data name="Journals_Prices_RecentlyPaid" xml:space="preserve">
+    <value>Recently paid</value>
   </data>
   <data name="Home_JournalScoreCard_WhoMayPublish_Title" xml:space="preserve">
     <value>Who may publish JSCs in QOAM?</value>

@@ -8,7 +8,7 @@
     
     <div class="col-md-4">
         <div class="panel panel-primary text-center">
-            <div class="panel-heading">@ViewStrings.Journals_Prices_IPaid</div>
+            <div class="panel-heading">@ViewStrings.Journals_Prices_RecentlyPaid</div>
             <div class="panel-body">                
                 @if (Model.Journal.JournalPrice != null && Model.Journal.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted) != null)
                 {
