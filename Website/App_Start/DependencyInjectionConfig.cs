@@ -6,6 +6,7 @@
     using Autofac.Integration.Mvc;
 
     using RU.Uci.OAMarket.Data;
+    using RU.Uci.OAMarket.Domain.Export;
     using RU.Uci.OAMarket.Domain.Import;
     using RU.Uci.OAMarket.Domain.Services;
     using RU.Uci.OAMarket.Website.Helpers;
@@ -28,6 +29,7 @@
             builder.Register(c => c.Resolve<OAMarketSettings>().Doaj).InstancePerHttpRequest();
             builder.Register(c => c.Resolve<OAMarketSettings>().Ulrichs).InstancePerHttpRequest();
             builder.Register(c => new MailSender(c.Resolve<OAMarketSettings>().Contact.SmtpHost)).As<IMailSender>().InstancePerHttpRequest();
+            builder.RegisterType<JournalsExport>().InstancePerHttpRequest();
             builder.RegisterType<JournalsImport>().InstancePerHttpRequest();
             builder.RegisterType<DoajImport>().InstancePerHttpRequest();
             builder.RegisterType<UlrichsClient>().InstancePerHttpRequest();

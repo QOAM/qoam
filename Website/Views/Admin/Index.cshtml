@@ -16,6 +16,7 @@
         { 
             <li>@Html.ActionLink(ViewStrings.Admin_Index_ImportJournals, "Import")</li>
             <li>@Html.ActionLink(ViewStrings.Admin_Index_UpdateJournals, "Update")</li>
+            <li>@Html.ActionLink(ViewStrings.Admin_Index_DownloadJournals, "Download")</li>
         }
         
         @if (User.IsInRole(ApplicationRole.InstitutionAdmin))

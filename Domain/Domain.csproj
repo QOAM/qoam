@@ -68,6 +68,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Export\ExportJournal.cs" />
+    <Compile Include="Export\JournalsExport.cs" />
     <Compile Include="Import\JournalIssnEqualityComparer.cs" />
     <Compile Include="JournalFeeType.cs" />
     <Compile Include="Import\DoajSettings.cs" />

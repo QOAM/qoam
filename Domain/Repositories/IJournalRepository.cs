@@ -1,7 +1,9 @@
 ﻿namespace RU.Uci.OAMarket.Domain.Repositories
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Linq.Expressions;
 
     using PagedList;
 
@@ -17,6 +19,8 @@
         IList<string> AllPublishers { get; }
         IList<string> AllIssns { get; }
         IList<Journal> All { get; }
+
+        IList<Journal> AllIncluding(params Expression<Func<Journal, object>>[] includeProperties);
 
         void Update(Journal journal);
         void Insert(Journal journal);

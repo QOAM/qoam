@@ -34,7 +34,7 @@
         </fieldset>
     }
     
-    @if (Model.FoundISSNs != null)
+    @if (Model != null && Model.FoundISSNs != null)
     {
         <p>
             @ViewStrings.Admin_Check_FoundISSNs:
@@ -48,7 +48,7 @@
         </ul>
     }
 
-    @if (Model.NotFoundISSNs != null)
+    @if (Model != null && Model.NotFoundISSNs != null)
     {
         <p>
             @ViewStrings.Admin_Check_NotFoundISSNs:

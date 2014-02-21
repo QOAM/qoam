@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountControllerTests.cs" />
+    <Compile Include="Controllers\AdminControllerTests.cs" />
     <Compile Include="Controllers\Helpers\HttpContextHelper.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Models\QuestionExtensionsTests.cs" />

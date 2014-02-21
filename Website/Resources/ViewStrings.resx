@@ -755,4 +755,7 @@ The registration will be confirmed by SURFconext, the Dutch eduGAIN partner. Ple
   <data name="Admin_Index_CheckISSNs" xml:space="preserve">
     <value>Check ISSNs</value>
   </data>
+  <data name="Admin_Index_DownloadJournals" xml:space="preserve">
+    <value>Download journals</value>
+  </data>
 </root>

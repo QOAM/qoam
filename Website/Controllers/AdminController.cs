@@ -2,15 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Web.Mvc;
 
     using AttributeRouting;
     using AttributeRouting.Web.Mvc;
 
-    using PagedList;
-
     using RU.Uci.OAMarket.Domain;
+    using RU.Uci.OAMarket.Domain.Export;
     using RU.Uci.OAMarket.Domain.Helpers;
     using RU.Uci.OAMarket.Domain.Import;
     using RU.Uci.OAMarket.Domain.Repositories;
@@ -31,18 +31,21 @@
         private readonly UlrichsImport ulrichsImport;
         private readonly DoajImport doajImport;
         private readonly IJournalRepository journalRepository;
+        private readonly JournalsExport journalsExport;
 
-        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication)
+        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication)
             : base(userProfileRepository, authentication)
         {
             Requires.NotNull(journalsImport, "journalsImport");
             Requires.NotNull(ulrichsImport, "ulrichsImport");
             Requires.NotNull(doajImport, "doajImport");
+            Requires.NotNull(journalsExport, "journalsExport");
             Requires.NotNull(journalRepository, "journalRepository");
 
             this.journalsImport = journalsImport;
             this.ulrichsImport = ulrichsImport;
             this.doajImport = doajImport;
+            this.journalsExport = journalsExport;
             this.journalRepository = journalRepository;
         }
 
@@ -64,7 +67,7 @@
         [Authorize(Roles = ApplicationRole.DataAdmin)]
         public ActionResult Import(ImportViewModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var journals = this.GetJournalsFromSource(model.Source);
                 var journalsISSNs = journals.Select(j => j.ISSN).ToSet(StringComparer.InvariantCultureIgnoreCase);
@@ -75,7 +78,7 @@
 
                 var journalsToImport = journals.Where(j => issnsFound.Contains(j.ISSN)).ToList();
                 this.journalsImport.ImportJournals(journalsToImport, JournalsImportMode.InsertOnly);
-                
+
                 this.Session[FoundISSNsSessionKey] = issnsFound;
                 this.Session[NotFoundISSNsSessionKey] = issnsNotFound;
 
@@ -91,7 +94,7 @@
         {
             var model = new ImportedViewModel
                         {
-                            FoundISSNs = (IEnumerable<string>)this.Session[FoundISSNsSessionKey], 
+                            FoundISSNs = (IEnumerable<string>)this.Session[FoundISSNsSessionKey],
                             NotFoundISSNs = (IEnumerable<string>)this.Session[NotFoundISSNsSessionKey]
                         };
 
@@ -110,7 +113,7 @@
         [Authorize(Roles = ApplicationRole.DataAdmin)]
         public ActionResult Update(UpdateViewModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var journals = this.GetJournalsFromSource(model.Source);
                 var issns = GetISSNs(model);
@@ -136,12 +139,24 @@
         public ViewResult Updated()
         {
             var model = new UpdatedViewModel
-            {
-                FoundISSNs = (IEnumerable<string>)this.Session[FoundISSNsSessionKey],
-                NotFoundISSNs = (IEnumerable<string>)this.Session[NotFoundISSNsSessionKey]
-            };
+                        {
+                            FoundISSNs = (IEnumerable<string>)this.Session[FoundISSNsSessionKey],
+                            NotFoundISSNs = (IEnumerable<string>)this.Session[NotFoundISSNsSessionKey]
+                        };
 
             return this.View(model);
+        }
+
+        [GET("download")]
+        [Authorize(Roles = ApplicationRole.DataAdmin)]
+        public FileContentResult Download()
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                this.journalsExport.ExportAllJournals(memoryStream);
+                
+                return this.File(memoryStream.ToArray(), "application/csv", "journals.csv");
+            }
         }
 
         [GET("check")]
@@ -158,24 +173,11 @@
             if (this.ModelState.IsValid)
             {
                 var parsedIssns = ParseISSNs(model.ISSNs);
-                model.FoundISSNs = this.journalRepository.SearchByISSN(parsedIssns).Select(j => j.ISSN) ;
-                model.NotFoundISSNs = parsedIssns.Except(model.FoundISSNs);
+                model.FoundISSNs = this.journalRepository.SearchByISSN(parsedIssns).Select(j => j.ISSN).ToSet();
+                model.NotFoundISSNs = parsedIssns.Except(model.FoundISSNs).ToSet();
             }
 
             return this.View(model);
-        }
-
-        private IList<Journal> GetJournalsFromSource(JournalsImportSource importSource)
-        {
-            switch (importSource)
-            {
-                case JournalsImportSource.DOAJ:
-                    return this.doajImport.GetJournals();
-                case JournalsImportSource.Ulrichs:
-                    return this.ulrichsImport.GetJournals(UlrichsImport.UlrichsJournalType.All);
-                default:
-                    throw new ArgumentOutOfRangeException("importSource");
-            }
         }
 
         private static HashSet<string> GetISSNs(ImportViewModel model)
@@ -191,6 +193,19 @@
         private static HashSet<string> ParseISSNs(string issns)
         {
             return issns.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).Where(s => s.Trim().Length > 0).Select(s => s.Trim()).ToSet(StringComparer.InvariantCultureIgnoreCase);
+        }
+
+        private IList<Journal> GetJournalsFromSource(JournalsImportSource importSource)
+        {
+            switch (importSource)
+            {
+                case JournalsImportSource.DOAJ:
+                    return this.doajImport.GetJournals();
+                case JournalsImportSource.Ulrichs:
+                    return this.ulrichsImport.GetJournals(UlrichsImport.UlrichsJournalType.All);
+                default:
+                    throw new ArgumentOutOfRangeException("importSource");
+            }
         }
     }
 }

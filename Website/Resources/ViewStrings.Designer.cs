@@ -196,6 +196,15 @@ namespace RU.Uci.OAMarket.Website.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download journals.
+        /// </summary>
+        public static string Admin_Index_DownloadJournals {
+            get {
+                return ResourceManager.GetString("Admin_Index_DownloadJournals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import journals.
         /// </summary>
         public static string Admin_Index_ImportJournals {

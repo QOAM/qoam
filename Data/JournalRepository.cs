@@ -5,6 +5,7 @@
     using System.Data;
     using System.Data.Entity;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Web.Helpers;
 
     using PagedList;
@@ -158,6 +159,17 @@
         public int ScoredJournalsCount()
         {
             return this.DbContext.Journals.Count(j => j.JournalScore.NumberOfReviewers > 0);
+        }
+
+        public IList<Journal> AllIncluding(params Expression<Func<Journal, object>>[] includeProperties)
+        {
+            IQueryable<Journal> query = this.DbContext.Journals;
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return query.ToList();
         }
 
         public void Update(Journal journal)

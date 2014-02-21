@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Export\JournalsExportTests.cs" />
     <Compile Include="Import\JournalIssnEqualityComparerTests.cs" />
     <Compile Include="Import\DoajImportTests.cs" />
     <EmbeddedResource Include="Import\Resources\doaj.csv" />
