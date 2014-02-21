@@ -1,0 +1,71 @@
+﻿@using RU.Uci.OAMarket.Website.Resources
+@model RU.Uci.OAMarket.Website.ViewModels.Import.CheckViewModel
+
+@{
+    ViewBag.Title = ViewStrings.Admin_Check_Title;
+}
+
+<div class="container main">
+    
+    <h2>@ViewBag.Title</h2>
+    
+    <p>
+        @ViewStrings.Admin_Check_Title
+    </p>
+    
+    @using (Html.BeginForm("Check", "Admin", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <fieldset>
+            <legend>@ViewBag.Title</legend>
+            
+            <div class="form-group row">
+                @Html.LabelFor(m => m.ISSNs, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2">
+                    @Html.TextAreaFor(m => m.ISSNs, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ISSNs, null, new { @class = "control-label" })
+                </div>
+            </div>
+
+            <div class="col-lg-10 col-md-offset-2">
+                <input type="submit" value="@Strings.Check" class="btn btn-primary" />
+            </div>
+        </fieldset>
+    }
+    
+    @if (Model.FoundISSNs != null)
+    {
+        <p>
+            @ViewStrings.Admin_Check_FoundISSNs:
+        </p>
+
+        <ul>
+            @foreach (var foundISSN in Model.FoundISSNs)
+            {
+                <li>@foundISSN</li>
+            }
+        </ul>
+    }
+
+    @if (Model.NotFoundISSNs != null)
+    {
+        <p>
+            @ViewStrings.Admin_Check_NotFoundISSNs:
+        </p>
+
+        <ul>
+            @foreach (var notFoundISSN in Model.NotFoundISSNs)
+            {
+                <li>@notFoundISSN</li>
+            }
+        </ul>
+    }
+</div>
+
+
+
+@section scripts
+{
+    @{ this.Html.RenderPartial("_FormScripts"); }
+}

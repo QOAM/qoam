@@ -740,4 +740,19 @@ The registration will be confirmed by SURFconext, the Dutch eduGAIN partner. Ple
     <value>Price per page
 </value>
   </data>
+  <data name="Admin_Check_FoundISSNs" xml:space="preserve">
+    <value>Found ISSNs</value>
+  </data>
+  <data name="Admin_Check_NotFoundISSNs" xml:space="preserve">
+    <value>Not found ISSNs</value>
+  </data>
+  <data name="Admin_Check_Text" xml:space="preserve">
+    <value>On this page you can submit a list of ISSNs and see if they are in QOAM or not.</value>
+  </data>
+  <data name="Admin_Check_Title" xml:space="preserve">
+    <value>Check ISSNs</value>
+  </data>
+  <data name="Admin_Index_CheckISSNs" xml:space="preserve">
+    <value>Check ISSNs</value>
+  </data>
 </root>

@@ -242,7 +242,7 @@
   </data>
   <data name="Prices" xml:space="preserve">
     <value>Prices</value>
-  </data>  
+  </data>
   <data name="Reviews" xml:space="preserve">
     <value>Reviews</value>
   </data>
@@ -524,5 +524,8 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>Check</value>
   </data>
 </root>

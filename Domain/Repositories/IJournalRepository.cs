@@ -1,6 +1,7 @@
 ﻿namespace RU.Uci.OAMarket.Domain.Repositories
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using PagedList;
 
@@ -22,5 +23,7 @@
         void Save();
 
         int ScoredJournalsCount();
+
+        IQueryable<Journal> SearchByISSN(IEnumerable<string> issns);
     }
 }

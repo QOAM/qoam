@@ -109,6 +109,11 @@
             return ApplyOrdering(query, filter).ToPagedList(filter.PageNumber, filter.PageSize);
         }
 
+        public IQueryable<Journal> SearchByISSN(IEnumerable<string> issns)
+        {
+            return this.DbContext.Journals.Where(j => issns.Contains(j.ISSN));
+        }
+
         public IList<Journal> SearchAll(JournalFilter filter)
         {
             var query = this.DbContext.Journals.AsQueryable();

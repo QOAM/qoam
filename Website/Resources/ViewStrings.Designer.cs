@@ -106,6 +106,42 @@ namespace RU.Uci.OAMarket.Website.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Found ISSNs.
+        /// </summary>
+        public static string Admin_Check_FoundISSNs {
+            get {
+                return ResourceManager.GetString("Admin_Check_FoundISSNs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not found ISSNs.
+        /// </summary>
+        public static string Admin_Check_NotFoundISSNs {
+            get {
+                return ResourceManager.GetString("Admin_Check_NotFoundISSNs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On this page you can submit a list of ISSNs and see if they are in QOAM or not..
+        /// </summary>
+        public static string Admin_Check_Text {
+            get {
+                return ResourceManager.GetString("Admin_Check_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check ISSNs.
+        /// </summary>
+        public static string Admin_Check_Title {
+            get {
+                return ResourceManager.GetString("Admin_Check_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In the text are below you can enter ISSNs of journals to be imported..
         /// </summary>
         public static string Admin_Import_Text {
@@ -147,6 +183,15 @@ namespace RU.Uci.OAMarket.Website.Resources {
         public static string Admin_Imported_Title {
             get {
                 return ResourceManager.GetString("Admin_Imported_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check ISSNs.
+        /// </summary>
+        public static string Admin_Index_CheckISSNs {
+            get {
+                return ResourceManager.GetString("Admin_Index_CheckISSNs", resourceCulture);
             }
         }
         
