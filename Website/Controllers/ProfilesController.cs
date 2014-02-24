@@ -47,7 +47,7 @@
             return this.View(model);
         }
 
-        [GET("{id}")]
+        [GET("{id:int}")]
         public ViewResult Details(DetailsViewModel model)
         {
             model.UserProfile = this.UserProfileRepository.Find(model.Id);
@@ -58,7 +58,7 @@
             return this.View(model);
         }
 
-        [GET("{id}/edit")]
+        [GET("{id:int}/edit")]
         [Authorize(Roles = ApplicationRole.Admin)]
         public ViewResult Edit(int id, string returnUrl)
         {
@@ -77,7 +77,7 @@
             return this.View(model);
         }
 
-        [POST("{id}/edit")]
+        [POST("{id:int}/edit")]
         [Authorize(Roles = ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, EditViewModel model)
@@ -94,7 +94,7 @@
             return this.View(model);
         }
 
-        [GET("{id}/scorecards")]
+        [GET("{id:int}/scorecards")]
         public PartialViewResult ScoreCards(ScoreCardsViewModel model)
         {
             var scoreCards = this.scoreCardRepository.FindForUser(model.ToScoreCardFilter(GetScoreCardStateFilter(model.Id)));

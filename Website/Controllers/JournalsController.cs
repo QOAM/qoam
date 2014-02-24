@@ -78,7 +78,7 @@
             return this.Json(this.journalRepository.Publishers(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
 
-        [GET("{id}/prices")]
+        [GET("{id:int}/prices")]
         public PartialViewResult Prices(PricesViewModel model)
         {
             ViewBag.RefererUrl = model.RefererUrl;
@@ -91,7 +91,7 @@
             return this.PartialView(model);
         }
 
-        [GET("{id}/journalprices")]
+        [GET("{id:int}/journalprices")]
         public PartialViewResult JournalPrices(PricesViewModel model)
         {
             ViewBag.RefererUrl = model.RefererUrl;
@@ -101,7 +101,7 @@
             return this.PartialView(journalPrices);
         }
 
-        [GET("{id}/institutionalprices")]
+        [GET("{id:int}/institutionalprices")]
         public PartialViewResult InstitutionJournalPrices(PricesViewModel model)
         {
             ViewBag.RefererUrl = model.RefererUrl;
@@ -111,7 +111,7 @@
             return this.PartialView(institutionJournals);
         }
 
-        [GET("{id}/scores")]
+        [GET("{id:int}/scores")]
         public PartialViewResult Scores(ScoresViewModel model)
         {
             model.ScoreCards = this.scoreCardRepository.Find(model.ToFilter());
@@ -119,7 +119,7 @@
             return this.PartialView(GetScoresViewName(model), model);
         }
 
-        [GET("{id}/comments")]
+        [GET("{id:int}/comments")]
         public PartialViewResult Comments(CommentsViewModel model)
         {
             model.CommentedScoreCards = this.scoreCardRepository.Find(model.ToFilter());
@@ -127,7 +127,7 @@
             return this.PartialView(GetCommentsViewName(model), model);
         }
 
-        [GET("{id}/institutionjournallicense")]
+        [GET("{id:int}/institutionjournallicense")]
         [Authorize(Roles = ApplicationRole.InstitutionAdmin)]
         public ViewResult InstitutionJournalLicense(int id, string refererUrl)
         {
@@ -139,7 +139,7 @@
             return this.View(model);
         }
 
-        [POST("{id}/institutionjournallicense")]
+        [POST("{id:int}/institutionjournallicense")]
         [Authorize(Roles = ApplicationRole.InstitutionAdmin)]
         [ValidateAntiForgeryToken]
         public ActionResult InstitutionJournalLicense(int id, InstitutionJournalLicenseViewModel model)

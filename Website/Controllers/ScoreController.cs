@@ -64,7 +64,7 @@
             return this.View(model);
         }
 
-        [GET("journal/{id}")]
+        [GET("journal/{id:int}")]
         [Authorize]
         public ViewResult Journal(int id)
         {
@@ -86,7 +86,7 @@
             return this.View(scoreViewModel);
         }
 
-        [POST("journal/{id}")]
+        [POST("journal/{id:int}")]
         [Authorize]
         [ValidateJsonAntiForgeryTokenAttribute]
         public ActionResult Journal(int id, ScoreViewModel model)
@@ -211,7 +211,7 @@
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
-        [GET("{id}")]
+        [GET("{id:int}")]
         public ActionResult Details(int id)
         {
             var scoreCard = this.scoreCardRepository.Find(id);
