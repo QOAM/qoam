@@ -27,12 +27,14 @@
             }
         }
 
-        public IList<string> AllNames
+        public IQueryable<string> Names(string query)
         {
-            get
+            if (string.IsNullOrWhiteSpace(query))
             {
-                return this.DbContext.UserProfiles.Select(j => j.DisplayName).ToList();
-            }
+                return Enumerable.Empty<string>().AsQueryable();
+            } 
+
+            return this.DbContext.UserProfiles.Where(u => u.DisplayName.ToLower().StartsWith(query.ToLower())).Select(j => j.DisplayName);
         }
 
         public UserProfile Find(int id)

@@ -29,27 +29,41 @@
             }
         }
 
-        public IList<string> AllTitles
+        public IQueryable<string> Titles(string query)
         {
-            get
+            if (string.IsNullOrWhiteSpace(query))
             {
-                return this.DbContext.Journals.Select(j => j.Title).ToList();
-            }
+                return Enumerable.Empty<string>().AsQueryable();
+            } 
+
+            return this.DbContext.Journals.Where(j => j.Title.ToLower().StartsWith(query.ToLower())).Select(j => j.Title);
         }
 
-        public IList<string> AllPublishers
+        public IQueryable<string> Publishers(string query)
         {
-            get
+            if (string.IsNullOrWhiteSpace(query))
             {
-                return this.DbContext.Journals.Select(j => j.Publisher.Name).Distinct().ToList();
-            }
+                return Enumerable.Empty<string>().AsQueryable();
+            } 
+
+            return this.DbContext.Journals.Where(j => j.Publisher.Name.ToLower().StartsWith(query.ToLower())).Select(j => j.Publisher.Name).Distinct();
         }
 
-        public IList<string> AllIssns
+        public IQueryable<string> Issns(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return Enumerable.Empty<string>().AsQueryable();
+            } 
+
+            return this.DbContext.Journals.Where(j => j.ISSN.ToLower().StartsWith(query.ToLower())).Select(j => j.ISSN);
+        }
+
+        public IQueryable<string> AllIssns
         {
             get
             {
-                return this.DbContext.Journals.Select(j => j.ISSN).ToList();
+                return this.DbContext.Journals.Select(j => j.ISSN);    
             }
         }
 

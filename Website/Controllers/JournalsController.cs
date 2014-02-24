@@ -59,23 +59,23 @@
 
         [GET("titles")]
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
-        public JsonResult Titles()
+        public JsonResult Titles(string query)
         {
-            return this.Json(this.journalRepository.AllTitles, JsonRequestBehavior.AllowGet);
+            return this.Json(this.journalRepository.Titles(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         [GET("issns")]
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
-        public JsonResult Issns()
+        public JsonResult Issns(string query)
         {
-            return this.Json(this.journalRepository.AllIssns, JsonRequestBehavior.AllowGet);
+            return this.Json(this.journalRepository.Issns(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         [GET("publishers")]
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
-        public JsonResult Publishers()
+        public JsonResult Publishers(string query)
         {
-            return this.Json(this.journalRepository.AllPublishers, JsonRequestBehavior.AllowGet);
+            return this.Json(this.journalRepository.Publishers(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         [GET("{id}/prices")]

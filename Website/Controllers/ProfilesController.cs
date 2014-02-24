@@ -104,9 +104,9 @@
 
         [GET("names")]
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
-        public JsonResult Names()
+        public JsonResult Names(string query)
         {
-            return this.Json(this.UserProfileRepository.AllNames, JsonRequestBehavior.AllowGet);
+            return this.Json(this.UserProfileRepository.Names(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         private ScoreCardState? GetScoreCardStateFilter(int userProfileId)

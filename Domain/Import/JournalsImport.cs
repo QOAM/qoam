@@ -45,7 +45,7 @@
             var subjects = ImportSubjects(distinctJournals);
             var publishers = ImportPublishers(distinctJournals);
             
-            var currentJournalIssns = this.journalRepository.AllIssns;
+            var currentJournalIssns = this.journalRepository.AllIssns.ToList();
             var newJournals = distinctJournals.Where(j => !currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
             var existingJournals = distinctJournals.Where(j => currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
 

@@ -11,6 +11,7 @@
     {
         protected const string CacheOneQuarter = "CacheOneQuarter";
         protected const string CacheOneHour = "CacheOneHour";
+        protected const int AutoCompleteItemsCount = 5;
 
         protected ApplicationController(IUserProfileRepository userProfileRepository, IAuthentication authentication)
         {

@@ -14,12 +14,11 @@
         IPagedList<Journal> Search(JournalFilter filter);
         IList<Journal> SearchAll(JournalFilter filter);
         Journal Find(int id);
-
-        IList<string> AllTitles { get; }
-        IList<string> AllPublishers { get; }
-        IList<string> AllIssns { get; }
+        IQueryable<string> Titles(string query);
+        IQueryable<string> Publishers(string query);
+        IQueryable<string> Issns(string query);
         IList<Journal> All { get; }
-
+        IQueryable<string> AllIssns { get; }
         IList<Journal> AllIncluding(params Expression<Func<Journal, object>>[] includeProperties);
 
         void Update(Journal journal);

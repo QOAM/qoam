@@ -456,10 +456,10 @@
       <DependentUpon>Compatibility.js</DependentUpon>
     </Content>
     <Content Include="Scripts\Controllers\JournalsController.min.js.map">
-      <DependentUpon>JournalsController.js</DependentUpon>
+      <DependentUpon>JournalsController.min.js</DependentUpon>
     </Content>
     <Content Include="Scripts\Controllers\ScoreController.min.js.map">
-      <DependentUpon>ScoreController.js</DependentUpon>
+      <DependentUpon>ScoreController.min.js</DependentUpon>
     </Content>
     <Content Include="App_Code\Sorting.cshtml" />
     <Content Include="Scripts\Helpers\Compatibility.min.js.map">
@@ -471,7 +471,7 @@
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\Staging.pubxml" />
     <Content Include="Scripts\Controllers\ProfilesController.min.js.map">
-      <DependentUpon>ProfilesController.js</DependentUpon>
+      <DependentUpon>ProfilesController.min.js</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.1.intellisense.js" />
     <Content Include="Images\message.png" />

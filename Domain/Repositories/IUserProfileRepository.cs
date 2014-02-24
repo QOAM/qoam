@@ -1,6 +1,7 @@
 ﻿namespace RU.Uci.OAMarket.Domain.Repositories
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using PagedList;
 
@@ -9,7 +10,8 @@
     public interface IUserProfileRepository
     {
         IList<UserProfile> All { get; }
-        IList<string> AllNames { get; }
+
+        IQueryable<string> Names(string query);
 
         UserProfile Find(int id);
         UserProfile Find(string username);

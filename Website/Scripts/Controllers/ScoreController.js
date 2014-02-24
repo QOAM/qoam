@@ -2,9 +2,9 @@
     function ScoreController() {
     }
     ScoreController.prototype.index = function (journalTitlesUrl, journalIssnsUrl, journalPublishersUrl) {
-        $('#Title').typeahead({ prefetch: journalTitlesUrl });
-        $('#Issn').typeahead({ prefetch: journalIssnsUrl });
-        $('#Publisher').typeahead({ prefetch: journalPublishersUrl });
+        $('#Title').typeahead({ remote: journalTitlesUrl + '?query=%QUERY' });
+        $('#Issn').typeahead({ remote: journalIssnsUrl + '?query=%QUERY' });
+        $('#Publisher').typeahead({ remote: journalPublishersUrl + '?query=%QUERY' });
     };
 
     ScoreController.prototype.details = function () {
