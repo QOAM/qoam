@@ -127,7 +127,7 @@
     <value>In order to publish score cards, you need to log in. You can log in by using your own institutional credentials. You cannot create an account, you have to have an institutional account to log in.</value>
   </data>
   <data name="Account_Login_Instructions_Part2" xml:space="preserve">
-    <value>To log in, just click on the image on the right, select your institution and login using your own institutional credentials. After succesfully logging in, you will automatically be returned to this website.</value>
+    <value>To log in, just click on the button below, select your institution and login using your own institutional credentials. After succesfully logging in, you will automatically be returned to this website.</value>
   </data>
   <data name="Account_Login_Title" xml:space="preserve">
     <value>Log in</value>
@@ -757,5 +757,8 @@ The registration will be confirmed by SURFconext, the Dutch eduGAIN partner. Ple
   </data>
   <data name="Admin_Index_DownloadJournals" xml:space="preserve">
     <value>Download journals</value>
+  </data>
+  <data name="Account_Login_Introduction" xml:space="preserve">
+    <value>Quality Open Access Market (QOAM) is an instrument of and for the academic community. Its members may inform the community about price and quality of a journal by publishing a Journal Score Card in QOAM. Logging in enables you to publish such cards.</value>
   </data>
 </root>
