@@ -5,7 +5,7 @@
 }
 
 <div class="container">
-    <div class="col-md-3">
+    <div class="col-md-6">
         
         <p>@ViewStrings.Account_Login_Introduction</p>
         <h2>@ViewBag.Title</h2>
@@ -20,7 +20,7 @@
                 <legend>@ViewStrings.Account_Login_Help</legend>
 
                 <p>
-                    <button type="submit" name="provider" value="@ViewBag.SurfContextClientData.AuthenticationClient.ProviderName" title="@ViewStrings.Account_Login_Help">
+                    <button type="submit" class="btn btn-primary" name="provider" value="@ViewBag.SurfContextClientData.AuthenticationClient.ProviderName" title="@ViewStrings.Account_Login_Help">
                         @Strings.LogIn
                     </button>
                 </p>
