@@ -330,12 +330,16 @@
     <Content Include="Images\ScoreCards\journalscorecard-valuation.png" />
     <Content Include="Images\Under-Construction.png" />
     <Content Include="Scripts\bootstrap-slider.js" />
+    <Content Include="Scripts\Helpers\knockout.isdirty.js" />
     <Content Include="Scripts\Helpers\Ajax.js" />
     <Content Include="Scripts\Helpers\Ajax.min.js">
       <DependentUpon>Ajax.js</DependentUpon>
     </Content>
     <Content Include="Scripts\Helpers\Form.min.js">
       <DependentUpon>Form.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Helpers\knockout.isdirty.min.js">
+      <DependentUpon>knockout.isdirty.js</DependentUpon>
     </Content>
     <Content Include="Scripts\jquery.fancybox-buttons.js" />
     <Content Include="Scripts\jquery.fancybox-media.js" />
@@ -377,6 +381,9 @@
     <Content Include="Views\Admin\Update.cshtml" />
     <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <Content Include="Views\Admin\Check.cshtml" />
+    <Content Include="Scripts\Helpers\knockout.isdirty.min.js.map">
+      <DependentUpon>knockout.isdirty.min.js</DependentUpon>
+    </Content>
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

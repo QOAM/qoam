@@ -102,13 +102,18 @@
             {
                 // Update the score card using the values of the model
                 model.UpdateScoreCard(scoreCard, this.generalSettings.ScoreCardLifeTime);
-
+                
                 // It is important to note that the JournalScore of the Journal is updated in a 
                 // trigger in the database and not in the code. This is done to prevent concurrency 
                 // issues from leading to incorrect totals and averages for the journal score
 
                 this.scoreCardRepository.Update(scoreCard);
                 this.scoreCardRepository.Save();
+
+                if (model.Price.FeeType == null)
+                {
+                    model.Price.FeeType = FeeType.Absent;
+                }
 
                 var isNewJournalPrice = model.Price.JournalPriceId == 0;
 
@@ -117,7 +122,9 @@
                     if (model.Price.Amount.HasValue)
                     {
                         if (model.Submitted)
+                        {
                             model.Price.FeeType = FeeType.Article; // set the default for backwards compatibility
+                        }
 
                         var journalPrice = model.Price.ToJournalPrice();
                         journalPrice.ScoreCardId = scoreCard.Id;
@@ -154,8 +161,8 @@
                         journalPrice.Price.Amount = 0;
                         journalPrice.JournalId = model.Journal.Id;
                         journalPrice.Price.Currency = null;
-                        this.journalPriceRepository.Insert(journalPrice);
 
+                        this.journalPriceRepository.Insert(journalPrice);
                     }
                 }
                 else
@@ -174,7 +181,9 @@
                     if (model.Price.Amount.HasValue)
                     {
                         if (model.Submitted)
+                        {
                             model.Price.FeeType = FeeType.Article; // set the default for backwards compatibility
+                        }
 
                         journalPrice.ScoreCardId = scoreCard.Id;
                         journalPrice.DateAdded = DateTime.Now;

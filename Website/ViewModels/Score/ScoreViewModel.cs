@@ -12,10 +12,12 @@
         public string Remarks { get; set; }
         public bool Submitted { get; set; }
         public bool Editor { get; set; }
+        public bool Publish { get; set; }
         public IList<QuestionScoreViewModel> QuestionScores { get; set; }
         public JournalViewModel Journal { get; set; }
         public JournalPriceViewModel Price { get; set; }
         public IEnumerable<KeyValuePair<Currency, string>> Currencies { get; set; }
+        public ScoreCardState State { get; set; }
 
         public void UpdateScoreCard(ScoreCard scoreCard, TimeSpan scoreCardLifeTime)
         {
@@ -28,9 +30,13 @@
             scoreCard.Remarks = this.Remarks;
             scoreCard.Submitted = this.Submitted;
             scoreCard.Editor = this.Editor;
-            scoreCard.State = ScoreCardState.Published;
-            scoreCard.DatePublished = DateTime.Now;
-            scoreCard.DateExpiration = DateTime.Now + scoreCardLifeTime;
+            
+            if (this.Publish)
+            {
+                scoreCard.State = ScoreCardState.Published;
+                scoreCard.DatePublished = DateTime.Now;
+                scoreCard.DateExpiration = DateTime.Now + scoreCardLifeTime;
+            }
         }
     }
 }

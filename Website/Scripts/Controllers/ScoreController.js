@@ -108,7 +108,7 @@
             }));
 
             self.publishing = ko.observable(false);
-
+            
             self.getRequestVerificationToken = function () {
                 return $('#journalScoreForm input[name="__RequestVerificationToken"]').val();
             },
@@ -125,28 +125,36 @@
                     data: ko.utils.stringifyJson(ko.mapping.toJS(self)),
                     dataType: 'json',
                     headers: { '__RequestVerificationToken': self.getRequestVerificationToken() }
-                })
-                .done(function () {
-                    $('#publishedModal')
-                        .modal()
-                        .on('hide.bs.modal', function () {
-                            window.location.href = profileUrl;
-                        });
-                })
-                .fail(function () {
-                    alert('Something failed!');
-                    self.publishing(false);
                 });
+
+                return currentXhr;
             };
 
             self.publishScoreCard = function () {
+                // We set this value to indicating that we are in the processing of publishing a score card
                 self.publishing(true);
-                self.storeScoreCard();
+
+                // We set this value to let the backend know that this is a publish action, not only a mere
+                // updating of the 
+                self.Publish(true);
+
+                self.storeScoreCard()
+                    .done(function () {
+                        $('#publishedModal')
+                            .modal()
+                            .on('hide.bs.modal', function () {
+                                window.location.href = profileUrl;
+                            });
+                    })
+                    .fail(function () {
+                        alert('Something failed!');
+                        self.publishing(false);
+                    });
             };
 
             self.categoryScores = ko.observableArray();
             self.questionScores = ko.observableArray();
-
+            
             self.baseScore = ko.computed(function () {
                 return ko.utils.arrayMap(ko.utils.arrayFilter(self.categoryScores(), function (item) {
                     return item.partOfBaseScore() && item.completed();
@@ -253,7 +261,6 @@
             });
 
             if (data.Price.Amount != null || self.progress() >= 100) {
-                console.log(data);
                 $("input[type=radio][name=IsPublishedWithinYearRadio]").each(function (index) {
                     if ($(this).val() == data.Submitted.toString()) {
                         $(this).prop('checked', true);
@@ -266,7 +273,42 @@
                         $(this).trigger("click");
                     }
                 });
-            }            
+            }
+            
+            // We only do auto-saving for unpublished (state equal to zero) score cards.
+            if (data.State == 0) {
+                self.questionScoresDirtyFlag = new ko.dirtyFlag(self.questionScores, false);
+                self.remarksDirtyFlag = new ko.dirtyFlag(self.Remarks, false);
+                self.editorDirtyFlag = new ko.dirtyFlag(self.Editor, false);
+                self.submittedDirtyFlag = new ko.dirtyFlag(self.Submitted, false);
+                self.priceDirtyFlag = new ko.dirtyFlag(self.Price, false);
+            
+                self.isDirty = ko.computed(function () {
+                    return self.questionScoresDirtyFlag.isDirty() ||
+                           self.remarksDirtyFlag.isDirty() ||
+                           self.editorDirtyFlag.isDirty() || 
+                           self.submittedDirtyFlag.isDirty() ||
+                           self.priceDirtyFlag.isDirty();
+                }, self).extend({ throttle: 2000 });
+            
+                self.isDirty.subscribe(function (newIsDirtyValue) {
+                    if (newIsDirtyValue && !self.publishing()) {
+
+                        // Ensure that the score card will not be published
+                        self.Publish(false);
+
+                        self.storeScoreCard()
+                                .done(function () {
+                                    // Reset the dirty flag to the just updated question scores
+                                    self.questionScoresDirtyFlag.reset(self.questionScores);
+                                    self.remarksDirtyFlag.reset(self.Remarks);
+                                    self.editorDirtyFlag.reset(self.Editor);
+                                    self.submittedDirtyFlag.reset(self.Submitted);
+                                    self.priceDirtyFlag.reset(self.Price);
+                                });
+                    }
+                });
+            }
         };
 
         var viewModel = new scoreCardModel(data);

@@ -19,6 +19,7 @@
                            Submitted = scoreCard.Submitted,
                            Editor = scoreCard.Editor,
                            Journal = scoreCard.Journal.ToViewModel(),
+                           State = scoreCard.State,
                            QuestionScores = scoreCard.QuestionScores.Select(ToViewModel).ToList()
                        };
         }
