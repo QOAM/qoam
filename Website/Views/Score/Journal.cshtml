@@ -248,26 +248,26 @@
                                                                     </div>
                                                                     <div data-bind="visible: IsOutDatedPublicationArticle">
                                                                         <select id="Price.CurrencyPerArticle" class="priceBox"
-                                                                            data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency">
+                                                                                data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency">
                                                                         </select>
                                                                         <input type="text"
-                                                                            class="form-control inline"
-                                                                            id="Price.AmountPerArticle"
-                                                                            name="Price.AmountPerArticle"
-                                                                            data-bind="value: Price.Amount"
-                                                                            placeholder="Price per article" />
+                                                                               class="form-control inline"
+                                                                               id="Price.AmountPerArticle"
+                                                                               name="Price.AmountPerArticle"
+                                                                               data-bind="value: Price.Amount"
+                                                                               placeholder="Price per article" />
                                                                     </div>
                                                                     <div data-bind="visible: IsOutDatedPublicationPage">
                                                                         <select id="Price.CurrencyPerPage"
-                                                                            class="priceBox"
-                                                                            data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency">
+                                                                                class="priceBox"
+                                                                                data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency">
                                                                         </select>
                                                                         <input type="text"
-                                                                            class="form-control inline"
-                                                                            id="Price.AmountPerPage"
-                                                                            name="Price.AmountPerPage"
-                                                                            data-bind="value: Price.Amount"
-                                                                            placeholder="Price per page" />
+                                                                               class="form-control inline"
+                                                                               id="Price.AmountPerPage"
+                                                                               name="Price.AmountPerPage"
+                                                                               data-bind="value: Price.Amount"
+                                                                               placeholder="Price per page" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -365,6 +365,9 @@
                             </div>
                         }
                     </div>
+                    <div id="spinner-row" class="row pull-right" data-bind="visible: storingScoreCard">
+                        <span id="spinner"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -394,6 +397,7 @@
     <script type="text/javascript" src="~/Scripts/knockout-2.3.0.js"></script>
     <script type="text/javascript" src="~/Scripts/knockout.mapping-latest.js"></script>
     <script type="text/javascript" src="~/Scripts/Helpers/knockout.isdirty.js"></script>
+    <script type="text/javascript" src="~/Scripts/spin.js"></script>
     <script type="text/javascript">
         $(function() {
             var scoreController = new ScoreController();
@@ -402,6 +406,28 @@
                 '@Url.Action("Journal", new { id = Model.Id })', 
                 '@Url.Action("Details", "Profiles", new { id = ViewBag.User.Id })');
         });
+
+
+        var opts = {
+            lines: 11, // The number of lines to draw
+            length: 4, // The length of each line
+            width: 3, // The line thickness
+            radius: 6, // The radius of the inner circle
+            corners: 1, // Corner roundness (0..1)
+            rotate: 0, // The rotation offset
+            direction: 1, // 1: clockwise, -1: counterclockwise
+            color: '#000', // #rgb or #rrggbb or array of colors
+            speed: 1, // Rounds per second
+            trail: 60, // Afterglow percentage
+            shadow: false, // Whether to render a shadow
+            hwaccel: false, // Whether to use hardware acceleration
+            className: 'spinner', // The CSS class to assign to the spinner
+            zIndex: 2e9, // The z-index (defaults to 2000000000)
+            top: 'auto', // Top position relative to parent in px
+            left: 'auto' // Left position relative to parent in px
+        };
+        var target = document.getElementById('spinner');
+        var spinner = new Spinner(opts).spin(target);
     </script>
 }
 

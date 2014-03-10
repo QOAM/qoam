@@ -449,6 +449,11 @@ a.home:hover, a.home, a.home:focus {
 .panel-heading {
     font-size:1.3em;
 }
+
+#spinner-row {
+    padding: 10px 30px 5px 0;
+}
+
 /*   mobile     */
 @media (max-width: 480px) {
 	#header .brand {

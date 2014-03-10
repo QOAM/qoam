@@ -108,6 +108,7 @@
             }));
 
             self.publishing = ko.observable(false);
+            self.storingScoreCard = ko.observable(false);
             
             self.getRequestVerificationToken = function () {
                 return $('#journalScoreForm input[name="__RequestVerificationToken"]').val();
@@ -118,6 +119,8 @@
                     currentXhr.abort();
                 }
 
+                self.storingScoreCard(true);
+
                 currentXhr = $.ajax({
                     type: "POST",
                     url: saveScoreCardUrl,
@@ -125,6 +128,9 @@
                     data: ko.utils.stringifyJson(ko.mapping.toJS(self)),
                     dataType: 'json',
                     headers: { '__RequestVerificationToken': self.getRequestVerificationToken() }
+                })
+                .always(function() {
+                    self.storingScoreCard(false);
                 });
 
                 return currentXhr;

@@ -352,6 +352,8 @@
     <Content Include="Scripts\jquery.mousewheel-3.0.6.pack.js" />
     <Content Include="Scripts\jquery.validate.globalize.js" />
     <Content Include="Scripts\jquery.validate.globalize.min.js" />
+    <Content Include="Scripts\spin.js" />
+    <Content Include="Scripts\spin.min.js" />
     <Content Include="Views\Shared\_Loading.cshtml" />
     <Content Include="Views\Journals\ScoresRows.cshtml" />
     <Content Include="Views\Journals\CommentsRows.cshtml" />
