@@ -451,7 +451,11 @@ a.home:hover, a.home, a.home:focus {
 }
 
 #spinner-row {
-    padding: 10px 30px 5px 0;
+    padding-right: 30px;
+}
+
+#spinner {
+    padding-right: 12px;
 }
 
 /*   mobile     */

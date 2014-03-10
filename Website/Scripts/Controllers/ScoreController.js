@@ -16,6 +16,30 @@
     };
 
     ScoreController.prototype.journal = function (data, saveScoreCardUrl, profileUrl) {
+        var setupSpinner = function() {
+            var opts = {
+                lines: 11,
+                length: 4,
+                width: 3,
+                radius: 6,
+                corners: 1,
+                rotate: 0,
+                direction: 1,
+                color: '#000',
+                speed: 1,
+                trail: 60,
+                shadow: false,
+                hwaccel: false,
+                className: 'spinner',
+                zIndex: 2e9,
+                top: 'auto',
+                left: 'auto'
+            };
+            var target = document.getElementById('spinner');
+            var spinner = new Spinner(opts).spin(target);
+        };
+
+        setupSpinner();
 
         var currentXhr = null;
         var valuationScoreCategory = 4;
@@ -120,7 +144,7 @@
                 }
 
                 self.storingScoreCard(true);
-
+                
                 currentXhr = $.ajax({
                     type: "POST",
                     url: saveScoreCardUrl,
@@ -283,6 +307,8 @@
             
             // We only do auto-saving for unpublished (state equal to zero) score cards.
             if (data.State == 0) {
+                var savedElement = $('#saved');
+
                 self.questionScoresDirtyFlag = new ko.dirtyFlag(self.questionScores, false);
                 self.remarksDirtyFlag = new ko.dirtyFlag(self.Remarks, false);
                 self.editorDirtyFlag = new ko.dirtyFlag(self.Editor, false);
@@ -303,8 +329,12 @@
                         // Ensure that the score card will not be published
                         self.Publish(false);
 
+                        savedElement.hide();
+                        
                         self.storeScoreCard()
                                 .done(function () {
+                                    savedElement.show().delay(200).fadeOut(2000);
+
                                     // Reset the dirty flag to the just updated question scores
                                     self.questionScoresDirtyFlag.reset(self.questionScores);
                                     self.remarksDirtyFlag.reset(self.Remarks);

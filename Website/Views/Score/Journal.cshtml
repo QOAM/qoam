@@ -17,15 +17,15 @@
             <div class="col-md-12">
                 <p class="text-left">@questionKey.ToDescription()</p>
 
-                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Absent.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score"/>
+                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Absent.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score" />
                 @Score.Absent.GetValue(): @Score.Absent.GetName()
-                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Poor.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score"/>
+                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Poor.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score" />
                 @Score.Poor.GetValue(): @Score.Poor.GetName()
-                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Moderate.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score"/>
+                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Moderate.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score" />
                 @Score.Moderate.GetValue(): @Score.Moderate.GetName()
-                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Good.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score"/>
+                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Good.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score" />
                 @Score.Good.GetValue(): @Score.Good.GetName()
-                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Excellent.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score"/>
+                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[(int)questionKey].Score)" value="@Score.Excellent.GetValue()" data-bind="checked: questionScores()[@questionKey.GetValue()].score" />
                 @Score.Excellent.GetValue(): @Score.Excellent.GetName()
             </div>
         </div>
@@ -157,7 +157,7 @@
                         @using (Html.BeginForm("Journal", "Score", FormMethod.Post, new { id = "journalScoreForm" }))
                         {
                             @Html.AntiForgeryToken()
-      
+
                             <div class="tabbable">
                                 <ul id="scoreTabs" class="nav nav-tabs">
                                     <li class="active"><a href="#@(QuestionCategory.EditorialInformation)ScoreTab" data-toggle="tab">@QuestionCategory.EditorialInformation.GetName()</a></li>
@@ -213,7 +213,8 @@
                                                             <div class="row high">
                                                                 <div class="col-md-12">
                                                                     <em>
-                                                                        <label for="Price.Amount">@ViewStrings.Score_Journal_PublicationCost</label></em>
+                                                                        <label for="Price.Amount">@ViewStrings.Score_Journal_PublicationCost</label>
+                                                                    </em>
                                                                     <br />
                                                                     <select id="Price.Currency" class="priceBox" data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency"></select>
                                                                     <input type="text" class="form-control inline" id="Price.Amount" name="Price.Amount" data-bind="value: Price.Amount" placeholder="Price of journal">
@@ -231,25 +232,29 @@
                                                             <div class="row high">
                                                                 <div class="col-md-12">
                                                                     <em>
-                                                                        <label for="Price.AmountPerArticle">@ViewStrings.Score_Journal_Outdated_Publication</label></em>
+                                                                        <label for="Price.AmountPerArticle">@ViewStrings.Score_Journal_Outdated_Publication</label>
+                                                                    </em>
                                                                     <div>
                                                                         <input type="radio" id="outdatedPublication-article" name="outdatedPublication" value="Article" />
                                                                         <em>
-                                                                            <label for="outdatedPublication-article">@ViewStrings.Score_Journal_Outdated_Publication_Price_Per_Article</label></em>
+                                                                            <label for="outdatedPublication-article">@ViewStrings.Score_Journal_Outdated_Publication_Price_Per_Article</label>
+                                                                        </em>
                                                                         <input type="radio" id="outdatedPublication-page" name="outdatedPublication" value="Page" />
                                                                         <em>
-                                                                            <label for="outdatedPublication-page">@ViewStrings.Score_Journal_Outdated_Publication_Price_Per_Page</label></em>
+                                                                            <label for="outdatedPublication-page">@ViewStrings.Score_Journal_Outdated_Publication_Price_Per_Page</label>
+                                                                        </em>
                                                                         <input type="radio" id="outdatedPublication-nofee" name="outdatedPublication" value="NoFee" />
                                                                         <em>
-                                                                            <label for="outdatedPublication-nofee">@ViewStrings.Score_Journal_Outdated_Publication_Price_No_Fee</label></em>
+                                                                            <label for="outdatedPublication-nofee">@ViewStrings.Score_Journal_Outdated_Publication_Price_No_Fee</label>
+                                                                        </em>
                                                                         <input type="radio" id="outdatedPublication-absent" name="outdatedPublication" value="Absent" />
                                                                         <em>
-                                                                            <label for="outdatedPublication-absent">@ViewStrings.Score_Journal_Outdated_Publication_Absent</label></em>
+                                                                            <label for="outdatedPublication-absent">@ViewStrings.Score_Journal_Outdated_Publication_Absent</label>
+                                                                        </em>
                                                                     </div>
                                                                     <div data-bind="visible: IsOutDatedPublicationArticle">
                                                                         <select id="Price.CurrencyPerArticle" class="priceBox"
-                                                                                data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency">
-                                                                        </select>
+                                                                                data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency"></select>
                                                                         <input type="text"
                                                                                class="form-control inline"
                                                                                id="Price.AmountPerArticle"
@@ -260,8 +265,7 @@
                                                                     <div data-bind="visible: IsOutDatedPublicationPage">
                                                                         <select id="Price.CurrencyPerPage"
                                                                                 class="priceBox"
-                                                                                data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency">
-                                                                        </select>
+                                                                                data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency"></select>
                                                                         <input type="text"
                                                                                class="form-control inline"
                                                                                id="Price.AmountPerPage"
@@ -309,68 +313,70 @@
 
                                     @*<div class="tab-pane" id="OverviewTab">
 
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        @ScoreCardAspect(QuestionCategory.EditorialInformation)
-                                                        @ScoreCardAspect(QuestionCategory.Governance)
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            @ScoreCardAspect(QuestionCategory.EditorialInformation)
+                                                            @ScoreCardAspect(QuestionCategory.Governance)
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            @ScoreCardAspect(QuestionCategory.PeerReview)
+                                                            @ScoreCardAspect(QuestionCategory.Process)
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            @ScoreCardAspect(QuestionCategory.Valuation)
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-3">
-                                                        @ScoreCardAspect(QuestionCategory.PeerReview)
-                                                        @ScoreCardAspect(QuestionCategory.Process)
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        @ScoreCardAspect(QuestionCategory.Valuation)
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div><strong>@Strings.Progress:</strong> <span data-bind="text: progress"></span>%</div>
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressPercentage() }, css: progressClass">
-                                                                <span class="sr-only">@Strings.Progress: <span data-bind="text: progressPercentage"></span></span>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div><strong>@Strings.Progress:</strong> <span data-bind="text: progress"></span>%</div>
+                                                            <div class="progress">
+                                                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressPercentage() }, css: progressClass">
+                                                                    <span class="sr-only">@Strings.Progress: <span data-bind="text: progressPercentage"></span></span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="panel panel-primary">
-                                                            <div class="panel-heading">@Strings.BaseScoreForThisJournal:</div>
-                                                            <div class="panel-body">
-                                                                <h1 data-bind="text: baseScore"></h1>
-                                                            </div>
+                                                <div class="col-md-3">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading">@Strings.BaseScoreForThisJournal:</div>
+                                                                <div class="panel-body">
+                                                                    <h1 data-bind="text: baseScore"></h1>
+                                                                </div>
 
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row topmargin">
-                                                    <div class="col-md-12">
-                                                        <div class="panel panel-secondary">
-                                                            <div class="panel-heading">@Strings.FinishedYourRating?</div>
-                                                            <div class="panel-body">
-                                                                <i class="icon-ok"></i>
-                                                                <button data-bind="enable: canPublish, click: publishScoreCard">@Strings.PublishYourScoreCard</button>
+                                                    <div class="row topmargin">
+                                                        <div class="col-md-12">
+                                                            <div class="panel panel-secondary">
+                                                                <div class="panel-heading">@Strings.FinishedYourRating?</div>
+                                                                <div class="panel-body">
+                                                                    <i class="icon-ok"></i>
+                                                                    <button data-bind="enable: canPublish, click: publishScoreCard">@Strings.PublishYourScoreCard</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>*@
+                                        </div>*@
                                 </div>
                             </div>
                         }
                     </div>
-                    <div id="spinner-row" class="row pull-right" data-bind="visible: storingScoreCard">
-                        <span id="spinner"></span>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="spinner-row" class="row pull-right">
+        <div id="saved" style="display: none;"><strong>Saved...</strong></div>
+        <div id="spinner" data-bind="visible: storingScoreCard"></div>
     </div>
 
     <div id="publishedModal" class="modal fade">
@@ -402,32 +408,10 @@
         $(function() {
             var scoreController = new ScoreController();
             scoreController.journal(
-                @Html.Raw(JsonConvert.SerializeObject(Model)), 
-                '@Url.Action("Journal", new { id = Model.Id })', 
+                @Html.Raw(JsonConvert.SerializeObject(Model)),
+                '@Url.Action("Journal", new { id = Model.Id })',
                 '@Url.Action("Details", "Profiles", new { id = ViewBag.User.Id })');
         });
-
-
-        var opts = {
-            lines: 11, // The number of lines to draw
-            length: 4, // The length of each line
-            width: 3, // The line thickness
-            radius: 6, // The radius of the inner circle
-            corners: 1, // Corner roundness (0..1)
-            rotate: 0, // The rotation offset
-            direction: 1, // 1: clockwise, -1: counterclockwise
-            color: '#000', // #rgb or #rrggbb or array of colors
-            speed: 1, // Rounds per second
-            trail: 60, // Afterglow percentage
-            shadow: false, // Whether to render a shadow
-            hwaccel: false, // Whether to use hardware acceleration
-            className: 'spinner', // The CSS class to assign to the spinner
-            zIndex: 2e9, // The z-index (defaults to 2000000000)
-            top: 'auto', // Top position relative to parent in px
-            left: 'auto' // Left position relative to parent in px
-        };
-        var target = document.getElementById('spinner');
-        var spinner = new Spinner(opts).spin(target);
     </script>
 }
 
