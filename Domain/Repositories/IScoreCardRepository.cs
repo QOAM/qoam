@@ -16,7 +16,8 @@
         void Update(ScoreCard scoreCard);
         void Save();
         IPagedList<ScoreCard> FindForUser(ScoreCardFilter filter);
-        ScoreCardStats CalculateStats(int userProfileId);
+        ScoreCardStats CalculateStats(UserProfile userProfile);
+        ScoreCardStats CalculateStats(Institution institution);
         IList<ScoreCard> FindScoreCardsToBeArchived();
         IList<ScoreCard> FindScoreCardsThatWillBeArchived(TimeSpan toBeArchivedWindow);
     }

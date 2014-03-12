@@ -26,9 +26,12 @@
         public string Email { get; set; }
 
         public DateTime DateRegistered { get; set; }
-        public int InstitutionId { get; set; }
 
+        public int NumberOfScoreCards { get; set; }
+        
+        public int InstitutionId { get; set; }
         public virtual Institution Institution { get; set; }
+
         public virtual ICollection<InstitutionJournal> InstitutionJournalPrices { get; set; }
         public virtual ICollection<JournalPrice> JournalPrices { get; set; }
         public virtual ICollection<ScoreCard> ScoreCards { get; set; }

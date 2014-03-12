@@ -510,9 +510,6 @@
   <data name="SendEmail" xml:space="preserve">
     <value>Send email</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
-  </data>
   <data name="ISSNs" xml:space="preserve">
     <value>ISSNs</value>
   </data>
@@ -527,5 +524,11 @@
   </data>
   <data name="Check" xml:space="preserve">
     <value>Check</value>
+  </data>
+  <data name="NumberOfJSCs" xml:space="preserve">
+    <value>Number of JSC's</value>
+  </data>
+  <data name="Institutions" xml:space="preserve">
+    <value>Institutions</value>
   </data>
 </root>

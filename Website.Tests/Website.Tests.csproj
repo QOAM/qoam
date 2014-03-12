@@ -161,6 +161,9 @@
     <Compile Include="Routes\HomeRouteTests.cs" />
     <Compile Include="Routes\RouteTest.cs" />
     <Compile Include="ViewModels\Home\ContactViewModelTests.cs" />
+    <Compile Include="ViewModels\Institutions\DetailsViewModelTests.cs" />
+    <Compile Include="ViewModels\Institutions\IndexViewModelTests.cs" />
+    <Compile Include="ViewModels\Profiles\IndexViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

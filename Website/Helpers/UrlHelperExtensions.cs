@@ -22,6 +22,13 @@
                                                                                                                           { UserProfileSortMode.Name, SortDirection.Ascending },
                                                                                                                           { UserProfileSortMode.Institution, SortDirection.Ascending },
                                                                                                                           { UserProfileSortMode.DateRegistered, SortDirection.Descending },
+                                                                                                                          { UserProfileSortMode.NumberOfJournalScoreCards, SortDirection.Descending },
+                                                                                                                      };
+
+        private static readonly IDictionary<InstitutionSortMode, SortDirection> DefaultSortDirectionInstitution = new Dictionary<InstitutionSortMode, SortDirection>
+                                                                                                                      {
+                                                                                                                          { InstitutionSortMode.Name, SortDirection.Ascending },
+                                                                                                                          { InstitutionSortMode.NumberOfJournalScoreCards, SortDirection.Descending },
                                                                                                                       };
 
         public static string SortUrl(this UrlHelper helper, JournalSortMode newSortMode, JournalSortMode currentSortMode, SortDirection sortDirection)
@@ -37,6 +44,18 @@
         }
 
         public static string SortUrl(this UrlHelper helper, UserProfileSortMode newSortMode, UserProfileSortMode currentSortMode, SortDirection sortDirection)
+        {
+            var query = helper.RequestContext.HttpContext.Request.QueryString;
+            var values = query.AllKeys.ToDictionary(key => key, key => (object)query[key]);
+
+            values["SortBy"] = newSortMode;
+            values["Sort"] = GetOrderDirection(newSortMode, currentSortMode, sortDirection);
+
+            var routeValues = new RouteValueDictionary(values);
+            return helper.Action(null, routeValues);
+        }
+
+        public static string SortUrl(this UrlHelper helper, InstitutionSortMode newSortMode, InstitutionSortMode currentSortMode, SortDirection sortDirection)
         {
             var query = helper.RequestContext.HttpContext.Request.QueryString;
             var values = query.AllKeys.ToDictionary(key => key, key => (object)query[key]);
@@ -66,6 +85,16 @@
             }
 
             return DefaultSortDirectionUserProfile[newSortMode];
+        }
+
+        private static SortDirection GetOrderDirection(InstitutionSortMode newSortMode, InstitutionSortMode currentSortMode, SortDirection sortDirection)
+        {
+            if (currentSortMode == newSortMode)
+            {
+                return sortDirection == SortDirection.Ascending ? SortDirection.Descending : SortDirection.Ascending;
+            }
+
+            return DefaultSortDirectionInstitution[newSortMode];
         }
     }
 }

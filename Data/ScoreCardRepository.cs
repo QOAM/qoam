@@ -74,9 +74,9 @@
             return query.OrderByDescending(s => s.DatePublished).ToPagedList(filter.PageNumber, filter.PageSize);
         }
 
-        public ScoreCardStats CalculateStats(int userProfileId)
+        public ScoreCardStats CalculateStats(UserProfile userProfile)
         {
-            var groupedStates = this.DbContext.ScoreCards.Where(s => s.UserProfileId == userProfileId)
+            var groupedStates = this.DbContext.ScoreCards.Where(s => s.UserProfileId == userProfile.Id)
                                     .GroupBy(s => s.State)
                                     .Select(g => new { State = g.Key, Count = g.Count() })
                                     .ToList();
@@ -87,6 +87,21 @@
                            NumberOfPublishedScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Published).Select(g => g.Count).FirstOrDefault(),
                            NumberOfUnpublishedScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Unpublished).Select(g => g.Count).FirstOrDefault(),
                        };
+        }
+
+        public ScoreCardStats CalculateStats(Institution institution)
+        {
+            var groupedStates = this.DbContext.ScoreCards.Where(s => s.UserProfile.InstitutionId == institution.Id)
+                                    .GroupBy(s => s.State)
+                                    .Select(g => new { State = g.Key, Count = g.Count() })
+                                    .ToList();
+
+            return new ScoreCardStats
+            {
+                NumberOfExpiredScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Expired).Select(g => g.Count).FirstOrDefault(),
+                NumberOfPublishedScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Published).Select(g => g.Count).FirstOrDefault(),
+                NumberOfUnpublishedScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Unpublished).Select(g => g.Count).FirstOrDefault(),
+            };
         }
 
         public IList<ScoreCard> FindScoreCardsToBeArchived()

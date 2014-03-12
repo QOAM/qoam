@@ -95,7 +95,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Repositories\Filters\BadgeFilter.cs" />
+    <Compile Include="Repositories\Filters\InstitutionFilter.cs" />
     <Compile Include="Repositories\Filters\InstitutionJournalFilter.cs" />
+    <Compile Include="Repositories\Filters\InstitutionSortMode.cs" />
     <Compile Include="Repositories\Filters\JournalPriceFilter.cs" />
     <Compile Include="Repositories\Filters\NotificationFilter.cs" />
     <Compile Include="Repositories\Filters\ScoreCardFilter.cs" />

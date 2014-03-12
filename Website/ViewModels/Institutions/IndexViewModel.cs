@@ -1,9 +1,7 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Profiles
+﻿namespace RU.Uci.OAMarket.Website.ViewModels.Institutions
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Helpers;
-    using System.Web.Mvc;
 
     using PagedList;
 
@@ -14,28 +12,23 @@
     {
         public IndexViewModel()
         {
-            this.SortBy = UserProfileSortMode.NumberOfJournalScoreCards;
+            this.SortBy = InstitutionSortMode.NumberOfJournalScoreCards;
             this.Sort = SortDirection.Descending;
         }
 
         [Display(Name = "Name", ResourceType = typeof(Resources.Strings))]
         public string Name { get; set; }
 
-        [Display(Name = "Institution", ResourceType = typeof(Resources.Strings))]
-        public int? Institution { get; set; }
-
-        public UserProfileSortMode SortBy { get; set; }
+        public InstitutionSortMode SortBy { get; set; }
         public SortDirection Sort { get; set; }
         
-        public IPagedList<UserProfile> Profiles { get; set; }
-        public IEnumerable<SelectListItem> Institutions { get; set; }
+        public IPagedList<Institution> Institutions { get; set; }
 
-        public UserProfileFilter ToFilter()
+        public InstitutionFilter ToFilter()
         {
-            return new UserProfileFilter
+            return new InstitutionFilter
                        {
                            Name = this.Name,
-                           InstitutionId = this.Institution,
                            SortMode = this.SortBy,
                            SortDirection = this.Sort,
                            PageNumber = this.Page,

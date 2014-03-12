@@ -457,6 +457,15 @@ namespace RU.Uci.OAMarket.Website.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Institutions.
+        /// </summary>
+        public static string Institutions {
+            get {
+                return ResourceManager.GetString("Institutions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ISSN.
         /// </summary>
         public static string ISSN {
@@ -687,6 +696,15 @@ namespace RU.Uci.OAMarket.Website.Resources {
         public static string Notifications {
             get {
                 return ResourceManager.GetString("Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of JSC&apos;s.
+        /// </summary>
+        public static string NumberOfJSCs {
+            get {
+                return ResourceManager.GetString("NumberOfJSCs", resourceCulture);
             }
         }
         
@@ -1128,15 +1146,6 @@ namespace RU.Uci.OAMarket.Website.Resources {
         public static string State {
             get {
                 return ResourceManager.GetString("State", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

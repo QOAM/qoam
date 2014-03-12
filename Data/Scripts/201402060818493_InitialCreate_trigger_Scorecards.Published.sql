@@ -1,10 +1,3 @@
-USE [OAMarket]
-GO
-/****** Object:  Trigger [dbo].[ScoreCards.Published]    Script Date: 9-10-2013 11:25:02 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 ALTER TRIGGER [dbo].[ScoreCards.Published]
    ON [dbo].[ScoreCards]
    AFTER UPDATE
@@ -61,4 +54,12 @@ AS BEGIN
       j.ValuationScore_AverageScore = u.ValuationScore_AverageScore,	
       j.ValuationScore_TotalScore = u.ValuationScore_TotalScore,
       j.OverallScore_AverageScore = u.OverallScore_AverageScore;    
+	  
+	  UPDATE [dbo].[UserProfiles] 
+	  SET [NumberOfScoreCards] = (SELECT COUNT(*) FROM [dbo].[ScoreCards] s WHERE s.[UserProfileId] = [dbo].[UserProfiles].[Id] AND s.[State] = 1)
+	  WHERE [dbo].[UserProfiles].[Id] IN (SELECT UserProfileId FROM inserted);
+
+	  UPDATE [dbo].[Institutions] 
+	  SET [NumberOfScoreCards] = (SELECT COUNT(*)  FROM [dbo].[ScoreCards] s INNER JOIN [dbo].[UserProfiles] u ON u.[Id] = s.[UserProfileId] WHERE u.[InstitutionId] = [dbo].[Institutions].[Id] AND s.[State] = 1)
+	  WHERE [dbo].[Institutions].[Id] IN (SELECT InstitutionId FROM UserProfiles WHERE Id IN (SELECT UserProfileId FROM inserted));
 END

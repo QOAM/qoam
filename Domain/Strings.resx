@@ -143,7 +143,7 @@
   </data>
   <data name="FeeType_Article" xml:space="preserve">
     <value>Article</value>
-  </data>  
+  </data>
   <data name="FeeType_Page" xml:space="preserve">
     <value>Page</value>
   </data>
@@ -215,5 +215,14 @@
   </data>
   <data name="UserProfileSortMode_Name" xml:space="preserve">
     <value>Sort by name</value>
+  </data>
+  <data name="UserProfileSortMode_NumberOfJournalScoreCards" xml:space="preserve">
+    <value>Sort by number of JSC's</value>
+  </data>
+  <data name="InstitutionSortMode_Name" xml:space="preserve">
+    <value>Sort by name</value>
+  </data>
+  <data name="InstitutionSortMode_NumberOfJournalScoreCards" xml:space="preserve">
+    <value>Sort by number of JSC's</value>
   </data>
 </root>

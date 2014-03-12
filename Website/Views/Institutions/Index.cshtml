@@ -1,12 +1,11 @@
 ﻿@using System.Web.Mvc.Html5
 @using PagedList.Mvc
 @using RU.Uci.OAMarket.Website.Helpers
-@using RU.Uci.OAMarket.Website.Models
 @using RU.Uci.OAMarket.Website.Resources
-@model RU.Uci.OAMarket.Website.ViewModels.Profiles.IndexViewModel
+@model RU.Uci.OAMarket.Website.ViewModels.Institutions.IndexViewModel
 
 @{
-    ViewBag.Title = ViewStrings.Profile_Index_Title;
+    ViewBag.Title = ViewStrings.Institutions_Index_Title;
 }
 
 <div class="container main">
@@ -15,7 +14,7 @@
                 <div id="filter" class="well">
                 <h3>@Strings.Filter</h3>
 
-                @using (Html.BeginForm("Index", "Profiles", FormMethod.Get))
+                @using (Html.BeginForm("Index", "Institutions", FormMethod.Get))
                 {
                     <fieldset>
                         <legend>@Strings.Search</legend>
@@ -26,11 +25,6 @@
                         <div class="form-group">
                             @Html.Html5TextBoxFor(m => m.Name, InputTypes.InputType.Text, new { @class = "form-control" }, Strings.SearchByName)
                             @Html.ValidationMessageFor(m => m.Name, null, new { @class = "control-label" })
-                        </div>
-
-                        <div class="form-group">
-                            @Html.DropDownListFor(m => m.Institution, Model.Institutions, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Institution, null, new { @class = "control-label" })
                         </div>
 
                         <p>
@@ -46,11 +40,11 @@
             
             <div class="row">
                 <div class="col-md-9">
-                    <h3>@Strings.Profiles: @Model.Profiles.TotalItemCount</h3>
+                    <h3>@Strings.Institutions: @Model.Institutions.TotalItemCount</h3>
 
                 </div>
                 <div class="col-md-3 text-right topmargin">
-                    <div class="topmargin">@Sorting.UserProfileSortMenu(Model.SortBy, Model.Sort)</div>
+                    <div class="topmargin">@Sorting.InstitutionSortMenu(Model.SortBy, Model.Sort)</div>
                 </div>
             </div>
 
@@ -59,34 +53,25 @@
                     <thead>
                         <tr>
                             <th>@Strings.Name</th>
-                            <th>@Strings.Institution</th>
-                            <th>@Strings.RegistrationDate</th>
                             <th>@Strings.NumberOfJSCs</th>
                             <th>@Strings.Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var profile in Model.Profiles)
+                        @foreach (var institution in Model.Institutions)
                         {
                             <tr>
-                                <td>@Html.ActionLink(profile.DisplayName, "Details", "Profiles", new { id = profile.Id }, null)</td>
-                                <td>@Html.ActionLink(profile.Institution.Name, "Index", new { Institution = profile.Institution.Id })</td>
-                                <td>@profile.DateRegistered</td>
-                                <td>@profile.NumberOfScoreCards</td>
+                                <td>@Html.ActionLink(institution.Name, "Details", "Institutions", new { id = institution.Id }, null)</td>
+                                <td>@institution.NumberOfScoreCards</td>
                                 <td>
-                                    <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink(Strings.View, "Details", "Profiles", new { id = profile.Id }, null)
-                                    
-                                    @if (User.IsInRole(ApplicationRole.Admin))
-                                    {
-                                      <span class="glyphicon glyphicon-pencil"></span>  @Html.ActionLink(Strings.Edit, "Edit", new { profile.Id, ReturnUrl = Request.Url.ToString() })
-                                    }
+                                    <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink(Strings.View, "Details", "Institutions", new { id = institution.Id }, null)
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
 
-                @Html.PagedListPager(Model.Profiles, page => Url.Action("Index", new { page, Model.Name, Model.Institution, Model.Sort, Model.SortBy }), Html.PagedListRenderOptions())
+                @Html.PagedListPager(Model.Institutions, page => Url.Action("Index", new { page, Model.Name, Model.Sort, Model.SortBy }), Html.PagedListRenderOptions())
             </div>
 
         </div>
@@ -102,12 +87,12 @@
 {
     @{ this.Html.RenderPartial("_FormScripts"); }
 
-    <script type="text/javascript" src="~/Scripts/Controllers/ProfilesController.js"></script>
+    <script type="text/javascript" src="~/Scripts/Controllers/InstitutionsController.js"></script>
     <script type="text/javascript" src="~/Scripts/typeahead.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            var profilesController = new ProfilesController();
-            profilesController.index('@Url.Action("Names", null, null, this.Request.Url.Scheme)');
+            var institutionsController = new InstitutionsController();
+            institutionsController.index('@Url.Action("Names", null, null, this.Request.Url.Scheme)');
         });
     </script>
 }

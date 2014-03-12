@@ -19,6 +19,8 @@
         [StringLength(1024)]
         public string ShortName { get; set; }
 
+        public int NumberOfScoreCards { get; set; }
+
         public virtual ICollection<InstitutionJournal> InstitutionJournalPrices { get; set; }
         public virtual ICollection<UserProfile> UserProfiles { get; set; }
     }

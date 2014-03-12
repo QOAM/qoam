@@ -458,6 +458,25 @@ a.home:hover, a.home, a.home:focus {
     padding-right: 12px;
 }
 
+/******************** icons ************************************/
+
+ul.nav span.icon-group {
+    background-image: url(images/icon_group.png);
+    width: 25px;
+    height: 16px;
+    display: block;
+    float: left;
+    margin-right: 5px;
+}
+
+ul.nav li:hover span.icon-group {
+        background-image: url(images/icon_group_active.png);
+    }
+
+ul.nav li.active span.icon-group{
+    background-image: url(images/icon_group_active.png);
+}
+
 /*   mobile     */
 @media (max-width: 480px) {
 	#header .brand {

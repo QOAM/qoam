@@ -215,6 +215,7 @@
     <Compile Include="App_Start\WebSecurityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\InstitutionsController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Helpers\ValidateJsonAntiForgeryTokenAttribute.cs" />
     <Compile Include="Helpers\DecimalModelBinder.cs" />
@@ -280,6 +281,8 @@
     <Compile Include="ViewModels\PagedViewModel.cs" />
     <Compile Include="ViewModels\Journals\PricesViewModel.cs" />
     <Compile Include="ViewModels\Journals\ScoresViewModel.cs" />
+    <Compile Include="ViewModels\Institutions\DetailsViewModel.cs" />
+    <Compile Include="ViewModels\Institutions\IndexViewModel.cs" />
     <Compile Include="ViewModels\Profiles\DetailsViewModel.cs" />
     <Compile Include="ViewModels\Profiles\EditViewModel.cs" />
     <Compile Include="ViewModels\Profiles\IndexViewModel.cs" />
@@ -309,6 +312,8 @@
     <Content Include="Content\images\banner2.gif" />
     <Content Include="Content\images\banner3.jpg" />
     <Content Include="Content\images\faq.png" />
+    <Content Include="Content\images\icon_group.png" />
+    <Content Include="Content\images\icon_group_active.png" />
     <Content Include="Content\images\journalscorecard.png" />
     <Content Include="Content\images\logo-big.png" />
     <Content Include="Content\iPicture.css" />
@@ -330,6 +335,10 @@
     <Content Include="Images\ScoreCards\journalscorecard-valuation.png" />
     <Content Include="Images\Under-Construction.png" />
     <Content Include="Scripts\bootstrap-slider.js" />
+    <Content Include="Scripts\Controllers\InstitutionsController.js" />
+    <Content Include="Scripts\Controllers\ProfilesController - Copy.min.js">
+      <DependentUpon>InstitutionsController.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Helpers\knockout.isdirty.js" />
     <Content Include="Scripts\Helpers\Ajax.js" />
     <Content Include="Scripts\Helpers\Ajax.min.js">
@@ -385,6 +394,11 @@
     <Content Include="Views\Admin\Check.cshtml" />
     <Content Include="Scripts\Helpers\knockout.isdirty.min.js.map">
       <DependentUpon>knockout.isdirty.min.js</DependentUpon>
+    </Content>
+    <Content Include="Views\Institutions\Details.cshtml" />
+    <Content Include="Views\Institutions\Index.cshtml" />
+    <Content Include="Scripts\Controllers\ProfilesController - Copy.min.js.map">
+      <DependentUpon>ProfilesController - Copy.min.js</DependentUpon>
     </Content>
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />

@@ -11,6 +11,9 @@
         DateRegistered,
         
         [Display(Name = "UserProfileSortMode_Institution", ResourceType = typeof(Strings))]
-        Institution
+        Institution,
+
+        [Display(Name = "UserProfileSortMode_NumberOfJournalScoreCards", ResourceType = typeof(Strings))]
+        NumberOfJournalScoreCards
     }
 }

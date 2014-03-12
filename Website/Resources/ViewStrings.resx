@@ -761,4 +761,13 @@ The registration will be confirmed by SURFconext, the Dutch eduGAIN partner. Ple
   <data name="Account_Login_Introduction" xml:space="preserve">
     <value>Quality Open Access Market (QOAM) is an instrument of and for the academic community. Its members may inform the community about price and quality of a journal by publishing a Journal Score Card in QOAM. Logging in enables you to publish such cards.</value>
   </data>
+  <data name="Institutions_Details_NoUsers" xml:space="preserve">
+    <value>This institution does not have any users associated with it.</value>
+  </data>
+  <data name="Institutions_Details_Title" xml:space="preserve">
+    <value>{0} institution</value>
+  </data>
+  <data name="Institutions_Index_Title" xml:space="preserve">
+    <value>Institutions</value>
+  </data>
 </root>
