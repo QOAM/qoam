@@ -1,4 +1,4 @@
-namespace RU.Uci.OAMarket.Data.Migrations
+namespace RU.Uci.OAMarket.Data
 {
     using System.Data.Entity.Migrations;
 
