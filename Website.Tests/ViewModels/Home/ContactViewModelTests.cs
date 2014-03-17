@@ -1,10 +1,10 @@
-﻿namespace RU.Uci.OAMarket.Website.Tests.ViewModels.Home
+﻿namespace QOAM.Website.Tests.ViewModels.Home
 {
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using RU.Uci.OAMarket.Website.Models;
-    using RU.Uci.OAMarket.Website.ViewModels.Home;
+    using QOAM.Website.Models;
+    using QOAM.Website.ViewModels.Home;
 
     using Xunit;
 

@@ -1,8 +1,8 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Score
+﻿namespace QOAM.Website.ViewModels.Score
 {
     using System.Linq;
 
-    using RU.Uci.OAMarket.Domain;
+    using QOAM.Core;
 
     using Validation;
 

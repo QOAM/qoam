@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.Controllers
+﻿namespace QOAM.Website.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
@@ -6,10 +6,10 @@
     using AttributeRouting;
     using AttributeRouting.Web.Mvc;
 
-    using RU.Uci.OAMarket.Domain.Repositories;
-    using RU.Uci.OAMarket.Website.Helpers;
-    using RU.Uci.OAMarket.Website.Models;
-    using RU.Uci.OAMarket.Website.ViewModels.Institutions;
+    using QOAM.Core.Repositories;
+    using QOAM.Website.Helpers;
+    using QOAM.Website.Models;
+    using QOAM.Website.ViewModels.Institutions;
 
     using Validation;
 

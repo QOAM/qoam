@@ -1,6 +1,6 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Score
+﻿namespace QOAM.Website.ViewModels.Score
 {
-    using RU.Uci.OAMarket.Domain;
+    using QOAM.Core;
 
     public class JournalPriceViewModel
     {

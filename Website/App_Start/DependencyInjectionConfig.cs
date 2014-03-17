@@ -1,16 +1,16 @@
-﻿namespace RU.Uci.OAMarket.Website.App_Start
+﻿namespace QOAM.Website
 {
     using System.Web.Mvc;
 
     using Autofac;
     using Autofac.Integration.Mvc;
 
-    using RU.Uci.OAMarket.Data;
-    using RU.Uci.OAMarket.Domain.Export;
-    using RU.Uci.OAMarket.Domain.Import;
-    using RU.Uci.OAMarket.Domain.Services;
-    using RU.Uci.OAMarket.Website.Helpers;
-    using RU.Uci.OAMarket.Website.Models;
+    using QOAM.Core.Export;
+    using QOAM.Core.Import;
+    using QOAM.Core.Repositories;
+    using QOAM.Core.Services;
+    using QOAM.Website.Helpers;
+    using QOAM.Website.Models;
 
     public static class DependencyInjectionConfig
     {

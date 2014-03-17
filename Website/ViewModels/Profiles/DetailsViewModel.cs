@@ -1,9 +1,9 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Profiles
+﻿namespace QOAM.Website.ViewModels.Profiles
 {
     using PagedList;
 
-    using RU.Uci.OAMarket.Domain;
-    using RU.Uci.OAMarket.Domain.Repositories.Filters;
+    using QOAM.Core;
+    using QOAM.Core.Repositories.Filters;
 
     public class DetailsViewModel : PagedViewModel
     {

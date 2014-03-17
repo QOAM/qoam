@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Home
+﻿namespace QOAM.Website.ViewModels.Home
 {
     public class IndexViewModel
     {

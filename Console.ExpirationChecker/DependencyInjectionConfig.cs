@@ -1,11 +1,11 @@
-﻿namespace RU.Uci.OAMarket.Console.ExpirationChecker
+﻿namespace QOAM.Console.ExpirationChecker
 {
     using System;
 
     using Autofac;
 
-    using RU.Uci.OAMarket.Data;
-    using RU.Uci.OAMarket.Domain.Services;
+    using QOAM.Core.Repositories;
+    using QOAM.Core.Services;
 
     internal static class DependencyInjectionConfig
     {

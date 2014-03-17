@@ -1,8 +1,8 @@
-﻿namespace RU.Uci.OAMarket.Website.Models
+﻿namespace QOAM.Website.Models
 {
     using System.ComponentModel.DataAnnotations;
 
-    using RU.Uci.OAMarket.Website.Resources;
+    using QOAM.Website.Resources;
 
     public enum LoginFailureReason
     {

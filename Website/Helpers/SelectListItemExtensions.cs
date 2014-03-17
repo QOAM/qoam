@@ -1,11 +1,11 @@
-﻿namespace RU.Uci.OAMarket.Website.Helpers
+﻿namespace QOAM.Website.Helpers
 {
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
 
-    using RU.Uci.OAMarket.Domain;
+    using QOAM.Core;
 
     using Validation;
 

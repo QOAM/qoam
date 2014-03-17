@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels
+﻿namespace QOAM.Website.ViewModels
 {
     public abstract class PagedViewModel
     {

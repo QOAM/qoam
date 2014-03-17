@@ -1,12 +1,12 @@
-﻿namespace RU.Uci.OAMarket.Console.DataImporter
+﻿namespace QOAM.Console.DataImporter
 {
     using System;
     using System.Collections.Generic;
 
     using Autofac;
 
-    using RU.Uci.OAMarket.Domain;
-    using RU.Uci.OAMarket.Domain.Import;
+    using QOAM.Core;
+    using QOAM.Core.Import;
 
     internal static class Program
     {

@@ -1,9 +1,9 @@
-﻿namespace RU.Uci.OAMarket.Website.Controllers
+﻿namespace QOAM.Website.Controllers
 {
     using System.Web.Mvc;
 
-    using RU.Uci.OAMarket.Domain.Repositories;
-    using RU.Uci.OAMarket.Website.Helpers;
+    using QOAM.Core.Repositories;
+    using QOAM.Website.Helpers;
 
     using Validation;
 
@@ -29,8 +29,8 @@
         {
             base.OnActionExecuting(filterContext);
 
-            ViewBag.PageId = GetPageId(filterContext); 
-            ViewBag.SelectedMenuItem = GetSelectedMenuItem(filterContext);
+            this.ViewBag.PageId = GetPageId(filterContext); 
+            this.ViewBag.SelectedMenuItem = GetSelectedMenuItem(filterContext);
             
             if (!this.User.Identity.IsAuthenticated)
             {

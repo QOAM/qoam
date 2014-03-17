@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.Models
+﻿namespace QOAM.Website.Models
 {
     internal class SurfConextAccessToken
     {

@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.Tests.Controllers
+﻿namespace QOAM.Website.Tests.Controllers
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -10,12 +10,12 @@
 
     using Moq;
 
-    using RU.Uci.OAMarket.Domain;
-    using RU.Uci.OAMarket.Domain.Repositories;
-    using RU.Uci.OAMarket.Website.Controllers;
-    using RU.Uci.OAMarket.Website.Helpers;
-    using RU.Uci.OAMarket.Website.Models;
-    using RU.Uci.OAMarket.Website.Tests.Controllers.Helpers;
+    using QOAM.Core;
+    using QOAM.Core.Repositories;
+    using QOAM.Website.Controllers;
+    using QOAM.Website.Helpers;
+    using QOAM.Website.Models;
+    using QOAM.Website.Tests.Controllers.Helpers;
 
     using Xunit;
 
@@ -244,7 +244,7 @@
             var userProfileRepositoryMock = new Mock<IUserProfileRepository>();
             userProfileRepositoryMock.Setup(u => u.Find(It.IsAny<string>())).Returns(new UserProfile());
 
-            var accountController = CreateAccountController(userProfileRepositoryMock.Object, authenticationMock.Object);
+            var accountController = this.CreateAccountController(userProfileRepositoryMock.Object, authenticationMock.Object);
 
             // Act
             var redirectToRouteResult = (RedirectToRouteResult)accountController.ExternalLoginCallback(ReturnUrl);

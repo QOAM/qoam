@@ -1,9 +1,7 @@
-﻿namespace RU.Uci.OAMarket.Website
+﻿namespace QOAM.Website
 {
     using System.Web.Mvc;
     using System.Web.Routing;
-
-    using RU.Uci.OAMarket.Website.App_Start;
 
     public class MvcApplication : System.Web.HttpApplication
     {

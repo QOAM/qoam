@@ -1,26 +1,25 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Home
+﻿namespace QOAM.Website.ViewModels.Home
 {
     using System.ComponentModel.DataAnnotations;
     using System.Net.Mail;
 
-    using RU.Uci.OAMarket.Website.Models;
-    using RU.Uci.OAMarket.Website.Resources;
+    using QOAM.Website.Models;
 
     using Validation;
 
     public class ContactViewModel
     {
         [Required]
-        [Display(Name = "Name", ResourceType = typeof(Strings))]
+        [Display(Name = "Name", ResourceType = typeof(Resources.Strings))]
         public string Name { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email", ResourceType = typeof(Strings))]
+        [Display(Name = "Email", ResourceType = typeof(Resources.Strings))]
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Message", ResourceType = typeof(Strings))]
+        [Display(Name = "Message", ResourceType = typeof(Resources.Strings))]
         public string Message { get; set; }
 
         public MailMessage ToMailMessage(ContactSettings contactSettings)

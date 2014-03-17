@@ -1,10 +1,10 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Score
+﻿namespace QOAM.Website.ViewModels.Score
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using RU.Uci.OAMarket.Domain;
+    using QOAM.Core;
 
     public class ScoreViewModel
     {

@@ -1,11 +1,11 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Institutions
+﻿namespace QOAM.Website.ViewModels.Institutions
 {
     using System.Web.Helpers;
 
     using PagedList;
 
-    using RU.Uci.OAMarket.Domain;
-    using RU.Uci.OAMarket.Domain.Repositories.Filters;
+    using QOAM.Core;
+    using QOAM.Core.Repositories.Filters;
 
     public class DetailsViewModel : PagedViewModel
     {

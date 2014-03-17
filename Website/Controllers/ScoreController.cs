@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.Controllers
+﻿namespace QOAM.Website.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -9,16 +9,14 @@
     using AttributeRouting;
     using AttributeRouting.Web.Mvc;
 
-    using RU.Uci.OAMarket.Domain;
-    using RU.Uci.OAMarket.Domain.Helpers;
-    using RU.Uci.OAMarket.Domain.Repositories;
-    using RU.Uci.OAMarket.Website.Helpers;
-    using RU.Uci.OAMarket.Website.Models;
-    using RU.Uci.OAMarket.Website.ViewModels.Score;
+    using QOAM.Core;
+    using QOAM.Core.Helpers;
+    using QOAM.Core.Repositories;
+    using QOAM.Website.Helpers;
+    using QOAM.Website.Models;
+    using QOAM.Website.ViewModels.Score;
 
     using Validation;
-
-    using Strings = RU.Uci.OAMarket.Website.Resources.Strings;
 
     [RoutePrefix("score")]
     public class ScoreController : ApplicationController
@@ -57,8 +55,8 @@
         [GET("")]
         public ActionResult Index(IndexViewModel model)
         {
-            model.Languages = this.languageRepository.All.ToSelectListItems(Strings.AllLanguages);
-            model.Disciplines = this.subjectRepository.All.ToSelectListItems(Strings.AllDisciplines);
+            model.Languages = this.languageRepository.All.ToSelectListItems(Resources.Strings.AllLanguages);
+            model.Disciplines = this.subjectRepository.All.ToSelectListItems(Resources.Strings.AllDisciplines);
             model.Journals = this.journalRepository.Search(model.ToFilter());
 
             return this.View(model);
@@ -88,7 +86,7 @@
 
         [POST("journal/{id:int}")]
         [Authorize]
-        [ValidateJsonAntiForgeryTokenAttribute]
+        [ValidateJsonAntiForgeryToken]
         public ActionResult Journal(int id, ScoreViewModel model)
         {
             var scoreCard = this.scoreCardRepository.Find(id);
@@ -235,7 +233,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
 
-            ViewBag.JournalPrice = this.journalPriceRepository.Find(scoreCard.JournalId, scoreCard.UserProfileId);
+            this.ViewBag.JournalPrice = this.journalPriceRepository.Find(scoreCard.JournalId, scoreCard.UserProfileId);
 
             return this.View(scoreCard);
         }

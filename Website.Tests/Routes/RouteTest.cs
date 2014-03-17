@@ -1,8 +1,6 @@
-﻿namespace RU.Uci.OAMarket.Website.Tests.Routes
+﻿namespace QOAM.Website.Tests.Routes
 {
     using System.Web.Routing;
-
-    using RU.Uci.OAMarket.Website.App_Start;
 
     public abstract class RouteTest
     {

@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.App_Start
+﻿namespace QOAM.Website
 {
     using System.Web.Mvc;
 

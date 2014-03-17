@@ -1,10 +1,10 @@
-﻿namespace RU.Uci.OAMarket.Website.Models
+﻿namespace QOAM.Website.Models
 {
     using System;
     using System.Configuration;
     using System.Web.Configuration;
 
-    using RU.Uci.OAMarket.Domain.Import;
+    using QOAM.Core.Import;
 
     public class OAMarketSettings : ConfigurationSectionGroup
     {

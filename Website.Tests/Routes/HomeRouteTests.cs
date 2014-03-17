@@ -1,11 +1,8 @@
-﻿namespace RU.Uci.OAMarket.Website.Tests.Routes
+﻿namespace QOAM.Website.Tests.Routes
 {
-    using System.Web.Routing;
-
     using MvcRouteTester;
 
-    using RU.Uci.OAMarket.Website.App_Start;
-    using RU.Uci.OAMarket.Website.Controllers;
+    using QOAM.Website.Controllers;
 
     using Xunit;
 

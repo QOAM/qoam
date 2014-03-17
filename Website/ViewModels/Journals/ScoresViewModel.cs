@@ -1,9 +1,9 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Journals
+﻿namespace QOAM.Website.ViewModels.Journals
 {
     using PagedList;
 
-    using RU.Uci.OAMarket.Domain;
-    using RU.Uci.OAMarket.Domain.Repositories.Filters;
+    using QOAM.Core;
+    using QOAM.Core.Repositories.Filters;
 
     public class ScoresViewModel : PagedViewModel
     {

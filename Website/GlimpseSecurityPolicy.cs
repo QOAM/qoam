@@ -1,4 +1,4 @@
-namespace RU.Uci.OAMarket.Website
+namespace QOAM.Website
 {
     using Glimpse.AspNet.Extensions;
     using Glimpse.Core.Extensibility;

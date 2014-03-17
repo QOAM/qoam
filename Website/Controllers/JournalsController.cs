@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.Controllers
+﻿namespace QOAM.Website.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -8,16 +8,14 @@
     using AttributeRouting;
     using AttributeRouting.Web.Mvc;
 
-    using RU.Uci.OAMarket.Domain;
-    using RU.Uci.OAMarket.Domain.Repositories;
-    using RU.Uci.OAMarket.Domain.Repositories.Filters;
-    using RU.Uci.OAMarket.Website.Helpers;
-    using RU.Uci.OAMarket.Website.Models;
-    using RU.Uci.OAMarket.Website.ViewModels.Journals;
+    using QOAM.Core;
+    using QOAM.Core.Repositories;
+    using QOAM.Core.Repositories.Filters;
+    using QOAM.Website.Helpers;
+    using QOAM.Website.Models;
+    using QOAM.Website.ViewModels.Journals;
 
     using Validation;
-
-    using IndexViewModel = RU.Uci.OAMarket.Website.ViewModels.Journals.IndexViewModel;
 
     [RoutePrefix("journals")]
     public class JournalsController : ApplicationController
@@ -81,7 +79,7 @@
         [GET("{id:int}/prices")]
         public PartialViewResult Prices(PricesViewModel model)
         {
-            ViewBag.RefererUrl = model.RefererUrl;
+            this.ViewBag.RefererUrl = model.RefererUrl;
 
             model.InstitutionJournals = this.institutionJournalRepository.Find(model.ToInstitutionJournalPriceFilter());
             model.InstitutionJournal = this.institutionJournalRepository.Find(model.Id, this.Authentication.CurrentUserId);
@@ -94,7 +92,7 @@
         [GET("{id:int}/journalprices")]
         public PartialViewResult JournalPrices(PricesViewModel model)
         {
-            ViewBag.RefererUrl = model.RefererUrl;
+            this.ViewBag.RefererUrl = model.RefererUrl;
 
             var journalPrices = this.journalPriceRepository.Find(model.ToJournalPriceFilter());
 
@@ -104,7 +102,7 @@
         [GET("{id:int}/institutionalprices")]
         public PartialViewResult InstitutionJournalPrices(PricesViewModel model)
         {
-            ViewBag.RefererUrl = model.RefererUrl;
+            this.ViewBag.RefererUrl = model.RefererUrl;
 
             var institutionJournals = this.institutionJournalRepository.Find(model.ToInstitutionJournalPriceFilter());
 
@@ -145,14 +143,14 @@
         public ActionResult InstitutionJournalLicense(int id, InstitutionJournalLicenseViewModel model)
         {
             // Ensure that only admin and institutional admin users can use the update all journals of a publisher
-            if (model.UpdateAllJournalsOfPublisher && (!User.IsInRole(ApplicationRole.Admin) && !User.IsInRole(ApplicationRole.InstitutionAdmin)))
+            if (model.UpdateAllJournalsOfPublisher && (!this.User.IsInRole(ApplicationRole.Admin) && !this.User.IsInRole(ApplicationRole.InstitutionAdmin)))
             {
                 return new HttpUnauthorizedResult();
             }
 
             var journal = this.journalRepository.Find(id);
             
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var institutionJournalsToModify = new List<InstitutionJournal>();
 

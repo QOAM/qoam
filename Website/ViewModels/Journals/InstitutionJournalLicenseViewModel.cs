@@ -1,8 +1,8 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Journals
+﻿namespace QOAM.Website.ViewModels.Journals
 {
     using System.ComponentModel.DataAnnotations;
 
-    using RU.Uci.OAMarket.Domain;
+    using QOAM.Core;
 
     public class InstitutionJournalLicenseViewModel
     {

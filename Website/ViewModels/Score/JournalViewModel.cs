@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Score
+﻿namespace QOAM.Website.ViewModels.Score
 {
     using System.Collections.Generic;
 

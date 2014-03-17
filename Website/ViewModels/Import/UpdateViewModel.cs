@@ -1,8 +1,8 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Import
+﻿namespace QOAM.Website.ViewModels.Import
 {
     using System.ComponentModel.DataAnnotations;
 
-    using RU.Uci.OAMarket.Domain.Import;
+    using QOAM.Core.Import;
 
     public class UpdateViewModel
     {

@@ -1,8 +1,8 @@
-﻿namespace RU.Uci.OAMarket.Website.App_Start
+﻿namespace QOAM.Website
 {
     using System.Web.Mvc;
 
-    using RU.Uci.OAMarket.Website.Helpers;
+    using QOAM.Website.Helpers;
 
     public static class ModelBinderConfig
     {

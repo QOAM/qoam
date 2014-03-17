@@ -1,9 +1,9 @@
-﻿namespace RU.Uci.OAMarket.Website.Tests.Models
+﻿namespace QOAM.Website.Tests.Models
 {
     using System;
 
-    using RU.Uci.OAMarket.Domain;
-    using RU.Uci.OAMarket.Website.Models;
+    using QOAM.Core;
+    using QOAM.Website.Models;
 
     using Xunit;
 

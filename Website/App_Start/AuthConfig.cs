@@ -1,8 +1,8 @@
-﻿namespace RU.Uci.OAMarket.Website.App_Start
+﻿namespace QOAM.Website
 {
     using Microsoft.Web.WebPages.OAuth;
 
-    using RU.Uci.OAMarket.Website.Models;
+    using QOAM.Website.Models;
 
     public static class AuthConfig
     {

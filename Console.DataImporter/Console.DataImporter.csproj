@@ -7,8 +7,8 @@
     <ProjectGuid>{0E2EE273-E64D-4E7B-A514-1A7E0E3F2458}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RU.Uci.OAMarket.Console.DataImporter</RootNamespace>
-    <AssemblyName>Console.DataImporter</AssemblyName>
+    <RootNamespace>QOAM.Console.DataImporter</RootNamespace>
+    <AssemblyName>DataImporter</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -96,13 +96,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
-      <Project>{85515DD0-9E50-4A21-B9BE-ADDC36892C8A}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain\Domain.csproj">
+    <ProjectReference Include="..\Core\Core.csproj">
       <Project>{48695F3E-A754-4A33-B22B-86CD55939CC6}</Project>
-      <Name>Domain</Name>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

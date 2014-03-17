@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Import
+﻿namespace QOAM.Website.ViewModels.Import
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

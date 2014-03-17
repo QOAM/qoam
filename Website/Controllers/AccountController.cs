@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.Controllers
+﻿namespace QOAM.Website.Controllers
 {
     using System;
     using System.Linq;
@@ -9,13 +9,13 @@
 
     using DotNetOpenAuth.AspNet;
 
-    using RU.Uci.OAMarket.Domain;
-    using RU.Uci.OAMarket.Domain.Repositories;
-    using RU.Uci.OAMarket.Website.Helpers;
-    using RU.Uci.OAMarket.Website.Models;
+    using QOAM.Core;
+    using QOAM.Core.Repositories;
+    using QOAM.Website.Helpers;
+    using QOAM.Website.Models;
 
     using Validation;
-    
+
     [Authorize]
     [RequireHttps]
     [RoutePrefix("account")]

@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.Controllers
+﻿namespace QOAM.Website.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -9,14 +9,14 @@
     using AttributeRouting;
     using AttributeRouting.Web.Mvc;
 
-    using RU.Uci.OAMarket.Domain;
-    using RU.Uci.OAMarket.Domain.Export;
-    using RU.Uci.OAMarket.Domain.Helpers;
-    using RU.Uci.OAMarket.Domain.Import;
-    using RU.Uci.OAMarket.Domain.Repositories;
-    using RU.Uci.OAMarket.Website.Helpers;
-    using RU.Uci.OAMarket.Website.Models;
-    using RU.Uci.OAMarket.Website.ViewModels.Import;
+    using QOAM.Core;
+    using QOAM.Core.Export;
+    using QOAM.Core.Helpers;
+    using QOAM.Core.Import;
+    using QOAM.Core.Repositories;
+    using QOAM.Website.Helpers;
+    using QOAM.Website.Models;
+    using QOAM.Website.ViewModels.Import;
 
     using Validation;
 

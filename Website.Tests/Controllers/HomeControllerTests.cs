@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.Tests.Controllers
+﻿namespace QOAM.Website.Tests.Controllers
 {
     using System;
     using System.Net.Mail;
@@ -6,12 +6,12 @@
 
     using Moq;
 
-    using RU.Uci.OAMarket.Domain.Repositories;
-    using RU.Uci.OAMarket.Domain.Services;
-    using RU.Uci.OAMarket.Website.Controllers;
-    using RU.Uci.OAMarket.Website.Helpers;
-    using RU.Uci.OAMarket.Website.Models;
-    using RU.Uci.OAMarket.Website.ViewModels.Home;
+    using QOAM.Core.Repositories;
+    using QOAM.Core.Services;
+    using QOAM.Website.Controllers;
+    using QOAM.Website.Helpers;
+    using QOAM.Website.Models;
+    using QOAM.Website.ViewModels.Home;
 
     using Xunit;
 

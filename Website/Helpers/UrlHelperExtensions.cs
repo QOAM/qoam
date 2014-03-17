@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.Helpers
+﻿namespace QOAM.Website.Helpers
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -6,7 +6,7 @@
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    using RU.Uci.OAMarket.Domain.Repositories.Filters;
+    using QOAM.Core.Repositories.Filters;
 
     public static class UrlHelperExtensions
     {

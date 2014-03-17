@@ -1,5 +1,5 @@
-﻿@using RU.Uci.OAMarket.Domain
-@model Price
+﻿@using QOAM.Core
+@model QOAM.Core.Price
 
 @if (Model == null)
 {
@@ -7,25 +7,25 @@
 }
 else if (Model.FeeType == FeeType.NoFee)
 {
-    @RU.Uci.OAMarket.Website.Resources.Strings.NoFee
+    @QOAM.Website.Resources.Strings.NoFee
 }
 else if (Model.FeeType == FeeType.Absent)
 {
-    @RU.Uci.OAMarket.Website.Resources.Strings.Absent
+    @QOAM.Website.Resources.Strings.Absent
 }
 else if (Model.Amount.HasValue && Model.Amount.Value == 0)
 {
-    @RU.Uci.OAMarket.Website.Resources.Strings.Free
+    @QOAM.Website.Resources.Strings.Free
 }
 else if (Model.FeeType == FeeType.Page)
 {
     @Html.DisplayFor(m => m.Currency)
     @Model.Amount.ToString()
-    @RU.Uci.OAMarket.Website.Resources.Strings.PricePerPage
+    @QOAM.Website.Resources.Strings.PricePerPage
 }
 else
 {
     @Html.DisplayFor(m => m.Currency)
     @Model.Amount.ToString()
-    @RU.Uci.OAMarket.Website.Resources.Strings.PricePerArticle
+    @QOAM.Website.Resources.Strings.PricePerArticle
 }

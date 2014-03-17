@@ -7,8 +7,8 @@
     <ProjectGuid>{6F4C1001-0A68-4A76-AEB5-85F44AB890FE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RU.Uci.OAMarket.Website.Tests</RootNamespace>
-    <AssemblyName>Website.Tests</AssemblyName>
+    <RootNamespace>QOAM.Website.Tests</RootNamespace>
+    <AssemblyName>QOAM.Website.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -170,9 +170,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj">
+    <ProjectReference Include="..\Core\Core.csproj">
       <Project>{48695F3E-A754-4A33-B22B-86CD55939CC6}</Project>
-      <Name>Domain</Name>
+      <Name>Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Website\Website.csproj">
       <Project>{55ffb776-3638-4d3f-8d07-e9fab6415bca}</Project>

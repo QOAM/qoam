@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.Helpers
+﻿namespace QOAM.Website.Helpers
 {
     using System.Collections.Generic;
 

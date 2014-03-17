@@ -1,8 +1,8 @@
-﻿namespace RU.Uci.OAMarket.Website.App_Start
+﻿namespace QOAM.Website
 {
     using System.Data.Entity;
 
-    using RU.Uci.OAMarket.Data;
+    using QOAM.Core.Repositories;
 
     public static class DatabaseConfig
     {

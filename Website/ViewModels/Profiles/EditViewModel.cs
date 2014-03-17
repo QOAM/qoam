@@ -1,9 +1,9 @@
-﻿namespace RU.Uci.OAMarket.Website.ViewModels.Profiles
+﻿namespace QOAM.Website.ViewModels.Profiles
 {
     using System.Collections.Generic;
 
-    using RU.Uci.OAMarket.Domain;
-    using RU.Uci.OAMarket.Website.Models;
+    using QOAM.Core;
+    using QOAM.Website.Models;
 
     public class EditViewModel
     {

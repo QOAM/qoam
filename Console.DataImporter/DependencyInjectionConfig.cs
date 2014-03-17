@@ -1,11 +1,11 @@
-﻿namespace RU.Uci.OAMarket.Console.DataImporter
+﻿namespace QOAM.Console.DataImporter
 {
     using System;
 
     using Autofac;
 
-    using RU.Uci.OAMarket.Data;
-    using RU.Uci.OAMarket.Domain.Import;
+    using QOAM.Core.Import;
+    using QOAM.Core.Repositories;
 
     internal static class DependencyInjectionConfig
     {

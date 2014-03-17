@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.Tests.Controllers
+﻿namespace QOAM.Website.Tests.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -8,13 +8,13 @@
 
     using Moq;
 
-    using RU.Uci.OAMarket.Domain;
-    using RU.Uci.OAMarket.Domain.Export;
-    using RU.Uci.OAMarket.Domain.Import;
-    using RU.Uci.OAMarket.Domain.Repositories;
-    using RU.Uci.OAMarket.Website.Controllers;
-    using RU.Uci.OAMarket.Website.Helpers;
-    using RU.Uci.OAMarket.Website.ViewModels.Import;
+    using QOAM.Core;
+    using QOAM.Core.Export;
+    using QOAM.Core.Import;
+    using QOAM.Core.Repositories;
+    using QOAM.Website.Controllers;
+    using QOAM.Website.Helpers;
+    using QOAM.Website.ViewModels.Import;
 
     using Xunit;
 

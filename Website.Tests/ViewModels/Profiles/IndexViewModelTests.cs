@@ -1,9 +1,9 @@
-﻿namespace RU.Uci.OAMarket.Website.Tests.ViewModels.Profiles
+﻿namespace QOAM.Website.Tests.ViewModels.Profiles
 {
     using System.Web.Helpers;
 
-    using RU.Uci.OAMarket.Domain.Repositories.Filters;
-    using RU.Uci.OAMarket.Website.ViewModels.Profiles;
+    using QOAM.Core.Repositories.Filters;
+    using QOAM.Website.ViewModels.Profiles;
 
     using Xunit;
 

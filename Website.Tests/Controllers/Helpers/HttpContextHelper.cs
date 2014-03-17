@@ -1,4 +1,4 @@
-﻿namespace RU.Uci.OAMarket.Website.Tests.Controllers.Helpers
+﻿namespace QOAM.Website.Tests.Controllers.Helpers
 {
     using System;
     using System.Collections.Specialized;
@@ -7,8 +7,6 @@
     using System.Web.Routing;
 
     using Moq;
-
-    using RU.Uci.OAMarket.Website.App_Start;
 
     public static class HttpContextHelper
     {

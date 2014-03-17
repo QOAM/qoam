@@ -1,10 +1,9 @@
-﻿namespace RU.Uci.OAMarket.Website.Models
+﻿namespace QOAM.Website.Models
 {
     using System.Resources;
 
-    using RU.Uci.OAMarket.Domain;
-
-    using Resources;
+    using QOAM.Core;
+    using QOAM.Website.Resources;
 
     using Validation;
 

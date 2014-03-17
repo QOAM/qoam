@@ -1,9 +1,9 @@
-﻿namespace RU.Uci.OAMarket.Website.Tests.ViewModels.Institutions
+﻿namespace QOAM.Website.Tests.ViewModels.Institutions
 {
     using System.Web.Helpers;
 
-    using RU.Uci.OAMarket.Domain.Repositories.Filters;
-    using RU.Uci.OAMarket.Website.ViewModels.Institutions;
+    using QOAM.Core.Repositories.Filters;
+    using QOAM.Website.ViewModels.Institutions;
 
     using Xunit;
 
