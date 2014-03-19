@@ -126,3 +126,9 @@ Contact.*.config
 Ulrichs.*.config
 ExpirationChecker.*.config
 MachineKey.*.config
+
+# Markdown HTML files
+LICENSE.html
+LICENSE.min.html
+README.html
+README.min.html
