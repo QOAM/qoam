@@ -2,9 +2,22 @@
     function ScoreController() {
     }
     ScoreController.prototype.index = function (journalTitlesUrl, journalIssnsUrl, journalPublishersUrl) {
-        $('#Title').typeahead({ remote: journalTitlesUrl + '?query=%QUERY' });
-        $('#Issn').typeahead({ remote: journalIssnsUrl + '?query=%QUERY' });
-        $('#Publisher').typeahead({ remote: journalPublishersUrl + '?query=%QUERY' });
+
+        var bestPictures = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: journalTitlesUrl + '?query=%QUERY'
+        });
+
+        bestPictures.initialize();
+
+
+        $('#Title').typeahead(null, {
+
+            source: bestPictures.ttAdapter()
+        });
+        //$('#Issn').typeahead({ remote: journalIssnsUrl + '?query=%QUERY' });
+        //$('#Publisher').typeahead({ remote: journalPublishersUrl + '?query=%QUERY' });
     };
 
     ScoreController.prototype.details = function () {

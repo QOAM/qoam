@@ -1,8 +1,6 @@
 ﻿namespace QOAM.Core.Repositories
 {
     using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    using System.Data.Objects;
 
     using QOAM.Core.Migrations;
 
@@ -30,14 +28,6 @@
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
-
-        public ObjectContext ObjectContext
-        {
-            get
-            {
-                return ((IObjectContextAdapter)this).ObjectContext;
-            }
-        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

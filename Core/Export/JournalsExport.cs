@@ -1,5 +1,6 @@
 ﻿namespace QOAM.Core.Export
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -36,7 +37,7 @@
             using (var streamWriter = new StreamWriter(stream))
             using (var csvWriter = new CsvWriter(streamWriter, CsvConfiguration))
             {
-                csvWriter.WriteRecords(this.GetExportJournals());
+                csvWriter.WriteRecords((IEnumerable)this.GetExportJournals());
             }
         }
 
