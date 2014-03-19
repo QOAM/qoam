@@ -83,7 +83,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("Criteria used by reviewers to rate submissions and types of submissions that are deemed appropriate for the journal are specified on the website", localizedQuestion);
+            Assert.Equal("Criteria used by reviewers to rate submissions are specified on the website", localizedQuestion);
         }
 
         [Fact]
@@ -96,7 +96,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("Reviewer’s comments and editorial correspondence are published alongside papers", localizedQuestion);
+            Assert.Equal("Editorial correspondence and reviewer's comments are published alongside papers", localizedQuestion);
         }
 
         [Fact]
@@ -109,7 +109,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("Authors are allowed to indicate names of (non-)desired reviewers", localizedQuestion);
+            Assert.Equal("The website indicates if authors have a say in suggesting names of (non-)desired reviewers", localizedQuestion);
         }
 
         [Fact]
@@ -135,7 +135,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The journal (publisher) has clear guidelines concerning sharing and availability of research data", localizedQuestion);
+            Assert.Equal("The journal (publisher) has clear guidelines concerning sharing and availability of data for verification purposes", localizedQuestion);
         }
 
         [Fact]
@@ -148,7 +148,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The journal (publisher) makes copies of published articles automatically available in trusted third-party repositories (e.g. PubMed Central) immediately upon publication", localizedQuestion);
+            Assert.Equal("The journal (publisher) makes copies of published articles available in trusted third-party repositories (e.g. PubMed Central) immediately upon publication", localizedQuestion);
         }
 
         [Fact]

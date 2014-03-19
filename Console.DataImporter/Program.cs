@@ -8,18 +8,12 @@
     using QOAM.Core;
     using QOAM.Core.Import;
 
-    internal static class Program
+    public static class Program
     {
         private static IContainer container;
 
         private static void Main(string[] args)
         {
-            if (args.Length < 1)
-            {
-                Console.WriteLine(Strings.InvalidArguments);
-                return;
-            }
-
             try
             {
                 container = DependencyInjectionConfig.RegisterComponents();
@@ -56,12 +50,17 @@
             }
         }
 
-        private static JournalsImportSource GetImportType(IList<string> args)
+        public static JournalsImportSource GetImportType(IList<string> args)
         {
+            if (args.Count < 1)
+            {
+                return JournalsImportSource.Ulrichs;
+            }
+
             return (JournalsImportSource)Enum.Parse(typeof(JournalsImportSource), args[0], true);
         }
 
-        private static JournalsImportMode GetImportMode(IList<string> args)
+        public static JournalsImportMode GetImportMode(IList<string> args)
         {
             if (args.Count < 2)
             {

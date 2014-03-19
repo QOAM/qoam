@@ -55,27 +55,6 @@
             return this.View(model);
         }
 
-        [GET("titles")]
-        [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
-        public JsonResult Titles(string query)
-        {
-            return this.Json(this.journalRepository.Titles(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
-        }
-
-        [GET("issns")]
-        [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
-        public JsonResult Issns(string query)
-        {
-            return this.Json(this.journalRepository.Issns(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
-        }
-
-        [GET("publishers")]
-        [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
-        public JsonResult Publishers(string query)
-        {
-            return this.Json(this.journalRepository.Publishers(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
-        }
-
         [GET("{id:int}/prices")]
         public PartialViewResult Prices(PricesViewModel model)
         {
@@ -126,7 +105,7 @@
         }
 
         [GET("{id:int}/institutionjournallicense")]
-        [Authorize(Roles = ApplicationRole.InstitutionAdmin)]
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
         public ViewResult InstitutionJournalLicense(int id, string refererUrl)
         {
             var model = new InstitutionJournalLicenseViewModel(
@@ -138,7 +117,7 @@
         }
 
         [POST("{id:int}/institutionjournallicense")]
-        [Authorize(Roles = ApplicationRole.InstitutionAdmin)]
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult InstitutionJournalLicense(int id, InstitutionJournalLicenseViewModel model)
         {
@@ -210,6 +189,27 @@
             model.JournalPublisher = journal.Publisher.Name;
 
             return this.View(model);
+        }
+
+        [GET("titles")]
+        [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
+        public JsonResult Titles(string query)
+        {
+            return this.Json(this.journalRepository.Titles(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [GET("issns")]
+        [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
+        public JsonResult Issns(string query)
+        {
+            return this.Json(this.journalRepository.Issns(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [GET("publishers")]
+        [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
+        public JsonResult Publishers(string query)
+        {
+            return this.Json(this.journalRepository.Publishers(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         private static string GetScoresViewName(ScoresViewModel model)

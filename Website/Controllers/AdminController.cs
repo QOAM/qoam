@@ -21,7 +21,7 @@
     using Validation;
 
     [RoutePrefix("admin")]
-    [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.InstitutionAdmin)]
+    [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.DataAdmin + "," + ApplicationRole.InstitutionAdmin)]
     public class AdminController : ApplicationController
     {
         private const string FoundISSNsSessionKey = "FoundISSNs";
@@ -56,7 +56,7 @@
         }
 
         [GET("import")]
-        [Authorize(Roles = ApplicationRole.DataAdmin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Import()
         {
             return this.View(new ImportViewModel());
@@ -64,7 +64,7 @@
 
         [POST("import")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = ApplicationRole.DataAdmin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult Import(ImportViewModel model)
         {
             if (this.ModelState.IsValid)
@@ -89,7 +89,7 @@
         }
 
         [GET("imported")]
-        [Authorize(Roles = ApplicationRole.DataAdmin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Imported()
         {
             var model = new ImportedViewModel
@@ -102,7 +102,7 @@
         }
 
         [GET("update")]
-        [Authorize(Roles = ApplicationRole.DataAdmin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Update()
         {
             return this.View(new UpdateViewModel());
@@ -110,7 +110,7 @@
 
         [POST("update")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = ApplicationRole.DataAdmin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult Update(UpdateViewModel model)
         {
             if (this.ModelState.IsValid)
@@ -135,7 +135,7 @@
         }
 
         [GET("updated")]
-        [Authorize(Roles = ApplicationRole.DataAdmin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Updated()
         {
             var model = new UpdatedViewModel
@@ -148,7 +148,7 @@
         }
 
         [GET("download")]
-        [Authorize(Roles = ApplicationRole.DataAdmin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public FileContentResult Download()
         {
             using (var memoryStream = new MemoryStream())
@@ -160,14 +160,14 @@
         }
 
         [GET("check")]
-        [Authorize(Roles = ApplicationRole.InstitutionAdmin)]
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Check()
         {
             return this.View();
         }
 
         [POST("check")]
-        [Authorize(Roles = ApplicationRole.InstitutionAdmin)]
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Check(CheckViewModel model)
         {
             if (this.ModelState.IsValid)

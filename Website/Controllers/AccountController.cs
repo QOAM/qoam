@@ -15,8 +15,7 @@
     using QOAM.Website.Models;
 
     using Validation;
-
-    [Authorize]
+    
     [RequireHttps]
     [RoutePrefix("account")]
     public class AccountController : ApplicationController
@@ -32,7 +31,6 @@
         }
 
         [GET("login")]
-        [AllowAnonymous]
         public ViewResult Login(string returnUrl)
         {
             this.ViewBag.ReturnUrl = returnUrl;
@@ -42,6 +40,7 @@
         }
 
         [POST("logoff")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public RedirectToRouteResult LogOff()
         {
@@ -51,7 +50,6 @@
         }
 
         [POST("externallogin")]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ExternalLoginResult ExternalLogin(string provider, string returnUrl)
         {
@@ -59,7 +57,6 @@
         }
 
         [GET("externallogincallback")]
-        [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
             AuthenticationResult result;
@@ -123,7 +120,6 @@
         }
 
         [GET("externalloginfailure")]
-        [AllowAnonymous]
         public ViewResult ExternalLoginFailure(LoginFailureReason reason)
         {
             return this.View(reason);

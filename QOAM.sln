@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.IntegrationTests", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "Core.Tests\Core.Tests.csproj", "{2360E298-C958-47FF-A7A0-97939EFE0D7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.DataImporter.Tests", "Console.DataImporter.Tests\Console.DataImporter.Tests.csproj", "{8D4F553B-E05F-4FF9-B156-136ED315A2DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,12 @@ Global
 		{2360E298-C958-47FF-A7A0-97939EFE0D7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2360E298-C958-47FF-A7A0-97939EFE0D7E}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
 		{2360E298-C958-47FF-A7A0-97939EFE0D7E}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Staging|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
