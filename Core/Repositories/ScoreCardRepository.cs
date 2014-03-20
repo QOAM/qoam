@@ -2,8 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.Entity;
-    using System.Data.Entity.Core.Objects;
+    using System.Data.Objects;
     using System.Linq;
 
     using PagedList;
@@ -113,7 +114,7 @@
             return this.DbContext.ScoreCards
                 .Include(s => s.Journal)
                 .Include(s => s.UserProfile)
-                .Where(s => s.State == ScoreCardState.Published && DbFunctions.TruncateTime(s.DateExpiration) == DbFunctions.TruncateTime(soonToBeArchivedDate)).ToList();
+                .Where(s => s.State == ScoreCardState.Published && EntityFunctions.TruncateTime(s.DateExpiration) == EntityFunctions.TruncateTime(soonToBeArchivedDate)).ToList();
         }
 
         public void Insert(ScoreCard scoreCard)

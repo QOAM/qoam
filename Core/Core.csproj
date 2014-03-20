@@ -46,23 +46,19 @@
   <ItemGroup>
     <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CsvHelper.2.5.0\lib\net40-client\CsvHelper.dll</HintPath>
+      <HintPath>..\packages\CsvHelper.2.2.2\lib\net40-client\CsvHelper.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.16.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
@@ -73,9 +69,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Validation.2.0.3.13323\lib\portable-windows8+net40+sl5+windowsphone8+MonoAndroid+MonoTouch\Validation.dll</HintPath>
+    <Reference Include="Validation">
+      <HintPath>..\packages\Validation.2.0.2.13022\lib\portable-windows8+net40+sl5+windowsphone8\Validation.dll</HintPath>
     </Reference>
     <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -109,10 +104,6 @@
     <Compile Include="Migrations\201403171503325_InitialCreate.cs" />
     <Compile Include="Migrations\201403171503325_InitialCreate.Designer.cs">
       <DependentUpon>201403171503325_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201403191324253_EntityFramework6.cs" />
-    <Compile Include="Migrations\201403191324253_EntityFramework6.Designer.cs">
-      <DependentUpon>201403191324253_EntityFramework6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationDbContextMigrationsConfiguration.cs" />
     <Compile Include="Price.cs" />
@@ -222,9 +213,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201403171503325_InitialCreate.resx">
       <DependentUpon>201403171503325_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201403191324253_EntityFramework6.resx">
-      <DependentUpon>201403191324253_EntityFramework6.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

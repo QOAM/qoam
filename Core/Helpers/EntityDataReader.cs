@@ -5,10 +5,9 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Common;
-    using System.Data.Entity.Core;
-    using System.Data.Entity.Core.Metadata.Edm;
-    using System.Data.Entity.Core.Objects;
-    using System.Data.Entity.Core.Objects.DataClasses;
+    using System.Data.Metadata.Edm;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Globalization;
     using System.IO;
     using System.Linq;

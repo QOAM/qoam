@@ -195,21 +195,21 @@
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
         public JsonResult Titles(string query)
         {
-            return this.Json(this.journalRepository.Titles(query).Take(AutoCompleteItemsCount).Select(s => new { value = s }).ToList(), JsonRequestBehavior.AllowGet);
+            return this.Json(this.journalRepository.Titles(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         [GET("issns")]
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
         public JsonResult Issns(string query)
         {
-            return this.Json(this.journalRepository.Issns(query).Take(AutoCompleteItemsCount).Select(s => new { value = s }).ToList(), JsonRequestBehavior.AllowGet);
+            return this.Json(this.journalRepository.Issns(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         [GET("publishers")]
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
         public JsonResult Publishers(string query)
         {
-            return this.Json(this.journalRepository.Publishers(query).Take(AutoCompleteItemsCount).Select(s => new { value = s }).ToList(), JsonRequestBehavior.AllowGet);
+            return this.Json(this.journalRepository.Publishers(query).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         private static string GetScoresViewName(ScoresViewModel model)

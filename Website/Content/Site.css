@@ -85,16 +85,14 @@ img.pull-right {
 	width:auto;
 }
 #header .brand {
-    color: #333;
+	color: #333;
 	display: block;
 	float: left;
 	font-size: 20px;
 	font-weight: 200;
 	padding: 0px 0px 0px 20px;
-    -ms-text-shadow:0;
-    text-shadow:0;
+	text-shadow:0;
 }
-
 .brand:hover {
 	text-decoration:none;
 }
@@ -227,20 +225,16 @@ fieldset legend {
 .nav-list > .active > a, .nav-list > .active > a:hover, .nav-list > .active > a:focus {
     background-color: #0088CC;
     color: #FFFFFF;
-    -ms-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
-
 .bs-docs-sidenav > .active > a {
-    border: 0 none;
+	border: 0 none;
 	box-shadow: 1px 0 0 rgba(0, 0, 0, 0.1) inset, -1px 0 0 rgba(0, 0, 0, 0.1) inset;
 	padding: 9px 15px;
 	position: relative;
-    -ms-text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
 	z-index: 2;
 }
-
 .bs-docs-sidenav .glyphicon-chevron-right  {
 	float: right;
 	margin-right: -6px;
@@ -486,14 +480,12 @@ ul.nav li.active span.icon-group{
 /*   mobile     */
 @media (max-width: 480px) {
 	#header .brand {
-	    font-size: 18px;
+		font-size: 18px;
 		font-weight: 200;
 		padding: 20px 0px 0px 10px;
-	    -ms-text-shadow:0;
-	    text-shadow:0;
+		text-shadow:0;
 	}
-
-    .navbar-inner {
+	.navbar-inner {
 		min-height: auto;
 		padding-left: 5px;
 		padding-right: 5px;
