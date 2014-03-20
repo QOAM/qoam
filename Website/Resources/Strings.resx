@@ -142,7 +142,7 @@
     <value>Journal</value>
   </data>
   <data name="Journals" xml:space="preserve">
-    <value>Journals</value>
+    <value>Journals to score</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -238,7 +238,7 @@
     <value>Journal Score Cards</value>
   </data>
   <data name="OAJournals" xml:space="preserve">
-    <value>OA Journals</value>
+    <value>Scored journals</value>
   </data>
   <data name="Prices" xml:space="preserve">
     <value>Prices</value>
