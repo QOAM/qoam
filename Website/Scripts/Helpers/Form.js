@@ -34,5 +34,19 @@
             }
         });
     });
+}
 
+function createTypeahead(selector, remoteUrl) {
+    var bloodhoundInstance = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: remoteUrl + '?query=%QUERY'
+    });
+
+    bloodhoundInstance.initialize();
+
+    $(selector).typeahead(null, {
+        displayKey: 'value',
+        source: bloodhoundInstance.ttAdapter()
+    });
 }

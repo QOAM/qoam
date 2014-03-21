@@ -2,9 +2,9 @@
     function ScoreController() {
     }
     ScoreController.prototype.index = function (journalTitlesUrl, journalIssnsUrl, journalPublishersUrl) {
-        $('#Title').typeahead({ remote: journalTitlesUrl + '?query=%QUERY' });
-        $('#Issn').typeahead({ remote: journalIssnsUrl + '?query=%QUERY' });
-        $('#Publisher').typeahead({ remote: journalPublishersUrl + '?query=%QUERY' });
+        createTypeahead('#Title', journalTitlesUrl);
+        createTypeahead('#Issn', journalIssnsUrl);
+        createTypeahead('#Publisher', journalPublishersUrl);
     };
 
     ScoreController.prototype.details = function () {

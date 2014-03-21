@@ -5,7 +5,7 @@
 @using QOAM.Website.ViewModels.Journals
 @using QOAM.Website.Resources
 @using Strings = QOAM.Website.Resources.Strings
-@model QOAM.Website.ViewModels.Journals.IndexViewModel
+@model IndexViewModel
 
 @{
     ViewBag.Title = ViewStrings.Journals_Index_Title;
@@ -269,7 +269,7 @@
     @{ this.Html.RenderPartial("_FormScripts"); }
     <script type="text/javascript" src="~/Scripts/Helpers/Ajax.min.js"></script>
     <script type="text/javascript" src="~/Scripts/Controllers/JournalsController.js"></script>
-    <script type="text/javascript" src="~/Scripts/typeahead.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/typeahead.bundle.min.js"></script>
     <script type="text/javascript" src="~/Scripts/bootstrap-slider.js"></script>
     <script type="text/javascript">
         $(function () {

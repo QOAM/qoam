@@ -2,7 +2,7 @@
     function ProfilesController() {
     }
     ProfilesController.prototype.index = function (userProfileNamesUrl) {
-        $('#Name').typeahead({ remote: userProfileNamesUrl + '?query=%QUERY' });
+        createTypeahead('#Name', userProfileNamesUrl);
     };
     return ProfilesController;
 })();

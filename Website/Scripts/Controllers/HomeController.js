@@ -3,7 +3,6 @@
     }
     HomeController.prototype.journalScoreCard = function () {
         $('a.jscimage').fancybox();
-        //$("#iPicture").iPicture(); 
     };
     return HomeController;
 })();
