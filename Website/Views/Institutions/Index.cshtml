@@ -1,4 +1,5 @@
 ﻿@using System.Web.Mvc.Html5
+@using System.Web.Optimization
 @using PagedList.Mvc
 @using QOAM.Website.Helpers
 @using QOAM.Website.Resources
@@ -80,15 +81,15 @@
 
 @section stylesheets
 {
-    <link href="~/Content/typeahead.js-bootstrap.min.css" rel="stylesheet" />
+    @Styles.Render("~/styles/typeahead")
 }
 
 @section scripts
 {
-    @{ this.Html.RenderPartial("_FormScripts"); }
+    @Scripts.Render("~/scripts/typeahead")
 
-    <script type="text/javascript" src="~/Scripts/Controllers/InstitutionsController.js"></script>
-    <script type="text/javascript" src="~/Scripts/typeahead.bundle.min.js"></script>
+    @Html.Partial("_FormScripts")
+
     <script type="text/javascript">
         $(function () {
             var institutionsController = new InstitutionsController();

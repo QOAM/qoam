@@ -1,4 +1,5 @@
-﻿@using QOAM.Core
+﻿@using System.Web.Optimization
+@using QOAM.Core
 @using QOAM.Website.Helpers
 @using QOAM.Website.Models
 @using QOAM.Website.Resources
@@ -93,15 +94,14 @@
 
 @section stylesheets
 {
-    <link href="~/Content/iPicture.css" rel="stylesheet" />
-    <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+    @Styles.Render("~/styles/fancybox")
 }
 
 @section scripts
 {
-    <script src="~/Scripts/jquery.ipicture.min.js" type="text/javascript"></script>
-    <script src="~/Scripts/jquery.fancybox.pack.js" type="text/javascript"></script>
-    <script type="text/javascript" src="~/Scripts/Controllers/HomeController.min.js"></script>
+    @Scripts.Render("~/scripts/fancybox")
+    @Scripts.Render("~/scripts/application")
+
     <script type="text/javascript">
         $(function () {
             var homeController = new HomeController();

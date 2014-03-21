@@ -1,4 +1,5 @@
-﻿@using QOAM.Website.Resources
+﻿@using System.Web.Optimization
+@using QOAM.Website.Resources
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +9,8 @@
     <title>@ViewBag.Title - @ViewStrings.Layout_Title_Postfix</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="@Request.Url.Scheme://fonts.googleapis.com/css?family=Mate+SC" rel="stylesheet" type="text/css">
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/Site.css" rel="stylesheet" />
-    <link href="~/Content/slider.css" rel="stylesheet" />
+
+    @Styles.Render("~/styles/application")
 
     @RenderSection("stylesheets", required: false)
 </head>
@@ -21,11 +21,9 @@
         </div>
     
         @Html.Partial("_Footer")
-
-        <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
-        <script type="text/javascript" src="~/Scripts/modernizr-2.7.2.js"></script>
-        <script type="text/javascript" src="~/Scripts/Helpers/Compatibility.js"></script>
+        
+        @Scripts.Render("~/scripts/libraries")
+        @Scripts.Render("~/scripts/application")
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -37,6 +35,5 @@
         
         @Html.Partial("_GoogleAnalytics")
         @Html.Partial("_Usersnap")
-        
     </body>
 </html>
