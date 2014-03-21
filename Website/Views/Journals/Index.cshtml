@@ -1,11 +1,12 @@
 ﻿@using System.Web.Mvc.Html5
+@using System.Web.Optimization
 @using PagedList.Mvc
 @using QOAM.Core
 @using QOAM.Website.Helpers
 @using QOAM.Website.ViewModels.Journals
 @using QOAM.Website.Resources
 @using Strings = QOAM.Website.Resources.Strings
-@model QOAM.Website.ViewModels.Journals.IndexViewModel
+@model IndexViewModel
 
 @{
     ViewBag.Title = ViewStrings.Journals_Index_Title;
@@ -261,16 +262,16 @@
 
 @section stylesheets
 {
-    <link href="~/Content/typeahead.js-bootstrap.min.css" rel="stylesheet" />
+    @Styles.Render("~/styles/typeahead")
 }
 
 @section scripts
 {
-    @{ this.Html.RenderPartial("_FormScripts"); }
-    <script type="text/javascript" src="~/Scripts/Helpers/Ajax.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/Controllers/JournalsController.js"></script>
-    <script type="text/javascript" src="~/Scripts/typeahead.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/bootstrap-slider.js"></script>
+    @Scripts.Render("~/scripts/typeahead")
+    @Scripts.Render("~/scripts/slider")
+
+    @Html.Partial("_FormScripts")
+
     <script type="text/javascript">
         $(function () {
             var journalsController = new JournalsController();

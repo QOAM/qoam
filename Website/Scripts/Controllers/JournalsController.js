@@ -2,9 +2,9 @@
     function JournalsController() {
     }
     JournalsController.prototype.index = function (journalTitlesUrl, journalIssnsUrl, journalPublishersUrl) {
-        $('#Title').typeahead({ remote: journalTitlesUrl + '?query=%QUERY' });
-        $('#Issn').typeahead({ remote: journalIssnsUrl + '?query=%QUERY' });
-        $('#Publisher').typeahead({ remote: journalPublishersUrl + '?query=%QUERY' });
+        createTypeahead('#Title', journalTitlesUrl);
+        createTypeahead('#Issn', journalIssnsUrl);
+        createTypeahead('#Publisher', journalPublishersUrl);
 
         $('#MinimumBaseScore, #MinimumValuationScore').each(function () {
             var sliderElement = $(this);
