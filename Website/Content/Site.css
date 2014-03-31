@@ -461,7 +461,7 @@ a.home:hover, a.home, a.home:focus {
 /******************** icons ************************************/
 
 ul.nav span.icon-group {
-    background-image: url(images/icon_group.png);
+    background-image: url(/content/images/icon_group.png);
     width: 25px;
     height: 16px;
     display: block;
@@ -470,11 +470,11 @@ ul.nav span.icon-group {
 }
 
 ul.nav li:hover span.icon-group {
-        background-image: url(images/icon_group_active.png);
+        background-image: url(/content/images/icon_group_active.png);
     }
 
 ul.nav li.active span.icon-group{
-    background-image: url(images/icon_group_active.png);
+    background-image: url(/content/images/icon_group_active.png);
 }
 
 /*   mobile     */
