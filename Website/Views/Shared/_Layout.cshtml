@@ -14,26 +14,25 @@
 
     @RenderSection("stylesheets", required: false)
 </head>
-    <body id="@ViewBag.PageId">
-        <div id="wrap">
-            @Html.Partial("_Header")
-            @RenderBody()
-        </div>
+<body id="@ViewBag.PageId">
+    <div id="wrap">
+        @Html.Partial("_Header")
+        @RenderBody()
+    </div>
+
+    @Html.Partial("_Footer")
+
+    @Scripts.Render("~/scripts/libraries")
+    @Scripts.Render("~/scripts/application")
     
-        @Html.Partial("_Footer")
-        
-        @Scripts.Render("~/scripts/libraries")
-        @Scripts.Render("~/scripts/application")
+    @RenderSection("scripts", required: false)
 
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-          <script src="~/Scripts/html5shiv.js"></script>
-          <script src="~/Scripts/respond.min.js"></script>
-        <![endif]-->
-
-        @RenderSection("scripts", required: false)
-        
-        @Html.Partial("_GoogleAnalytics")
-        @Html.Partial("_Usersnap")
-    </body>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="~/Scripts/html5shiv.js"></script>
+      <script src="~/Scripts/respond.min.js"></script>
+    <![endif]-->
+    @Html.Partial("_GoogleAnalytics")
+    @Html.Partial("_Usersnap")
+</body>
 </html>

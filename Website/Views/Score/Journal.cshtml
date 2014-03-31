@@ -1,4 +1,5 @@
-﻿@using Newtonsoft.Json
+﻿@using System.Web.Optimization
+@using Newtonsoft.Json
 @using QOAM.Core
 @using QOAM.Website.Helpers
 @using QOAM.Website.Models
@@ -399,11 +400,6 @@
 
 @section scripts
 {
-    <script type="text/javascript" src="~/Scripts/Controllers/ScoreController.js"></script>
-    <script type="text/javascript" src="~/Scripts/knockout-2.3.0.js"></script>
-    <script type="text/javascript" src="~/Scripts/knockout.mapping-latest.js"></script>
-    <script type="text/javascript" src="~/Scripts/knockout.isdirty.js"></script>
-    <script type="text/javascript" src="~/Scripts/spin.js"></script>
     <script type="text/javascript">
         $(function() {
             var scoreController = new ScoreController();
