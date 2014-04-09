@@ -1,0 +1,22 @@
+﻿@model QOAM.Website.ViewModels.Journals.CommentsViewModel
+
+@foreach (var scoreCard in Model.CommentedValuationScoreCards)
+{
+    var nextPage = Model.CommentedValuationScoreCards.IsLastPage ? (int?)null : (Model.CommentedValuationScoreCards.PageNumber + 1);
+                
+    <tr data-next-page="@nextPage">
+        <td>@Html.ActionLink(scoreCard.UserProfile.DisplayName, "Details", "Profiles", new { id = scoreCard.UserProfileId }, null)</td>
+        <td>@scoreCard.DatePublished.Value.ToShortDateString()</td>
+        <td>@scoreCard.Remarks</td>
+        <td>
+            @if (User.Identity.IsAuthenticated && scoreCard.UserProfileId == ViewBag.User.Id)
+            {
+                <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("Edit", "ValuationScoreCard", "Score", new { id = scoreCard.JournalId }, null)
+            }
+                else
+            {
+               <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("View", "ValuationScoreCardDetails", "Score", new { id = scoreCard.Id }, null)
+            }
+        </td>
+    </tr>    
+}

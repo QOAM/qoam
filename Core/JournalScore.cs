@@ -21,7 +21,8 @@
         public JournalCategoryScore GovernanceScore { get; set; }
         public JournalCategoryScore ProcessScore { get; set; }
         public JournalCategoryScore ValuationScore { get; set; }
-        public int NumberOfReviewers { get; set; }
+        public int NumberOfBaseReviewers { get; set; }
+        public int NumberOfValuationReviewers { get; set; }
         public int JournalId { get; set; }
         public string Swot {
             get

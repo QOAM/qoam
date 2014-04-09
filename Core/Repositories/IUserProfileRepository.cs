@@ -16,7 +16,7 @@
         UserProfile Find(int id);
         UserProfile Find(string username);
 
-        void Insert(UserProfile userProfile);
+        void InsertOrUpdate(UserProfile userProfile);
         void Save();
         IPagedList<UserProfile> Search(UserProfileFilter filter);
     }

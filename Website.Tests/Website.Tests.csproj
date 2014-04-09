@@ -177,6 +177,7 @@
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Models\SAML\SamlIdentityExtensionsTests.cs" />
     <Compile Include="Models\SAML\SamlAttributesTests.cs" />
+    <Compile Include="Helpers\UrlHelperExtensionsTests.cs" />
     <Compile Include="Models\QuestionExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routes\AccountControllerRoutingTests.cs" />

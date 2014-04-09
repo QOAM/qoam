@@ -6,7 +6,7 @@
 
     using QOAM.Core.Helpers;
 
-    public class SubjectRepository : Repository, ISubjectRepository
+    public class SubjectRepository : Repository<Subject>, ISubjectRepository
     {
         public SubjectRepository(ApplicationDbContext dbContext)
             : base(dbContext)

@@ -21,28 +21,34 @@
     public class JournalsController : ApplicationController
     {
         private readonly IJournalRepository journalRepository;
-        private readonly IJournalPriceRepository journalPriceRepository;
+        private readonly IBaseJournalPriceRepository baseJournalPriceRepository;
         private readonly ILanguageRepository languageRepository;
         private readonly ISubjectRepository subjectRepository;
         private readonly IInstitutionJournalRepository institutionJournalRepository;
-        private readonly IScoreCardRepository scoreCardRepository;
+        private readonly IBaseScoreCardRepository baseScoreCardRepository;
+        private readonly IValuationScoreCardRepository valuationScoreCardRepository;
+        private readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
 
-        public JournalsController(IJournalRepository journalRepository, IJournalPriceRepository journalPriceRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IInstitutionJournalRepository institutionJournalRepository, IScoreCardRepository scoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication)
+        public JournalsController(IJournalRepository journalRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IInstitutionJournalRepository institutionJournalRepository, IBaseScoreCardRepository baseScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication)
             : base(userProfileRepository, authentication)
         {
+            this.valuationJournalPriceRepository = valuationJournalPriceRepository;
             Requires.NotNull(journalRepository, "journalRepository");
-            Requires.NotNull(journalPriceRepository, "journalPriceRepository");
+            Requires.NotNull(baseJournalPriceRepository, "baseJournalPriceRepository");
+            Requires.NotNull(valuationJournalPriceRepository, "valuationJournalPriceRepository");
+            Requires.NotNull(valuationScoreCardRepository, "valuationScoreCardRepository");
             Requires.NotNull(languageRepository, "languageRepository");
             Requires.NotNull(subjectRepository, "keywordRepository");
             Requires.NotNull(institutionJournalRepository, "institutionJournalRepository");
-            Requires.NotNull(scoreCardRepository, "scoreCardRepository");
+            Requires.NotNull(baseScoreCardRepository, "scoreCardRepository");
 
             this.journalRepository = journalRepository;
-            this.journalPriceRepository = journalPriceRepository;
+            this.baseJournalPriceRepository = baseJournalPriceRepository;
             this.languageRepository = languageRepository;
             this.subjectRepository = subjectRepository;
             this.institutionJournalRepository = institutionJournalRepository;
-            this.scoreCardRepository = scoreCardRepository;
+            this.baseScoreCardRepository = baseScoreCardRepository;
+            this.valuationScoreCardRepository = valuationScoreCardRepository;
         }
         
         [GET("")]
@@ -62,18 +68,29 @@
 
             model.InstitutionJournals = this.institutionJournalRepository.Find(model.ToInstitutionJournalPriceFilter());
             model.InstitutionJournal = this.institutionJournalRepository.Find(model.Id, this.Authentication.CurrentUserId);
-            model.JournalPrices = this.journalPriceRepository.Find(model.ToJournalPriceFilter());
+            model.BaseJournalPrices = this.baseJournalPriceRepository.Find(model.ToJournalPriceFilter(null));
+            model.ValuationJournalPrices = this.valuationJournalPriceRepository.Find(model.ToJournalPriceFilter(FeeType.Article));
             model.Journal = this.journalRepository.Find(model.Id);
 
             return this.PartialView(model);
         }
 
-        [GET("{id:int}/journalprices")]
-        public PartialViewResult JournalPrices(PricesViewModel model)
+        [GET("{id:int}/basejournalprices")]
+        public PartialViewResult BaseJournalPrices(PricesViewModel model)
         {
             this.ViewBag.RefererUrl = model.RefererUrl;
 
-            var journalPrices = this.journalPriceRepository.Find(model.ToJournalPriceFilter());
+            var journalPrices = this.baseJournalPriceRepository.Find(model.ToJournalPriceFilter(null));
+
+            return this.PartialView(journalPrices);
+        }
+
+        [GET("{id:int}/valuationjournalprices")]
+        public PartialViewResult ValuationJournalPrices(PricesViewModel model)
+        {
+            this.ViewBag.RefererUrl = model.RefererUrl;
+
+            var journalPrices = this.valuationJournalPriceRepository.Find(model.ToJournalPriceFilter(FeeType.Article));
 
             return this.PartialView(journalPrices);
         }
@@ -88,20 +105,54 @@
             return this.PartialView(institutionJournals);
         }
 
-        [GET("{id:int}/scores")]
-        public PartialViewResult Scores(ScoresViewModel model)
+        [GET("{id:int}/scorecards")]
+        public PartialViewResult ScoreCards(ScoreCardsViewModel model)
         {
-            model.ScoreCards = this.scoreCardRepository.Find(model.ToFilter());
+            model.BaseScoreCards = this.baseScoreCardRepository.Find(model.ToFilter());
+            model.ValuationScoreCards = this.valuationScoreCardRepository.Find(model.ToFilter());
 
-            return this.PartialView(GetScoresViewName(model), model);
+            return this.PartialView(model);
+        }
+
+        [GET("{id:int}/basescorecards")]
+        public PartialViewResult BaseScoreCards(ScoreCardsViewModel model)
+        {
+            model.BaseScoreCards = this.baseScoreCardRepository.Find(model.ToFilter());
+
+            return this.PartialView(model);
+        }
+
+        [GET("{id:int}/valuationscorecards")]
+        public PartialViewResult ValuationScoreCards(ScoreCardsViewModel model)
+        {
+            model.ValuationScoreCards = this.valuationScoreCardRepository.Find(model.ToFilter());
+
+            return this.PartialView(model);
         }
 
         [GET("{id:int}/comments")]
         public PartialViewResult Comments(CommentsViewModel model)
         {
-            model.CommentedScoreCards = this.scoreCardRepository.Find(model.ToFilter());
+            model.CommentedBaseScoreCards = this.baseScoreCardRepository.Find(model.ToFilter());
+            model.CommentedValuationScoreCards = this.valuationScoreCardRepository.Find(model.ToFilter());
 
-            return this.PartialView(GetCommentsViewName(model), model);
+            return this.PartialView(model);
+        }
+
+        [GET("{id:int}/basescorecardcomments")]
+        public PartialViewResult BaseScoreCardComments(CommentsViewModel model)
+        {
+            model.CommentedBaseScoreCards = this.baseScoreCardRepository.Find(model.ToFilter());
+
+            return this.PartialView(model);
+        }
+
+        [GET("{id:int}/valuationscorecardcomments")]
+        public PartialViewResult ValuationScoreCardComments(CommentsViewModel model)
+        {
+            model.CommentedValuationScoreCards = this.valuationScoreCardRepository.Find(model.ToFilter());
+
+            return this.PartialView(model);
         }
 
         [GET("{id:int}/institutionjournallicense")]
@@ -169,14 +220,7 @@
 
                 foreach (var institutionJournal in institutionJournalsToModify)
                 {
-                    if (institutionJournal.Id == 0)
-                    {
-                        this.institutionJournalRepository.Insert(institutionJournal);
-                    }
-                    else
-                    {
-                        this.institutionJournalRepository.Update(institutionJournal);
-                    }
+                    this.institutionJournalRepository.InsertOrUpdate(institutionJournal);
                 }
 
                 this.institutionJournalRepository.Save();
@@ -210,16 +254,6 @@
         public JsonResult Publishers(string query)
         {
             return this.Json(this.journalRepository.Publishers(query).Select(s => new { value = s }).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
-        }
-
-        private static string GetScoresViewName(ScoresViewModel model)
-        {
-            return model.ScoreCards.IsFirstPage ? "Scores" : "ScoresRows";
-        }
-
-        private static string GetCommentsViewName(CommentsViewModel model)
-        {
-            return model.CommentedScoreCards.IsFirstPage ? "Comments" : "CommentsRows";
         }
     }
 }

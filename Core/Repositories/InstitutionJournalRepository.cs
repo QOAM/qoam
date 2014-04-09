@@ -1,7 +1,6 @@
 ﻿namespace QOAM.Core.Repositories
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Data.Entity;
     using System.Linq;
 
@@ -9,7 +8,7 @@
 
     using QOAM.Core.Repositories.Filters;
 
-    public class InstitutionJournalRepository : Repository, IInstitutionJournalRepository
+    public class InstitutionJournalRepository : Repository<InstitutionJournal>, IInstitutionJournalRepository
     {
         public InstitutionJournalRepository(ApplicationDbContext dbContext)
             : base(dbContext)
@@ -69,16 +68,6 @@
             }
 
             return query.OrderByDescending(i => i.DateAdded).ToList();
-        }
-
-        public void Insert(InstitutionJournal journalPrice)
-        {
-            this.DbContext.InstitutionJournals.Add(journalPrice);
-        }
-
-        public void Update(InstitutionJournal journalPrice)
-        {
-            this.DbContext.Entry(journalPrice).State = EntityState.Modified;
         }
     }
 }

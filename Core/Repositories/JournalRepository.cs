@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Data.Entity;
     using System.Linq;
     using System.Linq.Expressions;
@@ -12,7 +11,7 @@
 
     using QOAM.Core.Repositories.Filters;
 
-    public class JournalRepository : Repository, IJournalRepository
+    public class JournalRepository : Repository<Journal>, IJournalRepository
     {
         public JournalRepository(ApplicationDbContext dbContext)
             : base(dbContext)
@@ -71,8 +70,7 @@
                 .Include(j => j.Publisher)
                 .Include(j => j.Languages)
                 .Include(j => j.Subjects)
-                .Include(j => j.JournalScore)
-                .Include(j => j.JournalPrice);
+                .Include(j => j.JournalScore);
 
             if (!string.IsNullOrWhiteSpace(filter.Title))
             {
@@ -111,12 +109,12 @@
 
             if (filter.SubmittedOnly)
             {
-                query = query.Where(j => j.ScoreCards.Any(s => s.Submitted || s.Editor));
+                query = query.Where(j => j.ValuationScoreCards.Any(v => v.State == ScoreCardState.Published));
             }
 
             if (filter.MustHaveBeenScored)
             {
-                query = query.Where(j => j.JournalScore.NumberOfReviewers > 0);
+                query = query.Where(j => j.JournalScore.NumberOfBaseReviewers > 0 || j.JournalScore.NumberOfValuationReviewers > 0);
             }
 
             return ApplyOrdering(query, filter).ToPagedList(filter.PageNumber, filter.PageSize);
@@ -163,14 +161,9 @@
             return this.DbContext.Journals.Find(id);
         }
 
-        public void Insert(Journal journal)
-        {
-            this.DbContext.Journals.Add(journal);
-        }
-
         public int ScoredJournalsCount()
         {
-            return this.DbContext.Journals.Count(j => j.JournalScore.NumberOfReviewers > 0);
+            return this.DbContext.Journals.Count(j => j.JournalScore.NumberOfBaseReviewers > 0);
         }
 
         public IList<Journal> AllIncluding(params Expression<Func<Journal, object>>[] includeProperties)
@@ -182,11 +175,6 @@
             }
 
             return query.ToList();
-        }
-
-        public void Update(Journal journal)
-        {
-            this.DbContext.Entry(journal).State = EntityState.Modified;
         }
     }
 }

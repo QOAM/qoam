@@ -4,7 +4,8 @@ html, body {
 }
 
 *, input, .twitter-typeahead .tt-query {
-    border-radius: 0px !important;
+    -ms-border-radius: 0 !important;
+    border-radius: 0 !important;
 }
 
 #wrap {
@@ -43,7 +44,8 @@ ul.inline > li {
 .well {
     padding: 10px;
     margin-top: 30px;
-    border-radius: 0px;
+    -ms-border-radius: 0;
+    border-radius: 0;
 }
 
 .editor-label-placeholder {
@@ -55,12 +57,16 @@ img.pull-right {
 }
 
 .rangeslider {
-   margin-top:0px;
+    margin-top: 0;
 }
 
 .tooltip {
     position: fixed;
 }
+
+    .tooltip.in {
+        position: absolute;
+    }
 /****************end common ***************************/
 
 /*************** carrousel **********************/
@@ -104,8 +110,9 @@ img.pull-right {
     float: left;
     font-size: 20px;
     font-weight: 200;
-    padding: 0px 0px 0px 20px;
-    text-shadow: 0;
+    padding: 0 0 0 20px;
+    -ms-text-shadow: none;
+    text-shadow: none;
 }
 
 .brand:hover {
@@ -131,7 +138,7 @@ img.pull-right {
 }
 
 #logoutForm {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .dropdown-menu .divider {
@@ -151,7 +158,7 @@ fieldset legend {
 }
 
 .row.side [class="span-contentsearch"] {
-    padding: 0px 5px 10px 20px !important;
+    padding: 0 5px 10px 20px !important;
 }
 
 .row label {
@@ -164,7 +171,7 @@ fieldset legend {
 }
 /******************* search  **************************************/
 .resultdiv .col-md-n7 {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .score {
@@ -173,7 +180,13 @@ fieldset legend {
     text-align: center;
 }
 
-.tab-pane .score {
+.publish {
+    border: solid 1px #000;
+    padding: 3px;
+    margin-right: 10px;
+}
+
+.tab-pane .score, .tab-pane .publish {
     margin-top: 15px;
 }
 
@@ -191,9 +204,9 @@ fieldset legend {
 }
 
 .score .score {
-	margin-left:20%;
-	margin-right:20%;
-	margin-bottom:0px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 0;
 }
 
 .score h1, .score h2, .score h3, .panel-body h3, .panel-body h1 {
@@ -202,8 +215,8 @@ fieldset legend {
 }
 /******************* tabs ******************************/
 .journal-tabs {
-    margin-bottom: 0px;
-    border: 0px;
+    margin-bottom: 0;
+    border: 0;
 }
 
 .nav-tabs li a {
@@ -216,7 +229,7 @@ fieldset legend {
 }
 
 .tabbablesearch {
-	padding:0px 10px 0px 20px;
+    padding: 0px 10px 0px 20px;
 }
 
 .tab-content {
@@ -327,6 +340,10 @@ fieldset legend {
     color: #ffffff;
 }
 
+#score-index-page #journals .panel-body {
+    padding-bottom: 5px;
+}
+
 /****************** score card ************************************/
 
 .scoreCardAspects .panel-heading a {
@@ -338,13 +355,14 @@ fieldset legend {
     padding: 5px 5px;
 }
 
- .journal .panel-body {
+.journal .panel-body {
     padding: 15px 15px 0px 15px;
 }
 
-    .scoreCardAspects .panel-body h3 {
-        margin: 0;
-    }
+.scoreCardAspects .panel-body h3 {
+    margin: 0;
+}
+
 
 /****************** profile ************************************/
 .main .col-md-4 .badges img {
@@ -369,6 +387,7 @@ th {
 #OverviewScoreTab .row .row:nth-child(2) {
     margin-top: 20px;
 }
+
 /***************** tabs   ****************************/
 .nav-tabs {
     margin-bottom: 0px;
@@ -473,7 +492,7 @@ a.home:hover, a.home, a.home:focus {
 }
 
 .form-control .pull-left {
-    width:80%;
+    width: 80%;
 }
 
 .high label {
@@ -521,10 +540,12 @@ a.home:hover, a.home, a.home:focus {
 }
 
     .slider .tooltip {
+        -ms-opacity: 0.3;
         opacity: 0.3;
     }
 
         .slider .tooltip.in {
+            -ms-opacity: 0.9;
             opacity: 0.9;
         }
 
@@ -540,45 +561,46 @@ a.home:hover, a.home, a.home:focus {
     padding-right: 12px;
 }
 
-.swotContainer {
-    padding: 3px 0 0 0;    
+.table {
+    display: table;
+    border-collapse: collapse;
+    table-layout: fixed;
+    padding: 0;
+    margin: 0;
+    width: 100%;
 }
 
-    .swotContainer .swotBox {
-        display: table;
-        padding: 0;
-        border-collapse: collapse;
-        width: 100%;
-        border-top: solid 1px black;
-    }
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    .swotContainer .swotBox {
-        width: 102%;
-    }
+.table-row {
+    display: table-row;
+    padding: 0;
+    margin: 0;
 }
 
-.swotContainer .swotBox .row {
-    display: table-row;    
-}
-
-.swotContainer .swotBox .column {
+.table-cell {
+    float: left;
     display: table-cell;
-    background: none;
+    border: solid 1px black;
+    width: 50%;
     line-height: 32px;
-    width: 51%;
+    padding: 0;
+    margin: 0;
 }
 
-.swotContainer .swotBox .row:first-child {
-    border-bottom: solid 1px black;
+.swotContainer .table-cell {
+    border-right: 0;
+    border-bottom: 0;
 }
 
-.swotContainer .swotBox .column:nth-child(odd) {
-    border-right: solid 1px black;    
+.swotContainer .table-cell.first-column {
+    border-left: 0;
 }
 
+.swotContainer {
+    padding: 3px 0 0 0;
+    width: 104px;
+}
 
-.swotContainer .verdict-strong .strong{
+.swotContainer .verdict-strong .strong {
     background-color: green;
 }
 
@@ -586,15 +608,13 @@ a.home:hover, a.home, a.home:focus {
     background-color: yellow;
 }
 
-.swotContainer .verdict-opportunity .opportunity
- {
+.swotContainer .verdict-opportunity .opportunity {
     background-color: blue;
 }
 
 .swotContainer .verdict-threat .threat {
     background-color: red;
 }
-
 
 /******************** icons ************************************/
 
@@ -621,7 +641,8 @@ ul.nav li.active span.icon-group {
         font-size: 18px;
         font-weight: 200;
         padding: 20px 0px 0px 10px;
-        text-shadow: 0;
+        -ms-text-shadow: none;
+        text-shadow: none;
     }
 
     .navbar-inner {

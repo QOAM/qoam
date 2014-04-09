@@ -2,7 +2,7 @@
 {
     using System.Linq;
 
-    public class ScoreCardVersionRepository : Repository, IScoreCardVersionRepository
+    public class ScoreCardVersionRepository : Repository<ScoreCardVersion>, IScoreCardVersionRepository
     {
         public ScoreCardVersionRepository(ApplicationDbContext dbContext)
             : base(dbContext)

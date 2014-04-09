@@ -2,10 +2,12 @@
 {
     using System;
     using System.Configuration;
+    using System.Data.Entity;
 
     using Validation;
 
-    public abstract class Repository : IDisposable
+    public abstract class Repository<T> : IDisposable
+        where T : Entity
     {
         protected Repository(ApplicationDbContext dbContext)
         {
@@ -32,6 +34,32 @@
         public void Dispose()
         {
             this.DbContext.Dispose();
+        }
+
+        public void InsertOrUpdate(T entity)
+        {
+            Requires.NotNull(entity, "entity");
+
+            if (entity.Id == default(int))
+            {
+                this.DbContext.Set<T>().Add(entity);
+            }
+            else
+            {
+                this.DbContext.Entry(entity).State = EntityState.Modified;
+            }
+        }
+
+        public void Delete(T entity)
+        {
+            Requires.NotNull(entity, "entity");
+
+            if (entity.Id == default(int))
+            {
+                return;
+            }
+
+            this.DbContext.Set<T>().Remove(entity);
         }
     }
 }

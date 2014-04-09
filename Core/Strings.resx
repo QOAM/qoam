@@ -225,4 +225,16 @@
   <data name="InstitutionSortMode_NumberOfJournalScoreCards" xml:space="preserve">
     <value>Sort by number of JSC's</value>
   </data>
+  <data name="InstitutionSortMode_NumberOfBaseJournalScoreCards" xml:space="preserve">
+    <value>Sort by number of base JSC's</value>
+  </data>
+  <data name="InstitutionSortMode_NumberOfValuationJournalScoreCards" xml:space="preserve">
+    <value>Sort by number of valuation JSC's</value>
+  </data>
+  <data name="UserProfileSortMode_NumberOfBaseJournalScoreCards" xml:space="preserve">
+    <value>Sort by number of base JSC's</value>
+  </data>
+  <data name="UserProfileSortMode_NumberOfValuationJournalScoreCards" xml:space="preserve">
+    <value>Sort by number of valuation JSC's</value>
+  </data>
 </root>

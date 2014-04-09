@@ -6,7 +6,7 @@
 
     using QOAM.Core.Helpers;
 
-    public class CountryRepository : Repository, ICountryRepository
+    public class CountryRepository : Repository<Country>, ICountryRepository
     {
         public CountryRepository(ApplicationDbContext dbContext)
             : base(dbContext)

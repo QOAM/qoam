@@ -6,12 +6,12 @@
     {
         public Question()
         {
-            this.QuestionScores = new List<QuestionScore>();
+            this.QuestionScores = new List<BaseQuestionScore>();
         }
 
         public QuestionKey Key { get; set; }
         public QuestionCategory Category { get; set; }
 
-        public virtual ICollection<QuestionScore> QuestionScores { get; set; }
+        public virtual ICollection<BaseQuestionScore> QuestionScores { get; set; }
     }
 }

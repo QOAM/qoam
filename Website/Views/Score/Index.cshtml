@@ -2,7 +2,6 @@
 @using System.Web.Optimization
 @using PagedList.Mvc
 @using QOAM.Website.Helpers
-@using QOAM.Website.Resources
 @model QOAM.Website.ViewModels.Score.IndexViewModel
 
 @{
@@ -63,7 +62,7 @@
             </div>
         </div>
 
-        <div class="col-md-9">
+        <div id="journals" class="col-md-9">
 
             <h3>Journals to score: @Model.Journals.TotalItemCount</h3>
 
@@ -71,13 +70,13 @@
             {
                 foreach (var journal in Model.Journals)
                 {
-                <div class="panel panel-primary journal">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <a href="@journal.Link" title="Go to website">
                             <div>
                                 @journal.Title
                                 <span class="pull-right clearfix"><i class="glyphicon glyphicon-new-window"></i></span>
-                            </div>
+                            </div>                        
                         </a>
                     </div>
                     <div class="panel-body">
@@ -132,13 +131,25 @@
                         </div>
 
                         <div class="col-md-3">
-                            <div class="row score">
-                                <div class="col-md-5 ">
-                                    <a class="" href="@Url.Action("Journal", new { id = journal.Id })">
-                                        <img src="~/Content/Images/rate.png" alt="Score this journal" /></a>
+                            <div class="row score bottommargin">
+                                <div class="col-md-5a">
+                                    <a class="" href="@Url.Action("BaseScoreCard", new { id = journal.Id })">
+                                        <img src="~/Content/Images/rate-small.png" alt="Score this journal" />
+                                    </a>
                                 </div>
-                                <div class="col-md-7">
-                                    <a class="" href="@Url.Action("Journal", new { id = journal.Id })">Publish a Journal Score Card for this journal</a>
+                                <div class="col-md-7a">
+                                    <a class="" href="@Url.Action("BaseScoreCard", new { id = journal.Id })">Publish a Base Score Card</a>
+                                </div>
+                            </div>
+                            
+                            <div class="row score">
+                                <div class="col-md-5a">
+                                    <a class="" href="@Url.Action("ValuationScoreCard", new { id = journal.Id })">
+                                        <img src="~/Content/Images/rate-small.png" alt="Score this journal" />
+                                    </a>
+                                </div>
+                                <div class="col-md-7a">
+                                    <a class="" href="@Url.Action("ValuationScoreCard", new { id = journal.Id })">Publish a Valuation Score Card</a>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +161,7 @@
             }
             else
             {
-                @Html.Raw(string.Format("<p class=\"text-warning\">No journals could be found. This outcome is adressed in the FAQ <a href=\"{0}\" title=\"Why don\'t I find a specific journal in QOAM?\">Why don\'t I find a specific journal in QOAM?</a></p>", Url.Action("Faq", "Home") + "#cant-find-journal"))
+                <p class="text-warning">No journals could be found. This outcome is adressed in the FAQ <a href="@Url.Action("Faq", "Home")#cant-find-journal" title="Why don't I find a specific journal in QOAM?">Why don't I find a specific journal in QOAM?</a></p>
             }
 
         </div>

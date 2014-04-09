@@ -6,8 +6,6 @@
     using AttributeRouting;
     using AttributeRouting.Web.Mvc;
 
-    using PagedList;
-
     using QOAM.Core;
     using QOAM.Core.Repositories;
     using QOAM.Website.Helpers;
@@ -20,18 +18,21 @@
     public class ProfilesController : ApplicationController
     {
         private readonly IInstitutionRepository institutionRepository;
-        private readonly IScoreCardRepository scoreCardRepository;
+        private readonly IBaseScoreCardRepository baseScoreCardRepository;
+        private readonly IValuationScoreCardRepository valuationScoreCardRepository;
         private readonly IRoles roles;
 
-        public ProfilesController(IInstitutionRepository institutionRepository, IScoreCardRepository scoreCardRepository, IRoles roles, IUserProfileRepository userProfileRepository, IAuthentication authentication)
+        public ProfilesController(IInstitutionRepository institutionRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IRoles roles, IUserProfileRepository userProfileRepository, IAuthentication authentication)
             : base(userProfileRepository, authentication)
         {
             Requires.NotNull(institutionRepository, "institutionRepository");
-            Requires.NotNull(scoreCardRepository, "scoreCardRepository");
+            Requires.NotNull(baseScoreCardRepository, "scoreCardRepository");
+            Requires.NotNull(valuationScoreCardRepository, "valuationScoreCardRepository");
             Requires.NotNull(roles, "roles");
             
             this.institutionRepository = institutionRepository;
-            this.scoreCardRepository = scoreCardRepository;
+            this.baseScoreCardRepository = baseScoreCardRepository;
+            this.valuationScoreCardRepository = valuationScoreCardRepository;
             this.roles = roles;
         }
 
@@ -48,9 +49,10 @@
         public ViewResult Details(DetailsViewModel model)
         {
             model.UserProfile = this.UserProfileRepository.Find(model.Id);
-            model.ScoreCards = new StaticPagedList<ScoreCard>(new ScoreCard[0], 1, 1, 0);
-            model.ScoreCards = this.scoreCardRepository.FindForUser(model.ToScoreCardFilter(this.GetScoreCardStateFilter(model.Id)));
-            model.ScoreCardStats = this.scoreCardRepository.CalculateStats(model.UserProfile);
+            model.BaseScoreCards = this.baseScoreCardRepository.FindForUser(model.ToScoreCardFilter(this.GetScoreCardStateFilter(model.Id)));
+            model.BaseScoreCardStats = this.baseScoreCardRepository.CalculateStats(model.UserProfile);
+            model.ValuationScoreCards = this.valuationScoreCardRepository.FindForUser(model.ToScoreCardFilter(this.GetScoreCardStateFilter(model.Id)));
+            model.ValuationScoreCardStats = this.valuationScoreCardRepository.CalculateStats(model.UserProfile);
 
             return this.View(model);
         }
@@ -91,10 +93,18 @@
             return this.View(model);
         }
 
-        [GET("{id:int}/scorecards")]
-        public PartialViewResult ScoreCards(ScoreCardsViewModel model)
+        [GET("{id:int}/basescorecards")]
+        public PartialViewResult BaseScoreCards(ScoreCardsViewModel model)
         {
-            var scoreCards = this.scoreCardRepository.FindForUser(model.ToScoreCardFilter(this.GetScoreCardStateFilter(model.Id)));
+            var scoreCards = this.baseScoreCardRepository.FindForUser(model.ToScoreCardFilter(this.GetScoreCardStateFilter(model.Id)));
+
+            return this.PartialView(scoreCards);
+        }
+
+        [GET("{id:int}/valuationscorecards")]
+        public PartialViewResult ValuationScoreCards(ScoreCardsViewModel model)
+        {
+            var scoreCards = this.valuationScoreCardRepository.FindForUser(model.ToScoreCardFilter(this.GetScoreCardStateFilter(model.Id)));
 
             return this.PartialView(scoreCards);
         }

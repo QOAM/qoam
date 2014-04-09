@@ -17,27 +17,27 @@
             this.expirationCheckerSettings = expirationCheckerSettings;
         }
         
-        public MailMessage CreateSoonToBeExpiredMailMessage(ScoreCard scoreCard)
+        public MailMessage CreateSoonToBeExpiredMailMessage(BaseScoreCard scoreCard)
         {
             return this.CreateMailMessage(scoreCard, this.GetSoonToBeArchivedMailBody, this.expirationCheckerSettings.SoonToBeArchivedMailSubject);
         }
 
-        private string GetSoonToBeArchivedMailBody(ScoreCard scoreCard)
+        private string GetSoonToBeArchivedMailBody(BaseScoreCard scoreCard)
         {
             return this.GetToBeArchivedMailBody(scoreCard, this.expirationCheckerSettings.SoonToBeArchivedMailMessage);
         }
 
-        public MailMessage CreateAlmostExpiredMailMessage(ScoreCard scoreCard)
+        public MailMessage CreateAlmostExpiredMailMessage(BaseScoreCard scoreCard)
         {
             return this.CreateMailMessage(scoreCard, this.GetAlmostArchivedMailBody, this.expirationCheckerSettings.AlmostArchivedMailSubject);
         }
 
-        private string GetAlmostArchivedMailBody(ScoreCard scoreCard)
+        private string GetAlmostArchivedMailBody(BaseScoreCard scoreCard)
         {
             return this.GetToBeArchivedMailBody(scoreCard, this.expirationCheckerSettings.AlmostArchivedMailMessage);
         }
 
-        private string GetToBeArchivedMailBody(ScoreCard scoreCard, string toBeArchivedMailMessage)
+        private string GetToBeArchivedMailBody(BaseScoreCard scoreCard, string toBeArchivedMailMessage)
         {
             return toBeArchivedMailMessage
                        .Replace("[journalscoreurl]", this.expirationCheckerSettings.JournalScoreUrl.TrimEnd('/'))
@@ -48,12 +48,12 @@
                        .Replace("[journalexpirationdate]", scoreCard.DateExpiration.Value.ToShortDateString());
         }
 
-        public MailMessage CreateArchivedMailMessage(ScoreCard scoreCard)
+        public MailMessage CreateArchivedMailMessage(BaseScoreCard scoreCard)
         {
             return this.CreateMailMessage(scoreCard, this.GetArchivedMailBody, this.expirationCheckerSettings.ArchivedMailSubject);
         }
 
-        private string GetArchivedMailBody(ScoreCard scoreCard)
+        private string GetArchivedMailBody(BaseScoreCard scoreCard)
         {
             return this.expirationCheckerSettings.ArchivedMailMessage
                        .Replace("[journalscoreurl]", this.expirationCheckerSettings.JournalScoreUrl.TrimEnd('/'))
@@ -63,7 +63,7 @@
                        .Replace("[journalid]", scoreCard.JournalId.ToString(CultureInfo.InvariantCulture));
         }
 
-        private MailMessage CreateMailMessage(ScoreCard scoreCard, Func<ScoreCard, string> mailBodyFunc, string mailSubject)
+        private MailMessage CreateMailMessage(BaseScoreCard scoreCard, Func<BaseScoreCard, string> mailBodyFunc, string mailSubject)
         {
             Requires.NotNull(scoreCard, "scoreCard");
             Requires.NotNull(mailBodyFunc, "mailBodyFunc");

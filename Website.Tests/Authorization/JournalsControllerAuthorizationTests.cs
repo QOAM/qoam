@@ -27,7 +27,7 @@
         public void JournalPricesActionDoesNotRequireAuthorizedUser()
         {
             // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.JournalPrices(null)));
+            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.BaseJournalPrices(null)));
         }
 
         [Fact]
@@ -41,7 +41,7 @@
         public void ScoresActionDoesNotRequireAuthorizedUser()
         {
             // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.Scores(null)));
+            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.BaseScoreCards(null)));
         }
 
         [Fact]

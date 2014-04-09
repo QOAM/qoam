@@ -9,7 +9,8 @@
     {
         public int Id { get; set; }
 
-        public IPagedList<ScoreCard> CommentedScoreCards { get; set; }
+        public IPagedList<BaseScoreCard> CommentedBaseScoreCards { get; set; }
+        public IPagedList<ValuationScoreCard> CommentedValuationScoreCards { get; set; }
 
         public ScoreCardFilter ToFilter()
         {

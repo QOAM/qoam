@@ -14,7 +14,7 @@
     <RootNamespace>QOAM.Website</RootNamespace>
     <AssemblyName>QOAM.Website</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
+    <MvcBuildViews>true</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44310</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -295,7 +295,7 @@
     <Compile Include="ViewModels\Journals\InstitutionJournalLicenseViewModel.cs" />
     <Compile Include="ViewModels\PagedViewModel.cs" />
     <Compile Include="ViewModels\Journals\PricesViewModel.cs" />
-    <Compile Include="ViewModels\Journals\ScoresViewModel.cs" />
+    <Compile Include="ViewModels\Journals\ScoreCardsViewModel.cs" />
     <Compile Include="ViewModels\Institutions\DetailsViewModel.cs" />
     <Compile Include="ViewModels\Institutions\IndexViewModel.cs" />
     <Compile Include="ViewModels\Profiles\DetailsViewModel.cs" />
@@ -307,19 +307,19 @@
     <Compile Include="ViewModels\Score\JournalPriceViewModel.cs" />
     <Compile Include="ViewModels\Score\JournalViewModel.cs" />
     <Compile Include="ViewModels\Score\QuestionScoreViewModel.cs" />
-    <Compile Include="ViewModels\Score\ScoreViewModel.cs" />
+    <Compile Include="ViewModels\Score\BaseScoreCardViewModel.cs" />
     <Compile Include="ViewModels\Score\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Score\ValuationScoreCardViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\Scores.cshtml" />
     <None Include="App_Data\OAMarket.mdf" />
     <None Include="App_Data\OAMarket_log.ldf">
       <DependentUpon>OAMarket.mdf</DependentUpon>
     </None>
     <Content Include="App_Data\Metadata\metadata.xml" />
     <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fancybox\blank.gif" />
     <Content Include="Content\fancybox\fancybox_buttons.png" />
     <Content Include="Content\fancybox\fancybox_loading%402x.gif" />
@@ -336,6 +336,8 @@
     <Content Include="Content\images\icon_group_active.png" />
     <Content Include="Content\images\journalscorecard.png" />
     <Content Include="Content\images\logo-big.png" />
+    <Content Include="Content\images\organisation-small.png" />
+    <Content Include="Content\images\rate-small.png" />
     <Content Include="Content\iPicture.css" />
     <Content Include="Content\jquery.fancybox-buttons.css" />
     <Content Include="Content\jquery.fancybox-thumbs.css" />
@@ -733,8 +735,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -763,17 +763,17 @@
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.jquery.js" />
     <Content Include="Views\Shared\_Loading.cshtml" />
-    <Content Include="Views\Journals\ScoresRows.cshtml" />
-    <Content Include="Views\Journals\CommentsRows.cshtml" />
+    <Content Include="Views\Journals\BaseScoreCards.cshtml" />
+    <Content Include="Views\Journals\BaseScoreCardComments.cshtml" />
     <Content Include="Views\Journals\InstitutionJournalPrices.cshtml" />
     <Content Include="Scripts\Helpers\Ajax.min.js.map">
       <DependentUpon>Ajax.js</DependentUpon>
     </Content>
-    <Content Include="Views\Profiles\ScoreCards.cshtml" />
+    <Content Include="Views\Profiles\BaseScoreCards.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Currency.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ScoreCardState.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Price.cshtml" />
-    <Content Include="Views\Journals\JournalPrices.cshtml" />
+    <Content Include="Views\Journals\BaseJournalPrices.cshtml" />
     <Content Include="Views\Journals\InstitutionJournalLicense.cshtml" />
     <Content Include="Views\Profiles\Edit.cshtml" />
     <Content Include="Scripts\Helpers\Form.min.js.map">
@@ -798,6 +798,12 @@
     </Content>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\jquery.validate.globalize.min.js.map" />
+    <Content Include="Views\Score\ValuationScoreCard.cshtml" />
+    <Content Include="Views\Profiles\ValuationScoreCards.cshtml" />
+    <Content Include="Views\Journals\ValuationScoreCards.cshtml" />
+    <Content Include="Views\Journals\ValuationScoreCardComments.cshtml" />
+    <Content Include="Views\Journals\ValuationJournalPrices.cshtml" />
+    <Content Include="Views\Score\ValuationScoreCardDetails.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -814,8 +820,6 @@
     <None Include="_bin_deployableAssemblies\amd64\sqlceca40.dll" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
-    <Content Include="Content\bootstrap\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\images\about.png" />
     <Content Include="Content\images\contact.png" />
     <Content Include="Content\images\icon_mail.png" />
@@ -931,7 +935,7 @@
     <Content Include="Views\Profiles\Index.cshtml" />
     <Content Include="Views\Journals\Index.cshtml" />
     <Content Include="Views\Score\Index.cshtml" />
-    <Content Include="Views\Score\Journal.cshtml" />
+    <Content Include="Views\Score\BaseScoreCard.cshtml" />
     <Content Include="Views\Profiles\Details.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -942,9 +946,9 @@
     <Content Include="Views\Home\ContactSent.cshtml" />
     <Content Include="Views\Shared\_FormScripts.cshtml" />
     <Content Include="Views\Journals\Prices.cshtml" />
-    <Content Include="Views\Journals\Scores.cshtml" />
+    <Content Include="Views\Journals\ScoreCards.cshtml" />
     <Content Include="Views\Shared\_SidebarMenu.cshtml" />
-    <Content Include="Views\Score\Details.cshtml" />
+    <Content Include="Views\Score\BaseScoreCardDetails.cshtml" />
     <Content Include="Views\Home\Faq.cshtml" />
     <Content Include="Views\Journals\Comments.cshtml" />
     <Content Include="Views\Home\JournalScoreCard.cshtml" />

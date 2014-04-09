@@ -1,35 +1,45 @@
 ﻿namespace QOAM.Console.ExpirationChecker
 {
-    using System;
-
     using Autofac;
 
     using QOAM.Core.Repositories;
     using QOAM.Core.Services;
 
-    internal static class DependencyInjectionConfig
+    public static class DependencyInjectionConfig
     {
-        internal static IContainer RegisterComponents()
+        public static IContainer RegisterComponents()
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterAssemblyTypes(typeof(JournalRepository).Assembly)
-                   .Where(IsRepositoryType)
-                   .AsImplementedInterfaces()
-                   .SingleInstance();
-
-            builder.RegisterType<ApplicationDbContext>().SingleInstance();
-            builder.RegisterType<ExpirationChecker>().SingleInstance();
-            builder.RegisterType<ExpirationCheckerNotification>().SingleInstance();
-            builder.Register(_ => ExpirationCheckerSettings.Current).As<ExpirationCheckerSettings>().SingleInstance();
-            builder.Register(c => new MailSender(c.Resolve<ExpirationCheckerSettings>().SmtpHost)).As<IMailSender>().SingleInstance();
+            RegisterRepositories(builder);
+            RegisterExpirationCheckerComponents(builder);
+            RegisterConfigurationSections(builder);
+            RegisterMiscellaneousComponents(builder);
 
             return builder.Build();
         }
 
-        private static bool IsRepositoryType(Type t)
+        private static void RegisterRepositories(ContainerBuilder builder)
         {
-            return t.Name.EndsWith("Repository");
+            builder.RegisterType<BaseScoreCardRepository>().As<IBaseScoreCardRepository>().SingleInstance();
+            builder.RegisterType<ValuationScoreCardRepository>().As<IValuationScoreCardRepository>().SingleInstance();
+        }
+
+        private static void RegisterExpirationCheckerComponents(ContainerBuilder builder)
+        {
+            builder.RegisterType<ExpirationChecker>().SingleInstance();
+            builder.RegisterType<ExpirationCheckerNotification>().SingleInstance();
+        }
+
+        private static void RegisterConfigurationSections(ContainerBuilder builder)
+        {
+            builder.Register(_ => ExpirationCheckerSettings.Current).As<ExpirationCheckerSettings>().SingleInstance();
+        }
+
+        private static void RegisterMiscellaneousComponents(ContainerBuilder builder)
+        {
+            builder.RegisterType<ApplicationDbContext>().SingleInstance();
+            builder.Register(c => new MailSender(c.Resolve<ExpirationCheckerSettings>().SmtpHost)).As<IMailSender>().SingleInstance();
         }
     }
 }

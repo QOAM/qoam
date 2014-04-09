@@ -19,8 +19,10 @@
         }
 
         public DbSet<Journal> Journals { get; set; }
-        public DbSet<JournalPrice> JournalsPrices { get; set; }
-        public DbSet<ScoreCard> ScoreCards { get; set; }
+        public DbSet<BaseJournalPrice> BaseJournalPrices { get; set; }
+        public DbSet<BaseScoreCard> BaseScoreCards { get; set; }
+        public DbSet<ValuationScoreCard> ValuationScoreCards { get; set; }
+        public DbSet<ValuationJournalPrice> ValuationJournalPrices { get; set; }
         public DbSet<ScoreCardVersion> ScoreCardVersions { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Institution> Institutions { get; set; }
@@ -41,12 +43,8 @@
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.ComplexType<ScoreCardScore>();
-
-            modelBuilder.Entity<Journal>()
-                .HasOptional(t => t.JournalPrice)
-                .WithMany(t => t.Journals)
-                .HasForeignKey(d => d.JournalPriceId);
+            modelBuilder.ComplexType<BaseScoreCardScore>();
+            modelBuilder.ComplexType<ValuationScoreCardScore>();
 
             modelBuilder.Entity<Journal>()
                 .HasOptional(t => t.JournalScore)

@@ -9,7 +9,6 @@
     using QOAM.Core.Services;
     using QOAM.Website.Helpers;
     using QOAM.Website.Models;
-    using QOAM.Website.Resources;
     using QOAM.Website.ViewModels.Home;
 
     using Validation;

@@ -17,16 +17,19 @@
     public class InstitutionsController : ApplicationController
     {
         private readonly IInstitutionRepository institutionRepository;
-        private readonly IScoreCardRepository scoreCardRepository;
+        private readonly IBaseScoreCardRepository baseScoreCardRepository;
+        private readonly IValuationScoreCardRepository valuationScoreCardRepository;
 
-        public InstitutionsController(IInstitutionRepository institutionRepository, IScoreCardRepository scoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication)
+        public InstitutionsController(IInstitutionRepository institutionRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication)
             : base(userProfileRepository, authentication)
         {
             Requires.NotNull(institutionRepository, "institutionRepository");
-            Requires.NotNull(scoreCardRepository, "scoreCardRepository");
+            Requires.NotNull(baseScoreCardRepository, "scoreCardRepository");
+            Requires.NotNull(valuationScoreCardRepository, "valuationScoreCardRepository");
             
             this.institutionRepository = institutionRepository;
-            this.scoreCardRepository = scoreCardRepository;
+            this.baseScoreCardRepository = baseScoreCardRepository;
+            this.valuationScoreCardRepository = valuationScoreCardRepository;
         }
 
         [GET("")]
@@ -42,7 +45,8 @@
         {
             model.Institution = this.institutionRepository.Find(model.Id);
             model.UserProfiles = this.UserProfileRepository.Search(model.ToUserProfileFilter());
-            model.ScoreCardStats = this.scoreCardRepository.CalculateStats(model.Institution);
+            model.BaseScoreCardStats = this.baseScoreCardRepository.CalculateStats(model.Institution);
+            model.ValuationScoreCardStats = this.valuationScoreCardRepository.CalculateStats(model.Institution);
 
             return this.View(model);
         }

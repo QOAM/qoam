@@ -21,8 +21,7 @@
         IQueryable<string> AllIssns { get; }
         IList<Journal> AllIncluding(params Expression<Func<Journal, object>>[] includeProperties);
 
-        void Update(Journal journal);
-        void Insert(Journal journal);
+        void InsertOrUpdate(Journal journal);
         void Save();
 
         int ScoredJournalsCount();

@@ -61,7 +61,8 @@
                             <th>Name</th>
                             <th>Institution</th>
                             <th>Registration date</th>
-                            <th>Number of JSC's</th>
+                            <th>Number of Base JSC's</th>
+                            <th>Number of Valuation JSC's</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -72,7 +73,8 @@
                                 <td>@Html.ActionLink(profile.DisplayName, "Details", "Profiles", new { id = profile.Id }, null)</td>
                                 <td>@Html.ActionLink(profile.Institution.Name, "Index", new { Institution = profile.Institution.Id })</td>
                                 <td>@profile.DateRegistered</td>
-                                <td>@profile.NumberOfScoreCards</td>
+                                <td>@profile.NumberOfBaseScoreCards</td>
+                                <td>@profile.NumberOfValuationScoreCards</td>
                                 <td>
                                     <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("View", "Details", "Profiles", new { id = profile.Id }, null)
                                     

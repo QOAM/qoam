@@ -61,7 +61,7 @@
         public void ScoreCardsActionDoesNotRequireAuthorizedUser()
         {
             // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.ScoreCards(null)));
+            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.BaseScoreCards(null)));
         }
 
         [Fact]

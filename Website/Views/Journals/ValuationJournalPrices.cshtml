@@ -1,0 +1,12 @@
+﻿@model PagedList.IPagedList<QOAM.Core.ValuationJournalPrice>
+
+@foreach (var journalPrice in Model)
+{
+    var nextPage = Model.IsLastPage ? (int?)null : (Model.PageNumber + 1);
+    
+    <tr data-next-page="@nextPage">
+        <td>@Html.ActionLink(journalPrice.UserProfile.DisplayName, "Details", "Profiles", new { Id = journalPrice.UserProfileId }, null)</td>
+        <td>@journalPrice.DateAdded.ToShortDateString()</td>
+        <td>@Html.DisplayFor(_ => journalPrice.Price)</td>
+    </tr>    
+}

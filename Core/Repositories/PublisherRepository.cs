@@ -6,7 +6,7 @@
 
     using QOAM.Core.Helpers;
 
-    public class PublisherRepository : Repository, IPublisherRepository
+    public class PublisherRepository : Repository<Publisher>, IPublisherRepository
     {
         public PublisherRepository(ApplicationDbContext dbContext)
             : base(dbContext)

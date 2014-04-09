@@ -11,7 +11,8 @@
         public Journal Journal { get; set; }
         public InstitutionJournal InstitutionJournal { get; set; }
         public IPagedList<InstitutionJournal> InstitutionJournals { get; set; }
-        public IPagedList<JournalPrice> JournalPrices { get; set; }
+        public IPagedList<BaseJournalPrice> BaseJournalPrices { get; set; }
+        public IPagedList<ValuationJournalPrice> ValuationJournalPrices { get; set; }
         public string RefererUrl { get; set; }
 
         public InstitutionJournalFilter ToInstitutionJournalPriceFilter()
@@ -24,13 +25,14 @@
                        };
         }
 
-        public JournalPriceFilter ToJournalPriceFilter()
+        public JournalPriceFilter ToJournalPriceFilter(FeeType? feeType)
         {
             return new JournalPriceFilter
             {
                 JournalId = this.Id,
                 PageNumber = this.Page,
                 PageSize = this.PageSize,
+                FeeType = feeType
             };
         }
     }

@@ -1,0 +1,16 @@
+﻿@using QOAM.Core
+
+@helper AverageScore(JournalCategoryScore journalCategoryScore)
+{
+    @AverageScore(journalCategoryScore.AverageScore)
+}
+
+@helper AverageScore(ScoreCardCategoryScore scoreCardCategoryScore)
+{
+    @AverageScore(scoreCardCategoryScore.AverageScore)
+}
+
+@helper AverageScore(float? averageScore)
+{
+    @(averageScore == null || averageScore == 0.0f ? "N/A" : averageScore.Value.ToString("0.0"))
+}

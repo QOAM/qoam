@@ -13,7 +13,10 @@
         [Display(Name = "UserProfileSortMode_Institution", ResourceType = typeof(Strings))]
         Institution,
 
-        [Display(Name = "UserProfileSortMode_NumberOfJournalScoreCards", ResourceType = typeof(Strings))]
-        NumberOfJournalScoreCards
+        [Display(Name = "UserProfileSortMode_NumberOfBaseJournalScoreCards", ResourceType = typeof(Strings))]
+        NumberOfBaseJournalScoreCards,
+
+        [Display(Name = "UserProfileSortMode_NumberOfValuationJournalScoreCards", ResourceType = typeof(Strings))]
+        NumberOfValuationJournalScoreCards
     }
 }

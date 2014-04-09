@@ -1,29 +1,70 @@
 ﻿@model QOAM.Website.ViewModels.Journals.CommentsViewModel
 
-@if (Model.CommentedScoreCards.Count == 0)
+@if (Model.CommentedBaseScoreCards.Count == 0)
 {
-    <p>No comments have been made on this journal</p>
+    <p>No base score card comments have been made on this journal</p>
 }
 else
 {
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th>Reviewer</th>
-                <th>Date</th>
-                <th>Comment</th>
-                <th>Action</th>
+                <th>Base Score Card Reviewer</th>
+                <th style="width: 12%">Date</th>
+                <th style="width: 48%">Comment</th>
+                <th style="width: 10%">Action</th>
             </tr>
         </thead>
-        <tbody id="@Model.Id-comments">
-            @{ Html.RenderPartial("CommentsRows", Model); }
+        <tbody id="@Model.Id-baseScoreCardComments">
+            @Html.Partial("BaseScoreCardComments", Model)
         </tbody>
-        <tfoot id="loadMoreComments">
-            @if (Model.CommentedScoreCards.HasNextPage)
+        <tfoot id="loadMoreBaseScoreCardComments">
+            @if (Model.CommentedBaseScoreCards.HasNextPage)
             {
                 <tr>
                     <td colspan="9">
-                        @Ajax.ActionLink("Load more", "Comments", new { Model.Id, Page = Model.Page + 1 }, new AjaxOptions { UpdateTargetId = Model.Id + "-comments", InsertionMode = InsertionMode.InsertAfter, OnSuccess = "afterLoadMore(data, 'loadMoreComments', 'loadMoreCommentsLink')" }, new { id = "loadMoreCommentsLink" })
+                        @Ajax.ActionLink("Load more", "BaseScoreCardComments", new { Model.Id, Page = Model.Page + 1 }, new AjaxOptions
+                                                                                                                                 {
+                                                                                                                                     UpdateTargetId = this.Model.Id + "-baseScoreCardComments",
+                                                                                                                                     InsertionMode = InsertionMode.InsertAfter,
+                                                                                                                                     OnSuccess = "afterLoadMore(data, 'loadMoreBaseScoreCardComments', 'loadMoreBaseScoreCardCommentsLink')"
+                                                                                                                                 }, new { id = "loadMoreBaseScoreCardCommentsLink" })
+                    </td>
+                </tr>
+            }
+        </tfoot>
+    </table>
+}
+
+@if (Model.CommentedValuationScoreCards.Count == 0)
+{
+    <p>No valuation score cards comments have been made on this journal</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Valuation Score Card Reviewer</th>
+                <th style="width: 12%">Date</th>
+                <th style="width: 48%">Comment</th>
+                <th style="width: 10%">Action</th>
+            </tr>
+        </thead>
+        <tbody id="@Model.Id-valuationScoreCardComments">
+            @Html.Partial("ValuationScoreCardComments", Model)
+        </tbody>
+        <tfoot id="loadMoreValuationScoreCardComments">
+            @if (Model.CommentedValuationScoreCards.HasNextPage)
+            {
+                <tr>
+                    <td colspan="9">
+                        @Ajax.ActionLink("Load more", "ValuationScoreCardComments", new { Model.Id, Page = Model.Page + 1 }, new AjaxOptions
+                                                                                                                                 {
+                                                                                                                                     UpdateTargetId = this.Model.Id + "-valuationScoreCardComments",
+                                                                                                                                     InsertionMode = InsertionMode.InsertAfter,
+                                                                                                                                     OnSuccess = "afterLoadMore(data, 'loadMoreValuationScoreCardComments', 'loadMoreValuationScoreCardCommentsLink')"
+                                                                                                                                 }, new { id = "loadMoreValuationScoreCardCommentsLink" })
                     </td>
                 </tr>
             }

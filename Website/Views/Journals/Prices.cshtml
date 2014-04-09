@@ -1,25 +1,24 @@
-﻿@using PagedList
-@using QOAM.Core
-@using QOAM.Website.Models
+﻿@using QOAM.Website.Models
 @model QOAM.Website.ViewModels.Journals.PricesViewModel
 <div class="row">
-    
+
     <div class="col-md-4">
         <div class="panel panel-primary text-center">
             <div class="panel-heading">Recently paid</div>
-            <div class="panel-body">                
-                @if (Model.Journal.JournalPrice != null && Model.Journal.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted) != null)
+
+            <div class="panel-body">
+                @if (Model.ValuationJournalPrices.Count > 0)
                 {
-                    <p>Last paid price:<br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted).Price)</p>
+                    <p>Last paid price:<br /> @Html.DisplayFor(m => Model.ValuationJournalPrices[0].Price)</p>
                 }
-                
-                @if (Model.JournalPrices.TotalItemCount == 0 || Model.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted) == null)
+
+                @if (Model.ValuationJournalPrices.TotalItemCount == 0)
                 {
                     <p>Currently there is no actual price evidence for this journal.</p>
                 }
                 else
                 {
-                    <p><a id="@Model.Id-viewJournalPrices" title="View all paid prices">View all paid prices</a></p>
+                    <p><a id="@Model.Id-viewJournalValuationPrices" title="View all paid prices">View all paid prices</a></p>
                 }
             </div>
         </div>
@@ -29,7 +28,7 @@
         <div class="panel panel-primary text-center">
             <div class="panel-heading">Institutional price</div>
             <div class="panel-body">
-                
+
                 @if (User.Identity.IsAuthenticated)
                 {
                     if (Model.InstitutionJournal == null)
@@ -38,10 +37,10 @@
                     }
                     else
                     {
-                        <p>Your institution has a special license for this journal.:</p>
+                        <p>Your institution has a special license for this journal:</p>
 
                         <p>
-                            @Html.Raw(string.Format("For the institution\'s price see the <a href=\"{0}\" title=\"Journal website\">web site</a>", Model.InstitutionJournal.Link))
+                            For the institution's price see the <a href="@Model.InstitutionJournal.Link" title="Journal website">web site</a>
                         </p>
                     }
 
@@ -50,7 +49,7 @@
                         <p>@Html.ActionLink("Edit the institution's journal license", "InstitutionJournalLicense", new { Model.Id, Model.RefererUrl })</p>
                     }
                 }
-                
+
                 @if (Model.InstitutionJournals.TotalItemCount == 0)
                 {
                     <p>Currently, there are no institutions with a special license for this journal.</p>
@@ -58,7 +57,7 @@
                 else
                 {
                     <p>
-                        @Html.Raw(string.Format("Currently, {0} institution(s) have a special license for this journal. View <a id=\"{1}-viewInstitutionJournalPrices\" title=\"View the institutional prices\">the list of institution prices</a>.", Model.InstitutionJournals.TotalItemCount, Model.Id))
+                        Currently, @Model.InstitutionJournals.TotalItemCount institution(s) have a special license for this journal. View <a id="@Model.Id-viewInstitutionJournalPrices" title="View the institutional prices">the list of institution prices</a>.
                     </p>
                 }
             </div>
@@ -69,32 +68,28 @@
         <div class="panel panel-primary text-center">
             <div class="panel-heading">Price on website</div>
             <div class="panel-body">
-                @if (Model.Journal.JournalPrices.Count(x => x.ScoreCard != null && !x.ScoreCard.Submitted) == 0)
+                @if (Model.BaseJournalPrices.TotalItemCount == 0)
                 {
                     <p>
-                        For the standard price see the web site of this journal
+                        <a href="@Model.Journal.Link">For the standard price see the web site of this journal.</a>
                     </p>
                 }
                 else
                 {
-                    if (Model.Journal.JournalPrice != null && Model.Journal.JournalPrices.Count(x => x.ScoreCard != null && !x.ScoreCard.Submitted) > 0)
-                    {
-                        <p>Last price found on website: <br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId != 0 && x.ScoreCard != null && !x.ScoreCard.Submitted).Price)</p>
-                    }
-
-                    <p><a id="@Model.Id-viewJournalStandardPrices" title="View all prices found on the website">View all prices found on the website</a></p>
+                    <p>Last price found on website: <br /> @Html.DisplayFor(m => Model.BaseJournalPrices[0].Price)</p>
+                 
+                    <p><a id="@Model.Id-viewJournalBasePrices" title="View all prices found on the website">View all prices found on the website</a></p>
                 }
-                
             </div>
         </div>
     </div>
 </div>
 
 <div>
-    @Html.Raw(string.Format("Read more about <a href=\"{0}\" title=\"Price information\">Price information</a>.", Url.Action("About", "Home") + "#price-information"))
+    Read more about <a href="@Url.Action("About", "Home" )#price-information" title="Price information">Price information</a>.
 </div>
 
-<div id="@Model.Id-journalStandardPricesModal" class="modal fade">
+<div id="@Model.Id-journalBasePricesModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -102,7 +97,7 @@
                 <h3>All prices found on the website</h3>
             </div>
             <div class="modal-body">
-                @if (Model.JournalPrices.Count(x => x.ScoreCardId > 0 && !x.ScoreCard.Submitted) == 0)
+                @if (Model.BaseJournalPrices.TotalItemCount == 0)
                 {
                     <p>For the standard price see the web site of this journal</p>
                 }
@@ -116,15 +111,20 @@
                                 <th>Price</th>
                             </tr>
                         </thead>
-                        <tbody id="@Model.Id-journal-standard-prices">
-                            @{ Html.RenderPartial("JournalPrices", Model.JournalPrices.Where(x => x.ScoreCardId != 0 && x.ScoreCard != null && !x.ScoreCard.Submitted).ToPagedList(Model.Page, Model.PageSize)); }
+                        <tbody id="@Model.Id-journal-base-prices">
+                            @Html.Partial("BaseJournalPrices", Model.BaseJournalPrices)
                         </tbody>
-                        <tfoot id="loadMoreJournalPrices">
-                            @if (Model.JournalPrices.HasNextPage)
+                        <tfoot id="@Model.Id-loadMoreBaseJournalPrices">
+                            @if (this.Model.BaseJournalPrices.HasNextPage)
                             {
                                 <tr>
                                     <td colspan="9">
-                                        @Ajax.ActionLink("Load more", "JournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions { UpdateTargetId = Model.Id + "-journal-standard-prices", InsertionMode = InsertionMode.InsertAfter, OnSuccess = "afterLoadMore(data, 'loadMoreJournalPrices', 'loadMoreJournalPricesLink')" }, new { id = "loadMoreJournalPricesLink" })
+                                        @(Ajax.ActionLink("Load more", "BaseJournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions
+                                                                                                                                                                 {
+                                                                                                                                                                     UpdateTargetId = Model.Id + "-journal-base-prices",
+                                                                                                                                                                     InsertionMode = InsertionMode.InsertAfter,
+                                                                                                                                                                     OnSuccess = "afterLoadMore(data, '@Model.Id-loadMoreBaseJournalPrices', '@Model.Id-loadMoreBaseJournalPricesLink')"
+                                                                                                                                                                 }, new { id = "@Model.Id-loadMoreBaseJournalPricesLink" }))
                                     </td>
                                 </tr>
                             }
@@ -139,15 +139,15 @@
     </div>
 </div>
 
-<div id="@Model.Id-journalPricesModal" class="modal fade">
+<div id="@Model.Id-journalValuationPricesModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3>Paid prices</h3>
             </div>
-            <div class="modal-body">                
-                @if (Model.JournalPrices.Count(x => x.ScoreCardId == 0 || x.ScoreCard.Submitted) == 0)
+            <div class="modal-body">
+                @if (Model.ValuationJournalPrices.TotalItemCount == 0)
                 {
                     <p>There are no paid prices for this journal.</p>
                 }
@@ -161,15 +161,20 @@
                                 <th>Price</th>
                             </tr>
                         </thead>
-                        <tbody id="@Model.Id-journal-prices">
-                            @{ Html.RenderPartial("JournalPrices", Model.JournalPrices.Where(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted).ToPagedList(Model.Page, Model.PageSize)); }
+                        <tbody id="@Model.Id-valuation-journal-prices">
+                            @Html.Partial("ValuationJournalPrices", Model.ValuationJournalPrices)
                         </tbody>
-                        <tfoot id="loadMoreJournalStandardPrices">
-                            @if (Model.JournalPrices.HasNextPage)
+                        <tfoot id="@Model.Id-loadMoreValuationJournalPrices">
+                            @if (Model.ValuationJournalPrices.HasNextPage)
                             {
                                 <tr>
                                     <td colspan="9">
-                                        @Ajax.ActionLink("Load more", "JournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions { UpdateTargetId = Model.Id + "-journal-prices", InsertionMode = InsertionMode.InsertAfter, OnSuccess = "afterLoadMore(data, 'loadMoreJournalStandardPrices', 'loadMoreJournalPricesLink')" }, new { id = "loadMoreJournalPricesLink" })
+                                        @(Ajax.ActionLink("Load more", "ValuationJournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions
+                                                                                                                                                                 {
+                                                                                                                                                                     UpdateTargetId = Model.Id + "-valuation-journal-prices",
+                                                                                                                                                                     InsertionMode = InsertionMode.InsertAfter,
+                                                                                                                                                                     OnSuccess = "afterLoadMore(data, 'loadMoreValuationJournalPrices', 'loadMoreValuationJournalPricesLink')"
+                                                                                                                                                                 }, new { id = "loadMoreValuationJournalPricesLink" }))
                                     </td>
                                 </tr>
                             }
@@ -235,12 +240,12 @@
     $(function() {
         var journalsController = new JournalsController();
         journalsController.prices(
-            '@Model.Id-viewJournalPrices',
-            '@Model.Id-journalPricesModal',
+            '@Model.Id-viewJournalBasePrices',
+            '@Model.Id-journalBasePricesModal',
             '@Model.Id-viewInstitutionJournalPrices',
             '@Model.Id-institutionJournalPricesModal',
-            '@Model.Id-viewJournalStandardPrices',
-            '@Model.Id-journalStandardPricesModal'
+            '@Model.Id-viewJournalValuationPrices',
+            '@Model.Id-journalValuationPricesModal'
         );
     });
 </script>

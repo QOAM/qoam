@@ -6,7 +6,7 @@
 
     using QOAM.Core.Helpers;
 
-    public class LanguageRepository : Repository, ILanguageRepository
+    public class LanguageRepository : Repository<Language>, ILanguageRepository
     {
         public LanguageRepository(ApplicationDbContext dbContext)
             : base(dbContext)

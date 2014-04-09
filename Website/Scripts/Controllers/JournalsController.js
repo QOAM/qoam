@@ -14,6 +14,7 @@
                 min: parseFloat(sliderElement.attr('data-val-range-min')),
                 max: parseFloat(sliderElement.attr('data-val-range-max')),
                 value: parseFloat(sliderElement.val()) || 0,
+                tooltip: 'show',
                 normalizeValue: function(value) {
                     return Number(value).toFixed(1);
                 }
@@ -36,7 +37,7 @@
         });
 
         $('ul.journal-tabs').on('click', 'li.active a', function () {
-            $('.journal-tabs li.active, .tab-pane.active').removeClass('active');
+            $(this).closest('.tabbablesearch').find('.journal-tabs li.active, .tab-pane.active').removeClass('active');
             return false;
         });
     };

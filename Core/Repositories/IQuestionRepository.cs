@@ -4,6 +4,7 @@
 
     public interface IQuestionRepository
     {
-        IList<Question> All { get; }
+        IList<Question> BaseScoreCardQuestions { get; }
+        IList<Question> ValuationScoreCardQuestions { get; }
     }
 }

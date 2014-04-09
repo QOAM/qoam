@@ -38,7 +38,7 @@
             Console.WriteLine(Strings.CheckingExpiredJournals);
 
             var expirationChecker = container.Resolve<ExpirationChecker>();
-            var result = expirationChecker.ArchiveScoreCardsThatHaveExpired();
+            var result = expirationChecker.ArchiveBaseScoreCardsThatHaveExpired();
 
             Console.WriteLine(Strings.CheckedExpiredJournals, result.NumberOfArchivedScoreCards);
         }

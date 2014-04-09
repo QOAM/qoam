@@ -17,7 +17,7 @@
             bundles.Add(new ScriptBundle("~/scripts/typeahead").Include("~/Scripts/typeahead.bundle.js"));
             bundles.Add(new ScriptBundle("~/scripts/slider").Include("~/Scripts/bootstrap-slider.js"));
 
-            bundles.Add(new StyleBundle("~/styles/application").Include("~/Content/bootstrap.css", "~/Content/Site.css", "~/Content/slider.css"));
+            bundles.Add(new StyleBundle("~/styles/application") { Orderer = orderer }.Include("~/Content/bootstrap.css", "~/Content/Site.css", "~/Content/slider.css"));
             bundles.Add(new StyleBundle("~/styles/fancybox").Include("~/Content/iPicture.css", "~/Content/jquery.fancybox.css"));
             bundles.Add(new StyleBundle("~/styles/typeahead").Include("~/Content/typeahead.js-bootstrap.css"));
         }

@@ -9,6 +9,7 @@
     using PagedList;
 
     using QOAM.Core;
+    using QOAM.Core.Helpers;
     using QOAM.Core.Repositories.Filters;
 
     public class IndexViewModel : PagedViewModel
@@ -46,7 +47,7 @@
         [Range(MinimumScoreValue, MaximumScoreValue)]
         public float? MinimumValuationScore { get; set; }
 
-        [DisplayName("Only Journal Score Cards of authors and editors")]
+        [DisplayName("Only journals with Valuation Score Card")]
         public bool SubmittedOnly { get; set; }
 
         public JournalSortMode SortBy { get; set; }
@@ -60,9 +61,9 @@
         {
             return new JournalFilter
                        {
-                           Title = this.Title,
-                           Issn = this.Issn,
-                           Publisher = this.Publisher,
+                           Title = this.Title.TrimSafe(),
+                           Issn = this.Issn.TrimSafe(),
+                           Publisher = this.Publisher.TrimSafe(),
                            Discipline = this.Discipline,
                            Language = this.Language,
                            MinimumBaseScore = this.MinimumBaseScore,

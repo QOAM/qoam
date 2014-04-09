@@ -1,0 +1,34 @@
+﻿@model PagedList.IPagedList<QOAM.Core.ValuationScoreCard>
+
+@foreach (var scoreCard in Model)
+{
+    var isOwner = User.Identity.IsAuthenticated && scoreCard.UserProfile.Id == ViewBag.User.Id;
+    var nextPage = Model.IsLastPage ? (int?)null : (Model.PageNumber + 1);
+    
+    <tr data-next-page="@nextPage">
+        <td>
+            @if (isOwner)
+            {
+                @Html.ActionLink(scoreCard.Journal.Title, "ValuationScoreCard", "Score", new { id = scoreCard.JournalId }, null)
+            }
+            else
+            {
+                @Html.ActionLink(scoreCard.Journal.Title, "BaseScoreCardDetails", "Score", new { id = scoreCard.Id }, null)
+            }
+        </td>
+        <td>@(scoreCard.Score.ValuationScore.AverageScore.HasValue ? scoreCard.Score.ValuationScore.AverageScore.Value.ToString("0.0") : "-")</td>
+        <td>@scoreCard.Journal.JournalScore.ValuationScore.AverageScore.ToString("0.0")</td>
+        <td>@Html.DisplayFor(_ => scoreCard.State)</td>
+        <td>@(scoreCard.DateExpiration.HasValue ? scoreCard.DateExpiration.ToString() : "-")</td>
+        <td>
+            @if (isOwner)
+            {
+                <span class="glyphicon glyphicon-pencil"></span> @Html.ActionLink("Edit", "ValuationScoreCard", "Score", new { id = scoreCard.JournalId }, null)
+            }
+            else
+            {
+                <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("View", "BaseScoreCardDetails", "Score", new { id = scoreCard.Id }, null)
+            }
+        </td>
+    </tr>
+}

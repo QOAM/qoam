@@ -50,7 +50,7 @@
             if (institution == null)
             {
                 institution = new Institution { Name = saml20Identity.GetInstitutionShortName(), ShortName = saml20Identity.GetInstitutionShortName() };
-                this.institutionRepository.Insert(institution);
+                this.institutionRepository.InsertOrUpdate(institution);
             }
 
             var user = this.UserProfileRepository.Find(saml20Identity.GetUserName());
@@ -60,7 +60,7 @@
                 return this.RedirectToAction("LoginFailure", new { reason = LoginFailureReason.UsernameAlreadyExists });
             }
 
-            this.UserProfileRepository.Insert(new UserProfile
+            this.UserProfileRepository.InsertOrUpdate(new UserProfile
                                                   {
                                                       UserName = saml20Identity.GetUserName(),
                                                       DisplayName = saml20Identity.GetDisplayName(),

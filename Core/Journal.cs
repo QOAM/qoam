@@ -9,10 +9,12 @@
         public Journal()
         {
             this.InstitutionJournalPrices = new List<InstitutionJournal>();
-            this.JournalPrices = new List<JournalPrice>();
+            this.BaseJournalPrices = new List<BaseJournalPrice>();
+            this.ValuationJournalPrices = new List<ValuationJournalPrice>();
             this.JournalScores = new List<JournalScore>();
             this.Languages = new List<Language>();
-            this.ScoreCards = new List<ScoreCard>();
+            this.BaseScoreCards = new List<BaseScoreCard>();
+            this.ValuationScoreCards = new List<ValuationScoreCard>();
             this.Subjects = new List<Subject>();
         }
 
@@ -31,16 +33,16 @@
         public int CountryId { get; set; }
         public int PublisherId { get; set; }
         public int? JournalScoreId { get; set; }
-        public int? JournalPriceId { get; set; }
         public virtual Country Country { get; set; }
         public virtual Publisher Publisher { get; set; }
         public virtual JournalScore JournalScore { get; set; }
-        public virtual JournalPrice JournalPrice { get; set; }
         public virtual ICollection<InstitutionJournal> InstitutionJournalPrices { get; set; }
-        public virtual ICollection<JournalPrice> JournalPrices { get; set; }
+        public virtual ICollection<BaseJournalPrice> BaseJournalPrices { get; set; }
+        public virtual ICollection<ValuationJournalPrice> ValuationJournalPrices { get; set; }
         public virtual ICollection<JournalScore> JournalScores { get; set; }
         public virtual ICollection<Language> Languages { get; set; }
-        public virtual ICollection<ScoreCard> ScoreCards { get; set; }
+        public virtual ICollection<BaseScoreCard> BaseScoreCards { get; set; }
+        public virtual ICollection<ValuationScoreCard> ValuationScoreCards { get; set; }
         public virtual ICollection<Subject> Subjects { get; set; }
     }
 }

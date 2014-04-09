@@ -12,8 +12,7 @@
         IPagedList<InstitutionJournal> Find(InstitutionJournalFilter filter);
         IList<InstitutionJournal> FindAll(InstitutionJournalFilter filter);
 
-        void Insert(InstitutionJournal journalPrice);
-        void Update(InstitutionJournal journalPrice);
+        void InsertOrUpdate(InstitutionJournal journalPrice);
         void Save();
     }
 }

@@ -10,7 +10,6 @@
     using AttributeRouting.Web.Mvc;
 
     using QOAM.Core;
-    using QOAM.Core.Helpers;
     using QOAM.Core.Repositories;
     using QOAM.Website.Helpers;
     using QOAM.Website.Models;
@@ -21,34 +20,41 @@
     [RoutePrefix("score")]
     public class ScoreController : ApplicationController
     {
-        private readonly IScoreCardRepository scoreCardRepository;
+        private readonly IBaseScoreCardRepository baseScoreCardRepository;
         private readonly IScoreCardVersionRepository scoreCardVersionRepository;
         private readonly IJournalRepository journalRepository;
         private readonly ILanguageRepository languageRepository;
         private readonly ISubjectRepository subjectRepository;
         private readonly IQuestionRepository questionRepository;
-        private readonly IJournalPriceRepository journalPriceRepository;
+        private readonly IBaseJournalPriceRepository baseJournalPriceRepository;
         private readonly GeneralSettings generalSettings;
+        private readonly IValuationScoreCardRepository valuationScoreCardRepository;
+        private readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
 
-        public ScoreController(IScoreCardRepository scoreCardRepository, IScoreCardVersionRepository scoreCardVersionRepository, IJournalRepository journalRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IQuestionRepository questionRepository, IJournalPriceRepository journalPriceRepository, GeneralSettings generalSettings, IUserProfileRepository userProfileRepository, IAuthentication authentication)
+        public ScoreController(IBaseScoreCardRepository baseScoreCardRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, IValuationJournalPriceRepository valuationJournalPriceRepository,  IScoreCardVersionRepository scoreCardVersionRepository, IJournalRepository journalRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IQuestionRepository questionRepository, GeneralSettings generalSettings, IUserProfileRepository userProfileRepository, IAuthentication authentication)
             : base(userProfileRepository, authentication)
         {
-            Requires.NotNull(scoreCardRepository, "scoreCardRepository");
+            
+            Requires.NotNull(baseScoreCardRepository, "baseScoreCardRepository");
+            Requires.NotNull(baseJournalPriceRepository, "baseJournalPriceRepository");
+            Requires.NotNull(valuationScoreCardRepository, "valuationScoreCardRepository");
+            Requires.NotNull(valuationJournalPriceRepository, "valuationJournalPriceRepository");
             Requires.NotNull(scoreCardVersionRepository, "scoreCardVersionRepository");
             Requires.NotNull(journalRepository, "journalRepository");
             Requires.NotNull(languageRepository, "languageRepository");
             Requires.NotNull(subjectRepository, "keywordRepository");
             Requires.NotNull(questionRepository, "questionRepository");
-            Requires.NotNull(journalPriceRepository, "institutionJournalRepository");
             Requires.NotNull(generalSettings, "generalSettings");
 
-            this.scoreCardRepository = scoreCardRepository;
+            this.baseScoreCardRepository = baseScoreCardRepository;
             this.scoreCardVersionRepository = scoreCardVersionRepository;
+            this.valuationJournalPriceRepository = valuationJournalPriceRepository;
+            this.valuationScoreCardRepository = valuationScoreCardRepository;
             this.journalRepository = journalRepository;
             this.languageRepository = languageRepository;
             this.subjectRepository = subjectRepository;
             this.questionRepository = questionRepository;
-            this.journalPriceRepository = journalPriceRepository;
+            this.baseJournalPriceRepository = baseJournalPriceRepository;
             this.generalSettings = generalSettings;
         }
 
@@ -62,170 +68,135 @@
             return this.View(model);
         }
 
-        [GET("journal/{id:int}")]
+        [GET("basescorecard/{id:int}")]
         [Authorize]
-        public ViewResult Journal(int id)
+        public ViewResult BaseScoreCard(int id)
         {
-            var scoreCard = this.scoreCardRepository.Find(id, this.Authentication.CurrentUserId);
-            var journalPrice = this.journalPriceRepository.Find(id, this.Authentication.CurrentUserId);
-
+            var scoreCard = this.baseScoreCardRepository.Find(id, this.Authentication.CurrentUserId);
+            
             if (scoreCard == null)
             {
-                scoreCard = this.CreateNewScoreCard(id);
+                scoreCard = this.CreateNewBaseScoreCard(id);
 
-                this.scoreCardRepository.Insert(scoreCard);
-                this.scoreCardRepository.Save();
+                this.baseScoreCardRepository.InsertOrUpdate(scoreCard);
+                this.baseScoreCardRepository.Save();
             }
 
-            var scoreViewModel = scoreCard.ToViewModel();
+            var journalPrice = this.baseJournalPriceRepository.Find(id, this.Authentication.CurrentUserId);
+
+            if (journalPrice == null)
+            {
+                journalPrice = this.CreateNewBaseJournalPrice(scoreCard);
+
+                this.baseJournalPriceRepository.InsertOrUpdate(journalPrice);
+                this.baseJournalPriceRepository.Save();
+            }
+
+            var scoreViewModel = scoreCard.ToBaseScoreCardViewModel();
             scoreViewModel.Price = journalPrice.ToViewModel();
             scoreViewModel.Currencies = ((Currency[])Enum.GetValues(typeof(Currency))).Select(c => new KeyValuePair<Currency, string>(c, c.GetName()));
 
             return this.View(scoreViewModel);
         }
 
-        [POST("journal/{id:int}")]
+        [POST("basescorecard/{id:int}")]
         [Authorize]
         [ValidateJsonAntiForgeryToken]
-        public ActionResult Journal(int id, ScoreViewModel model)
+        public ActionResult BaseScoreCard(int id, BaseScoreCardViewModel model)
         {
-            var scoreCard = this.scoreCardRepository.Find(id);
-
-            if (scoreCard.UserProfileId != this.Authentication.CurrentUserId)
+            if (!this.ModelState.IsValid)
             {
-                return new HttpUnauthorizedResult();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            if (this.ModelState.IsValid)
+            var scoreCard = this.baseScoreCardRepository.Find(id, this.Authentication.CurrentUserId);
+            model.UpdateScoreCard(scoreCard, this.generalSettings.ScoreCardLifeTime);
+
+            // It is important to note that the JournalScore of the Journal is updated in a 
+            // trigger in the datavaluation and not in the code. This is done to prevent concurrency 
+            // issues from leading to incorrect totals and averages for the journal score
+
+            this.baseScoreCardRepository.InsertOrUpdate(scoreCard);
+            this.baseScoreCardRepository.Save();
+
+            var journalPrice = this.baseJournalPriceRepository.Find(id, this.Authentication.CurrentUserId);
+            model.UpdateJournalPrice(journalPrice);
+
+            this.baseJournalPriceRepository.InsertOrUpdate(journalPrice);
+            this.valuationJournalPriceRepository.Save();
+
+            return this.Json(true);
+        }
+        
+        [GET("valuationscorecard/{id:int}")]
+        [Authorize]
+        public ViewResult ValuationScoreCard(int id)
+        {
+            var scoreCard = this.valuationScoreCardRepository.Find(id, this.Authentication.CurrentUserId);
+            var journalPrice = this.valuationJournalPriceRepository.Find(id, this.Authentication.CurrentUserId);
+
+            if (scoreCard == null)
             {
-                // Update the score card using the values of the model
-                model.UpdateScoreCard(scoreCard, this.generalSettings.ScoreCardLifeTime);
-                
-                // It is important to note that the JournalScore of the Journal is updated in a 
-                // trigger in the database and not in the code. This is done to prevent concurrency 
-                // issues from leading to incorrect totals and averages for the journal score
+                scoreCard = this.CreateNewValuationScoreCard(id);
 
-                this.scoreCardRepository.Update(scoreCard);
-                this.scoreCardRepository.Save();
-
-                if (model.Price.FeeType == null)
-                {
-                    model.Price.FeeType = FeeType.Absent;
-                }
-
-                var isNewJournalPrice = model.Price.JournalPriceId == 0;
-
-                if (isNewJournalPrice)
-                {
-                    if (model.Price.Amount.HasValue)
-                    {
-                        if (model.Submitted)
-                        {
-                            model.Price.FeeType = FeeType.Article; // set the default for backwards compatibility
-                        }
-
-                        var journalPrice = model.Price.ToJournalPrice();
-                        journalPrice.ScoreCardId = scoreCard.Id;
-                        journalPrice.JournalId = model.Journal.Id;
-                        journalPrice.UserProfileId = this.Authentication.CurrentUserId;
-                        journalPrice.DateAdded = DateTime.Now;
-                        journalPrice.Price.Amount = model.Price.Amount;
-                        journalPrice.Price.Currency = model.Price.Currency;
-                        journalPrice.Price.FeeType = model.Price.FeeType;
-
-                        if (!model.Submitted)
-                        {
-                            if (model.Price.FeeType == FeeType.NoFee || model.Price.FeeType == FeeType.Absent)
-                            {
-                                journalPrice.Price.Amount = 0;
-                                journalPrice.Price.Currency = null;
-                            }
-                        }
-
-                        this.journalPriceRepository.Insert(journalPrice);
-
-                        var journal = this.journalRepository.Find(model.Journal.Id);
-                        journal.JournalPrice = journalPrice;
-
-                        this.journalRepository.Update(journal);
-                    }
-                    else
-                    {
-                        var journalPrice = new JournalPrice();
-                        journalPrice.ScoreCardId = scoreCard.Id;
-                        journalPrice.UserProfileId = this.Authentication.CurrentUserId;
-                        journalPrice.DateAdded = DateTime.Now;
-                        journalPrice.Price.FeeType = model.Price.FeeType;
-                        journalPrice.Price.Amount = 0;
-                        journalPrice.JournalId = model.Journal.Id;
-                        journalPrice.Price.Currency = null;
-
-                        this.journalPriceRepository.Insert(journalPrice);
-                    }
-                }
-                else
-                {
-                    var journalPrice = this.journalPriceRepository.Find(model.Price.JournalPriceId);
-                    if (journalPrice.JournalId != model.Journal.Id)
-                    {
-                        return new HttpUnauthorizedResult();
-                    }
-
-                    if (journalPrice.UserProfileId != this.Authentication.CurrentUserId)
-                    {
-                        return new HttpUnauthorizedResult();
-                    }
-
-                    if (model.Price.Amount.HasValue)
-                    {
-                        if (model.Submitted)
-                        {
-                            model.Price.FeeType = FeeType.Article; // set the default for backwards compatibility
-                        }
-
-                        journalPrice.ScoreCardId = scoreCard.Id;
-                        journalPrice.DateAdded = DateTime.Now;
-                        journalPrice.Price.Amount = model.Price.Amount;
-                        journalPrice.Price.Currency = model.Price.Currency;
-                        journalPrice.Price.FeeType = model.Price.FeeType;
-
-                        if (!model.Submitted)
-                        {
-                            if (model.Price.FeeType == FeeType.NoFee || model.Price.FeeType == FeeType.Absent)
-                            {
-                                journalPrice.Price.Amount = 0;
-                                journalPrice.Price.Currency = null;
-                            }                            
-                        }
-                        this.journalPriceRepository.Update(journalPrice);
-
-                        var journal = this.journalRepository.Find(model.Journal.Id);
-                        journal.JournalPrice = journalPrice;
-
-                        this.journalRepository.Update(journal);
-                    }
-                    else
-                    {
-                        this.journalPriceRepository.Delete(journalPrice);
-                    }
-                }
-
-                this.journalPriceRepository.Save();
-
-                return this.Json(true);
+                this.valuationScoreCardRepository.InsertOrUpdate(scoreCard);
+                this.valuationScoreCardRepository.Save();
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var scoreViewModel = scoreCard.ToValuationScoreCardViewModel();
+            scoreViewModel.Price = journalPrice.ToViewModel();
+            scoreViewModel.Currencies = ((Currency[])Enum.GetValues(typeof(Currency))).Select(c => new KeyValuePair<Currency, string>(c, c.GetName()));
+
+            return this.View(scoreViewModel);
         }
 
-        [GET("{id:int}")]
-        public ActionResult Details(int id)
+        [POST("valuationscorecard/{id:int}")]
+        [Authorize]
+        [ValidateJsonAntiForgeryToken]
+        public ActionResult ValuationScoreCard(int id, ValuationScoreCardViewModel model)
         {
-            var scoreCard = this.scoreCardRepository.Find(id);
+            if (!this.ModelState.IsValid)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var scoreCard = this.valuationScoreCardRepository.Find(id, this.Authentication.CurrentUserId);
+
+            model.UpdateScoreCard(scoreCard, this.generalSettings.ScoreCardLifeTime);
+
+            // It is important to note that the JournalScore of the Journal is updated in a 
+            // trigger in the datavaluation and not in the code. This is done to prevent concurrency 
+            // issues from leading to incorrect totals and averages for the journal score
+
+            this.valuationScoreCardRepository.InsertOrUpdate(scoreCard);
+            this.valuationScoreCardRepository.Save();
+
+            var journalPrice = this.valuationJournalPriceRepository.Find(id, this.Authentication.CurrentUserId) ?? this.CreateNewValuationJournalPrice(scoreCard);
+
+            model.UpdateJournalPrice(journalPrice);
+
+            if (model.HasPrice)
+            {
+                this.valuationJournalPriceRepository.InsertOrUpdate(journalPrice);    
+            }
+            else
+            {
+                this.valuationJournalPriceRepository.Delete(journalPrice);
+            }
+
+            this.valuationJournalPriceRepository.Save();
+
+            return this.Json(true);
+        }
+
+        [GET("basescorecard/details/{id:int}")]
+        public ActionResult BaseScoreCardDetails(int id)
+        {
+            var scoreCard = this.baseScoreCardRepository.Find(id);
 
             if (scoreCard.UserProfileId == this.Authentication.CurrentUserId)
             {
-                return this.RedirectToAction("Journal", scoreCard.JournalId);
+                return this.RedirectToAction("BaseScoreCard", scoreCard.JournalId);
             }
 
             if (scoreCard.State != ScoreCardState.Published)
@@ -233,22 +204,71 @@
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
 
-            this.ViewBag.JournalPrice = this.journalPriceRepository.Find(scoreCard.JournalId, scoreCard.UserProfileId);
+            this.ViewBag.JournalPrice = this.baseJournalPriceRepository.Find(scoreCard.JournalId, scoreCard.UserProfileId);
 
             return this.View(scoreCard);
         }
 
-        private ScoreCard CreateNewScoreCard(int id)
+        [GET("valuationscorecard/details/{id:int}")]
+        public ActionResult ValuationScoreCardDetails(int id)
         {
-            return new ScoreCard
+            var scoreCard = this.valuationScoreCardRepository.Find(id);
+
+            if (scoreCard.UserProfileId == this.Authentication.CurrentUserId)
+            {
+                return this.RedirectToAction("ValuationScoreCard", scoreCard.JournalId);
+            }
+
+            if (scoreCard.State != ScoreCardState.Published)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
+            this.ViewBag.JournalPrice = this.valuationJournalPriceRepository.Find(scoreCard.JournalId, scoreCard.UserProfileId);
+
+            return this.View(scoreCard);
+        }
+
+        private BaseScoreCard CreateNewBaseScoreCard(int id)
+        {
+            return new BaseScoreCard
                        {
                            DateStarted = DateTime.Now,
                            UserProfileId = this.Authentication.CurrentUserId,
                            Version = this.scoreCardVersionRepository.FindCurrent(),
                            Journal = this.journalRepository.Find(id),
-                           QuestionScores = this.questionRepository.All.Select(q => new QuestionScore { Question = q, Score = Score.Undecided }).ToSet(),
-                           Score = new ScoreCardScore(),
+                           QuestionScores = this.questionRepository.BaseScoreCardQuestions.Select(q => new BaseQuestionScore { Question = q, Score = Score.Undecided }).ToList(),
+                           Score = new BaseScoreCardScore(),
                        };
+        }
+
+        private ValuationScoreCard CreateNewValuationScoreCard(int id)
+        {
+            return new ValuationScoreCard
+            {
+                DateStarted = DateTime.Now,
+                UserProfileId = this.Authentication.CurrentUserId,
+                Version = this.scoreCardVersionRepository.FindCurrent(),
+                Journal = this.journalRepository.Find(id),
+                QuestionScores = this.questionRepository.ValuationScoreCardQuestions.Select(q => new ValuationQuestionScore { Question = q, Score = Score.Undecided }).ToList(),
+                Score = new ValuationScoreCardScore(),
+            };
+        }
+
+        private BaseJournalPrice CreateNewBaseJournalPrice(BaseScoreCard scoreCard)
+        {
+            return new BaseJournalPrice
+                   {
+                       BaseScoreCardId = scoreCard.Id, 
+                       JournalId = scoreCard.JournalId,
+                       UserProfileId = this.Authentication.CurrentUserId,
+                       DateAdded = DateTime.Now,
+                   };
+        }
+
+        private ValuationJournalPrice CreateNewValuationJournalPrice(ValuationScoreCard scoreCard)
+        {
+            return new ValuationJournalPrice { ValuationScoreCardId = scoreCard.Id, JournalId = scoreCard.JournalId, UserProfileId = this.Authentication.CurrentUserId };
         }
     }
 }

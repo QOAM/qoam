@@ -14,7 +14,7 @@
         Institution Find(int id);
         Institution Find(string shortName);
 
-        void Insert(Institution institution);
+        void InsertOrUpdate(Institution institution);
 
         IQueryable<string> Names(string query);
 

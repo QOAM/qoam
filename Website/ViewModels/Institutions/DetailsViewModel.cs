@@ -11,7 +11,7 @@
     {
         public DetailsViewModel()
         {
-            this.SortBy = UserProfileSortMode.NumberOfJournalScoreCards;
+            this.SortBy = UserProfileSortMode.NumberOfBaseJournalScoreCards;
             this.Sort = SortDirection.Descending;
         }
 
@@ -19,8 +19,8 @@
 
         public Institution Institution { get; set; }
         public IPagedList<UserProfile> UserProfiles { get; set; }
-        public ScoreCardStats ScoreCardStats { get; set; }
-
+        public ScoreCardStats BaseScoreCardStats { get; set; }
+        public ScoreCardStats ValuationScoreCardStats { get; set; }
         public UserProfileSortMode SortBy { get; set; }
         public SortDirection Sort { get; set; }
 

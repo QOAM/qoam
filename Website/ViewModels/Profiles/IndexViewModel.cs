@@ -8,13 +8,14 @@
     using PagedList;
 
     using QOAM.Core;
+    using QOAM.Core.Helpers;
     using QOAM.Core.Repositories.Filters;
 
     public class IndexViewModel : PagedViewModel
     {
         public IndexViewModel()
         {
-            this.SortBy = UserProfileSortMode.NumberOfJournalScoreCards;
+            this.SortBy = UserProfileSortMode.NumberOfBaseJournalScoreCards;
             this.Sort = SortDirection.Descending;
         }
 
@@ -34,7 +35,15 @@
 
         public UserProfileFilter ToFilter()
         {
-            return new UserProfileFilter { Name = this.Name, InstitutionId = this.Institution, SortMode = this.SortBy, SortDirection = this.Sort, PageNumber = this.Page, PageSize = this.PageSize, };
+            return new UserProfileFilter
+                   {
+                       Name = this.Name.TrimSafe(),
+                       InstitutionId = this.Institution,
+                       SortMode = this.SortBy,
+                       SortDirection = this.Sort,
+                       PageNumber = this.Page,
+                       PageSize = this.PageSize,
+                   };
         }
     }
 }

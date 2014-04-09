@@ -18,7 +18,7 @@
             // Act
 
             // Assert
-            Assert.Equal(UserProfileSortMode.NumberOfJournalScoreCards, indexViewModel.SortBy);
+            Assert.Equal(UserProfileSortMode.NumberOfBaseJournalScoreCards, indexViewModel.SortBy);
         }
 
         [Fact]

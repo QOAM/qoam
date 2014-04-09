@@ -43,14 +43,14 @@
         public void JournalPricesActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/journalprices/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.JournalPrices(null));
+            "~/journals/5/journalprices/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.BaseJournalPrices(null));
         }
 
         [Fact]
         public void JournalPricesActionDoesNotRequireHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.JournalPrices(null)));
+            Assert.False(ActionRequiresHttps(x => x.BaseJournalPrices(null)));
         }
 
         [Fact]
@@ -71,14 +71,14 @@
         public void ScoresActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/scores/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.Scores(null));
+            "~/journals/5/scores/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.BaseScoreCards(null));
         }
 
         [Fact]
         public void ScoresActionDoesNotRequireHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.Scores(null)));
+            Assert.False(ActionRequiresHttps(x => x.BaseScoreCards(null)));
         }
 
         [Fact]

@@ -71,14 +71,14 @@
         public void ScoreCardsActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/profiles/5/scorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<ProfilesController>(x => x.ScoreCards(null));
+            "~/profiles/5/scorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<ProfilesController>(x => x.BaseScoreCards(null));
         }
 
         [Fact]
         public void ScoreCardsActionDoesNotRequireHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.ScoreCards(null)));
+            Assert.False(ActionRequiresHttps(x => x.BaseScoreCards(null)));
         }
 
         [Fact]

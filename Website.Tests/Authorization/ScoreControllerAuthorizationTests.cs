@@ -17,21 +17,21 @@
         public void DetailsActionDoesNotRequireAuthorizedUser()
         {
             // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.Details(5)));
+            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.BaseScoreCardDetails(5)));
         }
 
         [Fact]
         public void JournalActionAuthorizedForAdminUser()
         {
             // Assert
-            Assert.True(ActionRequiresAuthorizedUser(x => x.Journal(5)));
+            Assert.True(ActionRequiresAuthorizedUser(x => x.BaseScoreCard(5)));
         }
 
         [Fact]
         public void JournalActionWithModelAuthorizedForAdminUser()
         {
             // Assert
-            Assert.True(ActionRequiresAuthorizedUser(x => x.Journal(5, null)));
+            Assert.True(ActionRequiresAuthorizedUser(x => x.BaseScoreCard(5, null)));
         }
     }
 }

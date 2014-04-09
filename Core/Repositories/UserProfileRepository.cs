@@ -10,7 +10,7 @@
 
     using QOAM.Core.Repositories.Filters;
 
-    public class UserProfileRepository : Repository, IUserProfileRepository
+    public class UserProfileRepository : Repository<UserProfile>, IUserProfileRepository
     {
         public UserProfileRepository(ApplicationDbContext dbContext)
             : base(dbContext)
@@ -45,11 +45,6 @@
             return this.DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower());
         }
 
-        public void Insert(UserProfile userProfile)
-        {
-            this.DbContext.UserProfiles.Add(userProfile);
-        }
-
         public IPagedList<UserProfile> Search(UserProfileFilter filter)
         {
             var query = this.DbContext.UserProfiles.Include(j => j.Institution);
@@ -75,10 +70,14 @@
                     return filter.SortDirection == SortDirection.Ascending ? query.OrderBy(u => u.DisplayName) : query.OrderByDescending(u => u.DisplayName);
                 case UserProfileSortMode.DateRegistered:
                     return filter.SortDirection == SortDirection.Ascending ? query.OrderBy(u => u.DateRegistered) : query.OrderByDescending(u => u.DateRegistered);
-                case UserProfileSortMode.NumberOfJournalScoreCards:
-                    return filter.SortDirection == SortDirection.Ascending ? 
-                        query.OrderBy(u => u.NumberOfScoreCards).ThenBy(u => u.DisplayName) :
-                        query.OrderByDescending(u => u.NumberOfScoreCards).ThenBy(u => u.DisplayName);
+                case UserProfileSortMode.NumberOfBaseJournalScoreCards:
+                    return filter.SortDirection == SortDirection.Ascending ?
+                        query.OrderBy(u => u.NumberOfBaseScoreCards).ThenBy(u => u.DisplayName) :
+                        query.OrderByDescending(u => u.NumberOfBaseScoreCards).ThenBy(u => u.DisplayName);
+                case UserProfileSortMode.NumberOfValuationJournalScoreCards:
+                    return filter.SortDirection == SortDirection.Ascending ?
+                        query.OrderBy(u => u.NumberOfValuationScoreCards).ThenBy(u => u.DisplayName) :
+                        query.OrderByDescending(u => u.NumberOfValuationScoreCards).ThenBy(u => u.DisplayName);
                 case UserProfileSortMode.Institution:
                     return filter.SortDirection == SortDirection.Ascending ?
                         query.OrderBy(u => u.Institution.Name).ThenBy(u => u.DisplayName) :

@@ -16,15 +16,27 @@
                 <h5>@Model.Institution.Name</h5>
 
                 <div>
-                    @Model.ScoreCardStats.NumberOfPublishedScoreCards Score card(s) published
+                    @Model.BaseScoreCardStats.NumberOfPublishedScoreCards Base Score card(s) published
                 </div>
 
                 <div>
-                    @Model.ScoreCardStats.NumberOfExpiredScoreCards Score card(s) expired
+                    @Model.BaseScoreCardStats.NumberOfExpiredScoreCards Base Score card(s) expired
                 </div>
 
                 <div class="bottommargin">
-                    @Model.ScoreCardStats.NumberOfUnpublishedScoreCards Score card(s) unfinished
+                    @Model.BaseScoreCardStats.NumberOfUnpublishedScoreCards Base Score card(s) unfinished
+                </div>
+
+                <div>
+                    @Model.ValuationScoreCardStats.NumberOfPublishedScoreCards Valuation Score card(s) published
+                </div>
+
+                <div>
+                    @Model.ValuationScoreCardStats.NumberOfExpiredScoreCards Valuation Score card(s) expired
+                </div>
+
+                <div class="bottommargin">
+                    @Model.ValuationScoreCardStats.NumberOfUnpublishedScoreCards Valuation Score card(s) unfinished
                 </div>
             </div>
         </div>
@@ -50,7 +62,8 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Registration date</th>
-                                <th>Number of JSC's</th>
+                                <th>Number of Base JSC's</th>
+                                <th>Number of Valuation JSC's</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -60,7 +73,8 @@
                                 <tr>
                                     <td>@Html.ActionLink(profile.DisplayName, "Details", "Profiles", new { id = profile.Id }, null)</td>
                                     <td>@profile.DateRegistered</td>
-                                    <td>@profile.NumberOfScoreCards</td>
+                                    <td>@profile.NumberOfBaseScoreCards</td>
+                                    <td>@profile.NumberOfValuationScoreCards</td>
                                     <td>
                                         <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("View", "Details", "Profiles", new { id = profile.Id }, null)
                                     

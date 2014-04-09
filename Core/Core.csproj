@@ -87,6 +87,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseQuestionScore.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Migrations\201404301016419_SplitJSC.cs" />
+    <Compile Include="Migrations\201404301016419_SplitJSC.Designer.cs">
+      <DependentUpon>201404301016419_SplitJSC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405071404008_ConvertDataAfterSplit.cs" />
+    <Compile Include="Migrations\201405071404008_ConvertDataAfterSplit.Designer.cs">
+      <DependentUpon>201405071404008_ConvertDataAfterSplit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405230828312_RemoveJournalPriceFromJournal.cs" />
+    <Compile Include="Migrations\201405230828312_RemoveJournalPriceFromJournal.Designer.cs">
+      <DependentUpon>201405230828312_RemoveJournalPriceFromJournal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201405230928436_AddTotalNumberOfScoreCards.cs" />
+    <Compile Include="Migrations\201405230928436_AddTotalNumberOfScoreCards.Designer.cs">
+      <DependentUpon>201405230928436_AddTotalNumberOfScoreCards.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionKeyExtensions.cs" />
+    <Compile Include="Repositories\IValuationJournalPriceRepository.cs" />
+    <Compile Include="Repositories\IValuationScoreCardRepository.cs" />
+    <Compile Include="Repositories\ValuationJournalPriceRepository.cs" />
+    <Compile Include="Repositories\ValuationScoreCardRepository.cs" />
+    <Compile Include="SwotVerdict.cs" />
+    <Compile Include="ValuationJournalPrice.cs" />
+    <Compile Include="ValuationQuestionScore.cs" />
+    <Compile Include="ValuationScoreCardScore.cs" />
+    <Compile Include="ValuationScoreCard.cs" />
     <Compile Include="Export\ExportJournal.cs" />
     <Compile Include="Export\JournalsExport.cs" />
     <Compile Include="Helpers\ContextExtensions.cs" />
@@ -105,7 +133,7 @@
     <Compile Include="Import\DoajImport.cs" />
     <Compile Include="Import\DoajImportRecord.cs" />
     <Compile Include="Import\UlrichsImport.cs" />
-    <Compile Include="JournalPrice.cs" />
+    <Compile Include="BaseJournalPrice.cs" />
     <Compile Include="Migrations\201403171503325_InitialCreate.cs" />
     <Compile Include="Migrations\201403171503325_InitialCreate.Designer.cs">
       <DependentUpon>201403171503325_InitialCreate.cs</DependentUpon>
@@ -132,25 +160,25 @@
     <Compile Include="Repositories\Filters\UserProfileFilter.cs" />
     <Compile Include="Repositories\Filters\UserProfileSortMode.cs" />
     <Compile Include="Repositories\IInstitutionJournalRepository.cs" />
-    <Compile Include="Repositories\IJournalPriceRepository.cs" />
+    <Compile Include="Repositories\IBaseJournalPriceRepository.cs" />
     <Compile Include="Repositories\InstitutionJournalRepository.cs" />
     <Compile Include="Repositories\InstitutionRepository.cs" />
     <Compile Include="Repositories\IQuestionRepository.cs" />
-    <Compile Include="Repositories\IScoreCardRepository.cs" />
+    <Compile Include="Repositories\IBaseScoreCardRepository.cs" />
     <Compile Include="Repositories\Filters\JournalSortMode.cs" />
     <Compile Include="Repositories\IScoreCardVersionRepository.cs" />
-    <Compile Include="Repositories\JournalPriceRepository.cs" />
+    <Compile Include="Repositories\BaseJournalPriceRepository.cs" />
     <Compile Include="Repositories\JournalRepository.cs" />
     <Compile Include="Repositories\LanguageRepository.cs" />
     <Compile Include="Repositories\PublisherRepository.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="Repositories\ScoreCardRepository.cs" />
+    <Compile Include="Repositories\BaseScoreCardRepository.cs" />
     <Compile Include="Repositories\ScoreCardVersionRepository.cs" />
     <Compile Include="Repositories\SubjectRepository.cs" />
     <Compile Include="Repositories\UserProfileRepository.cs" />
     <Compile Include="ScoreCardCategoryScore.cs" />
-    <Compile Include="ScoreCardScore.cs" />
+    <Compile Include="BaseScoreCardScore.cs" />
     <Compile Include="ScoreCardStats.cs" />
     <Compile Include="ScoreCardVersion.cs" />
     <Compile Include="Scripts\ResourceReader.cs" />
@@ -183,7 +211,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />
     <Compile Include="QuestionCategory.cs" />
-    <Compile Include="QuestionScore.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />
     <Compile Include="Repositories\IInstitutionRepository.cs" />
     <Compile Include="Repositories\IJournalRepository.cs" />
@@ -192,10 +219,7 @@
     <Compile Include="Repositories\IPublisherRepository.cs" />
     <Compile Include="Repositories\IUserProfileRepository.cs" />
     <Compile Include="Repositories\Filters\JournalFilter.cs" />
-    <Compile Include="ScoreCard.cs" />
-    <Compile Include="SwotVerdict.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="BaseScoreCard.cs" />
     <Compile Include="UserProfile.cs" />
     <Compile Include="Web References\Ulrichs\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -221,6 +245,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201403171503325_InitialCreate.resx">
       <DependentUpon>201403171503325_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404301016419_SplitJSC.resx">
+      <DependentUpon>201404301016419_SplitJSC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405071404008_ConvertDataAfterSplit.resx">
+      <DependentUpon>201405071404008_ConvertDataAfterSplit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405230828312_RemoveJournalPriceFromJournal.resx">
+      <DependentUpon>201405230828312_RemoveJournalPriceFromJournal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201405230928436_AddTotalNumberOfScoreCards.resx">
+      <DependentUpon>201405230928436_AddTotalNumberOfScoreCards.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -248,7 +284,13 @@
     <EmbeddedResource Include="Scripts\201403171503325_InitialCreate_MembershipTables.sql" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\Copy after split JSC.sql" />
     <EmbeddedResource Include="Scripts\201403171503325_InitialCreate_trigger_Scorecards.Published.sql" />
+    <EmbeddedResource Include="Scripts\20140409_Trigger_BaseScorecards.Published.sql" />
+    <EmbeddedResource Include="Scripts\20140409_Trigger_ValuationScorecards.Published.sql" />
+    <EmbeddedResource Include="Scripts\20140523_Trigger_BaseScorecards.Published.sql" />
+    <EmbeddedResource Include="Scripts\20140523_Trigger_ValuationScorecards.Published.sql" />
+    <EmbeddedResource Include="Scripts\UpdateTotalNumberOfScoreCards.sql" />
     <Content Include="Scripts\CleanupAfterUlrichs.sql" />
     <EmbeddedResource Include="Scripts\201403171503325_InitialCreate_function_MinimumFloat.sql" />
   </ItemGroup>

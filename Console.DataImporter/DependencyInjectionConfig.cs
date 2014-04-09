@@ -1,40 +1,53 @@
 ﻿namespace QOAM.Console.DataImporter
 {
-    using System;
-
     using Autofac;
 
     using QOAM.Core.Import;
     using QOAM.Core.Repositories;
 
-    internal static class DependencyInjectionConfig
+    public static class DependencyInjectionConfig
     {
-        internal static IContainer RegisterComponents()
+        public static IContainer RegisterComponents()
         {
             var builder = new ContainerBuilder();
-
-            builder.RegisterAssemblyTypes(typeof(JournalRepository).Assembly)
-                .Where(IsRepositoryType)
-                .AsImplementedInterfaces()
-                .SingleInstance();
             
-            builder.Register(_ => ImportSettings.Current).SingleInstance();
-            builder.Register(c => c.Resolve<ImportSettings>().General).SingleInstance();
-            builder.Register(c => c.Resolve<ImportSettings>().Doaj).SingleInstance();
-            builder.Register(c => c.Resolve<ImportSettings>().Ulrichs).SingleInstance();
-            builder.RegisterType<ApplicationDbContext>().SingleInstance();
+            RegisterRepositories(builder);
+            RegisterImportAndExportComponents(builder);
+            RegisterConfigurationSections(builder);
+            RegisterMiscellaneousComponents(builder);
+            
+            return builder.Build();
+        }
+
+        private static void RegisterRepositories(ContainerBuilder builder)
+        {
+            builder.RegisterType<CountryRepository>().As<ICountryRepository>().SingleInstance();
+            builder.RegisterType<JournalRepository>().As<IJournalRepository>().SingleInstance();
+            builder.RegisterType<LanguageRepository>().As<ILanguageRepository>().SingleInstance();
+            builder.RegisterType<PublisherRepository>().As<IPublisherRepository>().SingleInstance();
+            builder.RegisterType<SubjectRepository>().As<ISubjectRepository>().SingleInstance();
+        }
+
+        private static void RegisterImportAndExportComponents(ContainerBuilder builder)
+        {
             builder.RegisterType<JournalsImport>().SingleInstance();
             builder.RegisterType<DoajImport>().SingleInstance();
             builder.RegisterType<UlrichsClient>().SingleInstance();
             builder.RegisterType<UlrichsImport>().SingleInstance();
             builder.RegisterType<UlrichsCache>().SingleInstance();
-
-            return builder.Build();
         }
 
-        private static bool IsRepositoryType(Type t)
+        private static void RegisterConfigurationSections(ContainerBuilder builder)
         {
-            return t.Name.EndsWith("Repository");
+            builder.Register(_ => ImportSettings.Current).SingleInstance();
+            builder.Register(c => c.Resolve<ImportSettings>().General).SingleInstance();
+            builder.Register(c => c.Resolve<ImportSettings>().Doaj).SingleInstance();
+            builder.Register(c => c.Resolve<ImportSettings>().Ulrichs).SingleInstance();
+        }
+
+        private static void RegisterMiscellaneousComponents(ContainerBuilder builder)
+        {
+            builder.RegisterType<ApplicationDbContext>().SingleInstance();
         }
     }
 }

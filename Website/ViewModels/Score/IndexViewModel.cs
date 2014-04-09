@@ -8,6 +8,7 @@
     using PagedList;
 
     using QOAM.Core;
+    using QOAM.Core.Helpers;
     using QOAM.Core.Repositories.Filters;
 
     public class IndexViewModel : PagedViewModel
@@ -44,7 +45,18 @@
 
         public JournalFilter ToFilter()
         {
-            return new JournalFilter { Title = this.Title, Issn = this.Issn, Publisher = this.Publisher, Discipline = this.Discipline, Language = this.Language, SortMode = this.SortBy, SortDirection = this.Sort, PageNumber = this.Page, PageSize = this.PageSize, };
+            return new JournalFilter
+                   {
+                       Title = this.Title.TrimSafe(), 
+                       Issn = this.Issn.TrimSafe(), 
+                       Publisher = this.Publisher.TrimSafe(), 
+                       Discipline = this.Discipline, 
+                       Language = this.Language, 
+                       SortMode = this.SortBy, 
+                       SortDirection = this.Sort, 
+                       PageNumber = this.Page, 
+                       PageSize = this.PageSize,
+                   };
         }
     }
 }

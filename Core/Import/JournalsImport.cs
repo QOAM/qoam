@@ -93,7 +93,7 @@
                     currentJournal.Subjects.Add(subject);
                 }
 
-                this.journalRepository.Update(currentJournal);
+                this.journalRepository.InsertOrUpdate(currentJournal);
             }
 
             this.journalRepository.Save();
@@ -109,7 +109,7 @@
                 journal.Subjects = journal.Subjects.Select(s => subjects.First(u => string.Equals(u.Name, s.Name, StringComparison.InvariantCultureIgnoreCase))).ToSet();
                 journal.DateAdded = DateTime.Now;
 
-                this.journalRepository.Insert(journal);
+                this.journalRepository.InsertOrUpdate(journal);
             }
 
             this.journalRepository.Save();
@@ -121,7 +121,7 @@
             {
                 journal.JournalScore = new JournalScore { JournalId = journal.Id };
 
-                this.journalRepository.Update(journal);
+                this.journalRepository.InsertOrUpdate(journal);
             }
 
             this.journalRepository.Save();

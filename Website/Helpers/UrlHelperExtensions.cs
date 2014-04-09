@@ -22,13 +22,15 @@
                                                                                                                           { UserProfileSortMode.Name, SortDirection.Ascending },
                                                                                                                           { UserProfileSortMode.Institution, SortDirection.Ascending },
                                                                                                                           { UserProfileSortMode.DateRegistered, SortDirection.Descending },
-                                                                                                                          { UserProfileSortMode.NumberOfJournalScoreCards, SortDirection.Descending },
+                                                                                                                          { UserProfileSortMode.NumberOfBaseJournalScoreCards, SortDirection.Descending },
+                                                                                                                          { UserProfileSortMode.NumberOfValuationJournalScoreCards, SortDirection.Descending },
                                                                                                                       };
 
         private static readonly IDictionary<InstitutionSortMode, SortDirection> DefaultSortDirectionInstitution = new Dictionary<InstitutionSortMode, SortDirection>
                                                                                                                       {
                                                                                                                           { InstitutionSortMode.Name, SortDirection.Ascending },
-                                                                                                                          { InstitutionSortMode.NumberOfJournalScoreCards, SortDirection.Descending },
+                                                                                                                          { InstitutionSortMode.NumberOfBaseJournalScoreCards, SortDirection.Descending },
+                                                                                                                          { InstitutionSortMode.NumberOfValuationJournalScoreCards, SortDirection.Descending },
                                                                                                                       };
 
         public static string SortUrl(this UrlHelper helper, JournalSortMode newSortMode, JournalSortMode currentSortMode, SortDirection sortDirection)
@@ -67,7 +69,7 @@
             return helper.Action(null, routeValues);
         }
 
-        private static SortDirection GetOrderDirection(JournalSortMode newSortMode, JournalSortMode currentSortMode, SortDirection sortDirection)
+        public static SortDirection GetOrderDirection(JournalSortMode newSortMode, JournalSortMode currentSortMode, SortDirection sortDirection)
         {
             if (currentSortMode == newSortMode)
             {
@@ -77,7 +79,7 @@
             return DefaultSortDirectionJournal[newSortMode];
         }
 
-        private static SortDirection GetOrderDirection(UserProfileSortMode newSortMode, UserProfileSortMode currentSortMode, SortDirection sortDirection)
+        public static SortDirection GetOrderDirection(UserProfileSortMode newSortMode, UserProfileSortMode currentSortMode, SortDirection sortDirection)
         {
             if (currentSortMode == newSortMode)
             {
@@ -87,7 +89,7 @@
             return DefaultSortDirectionUserProfile[newSortMode];
         }
 
-        private static SortDirection GetOrderDirection(InstitutionSortMode newSortMode, InstitutionSortMode currentSortMode, SortDirection sortDirection)
+        public static SortDirection GetOrderDirection(InstitutionSortMode newSortMode, InstitutionSortMode currentSortMode, SortDirection sortDirection)
         {
             if (currentSortMode == newSortMode)
             {

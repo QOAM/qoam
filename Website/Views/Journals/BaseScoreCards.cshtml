@@ -1,0 +1,25 @@
+﻿@model QOAM.Website.ViewModels.Journals.ScoreCardsViewModel
+
+@foreach (var scoreCard in Model.BaseScoreCards)
+{
+    var nextPage = Model.BaseScoreCards.IsLastPage ? (int?)null : (Model.BaseScoreCards.PageNumber + 1);
+
+    <tr data-next-page="@nextPage">
+        <td>@Html.ActionLink(scoreCard.UserProfile.DisplayName, "Details", "Profiles", new { id = scoreCard.UserProfileId }, null)</td>
+        <td>@scoreCard.DatePublished.Value.ToShortDateString()</td>
+        <td>@Scores.AverageScore(scoreCard.Score.EditorialInformationScore)</td>
+        <td>@Scores.AverageScore(scoreCard.Score.PeerReviewScore)</td>
+        <td>@Scores.AverageScore(scoreCard.Score.GovernanceScore)</td>
+        <td>@Scores.AverageScore(scoreCard.Score.ProcessScore)</td>
+        <td>
+            @if (User.Identity.IsAuthenticated && scoreCard.UserProfileId == ViewBag.User.Id)
+            {
+                <span class="glyphicon glyphicon-pencil"></span>@Html.ActionLink("Edit", "BaseScoreCard", "Score", new { id = scoreCard.JournalId }, null)
+            }
+            else
+            {
+                <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("View", "BaseScoreCardDetails", "Score", new { id = scoreCard.Id }, null)
+            }
+        </td>
+    </tr>
+}

@@ -10,8 +10,10 @@
         public int Id { get; set; }
 
         public UserProfile UserProfile { get; set; }
-        public IPagedList<ScoreCard> ScoreCards { get; set; }
-        public ScoreCardStats ScoreCardStats { get; set; }
+        public IPagedList<BaseScoreCard> BaseScoreCards { get; set; }
+        public ScoreCardStats BaseScoreCardStats { get; set; }
+        public IPagedList<ValuationScoreCard> ValuationScoreCards { get; set; }
+        public ScoreCardStats ValuationScoreCardStats { get; set; }
 
         public ScoreCardFilter ToScoreCardFilter(ScoreCardState? state)
         {

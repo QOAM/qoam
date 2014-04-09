@@ -9,7 +9,7 @@
 
     using QOAM.Core.Repositories.Filters;
 
-    public class InstitutionRepository : Repository, IInstitutionRepository
+    public class InstitutionRepository : Repository<Institution>, IInstitutionRepository
     {
         public InstitutionRepository(ApplicationDbContext dbContext)
             : base(dbContext)
@@ -56,21 +56,20 @@
             return this.DbContext.Institutions.Find(id);
         }
 
-        public void Insert(Institution publisher)
-        {
-            this.DbContext.Institutions.Add(publisher);
-        }
-
         private static IOrderedQueryable<Institution> ApplyOrdering(IQueryable<Institution> query, InstitutionFilter filter)
         {
             switch (filter.SortMode)
             {
                 case InstitutionSortMode.Name:
                     return filter.SortDirection == SortDirection.Ascending ? query.OrderBy(u => u.Name) : query.OrderByDescending(u => u.Name);
-                case InstitutionSortMode.NumberOfJournalScoreCards:
+                case InstitutionSortMode.NumberOfBaseJournalScoreCards:
                     return filter.SortDirection == SortDirection.Ascending ?
-                        query.OrderBy(u => u.NumberOfScoreCards).ThenBy(u => u.Name) :
-                        query.OrderByDescending(u => u.NumberOfScoreCards).ThenBy(u => u.Name);
+                        query.OrderBy(u => u.NumberOfBaseScoreCards).ThenBy(u => u.Name) :
+                        query.OrderByDescending(u => u.NumberOfBaseScoreCards).ThenBy(u => u.Name);
+                case InstitutionSortMode.NumberOfValuationJournalScoreCards:
+                    return filter.SortDirection == SortDirection.Ascending ?
+                        query.OrderBy(u => u.NumberOfValuationScoreCards).ThenBy(u => u.Name) :
+                        query.OrderByDescending(u => u.NumberOfValuationScoreCards).ThenBy(u => u.Name);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
