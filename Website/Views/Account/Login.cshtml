@@ -13,18 +13,9 @@
         <p>@ViewStrings.Account_Login_Instructions_Part2 </p>
  
         <br />
-        @using (Html.BeginForm("ExternalLogin", "Account", new { ViewBag.ReturnUrl }))
-        {
-            @Html.AntiForgeryToken()
-            <fieldset>
-                <legend>@ViewStrings.Account_Login_Help</legend>
-
-                <p>
-                    <button type="submit" class="btn btn-primary" name="provider" value="@ViewBag.SurfContextClientData.AuthenticationClient.ProviderName" title="@ViewStrings.Account_Login_Help">
-                        @Strings.LogIn
-                    </button>
-                </p>
-            </fieldset>
-        }
+        
+        <p>
+            <a href="~/Login.ashx" class="btn btn-primary" title="@ViewStrings.Account_Login_Help">@Strings.LogIn</a>
+        </p>
     </div>
 </div>

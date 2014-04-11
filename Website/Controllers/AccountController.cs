@@ -1,18 +1,18 @@
 ﻿namespace QOAM.Website.Controllers
 {
     using System;
-    using System.Linq;
     using System.Web.Mvc;
 
     using AttributeRouting;
     using AttributeRouting.Web.Mvc;
 
-    using DotNetOpenAuth.AspNet;
-
     using QOAM.Core;
     using QOAM.Core.Repositories;
     using QOAM.Website.Helpers;
     using QOAM.Website.Models;
+    using QOAM.Website.Models.SAML;
+
+    using SAML2.Identity;
 
     using Validation;
     
@@ -34,72 +34,45 @@
         public ViewResult Login(string returnUrl)
         {
             this.ViewBag.ReturnUrl = returnUrl;
-            this.ViewBag.SurfContextClientData = this.Authentication.RegisteredClientData.First(c => c.AuthenticationClient.GetType() == typeof(SurfConextClient));
 
             return this.View();
         }
 
-        [POST("logoff")]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public RedirectToRouteResult LogOff()
+        [GET("login/callback")]
+        public ActionResult LoginCallback(string returnUrl)
         {
-            this.Authentication.Logout();
+            var saml20Identity = HttpContext.Session[typeof(Saml20Identity).FullName] as Saml20Identity;
 
-            return this.RedirectToAction("Index", "Home");
-        }
-
-        [POST("externallogin")]
-        [ValidateAntiForgeryToken]
-        public ExternalLoginResult ExternalLogin(string provider, string returnUrl)
-        {
-            return new ExternalLoginResult(provider, this.Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
-        }
-
-        [GET("externallogincallback")]
-        public ActionResult ExternalLoginCallback(string returnUrl)
-        {
-            AuthenticationResult result;
-
-            try
+            if (saml20Identity == null || !saml20Identity.IsAuthenticated)
             {
-                result = this.Authentication.VerifyAuthentication(this.Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
-            }
-            catch (Exception)
-            {
-                return this.RedirectToAction("ExternalLoginFailure", new { reason = LoginFailureReason.ExternalAuthenticationFailed });
-            }
-
-            if (!result.IsSuccessful)
-            {
-                return this.RedirectToAction("ExternalLoginFailure", new { reason = LoginFailureReason.ExternalAuthenticationFailed });
+                return this.RedirectToAction("LoginFailure", new { reason = LoginFailureReason.ExternalAuthenticationFailed });
             }
             
-            if (this.Authentication.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
+            if (this.Authentication.Login(saml20Identity.GetProvider(), saml20Identity.GetProviderUserId(), createPersistentCookie: false))
             {
                 return this.RedirectToLocal(returnUrl);
             }
 
-            var institution = this.institutionRepository.Find(result.GetInstitutionShortName());
+            var institution = this.institutionRepository.Find(saml20Identity.GetInstitutionShortName());
 
             if (institution == null)
             {
-                institution = new Institution { Name = result.GetInstitutionShortName(), ShortName = result.GetInstitutionShortName() };
+                institution = new Institution { Name = saml20Identity.GetInstitutionShortName(), ShortName = saml20Identity.GetInstitutionShortName() };
                 this.institutionRepository.Insert(institution);
             }
 
-            var user = this.UserProfileRepository.Find(result.GetUsername());
+            var user = this.UserProfileRepository.Find(saml20Identity.GetUserName());
 
             if (user != null)
             {
-                return this.RedirectToAction("ExternalLoginFailure", new { reason = LoginFailureReason.UsernameAlreadyExists });
+                return this.RedirectToAction("LoginFailure", new { reason = LoginFailureReason.UsernameAlreadyExists });
             }
 
             this.UserProfileRepository.Insert(new UserProfile
                                                   {
-                                                      UserName = result.GetUsername(),
-                                                      DisplayName = result.GetDisplayName(),
-                                                      Email = result.GetEmail(),
+                                                      UserName = saml20Identity.GetUserName(),
+                                                      DisplayName = saml20Identity.GetDisplayName(),
+                                                      Email = saml20Identity.GetEmail(),
                                                       DateRegistered = DateTime.Now,
                                                       Institution = institution
                                                   });
@@ -108,19 +81,19 @@
             {
                 this.UserProfileRepository.Save();
 
-                this.Authentication.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, result.GetUsername());
-                this.Authentication.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false);
+                this.Authentication.CreateOrUpdateAccount(saml20Identity.GetProvider(), saml20Identity.GetProviderUserId(), saml20Identity.GetUserName());
+                this.Authentication.Login(saml20Identity.GetProvider(), saml20Identity.GetProviderUserId(), createPersistentCookie: false);
 
                 return this.RedirectToLocal(returnUrl);
             }
             catch
             {
-                return this.RedirectToAction("ExternalLoginFailure", new { reason = LoginFailureReason.SaveFailed });
+                return this.RedirectToAction("LoginFailure", new { reason = LoginFailureReason.SaveFailed });
             }
         }
 
-        [GET("externalloginfailure")]
-        public ViewResult ExternalLoginFailure(LoginFailureReason reason)
+        [GET("login/failure")]
+        public ViewResult LoginFailure(LoginFailureReason reason = LoginFailureReason.ExternalAuthenticationFailed)
         {
             return this.View(reason);
         }

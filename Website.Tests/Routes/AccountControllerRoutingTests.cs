@@ -26,62 +26,34 @@
         }
 
         [Fact]
-        public void LogOffActionRoutedToWithCorrectUrlAndVerb()
+        public void LoginCallbackActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/account/logoff/".WithMethod(HttpVerbs.Post).ShouldMapTo<AccountController>(x => x.LogOff());
+            "~/account/login/callback/".WithMethod(HttpVerbs.Get).ShouldMapTo<AccountController>(x => x.LoginCallback(null));
         }
 
         [Fact]
-        public void LogOffActionDoesNotRequireHttps()
+        public void LoginCallbackActionDoesNotRequireHttps()
         {
             // Assert
-            Assert.True(ActionRequiresHttps(x => x.LogOff()));
+            Assert.True(ActionRequiresHttps(x => x.LoginCallback(null)));
         }
 
         [Fact]
-        public void ExternalLoginActionRoutedToWithCorrectUrlAndVerb()
+        public void LoginFailureActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/account/externallogin/".WithMethod(HttpVerbs.Post).ShouldMapTo<AccountController>(x => x.ExternalLogin(null, null));
-        }
-
-        [Fact]
-        public void ExternalLoginActionDoesNotRequireHttps()
-        {
-            // Assert
-            Assert.True(ActionRequiresHttps(x => x.ExternalLogin(null, null)));
-        }
-
-        [Fact]
-        public void ExternalLoginCallbackActionRoutedToWithCorrectUrlAndVerb()
-        {
-            // Assert    
-            "~/account/externallogincallback/".WithMethod(HttpVerbs.Get).ShouldMapTo<AccountController>(x => x.ExternalLoginCallback(null));
-        }
-
-        [Fact]
-        public void ExternalLoginCallbackActionDoesNotRequireHttps()
-        {
-            // Assert
-            Assert.True(ActionRequiresHttps(x => x.ExternalLoginCallback(null)));
-        }
-
-        [Fact]
-        public void ExternalLoginFailureActionRoutedToWithCorrectUrlAndVerb()
-        {
-            // Assert    
-            var method = "~/account/externalloginfailure/".WithMethod(HttpVerbs.Get);
+            var method = "~/account/login/failure/".WithMethod(HttpVerbs.Get);
             method.Values["reason"] = LoginFailureReason.ExternalAuthenticationFailed;
 
-            method.ShouldMapTo<AccountController>(x => x.ExternalLoginFailure(LoginFailureReason.ExternalAuthenticationFailed));
+            method.ShouldMapTo<AccountController>(x => x.LoginFailure(LoginFailureReason.ExternalAuthenticationFailed));
         }
 
         [Fact]
-        public void ExternalLoginFailureActionDoesNotRequireHttps()
+        public void LoginFailureActionDoesNotRequireHttps()
         {
             // Assert
-            Assert.True(ActionRequiresHttps(x => x.ExternalLoginFailure(LoginFailureReason.ExternalAuthenticationFailed)));
+            Assert.True(ActionRequiresHttps(x => x.LoginFailure(LoginFailureReason.ExternalAuthenticationFailed)));
         }
 
     }

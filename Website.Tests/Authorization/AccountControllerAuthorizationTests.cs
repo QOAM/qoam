@@ -15,31 +15,17 @@
         }
 
         [Fact]
-        public void LogOffActioRequiresAuthorizedUser()
+        public void LoginCallbackActionDoesNotRequireAuthorizedUser()
         {
             // Assert
-            Assert.True(ActionRequiresAuthorizedUser(x => x.LogOff()));
+            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.LoginCallback(null)));
         }
 
         [Fact]
-        public void ExternalLoginActionDoesNotRequireAuthorizedUser()
+        public void LoginFailureActionDoesNotRequireAuthorizedUser()
         {
             // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.ExternalLogin(null, null)));
-        }
-
-        [Fact]
-        public void ExternalLoginCallbackActionDoesNotRequireAuthorizedUser()
-        {
-            // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.ExternalLoginCallback(null)));
-        }
-
-        [Fact]
-        public void ExternalLoginFailureActionDoesNotRequireAuthorizedUser()
-        {
-            // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.ExternalLoginFailure(LoginFailureReason.ExternalAuthenticationFailed)));
+            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.LoginFailure(LoginFailureReason.ExternalAuthenticationFailed)));
         }
     }
 }

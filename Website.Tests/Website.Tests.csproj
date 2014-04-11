@@ -94,6 +94,10 @@
     <Reference Include="Rhino.Mocks">
       <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
+    <Reference Include="SAML2, Version=2.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SAML2.2.4.4.0\lib\net35\SAML2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -171,6 +175,8 @@
     <Compile Include="Controllers\AdminControllerTests.cs" />
     <Compile Include="Controllers\Helpers\HttpContextHelper.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
+    <Compile Include="Models\SAML\SamlIdentityExtensionsTests.cs" />
+    <Compile Include="Models\SAML\SamlAttributesTests.cs" />
     <Compile Include="Models\QuestionExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routes\AccountControllerRoutingTests.cs" />

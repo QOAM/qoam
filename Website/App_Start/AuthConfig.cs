@@ -10,7 +10,7 @@
 
         public static void RegisterAuth()
         {
-            OAuthWebSecurity.RegisterClient(new SurfConextClient(OAMarketSettings.Current.SurfContext), SurfContextDisplayName, null);
+            OAuthWebSecurity.RegisterClient(new SurfConextClient(), SurfContextDisplayName, null);
         }
     }
 }

@@ -44,15 +44,6 @@
             }
         }
 
-        [ConfigurationProperty(SurfContextSectionName)]
-        public SurfContextSettings SurfContext
-        {
-            get
-            {
-                return (SurfContextSettings)this.Sections[SurfContextSectionName];
-            }
-        }
-
         [ConfigurationProperty(GeneralImportSectionName)]
         public GeneralImportSettings GeneralImport
         {

@@ -63,9 +63,9 @@ namespace QOAM.Website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Log in failure.
         /// </summary>
-        public static string Account_ExternalLoginFailure_Title {
+        public static string Account_LoginFailure_Title {
             get {
-                return ResourceManager.GetString("Account_ExternalLoginFailure_Title", resourceCulture);
+                return ResourceManager.GetString("Account_LoginFailure_Title", resourceCulture);
             }
         }
         

@@ -1,12 +1,9 @@
 ﻿namespace QOAM.Website.Tests.Controllers
 {
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Web.Mvc;
 
     using DotNetOpenAuth.AspNet;
-
-    using Microsoft.Web.WebPages.OAuth;
 
     using Moq;
 
@@ -22,7 +19,6 @@
     public class AccountControllerTests
     {
         private const string ReturnUrl = "/home/about/";
-        private const string Provider = "provider";
 
         [Fact]
         public void LoginStoresReturnUrlInViewBag()
@@ -38,74 +34,7 @@
         }
 
         [Fact]
-        public void LoginStoresSurfContextClientDataInViewBag()
-        {
-            // Arrange
-            var accountController = CreateAccountController();
-
-            // Act
-            var viewResult = accountController.Login(ReturnUrl);
-
-            // Assert
-            Assert.IsType<SurfConextClient>(viewResult.ViewBag.SurfContextClientData.AuthenticationClient);
-        }
-
-        [Fact]
-        public void LogOffDoesLogoutOfAuthenticatedUser()
-        {
-            // Arrange
-            var authenticationMock = new Mock<IAuthentication>();
-            var accountController = CreateAccountController(authenticationMock.Object);
-
-            // Act
-            accountController.LogOff();
-
-            // Assert
-            authenticationMock.Verify(a => a.Logout(), Times.Once());
-        }
-
-        [Fact]
-        public void LogOffWillRedirectToHomePage()
-        {
-            // Arrange
-            var accountController = CreateAccountController();
-
-            // Act
-            var redirectToRouteResult = accountController.LogOff();
-
-            // Assert
-            Assert.Equal("Home", redirectToRouteResult.RouteValues["controller"]);
-            Assert.Equal("Index", redirectToRouteResult.RouteValues["action"]);
-        }
-
-        [Fact]
-        public void ExternalLoginReturnsExternalLoginResultWithPassedProvider()
-        {
-            // Arrange
-            var accountController = CreateAccountController();
-
-            // Act
-            var externalLoginResult = accountController.ExternalLogin(Provider, ReturnUrl);
-
-            // Assert
-            Assert.Equal(Provider, externalLoginResult.Provider);
-        }
-
-        [Fact]
-        public void ExternalLoginReturnsExternalLoginResultWithPassedReturnUrl()
-        {
-            // Arrange
-            var accountController = CreateAccountController();
-
-            // Act
-            var externalLoginResult = accountController.ExternalLogin(Provider, ReturnUrl);
-
-            // Assert
-            Assert.Equal("/account/externallogincallback?ReturnUrl=%2Fhome%2Fabout%2F", externalLoginResult.ReturnUrl);
-        }
-
-        [Fact]
-        public void ExternalLoginFailureReturnsPassedLoginFailureReasonAsModel()
+        public void LoginFailureReturnsPassedLoginFailureReasonAsModel()
         {
             // Arrange
             var accountController = CreateAccountController();
@@ -113,14 +42,14 @@
 
             // Actr
 
-            var externalLoginResult = accountController.ExternalLoginFailure(loginFailureReason);
+            var externalLoginResult = accountController.LoginFailure(loginFailureReason);
 
             // Assert
             Assert.Equal(loginFailureReason, externalLoginResult.Model);
         }
 
         [Fact]
-        public void ExternalLoginCallbackWithAuthenticationInvalidRedirectsToExternalLoginFailureAction()
+        public void LoginCallbackWithAuthenticationInvalidRedirectsToLoginFailureAction()
         {
             // Arrange
             var authenticationMock = new Mock<IAuthentication>();
@@ -129,15 +58,15 @@
             var accountController = CreateAccountController(authenticationMock.Object);
 
             // Act
-            var redirectToRouteResult = (RedirectToRouteResult)accountController.ExternalLoginCallback(ReturnUrl);
+            var redirectToRouteResult = (RedirectToRouteResult)accountController.LoginCallback(ReturnUrl);
 
             // Assert
             Assert.Null(redirectToRouteResult.RouteValues["controller"]);
-            Assert.Equal("ExternalLoginFailure", redirectToRouteResult.RouteValues["action"]);
+            Assert.Equal("LoginFailure", redirectToRouteResult.RouteValues["action"]);
         }
 
         [Fact]
-        public void ExternalLoginCallbackWithAuthenticationInvalidRedirectsToExternalLoginFailureActionWithExternalAuthenticationFailedLoginFailureReason()
+        public void LoginCallbackWithAuthenticationInvalidRedirectsToLoginFailureActionWithExternalAuthenticationFailedLoginFailureReason()
         {
             // Arrange
             var authenticationMock = new Mock<IAuthentication>();
@@ -146,14 +75,14 @@
             var accountController = CreateAccountController(authenticationMock.Object);
 
             // Act
-            var redirectToRouteResult = (RedirectToRouteResult)accountController.ExternalLoginCallback(ReturnUrl);
+            var redirectToRouteResult = (RedirectToRouteResult)accountController.LoginCallback(ReturnUrl);
 
             // Assert
             Assert.Equal(LoginFailureReason.ExternalAuthenticationFailed, (LoginFailureReason)redirectToRouteResult.RouteValues["reason"]);
         }
 
         [Fact]
-        public void ExternalLoginCallbackWithExistingUserAndLocalReturnUrlRedirectsToReturnUrl()
+        public void LoginCallbackWithExistingUserAndLocalReturnUrlRedirectsToReturnUrl()
         {
             // Arrange
             var authenticationMock = new Mock<IAuthentication>();
@@ -163,14 +92,14 @@
             var accountController = CreateAccountController(authenticationMock.Object);
 
             // Act
-            var redirectResult = (RedirectResult)accountController.ExternalLoginCallback(ReturnUrl);
+            var redirectResult = (RedirectResult)accountController.LoginCallback(ReturnUrl);
 
             // Assert
             Assert.Equal(ReturnUrl, redirectResult.Url);
         }
 
         [Fact]
-        public void ExternalLoginCallbackWithExistingUserAndNonLocalReturnUrlRedirectsToHomeUrl()
+        public void LoginCallbackWithExistingUserAndNonLocalReturnUrlRedirectsToHomeUrl()
         {
             // Arrange
             var authenticationMock = new Mock<IAuthentication>();
@@ -180,7 +109,7 @@
             var accountController = CreateAccountController(authenticationMock.Object);
 
             // Act
-            var redirectToRouteResult = (RedirectToRouteResult)accountController.ExternalLoginCallback("http://www.google.nl");
+            var redirectToRouteResult = (RedirectToRouteResult)accountController.LoginCallback("http://www.google.nl");
 
             // Assert
             Assert.Equal("Home", redirectToRouteResult.RouteValues["controller"]);
@@ -188,7 +117,7 @@
         }
 
         [Fact]
-        public void ExternalLoginCallbackWithExistingUserDoesNotInsertAnotherUser()
+        public void LoginCallbackWithExistingUserDoesNotInsertAnotherUser()
         {
             // Arrange
             var authenticationMock = new Mock<IAuthentication>();
@@ -197,15 +126,15 @@
             var accountController = CreateAccountController(authenticationMock.Object);
 
             // Act
-            var redirectToRouteResult = (RedirectToRouteResult)accountController.ExternalLoginCallback(ReturnUrl);
+            var redirectToRouteResult = (RedirectToRouteResult)accountController.LoginCallback(ReturnUrl);
 
             // Assert
             Assert.Null(redirectToRouteResult.RouteValues["controller"]);
-            Assert.Equal("ExternalLoginFailure", redirectToRouteResult.RouteValues["action"]);
+            Assert.Equal("LoginFailure", redirectToRouteResult.RouteValues["action"]);
         }
 
         [Fact]
-        public void ExternalLoginCallbackWithUsernameAlreadyExistsForOtherUserRedirectsToExternalLoginFailureAction()
+        public void LoginCallbackWithUsernameAlreadyExistsForOtherUserRedirectsToLoginFailureAction()
         {
             // Arrange
             var authenticationMock = new Mock<IAuthentication>();
@@ -222,15 +151,15 @@
             var accountController = this.CreateAccountController(userProfileRepositoryMock.Object, authenticationMock.Object);
 
             // Act
-            var redirectToRouteResult = (RedirectToRouteResult)accountController.ExternalLoginCallback("http://www.google.nl");
+            var redirectToRouteResult = (RedirectToRouteResult)accountController.LoginCallback("http://www.google.nl");
 
             // Assert
             Assert.Null(redirectToRouteResult.RouteValues["controller"]);
-            Assert.Equal("ExternalLoginFailure", redirectToRouteResult.RouteValues["action"]);
+            Assert.Equal("LoginFailure", redirectToRouteResult.RouteValues["action"]);
         }
 
         [Fact]
-        public void ExternalLoginCallbackWithUsernameAlreadyExistsForOtherUserRedirectsToExternalLoginFailureActionWithUsernameAlreadyExistsLoginFailureReason()
+        public void LoginCallbackWithUsernameAlreadyExistsForOtherUserRedirectsToLoginFailureActionWithUsernameAlreadyExistsLoginFailureReason()
         {
             // Arrange
             var authenticationMock = new Mock<IAuthentication>();
@@ -247,7 +176,7 @@
             var accountController = this.CreateAccountController(userProfileRepositoryMock.Object, authenticationMock.Object);
 
             // Act
-            var redirectToRouteResult = (RedirectToRouteResult)accountController.ExternalLoginCallback(ReturnUrl);
+            var redirectToRouteResult = (RedirectToRouteResult)accountController.LoginCallback(ReturnUrl);
 
             // Assert
             Assert.Equal(LoginFailureReason.UsernameAlreadyExists, (LoginFailureReason)redirectToRouteResult.RouteValues["reason"]);
@@ -255,10 +184,7 @@
 
         private static AccountController CreateAccountController()
         {
-            var authenticationMock = new Mock<IAuthentication>();
-            authenticationMock.Setup(a => a.RegisteredClientData).Returns(new Collection<AuthenticationClientData> { new AuthenticationClientData(new SurfConextClient(new SurfContextSettings()), "SurfContext", null) });
-
-            return CreateAccountController(authenticationMock.Object);
+            return CreateAccountController(new Mock<IAuthentication>().Object);
         }
 
         private static AccountController CreateAccountController(IAuthentication authentication)

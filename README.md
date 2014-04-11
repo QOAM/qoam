@@ -1,4 +1,4 @@
-# Quality Open Access Market
+﻿# Quality Open Access Market
 
 ## Introduction
 Quality Open Access Market (QOAM) is primarily for authors who want to publish their article in open access in a high quality journal and for a reasonable price.
@@ -11,7 +11,13 @@ Building QOAM requires the following steps to be followed:
 `<connectionStrings configSource="ConnectionStrings.Debug.config" />`
 Here you can see that the connection strings configuration section is defined in an external file: `ConnectionStrings.Debug.config`. This file should be in the same directory as the `Web.config` file. You should thus create a `ConnectionStrings.Debug.config` file on your local machine that contains the connection strings you want to use. To ease this step, the following zip file contains sample files for every one of the external configuration files: https://www.dropbox.com/s/a8y16utfdtuju7y/Sample-config-files.zip Just extract this zip in your solution folder and then replace the contents of the config files with the values you want to use on your system.
 3. Enable the application to be run using HTTPS. This is important as authentication requires HTTPS.
-4. Run the application!
+4. Open the Microsoft Management Console (mmc.exe).
+5. Add the certificates snap-in and add it managing the "Computer account".
+6. Import the `qoam.nl.pfx` private certificate in the **Personal/Certificates** section. Note: you need to contact one of the team members to receive this certificate.
+7. Open a command prompt (run as an administrator) and go to the **tools** directory in the solution. In that command prompt run:
+`FindPrivateKey My LocalMachine -t "‎7f 31 3d 42 39 72 84 63 99 43 a6 25 65 2e f5 5c 09 f4 fa 9c"`. This will output the path to the private key file.
+8. Open the "Properties" window of the private key file and give the account under which the QOAM website will run read access (for IIS this will probably be `IIS_IUSR`, for IIS express this will your own account).
+9. Run the application!
 
 If everything works out, you should now see the frontpage.
 

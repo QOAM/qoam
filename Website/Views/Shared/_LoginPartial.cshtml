@@ -8,12 +8,7 @@
             <li>@Html.ActionLink(Strings.Profile, "Details", "Profiles", new { id = ViewBag.User.Id }, null)</li>
             <li class="divider"></li>
             <li>
-                <a href="javascript:document.getElementById('logoutForm').submit()">@Strings.LogOff</a>
-
-                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                {
-                    @Html.AntiForgeryToken()
-                }
+                <a href="~/Logout.ashx">@Strings.LogOff</a>
             </li>
         </ul>
     </li>
