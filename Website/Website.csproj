@@ -234,6 +234,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\InstitutionsController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
+    <Compile Include="Helpers\AsIncludedOrderer.cs" />
     <Compile Include="Helpers\ValidateJsonAntiForgeryTokenAttribute.cs" />
     <Compile Include="Helpers\DecimalModelBinder.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />

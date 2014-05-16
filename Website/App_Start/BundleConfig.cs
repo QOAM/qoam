@@ -2,14 +2,18 @@
 {
     using System.Web.Optimization;
 
+    using QOAM.Website.Helpers;
+
     public static class BundleConfig
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/scripts/libraries").Include("~/Scripts/jquery-{version}.js", "~/Scripts/bootstrap.js", "~/Scripts/modernizr-{version}.js", "~/Scripts/knockout-{version}.js", "~/Scripts/knockout.mapping-latest.js", "~/Scripts/knockout.isdirty.js", "~/Scripts/spin.js"));
-            bundles.Add(new ScriptBundle("~/scripts/form").Include("~/Scripts/jquery.validate.js", "~/Scripts/jquery.validate.unobtrusive.js", "~/Scripts/jquery.unobtrusive-ajax.js", "~/Scripts/globalize/globalize.js", "~/Scripts/globalize/cultures/globalize.cultures.js", "~/Scripts/jquery.validate.globalize.js"));
-            bundles.Add(new ScriptBundle("~/scripts/application").Include("~/Scripts/Helpers/*.js", "~/Scripts/Controllers/*.js"));
-            bundles.Add(new ScriptBundle("~/scripts/fancybox").Include("~/Scripts/jquery.ipicture.min.js", "~/Scripts/jquery.fancybox.js"));
+            var orderer = new AsIncludedOrderer();
+
+            bundles.Add(new ScriptBundle("~/scripts/libraries") { Orderer = orderer }.Include("~/Scripts/jquery-{version}.js", "~/Scripts/bootstrap.js", "~/Scripts/modernizr-{version}.js", "~/Scripts/knockout-{version}.js", "~/Scripts/knockout.mapping-latest.js", "~/Scripts/knockout.isdirty.js", "~/Scripts/spin.js"));
+            bundles.Add(new ScriptBundle("~/scripts/form") { Orderer = orderer }.Include("~/Scripts/jquery.validate.js", "~/Scripts/jquery.validate.unobtrusive.js", "~/Scripts/jquery.unobtrusive-ajax.js", "~/Scripts/globalize/globalize.js", "~/Scripts/globalize/cultures/globalize.cultures.js", "~/Scripts/jquery.validate.globalize.js"));
+            bundles.Add(new ScriptBundle("~/scripts/application") { Orderer = orderer }.Include("~/Scripts/Helpers/*.js", "~/Scripts/Controllers/*.js"));
+            bundles.Add(new ScriptBundle("~/scripts/fancybox") { Orderer = orderer }.Include("~/Scripts/jquery.ipicture.min.js", "~/Scripts/jquery.fancybox.js"));
             bundles.Add(new ScriptBundle("~/scripts/typeahead").Include("~/Scripts/typeahead.bundle.js"));
             bundles.Add(new ScriptBundle("~/scripts/slider").Include("~/Scripts/bootstrap-slider.js"));
 
