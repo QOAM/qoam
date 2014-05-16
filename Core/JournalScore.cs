@@ -35,7 +35,7 @@
                     if (this.OverallScore.AverageScore > 3 && this.ValuationScore.AverageScore <= 3)
                         return SwotVerdict.ThreatToAuthor;
                     if (this.OverallScore.AverageScore <= 3 && this.ValuationScore.AverageScore > 3)
-                        return SwotVerdict.ThreatToAuthor;
+                        return SwotVerdict.OpportunityToPublisher;
                     
                     return string.Empty;
                 }
