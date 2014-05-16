@@ -55,7 +55,7 @@ img.pull-right {
 }
 
 .rangeslider {
-    margin-top: 30px;
+   margin-top:0px;
 }
 
 .tooltip {
@@ -461,7 +461,7 @@ a.home:hover, a.home, a.home:focus {
 }
 
 .form-control .pull-left {
-    width: 70%;
+    width:80%;
 }
 
 .high label {

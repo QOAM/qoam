@@ -109,14 +109,18 @@
             {
                 foreach (var journal in Model.Journals)
                 {
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">@journal.Title</div>
-                        <div class="panel-body">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <label class="col-md-2">@Strings.ISSN:</label>
-                                    <div class="col-md-10">@journal.ISSN</div>
-                                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <a href="@journal.Link" title="@Strings.GoToWebsite">@journal.Title
+                        <img src="~/Images/url.gif" class="pull-right clearfix" style="height: 40px;" /></a>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <label class="col-md-2">@Strings.ISSN:</label>
+                                <div class="col-md-10">@journal.ISSN</div>
+                            </div>
 
                                 <div class="row">
                                     <label class="col-md-2">@Strings.Publisher:</label>
@@ -157,10 +161,18 @@
                                     </div>
                                 </div>
 
-                                <div>
-                                    <a href="@journal.Link" class="btn btn-success external" title="@Strings.GoToWebsite">@Strings.GoToWebsite</a>
-                                </div>
-                            </div>
+                            <!--<div>
+                                <a href="@journal.Link" class="btn btn-success external" title="@Strings.GoToWebsite">@Strings.GoToWebsite</a>
+                            </div>-->
+                        </div>
+
+                        <a href="#journal@(journal.Id)-tab-score" data-select-tab="true">
+                            <div class="col-md-2">
+                                <div class="score">
+                                    <small>@Strings.ValuationScore</small>
+                                    <h2>
+                                        @journal.JournalScore.ValuationScore.AverageScore.ToString("0.0")
+                                    </h2>
 
                             <a href="/journalscorecard#swot" data-select-tab="false">
                                 <div class="col-md-2">

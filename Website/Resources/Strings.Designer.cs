@@ -1159,7 +1159,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only Journal Score Cards of authors en editors.
+        ///   Looks up a localized string similar to Only Journal Score Cards of authors and editors.
         /// </summary>
         public static string SubmittedOnly {
             get {

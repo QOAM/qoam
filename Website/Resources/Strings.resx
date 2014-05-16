@@ -508,7 +508,7 @@
     <value>SWOT matrix</value>
   </data>
   <data name="SubmittedOnly" xml:space="preserve">
-    <value>Only Journal Score Cards of authors en editors</value>
+    <value>Only Journal Score Cards of authors and editors</value>
   </data>
   <data name="SendEmail" xml:space="preserve">
     <value>Send email</value>

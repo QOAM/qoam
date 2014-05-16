@@ -72,7 +72,10 @@
                 foreach (var journal in Model.Journals)
                 {
                 <div class="panel panel-primary">
-                    <div class="panel-heading">@journal.Title</div>
+                    <div class="panel-heading">
+                        <a href="@journal.Link" title="@Strings.GoToWebsite">@journal.Title
+                        <img src="~/Images/url.gif" class="pull-right clearfix" style="height: 40px;" /></a>
+                    </div>
                     <div class="panel-body">
                         <div class="col-md-9">
                             <div class="row">
@@ -119,9 +122,9 @@
                                 </div>
                             </div>
 
-                            <div>
+                            <!--<div>
                                 <a href="@journal.Link" class="btn btn-success external" title="@Strings.GoToWebsite">@Strings.GoToWebsite</a>
-                            </div>
+                            </div>-->
                         </div>
 
                         <div class="col-md-3">
