@@ -23,6 +23,26 @@
         public JournalCategoryScore ValuationScore { get; set; }
         public int NumberOfReviewers { get; set; }
         public int JournalId { get; set; }
+        public string Swot {
+            get
+            {
+                if (this.OverallScore != null && this.ValuationScore != null)
+                {
+                    if (this.OverallScore.AverageScore > 3 && this.ValuationScore.AverageScore > 3)
+                        return SwotVerdict.StrongJournal;
+                    if(this.OverallScore.AverageScore <= 3 && this.ValuationScore.AverageScore <= 3)
+                        return SwotVerdict.WeakerJournal;
+                    if (this.OverallScore.AverageScore > 3 && this.ValuationScore.AverageScore <= 3)
+                        return SwotVerdict.ThreatToAuthor;
+                    if (this.OverallScore.AverageScore <= 3 && this.ValuationScore.AverageScore > 3)
+                        return SwotVerdict.ThreatToAuthor;
+                    
+                    return string.Empty;
+                }
+                else
+                    return string.Empty;
+            } 
+        }
         public virtual Journal Journal { get; set; }
         public virtual ICollection<Journal> Journals { get; set; }
     }

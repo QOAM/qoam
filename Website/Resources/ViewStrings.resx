@@ -463,9 +463,12 @@ The initiators of QOAM despise this ‘double dipping’ but QOAM is not the ins
   <data name="Home_JournalScoreCard_ShowIt_Title" xml:space="preserve">
     <value>Show it!</value>
   </data>
+  <data name="Home_JournalScoreCard_swotMatrix_Title" xml:space="preserve">
+    <value>The SWOT matrix</value>
+  </data>  
   <data name="Home_JournalScoreCard_WhatIsJournalScoreCard_Text" xml:space="preserve">
     <value>&lt;p&gt;
-                A Journal Score Card (JSC) is a questionnaire on five relevant journal aspects. Four of them – Editorial information, Peer review, Governance and Process - are based on the journal’s website. The fifth – Valuation – is a reality check, preferably based on experience with the submission of an article to the journal.  Every aspect has some bullets and each bullet can be rated from 1 to 5. The average of these ratings is called the subscore for this aspect. The lowest subscore of the four web site related aspects is called the &lt;strong&gt;Base Score&lt;/strong&gt; of the journal. The subscore of the fifth aspect is called the &lt;strong&gt;Valuation Score&lt;/strong&gt; of the jounal. 
+                 Journal Score Card (JSC) is a questionnaire on five relevant journal aspects. Four of them – Editorial information, Peer review, Governance and Process - are based on the journal’s website. The fifth – Valuation – is a reality check, preferably based on experience with the submission of an article to the journal.  Every aspect has some bullets and each bullet can be rated from 1 to 5. The average of these ratings is called the subscore for this aspect. The lowest subscore of the four web site related aspects is called the &lt;strong&gt;Base Score&lt;/strong&gt; of the journal. The subscore of the fifth aspect is called the &lt;strong&gt;Valuation Score&lt;/strong&gt; of the jounal. 
             &lt;/p&gt;</value>
   </data>
   <data name="Home_JournalScoreCard_WhatIsJournalScoreCard_Title" xml:space="preserve">

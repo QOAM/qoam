@@ -1168,6 +1168,15 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SWOT matrix.
+        /// </summary>
+        public static string swotmatrix {
+            get {
+                return ResourceManager.GetString("swotmatrix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Team.
         /// </summary>
         public static string Team {

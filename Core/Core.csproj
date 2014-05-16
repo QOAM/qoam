@@ -193,6 +193,9 @@
     <Compile Include="Repositories\IUserProfileRepository.cs" />
     <Compile Include="Repositories\Filters\JournalFilter.cs" />
     <Compile Include="ScoreCard.cs" />
+    <Compile Include="SwotVerdict.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="UserProfile.cs" />
     <Compile Include="Web References\Ulrichs\Reference.cs">
       <AutoGen>True</AutoGen>

@@ -504,6 +504,9 @@
   <data name="ValuationScore" xml:space="preserve">
     <value>Valuation Score</value>
   </data>
+  <data name="swotmatrix" xml:space="preserve">
+    <value>SWOT matrix</value>
+  </data>
   <data name="SubmittedOnly" xml:space="preserve">
     <value>Only Journal Score Cards of authors en editors</value>
   </data>
