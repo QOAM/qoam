@@ -105,10 +105,11 @@
             {
                 foreach (var journal in Model.Journals)
                 {
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <a href="@journal.Link" title="@Strings.GoToWebsite">@journal.Title
-                        <span class="pull-right clearfix"><i class="glyphicon glyphicon-new-window"></i></span>
+                    <div class="panel panel-primary journal">
+                        <div class="panel-heading">
+                            <a href="@journal.Link" title="@Strings.GoToWebsite">
+                                @journal.Title
+                            <span class="pull-right clearfix"><i class="glyphicon glyphicon-new-window"></i></span>
                         </a>
                     </div>
                     <div class="panel-body">
@@ -129,12 +130,12 @@
                                     @for (var i = 0; i < journal.Languages.Count; ++i)
                                     {
                                         var language = journal.Languages.ElementAt(i);
-                                
+
                                         @Html.ActionLink(language.Name, "Index", new { Language = language.Id })
 
                                         if (i < journal.Languages.Count - 1)
                                         {
-                                        <text>,</text>
+                                            <text>,</text>
                                         }
                                     }
                                 </div>
@@ -146,12 +147,12 @@
                                     @for (var i = 0; i < journal.Subjects.Count; ++i)
                                     {
                                         var subject = journal.Subjects.ElementAt(i);
-                                
+
                                         @Html.ActionLink(subject.Name, "Index", new { Discipline = subject.Id })
-                                
+
                                         if (i < journal.Subjects.Count - 1)
                                         {
-                                        <text>,</text>
+                                            <text>,</text>
                                         }
                                     }
                                 </div>
@@ -199,27 +200,33 @@
                                     <div class="tab-pane" id="journal@(journal.Id)-tab-score">
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <div class="score nohover">@QuestionCategory.Valuation.GetName():<h3>@journal.JournalScore.ValuationScore.AverageScore.ToString("0.0")</h3>
+                                                <div class="score nohover">
+                                                    @QuestionCategory.Valuation.GetName():<h3>@journal.JournalScore.ValuationScore.AverageScore.ToString("0.0")</h3>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-2">
-                                                <div class="score nohover">@QuestionCategory.EditorialInformation.GetName():<h3>@journal.JournalScore.EditorialInformationScore.AverageScore.ToString("0.0")</h3>
+                                                <div class="score nohover">
+                                                    @QuestionCategory.EditorialInformation.GetName():<h3>@journal.JournalScore.EditorialInformationScore.AverageScore.ToString("0.0")</h3>
                                                 </div>
-                                                <div class="score nohover">@QuestionCategory.Governance:<h3>@journal.JournalScore.GovernanceScore.AverageScore.ToString("0.0")</h3>
+                                                <div class="score nohover">
+                                                    @QuestionCategory.Governance:<h3>@journal.JournalScore.GovernanceScore.AverageScore.ToString("0.0")</h3>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-2">
-                                                <div class="score nohover">@QuestionCategory.PeerReview.GetName():<h3>@journal.JournalScore.PeerReviewScore.AverageScore.ToString("0.0")</h3>
+                                                <div class="score nohover">
+                                                    @QuestionCategory.PeerReview.GetName():<h3>@journal.JournalScore.PeerReviewScore.AverageScore.ToString("0.0")</h3>
                                                 </div>
-                                                <div class="score nohover">@QuestionCategory.Process.GetName():<h3>@journal.JournalScore.ProcessScore.AverageScore.ToString("0.0")</h3>
+                                                <div class="score nohover">
+                                                    @QuestionCategory.Process.GetName():<h3>@journal.JournalScore.ProcessScore.AverageScore.ToString("0.0")</h3>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-3 ">
                                                 <div class="score">
-                                                    <a href="#journal@(journal.Id)-tab-review" data-select-tab="true">@Strings.NumberOfReviewers:<h2>@journal.JournalScore.NumberOfReviewers</h2>
+                                                    <a href="#journal@(journal.Id)-tab-review" data-select-tab="true">
+                                                        @Strings.NumberOfReviewers:<h2>@journal.JournalScore.NumberOfReviewers</h2>
                                                     </a>
                                                     <img alt="@Strings.Reviews" src="~/Content/images/organisation.png">
                                                 </div>
@@ -230,7 +237,8 @@
                                                     @Html.ActionLink(Strings.PublishScoreCardForThisJournal, "Journal", "Score", new { id = journal.Id }, null)
                                                     <div class="Scoresheet">
                                                         <a href="@Url.Action("Journal", "Score", new { id = journal.Id }, null)">
-                                                            <img src="~/Images/scoresheet.png" alt="Scoresheet" /></a>
+                                                            <img src="~/Images/scoresheet.png" alt="Scoresheet" />
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
