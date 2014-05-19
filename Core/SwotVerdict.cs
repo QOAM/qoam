@@ -7,5 +7,4 @@
         public const string OpportunityToPublisher = "opportunity";
         public const string ThreatToAuthor = "threat";
     }
-
 }

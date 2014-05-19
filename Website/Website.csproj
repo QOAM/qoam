@@ -357,8 +357,8 @@
     <Content Include="Images\ScoreCards\journalscorecard-process.png" />
     <Content Include="Images\ScoreCards\journalscorecard-valuation-small.png" />
     <Content Include="Images\ScoreCards\journalscorecard-valuation.png" />
+    <Content Include="Images\swot.png" />
     <Content Include="Images\Under-Construction.png" />
-    <Content Include="Images\url.gif" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bootstrap-slider.js" />
     <Content Include="Scripts\bootstrap.js" />

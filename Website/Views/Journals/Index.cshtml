@@ -113,7 +113,7 @@
                         </a>
                     </div>
                     <div class="panel-body">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="row">
                                 <label class="col-md-2">@Strings.ISSN:</label>
                                 <div class="col-md-10">@journal.ISSN</div>
@@ -158,6 +158,24 @@
                                 </div>
                             </div>
                         </div>
+
+                        <a href="@Url.Action("JournalScoreCard", "Home")#swot" data-select-tab="false">
+                            <div class="col-md-2">
+                                <div class="score swotContainer">
+                                    <small>@Strings.swotmatrix</small>
+                                    <div class="swotBox verdict-@journal.JournalScore.Swot">
+                                        <div class="row">
+                                            <div class="column strong">&#160;</div>
+                                            <div class="column threat">&#160;</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="column opportunity">&#160;</div>
+                                            <div class="column weak">&#160;</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
 
                         <a href="#journal@(journal.Id)-tab-score" data-select-tab="true">
                             <div class="col-md-2">
