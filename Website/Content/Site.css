@@ -150,6 +150,10 @@ fieldset legend {
     padding: 0 5px 20px 20px !important;
 }
 
+.row.side [class="span-contentsearch"] {
+    padding: 0px 5px 10px 20px !important;
+}
+
 .row label {
     font-weight: normal;
 }
@@ -187,9 +191,9 @@ fieldset legend {
 }
 
 .score .score {
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-bottom: 10px;
+	margin-left:20%;
+	margin-right:20%;
+	margin-bottom:0px;
 }
 
 .score h1, .score h2, .score h3, .panel-body h3, .panel-body h1 {
@@ -209,6 +213,10 @@ fieldset legend {
 
 .tabbable {
     padding: 10px;
+}
+
+.tabbablesearch {
+	padding:0px 10px 0px 20px;
 }
 
 .tab-content {
