@@ -15,8 +15,8 @@ Here you can see that the connection strings configuration section is defined in
 5. Add the certificates snap-in and add it managing the "Computer account".
 6. Import the `qoam.nl.pfx` private certificate in the **Personal/Certificates** section. Note: you need to contact one of the team members to receive this certificate.
 7. Open a command prompt (run as an administrator) and go to the **tools** directory in the solution. In that command prompt run:
-`FindPrivateKey My LocalMachine -t "‎7f 31 3d 42 39 72 84 63 99 43 a6 25 65 2e f5 5c 09 f4 fa 9c"`. This will output the path to the private key file.
-8. Open the "Properties" window of the private key file and give the account under which the QOAM website will run read access (for IIS this will probably be `IIS_IUSR`, for IIS express this will your own account).
+`FindPrivateKeyPath.cmd`. This will output the path to the private key (.pfx) file.
+8. Navigate to the private key directory and open the "Properties" window of the private key file. Then give the account under which the QOAM website will run read access (for IIS this will probably be `IIS_IUSR`, for IIS express this will your own account).
 9. Run the application!
 
 If everything works out, you should now see the frontpage.
