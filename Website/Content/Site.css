@@ -334,8 +334,11 @@ fieldset legend {
 }
 
 .scoreCardAspects .panel-heading,
-.scoreCardAspects .panel-body,
-.journal .panel-body {
+.scoreCardAspects .panel-body {
+    padding: 5px 5px;
+}
+
+ .journal .panel-body {
     padding: 15px 5px 5px 5px;
 }
 
