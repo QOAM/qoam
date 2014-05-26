@@ -61,15 +61,6 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log in failure.
-        /// </summary>
-        public static string Account_LoginFailure_Title {
-            get {
-                return ResourceManager.GetString("Account_LoginFailure_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Log in using your institutional account.
         /// </summary>
         public static string Account_Login_Help {
@@ -111,6 +102,15 @@ namespace QOAM.Website.Resources {
         public static string Account_Login_Title {
             get {
                 return ResourceManager.GetString("Account_Login_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in failure.
+        /// </summary>
+        public static string Account_LoginFailure_Title {
+            get {
+                return ResourceManager.GetString("Account_LoginFailure_Title", resourceCulture);
             }
         }
         
@@ -483,6 +483,26 @@ namespace QOAM.Website.Resources {
         public static string Home_About_PriceInformation_Title {
             get {
                 return ResourceManager.GetString("Home_About_PriceInformation_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;QOAM is a free service, based on academic crowd sourcing. QOAM uses no cookies and can be visited anonimously. Conversely, contributions to QOAM’s content via Journal Score Cards are named. &lt;br/&gt;
+        ///&lt;br/&gt;
+        ///In order to publish a Journal Score Card in QOAM – via “Score journal” on the main page – one has to log in via one’s institutional account. QOAM uses and meets the requirements of eduGAIN, the network of academic identity providers. As a consequence, the use of personal information in QOAM is governed b [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Home_About_PrivacyPolicy_Text {
+            get {
+                return ResourceManager.GetString("Home_About_PrivacyPolicy_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacy policy.
+        /// </summary>
+        public static string Home_About_PrivacyPolicy_Title {
+            get {
+                return ResourceManager.GetString("Home_About_PrivacyPolicy_Title", resourceCulture);
             }
         }
         

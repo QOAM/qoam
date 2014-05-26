@@ -465,7 +465,7 @@ The initiators of QOAM despise this ‘double dipping’ but QOAM is not the ins
   </data>
   <data name="Home_JournalScoreCard_swotMatrix_Title" xml:space="preserve">
     <value>The SWOT matrix</value>
-  </data>  
+  </data>
   <data name="Home_JournalScoreCard_WhatIsJournalScoreCard_Text" xml:space="preserve">
     <value>&lt;p&gt;
                  Journal Score Card (JSC) is a questionnaire on five relevant journal aspects. Four of them – Editorial information, Peer review, Governance and Process - are based on the journal’s website. The fifth – Valuation – is a reality check, preferably based on experience with the submission of an article to the journal.  Every aspect has some bullets and each bullet can be rated from 1 to 5. The average of these ratings is called the subscore for this aspect. The lowest subscore of the four web site related aspects is called the &lt;strong&gt;Base Score&lt;/strong&gt; of the journal. The subscore of the fifth aspect is called the &lt;strong&gt;Valuation Score&lt;/strong&gt; of the jounal. 
@@ -772,5 +772,19 @@ The registration will be confirmed by SURFconext, the Dutch eduGAIN partner. Ple
   </data>
   <data name="Institutions_Index_Title" xml:space="preserve">
     <value>Institutions</value>
+  </data>
+  <data name="Home_About_PrivacyPolicy_Text" xml:space="preserve">
+    <value>&lt;p&gt;QOAM is a free service, based on academic crowd sourcing. QOAM uses no cookies and can be visited anonimously. Conversely, contributions to QOAM’s content via Journal Score Cards are named. &lt;br/&gt;
+&lt;br/&gt;
+In order to publish a Journal Score Card in QOAM – via “Score journal” on the main page – one has to log in via one’s institutional account. QOAM uses and meets the requirements of eduGAIN, the network of academic identity providers. As a consequence, the use of personal information in QOAM is governed by the Codes of Conduct of institutions that connect to QOAM in order to enable their members to publish Journal Score Cards. Thus, QOAM fully complies with institutional privacy policies. &lt;br/&gt;
+&lt;br/&gt;
+In practice this means that QOAM only collects the names and institutional email adresses of the authors of Journal Score Cards. No other information is collected. The names are used to sign the Journal Score Cards and are publicly visible. However, an author’s institutional email adress is only shown to other authors of Journal Score Cards. No other uses of these data are foreseen.&lt;br/&gt;
+&lt;br/&gt;
+Underlying this policy are the views that (1) anonimous Journal Score Cards are prone to misuse and should be avoided in QOAM and (2) authors of Journal Score Cards 
+should be able to contact each other for dialogue.
+&lt;/p&gt;</value>
+  </data>
+  <data name="Home_About_PrivacyPolicy_Title" xml:space="preserve">
+    <value>Privacy policy</value>
   </data>
 </root>

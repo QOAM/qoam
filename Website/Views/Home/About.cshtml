@@ -17,6 +17,7 @@
                 <li><a href="#why">@ViewStrings.Home_About_Why_Title</a></li>
                 <li><a href="#quality-of-service">@ViewStrings.Home_About_QualityOfService_Title</a></li>
                 <li><a href="#target-groups">@ViewStrings.Home_About_ForWhom_Title</a></li>
+                <li><a href="#privacy">@ViewStrings.Home_About_PrivacyPolicy_Title</a></li>
                 <li><a href="#how">@ViewStrings.Home_About_JournalScoreCards_Title</a></li>
                 <li><a href="#filtering-per-discipline">@ViewStrings.Home_About_FilteringPerDiscipline_Title</a></li>
                 <li><a href="#price-information">@ViewStrings.Home_About_PriceInformation_Title</a></li>
@@ -32,6 +33,9 @@
 
             <h3 id="target-groups">@ViewStrings.Home_About_ForWhom_Title</h3>
             @Html.Raw(ViewStrings.Home_About_ForWhom_Text)
+
+            <h3 id="privacy">@ViewStrings.Home_About_PrivacyPolicy_Title</h3>
+            @Html.Raw(ViewStrings.Home_About_PrivacyPolicy_Text)
 
             <h3 id="how">@ViewStrings.Home_About_JournalScoreCards_Title</h3>
             @Html.Raw(string.Format(ViewStrings.Home_About_JournalScoreCards_Text, Url.Action("Index", "Score"), Url.Action("Faq") + "#hybrid-journals", Url.Action("JournalScoreCard")))
