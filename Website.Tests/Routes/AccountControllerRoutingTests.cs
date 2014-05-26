@@ -12,20 +12,6 @@
     public class AccountControllerRoutingTests : ControllerRoutingTests<AccountController>
     {
         [Fact]
-        public void LoginActionRoutedToWithCorrectUrlAndVerb()
-        {
-            // Assert    
-            "~/account/login/".WithMethod(HttpVerbs.Get).ShouldMapTo<AccountController>(x => x.Login(null));
-        }
-
-        [Fact]
-        public void LoginActionDoesNotRequireHttps()
-        {
-            // Assert
-            Assert.True(ActionRequiresHttps(x => x.Login(null)));
-        }
-
-        [Fact]
         public void LoginCallbackActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    

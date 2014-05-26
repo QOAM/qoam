@@ -21,19 +21,6 @@
         private const string ReturnUrl = "/home/about/";
 
         [Fact]
-        public void LoginStoresReturnUrlInViewBag()
-        {
-            // Arrange
-            var accountController = CreateAccountController();
-
-            // Act
-            var viewResult = accountController.Login(ReturnUrl);
-
-            // Assert
-            Assert.Equal(ReturnUrl, viewResult.ViewBag.ReturnUrl);
-        }
-
-        [Fact]
         public void LoginFailureReturnsPassedLoginFailureReasonAsModel()
         {
             // Arrange

@@ -30,14 +30,6 @@
             this.institutionRepository = institutionRepository;
         }
 
-        [GET("login")]
-        public ViewResult Login(string returnUrl)
-        {
-            this.ViewBag.ReturnUrl = returnUrl;
-
-            return this.View();
-        }
-
         [GET("login/callback")]
         public ActionResult LoginCallback(string returnUrl)
         {
