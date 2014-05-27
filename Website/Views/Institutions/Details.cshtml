@@ -1,31 +1,30 @@
 ﻿@using PagedList.Mvc
 @using QOAM.Website.Helpers
 @using QOAM.Website.Models
-@using QOAM.Website.Resources
 @model QOAM.Website.ViewModels.Institutions.DetailsViewModel
 
 @{
-    ViewBag.Title = string.Format(ViewStrings.Institutions_Details_Title, Model.Institution.Name);
+    ViewBag.Title = string.Format("{0} institution", Model.Institution.Name);
 }
 
 <div class="container main">
     <div class="row">
         <div class="col-md-3">
             <div class="well">
-                <h3 class="text-align">@Strings.Institution<img src="~/Content/images/profile.png" alt="@Strings.Institution"></h3>
+                <h3 class="text-align">Institution<img src="~/Content/images/profile.png" alt="Institution"/></h3>
 
                 <h5>@Model.Institution.Name</h5>
 
                 <div>
-                    @Model.ScoreCardStats.NumberOfPublishedScoreCards @ViewStrings.Profile_Details_ScoreCardsPublished
+                    @Model.ScoreCardStats.NumberOfPublishedScoreCards Score card(s) published
                 </div>
 
                 <div>
-                    @Model.ScoreCardStats.NumberOfExpiredScoreCards @ViewStrings.Profile_Details_ScoreCardsExpired
+                    @Model.ScoreCardStats.NumberOfExpiredScoreCards Score card(s) expired
                 </div>
 
                 <div class="bottommargin">
-                    @Model.ScoreCardStats.NumberOfUnpublishedScoreCards @ViewStrings.Profile_Details_ScoreCardsUnfinished
+                    @Model.ScoreCardStats.NumberOfUnpublishedScoreCards Score card(s) unfinished
                 </div>
             </div>
         </div>
@@ -35,7 +34,7 @@
 
             <div class="row">
                 <div class="col-md-9">
-                    <h3>@Strings.Profiles: @Model.UserProfiles.TotalItemCount</h3>
+                    <h3>Profiles: @Model.UserProfiles.TotalItemCount</h3>
 
                 </div>
                 <div class="col-md-3 text-right topmargin">
@@ -49,10 +48,10 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>@Strings.Name</th>
-                                <th>@Strings.RegistrationDate</th>
-                                <th>@Strings.NumberOfJSCs</th>
-                                <th>@Strings.Actions</th>
+                                <th>Name</th>
+                                <th>Registration date</th>
+                                <th>Number of JSC's</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,11 +62,12 @@
                                     <td>@profile.DateRegistered</td>
                                     <td>@profile.NumberOfScoreCards</td>
                                     <td>
-                                        <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink(Strings.View, "Details", "Profiles", new { id = profile.Id }, null)
+                                        <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("View", "Details", "Profiles", new { id = profile.Id }, null)
                                     
                                         @if (User.IsInRole(ApplicationRole.Admin))
                                         {
-                                            <span class="glyphicon glyphicon-pencil"></span>  @Html.ActionLink(Strings.Edit, "Edit", "Profiles", new { profile.Id, ReturnUrl = Request.Url.ToString() }, null)
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            @Html.ActionLink("Edit", "Edit", "Profiles", new { profile.Id, ReturnUrl = Request.Url.ToString() }, null)
                                         }
                                     </td>
                                 </tr>
@@ -80,7 +80,7 @@
                 else
                 {
                     <p>
-                        @ViewStrings.Institutions_Details_NoUsers
+                        This institution does not have any users associated with it.
                     </p>
                 }
                 

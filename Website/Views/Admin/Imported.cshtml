@@ -1,15 +1,13 @@
 ﻿@model QOAM.Website.ViewModels.Import.ImportedViewModel
 
-@using QOAM.Website.Resources
-
 @{
-    ViewBag.Title = ViewStrings.Admin_Imported_Title;
+    ViewBag.Title = "Journals import result";
 }
 
 <div class="container main">
 
     <p>
-        @ViewStrings.Admin_Imported_Success:
+    The journal with the following ISSNs were successfully imported:
     </p>
 
     <ul>
@@ -20,7 +18,7 @@
     </ul>
 
     <p>
-        @ViewStrings.Admin_Imported_Failure:
+    The journal with the following ISSNs were not imported as they could not be found:
     </p>
 
     <ul>

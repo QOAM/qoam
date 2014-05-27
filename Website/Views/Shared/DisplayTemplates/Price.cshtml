@@ -7,25 +7,25 @@
 }
 else if (Model.FeeType == FeeType.NoFee)
 {
-    @QOAM.Website.Resources.Strings.NoFee
+    <text>No Fee</text>
 }
 else if (Model.FeeType == FeeType.Absent)
 {
-    @QOAM.Website.Resources.Strings.Absent
+    <text>Absent or diffuse</text>
 }
 else if (Model.Amount.HasValue && Model.Amount.Value == 0)
 {
-    @QOAM.Website.Resources.Strings.Free
+    <text>Free</text>
 }
 else if (Model.FeeType == FeeType.Page)
 {
     @Html.DisplayFor(m => m.Currency)
     @Model.Amount.ToString()
-    @QOAM.Website.Resources.Strings.PricePerPage
+    <text> per page</text>
 }
 else
 {
     @Html.DisplayFor(m => m.Currency)
     @Model.Amount.ToString()
-    @QOAM.Website.Resources.Strings.PricePerArticle
+    <text> per article</text>
 }

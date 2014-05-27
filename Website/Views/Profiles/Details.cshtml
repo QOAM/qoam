@@ -1,49 +1,48 @@
-﻿@using QOAM.Website.Resources
-@model QOAM.Website.ViewModels.Profiles.DetailsViewModel
+﻿@model QOAM.Website.ViewModels.Profiles.DetailsViewModel
 
 @{
-    ViewBag.Title = string.Format(ViewStrings.Profile_Details_Title, Model.UserProfile.DisplayName);
+    ViewBag.Title = string.Format("Profile of {0}", Model.UserProfile.DisplayName);
 }
 
 <div class="container main">
     <div class="row">
         <div class="col-md-3">
             <div class="well">
-                <h3 class="text-align">@Strings.Profile<img src="~/Content/images/profile.png" alt="@Strings.Profile"></h3>
+                <h3 class="text-align">Profile<img src="~/Content/images/profile.png" alt="Profile"></h3>
 
                 <h5>@Model.UserProfile.DisplayName</h5>
                 <div class="institute bottommargin">@Model.UserProfile.Institution.Name</div>
 
                 <div>
-                    @Model.ScoreCardStats.NumberOfPublishedScoreCards @ViewStrings.Profile_Details_ScoreCardsPublished
+                    @Model.ScoreCardStats.NumberOfPublishedScoreCards Score card(s) published
                 </div>
 
                 <div>
-                    @Model.ScoreCardStats.NumberOfExpiredScoreCards @ViewStrings.Profile_Details_ScoreCardsExpired
+                    @Model.ScoreCardStats.NumberOfExpiredScoreCards Score card(s) expired
                 </div>
 
                 <div class="bottommargin">
-                    @Model.ScoreCardStats.NumberOfUnpublishedScoreCards @ViewStrings.Profile_Details_ScoreCardsUnfinished
+                    @Model.ScoreCardStats.NumberOfUnpublishedScoreCards Score card(s) unfinished
                 </div>
 
                 @if (User.Identity.IsAuthenticated && Model.UserProfile.Id == ViewBag.User.Id)
                 {
                     <div class="score">
-                        <a class="" href="@Url.Action("Index", "Score")">@ViewStrings.Profile_Details_RateAnotherJournal</a><br />
+                        <a class="" href="@Url.Action("Index", "Score")">Rate another journal</a><br />
                         <a class="" href="@Url.Action("Index", "Score")">
-                            <img src="~/Content/Images/rate.png" alt="@ViewStrings.Profile_Details_RateAnotherJournal" /></a>
+                            <img src="~/Content/Images/rate.png" alt="Rate another journal" /></a>
                     </div>
                 }
                 else if (User.Identity.IsAuthenticated)
                 {
                     <div>
-                        <a href="mailto:@Model.UserProfile.Email" class="btn btn-success" title="@Strings.SendEmail">@Strings.SendEmail</a>
+                        <a href="mailto:@Model.UserProfile.Email" class="btn btn-success" title="Send email">Send email</a>
                     </div>
                 }
                 else
                 {
                     <p>
-                        @Html.Raw(string.Format(ViewStrings.Profiles_Details_YouMayContact, Model.UserProfile.DisplayName, Url.Action("Login", "Account", new { returnUrl = Url.Action("Details", new { id = Model.UserProfile.Id }) })))
+                        @Html.Raw(string.Format("You may contact {0} if you are <a href=\"{1}\" title=\"Log in to contact {0}\">logged in</a>", Model.UserProfile.DisplayName, Url.Action("Login", "Account", new { returnUrl = Url.Action("Details", new { id = Model.UserProfile.Id }) })))
                     </p>
                 }
             </div>
@@ -51,37 +50,32 @@
 
         <div class="col-md-9">
             <div class="row">
-                <h3>@Strings.JournalScoreCards</h3>
+                <h3>Journal Score Cards</h3>
                 
                 @if (Model.ScoreCards.TotalItemCount > 0)
                 {
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>@Strings.OAJournal</th>
-                                <th>@Strings.BaseScore</th>
-                                <th>@Strings.AverageBaseScore</th>
-                                <th>@Strings.ValuationScore</th>
-                                <th>@Strings.AverageValuationScore</th>
-                                <th>@Strings.State</th>
-                                <th>@Strings.ExpirationDate</th>
-                                <th>@Strings.Actions</th>
+                                <th>OA Journal</th>
+                                <th>Base Score</th>
+                                <th>Avg. Base Score</th>
+                                <th>Valuation Score</th>
+                                <th>Avg. Valuation Score</th>
+                                <th>State</th>
+                                <th>Expiration date</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="scorecards">
-                            @{ this.Html.RenderPartial("ScoreCards", this.Model.ScoreCards); }
+                            @{ Html.RenderPartial("ScoreCards", Model.ScoreCards); }
                         </tbody>
                         <tfoot id="loadMoreScoreCards">
-                            @if (this.Model.ScoreCards.HasNextPage)
+                            @if (Model.ScoreCards.HasNextPage)
                             {
                                 <tr>
                                     <td colspan="9">
-                                        @this.Ajax.ActionLink(Strings.LoadMore, "ScoreCards", new { Model.Id, Page = Model.Page + 1 }, new AjaxOptions
-                                                                                                                                       {
-                                                                                                                                           UpdateTargetId = "scorecards",
-                                                                                                                                           InsertionMode = InsertionMode.InsertAfter,
-                                                                                                                                           OnSuccess = "afterLoadMore(data, 'loadMoreScoreCards', 'loadMoreScoreCardsLink')"
-                                                                                                                                       }, new { id = "loadMoreScoreCardsLink" })
+                                        @Ajax.ActionLink("Load more", "ScoreCards", new { Model.Id, Page = Model.Page + 1 }, new AjaxOptions { UpdateTargetId = "scorecards", InsertionMode = InsertionMode.InsertAfter, OnSuccess = "afterLoadMore(data, 'loadMoreScoreCards', 'loadMoreScoreCardsLink')" }, new { id = "loadMoreScoreCardsLink" })
                                     </td>
                                 </tr>
                             }
@@ -91,7 +85,7 @@
                 else
                 {
                     <p>
-                        @Html.Raw(string.Format(ViewStrings.Profiles_Details_NoScoreCards, Model.UserProfile.DisplayName))
+                        @Html.Raw(string.Format("{0} has not yet published any Journal Score Cards.", Model.UserProfile.DisplayName))
                     </p>
                 }
                 

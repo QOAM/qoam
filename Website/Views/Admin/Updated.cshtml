@@ -1,30 +1,28 @@
 ﻿@model QOAM.Website.ViewModels.Import.UpdatedViewModel
 
-@using QOAM.Website.Resources
-
 @{
-    ViewBag.Title = ViewStrings.Admin_Updated_Title;
+    ViewBag.Title = "Journals update result";
 }
 
 <div class="container main">
 
     <p>
-        @ViewStrings.Admin_Updated_Success:
+        The journal with the following ISSNs were successfully updated:
     </p>
     
     <ul>
-        @foreach(var foundISSN in Model.FoundISSNs)
+        @foreach (var foundISSN in Model.FoundISSNs)
         {
             <li>@foundISSN</li>
         }
     </ul>
 
-  <p>
-        @ViewStrings.Admin_Updated_Failure:
+    <p>
+        The journal with the following ISSNs were not updated as they could not be found:
     </p>
     
     <ul>
-        @foreach(var notFoundISSN in Model.NotFoundISSNs)
+        @foreach (var notFoundISSN in Model.NotFoundISSNs)
         {
             <li>@notFoundISSN</li>
         }

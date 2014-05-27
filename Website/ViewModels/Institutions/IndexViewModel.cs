@@ -1,6 +1,6 @@
 ﻿namespace QOAM.Website.ViewModels.Institutions
 {
-    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel;
     using System.Web.Helpers;
 
     using PagedList;
@@ -16,24 +16,18 @@
             this.Sort = SortDirection.Descending;
         }
 
-        [Display(Name = "Name", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("Name")]
         public string Name { get; set; }
 
         public InstitutionSortMode SortBy { get; set; }
+
         public SortDirection Sort { get; set; }
-        
+
         public IPagedList<Institution> Institutions { get; set; }
 
         public InstitutionFilter ToFilter()
         {
-            return new InstitutionFilter
-                       {
-                           Name = this.Name,
-                           SortMode = this.SortBy,
-                           SortDirection = this.Sort,
-                           PageNumber = this.Page,
-                           PageSize = this.PageSize,
-                       };
+            return new InstitutionFilter { Name = this.Name, SortMode = this.SortBy, SortDirection = this.Sort, PageNumber = this.Page, PageSize = this.PageSize, };
         }
     }
 }

@@ -2,46 +2,45 @@
 @using System.Web.Optimization
 @using PagedList.Mvc
 @using QOAM.Website.Helpers
-@using QOAM.Website.Resources
 @model QOAM.Website.ViewModels.Institutions.IndexViewModel
 
 @{
-    ViewBag.Title = ViewStrings.Institutions_Index_Title;
+    ViewBag.Title = "Institutions";
 }
 
 <div class="container main">
     <div class="row side">
         <div class="col-md-3">
-                <div id="filter" class="well">
-                <h3>@Strings.Filter</h3>
+            <div id="filter" class="well">
+                <h3>Filter</h3>
 
                 @using (Html.BeginForm("Index", "Institutions", FormMethod.Get))
                 {
                     <fieldset>
-                        <legend>@Strings.Search</legend>
+                        <legend>Search</legend>
 
                         <div class="form-group editor-label-placeholder">
                             @Html.LabelFor(m => m.Name)
                         </div>
                         <div class="form-group">
-                            @Html.Html5TextBoxFor(m => m.Name, InputTypes.InputType.Text, new { @class = "form-control" }, Strings.SearchByName)
+                            @Html.Html5TextBoxFor(m => m.Name, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by name")
                             @Html.ValidationMessageFor(m => m.Name, null, new { @class = "control-label" })
                         </div>
 
                         <p>
-                            <input type="submit" value="@Strings.Search" class="btn btn-primary" />
+                            <input type="submit" value="Search" class="btn btn-primary" />
                         </p>
                     </fieldset>
                 }
 
             </div>
-    </div>
+        </div>
 
         <div class="col-md-9">
             
             <div class="row">
                 <div class="col-md-9">
-                    <h3>@Strings.Institutions: @Model.Institutions.TotalItemCount</h3>
+                    <h3>Institutions: @Model.Institutions.TotalItemCount</h3>
 
                 </div>
                 <div class="col-md-3 text-right topmargin">
@@ -53,9 +52,9 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>@Strings.Name</th>
-                            <th>@Strings.NumberOfJSCs</th>
-                            <th>@Strings.Actions</th>
+                            <th>Name</th>
+                            <th>Number of JSC's</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,7 +64,7 @@
                                 <td>@Html.ActionLink(institution.Name, "Details", "Institutions", new { id = institution.Id }, null)</td>
                                 <td>@institution.NumberOfScoreCards</td>
                                 <td>
-                                    <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink(Strings.View, "Details", "Institutions", new { id = institution.Id }, null)
+                                    <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("View", "Details", "Institutions", new { id = institution.Id }, null)
                                 </td>
                             </tr>
                         }
@@ -76,7 +75,7 @@
             </div>
 
         </div>
-</div>
+    </div>
 </div>
 
 @section stylesheets
@@ -91,9 +90,9 @@
     @Html.Partial("_FormScripts")
 
     <script type="text/javascript">
-        $(function () {
+        $(function() {
             var institutionsController = new InstitutionsController();
-            institutionsController.index('@Url.Action("Names", null, null, this.Request.Url.Scheme)');
+            institutionsController.index('@Url.Action("Names", null, null, Request.Url.Scheme)');
         });
     </script>
 }

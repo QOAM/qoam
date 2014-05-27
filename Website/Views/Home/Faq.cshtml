@@ -1,6 +1,5 @@
-﻿@using QOAM.Website.Resources
-@{
-    ViewBag.Title = ViewStrings.Home_Faq_Title;
+﻿@{
+    ViewBag.Title = "FAQ";
 }
 
 <div class="container main">
@@ -12,31 +11,31 @@
             <h2>@ViewBag.Title</h2>
 
             <ul class="list-unstyled">
-                <li><a href="#hybrid-journals"><em>@ViewStrings.Home_Faq_HybridJournalsIncluded_Title</em></a></li>
-                <li><a href="#subscription-journals"><em>@ViewStrings.Home_Faq_SubscriptionJournalsNotIncluded_Title</em></a></li>
-                <li><a href="#cant-find-journal"><em>@ViewStrings.Home_Faq_CantFindJournal_Title</em></a></li>
-                <li><a href="#no-metrics"><em>@ViewStrings.Home_Faq_NoMetrics_Title</em></a></li>
-                <li><a href="#framing"><em>@ViewStrings.Home_Faq_Framing_Title</em></a></li>
-                <li><a href="#connect-institute"><em>@ViewStrings.Home_Faq_Connect_Institute_Title</em></a></li>
+                <li><a href="#hybrid-journals"><em>Why are hybrid journals also included in QOAM?</em></a></li>
+                <li><a href="#subscription-journals"><em>Why are subscription journals not included in QOAM?</em></a></li>
+                <li><a href="#cant-find-journal"><em>Why don’t I find a specific journal in QOAM?</em></a></li>
+                <li><a href="#no-metrics"><em>Why does QOAM not include metrics as a quality proxy?</em></a></li>
+                <li><a href="#framing"><em>Is QOAM prone to improper use?</em></a></li>
+                <li><a href="#connect-institute"><em>How to get my institute connected to QOAM’s scoring section?</em></a></li>
             </ul>
 
-            <h3 id="hybrid-journals">@ViewStrings.Home_Faq_HybridJournalsIncluded_Title</h3>
-            @Html.Raw(ViewStrings.Home_Faq_HybridJournalsIncluded_Text)
+            <h3 id="hybrid-journals">Why are hybrid journals also included in QOAM?</h3>
+            <p>Author centric, QOAM provides all journals that offer open access publishing. This entails hybrid journals. Some hybrid journals manage to generate a double income by charging both readers (via full library subscriptions) and authors (via full publication fees).<br/>The initiators of QOAM despise this ‘double dipping’ but QOAM is not the instrument to combat this directly. However, if institutions succeed in negotiating journal licenses that end these practices, the license results and more specifically their effect on the publication fees will be mentioned on QOAM’s web site (be it that in most cases one has to log in with their institutional account to see if this applies to one’s institute). For example, SURFmarket succeeded to settle such deals with SAGE and the Royal Society of Chemistry on behalf of UKB, the Dutch consortium of university libraries and the National Library.</p>
 
-            <h3 id="subscription-journals">@ViewStrings.Home_Faq_SubscriptionJournalsNotIncluded_Title</h3>
-            @Html.Raw(ViewStrings.Home_Faq_SubscriptionJournalsNotIncluded_Text)
+            <h3 id="subscription-journals">Why are subscription journals not included in QOAM?</h3>
+            <p>QOAM is in the overlap of three domains: (1) Quality, (2) Open Access, (3) Market. Do subscription journals fit into these domains?<br />Ad 1. Quality. Yes. The Journal Score Card is business model neutral.<br />Ad 2. Open Access. No. Subscription is at odds with Open Access.<br />Ad 3. Market. No. The current Big Deal packages obscure any market idea.<br />So, subscription journals do not fit in QOAM. Yet, the initiators of QOAM are convinced that quality control as such is equally well necessary for subscription journals. Especially for new journals which are simply included in existing packages. The Journal Score Card, or an adapted version of it, might be applicable here and the initiators of QOAM are open to discuss this.</p>
             
-            <h3 id="cant-find-journal">@ViewStrings.Home_Faq_CantFindJournal_Title_Short</h3>
-            @Html.Raw(string.Format(ViewStrings.Home_Faq_CantFindJournal_Text, Url.Action("Index", "Journals"), Url.Action("Index", "Score")))
+            <h3 id="cant-find-journal">Why don’t I find a specific journal</h3>
+            @Html.Raw(string.Format("<h4>A. in QOAM’s <a href=\"{0}\" title=\"searching section\">searching section?</a></h4>            <p>                The reason is that for this journal a Journal Score Card has not been published yet. To remedy this, go to the “I want to publish a Journal Score Card” section on QOAM’s main page and publish a JSC for the journal in question. Alternatively, ask your library to do so.            </p>            <h4>B. in QOAM’s <a href=\"{1}\" title=\"scoring section\">scoring section?</a></h4>            <p>We suggest to ask your library for advice. They know how to have a journal added to databases that underly QOAM and/or how to migrate a journal from there to QOAM. Once done the journal will pop up in QOAM (provided it is an OA or hybrid journal).</p>            <table id=\"qoamComposition\" class=\"text-center\">                <thead>                    <tr>                        <th>&nbsp;</th>                        <th>&nbsp;</th>                        <th class=\"text-center\">QOAM’s scoring section</th>                        <th>&nbsp;</th>                        <th>QOAM’s searching section</th>                    </tr>                </thead>                <tbody>                    <tr>                        <td class=\"border\">Underlying external databases</td>                        <td>»</td>                        <td class=\"border\">OA and hybrid journals in QOAM</td>                        <td>»</td>                        <td class=\"border\">Journal Score Cards in QOAM</td>                    </tr>                </tbody>                <tfoot>                    <tr>                        <td colspan=\"2\">&nbsp;</td>                        <td><em>The composition of QOAM</em></td>                        <td colspan=\"2\">&nbsp;</td></tr></tfoot></table>", Url.Action("Index", "Journals"), Url.Action("Index", "Score")))
 
-            <h3 id="no-metrics">@ViewStrings.Home_Faq_NoMetrics_Title</h3>
-            @Html.Raw(ViewStrings.Home_Faq_NoMetrics_Text)
+            <h3 id="no-metrics">Why does QOAM not include metrics as a quality proxy?</h3>
+            <p>Metrics for QOAM must apply to young journals because most  journals which are born OA are in their infancy. Therefore, the Journal Impact Factor is not included. The Leiden institute CWTS developed an Editorial Board Indicator, a metric for the scientific impact of the editorial board. The main obstacle for applying it is the problem of identifying the board members; just a name and an affiliation are not enough for that. The importance of having a clear identification of the Editorial Board members of scientific journals (i.e. their full names, affiliations, e-mail and even their ORCID identifier) can be also considered as an element of transparency and quality. Should these data be more transparent and accessible, indicators on the scientific impact of the editorial board could then be extensively developed and included in QOAM. See <a href="http://www.surf.nl/en/publicaties/Pages/CWTSrapport.aspx">SURF</a>. Other straightforward young journal metrics would be welcomed by QOAM as well.</p>
 
-            <h3 id="framing">@ViewStrings.Home_Faq_Framing_Title</h3>
-            @Html.Raw(string.Format(ViewStrings.Home_Faq_Framing_Text, Url.Action("Index", "Profiles")))
+            <h3 id="framing">Is QOAM prone to improper use?</h3>
+            @Html.Raw(string.Format("<p>To avoid unqualified contributions to QOAM, only members of the academic community may publish Journal Score Cards. Membership will be controlled by federated authentication via trusted third parties like SURFconext in the Netherlands. Per person only one JSC may be published for a specific journal. Published Journal Score Cards are non-anonymous. Their authors can be contacted by other members of the academic community via the <a href=\"{0}\" title=\"Profiles section\">Profiles section</a> of QOAM.<br/>                Currently, QOAM has no resources to organise any form of social control or moderation. We have to rely on academic vigilance. Jeffrey Beall’s <a href=\"http://scholarlyoa.com/individual-journals/\" title=\"list of predatory journals\">list of predatory journals</a> and John Bohannon’s article <a href=\"http://www.sciencemag.org/content/342/6154/60.full\" title=\"Who is Afraid of Peer Review?\">Who is Afraid of Peer Review?</a> are examples of this.</p>", Url.Action("Index", "Profiles")))
 
-            <h3 id="connect-institute">@ViewStrings.Home_Faq_Connect_Institute_Title</h3>
-            @Html.Raw(ViewStrings.Home_Faq_Connect_Institute_Text)
+            <h3 id="connect-institute">How to get my institute connected to QOAM’s scoring section?</h3>
+            <p>QOAM is a fully open web site but only academic staff may publish Journal Score Cards in QOAM. To avoid unauthorized publishing of such cards QOAM has been registered with eduGAIN. EduGAIN interconnects identity federations around the world, simplifying access to content, services and resources for the global research and education community. This will enable staff of your institute to simply log in to the scoring section of QOAM via their institutional account. <br/>To effectuate this your institute has to be registered as a QOAM participant. A registration request can be sent to Leo Waaijers, using the Contact option behind the ‘Learn more’ button in QOAM.  Don’t forget to include the name of your internet domain in this mail. The domain is the extension of your email address behind the @@ sign. If you feel uncertain about the domain name of your institute please contact your ICT department. <br/>The registration will be confirmed by SURFconext, the Dutch eduGAIN partner. Please be aware that the procedure may take about a week. Once your institute is registered in QOAM, staff have access via their institutional account and may start publishing Journal Score Cards in QOAM.</p>
         </div>
     </div>
 </div>

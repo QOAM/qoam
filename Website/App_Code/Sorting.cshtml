@@ -1,13 +1,12 @@
-﻿@using QOAM.Core.Repositories.Filters
+﻿@using System.Web.Mvc
+@using QOAM.Core.Repositories.Filters
 @using QOAM.Website.Helpers
-@using QOAM.Website.Resources
-
 @helper JournalSortMenu(JournalSortMode currentSortMode, SortDirection currentSortDirection)
 {
-    var url = new System.Web.Mvc.UrlHelper(Context.Request.RequestContext);
-    
+    var url = new UrlHelper(Context.Request.RequestContext);
+
     <div class="btn-group">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">@Strings.Sort
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Sort
             <span class="caret"></span>
         </a>
 
@@ -19,7 +18,7 @@
                 var sortDirectionClass = isActive ? (currentSortDirection == SortDirection.Ascending ? "glyphicon glyphicon-arrow-up" : "glyphicon glyphicon-arrow-down") : null;
                 <li class="@activeClass">
                     <a href="@url.SortUrl(sortMode, currentSortMode, currentSortDirection)">@sortMode.GetName()<i class="@sortDirectionClass"></i></a>
-                </li>    
+                </li>
             }
         </ul>
     </div>
@@ -27,10 +26,10 @@
 
 @helper UserProfileSortMenu(UserProfileSortMode currentSortMode, SortDirection currentSortDirection)
 {
-    var url = new System.Web.Mvc.UrlHelper(Context.Request.RequestContext);
-    
+    var url = new UrlHelper(Context.Request.RequestContext);
+
     <div class="btn-group">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">@Strings.Sort
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Sort
             <span class="caret"></span>
         </a>
 
@@ -42,7 +41,7 @@
                 var sortDirectionClass = isActive ? (currentSortDirection == SortDirection.Ascending ? "glyphicon glyphicon-arrow-up" : "glyphicon glyphicon-arrow-down") : null;
                 <li class="@activeClass">
                     <a href="@url.SortUrl(sortMode, currentSortMode, currentSortDirection)">@sortMode.GetName()<i class="@sortDirectionClass"></i></a>
-                </li>    
+                </li>
             }
         </ul>
     </div>
@@ -50,24 +49,24 @@
 
 @helper InstitutionSortMenu(InstitutionSortMode currentSortMode, SortDirection currentSortDirection)
 {
-    var url = new System.Web.Mvc.UrlHelper(Context.Request.RequestContext);
+    var url = new UrlHelper(Context.Request.RequestContext);
 
     <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-            @Strings.Sort
-        <span class="caret"></span>
-    </a>
+            Sort
+            <span class="caret"></span>
+        </a>
 
-    <ul class="dropdown-menu pull-right">
-        @foreach (var sortMode in (InstitutionSortMode[])Enum.GetValues(typeof(InstitutionSortMode)))
-        {
-            var isActive = sortMode == currentSortMode;
-            var activeClass = isActive ? "active" : null;
-            var sortDirectionClass = isActive ? (currentSortDirection == SortDirection.Ascending ? "glyphicon glyphicon-arrow-up" : "glyphicon glyphicon-arrow-down") : null;
-            <li class="@activeClass">
-                <a href="@url.SortUrl(sortMode, currentSortMode, currentSortDirection)">@sortMode.GetName()<i class="@sortDirectionClass"></i></a>
-            </li>
-        }
-    </ul>
-</div>
+        <ul class="dropdown-menu pull-right">
+            @foreach (var sortMode in (InstitutionSortMode[])Enum.GetValues(typeof(InstitutionSortMode)))
+            {
+                var isActive = sortMode == currentSortMode;
+                var activeClass = isActive ? "active" : null;
+                var sortDirectionClass = isActive ? (currentSortDirection == SortDirection.Ascending ? "glyphicon glyphicon-arrow-up" : "glyphicon glyphicon-arrow-down") : null;
+                <li class="@activeClass">
+                    <a href="@url.SortUrl(sortMode, currentSortMode, currentSortDirection)">@sortMode.GetName()<i class="@sortDirectionClass"></i></a>
+                </li>
+            }
+        </ul>
+    </div>
 }

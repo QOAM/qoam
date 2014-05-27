@@ -87,7 +87,7 @@
                 }
                 catch
                 {
-                    this.ModelState.AddModelError("mailsender", ViewStrings.Home_Contact_Form_Error);
+                    this.ModelState.AddModelError("mailsender", "An error occured while trying to process the contact form. Please try again.");
                 }
             }
 

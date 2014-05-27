@@ -1,8 +1,7 @@
-﻿@using QOAM.Website.Resources
-@model QOAM.Website.ViewModels.Import.CheckViewModel
+﻿@model QOAM.Website.ViewModels.Import.CheckViewModel
 
 @{
-    ViewBag.Title = ViewStrings.Admin_Check_Title;
+    ViewBag.Title = "Check ISSNs";
 }
 
 <div class="container main">
@@ -10,7 +9,7 @@
     <h2>@ViewBag.Title</h2>
     
     <p>
-        @ViewStrings.Admin_Check_Title
+    Check ISSNs
     </p>
     
     @using (Html.BeginForm("Check", "Admin", FormMethod.Post, new { role = "form" }))
@@ -29,7 +28,7 @@
             </div>
 
             <div class="col-lg-10 col-md-offset-2">
-                <input type="submit" value="@Strings.Check" class="btn btn-primary" />
+                <input type="submit" value="Check" class="btn btn-primary" />
             </div>
         </fieldset>
     }
@@ -37,7 +36,7 @@
     @if (Model != null && Model.FoundISSNs != null)
     {
         <p>
-            @ViewStrings.Admin_Check_FoundISSNs:
+        Found ISSNs:
         </p>
 
         <ul>
@@ -51,7 +50,7 @@
     @if (Model != null && Model.NotFoundISSNs != null)
     {
         <p>
-            @ViewStrings.Admin_Check_NotFoundISSNs:
+        Not found ISSNs:
         </p>
 
         <ul>

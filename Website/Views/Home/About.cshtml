@@ -1,6 +1,5 @@
-﻿@using QOAM.Website.Resources
-@{
-    ViewBag.Title = ViewStrings.Home_About_Title;
+﻿@{
+    ViewBag.Title = "About QOAM";
 }
 
 <div class="container main">
@@ -11,46 +10,46 @@
         <div class="col-md-9">
             <h2>@ViewBag.Title</h2>
 
-            <p><strong>@ViewStrings.Home_About_Introduction</strong></p>
+            <p><strong>Quality Open Access Market is primarily for authors who want to publish their article in open access in a high quality journal and for a reasonable price.</strong></p>
 
             <ul class="list-unstyled">
-                <li><a href="#why">@ViewStrings.Home_About_Why_Title</a></li>
-                <li><a href="#quality-of-service">@ViewStrings.Home_About_QualityOfService_Title</a></li>
-                <li><a href="#target-groups">@ViewStrings.Home_About_ForWhom_Title</a></li>
-                <li><a href="#privacy">@ViewStrings.Home_About_PrivacyPolicy_Title</a></li>
-                <li><a href="#how">@ViewStrings.Home_About_JournalScoreCards_Title</a></li>
-                <li><a href="#filtering-per-discipline">@ViewStrings.Home_About_FilteringPerDiscipline_Title</a></li>
-                <li><a href="#price-information">@ViewStrings.Home_About_PriceInformation_Title</a></li>
-                <li><a href="#brief-history">@ViewStrings.Home_About_BriefHistory_Title</a></li>
-                <li><a href="#einsteins-razor">@ViewStrings.Home_About_EinsteinRazor_Title</a></li>
+                <li><a href="#why">Why?</a></li>
+                <li><a href="#quality-of-service">QOAM – quality of service matched against price</a></li>
+                <li><a href="#target-groups">For whom is QOAM useful?</a></li>
+                <li><a href="#privacy">Privacy policy</a></li>
+                <li><a href="#how">Journal Score Cards</a></li>
+                <li><a href="#filtering-per-discipline">Filtering per discipline</a></li>
+                <li><a href="#price-information">Price information</a></li>
+                <li><a href="#brief-history">A brief history</a></li>
+                <li><a href="#einsteins-razor">Einstein’s razor</a></li>
             </ul>
 
-            <h3 id="why">@ViewStrings.Home_About_Why_Title</h3>
-            @Html.Raw(ViewStrings.Home_About_Why_Text)
+            <h3 id="why">Why?</h3>
+            <p>Recently, Science Europe’s <a href="http://www.scienceeurope.org/uploads/Public%20documents%20and%20speeches/SE_OA_Pos_Statement.pdf" title="Position Statement">Position Statement</a> has reconfirmed the Open Access imperative.</p><blockquote>“Research publications are one of the main results of the research process and the Research Performing and Research Funding Organisations that comprise Science Europe share the vision of increasing the impact and reducing the costs of research publications by moving to a system of Open Access.” </blockquote><p>reads their statement, and also </p><blockquote>“The Science Europe Member Organisations [..] require that as part of the publication services provided against the payment of Open Access publication fees, effective mechanisms are in place to ensure that the publication of research outputs is subject to rigorous quality assurance.”</blockquote>
 
-            <h3 id="quality-of-service">@ViewStrings.Home_About_QualityOfService_Title</h3>
-            @Html.Raw(ViewStrings.Home_About_QualityOfService_Text)
+            <h3 id="quality-of-service">QOAM – quality of service matched against price</h3>
+            <p>When scientific and scholarly publishing is no longer seen as copyright exploitation but as a service, as is the case in the OA paradigm, there is a need for a market where quality of the service can be matched against price. So, once the Journal Score Card was developed (see <a href="#brief-history" title="A Brief History">A brief history</a> below) it was a natural step to create a place where information about actual journal prices, that is publication fees, was available as well. The idea of the Quality Open Access Market – QOAM - was born. As QOAM will be operating in a nascent market, both its journal quality indicator and the information about pricing are in their infancy and may need further development. But one has to start somewhere. </p>
 
-            <h3 id="target-groups">@ViewStrings.Home_About_ForWhom_Title</h3>
-            @Html.Raw(ViewStrings.Home_About_ForWhom_Text)
+            <h3 id="target-groups">For whom is QOAM useful?</h3>
+            <p>First and for all, QOAM aims at <strong>authors</strong> who want to publish their article in open access in a high quality journal and for a reasonable price. Then there is the <strong>library community</strong>. In the subscription period libraries were invaluable to  academia when building up high quality collections. The Big Deals with their take-it-or-leave-it approach seemed to make this capacity redundant. QOAM enables libraries to apply this competence anew in the open access world by publishing Journal Score Cards and give <strong>journals</strong> feedback on how to improve. Last but not least, QOAM makes the world of academic publishing transparent to <strong>policy makers, journalists, and the public at large</strong>.<br/>Therefore, QOAM is a public website. But academics have to log in with their institutional account for publishing a Journal Score Card (to avoid misuse) or if they want to check if their institution has bargained a good publication price (because of non-disclosure clauses of publishers).</p>
 
-            <h3 id="privacy">@ViewStrings.Home_About_PrivacyPolicy_Title</h3>
-            @Html.Raw(ViewStrings.Home_About_PrivacyPolicy_Text)
+            <h3 id="privacy">Privacy policy</h3>
+            <p>QOAM is a free service, based on academic crowd sourcing. QOAM uses no cookies and can be visited anonimously. Conversely, contributions to QOAM’s content via Journal Score Cards are named. <br/><br/>In order to publish a Journal Score Card in QOAM – via “Score journal” on the main page – one has to log in via one’s institutional account. QOAM uses and meets the requirements of eduGAIN, the network of academic identity providers. As a consequence, the use of personal information in QOAM is governed by the Codes of Conduct of institutions that connect to QOAM in order to enable their members to publish Journal Score Cards. Thus, QOAM fully complies with institutional privacy policies. <br/><br/>In practice this means that QOAM only collects the names and institutional email adresses of the authors of Journal Score Cards. No other information is collected. The names are used to sign the Journal Score Cards and are publicly visible. However, an author’s institutional email adress is only shown to other authors of Journal Score Cards. No other uses of these data are foreseen.<br/><br/>Underlying this policy are the views that (1) anonimous Journal Score Cards are prone to misuse and should be avoided in QOAM and (2) authors of Journal Score Cards should be able to contact each other for dialogue.</p>
 
-            <h3 id="how">@ViewStrings.Home_About_JournalScoreCards_Title</h3>
-            @Html.Raw(string.Format(ViewStrings.Home_About_JournalScoreCards_Text, Url.Action("Index", "Score"), Url.Action("Faq") + "#hybrid-journals", Url.Action("JournalScoreCard")))
+            <h3 id="how">Journal Score Cards</h3>
+            @Html.Raw(string.Format("<p>In QOAM quality of a journal is determined by the academic community itself via so called Journal Score Cards. A Journal Score Card is a questionnaire resulting in subscores for five critical aspects of a journal. Four of them – Editorial information, Peer review, Governance and Process - are based on the journal’s website. The fifth – Valuation – is a reality check, preferably based on experience with the submission of an article to the journal. The lowest subscore of the four web site related aspects is called the <strong>Base Score</strong> of the journal. The subscore of the fifth aspect is called the <strong>Valuation score</strong> of the jounal. </p><p>QOAM offers members of the academic community the opportunity to publish a Journal Score Card for one or more of the OA and hybrid journals in QOAM’s <a href=\"{0}\" title=\"scoring section\">scoring section</a>. (NB This section includes all <a href=\"http://www.doaj.org/\" title=\"DOAJ journals\">DOAJ journals</a>.) Although there may be afterthoughts about hybrid journals (see FAQ <a href=\"{1}\" title=\"Why are so called hybrid journals also included in QOAM?\">“Why are so called hybrid journals also included in QOAM?”</a>), from an author-centric point of view they may simply be prestigious journals in which one can publish articles in open access as well. (Read more about <a href=\"{2}\" title=\"Journal Score Card\">Journal Score Card</a>)</p>", Url.Action("Index", "Score"), Url.Action("Faq") + "#hybrid-journals", Url.Action("JournalScoreCard")))
 
-            <h3 id="filtering-per-discipline">@ViewStrings.Home_About_FilteringPerDiscipline_Title</h3>
-            @Html.Raw(ViewStrings.Home_About_FilteringPerDiscipline_Text)
+            <h3 id="filtering-per-discipline">Filtering per discipline</h3>
+            <p>QOAM allows filtering per discipline. Thus the varied recognition of the different aspects over the disciplines can be taken into account. E.g. if speed of publication is less important in a specific discipline all journals in this discipline will produce a low subscore for the aspect ‘process’, which might be their Base Score. As in QOAM journals are ranked by default according to their Base score, a general search would result in a place at the bottom of the list for this journals. Within their own discipline the other aspects are more profiling. </p>
 
-            <h3 id="price-information">@ViewStrings.Home_About_PriceInformation_Title</h3>
-            @Html.Raw(ViewStrings.Home_About_PriceInformation_Text)
+            <h3 id="price-information">Price information</h3>
+            <p>For standard price information QOAM links directly to the website of a journal. However, a growing number of institutions, and more specifically their libraries, succeed in negotiating better prices for their community via memberships, licences or other agreements. Unfortunately, publishers often include non-disclosure clauses in their contracts. Therefore, prices may not always be referred to directly on the QOAM website, but per journal QOAM will list the licensed institutes. Searching authors can see if their institute is on the list. In that case they can log in to their own institutional intranet and compare the institutional price to the standard price.</p><p>Currently, prices vary widely. According to <a href="http://legacy.earlham.edu/~peters/fos/newsletter/11-02-06.htm#nofee" title="No-fee open-access journals">Peter Suber</a> the vast majority of peer-reviewed OA journals are no-fee. Journals that do charge have an <a href="http://www.openaccesspublishing.org/apc2/" title="A Study of Open Access Journals Using Article Processing Charges">average price of &euro;700</a> per article, but price quotations may mount to &euro;3000 and up. In such a bewildering situation sharing price experiences might give some guidance. For that reason a question is included in the Valuation aspect asking for the actual publication price of a published article. The replies are shown in reverse chronological order behind the tab Price information next to the standard price and the institutional price.</p>
 
-            <h3 id="brief-history">@ViewStrings.Home_About_BriefHistory_Title</h3>
-            @Html.Raw(string.Format(ViewStrings.Home_About_BriefHistory_Text, Url.Action("Faq") + "#no-metrics", Url.Action("JournalScoreCard")))
+            <h3 id="brief-history">A brief history</h3>
+            @Html.Raw(string.Format("<p>For long, SURF has been convinced that in the OA paradigm, next to price quality is a critical issue. For established journals the Journal Impact Factor, though controversial, is used as a proxy for quality but for young journals there is no such quality indicator whatsoever. This is a specific handicap for young OA journals whereas young subscription journals are often just included in Big Deal packages. The outcomes of the <a href=\"http://project-soap.eu/report-from-the-soap-symposium/\" title=\"EC-project SOAP\">EC-project SOAP</a> confirmed a growing urgency to address the quality issue for OA journals (later alarmingly demonstrated by  the emergence of <a href=\"http://scholarlyoa.com/individual-journals/\" title=\"predatory journals\">predatory journals</a> and John Bohannon’s article <a href=\"http://www.sciencemag.org/content/342/6154/60.full\" title=\"Who is Afraid of Peer Review?\">Who is Afraid of Peer Review?</a>)            </p>            <p>                As early as 2009 SURF took the initiative to investigate the feasibility of an accreditation system for young OA journals. The idea was embraced by the European Commission but rejected by SURF’s OpenAIRE project partners (who stuck to the Green Road to OA). Publishers and funders reacted expectantly. SURF left this approach after all and, in hindsight, it might have been too ambitious.            </p>            <p>                In autumn 2011 a new endeavour was started, this time aiming at tools that would enable a crowd sourced solution. For that purpose two indicators were prototyped: an Editorial Board Indicator, a metric for the scientific impact of the editorial board, and a Transparency Indicator, checking the transparency of the article admission process. Both indicators were presented, and the second one even tested, at an international expert colloquium in Rotterdam, October 2012.             </p>            <p>                The main obstacle for the first indicator was, and still is, the problem of identifying the board members; just a name and an affiliation are not enough for that. (See FAQ <a href=\"{0}\" title=\"Why does QOAM not include metrics as a quality proxy?\">“Why does QOAM not include metrics as a quality proxy?”</a>) The second indicator turned out to be more readily applicable as was demonstrated by the test in Rotterdam and subsequently by a group of Dutch university libraries. These encouraging results led to the development of the more comprehensive <a href=\"{1}\" title=\"Journal Score Card\">Journal Score Card</a> as a first measure of young journal quality.             </p>", Url.Action("Faq") + "#no-metrics", Url.Action("JournalScoreCard")))
 
-            <h3 id="einsteins-razor">@ViewStrings.Home_About_EinsteinRazor_Title</h3>
-            @Html.Raw(ViewStrings.Home_About_EinsteinRazor_Text)
+            <h3 id="einsteins-razor">Einstein’s razor</h3>
+            <p>Overall, the builders have tried to apply Einstein’s razor: “Make web sites as simple as possible, but not simpler.”</p>
         </div>
     </div>
 </div>

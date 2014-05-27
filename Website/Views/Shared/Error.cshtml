@@ -1,12 +1,11 @@
-﻿@using QOAM.Website.Resources
-@model HandleErrorInfo
+﻿@model HandleErrorInfo
 
 @{
-    ViewBag.Title = ViewStrings.Error_Title;
+    ViewBag.Title = "Error";
 }
 
 <div class="container">
     <h1>@ViewBag.Title.</h1>
     
-    @Bootstrap.Error(ViewStrings.Error_Text)
+    @Bootstrap.Error("An error occurred while processing your request.")
 </div>

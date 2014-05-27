@@ -2,9 +2,8 @@
 @using QOAM.Core
 @using QOAM.Website.Helpers
 @using QOAM.Website.Models
-@using QOAM.Website.Resources
 @{
-    ViewBag.Title = ViewStrings.Home_JournalScoreCard_Title;
+    ViewBag.Title = "Journal Score Card";
 }
 
 @helper JournalScoreCardImage(string name, string description)
@@ -23,15 +22,15 @@
             <h2>@ViewBag.Title</h2>
 
             <ul class="list-unstyled">
-                <li><a href="#what">@ViewStrings.Home_JournalScoreCard_WhatIsJournalScoreCard_Title</a></li>
-                <li><a href="#how-used">@ViewStrings.Home_JournalScoreCard_HowAreJournalScoreCardsUsed_Title</a></li>
-                <li><a href="#who-may-publish">@ViewStrings.Home_JournalScoreCard_WhoMayPublish_Title</a></li>
-                <li><a href="#show-it">@ViewStrings.Home_JournalScoreCard_ShowIt_Title</a></li>
-                <li><a href="#swot">@ViewStrings.Home_JournalScoreCard_swotMatrix_Title</a></li>
+                <li><a href="#what">What is a Journal Score Card?</a></li>
+                <li><a href="#how-used">How are JSCs used in QOAM?</a></li>
+                <li><a href="#who-may-publish">Who may publish JSCs in QOAM?</a></li>
+                <li><a href="#show-it">Show it!</a></li>
+                <li><a href="#swot">The SWOT matrix</a></li>
             </ul>
 
-            <h3 id="what">@ViewStrings.Home_JournalScoreCard_WhatIsJournalScoreCard_Title</h3>
-            @Html.Raw(ViewStrings.Home_JournalScoreCard_WhatIsJournalScoreCard_Text)
+            <h3 id="what">What is a Journal Score Card?</h3>
+            <p>Journal Score Card (JSC) is a questionnaire on five relevant journal aspects. Four of them – Editorial information, Peer review, Governance and Process - are based on the journal’s website. The fifth – Valuation – is a reality check, preferably based on experience with the submission of an article to the journal. Every aspect has some bullets and each bullet can be rated from 1 to 5. The average of these ratings is called the subscore for this aspect. The lowest subscore of the four web site related aspects is called the <strong>Base Score</strong> of the journal. The subscore of the fifth aspect is called the <strong>Valuation Score</strong> of the jounal.</p>
 
             <p>1. @QuestionCategory.EditorialInformation.GetName()</p>
             <ul>
@@ -67,20 +66,20 @@
 
             <p>5. @QuestionCategory.Valuation.GetName()</p>
             <ul>
-                <li>@Html.Raw(ViewStrings.Score_Journal_HaveSubmittedToThisJournal)</li>
+                <li>I have published an article in this journal less than a year ago</li>
                 <li>@QuestionKey.PeerReviewProcessTransparent.ToDescription()</li>
                 <li>@QuestionKey.RecommendScholarsToSubmit.ToDescription()</li>
                 <li>@QuestionKey.GoodValueForMoney.ToDescription()</li>
-                <li>@ViewStrings.Score_Journal_PublicationCost</li>
+                <li>Publication of my article in this journal did cost</li>
             </ul>
 
-            <h3 id="how-used">@ViewStrings.Home_JournalScoreCard_HowAreJournalScoreCardsUsed_Title</h3>
-            @Html.Raw(ViewStrings.Home_JournalScoreCard_HowAreJournalScoreCardsUsed_Text)
+            <h3 id="how-used">How are JSCs used in QOAM?</h3>
+            <p>In QOAM journals are ranked by default in order of their Base Score. So, a journal at the top of the list, i.e. with a high Base Score, has a web site that addresses all the journal aspects adequately. On the other hand, a journal with a low Base Score has at least one weak aspect, but may still be strong in other respects. In order to climb on the list a journal must address its weakest aspect.</p><p>Next to the Base score the Valuation score of a journal is shown. This score reflects an appraisal of the journal, preferably based on a real submission. If this experience is lacking, circumstantial information may do and a free text box gives room for additional comments. NB Price information is only asked for when it is based on submission experience. In QOAM it is possible to limit a search to submission based Journal Score Cards only.</p><p>QOAM has the option to filter journals per title key word, ISSN, publisher, discipline and language. Filtering per discipline enables to take the varied recognition of different aspects over disciplines into account. E.g. if speed of publication is less important in a specific discipline all journals in this discipline will produce a low subscore for the aspect ‘process’, which might be their Base Score. In a general search this would result in a place at the bottom of the ranking. Within their own discipline the other aspects are more profiling.</p><p>On top of that, every academic author can decide for herself which aspects she deems most relevant. Per journal all aspect subscores are produced.</p>
             
-            <h3 id="who-may-publish">@ViewStrings.Home_JournalScoreCard_WhoMayPublish_Title</h3>
-            @Html.Raw(string.Format(ViewStrings.Home_JournalScoreCard_WhoMayPublish_Text, Url.Action("Index", "Score"), Url.Action("Faq") + "#hybrid-journals"))
+            <h3 id="who-may-publish">Who may publish JSCs in QOAM?</h3>
+            @Html.Raw(string.Format("<p>\tMembers of the academic community with a Higher Education (HE) institutional account can select open access and hybrid journals from QOAM’s <a href=\"{0}\" title=\"Scoring section\">scoring section</a>. (See the FAQ <a href=\"{1}\" title=\"Why are so called hybrid journals also included in QOAM?\">“Why are so called hybrid journals also included in QOAM?”</a>) Then QOAM offers the opportunity to publish a Journal Score Card for one or more of the selected journals. Per person only one JSC may be published for a specific journal. In case several people publish a JSC for the same journal the averaged subscores will be attributed to the journal. Thus QOAM is crowd sourced in a controlled way.</p><p>\tEvery JSC is presented in QOAM for a period of a year. Authors can edit their published JSC at any moment, e.g. in order to reflect new developments of the journal. Updated Journal Score Cards will be dealt with as newly published ones. Thus QOAM is kept up to date.</p><p>\tA year after its publication a JSC expires and will be archived. It no longer plays a role in QOAM but its author will keep access to it via the Profile section of QOAM. A month before a JSC will be archived its author will be notified of the upcoming expiration and will be invited to update their JSC (provided they are still a member of the academic community.) Thus QOAM keeps in touch with people who committed themselves by publishing a JSC.</p><p>\tThe Journal Score Card as a format will be evaluated periodically and possibly adapted to new insights. However, changes will not be abrupt and draft versions will be circulated for comment prior to installation. As JSCs are archived after a year the migration period in which ‘old’ and ‘new’ subscores sit together lasts a year at most. Effectively the migration period could be shorter because everybody may edit their JSC any time. Thus, the JSC evolves organically. </p>", Url.Action("Index", "Score"), Url.Action("Faq") + "#hybrid-journals"))
 
-            <h3 id="show-it">@ViewStrings.Home_JournalScoreCard_ShowIt_Title</h3>
+            <h3 id="show-it">Show it!</h3>
 
             <ul class="list-unstyled">
                 <li>@JournalScoreCardImage("editorial", "Editorial aspect of the Journal Score Card")</li>
@@ -90,7 +89,7 @@
                 <li>@JournalScoreCardImage("valuation", "Valuation aspect of the Journal Score Card")</li>
             </ul>
             
-            <h3 id="swot">@ViewStrings.Home_JournalScoreCard_swotMatrix_Title</h3>
+            <h3 id="swot">The SWOT matrix</h3>
             <img src="~/Images/swot.png"/>
         </div>
     </div>
@@ -106,7 +105,7 @@
     @Scripts.Render("~/scripts/fancybox")
 
     <script type="text/javascript">
-        $(function () {
+        $(function() {
             var homeController = new HomeController();
             homeController.journalScoreCard();
         });

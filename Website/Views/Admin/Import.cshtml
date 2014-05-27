@@ -1,9 +1,8 @@
 ﻿@using QOAM.Website.Helpers
-@using QOAM.Website.Resources
 @model QOAM.Website.ViewModels.Import.ImportViewModel
 
 @{
-    ViewBag.Title = ViewStrings.Admin_Import_Title;
+    ViewBag.Title = "Import journals";
 }
 
 <div class="container main">
@@ -11,7 +10,7 @@
     <h2>@ViewBag.Title</h2>
     
     <p>
-        @ViewStrings.Admin_Import_Text
+        In the text are below you can enter ISSNs of journals to be imported.
     </p>
     
     @using (Html.BeginForm("Import", "Admin", FormMethod.Post, new { role = "form" }))
@@ -38,7 +37,7 @@
             </div>
 
             <div class="col-lg-10 col-md-offset-2">
-                <input type="submit" value="@Strings.Import" class="btn btn-primary" />
+                <input type="submit" value="Import" class="btn btn-primary" />
             </div>
         </fieldset>
     }

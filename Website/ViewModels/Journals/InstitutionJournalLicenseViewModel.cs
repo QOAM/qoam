@@ -1,5 +1,6 @@
 ﻿namespace QOAM.Website.ViewModels.Journals
 {
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     using QOAM.Core;
@@ -33,7 +34,7 @@
         [Url]
         public string Link { get; set; }
 
-        [Display(Name = "UpdateAllJournalsOfPublisher", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("Update all journals with the same publisher")]
         public bool UpdateAllJournalsOfPublisher { get; set; }
 
         public string RefererUrl { get; set; }

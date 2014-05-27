@@ -55,8 +55,8 @@
         [GET("")]
         public ActionResult Index(IndexViewModel model)
         {
-            model.Languages = this.languageRepository.All.ToSelectListItems(Resources.Strings.AllLanguages);
-            model.Disciplines = this.subjectRepository.All.ToSelectListItems(Resources.Strings.AllDisciplines);
+            model.Languages = this.languageRepository.All.ToSelectListItems("<All languages>");
+            model.Disciplines = this.subjectRepository.All.ToSelectListItems("<All disciplines>");
             model.Journals = this.journalRepository.Search(model.ToFilter());
 
             return this.View(model);

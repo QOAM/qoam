@@ -1,36 +1,29 @@
-﻿@using QOAM.Website.Resources
-@using Strings = QOAM.Website.Resources.Strings
-@model QOAM.Website.ViewModels.Journals.CommentsViewModel
+﻿@model QOAM.Website.ViewModels.Journals.CommentsViewModel
 
 @if (Model.CommentedScoreCards.Count == 0)
 {
-    <p>@ViewStrings.Journals_Comments_NoComments</p>
+    <p>No comments have been made on this journal</p>
 }
 else
 {
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th>@Strings.Reviewer</th>
-                <th>@Strings.Date</th>
-                <th>@Strings.Comment</th>
-                <th>@Strings.Action</th>
+                <th>Reviewer</th>
+                <th>Date</th>
+                <th>Comment</th>
+                <th>Action</th>
             </tr>
         </thead>
-        <tbody id="@this.Model.Id-comments">
-            @{ this.Html.RenderPartial("CommentsRows", this.Model); }
+        <tbody id="@Model.Id-comments">
+            @{ Html.RenderPartial("CommentsRows", Model); }
         </tbody>
         <tfoot id="loadMoreComments">
-            @if (this.Model.CommentedScoreCards.HasNextPage)
+            @if (Model.CommentedScoreCards.HasNextPage)
             {
                 <tr>
                     <td colspan="9">
-                        @this.Ajax.ActionLink(Strings.LoadMore, "Comments", new { this.Model.Id, Page = this.Model.Page + 1 }, new AjaxOptions
-                                                                                                                                 {
-                                                                                                                                     UpdateTargetId = this.Model.Id + "-comments",
-                                                                                                                                     InsertionMode = InsertionMode.InsertAfter,
-                                                                                                                                     OnSuccess = "afterLoadMore(data, 'loadMoreComments', 'loadMoreCommentsLink')"
-                                                                                                                                 }, new { id = "loadMoreCommentsLink" })
+                        @Ajax.ActionLink("Load more", "Comments", new { Model.Id, Page = Model.Page + 1 }, new AjaxOptions { UpdateTargetId = Model.Id + "-comments", InsertionMode = InsertionMode.InsertAfter, OnSuccess = "afterLoadMore(data, 'loadMoreComments', 'loadMoreCommentsLink')" }, new { id = "loadMoreCommentsLink" })
                     </td>
                 </tr>
             }

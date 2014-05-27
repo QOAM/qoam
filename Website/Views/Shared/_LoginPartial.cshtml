@@ -1,19 +1,17 @@
-﻿@using QOAM.Website.Resources
-
-@if (User.Identity.IsAuthenticated)
+﻿@if (User.Identity.IsAuthenticated)
 {
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Details", "Profiles", new { id = ViewBag.User.Id })">@ViewBag.User.DisplayName <b class="caret"></b></a>
         <ul class="dropdown-menu">
-            <li>@Html.ActionLink(Strings.Profile, "Details", "Profiles", new { id = ViewBag.User.Id }, null)</li>
+            <li>@Html.ActionLink("Profile", "Details", "Profiles", new { id = ViewBag.User.Id }, null)</li>
             <li class="divider"></li>
             <li>
-                <a href="~/Logout.ashx">@Strings.LogOff</a>
+                <a href="~/Logout.ashx">Log off</a>
             </li>
         </ul>
     </li>
 }
 else
 {
-    <li><a href="~/Login.ashx">@Strings.LogIn</a></li>
+    <li><a href="~/Login.ashx">Log in</a></li>
 }

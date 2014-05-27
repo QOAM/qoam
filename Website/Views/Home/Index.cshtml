@@ -1,19 +1,18 @@
-﻿@using QOAM.Website.Resources
-@model QOAM.Website.ViewModels.Home.IndexViewModel
+﻿@model QOAM.Website.ViewModels.Home.IndexViewModel
 @{
-    ViewBag.Title = ViewStrings.Home_Index_Title;
+    ViewBag.Title = "Quality Open Access Market";
 }
 
 <div class="carousel">
     <div class="carousel-inner">
         <div class="item active">
-            <img src="~/Content/images/banner3.jpg" alt="@Strings.QualityOpenAccessMarket" title="@Strings.QualityOpenAccessMarket">
+            <img src="~/Content/images/banner3.jpg" alt="Quality Open Access Market" title="Quality Open Access Market">
 
             <div class="container">
                 <div class="carousel-caption">
 
-                    <!-- <h1>@Strings.QualityOpenAccessMarket</h1> 
-                        <p>@Html.ActionLink(Strings.LearnMore, "About", "Home", null, new { @class = "btn btn btn-primary topmargin" })</p>-->
+                    <!-- <h1>Quality Open Access Market</h1> 
+                        <p>@Html.ActionLink("Learn more", "About", "Home", null, new { @class = "btn btn btn-primary topmargin" })</p>-->
                     
                     <span id="under-construction" class="text-center">
                         <a href="#" data-toggle="tooltip" data-placement="bottom" title="Only with a critical mass of several thousands quality checked journals QOAM becomes a real market place where authors may select a good journal for their open access article. Currently, QOAM has @Model.NumberOfScoredJournals checked journals. Please, help that number grow by publishing a Journal Score Card. See the item Journal Score Card behind the ‘Learn more’ button below.">
@@ -27,14 +26,14 @@
 </div>
 
 <div class="container main">
-    <p class="text-center">@Html.ActionLink(Strings.LearnMore, "About", "Home", null, new { @class = "btn btn btn-primary topmargin" })</p>
+    <p class="text-center">@Html.ActionLink("Learn more", "About", "Home", null, new { @class = "btn btn btn-primary topmargin" })</p>
     <div class="row">
         <div class="col-md-4 col-md-offset-2">
             <a href="@Url.Action("Index", "Journals")">
                 <div class="container-inner  text-center">
-                    <img class="" src="~/Images/zoom.png" title="@ViewStrings.Home_Index_Search" alt="@ViewStrings.Home_Index_Search" />
+                    <img class="" src="~/Images/zoom.png" title="I am looking for an Open Access Journal" alt="I am looking for an Open Access Journal" />
                     <p class="lead">
-                        @Html.Raw(ViewStrings.Home_Index_Search)
+                        I am looking for an<br />Open Access Journal
                     </p>
                 </div>
             </a>
@@ -43,9 +42,9 @@
         <div class="col-md-4">
             <a href="@Url.Action("Index", "Score")">
                 <div class="container-inner text-center">
-                    <img class="" src="~/Images/scoresheet.png" title="@ViewStrings.Home_Index_Score" alt="@ViewStrings.Home_Index_Score" />
+                    <img class="" src="~/Images/scoresheet.png" title="I want to publish a Journal Score Card" alt="I want to publish a Journal Score Card" />
                     <p class="lead">
-                        @Html.Raw(ViewStrings.Home_Index_Score)
+                        I want to publish a<br/>Journal Score Card
                     </p>
                 </div>
             </a>

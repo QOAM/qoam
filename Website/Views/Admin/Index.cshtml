@@ -1,27 +1,25 @@
 ﻿@using QOAM.Website.Models
-@using QOAM.Website.Resources
-
 @{
-    ViewBag.Title = ViewStrings.Admin_Index_Title;
+    ViewBag.Title = "Admin";
 }
 
 <div class="container main">
 
     <p>
-        @ViewStrings.Admin_Index_Text
+        Here you can choose from several administrative tasks
     </p>
 
     <ul>
         @if (User.IsInRole(ApplicationRole.DataAdmin))
-        { 
-            <li>@Html.ActionLink(ViewStrings.Admin_Index_ImportJournals, "Import")</li>
-            <li>@Html.ActionLink(ViewStrings.Admin_Index_UpdateJournals, "Update")</li>
-            <li>@Html.ActionLink(ViewStrings.Admin_Index_DownloadJournals, "Download")</li>
+        {
+            <li>@Html.ActionLink("Import journals", "Import")</li>
+            <li>@Html.ActionLink("Update journals", "Update")</li>
+            <li>@Html.ActionLink("Download journals", "Download")</li>
         }
         
         @if (User.IsInRole(ApplicationRole.InstitutionAdmin))
         {
-            <li>@Html.ActionLink(ViewStrings.Admin_Index_CheckISSNs, "Check")</li>
+            <li>@Html.ActionLink("Check ISSNs", "Check")</li>
         }
     </ul>
 </div>

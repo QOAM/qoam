@@ -4,31 +4,29 @@
 @using QOAM.Core
 @using QOAM.Website.Helpers
 @using QOAM.Website.ViewModels.Journals
-@using QOAM.Website.Resources
-@using Strings = QOAM.Website.Resources.Strings
-@model IndexViewModel
+@model QOAM.Website.ViewModels.Journals.IndexViewModel
 
 @{
-    ViewBag.Title = ViewStrings.Journals_Index_Title;
+    ViewBag.Title = "OA Journals";
 }
 
 <div class="container main">
     <div class="row side">
         <div class="col-md-3">
             <div id="filter" class="well">
-                <h3>@Strings.Filter
+                <h3>Filter
                     <img src="~/Images/zoom.png" class="pull-right clearfix" style="height: 30px;" /></h3>
 
                 @using (Html.BeginForm("Index", "Journals", FormMethod.Get))
                 {
                     <fieldset>
-                        <legend>@Strings.Search</legend>
+                        <legend>Search</legend>
 
                         <div class="form-group editor-label-placeholder">
                             @Html.LabelFor(m => m.Title, null, new { @class = "control-label" })
                         </div>
                         <div class="form-group">
-                            @Html.Html5TextBoxFor(m => m.Title, InputTypes.InputType.Text, new { @class = "form-control" }, Strings.SearchByTitle)
+                            @Html.Html5TextBoxFor(m => m.Title, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by journal title")
                             @Html.ValidationMessageFor(m => m.Title, null, new { @class = "control-label" })
                         </div>
 
@@ -36,7 +34,7 @@
                             @Html.LabelFor(m => m.Issn, null, new { @class = "control-label" })
                         </div>
                         <div class="form-group">
-                            @Html.Html5TextBoxFor(m => m.Issn, InputTypes.InputType.Text, new { @class = "form-control" }, Strings.SearchByISSN)
+                            @Html.Html5TextBoxFor(m => m.Issn, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by ISSN")
                             @Html.ValidationMessageFor(m => m.Issn, null, new { @class = "control-label" })
                         </div>
 
@@ -44,7 +42,7 @@
                             @Html.LabelFor(m => m.Publisher, null, new { @class = "control-label" })
                         </div>
                         <div class="form-group">
-                            @Html.Html5TextBoxFor(m => m.Publisher, InputTypes.InputType.Text, new { @class = "form-control" }, Strings.SearchByPublisher)
+                            @Html.Html5TextBoxFor(m => m.Publisher, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by publisher")
                             @Html.ValidationMessageFor(m => m.Publisher, null, new { @class = "control-label" })
                         </div>
 
@@ -81,7 +79,7 @@
                         </div>
 
                         <p>
-                            <input type="submit" value="@Strings.Search" class="btn btn-primary" />
+                            <input type="submit" value="Search" class="btn btn-primary" />
                         </p>
                     </fieldset>
                 }
@@ -93,7 +91,7 @@
 
             <div class="row">
                 <div class="col-md-9">
-                    <h3>@Strings.OAJournals: @Model.Journals.TotalItemCount</h3>
+                    <h3>Scored journals: @Model.Journals.TotalItemCount</h3>
 
                 </div>
                 <div class="col-md-3 text-right topmargin">
@@ -107,180 +105,180 @@
                 {
                     <div class="panel panel-primary journal">
                         <div class="panel-heading">
-                            <a href="@journal.Link" title="@Strings.GoToWebsite">
-                            <div>
-                                @journal.Title
-                                <span class="pull-right clearfix"><i class="glyphicon glyphicon-new-window"></i></span>
-                            </div>
+                            <a href="@journal.Link" title="Go to website">
+                                <div>
+                                    @journal.Title
+                                    <span class="pull-right clearfix"><i class="glyphicon glyphicon-new-window"></i></span>
+                                </div>
                             </a>
-                    </div>
-                    <div class="panel-body">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <label class="col-md-2">@Strings.ISSN:</label>
-                                <div class="col-md-10">@journal.ISSN</div>
-                            </div>
-
-                            <div class="row">
-                                <label class="col-md-2">@Strings.Publisher:</label>
-                                <div class="col-md-10">@Html.ActionLink(journal.Publisher.Name, "Index", new { Publisher = journal.Publisher.Name })</div>
-                            </div>
-
-                            <div class="row">
-                                <label class="col-md-2">@Strings.Language:</label>
-                                <div class="col-md-10">
-                                    @for (var i = 0; i < journal.Languages.Count; ++i)
-                                    {
-                                        var language = journal.Languages.ElementAt(i);
-
-                                        @Html.ActionLink(language.Name, "Index", new { Language = language.Id })
-
-                                        if (i < journal.Languages.Count - 1)
-                                        {
-                                            <text>,</text>
-                                        }
-                                    }
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <label class="col-md-2">@Strings.Discipline:</label>
-                                <div class="col-md-10">
-                                    @for (var i = 0; i < journal.Subjects.Count; ++i)
-                                    {
-                                        var subject = journal.Subjects.ElementAt(i);
-
-                                        @Html.ActionLink(subject.Name, "Index", new { Discipline = subject.Id })
-
-                                        if (i < journal.Subjects.Count - 1)
-                                        {
-                                            <text>,</text>
-                                        }
-                                    }
-                                </div>
-                            </div>
                         </div>
+                        <div class="panel-body">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <label class="col-md-2">ISSN:</label>
+                                    <div class="col-md-10">@journal.ISSN</div>
+                                </div>
 
-                        <a href="@Url.Action("JournalScoreCard", "Home")#swot" data-select-tab="false">
-                            <div class="col-md-2">
-                                <div class="score swotContainer">
-                                    <small>@Strings.swotmatrix</small>
-                                    <div class="swotBox verdict-@journal.JournalScore.Swot">
-                                        <div class="row">
-                                            <div class="column strong">&#160;</div>
-                                            <div class="column threat">&#160;</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="column opportunity">&#160;</div>
-                                            <div class="column weak">&#160;</div>
-                                        </div>
+                                <div class="row">
+                                    <label class="col-md-2">Publisher:</label>
+                                    <div class="col-md-10">@Html.ActionLink(journal.Publisher.Name, "Index", new { Publisher = journal.Publisher.Name })</div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-md-2">Language:</label>
+                                    <div class="col-md-10">
+                                        @for (var i = 0; i < journal.Languages.Count; ++i)
+                                        {
+                                            var language = journal.Languages.ElementAt(i);
+
+                                            @Html.ActionLink(language.Name, "Index", new { Language = language.Id })
+
+                                            if (i < journal.Languages.Count - 1)
+                                            {
+                                                <text>,</text>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-md-2">Discipline:</label>
+                                    <div class="col-md-10">
+                                        @for (var i = 0; i < journal.Subjects.Count; ++i)
+                                        {
+                                            var subject = journal.Subjects.ElementAt(i);
+
+                                            @Html.ActionLink(subject.Name, "Index", new { Discipline = subject.Id })
+
+                                            if (i < journal.Subjects.Count - 1)
+                                            {
+                                                <text>,</text>
+                                            }
+                                        }
                                     </div>
                                 </div>
                             </div>
-                        </a>
 
-                        <a href="#journal@(journal.Id)-tab-score" data-select-tab="true">
-                            <div class="col-md-2">
-                                <div class="score">
-                                    <small>@Strings.ValuationScore</small>
-                                    <h2>
-                                        @journal.JournalScore.ValuationScore.AverageScore.ToString("0.0")
-                                    </h2>
+                            <a href="@Url.Action("JournalScoreCard", "Home")#swot" data-select-tab="false">
+                                <div class="col-md-2">
+                                    <div class="score swotContainer">
+                                        <small>SWOT matrix</small>
+                                        <div class="swotBox verdict-@journal.JournalScore.Swot">
+                                            <div class="row">
+                                                <div class="column strong">&#160;</div>
+                                                <div class="column threat">&#160;</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="column opportunity">&#160;</div>
+                                                <div class="column weak">&#160;</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#journal@(journal.Id)-tab-score" data-select-tab="true">
+                                <div class="col-md-2">
+                                    <div class="score">
+                                        <small>Valuation Score</small>
+                                        <h2>
+                                            @journal.JournalScore.ValuationScore.AverageScore.ToString("0.0")
+                                        </h2>
+
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#journal@(journal.Id)-tab-score" data-select-tab="true">
+                                <div class="col-md-2">
+                                    <div class="score">
+                                        <small>Base Score</small>
+                                        <h2>
+                                            @journal.JournalScore.OverallScore.AverageScore.ToString("0.0")
+                                        </h2>
+                                    </div>
 
                                 </div>
-                            </div>
-                        </a>
 
-                        <a href="#journal@(journal.Id)-tab-score" data-select-tab="true">
-                            <div class="col-md-2">
-                                <div class="score">
-                                    <small>@Strings.BaseScore</small>
-                                    <h2>
-                                        @journal.JournalScore.OverallScore.AverageScore.ToString("0.0")
-                                    </h2>
-                                </div>
-
-                            </div>
-
-                        </a>
-                    </div>
-                    <div class="span-contentsearch">
-                        <div class="row">
-                            <div class="tabbablesearch">
-                                <ul class="nav nav-tabs journal-tabs">
-                                    <li><a href="#journal@(journal.Id)-tab-score" data-toggle="tab">@Strings.AverageSubscores</a></li>
-                                    <li><a href="#journal@(journal.Id)-tab-review" data-url="@Url.Action("Scores", new { id = journal.Id })" data-toggle="tab">@ViewStrings.Journals_Index_PublishedJournalScoreCards</a></li>
-                                    <li><a href="#journal@(journal.Id)-tab-prices" data-url="@Url.Action("Prices", new { id = journal.Id, RefererUrl = Request.Url.ToString() })" data-toggle="tab">@Strings.PriceInformation</a></li>
-                                    <li><a href="#journal@(journal.Id)-tab-comments" data-url="@Url.Action("Comments", new { id = journal.Id })" data-toggle="tab">@Strings.AdditionalComments</a></li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane" id="journal@(journal.Id)-tab-review">@{ Html.RenderPartial("_Loading"); }</div>
-                                    <div class="tab-pane" id="journal@(journal.Id)-tab-comments">@{ Html.RenderPartial("_Loading"); }</div>
-                                    <div class="tab-pane" id="journal@(journal.Id)-tab-prices">@{ Html.RenderPartial("_Loading"); }</div>
-                                    <div class="tab-pane" id="journal@(journal.Id)-tab-score">
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <div class="score nohover">
-                                                    @QuestionCategory.Valuation.GetName():<h3>@journal.JournalScore.ValuationScore.AverageScore.ToString("0.0")</h3>
+                            </a>
+                        </div>
+                        <div class="span-contentsearch">
+                            <div class="row">
+                                <div class="tabbablesearch">
+                                    <ul class="nav nav-tabs journal-tabs">
+                                        <li><a href="#journal@(journal.Id)-tab-score" data-toggle="tab">Average subscores</a></li>
+                                        <li><a href="#journal@(journal.Id)-tab-review" data-url="@Url.Action("Scores", new { id = journal.Id })" data-toggle="tab">Published JSCs</a></li>
+                                        <li><a href="#journal@(journal.Id)-tab-prices" data-url="@Url.Action("Prices", new { id = journal.Id, RefererUrl = Request.Url.ToString() })" data-toggle="tab">Price information</a></li>
+                                        <li><a href="#journal@(journal.Id)-tab-comments" data-url="@Url.Action("Comments", new { id = journal.Id })" data-toggle="tab">Additional comments</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane" id="journal@(journal.Id)-tab-review">@{ Html.RenderPartial("_Loading"); }</div>
+                                        <div class="tab-pane" id="journal@(journal.Id)-tab-comments">@{ Html.RenderPartial("_Loading"); }</div>
+                                        <div class="tab-pane" id="journal@(journal.Id)-tab-prices">@{ Html.RenderPartial("_Loading"); }</div>
+                                        <div class="tab-pane" id="journal@(journal.Id)-tab-score">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="score nohover">
+                                                        @QuestionCategory.Valuation.GetName():<h3>@journal.JournalScore.ValuationScore.AverageScore.ToString("0.0")</h3>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-md-2">
-                                                <div class="score nohover">
-                                                    @QuestionCategory.EditorialInformation.GetName():<h3>@journal.JournalScore.EditorialInformationScore.AverageScore.ToString("0.0")</h3>
+                                                <div class="col-md-2">
+                                                    <div class="score nohover">
+                                                        @QuestionCategory.EditorialInformation.GetName():<h3>@journal.JournalScore.EditorialInformationScore.AverageScore.ToString("0.0")</h3>
+                                                    </div>
+                                                    <div class="score nohover">
+                                                        @QuestionCategory.Governance:<h3>@journal.JournalScore.GovernanceScore.AverageScore.ToString("0.0")</h3>
+                                                    </div>
                                                 </div>
-                                                <div class="score nohover">
-                                                    @QuestionCategory.Governance:<h3>@journal.JournalScore.GovernanceScore.AverageScore.ToString("0.0")</h3>
-                                                </div>
-                                            </div>
 
-                                            <div class="col-md-2">
-                                                <div class="score nohover">
-                                                    @QuestionCategory.PeerReview.GetName():<h3>@journal.JournalScore.PeerReviewScore.AverageScore.ToString("0.0")</h3>
+                                                <div class="col-md-2">
+                                                    <div class="score nohover">
+                                                        @QuestionCategory.PeerReview.GetName():<h3>@journal.JournalScore.PeerReviewScore.AverageScore.ToString("0.0")</h3>
+                                                    </div>
+                                                    <div class="score nohover">
+                                                        @QuestionCategory.Process.GetName():<h3>@journal.JournalScore.ProcessScore.AverageScore.ToString("0.0")</h3>
+                                                    </div>
                                                 </div>
-                                                <div class="score nohover">
-                                                    @QuestionCategory.Process.GetName():<h3>@journal.JournalScore.ProcessScore.AverageScore.ToString("0.0")</h3>
-                                                </div>
-                                            </div>
 
-                                            <div class="col-md-3 ">
-                                                <div class="score">
-                                                    <a href="#journal@(journal.Id)-tab-review" data-select-tab="true">
-                                                        @Strings.NumberOfReviewers:<h2>@journal.JournalScore.NumberOfReviewers</h2>
-                                                    </a>
-                                                    <img alt="@Strings.Reviews" src="~/Content/images/organisation.png">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <div class="score">
-                                                    @Html.ActionLink(Strings.PublishScoreCardForThisJournal, "Journal", "Score", new { id = journal.Id }, null)
-                                                    <div class="Scoresheet">
-                                                        <a href="@Url.Action("Journal", "Score", new { id = journal.Id }, null)">
-                                                            <img src="~/Images/scoresheet.png" alt="Scoresheet" />
+                                                <div class="col-md-3 ">
+                                                    <div class="score">
+                                                        <a href="#journal@(journal.Id)-tab-review" data-select-tab="true">
+                                                            Number of reviewers:<h2>@journal.JournalScore.NumberOfReviewers</h2>
                                                         </a>
+                                                        <img alt="Reviews" src="~/Content/images/organisation.png">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="score">
+                                                        @Html.ActionLink("Publish a Journal Score Card for this journal", "Journal", "Score", new { id = journal.Id }, null)
+                                                        <div class="Scoresheet">
+                                                            <a href="@Url.Action("Journal", "Score", new { id = journal.Id }, null)">
+                                                                <img src="~/Images/scoresheet.png" alt="Scoresheet" />
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="topmargin">
-                                            @Html.Raw(string.Format(ViewStrings.Journals_Index_ScoreText, Url.Action("JournalScoreCard", "Home")))
+                                            <div class="topmargin">
+                                                @Html.Raw(string.Format("The <strong>Base Score</strong> and the <strong>Valuation Score</strong> are the outcomes of one or more <a href=\"{0}\" title=\"Journal Score Cards\">Journal Score Cards</a> published for this journal", Url.Action("JournalScoreCard", "Home")))
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
-                </div>
                 }
 
                 @Html.PagedListPager(Model.Journals, page => Url.Action("Index", new { page, Model.Title, Model.Issn, Model.Publisher, Model.Discipline, Model.Language, Model.MinimumBaseScore, Model.MinimumValuationScore, Model.SubmittedOnly, Model.Sort, Model.SortBy }), Html.PagedListRenderOptions())
             }
             else
             {
-                @Html.Raw(string.Format(ViewStrings.Shared_NoJournalsFound, Url.Action("Faq", "Home") + "#cant-find-journal"))
+                @Html.Raw(string.Format("<p class=\"text-warning\">No journals could be found. This outcome is adressed in the FAQ <a href=\"{0}\" title=\"Why don\'t I find a specific journal in QOAM?\">Why don\'t I find a specific journal in QOAM?</a></p>", Url.Action("Faq", "Home") + "#cant-find-journal"))
             }
         </div>
     </div>
@@ -300,12 +298,12 @@
     @Html.Partial("_FormScripts")
 
     <script type="text/javascript">
-        $(function () {
+        $(function() {
             var journalsController = new JournalsController();
             journalsController.index(
-                '@Url.Action("Titles", null, null, this.Request.Url.Scheme)',
-                '@Url.Action("Issns", null, null, this.Request.Url.Scheme)',
-                '@Url.Action("Publishers", null, null, this.Request.Url.Scheme)'
+                '@Url.Action("Titles", null, null, Request.Url.Scheme)',
+                '@Url.Action("Issns", null, null, Request.Url.Scheme)',
+                '@Url.Action("Publishers", null, null, Request.Url.Scheme)'
             );
         });
     </script>

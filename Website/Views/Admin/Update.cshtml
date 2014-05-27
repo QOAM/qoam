@@ -1,9 +1,8 @@
 ﻿@using QOAM.Website.Helpers
-@using QOAM.Website.Resources
 @model QOAM.Website.ViewModels.Import.UpdateViewModel
 
 @{
-    ViewBag.Title = ViewStrings.Admin_Update_Title;
+    ViewBag.Title = "Update journals";
 }
 
 <div class="container main">
@@ -11,7 +10,7 @@
     <h2>@ViewBag.Title</h2>
     
     <p>
-        @ViewStrings.Admin_Update_Text
+        In the text are below you can enter ISSNs of journals to be updated. Please note that the existing information will be overwritten, which means that the publisher, language, country and disciplines will all be overwritten.
     </p>
     
     @using (Html.BeginForm("Update", "Admin", FormMethod.Post, new { role = "form" }))
@@ -38,7 +37,7 @@
             </div>
 
             <div class="col-lg-10 col-md-offset-2">
-                <input type="submit" value="@Strings.Update" class="btn btn-primary" />
+                <input type="submit" value="Update" class="btn btn-primary" />
             </div>
         </fieldset>
     }

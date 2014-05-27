@@ -1,11 +1,10 @@
-﻿@using QOAM.Website.Resources
-@model PagedList.IPagedList<QOAM.Core.ScoreCard>
+﻿@model PagedList.IPagedList<QOAM.Core.ScoreCard>
 
 @foreach (var scoreCard in Model)
 {
     var isOwner = User.Identity.IsAuthenticated && scoreCard.UserProfile.Id == ViewBag.User.Id;
     var nextPage = Model.IsLastPage ? (int?)null : (Model.PageNumber + 1);
-    
+
     <tr data-next-page="@nextPage">
         <td>
             @if (isOwner)
@@ -26,11 +25,13 @@
         <td>
             @if (isOwner)
             {
-                <span class="glyphicon glyphicon-pencil"></span> @Html.ActionLink(Strings.Edit, "Journal", "Score", new { id = scoreCard.JournalId }, null)
+                <span class="glyphicon glyphicon-pencil"></span>
+                @Html.ActionLink("Edit", "Journal", "Score", new { id = scoreCard.JournalId }, null)
             }
             else
             {
-                <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink(Strings.View, "Details", "Score", new { id = scoreCard.Id }, null)
+                <span class="glyphicon glyphicon-eye-open"></span>
+                @Html.ActionLink("View", "Details", "Score", new { id = scoreCard.Id }, null)
             }
         </td>
     </tr>

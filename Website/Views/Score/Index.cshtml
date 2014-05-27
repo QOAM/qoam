@@ -6,25 +6,25 @@
 @model QOAM.Website.ViewModels.Score.IndexViewModel
 
 @{
-    ViewBag.Title = ViewStrings.Score_Index_Title;
+    ViewBag.Title = "Score a journal";
 }
 
 <div class="container main">
     <div class="row side">
         <div class="col-md-3">
             <div id="filter" class="well">
-                <h3>@Strings.Select <img src="~/Images/scoresheet.png" class="pull-right clearfix" style=height:30px; /></h3>
+                <h3>Select <img src="~/Images/scoresheet.png" class="pull-right clearfix" style="height:30px;" /></h3>
                 
                 @using (Html.BeginForm("Index", "Score", FormMethod.Get))
                 {
                     <fieldset>
-                        <legend>@Strings.Search</legend>
+                        <legend>Search</legend>
 
                         <div class="form-group editor-label-placeholder">
                             @Html.LabelFor(m => m.Title, null, new { @class = "control-label" })
                         </div>
                         <div class="form-group">
-                            @Html.Html5TextBoxFor(m => m.Title, InputTypes.InputType.Text, new { @class = "form-control" }, Strings.SearchByTitle)
+                            @Html.Html5TextBoxFor(m => m.Title, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by journal title")
                             @Html.ValidationMessageFor(m => m.Title, null, new { @class = "control-label" })
                         </div>
 
@@ -32,7 +32,7 @@
                             @Html.LabelFor(m => m.Issn, null, new { @class = "control-label" })
                         </div>
                         <div class="form-group">
-                            @Html.Html5TextBoxFor(m => m.Issn, InputTypes.InputType.Text, new { @class = "form-control" }, Strings.SearchByISSN)
+                            @Html.Html5TextBoxFor(m => m.Issn, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by ISSN")
                             @Html.ValidationMessageFor(m => m.Issn, null, new { @class = "control-label" })
                         </div>
 
@@ -40,7 +40,7 @@
                             @Html.LabelFor(m => m.Publisher, null, new { @class = "control-label" })
                         </div>
                         <div class="form-group">
-                            @Html.Html5TextBoxFor(m => m.Publisher, InputTypes.InputType.Text, new { @class = "form-control" }, Strings.SearchByPublisher)
+                            @Html.Html5TextBoxFor(m => m.Publisher, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by publisher")
                             @Html.ValidationMessageFor(m => m.Publisher, null, new { @class = "control-label" })
                         </div>
 
@@ -55,7 +55,7 @@
                         </div>
 
                         <p>
-                            <input type="submit" value="@Strings.Search" class="btn btn-primary" />
+                            <input type="submit" value="Search" class="btn btn-primary" />
                         </p>
                     </fieldset>
                 }
@@ -65,7 +65,7 @@
 
         <div class="col-md-9">
 
-            <h3>@Strings.Journals: @Model.Journals.TotalItemCount</h3>
+            <h3>Journals to score: @Model.Journals.TotalItemCount</h3>
 
             @if (Model.Journals.Any())
             {
@@ -73,7 +73,7 @@
                 {
                 <div class="panel panel-primary journal">
                     <div class="panel-heading">
-                        <a href="@journal.Link" title="@Strings.GoToWebsite">
+                        <a href="@journal.Link" title="Go to website">
                             <div>
                                 @journal.Title
                                 <span class="pull-right clearfix"><i class="glyphicon glyphicon-new-window"></i></span>
@@ -83,17 +83,17 @@
                     <div class="panel-body">
                         <div class="col-md-9">
                             <div class="row">
-                                <label class="col-md-2">@Strings.ISSN:</label>
+                                <label class="col-md-2">ISSN:</label>
                                 <div class="col-md-10">@journal.ISSN</div>
                             </div>
 
                             <div class="row">
-                                <label class="col-md-2">@Strings.Publisher:</label>
+                                <label class="col-md-2">Publisher:</label>
                                 <div class="col-md-10">@Html.ActionLink(journal.Publisher.Name, "Index", new { Publisher = journal.Publisher.Name })</div>
                             </div>
 
                             <div class="row">
-                                <label class="col-md-2">@Strings.Language:</label>
+                                <label class="col-md-2">Language:</label>
                                 <div class="col-md-10">
                                     @for (var i = 0; i < journal.Languages.Count; ++i)
                                     {
@@ -110,7 +110,7 @@
                             </div>
 
                             <div class="row">
-                                <label class="col-md-2">@Strings.Discipline:</label>
+                                <label class="col-md-2">Discipline:</label>
                                 <div class="col-md-10">
                                     @for (var i = 0; i < journal.Subjects.Count; ++i)
                                     {
@@ -127,7 +127,7 @@
                             </div>
 
                             <!--<div>
-                                <a href="@journal.Link" class="btn btn-success external" title="@Strings.GoToWebsite">@Strings.GoToWebsite</a>
+                                <a href="@journal.Link" class="btn btn-success external" title="Go to website">Go to website</a>
                             </div>-->
                         </div>
 
@@ -135,10 +135,10 @@
                             <div class="row score">
                                 <div class="col-md-5 ">
                                     <a class="" href="@Url.Action("Journal", new { id = journal.Id })">
-                                        <img src="~/Content/Images/rate.png" alt="@Strings.ScoreThisJournal" /></a>
+                                        <img src="~/Content/Images/rate.png" alt="Score this journal" /></a>
                                 </div>
                                 <div class="col-md-7">
-                                    <a class="" href="@Url.Action("Journal", new { id = journal.Id })">@Strings.PublishScoreCardForThisJournal</a>
+                                    <a class="" href="@Url.Action("Journal", new { id = journal.Id })">Publish a Journal Score Card for this journal</a>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
             }
             else
             {
-                @Html.Raw(string.Format(ViewStrings.Shared_NoJournalsFound, Url.Action("Faq", "Home") + "#cant-find-journal"))
+                @Html.Raw(string.Format("<p class=\"text-warning\">No journals could be found. This outcome is adressed in the FAQ <a href=\"{0}\" title=\"Why don\'t I find a specific journal in QOAM?\">Why don\'t I find a specific journal in QOAM?</a></p>", Url.Action("Faq", "Home") + "#cant-find-journal"))
             }
 
         </div>

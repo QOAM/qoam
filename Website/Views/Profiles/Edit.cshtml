@@ -1,15 +1,14 @@
-﻿@using QOAM.Website.Resources
-@model QOAM.Website.ViewModels.Profiles.EditViewModel
+﻿@model QOAM.Website.ViewModels.Profiles.EditViewModel
 
 @{
-    ViewBag.Title = ViewStrings.Profiles_Edit_Title;
+    ViewBag.Title = "Edit the profile";
 }
 
 <div class="container main">
     
     <h2>@ViewBag.Title</h2>
     
-    <p>@ViewStrings.Profiles_Edit_EditTheProfileOf: @Html.ActionLink(Model.UserProfile.DisplayName, "Details", new { Model.UserProfile.Id })</p>
+    <p>Edit the profile of: @Html.ActionLink(Model.UserProfile.DisplayName, "Details", new { Model.UserProfile.Id })</p>
     
     @using (Html.BeginForm("Edit", "Profiles", FormMethod.Post, new { role = "form" }))
     {
@@ -45,7 +44,7 @@
             </div>
 
             <div class="col-lg-10 col-md-offset-2">
-                <input type="submit" value="@Strings.Submit" class="btn btn-primary" />
+                <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
         </fieldset>
     }

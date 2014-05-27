@@ -1,6 +1,7 @@
 ﻿namespace QOAM.Website.ViewModels.Journals
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Helpers;
     using System.Web.Mvc;
@@ -22,30 +23,30 @@
             this.Sort = SortDirection.Descending;
         }
 
-        [Display(Name = "Title", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("Title")]
         public string Title { get; set; }
 
-        [Display(Name = "ISSN", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("ISSN")]
         public string Issn { get; set; }
 
-        [Display(Name = "Publisher", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("Publisher")]
         public string Publisher { get; set; }
 
-        [Display(Name = "Discipline", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("Discipline")]
         public int? Discipline { get; set; }
 
-        [Display(Name = "Language", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("Language")]
         public int? Language { get; set; }
 
-        [Display(Name = "MinimumBaseScore", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("Minimum Base Score")]
         [Range(MinimumScoreValue, MaximumScoreValue)]
         public float? MinimumBaseScore { get; set; }
 
-        [Display(Name = "MinimumValuationScore", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("Minimum Valuation Score")]
         [Range(MinimumScoreValue, MaximumScoreValue)]
         public float? MinimumValuationScore { get; set; }
 
-        [Display(Name = "SubmittedOnly", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("Only Journal Score Cards of authors and editors")]
         public bool SubmittedOnly { get; set; }
 
         public JournalSortMode SortBy { get; set; }

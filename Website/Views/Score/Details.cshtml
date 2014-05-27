@@ -1,13 +1,10 @@
-﻿@using System.Web.Mvc.Html
-@using QOAM.Core
+﻿@using QOAM.Core
 @using QOAM.Website.Helpers
 @using QOAM.Website.Models
-@using QOAM.Website.Resources
-@using Strings = QOAM.Website.Resources.Strings
 @model QOAM.Core.ScoreCard
 
 @{
-    ViewBag.Title = ViewStrings.Score_Journal_Title;
+    ViewBag.Title = "Score card";
 }
 
 @helper QuestionRating(QuestionKey questionKey)
@@ -50,7 +47,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="scoreCardAspects well text-center">
-                <h3>@Strings.ScoreCard</h3>
+                <h3>Score Card</h3>
 
                 <div class="row">
                     <div class="col-md-6">
@@ -79,12 +76,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-primary">
-                            <div class="panel-heading">@Strings.BaseScoreForThisJournal:</div>
+                            <div class="panel-heading">Base Score for this journal:</div>
                             <div class="panel-body">
                                 <h1>@Model.Score.OverallScore.AverageScore.Value.ToString("0.0")</h1>
                             </div>
                             <div class="panel-footer">
-                                <small>@Strings.By @Html.ActionLink(Model.UserProfile.DisplayName, "Details", "Profiles", new { id = Model.UserProfileId }, null) <i class="icon-user"></i></small>
+                                <small>by" @Html.ActionLink(Model.UserProfile.DisplayName, "Details", "Profiles", new { id = Model.UserProfileId }, null) <i class="icon-user"></i></small>
                             </div>
                         </div>
                     </div>
@@ -98,27 +95,27 @@
                 <div class="panel-body">
 
                     <div class="row">
-                        <label class="col-md-2">@Strings.ISSN:</label>
+                        <label class="col-md-2">ISSN:</label>
                         <div class="col-md-10">@Model.Journal.ISSN</div>
                     </div>
 
                     <div class="row">
-                        <label class="col-md-2">@Strings.Publisher:</label>
+                        <label class="col-md-2">Publisher:</label>
                         <div class="col-md-10">@Model.Journal.Publisher.Name</div>
                     </div>
 
                     <div class="row">
-                        <label class="col-md-2">@Strings.Language:</label>
+                        <label class="col-md-2">Language:</label>
                         <div class="col-md-10">@string.Join(", ", Model.Journal.Languages.Select(l => l.Name))</div>
                     </div>
 
                     <div class="row">
-                        <label class="col-md-2">@Strings.Disciplines:</label>
+                        <label class="col-md-2">Disciplines:</label>
                         <div class="col-md-10">@string.Join(", ", Model.Journal.Subjects.Select(s => s.Name))</div>
                     </div>
                     
                     <div>
-                        <a href="@Model.Journal.Link" class="btn btn-success external" title="@Strings.GoToWebsite">@Strings.GoToWebsite</a>
+                        <a href="@Model.Journal.Link" class="btn btn-success external" title="Go to website">Go to website</a>
                     </div>
 
                     <div class="row">
@@ -168,7 +165,7 @@
                                                 <div class="col-md-12">
                                                     <p class="text-left">
                                                         @Html.CheckBoxFor(m => m.Submitted, new { @disabled = "disabled" })
-                                                        @Html.Raw(ViewStrings.Score_Journal_HaveSubmittedToThisJournal)
+                                                        I have published an article in this journal less than a year ago
                                                     </p>
 
                                                 </div>
@@ -180,7 +177,7 @@
                                                 <div class="col-md-12">
                                                     <p class="text-left">
                                                         @Html.CheckBoxFor(m => m.Editor, new { @disabled = "disabled" })
-                                                        @Html.Raw(ViewStrings.Score_Journal_IsEditorOfJournal)
+                                                        I am an editor of this journal <small>(If ‘Yes’, please tick the box) </small>
                                                     </p>
 
                                                 </div>
@@ -194,13 +191,13 @@
                                         @if (ViewBag.JournalPrice != null)
                                         {
                                             <div class="row">
-                                                <p>@ViewStrings.Score_Journal_PublicationCost: @Html.Partial("DisplayTemplates/Price", (object)ViewBag.JournalPrice.Price)</p>
+                                                <p>Publication of my article in this journal did cost: @Html.Partial("DisplayTemplates/Price", (object)ViewBag.JournalPrice.Price)</p>
                                             </div>
                                         }
 
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <p>@ViewStrings.Score_Journal_AdditionalComments</p>
+                                                <p>Additional comments</p>
 
                                                 <textarea rows="3" class="form-control" disabled="disabled">@Model.Remarks</textarea>
                                             </div>
@@ -219,7 +216,7 @@
 @section scripts
 {
     <script type="text/javascript">
-        $(function () {
+        $(function() {
             var scoreController = new ScoreController();
             scoreController.details();
         });

@@ -1,5 +1,6 @@
 ﻿namespace QOAM.Website.ViewModels.Home
 {
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Net.Mail;
 
@@ -10,16 +11,16 @@
     public class ContactViewModel
     {
         [Required]
-        [Display(Name = "Name", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("Name")]
         public string Name { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("Email")]
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Message", ResourceType = typeof(Resources.Strings))]
+        [DisplayName("Message")]
         public string Message { get; set; }
 
         public MailMessage ToMailMessage(ContactSettings contactSettings)

@@ -1,7 +1,6 @@
-﻿@using QOAM.Website.Resources
-@model QOAM.Website.ViewModels.Home.ContactViewModel
+﻿@model QOAM.Website.ViewModels.Home.ContactViewModel
 @{
-    ViewBag.Title = ViewStrings.Home_Contact_Title;
+    ViewBag.Title = "Contact";
 }
 
 <div class="container main">
@@ -13,12 +12,12 @@
             <h2>@ViewBag.Title</h2>
             <div id="contact">
                 <address>
-                    <strong>@ViewStrings.Home_Contact_ContactPerson:</strong><br />
+                    <strong>Contact person:</strong><br />
                     Leo Waaijers
                 </address>
             </div>
 
-            <p>@ViewStrings.Home_Contact_Text</p>
+            <p>You can contact Leo through the form below:</p>
 
             @Html.ValidationSummary()
 
@@ -27,12 +26,12 @@
                 @Html.AntiForgeryToken()
 
                 <fieldset>
-                    <legend>@ViewStrings.Home_Contact_Form_Legend</legend>
+                    <legend>Please fill in the contact information and then submit the form.</legend>
 
                     <div class="form-group">
                         @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextBoxFor(m => m.Name, new { placeholder = Strings.Name, @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Name, new { placeholder = "Name", @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Name, null, new { @class = "control-label" })
                         </div>
                     </div>
@@ -40,7 +39,7 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.Email, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextBoxFor(m => m.Email, new { placeholder = Strings.Email, @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Email, null, new { @class = "control-label" })
                         </div>
                     </div>
@@ -48,13 +47,13 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.Message, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextAreaFor(m => m.Message, 5, 40, new { placeholder = Strings.Message, @class = "form-control" })
+                            @Html.TextAreaFor(m => m.Message, 5, 40, new { placeholder = "Message", @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Message, null, new { @class = "control-label " })
                         </div>
                     </div>
 
                     <div class="col-lg-10 col-md-offset-2">
-                        <input type="submit" value="@Strings.Submit" class="btn btn-primary" />
+                        <input type="submit" value="Submit" class="btn btn-primary" />
                     </div>
                 </fieldset>
             }

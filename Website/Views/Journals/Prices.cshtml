@@ -1,27 +1,25 @@
 ﻿@using PagedList
 @using QOAM.Core
 @using QOAM.Website.Models
-@using QOAM.Website.Resources
-@using Strings = QOAM.Website.Resources.Strings
 @model QOAM.Website.ViewModels.Journals.PricesViewModel
 <div class="row">
     
     <div class="col-md-4">
         <div class="panel panel-primary text-center">
-            <div class="panel-heading">@ViewStrings.Journals_Prices_RecentlyPaid</div>
+            <div class="panel-heading">Recently paid</div>
             <div class="panel-body">                
                 @if (Model.Journal.JournalPrice != null && Model.Journal.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted) != null)
                 {
-                    <p>@Strings.LastPaidPrice:<br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted).Price)</p>
+                    <p>Last paid price:<br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted).Price)</p>
                 }
                 
                 @if (Model.JournalPrices.TotalItemCount == 0 || Model.JournalPrices.FirstOrDefault(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted) == null)
                 {
-                    <p>@ViewStrings.Journals_Prices_NoJournalPricesForJournal</p>
+                    <p>Currently there is no actual price evidence for this journal.</p>
                 }
                 else
                 {
-                    <p><a id="@Model.Id-viewJournalPrices" title="@ViewStrings.Journals_Prices_ViewPaidPrices">@ViewStrings.Journals_Prices_ViewPaidPrices</a></p>
+                    <p><a id="@Model.Id-viewJournalPrices" title="View all paid prices">View all paid prices</a></p>
                 }
             </div>
         </div>
@@ -29,38 +27,38 @@
 
     <div class="col-md-4">
         <div class="panel panel-primary text-center">
-            <div class="panel-heading">@Strings.InstitutionalPrice</div>
+            <div class="panel-heading">Institutional price</div>
             <div class="panel-body">
                 
                 @if (User.Identity.IsAuthenticated)
                 {
                     if (Model.InstitutionJournal == null)
                     {
-                        <p>@ViewStrings.Journals_Prices_NoInstitutionPriceForInstitution</p>
+                        <p>Your institution does not have a special license for this journal.</p>
                     }
                     else
                     {
-                        <p>@ViewStrings.Journals_Prices_InstitutionPriceForInstitution:</p>
-                    
+                        <p>Your institution has a special license for this journal.:</p>
+
                         <p>
-                            @Html.Raw(string.Format(ViewStrings.Journals_Prices_ForInstitutionPriceSeeWebsite, Model.InstitutionJournal.Link))
+                            @Html.Raw(string.Format("For the institution\'s price see the <a href=\"{0}\" title=\"Journal website\">web site</a>", Model.InstitutionJournal.Link))
                         </p>
                     }
 
                     if (User.IsInRole(ApplicationRole.InstitutionAdmin) || User.IsInRole(ApplicationRole.Admin))
                     {
-                        <p>@Html.ActionLink(ViewStrings.Journals_Prices_EditInstitutionJournalLicense, "InstitutionJournalLicense", new { Model.Id, Model.RefererUrl })</p>
+                        <p>@Html.ActionLink("Edit the institution's journal license", "InstitutionJournalLicense", new { Model.Id, Model.RefererUrl })</p>
                     }
                 }
                 
                 @if (Model.InstitutionJournals.TotalItemCount == 0)
                 {
-                    <p>@ViewStrings.Journals_Prices_NoInstitutionPricesForJournal</p>
+                    <p>Currently, there are no institutions with a special license for this journal.</p>
                 }
                 else
                 {
                     <p>
-                        @Html.Raw(string.Format(ViewStrings.Journals_Prices_InstitutionPricesForJournal, Model.InstitutionJournals.TotalItemCount, Model.Id))
+                        @Html.Raw(string.Format("Currently, {0} institution(s) have a special license for this journal. View <a id=\"{1}-viewInstitutionJournalPrices\" title=\"View the institutional prices\">the list of institution prices</a>.", Model.InstitutionJournals.TotalItemCount, Model.Id))
                     </p>
                 }
             </div>
@@ -69,23 +67,22 @@
 
     <div class="col-md-4">
         <div class="panel panel-primary text-center">
-            <div class="panel-heading">@Strings.PriceOnWebsite</div>
+            <div class="panel-heading">Price on website</div>
             <div class="panel-body">
                 @if (Model.Journal.JournalPrices.Count(x => x.ScoreCard != null && !x.ScoreCard.Submitted) == 0)
                 {
                     <p>
-                @Html.Raw(string.Format(ViewStrings.Journals_Prices_ForStandardPriceSeeWebsite, Model.Journal.Link));
-                        </p>
+                        For the standard price see the web site of this journal
+                    </p>
                 }
                 else
                 {
                     if (Model.Journal.JournalPrice != null && Model.Journal.JournalPrices.Count(x => x.ScoreCard != null && !x.ScoreCard.Submitted) > 0)
                     {
-                        <p>@Strings.LastStandardPrice: <br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId != 0 && x.ScoreCard != null && !x.ScoreCard.Submitted).Price)</p>
+                        <p>Last price found on website: <br/> @Html.DisplayFor(m => Model.JournalPrices.FirstOrDefault(x => x.ScoreCardId != 0 && x.ScoreCard != null && !x.ScoreCard.Submitted).Price)</p>
                     }
-                    
-                    <p><a id="@Model.Id-viewJournalStandardPrices" title="@ViewStrings.Journals_Prices_ViewStandardPrices">@ViewStrings.Journals_Prices_ViewStandardPrices</a></p>
-                    
+
+                    <p><a id="@Model.Id-viewJournalStandardPrices" title="View all prices found on the website">View all prices found on the website</a></p>
                 }
                 
             </div>
@@ -94,7 +91,7 @@
 </div>
 
 <div>
-    @Html.Raw(string.Format(ViewStrings.Journals_Index_ReadMorePriceInformation, Url.Action("About", "Home") + "#price-information"))
+    @Html.Raw(string.Format("Read more about <a href=\"{0}\" title=\"Price information\">Price information</a>.", Url.Action("About", "Home") + "#price-information"))
 </div>
 
 <div id="@Model.Id-journalStandardPricesModal" class="modal fade">
@@ -102,37 +99,32 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3>@ViewStrings.Journals_Prices_ViewStandardPricesFound</h3>
+                <h3>All prices found on the website</h3>
             </div>
             <div class="modal-body">
                 @if (Model.JournalPrices.Count(x => x.ScoreCardId > 0 && !x.ScoreCard.Submitted) == 0)
                 {
-                    <p>@ViewStrings.Journals_Prices_ForStandardPriceSeeWebsite</p>
+                    <p>For the standard price see the web site of this journal</p>
                 }
                 else
                 {
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>@Strings.Profile</th>
-                                <th>@Strings.Date</th>
-                                <th>@Strings.Price</th>
+                                <th>Profile</th>
+                                <th>Date</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
-                        <tbody id="@this.Model.Id-journal-standard-prices">
-                            @{ this.Html.RenderPartial("JournalPrices", this.Model.JournalPrices.Where(x => x.ScoreCardId != 0 && x.ScoreCard != null && !x.ScoreCard.Submitted).ToPagedList(Model.Page, Model.PageSize)); }
+                        <tbody id="@Model.Id-journal-standard-prices">
+                            @{ Html.RenderPartial("JournalPrices", Model.JournalPrices.Where(x => x.ScoreCardId != 0 && x.ScoreCard != null && !x.ScoreCard.Submitted).ToPagedList(Model.Page, Model.PageSize)); }
                         </tbody>
                         <tfoot id="loadMoreJournalPrices">
-                            @if (this.Model.JournalPrices.HasNextPage)
+                            @if (Model.JournalPrices.HasNextPage)
                             {
                                 <tr>
                                     <td colspan="9">
-                                        @this.Ajax.ActionLink(Strings.LoadMore, "JournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions
-                                   {
-                                       UpdateTargetId = this.Model.Id + "-journal-standard-prices",
-                                       InsertionMode = InsertionMode.InsertAfter,
-                                       OnSuccess = "afterLoadMore(data, 'loadMoreJournalPrices', 'loadMoreJournalPricesLink')"
-                                   }, new { id = "loadMoreJournalPricesLink" })
+                                        @Ajax.ActionLink("Load more", "JournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions { UpdateTargetId = Model.Id + "-journal-standard-prices", InsertionMode = InsertionMode.InsertAfter, OnSuccess = "afterLoadMore(data, 'loadMoreJournalPrices', 'loadMoreJournalPricesLink')" }, new { id = "loadMoreJournalPricesLink" })
                                     </td>
                                 </tr>
                             }
@@ -141,7 +133,7 @@
                 }
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" aria-hidden="true" data-dismiss="modal">@Strings.Close</button>
+                <button type="submit" class="btn btn-primary" aria-hidden="true" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -152,37 +144,32 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3>@Strings.PaidPrices</h3>
+                <h3>Paid prices</h3>
             </div>
             <div class="modal-body">                
                 @if (Model.JournalPrices.Count(x => x.ScoreCardId == 0 || x.ScoreCard.Submitted) == 0)
                 {
-                    <p>@ViewStrings.Journals_Prices_NoPaidPrices</p>
+                    <p>There are no paid prices for this journal.</p>
                 }
                 else
                 {
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>@Strings.Profile</th>
-                                <th>@Strings.Date</th>
-                                <th>@Strings.Price</th>
+                                <th>Profile</th>
+                                <th>Date</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
-                        <tbody id="@this.Model.Id-journal-prices">
-                            @{ this.Html.RenderPartial("JournalPrices", this.Model.JournalPrices.Where(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted).ToPagedList(Model.Page, Model.PageSize)); }
+                        <tbody id="@Model.Id-journal-prices">
+                            @{ Html.RenderPartial("JournalPrices", Model.JournalPrices.Where(x => x.Price.FeeType == FeeType.Article && x.ScoreCard != null && x.ScoreCard.Submitted).ToPagedList(Model.Page, Model.PageSize)); }
                         </tbody>
                         <tfoot id="loadMoreJournalStandardPrices">
-                            @if (this.Model.JournalPrices.HasNextPage)
+                            @if (Model.JournalPrices.HasNextPage)
                             {
                                 <tr>
                                     <td colspan="9">
-                                        @this.Ajax.ActionLink(Strings.LoadMore, "JournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions
-                                   {
-                                       UpdateTargetId = this.Model.Id + "-journal-prices",
-                                       InsertionMode = InsertionMode.InsertAfter,
-                                       OnSuccess = "afterLoadMore(data, 'loadMoreJournalStandardPrices', 'loadMoreJournalPricesLink')"
-                                   }, new { id = "loadMoreJournalPricesLink" })
+                                        @Ajax.ActionLink("Load more", "JournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions { UpdateTargetId = Model.Id + "-journal-prices", InsertionMode = InsertionMode.InsertAfter, OnSuccess = "afterLoadMore(data, 'loadMoreJournalStandardPrices', 'loadMoreJournalPricesLink')" }, new { id = "loadMoreJournalPricesLink" })
                                     </td>
                                 </tr>
                             }
@@ -191,7 +178,7 @@
                 }
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" aria-hidden="true" data-dismiss="modal">@Strings.Close</button>
+                <button type="submit" class="btn btn-primary" aria-hidden="true" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -202,39 +189,34 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3>@Strings.InstitutionalPrice</h3>
+                <h3>Institutional price</h3>
             </div>
             <div class="modal-body">
                 @if (Model.InstitutionJournals.Count == 0)
                 {
-                    <p>@ViewStrings.Journals_Prices_NoInstitutionPrices</p>
+                    <p>There are no institutions with a discount for this journal.</p>
                 }
                 else
                 {
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>@Strings.Institution</th>
+                                <th>Institution</th>
                                 @if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin))
                                 {
-                                    <th>@Strings.Action</th>
+                                    <th>Action</th>
                                 }
                             </tr>
                         </thead>
-                        <tbody id="@this.Model.Id-institutional-prices">
-                            @{ this.Html.RenderPartial("InstitutionJournalPrices", this.Model.InstitutionJournals); }
+                        <tbody id="@Model.Id-institutional-prices">
+                            @{ Html.RenderPartial("InstitutionJournalPrices", Model.InstitutionJournals); }
                         </tbody>
                         <tfoot id="loadMoreInstitutionalPrice">
-                            @if (this.Model.InstitutionJournals.HasNextPage)
+                            @if (Model.InstitutionJournals.HasNextPage)
                             {
                                 <tr>
                                     <td colspan="9">
-                                        @this.Ajax.ActionLink(Strings.LoadMore, "InstitutionJournalPrices", new { this.Model.Id, Model.RefererUrl, Page = this.Model.Page + 1 }, new AjaxOptions
-                                   {
-                                       UpdateTargetId = this.Model.Id + "-institutional-prices",
-                                       InsertionMode = InsertionMode.InsertAfter,
-                                       OnSuccess = "afterLoadMore(data, 'loadMoreInstitutionalPrice', 'loadMoreInstitutionalPriceLink')"
-                                   }, new { id = "loadMoreInstitutionalPriceLink" })
+                                        @Ajax.ActionLink("Load more", "InstitutionJournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions { UpdateTargetId = Model.Id + "-institutional-prices", InsertionMode = InsertionMode.InsertAfter, OnSuccess = "afterLoadMore(data, 'loadMoreInstitutionalPrice', 'loadMoreInstitutionalPriceLink')" }, new { id = "loadMoreInstitutionalPriceLink" })
                                     </td>
                                 </tr>
                             }
@@ -243,14 +225,14 @@
                 }
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" aria-hidden="true" data-dismiss="modal">@Strings.Close</button>
+                <button type="submit" class="btn btn-primary" aria-hidden="true" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    $(function () {
+    $(function() {
         var journalsController = new JournalsController();
         journalsController.prices(
             '@Model.Id-viewJournalPrices',

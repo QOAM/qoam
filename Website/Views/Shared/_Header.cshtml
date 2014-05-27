@@ -1,6 +1,4 @@
-﻿@using QOAM.Website.Resources
-
-@helper MenuItemClass(string menuItem)
+﻿@helper MenuItemClass(string menuItem)
 {
     if (menuItem == ViewBag.SelectedMenuItem)
     {
@@ -17,14 +15,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="@Url.Action("Index", "Home")">@ViewStrings.Layout_Project_Name</a>
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">Quality Open Access Market</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li @MenuItemClass("Journals")><a href="@Url.Action("Index", "Journals")"><i class="glyphicon glyphicon-search"></i> @Strings.SearchJournal</a></li>
-                <li @MenuItemClass("Score")><a href="@Url.Action("Index", "Score")"><i class="glyphicon glyphicon-list-alt"></i> @Strings.ScoreJournal</a></li>
-                <li @MenuItemClass("Profiles")><a href="@Url.Action("Index", "Profiles")"><i class="glyphicon glyphicon-user"></i> @Strings.Profiles</a></li>
-                <li @MenuItemClass("Institutions")><a href="@Url.Action("Index", "Institutions")"><span class="icon-group"></span> @Strings.Institutions</a></li>
+                <li @MenuItemClass("Journals")><a href="@Url.Action("Index", "Journals")"><i class="glyphicon glyphicon-search"></i> Search journal</a></li>
+                <li @MenuItemClass("Score")><a href="@Url.Action("Index", "Score")"><i class="glyphicon glyphicon-list-alt"></i> Score journal</a></li>
+                <li @MenuItemClass("Profiles")><a href="@Url.Action("Index", "Profiles")"><i class="glyphicon glyphicon-user"></i> Profiles</a></li>
+                <li @MenuItemClass("Institutions")><a href="@Url.Action("Index", "Institutions")"><span class="icon-group"></span> Institutions</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @{ Html.RenderPartial("_LoginPartial"); }

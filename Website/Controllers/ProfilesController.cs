@@ -38,7 +38,7 @@
         [GET("")]
         public ViewResult Index(IndexViewModel model)
         {
-            model.Institutions = this.institutionRepository.All.ToSelectListItems(Resources.Strings.AllInstitutions);
+            model.Institutions = this.institutionRepository.All.ToSelectListItems("<All institutions>");
             model.Profiles = this.UserProfileRepository.Search(model.ToFilter());
             
             return this.View(model);
