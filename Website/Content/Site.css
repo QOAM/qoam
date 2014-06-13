@@ -407,6 +407,16 @@ th {
     border: 1px solid black;
     padding: 10px 20px;
 }
+
+.faqtable {
+    width: 500px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.faqcell {
+    text-align:center;
+}
 /***************** frontpage ****************************/
 #under-construction {
     position: relative;
