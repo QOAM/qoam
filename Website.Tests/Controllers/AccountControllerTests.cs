@@ -1,6 +1,7 @@
 ﻿namespace QOAM.Website.Tests.Controllers
 {
     using System.Collections.Generic;
+    using System.Web;
     using System.Web.Mvc;
 
     using DotNetOpenAuth.AspNet;
@@ -176,7 +177,7 @@
 
         private static AccountController CreateAccountController(IAuthentication authentication)
         {
-            return new AccountController(Mock.Of<IInstitutionRepository>(), Mock.Of<IUserProfileRepository>(), authentication)
+            return new AccountController(Mock.Of<IInstitutionRepository>(), Mock.Of<IUserProfileRepository>(), authentication, Mock.Of<HttpSessionStateBase>())
                        {
                            Url = HttpContextHelper.CreateUrlHelper()
                        };
@@ -184,7 +185,7 @@
 
         private AccountController CreateAccountController(IUserProfileRepository userProfileRepository, IAuthentication authentication)
         {
-            return new AccountController(Mock.Of<IInstitutionRepository>(), userProfileRepository, authentication)
+            return new AccountController(Mock.Of<IInstitutionRepository>(), userProfileRepository, authentication, Mock.Of<HttpSessionStateBase>())
                        {
                            Url = HttpContextHelper.CreateUrlHelper()
                        };
@@ -192,7 +193,7 @@
 
         private AccountController CreateAccountController(IInstitutionRepository institutionRepository, IUserProfileRepository userProfileRepository)
         {
-            return new AccountController(institutionRepository, userProfileRepository, Mock.Of<IAuthentication>())
+            return new AccountController(institutionRepository, userProfileRepository, Mock.Of<IAuthentication>(), Mock.Of<HttpSessionStateBase>())
                        {
                            Url = HttpContextHelper.CreateUrlHelper()
                        };
@@ -200,7 +201,7 @@
 
         private AccountController CreateAccountController(IInstitutionRepository institutionRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication)
         {
-            return new AccountController(institutionRepository, userProfileRepository, authentication)
+            return new AccountController(institutionRepository, userProfileRepository, authentication, Mock.Of<HttpSessionStateBase>())
                        {
                            Url = HttpContextHelper.CreateUrlHelper()
                        };

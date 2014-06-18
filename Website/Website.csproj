@@ -249,7 +249,6 @@
     <Compile Include="Helpers\Roles.cs" />
     <Compile Include="Helpers\UrlHelperExtensions.cs" />
     <Compile Include="Models\CacheProfile.cs" />
-    <Compile Include="Models\AuthenticationResultExtensions.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\SurfConextClient.cs" />
     <Compile Include="Models\PersistentPseudonymMapper.cs" />

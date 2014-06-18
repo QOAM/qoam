@@ -11,12 +11,7 @@
 
         public static string GetProviderUserId(this ISaml20Identity saml20Identity)
         {
-            return string.Format("urn:collab:person:{0}:{1}", saml20Identity.GetInstitutionShortName(), saml20Identity.GetUserName());
-        }
-
-        public static string GetUserName(this ISaml20Identity saml20Identity)
-        {
-            return saml20Identity.GetAttributeValue(SamlAttributes.UID);
+            return saml20Identity.Name;
         }
 
         public static string GetDisplayName(this ISaml20Identity saml20Identity)

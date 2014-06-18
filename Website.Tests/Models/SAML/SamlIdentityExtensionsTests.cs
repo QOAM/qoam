@@ -28,30 +28,13 @@
         public void GetProviderUserIdReturnCorrectProviderUserId()
         {
             // Arrange
-            var saml20Identity = new Saml20Identity("test", new List<SamlAttribute>
-                                                            {
-                                                                new SamlAttribute { Name = SamlAttributes.SchacHomeOrganization, AttributeValue = new[] { "org1.com" } },
-                                                                new SamlAttribute { Name = SamlAttributes.UID, AttributeValue = new[] { "user1" } },
-                                                            }, null);
+            var saml20Identity = new Saml20Identity("test", new List<SamlAttribute>(), null);
 
             // Act
             var providerUserId = saml20Identity.GetProviderUserId();
 
             // Assert
-            Assert.Equal("urn:collab:person:org1.com:user1", providerUserId);
-        }
-
-        [Fact]
-        public void GetUserNameReturnCorrectUserName()
-        {
-            // Arrange
-            var saml20Identity = new Saml20Identity("test", new List<SamlAttribute> { new SamlAttribute { Name = SamlAttributes.UID, AttributeValue = new[] { "user1" } }, }, null);
-
-            // Act
-            var providerUserId = saml20Identity.GetUserName();
-
-            // Assert
-            Assert.Equal("user1", providerUserId);
+            Assert.Equal("test", providerUserId);
         }
 
         [Fact]

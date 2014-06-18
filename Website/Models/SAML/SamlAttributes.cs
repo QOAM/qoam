@@ -4,14 +4,13 @@
 
     public static class SamlAttributes
     {
-        public const string UID = "urn:mace:dir:attribute-def:uid";
         public const string DisplayName = "urn:mace:dir:attribute-def:displayName";
         public const string Mail = "urn:mace:dir:attribute-def:mail";
         public const string SchacHomeOrganization = "urn:mace:terena.org:attribute-def:schacHomeOrganization";
         
         public static ISet<string> GetRequiredAttributes()
         {
-            return new HashSet<string> { UID, DisplayName, Mail, SchacHomeOrganization };
+            return new HashSet<string> { DisplayName, Mail, SchacHomeOrganization };
         }
     }
 }

@@ -8,7 +8,6 @@
     public class SamlAttributesTests
     {
         [Theory]
-        [InlineData(SamlAttributes.UID)]
         [InlineData(SamlAttributes.DisplayName)]
         [InlineData(SamlAttributes.Mail)]
         [InlineData(SamlAttributes.SchacHomeOrganization)]
@@ -33,7 +32,7 @@
             var requiredAttributes = SamlAttributes.GetRequiredAttributes();
 
             // Assert
-            Assert.Equal(4, requiredAttributes.Count);
+            Assert.Equal(3, requiredAttributes.Count);
         }
     }
 }

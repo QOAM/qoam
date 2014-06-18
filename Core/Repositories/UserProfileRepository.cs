@@ -42,7 +42,7 @@
 
         public UserProfile Find(string username)
         {
-            return this.DbContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower());
+            return this.DbContext.UserProfiles.FirstOrDefault(u => u.UserName == username);
         }
 
         public IPagedList<UserProfile> Search(UserProfileFilter filter)

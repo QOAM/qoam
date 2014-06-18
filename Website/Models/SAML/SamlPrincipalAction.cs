@@ -38,12 +38,14 @@
                 return;
             }
 
-            // Extract the user's name from the SAML attributes
-            var name = assertion.Attributes.First(s => s.Name == SamlAttributes.UID).AttributeValue.First();
+            var isPersistentPseudonym = assertion.Subject.Format == Saml20Constants.NameIdentifierFormats.Persistent;
 
+            // Protocol-level support for persistent pseudonyms: If a mapper has been configured, use it here before constructing the principal.
+            var subjectIdentifier = assertion.Subject.Value;
+            
             // Create the identity
-            var identity = new Saml20Identity(name, assertion.Attributes, name);
-
+            var identity = new Saml20Identity(subjectIdentifier, assertion.Attributes, isPersistentPseudonym ? assertion.Subject.Value : null);                        
+            
             // Store the identity in the session to be able to access it later on
             HttpContext.Current.Session[typeof(Saml20Identity).FullName] = identity;
         }

@@ -73,6 +73,7 @@
 
         private static void RegisterMiscellaneousComponents(ContainerBuilder builder)
         {
+            builder.RegisterModule(new AutofacWebTypesModule());
             builder.RegisterType<ApplicationDbContext>().AsSelf().InstancePerHttpRequest();
             builder.RegisterType<Authentication>().As<IAuthentication>().InstancePerHttpRequest();
             builder.RegisterType<Roles>().As<IRoles>().InstancePerHttpRequest();
