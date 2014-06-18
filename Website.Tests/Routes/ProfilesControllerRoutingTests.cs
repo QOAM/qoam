@@ -68,17 +68,31 @@
         }
 
         [Fact]
-        public void ScoreCardsActionRoutedToWithCorrectUrlAndVerb()
+        public void BaseScoreCardsActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/profiles/5/scorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<ProfilesController>(x => x.BaseScoreCards(null));
+            "~/profiles/5/basescorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<ProfilesController>(x => x.BaseScoreCards(null));
         }
 
         [Fact]
-        public void ScoreCardsActionDoesNotRequireHttps()
+        public void BaseScoreCardsActionDoesNotRequireHttps()
         {
             // Assert
             Assert.False(ActionRequiresHttps(x => x.BaseScoreCards(null)));
+        }
+
+        [Fact]
+        public void ValuationScoreCardsActionRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            "~/profiles/5/valuationscorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<ProfilesController>(x => x.ValuationScoreCards(null));
+        }
+
+        [Fact]
+        public void ValuationScoreCardsActionDoesNotRequireHttps()
+        {
+            // Assert
+            Assert.False(ActionRequiresHttps(x => x.ValuationScoreCards(null)));
         }
 
         [Fact]

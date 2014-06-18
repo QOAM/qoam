@@ -40,17 +40,31 @@
         }
 
         [Fact]
-        public void JournalPricesActionRoutedToWithCorrectUrlAndVerb()
+        public void BaseJournalPricesActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/journalprices/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.BaseJournalPrices(null));
+            "~/journals/5/basejournalprices/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.BaseJournalPrices(null));
         }
 
         [Fact]
-        public void JournalPricesActionDoesNotRequireHttps()
+        public void BaseJournalPricesActionDoesNotRequireHttps()
         {
             // Assert
             Assert.False(ActionRequiresHttps(x => x.BaseJournalPrices(null)));
+        }
+
+        [Fact]
+        public void ValuationJournalPricesActionRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            "~/journals/5/valuationjournalprices/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.ValuationJournalPrices(null));
+        }
+
+        [Fact]
+        public void ValuationJournalPricesActionDoesNotRequireHttps()
+        {
+            // Assert
+            Assert.False(ActionRequiresHttps(x => x.ValuationJournalPrices(null)));
         }
 
         [Fact]
@@ -68,17 +82,31 @@
         }
 
         [Fact]
-        public void ScoresActionRoutedToWithCorrectUrlAndVerb()
+        public void BaseScoreCardsActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/scores/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.BaseScoreCards(null));
+            "~/journals/5/basescorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.BaseScoreCards(null));
         }
 
         [Fact]
-        public void ScoresActionDoesNotRequireHttps()
+        public void BaseScoreCardsActionDoesNotRequireHttps()
         {
             // Assert
             Assert.False(ActionRequiresHttps(x => x.BaseScoreCards(null)));
+        }
+
+        [Fact]
+        public void ValuationScoreCardsActionRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            "~/journals/5/valuationscorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.ValuationScoreCards(null));
+        }
+
+        [Fact]
+        public void ValuationScoreCardsActionDoesNotRequireHttps()
+        {
+            // Assert
+            Assert.False(ActionRequiresHttps(x => x.ValuationScoreCards(null)));
         }
 
         [Fact]

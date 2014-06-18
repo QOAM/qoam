@@ -41,7 +41,7 @@
                 return this.RedirectToAction("LoginFailure", new { reason = LoginFailureReason.ExternalAuthenticationFailed });
             }
 
-            var saml20Identity = this.session[typeof(Saml20Identity).FullName] as Saml20Identity;
+            var saml20Identity = this.session[typeof(Saml20Identity).FullName] as ISaml20Identity;
 
             if (saml20Identity == null || !saml20Identity.IsAuthenticated)
             {

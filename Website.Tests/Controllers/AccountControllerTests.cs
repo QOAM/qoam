@@ -3,22 +3,29 @@
     using System.Collections.Generic;
     using System.Web;
     using System.Web.Mvc;
+    using System.Web.SessionState;
 
     using DotNetOpenAuth.AspNet;
 
     using Moq;
+
+    using MvcContrib.TestHelper.Fakes;
 
     using QOAM.Core;
     using QOAM.Core.Repositories;
     using QOAM.Website.Controllers;
     using QOAM.Website.Helpers;
     using QOAM.Website.Models;
+    using QOAM.Website.Models.SAML;
     using QOAM.Website.Tests.Controllers.Helpers;
+
+    using SAML2.Identity;
+    using SAML2.Schema.Core;
 
     using Xunit;
 
     public class AccountControllerTests
-    {
+    { 
         private const string ReturnUrl = "/home/about/";
 
         [Fact]
@@ -37,13 +44,11 @@
         }
 
         [Fact]
-        public void LoginCallbackWithAuthenticationInvalidRedirectsToLoginFailureAction()
+        public void LoginCallbackWithNullSessionRedirectsToLoginFailureAction()
         {
             // Arrange
-            var authenticationMock = new Mock<IAuthentication>();
-            authenticationMock.Setup(a => a.VerifyAuthentication(It.IsAny<string>())).Returns(new AuthenticationResult(false));
-
-            var accountController = CreateAccountController(authenticationMock.Object);
+            HttpSessionStateBase nullHttpSessionState = null;
+            var accountController = CreateAccountController(nullHttpSessionState);
 
             // Act
             var redirectToRouteResult = (RedirectToRouteResult)accountController.LoginCallback(ReturnUrl);
@@ -54,19 +59,35 @@
         }
 
         [Fact]
-        public void LoginCallbackWithAuthenticationInvalidRedirectsToLoginFailureActionWithExternalAuthenticationFailedLoginFailureReason()
+        public void LoginCallbackWithSaml20IdentityNotInSessionRedirectsToLoginFailureAction()
         {
             // Arrange
-            var authenticationMock = new Mock<IAuthentication>();
-            authenticationMock.Setup(a => a.VerifyAuthentication(It.IsAny<string>())).Returns(new AuthenticationResult(false));
-
-            var accountController = CreateAccountController(authenticationMock.Object);
+            var httpSessionStateMock = new FakeHttpSessionState(new SessionStateItemCollection());
+            var accountController = CreateAccountController(httpSessionStateMock);
 
             // Act
             var redirectToRouteResult = (RedirectToRouteResult)accountController.LoginCallback(ReturnUrl);
 
             // Assert
-            Assert.Equal(LoginFailureReason.ExternalAuthenticationFailed, (LoginFailureReason)redirectToRouteResult.RouteValues["reason"]);
+            Assert.Null(redirectToRouteResult.RouteValues["controller"]);
+            Assert.Equal("LoginFailure", redirectToRouteResult.RouteValues["action"]);
+        }
+
+        [Fact]
+        public void LoginCallbackWithUserNotAuthenticatedRedirectsToLoginFailureAction()
+        {
+            // Arrange
+            var saml20IdentityMock = new Mock<ISaml20Identity>();
+            saml20IdentityMock.Setup(s => s.IsAuthenticated).Returns(false);
+
+            var accountController = CreateAccountController(saml20IdentityMock.Object);
+
+            // Act
+            var redirectToRouteResult = (RedirectToRouteResult)accountController.LoginCallback(ReturnUrl);
+
+            // Assert
+            Assert.Null(redirectToRouteResult.RouteValues["controller"]);
+            Assert.Equal("LoginFailure", redirectToRouteResult.RouteValues["action"]);
         }
 
         [Fact]
@@ -74,7 +95,6 @@
         {
             // Arrange
             var authenticationMock = new Mock<IAuthentication>();
-            authenticationMock.Setup(a => a.VerifyAuthentication(It.IsAny<string>())).Returns(new AuthenticationResult(true));
             authenticationMock.Setup(a => a.Login(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(true);
 
             var accountController = CreateAccountController(authenticationMock.Object);
@@ -91,7 +111,6 @@
         {
             // Arrange
             var authenticationMock = new Mock<IAuthentication>();
-            authenticationMock.Setup(a => a.VerifyAuthentication(It.IsAny<string>())).Returns(new AuthenticationResult(true));
             authenticationMock.Setup(a => a.Login(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(true);
 
             var accountController = CreateAccountController(authenticationMock.Object);
@@ -105,38 +124,16 @@
         }
 
         [Fact]
-        public void LoginCallbackWithExistingUserDoesNotInsertAnotherUser()
-        {
-            // Arrange
-            var authenticationMock = new Mock<IAuthentication>();
-            authenticationMock.Setup(a => a.VerifyAuthentication(It.IsAny<string>())).Returns(new AuthenticationResult(false));
-
-            var accountController = CreateAccountController(authenticationMock.Object);
-
-            // Act
-            var redirectToRouteResult = (RedirectToRouteResult)accountController.LoginCallback(ReturnUrl);
-
-            // Assert
-            Assert.Null(redirectToRouteResult.RouteValues["controller"]);
-            Assert.Equal("LoginFailure", redirectToRouteResult.RouteValues["action"]);
-        }
-
-        [Fact]
         public void LoginCallbackWithUsernameAlreadyExistsForOtherUserRedirectsToLoginFailureAction()
         {
             // Arrange
             var authenticationMock = new Mock<IAuthentication>();
-            authenticationMock.Setup(a => a.VerifyAuthentication(It.IsAny<string>())).Returns(new AuthenticationResult(true, null, null, null, new Dictionary<string, string>
-                                                                                                                                                   {
-                                                                                                                                                       { "organisations_name", "" },
-                                                                                                                                                       { "account_username", "" },
-                                                                                                                                                   }));
             authenticationMock.Setup(a => a.Login(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(false);
 
             var userProfileRepositoryMock = new Mock<IUserProfileRepository>();
             userProfileRepositoryMock.Setup(u => u.Find(It.IsAny<string>())).Returns(new UserProfile());
 
-            var accountController = this.CreateAccountController(userProfileRepositoryMock.Object, authenticationMock.Object);
+            var accountController = CreateAccountController(userProfileRepositoryMock.Object, authenticationMock.Object);
 
             // Act
             var redirectToRouteResult = (RedirectToRouteResult)accountController.LoginCallback("http://www.google.nl");
@@ -145,23 +142,17 @@
             Assert.Null(redirectToRouteResult.RouteValues["controller"]);
             Assert.Equal("LoginFailure", redirectToRouteResult.RouteValues["action"]);
         }
-
+        
         [Fact]
         public void LoginCallbackWithUsernameAlreadyExistsForOtherUserRedirectsToLoginFailureActionWithUsernameAlreadyExistsLoginFailureReason()
         {
             // Arrange
             var authenticationMock = new Mock<IAuthentication>();
-            authenticationMock.Setup(a => a.VerifyAuthentication(It.IsAny<string>())).Returns(new AuthenticationResult(true, null, null, null, new Dictionary<string, string>
-                                                                                                                                                   {
-                                                                                                                                                       { "organisations_name", "" },
-                                                                                                                                                       { "account_username", "" },
-                                                                                                                                                   }));
-            authenticationMock.Setup(a => a.Login(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(false);
 
             var userProfileRepositoryMock = new Mock<IUserProfileRepository>();
             userProfileRepositoryMock.Setup(u => u.Find(It.IsAny<string>())).Returns(new UserProfile());
 
-            var accountController = this.CreateAccountController(userProfileRepositoryMock.Object, authenticationMock.Object);
+            var accountController = CreateAccountController(userProfileRepositoryMock.Object, authenticationMock.Object);
 
             // Act
             var redirectToRouteResult = (RedirectToRouteResult)accountController.LoginCallback(ReturnUrl);
@@ -177,34 +168,56 @@
 
         private static AccountController CreateAccountController(IAuthentication authentication)
         {
-            return new AccountController(Mock.Of<IInstitutionRepository>(), Mock.Of<IUserProfileRepository>(), authentication, Mock.Of<HttpSessionStateBase>())
-                       {
-                           Url = HttpContextHelper.CreateUrlHelper()
-                       };
+            return new AccountController(Mock.Of<IInstitutionRepository>(), Mock.Of<IUserProfileRepository>(), authentication, CreateHttpSessionState())
+                   {
+                       Url = HttpContextHelper.CreateUrlHelper()
+                   };
         }
 
-        private AccountController CreateAccountController(IUserProfileRepository userProfileRepository, IAuthentication authentication)
+        private static HttpSessionStateBase CreateHttpSessionState()
         {
-            return new AccountController(Mock.Of<IInstitutionRepository>(), userProfileRepository, authentication, Mock.Of<HttpSessionStateBase>())
-                       {
-                           Url = HttpContextHelper.CreateUrlHelper()
-                       };
+            return CreateHttpSessionState(CreateSaml20IdentityMock());
         }
 
-        private AccountController CreateAccountController(IInstitutionRepository institutionRepository, IUserProfileRepository userProfileRepository)
+        private static ISaml20Identity CreateSaml20IdentityMock()
         {
-            return new AccountController(institutionRepository, userProfileRepository, Mock.Of<IAuthentication>(), Mock.Of<HttpSessionStateBase>())
-                       {
-                           Url = HttpContextHelper.CreateUrlHelper()
-                       };
+            var mock = new Mock<ISaml20Identity>();
+            mock.Setup(s => s.IsAuthenticated).Returns(true);
+            mock.Setup(s => s[SamlAttributes.SchacHomeOrganization]).Returns(new List<SamlAttribute> { new SamlAttribute { AttributeValue = new[] { "ru.nl" } } });
+
+            return mock.Object;
         }
 
-        private AccountController CreateAccountController(IInstitutionRepository institutionRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication)
+        private static HttpSessionStateBase CreateHttpSessionState(ISaml20Identity saml20Identity)
         {
-            return new AccountController(institutionRepository, userProfileRepository, authentication, Mock.Of<HttpSessionStateBase>())
-                       {
-                           Url = HttpContextHelper.CreateUrlHelper()
-                       };
+            var fakeHttpSessionState = new FakeHttpSessionState(new SessionStateItemCollection());
+            fakeHttpSessionState[typeof(Saml20Identity).FullName] = saml20Identity;
+
+            return fakeHttpSessionState;
+        }
+
+        private static AccountController CreateAccountController(HttpSessionStateBase httpSessionStateMock)
+        {
+            return new AccountController(Mock.Of<IInstitutionRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), httpSessionStateMock)
+                   {
+                       Url = HttpContextHelper.CreateUrlHelper()
+                   };
+        }
+
+        private static AccountController CreateAccountController(IUserProfileRepository userProfileRepository, IAuthentication authentication)
+        {
+            return new AccountController(Mock.Of<IInstitutionRepository>(), userProfileRepository, authentication, CreateHttpSessionState())
+                   {
+                       Url = HttpContextHelper.CreateUrlHelper()
+                   };
+        }
+
+        private static AccountController CreateAccountController(ISaml20Identity saml20Identity)
+        {
+            return new AccountController(Mock.Of<IInstitutionRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), CreateHttpSessionState(saml20Identity))
+                   {
+                       Url = HttpContextHelper.CreateUrlHelper()
+                   };
         }
     }
 }
