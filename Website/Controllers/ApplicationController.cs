@@ -38,11 +38,6 @@
             }
 
             this.ViewBag.User = this.UserProfileRepository.Find(this.Authentication.CurrentUserId);
-
-            if (this.ViewBag.User == null)
-            {
-                this.Logout(filterContext);
-            }
         }
 
         private static string GetPageId(ActionExecutingContext filterContext)
@@ -53,13 +48,6 @@
         private static string GetSelectedMenuItem(ActionExecutingContext filterContext)
         {
             return filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
-        }
-
-        private void Logout(ActionExecutingContext filterContext)
-        {
-            this.Authentication.Logout();
-
-            filterContext.Result = this.RedirectToAction("Index", "Home");
         }
     }
 }

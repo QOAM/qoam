@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://www.qoam.eu/idp/tst/">
+  <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDQDCCAiigAwIBAgIJAJcxeRXdkrZFMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAYTAk5MMRAwDgYDVQQKEwdxb2FtLm5sMRAwDgYDVQQDEwdxb2FtLm5sMRswGQYJKoZIhvcNAQkBFgxpbmZvQHFvYW0ubmwwHhcNMTQwNDA0MDkzMjIwWhcNMjQwNDAxMDkzMjIwWjBOMQswCQYDVQQGEwJOTDEQMA4GA1UEChMHcW9hbS5ubDEQMA4GA1UEAxMHcW9hbS5ubDEbMBkGCSqGSIb3DQEJARYMaW5mb0Bxb2FtLm5sMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy+ZlubUDIVxCkaxhs3JV4M6Yx7oOmmg6v2hPTTff1xhp1w5EjKK3lqHKsTafhR3XpgZEEyNu9Q5YDAh1wTXWxodz4tvkYIArggTAKwygMK88b4VsBqwRmySwc4e5GOhZEo4epdumAv0ZIjiGch2FQpu1HkjOODOAc9nxf22gYkgjxgDZy5whSsaSBshUkFep3IO73h9SMHJw6M6/vKKFOVGqxtCYMd8lv+5eTfzaoJezeOiIsnJRafzt/u5FsQon4mzx121UPQlrKf3LNj7VTrlMpXttrAUlOLzUG1wTelIGzEqUIV6xqmzbyk9c/MR4Dmvq3CJ8q5mpAmyzZMufHwIDAQABoyEwHzAdBgNVHREEFjAUggdxb2FtLm5sggkqLnFvYW0ubmwwDQYJKoZIhvcNAQELBQADggEBAGZICIIb3zJL8af2x956KZqSJ5nFkdpTou3VO8HqCp4LpUt1xrWMtfvczJya+b/5l2qKsgHeA4+dR4GPvA1fARbnJjjPAEXiBue8hI6kdZi0QggeovpfuYqlPhpa//S7ofv0zlq9h08R/BW8r/BtjDL67cra17eGv+3RlqOZ7IEGPJHXnXRhzVUEi6iNlrlnEyyuT0A2IjkCWWUx3LfvIpNnWxhQxmciWgn+Fbj9etFO+gpEKSodCOF6k+ki5ieGL5KZvxypzNS0wAVOmUAbmtPU/3cyh7YRKDXawz5lZ6P0HQ2zwo2QgJ3iGZjNouxtd9dGnCt0sIpSoUZw6mYs+CM=</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:KeyDescriptor use="encryption">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDQDCCAiigAwIBAgIJAJcxeRXdkrZFMA0GCSqGSIb3DQEBCwUAME4xCzAJBgNVBAYTAk5MMRAwDgYDVQQKEwdxb2FtLm5sMRAwDgYDVQQDEwdxb2FtLm5sMRswGQYJKoZIhvcNAQkBFgxpbmZvQHFvYW0ubmwwHhcNMTQwNDA0MDkzMjIwWhcNMjQwNDAxMDkzMjIwWjBOMQswCQYDVQQGEwJOTDEQMA4GA1UEChMHcW9hbS5ubDEQMA4GA1UEAxMHcW9hbS5ubDEbMBkGCSqGSIb3DQEJARYMaW5mb0Bxb2FtLm5sMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAy+ZlubUDIVxCkaxhs3JV4M6Yx7oOmmg6v2hPTTff1xhp1w5EjKK3lqHKsTafhR3XpgZEEyNu9Q5YDAh1wTXWxodz4tvkYIArggTAKwygMK88b4VsBqwRmySwc4e5GOhZEo4epdumAv0ZIjiGch2FQpu1HkjOODOAc9nxf22gYkgjxgDZy5whSsaSBshUkFep3IO73h9SMHJw6M6/vKKFOVGqxtCYMd8lv+5eTfzaoJezeOiIsnJRafzt/u5FsQon4mzx121UPQlrKf3LNj7VTrlMpXttrAUlOLzUG1wTelIGzEqUIV6xqmzbyk9c/MR4Dmvq3CJ8q5mpAmyzZMufHwIDAQABoyEwHzAdBgNVHREEFjAUggdxb2FtLm5sggkqLnFvYW0ubmwwDQYJKoZIhvcNAQELBQADggEBAGZICIIb3zJL8af2x956KZqSJ5nFkdpTou3VO8HqCp4LpUt1xrWMtfvczJya+b/5l2qKsgHeA4+dR4GPvA1fARbnJjjPAEXiBue8hI6kdZi0QggeovpfuYqlPhpa//S7ofv0zlq9h08R/BW8r/BtjDL67cra17eGv+3RlqOZ7IEGPJHXnXRhzVUEi6iNlrlnEyyuT0A2IjkCWWUx3LfvIpNnWxhQxmciWgn+Fbj9etFO+gpEKSodCOF6k+ki5ieGL5KZvxypzNS0wAVOmUAbmtPU/3cyh7YRKDXawz5lZ6P0HQ2zwo2QgJ3iGZjNouxtd9dGnCt0sIpSoUZw6mYs+CM=</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://www.qoam.eu/saml-tst/saml2/idp/SingleLogoutService.php"/>
+    <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</md:NameIDFormat>
+    <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://www.qoam.eu/saml-tst/saml2/idp/SSOService.php"/>
+  </md:IDPSSODescriptor>
+  <md:ContactPerson contactType="technical">
+    <md:SurName>Administrator</md:SurName>
+    <md:EmailAddress>info@qoam.eu</md:EmailAddress>
+  </md:ContactPerson>
+</md:EntityDescriptor>

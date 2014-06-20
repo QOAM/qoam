@@ -251,7 +251,6 @@
     <Compile Include="Models\CacheProfile.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\SurfConextClient.cs" />
-    <Compile Include="Models\PersistentPseudonymMapper.cs" />
     <Compile Include="Models\GeneralSettings.cs" />
     <Compile Include="Models\OAMarketSettings.cs" />
     <Compile Include="Models\ContactSettings.cs" />
@@ -316,6 +315,8 @@
     <None Include="App_Data\OAMarket_log.ldf">
       <DependentUpon>OAMarket.mdf</DependentUpon>
     </None>
+    <Content Include="App_Data\Metadata\metadata-acc.xml" />
+    <Content Include="App_Data\Metadata\metadata-tst.xml" />
     <Content Include="App_Data\Metadata\metadata.xml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap.css" />
