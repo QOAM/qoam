@@ -64,7 +64,7 @@
                 institutionRepository.InsertOrUpdate(institution);
             }
 
-            var user = userProfileRepository.Find(saml20Identity.Name);
+            var user = userProfileRepository.Find(saml20Identity.GetProviderUserId());
 
             if (user != null)
             {
@@ -82,7 +82,7 @@
             {
                 userProfileRepository.InsertOrUpdate(new UserProfile
                 {
-                    UserName = saml20Identity.Name,
+                    UserName = saml20Identity.GetProviderUserId(),
                     DisplayName = saml20Identity.GetDisplayName(),
                     Email = saml20Identity.GetEmail(),
                     DateRegistered = DateTime.Now,
@@ -92,7 +92,7 @@
                 userProfileRepository.Save();
             }
 
-            authentication.CreateOrUpdateAccount(saml20Identity.GetProvider(), saml20Identity.GetProviderUserId(), saml20Identity.Name);
+            authentication.CreateOrUpdateAccount(saml20Identity.GetProvider(), saml20Identity.GetProviderUserId(), saml20Identity.GetProviderUserId());
             authentication.Login(saml20Identity.GetProvider(), saml20Identity.GetProviderUserId(), createPersistentCookie: false);
         }
 

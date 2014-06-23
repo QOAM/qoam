@@ -11,7 +11,7 @@
 
         public static string GetProviderUserId(this ISaml20Identity saml20Identity)
         {
-            return saml20Identity.Name;
+            return saml20Identity.GetAttributeValue(SamlAttributes.EduPersonTargetedID);
         }
 
         public static string GetDisplayName(this ISaml20Identity saml20Identity)
