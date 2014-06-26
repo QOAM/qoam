@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Web.Helpers;
 
@@ -60,6 +61,18 @@
             }
 
             return ApplyOrdering(query, filter).ToPagedList(filter.PageNumber, filter.PageSize);
+        }
+
+        public UserProfile FindByEmail(string email)
+        {
+            return this.DbContext.UserProfiles.FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
+        }
+
+        public void UpdateProviderUserId(UserProfile userProfile, string providerUserId)
+        {
+            userProfile.UserName = providerUserId;
+
+            this.DbContext.Database.ExecuteSqlCommand("UPDATE [dbo].[webpages_OAuthMembership] SET [ProviderUserId] = @providerUserId WHERE [UserId] = @userId", new SqlParameter("@providerUserId", providerUserId), new SqlParameter("@userId", userProfile.Id));
         }
 
         private static IOrderedQueryable<UserProfile> ApplyOrdering(IQueryable<UserProfile> query, UserProfileFilter filter)

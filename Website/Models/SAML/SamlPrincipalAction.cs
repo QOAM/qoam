@@ -37,17 +37,15 @@
             {
                 return;
             }
-
-            var isPersistentPseudonym = assertion.Subject.Format == Saml20Constants.NameIdentifierFormats.Persistent;
-
-            // Protocol-level support for persistent pseudonyms: If a mapper has been configured, use it here before constructing the principal.
-            var subjectIdentifier = assertion.Subject.Value;
+            
+            // Retrieve the unique identifier
+            var subjectIdentifier = assertion.Attributes.First(a => a.Name == SamlAttributes.EduPersonTargetedID).AttributeValue[0];
             
             // Create the identity
-            var identity = new Saml20Identity(subjectIdentifier, assertion.Attributes, isPersistentPseudonym ? assertion.Subject.Value : null);                        
+            var identity = new Saml20Identity(subjectIdentifier, assertion.Attributes, null);                        
             
-            // Store the identity in the session to be able to access it later on
-            HttpContext.Current.Session[typeof(Saml20Identity).FullName] = identity;
+            // Store the identity in the HTTP context to be able to access it later on in our forms authentication action
+            context.Items[assertion.Id] = identity;
         }
 
         /// <summary>
@@ -58,7 +56,8 @@
         /// <param name="idpInitiated">During IdP initiated logout some actions such as redirecting should not be performed</param>
         public void LogoutAction(AbstractEndpointHandler handler, HttpContext context, bool idpInitiated)
         {
-            HttpContext.Current.Session.Remove(typeof(Saml20Identity).FullName);
+            // Note: we do not need to do anything here as we stored the identity in the HTTP context which is
+            // automatically cleared after each request
         }
 
         private static bool AssertionDoesNotContainAllRequiredAttributes(Saml20Assertion assertion)

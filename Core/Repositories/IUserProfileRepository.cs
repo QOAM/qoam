@@ -19,5 +19,9 @@
         void InsertOrUpdate(UserProfile userProfile);
         void Save();
         IPagedList<UserProfile> Search(UserProfileFilter filter);
+
+        UserProfile FindByEmail(string email);
+
+        void UpdateProviderUserId(UserProfile userProfile, string providerUserId);
     }
 }
