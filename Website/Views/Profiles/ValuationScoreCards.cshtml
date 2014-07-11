@@ -13,7 +13,7 @@
             }
             else
             {
-                @Html.ActionLink(scoreCard.Journal.Title, "BaseScoreCardDetails", "Score", new { id = scoreCard.Id }, null)
+                @Html.ActionLink(scoreCard.Journal.Title, "ValuationScoreCardDetails", "Score", new { id = scoreCard.Id }, null)
             }
         </td>
         <td>@(scoreCard.Score.ValuationScore.AverageScore.HasValue ? scoreCard.Score.ValuationScore.AverageScore.Value.ToString("0.0") : "-")</td>
@@ -27,7 +27,7 @@
             }
             else
             {
-                <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("View", "BaseScoreCardDetails", "Score", new { id = scoreCard.Id }, null)
+                <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("View", "ValuationScoreCardDetails", "Score", new { id = scoreCard.Id }, null)
             }
         </td>
     </tr>
