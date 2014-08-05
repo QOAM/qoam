@@ -11,12 +11,12 @@
     public class ContactViewModel
     {
         [Required]
-        [DisplayName("Name")]
+        [DisplayName("Your name")]
         public string Name { get; set; }
 
         [Required]
         [EmailAddress]
-        [DisplayName("Email")]
+        [DisplayName("Your email address")]
         public string Email { get; set; }
 
         [Required]
