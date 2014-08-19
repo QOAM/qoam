@@ -10,14 +10,6 @@
         </div>
         <div class="col-md-9">
             <h2>@ViewBag.Title</h2>
-            <div id="contact">
-                <address>
-                    <strong>Contact person:</strong><br />
-                    Leo Waaijers
-                </address>
-            </div>
-
-            <p>You can contact Leo through the form below:</p>
 
             @Html.ValidationSummary()
 
@@ -31,7 +23,7 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextBoxFor(m => m.Name, new { placeholder = "Name", @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Name, null, new { @class = "control-label" })
                         </div>
                     </div>
@@ -39,7 +31,7 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.Email, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Email, null, new { @class = "control-label" })
                         </div>
                     </div>
@@ -47,7 +39,7 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.Message, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextAreaFor(m => m.Message, 5, 40, new { placeholder = "Message", @class = "form-control" })
+                            @Html.TextAreaFor(m => m.Message, 5, 40, new {  @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Message, null, new { @class = "control-label " })
                         </div>
                     </div>

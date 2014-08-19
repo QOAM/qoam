@@ -1,4 +1,4 @@
-﻿@if (User.Identity.IsAuthenticated)
+﻿@if (User.Identity.IsAuthenticated && ViewBag.User != null)
 {
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Details", "Profiles", new { id = ViewBag.User.Id })">@ViewBag.User.DisplayName <b class="caret"></b></a>
