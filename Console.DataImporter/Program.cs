@@ -5,12 +5,15 @@
 
     using Autofac;
 
+    using NLog;
+
     using QOAM.Core;
     using QOAM.Core.Import;
 
     public static class Program
     {
         private static IContainer container;
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private static void Main(string[] args)
         {
@@ -22,19 +25,20 @@
             }
             catch (Exception ex)
             {
-                Console.WriteLine(Strings.Error, ex);
+                Logger.Error(ex);
             }
         }
 
         private static void ImportJournals(JournalsImportSource importSource, JournalsImportMode importMode)
         {
-            Console.WriteLine(Strings.ExecutingType, importSource);
-            Console.WriteLine(Strings.ExecutingMode, importMode);
-            Console.WriteLine(Strings.ImportingJournals);
+            Logger.Info("Import source: {0}", importSource);
+            Logger.Info("Import mode: {0}", importMode);
+            Logger.Info("Importing journals...");
 
             var importResult = container.Resolve<JournalsImport>().ImportJournals(GetJournalsToImport(importSource), importMode);
 
-            Console.WriteLine(Strings.ImportedJournals, importResult.NumberOfImportedJournals, importResult.NumberOfNewJournals);
+            Logger.Info("Imported {0} journals total", importResult.NumberOfImportedJournals);
+            Logger.Info("mported {0} new journals", importResult.NumberOfNewJournals);
         }
 
         private static IList<Journal> GetJournalsToImport(JournalsImportSource importSource)
