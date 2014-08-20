@@ -1,7 +1,10 @@
 ﻿namespace QOAM.Website.Models.SAML
 {
+    using System;
     using System.Linq;
     using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Routing;
 
     using SAML2;
     using SAML2.Actions;
@@ -35,6 +38,7 @@
         {
             if (AssertionDoesNotContainAllRequiredAttributes(assertion))
             {
+                context.Response.Redirect(GetLoginFailureUrl(context));
                 return;
             }
             
@@ -63,6 +67,12 @@
         private static bool AssertionDoesNotContainAllRequiredAttributes(Saml20Assertion assertion)
         {
             return !SamlAttributes.GetRequiredAttributes().IsSubsetOf(assertion.Attributes.Select(a => a.Name));
+        }
+
+        private static string GetLoginFailureUrl(HttpContext context)
+        {
+            var urlHelper = new UrlHelper(new RequestContext(new HttpContextWrapper(context), new RouteData()));
+            return urlHelper.Action("LoginFailure", "Account", new { reason = LoginFailureReason.SamlAttributeMissing });
         }
     }
 }

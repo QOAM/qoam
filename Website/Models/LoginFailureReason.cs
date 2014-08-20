@@ -5,5 +5,6 @@
         ExternalAuthenticationFailed,
         UsernameAlreadyExists,
         SaveFailed,
+        SamlAttributeMissing,
     }
 }
