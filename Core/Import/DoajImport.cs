@@ -9,10 +9,14 @@
     using CsvHelper;
     using CsvHelper.Configuration;
 
+    using NLog;
+
     using Validation;
 
     public class DoajImport
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private readonly DoajSettings doajSettings;
 
         private static readonly CsvConfiguration CsvConfiguration = new CsvConfiguration
@@ -31,16 +35,25 @@
 
         public IList<Journal> GetJournals()
         {
+            return this.ParseJournals(this.DownloadJournals());
+        }
+
+        private string DownloadJournals()
+        {
+            Logger.Info("Downloading journals...");
+
             using (var webClient = new WebClient())
             {
                 webClient.Encoding = Encoding.UTF8;
 
-                return this.ParseJournals(webClient.DownloadString(this.doajSettings.CsvUrl));
+                return webClient.DownloadString(this.doajSettings.CsvUrl);
             }
         }
 
         public IList<Journal> ParseJournals(string csv)
         {
+            Logger.Info("Parsing journals...");
+
             using (var csvReader = new CsvReader(new StringReader(csv), CsvConfiguration))
             {
                 var importRecords = csvReader.GetRecords<DoajImportRecord>().ToList();

@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using NLog;
+
     using QOAM.Core.Helpers;
     using QOAM.Core.Repositories;
 
@@ -11,6 +13,8 @@
 
     public class JournalsImport
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private readonly IJournalRepository journalRepository;
         private readonly ILanguageRepository languageRepository;
         private readonly ICountryRepository countryRepository;
@@ -38,35 +42,65 @@
         public JournalsImportResult ImportJournals(IList<Journal> journals, JournalsImportMode journalsImportMode)
         {
             var distinctJournals = journals.Distinct(new JournalIssnEqualityComparer()).ToList();
-
-            var allJournals = this.journalRepository.All;
+            
             var countries = this.ImportCountries(distinctJournals);
             var languages = this.ImportLanguages(distinctJournals);
             var subjects = this.ImportSubjects(distinctJournals);
             var publishers = this.ImportPublishers(distinctJournals);
+
+            Logger.Info("Retrieving existing journals from database...");
+            var allJournals = this.journalRepository.All;
             
             var currentJournalIssns = this.journalRepository.AllIssns.ToList();
+            
             var newJournals = distinctJournals.Where(j => !currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
+
+            Logger.Info("Found {0} new journals", newJournals.Count);
+
             var existingJournals = distinctJournals.Where(j => currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
+
+            Logger.Info("Found {0} existing journals", existingJournals.Count);
 
             if (ShouldInsertJournals(journalsImportMode))
             {
-                foreach (var newJournalsChunk in newJournals.Chunk(this.importSettings.BatchSize).ToList())
-                {
-                    this.ImportJournalsInChunk(newJournalsChunk.ToList(), countries, publishers, languages, subjects);
-                    this.AddJournalScoreToImportedJournalsInChunk(newJournalsChunk.ToList());
-                }
+                this.InsertJournals(newJournals, countries, publishers, languages, subjects);
             }
 
             if (ShouldUpdateJournals(journalsImportMode))
             {
-                foreach (var existingJournalsChunk in existingJournals.Chunk(this.importSettings.BatchSize).ToList())
-                {
-                    this.UpdateJournalsInChunk(existingJournalsChunk.ToList(), countries, publishers, languages, subjects, allJournals);
-                }    
+                this.UpdateJournals(existingJournals, countries, publishers, languages, subjects, allJournals);
             }
 
             return new JournalsImportResult { NumberOfImportedJournals = distinctJournals.Count, NumberOfNewJournals = newJournals.Count };
+        }
+
+        private void InsertJournals(List<Journal> newJournals, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects)
+        {
+            Logger.Info("Importing journals in batches of {0}...", this.importSettings.BatchSize);
+
+            var index = 1;
+
+            foreach (var newJournalsChunk in newJournals.Chunk(this.importSettings.BatchSize).ToList())
+            {
+                Logger.Info("Importing chunk {0}", index++);
+
+                this.ImportJournalsInChunk(newJournalsChunk.ToList(), countries, publishers, languages, subjects);
+                this.AddJournalScoreToImportedJournalsInChunk(newJournalsChunk.ToList());
+            }
+        }
+
+        private void UpdateJournals(List<Journal> existingJournals, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<Journal> allJournals)
+        {
+            Logger.Info("Updating journals in batches of {0}...", this.importSettings.BatchSize);
+
+            var index = 1;
+
+            foreach (var existingJournalsChunk in existingJournals.Chunk(this.importSettings.BatchSize).ToList())
+            {
+                Logger.Info("Updating chunk {0}", index++);
+
+                this.UpdateJournalsInChunk(existingJournalsChunk.ToList(), countries, publishers, languages, subjects, allJournals);
+            }
         }
 
         private void UpdateJournalsInChunk(IList<Journal> existingJournalsChunk, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<Journal> allJournals)
@@ -129,7 +163,13 @@
 
         private IList<Country> ImportCountries(IEnumerable<Journal> journals)
         {
-            this.countryRepository.InsertBulk(this.GetNewCountries(journals));
+            Logger.Info("Importing countries...");
+
+            var newCountries = this.GetNewCountries(journals);
+
+            Logger.Info("Inserting {0} new countries into database...", newCountries.Count());
+
+            this.countryRepository.InsertBulk(newCountries);
             
             return this.countryRepository.All;
         }
@@ -149,7 +189,13 @@
 
         private IList<Language> ImportLanguages(IEnumerable<Journal> journals)
         {
-            this.languageRepository.InsertBulk(this.GetNewLanguages(journals));
+            Logger.Info("Importing languages...");
+
+            var newLanguages = this.GetNewLanguages(journals);
+
+            Logger.Info("Inserting {0} new languages into database...", newLanguages.Count());
+
+            this.languageRepository.InsertBulk(newLanguages);
             
             return this.languageRepository.All;
         }
@@ -169,7 +215,13 @@
 
         private IList<Subject> ImportSubjects(IEnumerable<Journal> journals)
         {
-            this.subjectRepository.InsertBulk(this.GetNewSubjects(journals));
+            Logger.Info("Importing subjects...");
+
+            var newSubjects = this.GetNewSubjects(journals);
+
+            Logger.Info("Inserting {0} new subjects into database...", newSubjects.Count());
+
+            this.subjectRepository.InsertBulk(newSubjects);
 
             return this.subjectRepository.All;
         }
@@ -189,7 +241,13 @@
 
         private IList<Publisher> ImportPublishers(IEnumerable<Journal> journals)
         {
-            this.publisherRepository.InsertBulk(this.GetNewPublishers(journals));
+            Logger.Info("Importing publishers...");
+
+            var newPublishers = this.GetNewPublishers(journals);
+
+            Logger.Info("Inserting {0} new publishers into database...", newPublishers.Count());
+
+            this.publisherRepository.InsertBulk(newPublishers);
 
             return this.publisherRepository.All;
         }

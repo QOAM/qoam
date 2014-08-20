@@ -5,11 +5,15 @@
     using System.Linq;
     using System.Xml.Linq;
 
+    using NLog;
+
     using Validation;
 
     public class UlrichsImport
     {
         private const string MissingPublisherName = "<none indicated>";
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly UlrichsClient ulrichsClient;
         private readonly UlrichsCache ulrichsCache;
@@ -32,6 +36,13 @@
         public IList<Journal> GetJournals(UlrichsJournalType journalType)
         {
             this.DownloadJournals();
+
+            return this.ParseJournals(journalType);
+        }
+
+        private IList<Journal> ParseJournals(UlrichsJournalType journalType)
+        {
+            Logger.Info("Parsing journals...");
 
             var journals = new List<Journal>();
 
@@ -165,6 +176,8 @@
 
         private void DownloadJournals()
         {
+            Logger.Info("Downloading journals...");
+
             if (!this.ulrichsClient.TryLogOn())
             {
                 throw new InvalidOperationException("Could not log-in to Ulrichs.");
@@ -174,16 +187,27 @@
             {
                 throw new InvalidOperationException("Could not request report token.");
             }
-
+            
             for (var page = 1; page <= this.ulrichsClient.NumberOfPages; ++page)
             {
                 if (this.ulrichsCache.HasExpired(page))
                 {
-                    this.ulrichsCache.Add(this.DownloadJournalsForPage(page), page);
+                    Logger.Info("Downloading page {0} as it has expired.", page);
+
+                    try
+                    {
+                        this.ulrichsCache.Add(this.DownloadJournalsForPage(page), page);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex);
+                    }
+                }
+                else
+                {
+                    Logger.Info("Skipping page {0} as it has not yet expired.", page);
                 }
             }
-
-            this.ulrichsClient.LogOff();
         }
 
         private IList<Language> ParseLanguages(XElement recordElement)

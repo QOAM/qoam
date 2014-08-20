@@ -6,6 +6,8 @@
     using System.Web.Services.Protocols;
     using System.Xml;
 
+    using NLog;
+
     using QOAM.Core.Ulrichs;
 
     using Validation;
@@ -16,6 +18,8 @@
         private const string VersionNumberLogOn = "1";
         private const string VersionNumberRequestReportToken = "1";
         private const string VersionNumberRequestPagedData = "1";
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly UlrichsSettings ulrichsSettings;
         private readonly UlrichsWebService webService;
@@ -38,6 +42,8 @@
         {
             for (var i = 0; i < this.ulrichsSettings.LogonAttempts; ++i)
             {
+                Logger.Debug("Logging on to Ulrichs, attempt {0}...", i + 1);
+
                 if (this.LogOn())
                 {
                     return true;
@@ -92,6 +98,8 @@
 
         public bool RequestReportToken()
         {
+            Logger.Debug("Requesting report token");
+
             var requestReportTokenReturn = new XmlDocument();
 
             try
@@ -239,6 +247,8 @@
 
         public bool LogOff()
         {
+            Logger.Debug("Logging off from Ulrichs");
+
             try
             {
                 var logoffReturnDocument = new XmlDocument();
