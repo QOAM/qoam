@@ -4,11 +4,14 @@
 
     using Autofac;
 
+    using NLog;
+
     using QOAM.Core.Services;
 
     internal static class Program
     {
         private static IContainer container;
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private static void Main()
         {
@@ -20,7 +23,7 @@
             }
             catch (Exception ex)
             {
-                Console.WriteLine(Strings.Error, ex);
+                Logger.Error(ex);
             }
 
             try
@@ -29,29 +32,29 @@
             }
             catch (Exception ex)
             {
-                Console.WriteLine(Strings.Error, ex);
+                Logger.Error(ex);
             }
         }
         
         private static void ArchiveScoreCardsThatHaveExpired()
         {
-            Console.WriteLine(Strings.CheckingExpiredJournals);
+            Logger.Info("Sending notifications to owners of expired JSC's...");
 
             var expirationChecker = container.Resolve<ExpirationChecker>();
             var result = expirationChecker.ArchiveBaseScoreCardsThatHaveExpired();
 
-            Console.WriteLine(Strings.CheckedExpiredJournals, result.NumberOfArchivedScoreCards);
+            Logger.Info("Number of expired JSC's: {0}", result.NumberOfArchivedScoreCards);
         }
 
         private static void NotifyUsersOfScoreCardsThatAlmostExpire()
         {
-            Console.WriteLine(Strings.CheckingAlmostExpiredJournals);
+            Logger.Info("Sending notifications to owners of soon to expire JSC's...");
 
             var expirationChecker = container.Resolve<ExpirationChecker>();
             var result = expirationChecker.NotifyUsersOfScoreCardsThatAlmostExpire();
 
-            Console.WriteLine(Strings.CheckedSoonToBeExpiredJournals, result.NumberOfSoonToBeArchivedNotificationsSent);
-            Console.WriteLine(Strings.CheckedAlmostExpiredJournals, result.NumberOfAlmostArchivedNotificationsSent);
+            Logger.Info("Number of soon to expire JSC's: {0}", result.NumberOfSoonToBeArchivedNotificationsSent);
+            Logger.Info("Number of almost expired JSC's: {0}", result.NumberOfAlmostArchivedNotificationsSent);
         }
     }
 }

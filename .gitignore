@@ -127,6 +127,7 @@ Ulrichs.*.config
 ExpirationChecker.*.config
 MachineKey.*.config
 Saml2.*.config
+NLog.*.config
 
 # Markdown HTML files
 LICENSE.html
