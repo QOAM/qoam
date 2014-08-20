@@ -1,0 +1,25 @@
+@using QOAM.Website.Models
+@model LoginFailureReason
+
+@{
+    ViewBag.Title = "Login failed";
+}
+
+<div class="container main">
+    <div class="row alert alert-danger" role="danger">
+
+        @switch (Model)
+        {
+            case LoginFailureReason.ExternalAuthenticationFailed:
+                <p>Authentication was not succesful. Please try to log in again.</p>
+                break;
+            case LoginFailureReason.UsernameAlreadyExists:
+            <p>The username already exists. Perhaps you already have an account?</p>
+                break;
+            case LoginFailureReason.SaveFailed:
+            <p>There was an error while saving the user to the database. Please try again.</p>
+                break;
+        }
+
+    </div>
+</div>
