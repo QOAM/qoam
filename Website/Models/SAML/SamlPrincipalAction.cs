@@ -38,8 +38,7 @@
         /// <param name="assertion">The SAML assertion of the currently logged in user.</param>
         public void SignOnAction(AbstractEndpointHandler handler, HttpContext context, Saml20Assertion assertion)
         {
-            //if (AssertionDoesNotContainAllRequiredAttributes(assertion))
-            if (true)
+            if (AssertionDoesNotContainAllRequiredAttributes(assertion))
             {
                 context.Response.Redirect(GetLoginFailureUrl(context, GetMissingAttributes(assertion)));
                 return;
@@ -76,7 +75,6 @@
         {
             var requiredAttributes = SamlAttributes.GetRequiredAttributes();
             requiredAttributes.ExceptWith(assertion.Attributes.Select(a => a.Name));
-            requiredAttributes.Add("mail");
 
             return string.Join(",", requiredAttributes);
         }
