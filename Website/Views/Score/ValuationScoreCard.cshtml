@@ -97,7 +97,14 @@
         <div class="col-md-9">
             <h3>Score Card</h3>
             <div class="panel panel-primary">
-                <div class="panel-heading">@Model.Journal.Title</div>
+                <div class="panel-heading">
+                    <a href="@Model.Journal.Link" title="Go to website">
+                        <div>
+                            @Model.Journal.Title
+                            <span class="pull-right clearfix"><i class="glyphicon glyphicon-new-window"></i></span>
+                        </div>
+                    </a>
+                </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-10">
@@ -119,10 +126,6 @@
                             <div class="row">
                                 <label class="col-md-2">Disciplines:</label>
                                 <div class="col-md-10">@string.Join(", ", Model.Journal.Subjects)</div>
-                            </div>
-
-                            <div>
-                                <a href="@Model.Journal.Link" class="btn btn-success external" title="Go to website">Go to website</a>
                             </div>
                         </div>
                         <div class="col-md-2">

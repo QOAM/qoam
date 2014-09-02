@@ -85,7 +85,14 @@
 
         <div class="col-md-9">
             <div class="panel panel-primary">
-                <div class="panel-heading">@Model.Journal.Title</div>
+                <div class="panel-heading">
+                    <a href="@Model.Journal.Link" title="Go to website">
+                        <div>
+                            @Model.Journal.Title
+                            <span class="pull-right clearfix"><i class="glyphicon glyphicon-new-window"></i></span>
+                        </div>
+                    </a>
+                </div>
                 <div class="panel-body">
 
                     <div class="row">
@@ -106,10 +113,6 @@
                     <div class="row">
                         <label class="col-md-2">Disciplines:</label>
                         <div class="col-md-10">@string.Join(", ", Model.Journal.Subjects.Select(s => s.Name))</div>
-                    </div>
-                    
-                    <div>
-                        <a href="@Model.Journal.Link" class="btn btn-success external" title="Go to website">Go to website</a>
                     </div>
 
                     <div class="row">
@@ -182,7 +185,7 @@
 @section scripts
 {
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             var scoreController = new ScoreController();
             scoreController.baseScoreCardDetails();
         });
