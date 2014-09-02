@@ -18,7 +18,7 @@
         public void LoginFailureActionDoesNotRequireAuthorizedUser()
         {
             // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.LoginFailure(LoginFailureReason.ExternalAuthenticationFailed)));
+            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.LoginFailure(LoginFailureReason.ExternalAuthenticationFailed, null)));
         }
     }
 }

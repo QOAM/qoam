@@ -32,14 +32,14 @@
             var method = "~/account/login/failure/".WithMethod(HttpVerbs.Get);
             method.Values["reason"] = LoginFailureReason.ExternalAuthenticationFailed;
 
-            method.ShouldMapTo<AccountController>(x => x.LoginFailure(LoginFailureReason.ExternalAuthenticationFailed));
+            method.ShouldMapTo<AccountController>(x => x.LoginFailure(LoginFailureReason.ExternalAuthenticationFailed, null));
         }
 
         [Fact]
         public void LoginFailureActionDoesNotRequireHttps()
         {
             // Assert
-            Assert.True(ActionRequiresHttps(x => x.LoginFailure(LoginFailureReason.ExternalAuthenticationFailed)));
+            Assert.True(ActionRequiresHttps(x => x.LoginFailure(LoginFailureReason.ExternalAuthenticationFailed, null)));
         }
 
     }

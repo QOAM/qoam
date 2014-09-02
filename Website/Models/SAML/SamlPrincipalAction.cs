@@ -1,7 +1,9 @@
 ﻿namespace QOAM.Website.Models.SAML
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
@@ -36,9 +38,10 @@
         /// <param name="assertion">The SAML assertion of the currently logged in user.</param>
         public void SignOnAction(AbstractEndpointHandler handler, HttpContext context, Saml20Assertion assertion)
         {
-            if (AssertionDoesNotContainAllRequiredAttributes(assertion))
+            //if (AssertionDoesNotContainAllRequiredAttributes(assertion))
+            if (true)
             {
-                context.Response.Redirect(GetLoginFailureUrl(context));
+                context.Response.Redirect(GetLoginFailureUrl(context, GetMissingAttributes(assertion)));
                 return;
             }
             
@@ -69,10 +72,19 @@
             return !SamlAttributes.GetRequiredAttributes().IsSubsetOf(assertion.Attributes.Select(a => a.Name));
         }
 
-        private static string GetLoginFailureUrl(HttpContext context)
+        private static string GetMissingAttributes(Saml20Assertion assertion)
+        {
+            var requiredAttributes = SamlAttributes.GetRequiredAttributes();
+            requiredAttributes.ExceptWith(assertion.Attributes.Select(a => a.Name));
+            requiredAttributes.Add("mail");
+
+            return string.Join(",", requiredAttributes);
+        }
+
+        private static string GetLoginFailureUrl(HttpContext context, string missingAttributes)
         {
             var urlHelper = new UrlHelper(new RequestContext(new HttpContextWrapper(context), new RouteData()));
-            return urlHelper.Action("LoginFailure", "Account", new { reason = LoginFailureReason.SamlAttributeMissing });
+            return urlHelper.Action("LoginFailure", "Account", new { reason = LoginFailureReason.SamlAttributeMissing, missingAttributes = missingAttributes });
         }
     }
 }

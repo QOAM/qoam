@@ -1,5 +1,6 @@
 ﻿namespace QOAM.Website.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
 
     using AttributeRouting;
@@ -30,8 +31,13 @@
         }
 
         [GET("login/failure")]
-        public ViewResult LoginFailure(LoginFailureReason reason = LoginFailureReason.ExternalAuthenticationFailed)
+        public ViewResult LoginFailure(LoginFailureReason reason = LoginFailureReason.ExternalAuthenticationFailed, string missingAttributes = null)
         {
+            if (missingAttributes != null)
+            {
+                this.ViewBag.MissingAttributes = missingAttributes.Split(',').ToList();
+            }
+
             return this.View(reason);
         }
 
