@@ -11,7 +11,7 @@
         }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(1000)]
         public string Name { get; set; }
 
         public virtual ICollection<Journal> Journals { get; set; }

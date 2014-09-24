@@ -12,11 +12,11 @@
         }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(1000)]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(1000)]
         public string ShortName { get; set; }
 
         public int NumberOfBaseScoreCards { get; set; }

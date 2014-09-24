@@ -15,15 +15,15 @@
         }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(1000)]
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(1000)]
         public string DisplayName { get; set; }
 
         [EmailAddress]
-        [StringLength(255)]
+        [StringLength(1000)]
         public string Email { get; set; }
 
         public DateTime DateRegistered { get; set; }

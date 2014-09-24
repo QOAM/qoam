@@ -108,6 +108,10 @@
     <Compile Include="Migrations\201405230928436_AddTotalNumberOfScoreCards.Designer.cs">
       <DependentUpon>201405230928436_AddTotalNumberOfScoreCards.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409241026475_ExpandedColumns.cs" />
+    <Compile Include="Migrations\201409241026475_ExpandedColumns.Designer.cs">
+      <DependentUpon>201409241026475_ExpandedColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\IValuationJournalPriceRepository.cs" />
     <Compile Include="Repositories\IValuationScoreCardRepository.cs" />
@@ -260,6 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201405230928436_AddTotalNumberOfScoreCards.resx">
       <DependentUpon>201405230928436_AddTotalNumberOfScoreCards.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409241026475_ExpandedColumns.resx">
+      <DependentUpon>201409241026475_ExpandedColumns.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
