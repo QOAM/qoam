@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseQuestionScore.cs" />
+    <Compile Include="Helpers\ValidatorExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.Designer.cs">

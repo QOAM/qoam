@@ -11,6 +11,8 @@
 
     using NLog;
 
+    using QOAM.Core.Helpers;
+
     using Validation;
 
     public class DoajImport
@@ -57,7 +59,7 @@
             using (var csvReader = new CsvReader(new StringReader(csv), CsvConfiguration))
             {
                 var importRecords = csvReader.GetRecords<DoajImportRecord>().ToList();
-                return importRecords.Select(i => i.ToJournal()).ToList();
+                return importRecords.Select(i => i.ToJournal()).Where(j => j.IsValid()).ToList();
             }
         }
     }

@@ -84,8 +84,15 @@
             {
                 Logger.Info("Importing chunk {0}", index++);
 
-                this.ImportJournalsInChunk(newJournalsChunk.ToList(), countries, publishers, languages, subjects);
-                this.AddJournalScoreToImportedJournalsInChunk(newJournalsChunk.ToList());
+                try
+                {
+                    this.ImportJournalsInChunk(newJournalsChunk.ToList(), countries, publishers, languages, subjects);
+                    this.AddJournalScoreToImportedJournalsInChunk(newJournalsChunk.ToList());
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error("Error importing chunk", ex);
+                }
             }
         }
 
@@ -99,7 +106,15 @@
             {
                 Logger.Info("Updating chunk {0}", index++);
 
-                this.UpdateJournalsInChunk(existingJournalsChunk.ToList(), countries, publishers, languages, subjects, allJournals);
+                try
+                {
+                    this.UpdateJournalsInChunk(existingJournalsChunk.ToList(), countries, publishers, languages, subjects, allJournals);
+
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error("Error updating chunk", ex);
+                }
             }
         }
 

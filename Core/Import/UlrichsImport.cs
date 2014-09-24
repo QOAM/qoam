@@ -7,6 +7,8 @@
 
     using NLog;
 
+    using QOAM.Core.Helpers;
+
     using Validation;
 
     public class UlrichsImport
@@ -59,7 +61,7 @@
             var ulrichsElements = XDocument.Parse(xml).Descendants("UlrichsDataRecords").Descendants("Record");
             var journalElements = journalType == UlrichsJournalType.All ? ulrichsElements.Where(IsJournal) : ulrichsElements.Where(IsOpenAccessJournal);
 
-            return journalElements.SelectMany(this.ParseJournal).ToList();
+            return journalElements.SelectMany(this.ParseJournal).Where(j => j.IsValid()).ToList();
         }
 
         public IEnumerable<Journal> ParseJournal(XElement recordElement)
