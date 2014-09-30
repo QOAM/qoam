@@ -24,26 +24,28 @@
         public int NumberOfBaseReviewers { get; set; }
         public int NumberOfValuationReviewers { get; set; }
         public int JournalId { get; set; }
-        public string Swot {
+        public string Swot
+        {
             get
             {
                 if (this.OverallScore != null && this.ValuationScore != null)
                 {
-                    if (this.OverallScore.AverageScore > 3 && this.ValuationScore.AverageScore > 3)
+                    if (this.OverallScore.AverageScore >= 3 && this.ValuationScore.AverageScore >= 3)
                         return SwotVerdict.StrongJournal;
-                    if(this.OverallScore.AverageScore <= 3 && this.ValuationScore.AverageScore <= 3)
+                    if (this.OverallScore.AverageScore < 3 && this.ValuationScore.AverageScore < 3)
                         return SwotVerdict.WeakerJournal;
-                    if (this.OverallScore.AverageScore > 3 && this.ValuationScore.AverageScore <= 3)
+                    if (this.OverallScore.AverageScore >= 3 && this.ValuationScore.AverageScore < 3)
                         return SwotVerdict.ThreatToAuthor;
-                    if (this.OverallScore.AverageScore <= 3 && this.ValuationScore.AverageScore > 3)
+                    if (this.OverallScore.AverageScore < 3 && this.ValuationScore.AverageScore >= 3)
                         return SwotVerdict.OpportunityToPublisher;
-                    
+
                     return string.Empty;
                 }
-                else
-                    return string.Empty;
-            } 
+                
+                return string.Empty;
+            }
         }
+
         public virtual Journal Journal { get; set; }
         public virtual ICollection<Journal> Journals { get; set; }
     }

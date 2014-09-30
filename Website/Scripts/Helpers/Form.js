@@ -50,3 +50,11 @@ function createTypeahead(selector, remoteUrl) {
         source: bloodhoundInstance.ttAdapter()
     });
 }
+
+function updateSwotMatrix(selector, input) {
+    $($(input).val().split(',')).each(function () {
+        if (this.length > 0) {
+            $(selector).find('.' + this).addClass('verdict-' + this).addClass('selected');
+        }
+    });
+}

@@ -1,8 +1,10 @@
 ﻿namespace QOAM.Website.ViewModels.Journals
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Web.Helpers;
     using System.Web.Mvc;
 
@@ -22,6 +24,7 @@
             this.Journals = new PagedList<Journal>(new Journal[0], this.Page, this.PageSize);
             this.SortBy = JournalSortMode.BaseScore;
             this.Sort = SortDirection.Descending;
+            this.SwotMatrix = string.Empty;
         }
 
         [DisplayName("Title")]
@@ -39,16 +42,10 @@
         [DisplayName("Language")]
         public int? Language { get; set; }
 
-        [DisplayName("Minimum Base Score")]
-        [Range(MinimumScoreValue, MaximumScoreValue)]
-        public float? MinimumBaseScore { get; set; }
-
-        [DisplayName("Minimum Valuation Score")]
-        [Range(MinimumScoreValue, MaximumScoreValue)]
-        public float? MinimumValuationScore { get; set; }
-
         [DisplayName("Only journals with Valuation Score Card")]
         public bool SubmittedOnly { get; set; }
+
+        public string SwotMatrix { get; set; } 
 
         public JournalSortMode SortBy { get; set; }
         public SortDirection Sort { get; set; }
@@ -66,14 +63,13 @@
                            Publisher = this.Publisher.TrimSafe(),
                            Discipline = this.Discipline,
                            Language = this.Language,
-                           MinimumBaseScore = this.MinimumBaseScore,
-                           MinimumValuationScore = this.MinimumValuationScore,
                            SubmittedOnly = this.SubmittedOnly,
                            MustHaveBeenScored = true,
                            SortMode = this.SortBy,
                            SortDirection = this.Sort,
                            PageNumber = this.Page,
                            PageSize = this.PageSize,
+                           SwotMatrix = !string.IsNullOrEmpty(this.SwotMatrix) ? this.SwotMatrix.Split(',').ToList() : new List<string>(),
                        };
         }
     }

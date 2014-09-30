@@ -1,7 +1,5 @@
 ﻿/**************** common ***************************/
-html, body {
-    height: 100%;
-}
+html, body { height: 100%; }
 
 *, input, .twitter-typeahead .tt-query {
     -ms-border-radius: 0 !important;
@@ -16,25 +14,15 @@ html, body {
     padding: 0 0 40px;
 }
 
-h1, h2, h3, h4 {
-    font-weight: normal;
-}
+h1, h2, h3, h4 { font-weight: normal; }
 
-a:active, a:focus {
-    outline-style: none;
-}
+a:active, a:focus { outline-style: none; }
 
-.bottommargin {
-    margin-bottom: 10px;
-}
+.bottommargin { margin-bottom: 10px; }
 
-.topmargin {
-    margin-top: 10px;
-}
+.topmargin { margin-top: 10px; }
 
-.inline {
-    list-style: none;
-}
+.inline { list-style: none; }
 
 ul.inline > li {
     display: inline !important;
@@ -43,44 +31,35 @@ ul.inline > li {
 
 .well {
     padding: 10px;
-    margin-top: 30px;
+    margin-top: 16px;
     -ms-border-radius: 0;
     border-radius: 0;
 }
 
-.editor-label-placeholder {
-    display: none;
-}
+.editor-label-placeholder { display: none; }
 
-img.pull-right {
-    margin-left: 10px;
-}
+img.pull-right { margin-left: 10px; }
 
-.rangeslider {
-    margin-top: 0;
-}
+.rangeslider { margin-top: 0; }
 
-.tooltip {
-    position: fixed;
-}
+.tooltip { position: fixed; }
 
-    .tooltip.in {
-        position: absolute;
-    }
+.tooltip.in { position: absolute; }
+
 /****************end common ***************************/
 
 /*************** carrousel **********************/
 
 /* Carousel base class */
-.carousel {
-    margin: 30px 0;
-}
+
+.carousel { margin: 30px 0; }
+
 /* Since positioning the image, we need to help out the caption */
-.carousel-caption {
-    z-index: 10;
-}
+
+.carousel-caption { z-index: 10; }
 
 /* Declare heights because of positioning of img element */
+
 .carousel .item {
     height: 260px;
     background: #2297d5;
@@ -95,9 +74,8 @@ img.pull-right {
 }
 
 /******************end carroussel************************/
-#header, .main, .footer, #formdiv {
-    margin-top: 10px;
-}
+
+#header, .main, .footer, #formdiv { margin-top: 10px; }
 
 #formdiv {
     padding: 10px;
@@ -115,9 +93,7 @@ img.pull-right {
     text-shadow: none;
 }
 
-.brand:hover {
-    text-decoration: none;
-}
+.brand:hover { text-decoration: none; }
 
 #logo {
     float: left;
@@ -129,50 +105,30 @@ img.pull-right {
     margin: 5px 10px;
 }
 
-.btn-primary {
-    font-size: 12px !important;
-}
+.btn-primary { font-size: 12px !important; }
 
-.btn i {
-    margin-right: 5px;
-}
+.btn i { margin-right: 5px; }
 
-#logoutForm {
-    margin-bottom: 0;
-}
+#logoutForm { margin-bottom: 0; }
 
-.dropdown-menu .divider {
-    margin: 1px 1px;
-}
+.dropdown-menu .divider { margin: 1px 1px; }
 
-fieldset legend {
-    display: none;
-}
+fieldset legend { display: none; }
 
-.row [class="span-content"] {
-    padding: 0 20px 20px 20px !important;
-}
+.row [class="span-content"] { padding: 0 20px 20px 20px !important; }
 
-.row.side [class="span-content"] {
-    padding: 0 5px 20px 20px !important;
-}
+.row.side [class="span-content"] { padding: 0 5px 20px 20px !important; }
 
-.row.side [class="span-contentsearch"] {
-    padding: 0 5px 10px 20px !important;
-}
+.row.side [class="span-contentsearch"] { padding: 0 5px 10px 20px !important; }
 
-.row label {
-    font-weight: normal;
-}
+.row label { font-weight: normal; }
 
 
-.row .innerRow {
-    margin: 0 0 10px 15px;
-}
+.row .innerRow { margin: 0 0 10px 15px; }
+
 /******************* search  **************************************/
-.resultdiv .col-md-n7 {
-    margin-top: 0;
-}
+
+.resultdiv .col-md-n7 { margin-top: 0; }
 
 .score {
     border: solid 1px #000;
@@ -186,22 +142,16 @@ fieldset legend {
     margin-right: 10px;
 }
 
-.tab-pane .score, .tab-pane .publish {
-    margin-top: 15px;
-}
+.tab-pane .score, .tab-pane .publish { margin-top: 15px; }
 
-.scoreCardAspects > h3:first-child {
-    text-align: left;
-}
+.scoreCardAspects > h3:first-child { text-align: left; }
 
 #score-journal-page .tab-content .score, #score-details-page .tab-content .score {
     text-align: left;
     padding: 5px;
 }
 
-#score-journal-page .tab-content p, #score-details-page .tab-content p {
-    font-style: italic;
-}
+#score-journal-page .tab-content p, #score-details-page .tab-content p { font-style: italic; }
 
 .score .score {
     margin-left: 20%;
@@ -213,7 +163,13 @@ fieldset legend {
     font-family: Mate SC, Arial, serif !important;
     text-transform: lowercase;
 }
+
+.big {
+    height: 111px;
+}
+
 /******************* tabs ******************************/
+
 .journal-tabs {
     margin-bottom: 0;
     border: 0;
@@ -224,48 +180,33 @@ fieldset legend {
     font-weight: bold;
 }
 
-.tabbable {
-    padding: 10px;
-}
+.tabbable { padding: 10px; }
 
-.tabbablesearch {
-    padding: 0px 10px 0px 20px;
-}
+.tabbablesearch { padding: 0 10px 0 20px; }
 
 .tab-content {
     border: 1px solid #DDDDDD;
     background: #F5F5F5;
 }
 
-.tab-pane {
-    padding: 10px;
-}
+.tab-pane { padding: 10px; }
 
 .tab-content .col-md-2 {
-    border: 0px;
-    margin-top: 0px;
+    border: 0;
+    margin-top: 0;
 }
 
-.tab-content .col-md-3 {
-    margin-top: 0px;
-}
+.tab-content .col-md-3 { margin-top: 0; }
 
-    .tab-content .col-md-3 img {
-        margin-bottom: 15px;
-    }
+.tab-content .col-md-3 img { margin-bottom: 15px; }
 
-    .tab-content .col-md-3 .Scoresheet {
-        margin-top: 10px;
-    }
+.tab-content .col-md-3 .Scoresheet { margin-top: 10px; }
+
 /******************** sidebar nav *********************************/
 
-.col-md-3 img {
-    margin: 0px auto;
-}
+.col-md-3 img { margin: 0 auto; }
 
-.bs-docs-sidenav {
-    width: 258px;
-}
+.bs-docs-sidenav { width: 258px; }
 
 .bs-docs-sidenav {
     background-color: #FFFFFF;
@@ -275,15 +216,14 @@ fieldset legend {
     width: 228px;
 }
 
-    .bs-docs-sidenav > li > a {
-    }
+.bs-docs-sidenav > li > a { }
 
-    .bs-docs-sidenav > li > a {
-        border: 1px solid #E5E5E5;
-        display: block;
-        margin: 0 0 -1px;
-        padding: 8px 14px;
-    }
+.bs-docs-sidenav > li > a {
+    border: 1px solid #E5E5E5;
+    display: block;
+    margin: 0 0 -1px;
+    padding: 8px 14px;
+}
 
 .nav-list > .active > a, .nav-list > .active > a:hover, .nav-list > .active > a:focus {
     background-color: #0088CC;
@@ -307,9 +247,7 @@ fieldset legend {
     opacity: 0.25;
 }
 
-.bs-docs-sidenav > l:hover > .glyphicon-chevron-right {
-    opacity: 1;
-}
+.bs-docs-sidenav > l:hover > .glyphicon-chevron-right { opacity: 1; }
 
 .bs-docs-sidenav .active .glyphicon-chevron-right, .bs-docs-sidenav .active a:hover .glyphicon-chevron-right {
     background-image: url("../img/glyphicons-halflings-white.png");
@@ -318,88 +256,82 @@ fieldset legend {
 
 /****************** panels ************************************/
 
-.panel-secondary {
+.panel-secondary { border-color: #5cb85c; }
+
+.panel-secondary > .panel-heading {
+    color: #ffffff;
+    background-color: #5cb85c;
     border-color: #5cb85c;
 }
 
-    .panel-secondary > .panel-heading {
-        color: #ffffff;
-        background-color: #5cb85c;
-        border-color: #5cb85c;
-    }
+.panel-secondary > .panel-heading + .panel-collapse .panel-body { border-top-color: #5cb85c; }
 
-        .panel-secondary > .panel-heading + .panel-collapse .panel-body {
-            border-top-color: #5cb85c;
-        }
+.panel-secondary > .panel-footer + .panel-collapse .panel-body { border-bottom-color: #5cb85c; }
 
-    .panel-secondary > .panel-footer + .panel-collapse .panel-body {
-        border-bottom-color: #5cb85c;
-    }
+.panel-heading a { color: #ffffff; }
 
-.panel-heading a {
-    color: #ffffff;
-}
-
-#score-index-page #journals .panel-body {
-    padding-bottom: 5px;
-}
+#score-index-page #journals .panel-body { padding-bottom: 5px; }
 
 /****************** score card ************************************/
 
-.scoreCardAspects .panel-heading a {
-    color: #fff;
-}
+.scoreCardAspects .panel-heading a { color: #fff; }
 
 .scoreCardAspects .panel-heading,
-.scoreCardAspects .panel-body {
-    padding: 5px 5px;
-}
+.scoreCardAspects .panel-body { padding: 5px 5px; }
 
-.journal .panel-body {
-    padding: 15px 15px 0px 15px;
-}
+.journal .panel-body { padding: 15px 15px 0px 15px; }
 
-.scoreCardAspects .panel-body h3 {
-    margin: 0;
-}
+.scoreCardAspects .panel-body h3 { margin: 0; }
 
 
 /****************** profile ************************************/
+
 .main .col-md-4 .badges img {
-    margin-left: 0px;
+    margin-left: 0;
     width: 80%;
 }
+
 /********************** table ****************************************/
+
 .table thead th {
-    background: #dfe4eb;
+    background-color: #0088CC;
+    color: #FFFFFF;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
     vertical-align: top;
     font-weight: normal;
 }
 
-th {
-    vertical-align: top !important;
-}
-/******************* score ****************************/
-#OverviewScoreTab .score, #OpenAccessScoreTab .score {
-    margin-top: 0px;
+th { vertical-align: middle !important; }
+
+th.title { width: 400px; }
+
+th.publisher { width: 240px; }
+
+th.swot { width: 64px; }
+
+th a,
+th a:hover {
+    color: #fff;
+    text-decoration: none;
 }
 
-#OverviewScoreTab .row .row:nth-child(2) {
-    margin-top: 20px;
-}
+/******************* score ****************************/
+
+#OverviewScoreTab .score, #OpenAccessScoreTab .score { margin-top: 0; }
+
+#OverviewScoreTab .row .row:nth-child(2) { margin-top: 20px; }
 
 /***************** tabs   ****************************/
-.nav-tabs {
-    margin-bottom: 0px;
-}
+
+.nav-tabs { margin-bottom: 0; }
+
 /***************** about ****************************/
-#footnote {
-    margin-top: 30px;
-}
+
+#footnote { margin-top: 30px; }
+
 /***************** faq ****************************/
-#qoamComposition td {
-    padding: 5px 10px;
-}
+
+#qoamComposition td { padding: 5px 10px; }
 
 #qoamComposition {
     border-collapse: separate;
@@ -414,38 +346,38 @@ th {
     margin: 10px;
 }
 
-.faqcell {
-    text-align:center;
-}
+.faqcell { text-align: center; }
+
 /***************** frontpage ****************************/
+
 #under-construction {
     position: relative;
     display: block;
     top: 50px;
 }
+
 /******************** iframe ************************************/
+
 #map {
     height: 100%;
     width: 65%;
 }
 
-.h_iframe {
-    position: relative;
+.h_iframe { position: relative; }
+
+.h_iframe .ratio {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
-    .h_iframe .ratio {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-
-    .h_iframe iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
+.h_iframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
 .border {
     border: 1px solid #000;
@@ -458,52 +390,36 @@ th {
     padding: 10px;
 }
 
-    .col-md-4 .container-inner:hover, .score:hover {
-        background: #EEE;
-        text-decoration: none;
-    }
-
-    .col-md-4 .container-inner:hover, .score.nohover:hover {
-        background: none;
-    }
-
-a.home:hover, a.home, a.home:focus {
+.col-md-4 .container-inner:hover, .score:hover {
+    background: #EEE;
     text-decoration: none;
 }
+
+.col-md-4 .container-inner:hover, .score.nohover:hover { background: none; }
+
+a.home:hover, a.home, a.home:focus { text-decoration: none; }
 
 #footer {
     background-color: #357EBD;
     height: 40px;
 }
 
-    #footer a {
-        color: #FFF;
-    }
+#footer a { color: #FFF; }
 
-    #footer .glyphicon {
-        font-size: x-small;
-    }
+#footer .glyphicon { font-size: x-small; }
 
-    #footer p, ul, .black a {
-        margin: 10px 0;
-        color: #000;
-    }
-
-.dark a {
-    color: #000 !important;
+#footer p, ul, .black a {
+    margin: 10px 0;
+    color: #000;
 }
 
-.institute {
-    font-style: italic;
-}
+.dark a { color: #000 !important; }
 
-.form-horizontal .controls {
-    margin-left: 90px;
-}
+.institute { font-style: italic; }
 
-.form-control .pull-left {
-    width: 80%;
-}
+.form-horizontal .controls { margin-left: 90px; }
+
+.form-control .pull-left { width: 80%; }
 
 .high label {
     font-weight: normal;
@@ -523,13 +439,9 @@ a.home:hover, a.home, a.home:focus {
     margin-bottom: 5px;
 }
 
-.priceBox {
-    height: 2em;
-}
+.priceBox { height: 2em; }
 
-.clear {
-    clear: both;
-}
+.clear { clear: both; }
 
 .clearfix:after {
     clear: both;
@@ -539,9 +451,7 @@ a.home:hover, a.home, a.home:focus {
     visibility: hidden;
 }
 
-.range {
-    font-weight: bold;
-}
+.range { font-weight: bold; }
 
 .slider {
     margin-left: 15px;
@@ -549,27 +459,21 @@ a.home:hover, a.home, a.home:focus {
     max-width: 170px;
 }
 
-    .slider .tooltip {
-        -ms-opacity: 0.3;
-        opacity: 0.3;
-    }
-
-        .slider .tooltip.in {
-            -ms-opacity: 0.9;
-            opacity: 0.9;
-        }
-
-.panel-heading {
-    font-size: 1.3em;
+.slider .tooltip {
+    -ms-opacity: 0.3;
+    opacity: 0.3;
 }
 
-#spinner-row {
-    padding-right: 30px;
+.slider .tooltip.in {
+    -ms-opacity: 0.9;
+    opacity: 0.9;
 }
 
-#spinner {
-    padding-right: 12px;
-}
+.panel-heading { font-size: 1.3em; }
+
+#spinner-row { padding-right: 30px; }
+
+#spinner { padding-right: 12px; }
 
 .table {
     display: table;
@@ -589,42 +493,78 @@ a.home:hover, a.home, a.home:focus {
 .table-cell {
     float: left;
     display: table-cell;
-    border: solid 1px black;
+    border: solid 1px #000;
+    background-color: #fff;
     width: 50%;
     line-height: 32px;
     padding: 0;
     margin: 0;
 }
 
+.swotFilterContainer .table-cell {
+    height: 50px;
+    line-height: 1em;
+    border: solid 1px #ccc;
+}
+
+.swotFilterContainer .table-cell,
 .swotContainer .table-cell {
     border-right: 0;
     border-bottom: 0;
+    padding-top: 10px;
 }
 
-.swotContainer .table-cell.first-column {
-    border-left: 0;
-}
+.swotFilterContainer .table-cell.first-column,
+.swotContainer .table-cell.first-column { border-left: 0; }
 
 .swotContainer {
     padding: 3px 0 0 0;
-    width: 104px;
+    width: 155px;
 }
 
-.swotContainer .verdict-strong .strong {
-    background-color: green;
+.swotFilterContainer {
+    padding: 3px 0 0 0;
+    width: 100%;
+    font-size: 1em;
+    cursor: pointer;
+    border: solid 1px #ccc;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.swotContainer .verdict-weak .weak {
-    background-color: yellow;
+.swotFilterContainer a {
+    display: block;
+    text-decoration: none;
+    line-height: 28px;
 }
 
-.swotContainer .verdict-opportunity .opportunity {
-    background-color: blue;
-}
+.table .verdict-strong,
+.swotContainer .verdict-strong .strong { background-color: green !important; }
 
-.swotContainer .verdict-threat .threat {
-    background-color: red;
-}
+.table .verdict-weak,
+.swotContainer .verdict-weak .weak { background-color: orange !important; }
+
+.table .verdict-opportunity,
+.swotContainer .verdict-opportunity .opportunity { background-color: #0088CC !important; }
+
+.table .verdict-threat,
+.swotContainer .verdict-threat .threat { background-color: red !important; }
+
+.swotFilterContainer .strong { color: green; }
+
+.swotFilterContainer .weak { color: orange; }
+
+.swotFilterContainer .opportunity { color: #0088CC; }
+
+.swotFilterContainer .threat { color: red; }
+
+.swotFilterContainer .selected { color: #fff; }
+
+.swotFilterContainer span { display: block; }
 
 /******************** icons ************************************/
 
@@ -637,15 +577,16 @@ ul.nav span.icon-group {
     margin-right: 5px;
 }
 
-ul.nav li:hover span.icon-group {
-    background-image: url(../content/images/icon_group_active.png);
-}
+ul.nav li:hover span.icon-group { background-image: url(../content/images/icon_group_active.png); }
 
-ul.nav li.active span.icon-group {
-    background-image: url(../content/images/icon_group_active.png);
+ul.nav li.active span.icon-group { background-image: url(../content/images/icon_group_active.png); }
+
+a.return-button {
+    margin-bottom: 16px;
 }
 
 /*   mobile     */
+
 @media (max-width: 480px) {
     #header .brand {
         font-size: 18px;
@@ -668,10 +609,8 @@ ul.nav li.active span.icon-group {
     }
 }
 
-@media only screen and (min-width:481px) and (max-width:768px) {
-    .col-md-3 {
-        padding: 0px !important;
-    }
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .col-md-3 { padding: 0px !important; }
 
     .carousel {
         height: auto;
