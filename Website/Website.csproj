@@ -361,6 +361,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Controllers\InstitutionsController.js" />
+    <Content Include="Scripts\Controllers\InstitutionsController.min.js">
+      <DependentUpon>InstitutionsController.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Controllers\ProfilesController - Copy.min.js">
       <DependentUpon>InstitutionsController.js</DependentUpon>
     </Content>
@@ -734,6 +737,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\Acceptatie.pubxml" />
     <None Include="Properties\PublishProfiles\Productie.pubxml" />
+    <Content Include="Scripts\bootstrap.min.js.map">
+      <DependentUpon>bootstrap.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Controllers\InstitutionsController.min.js.map">
+      <DependentUpon>InstitutionsController.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -803,6 +812,28 @@
     <Content Include="Views\Journals\ValuationScoreCardComments.cshtml" />
     <Content Include="Views\Journals\ValuationJournalPrices.cshtml" />
     <Content Include="Views\Score\ValuationScoreCardDetails.cshtml" />
+    <Content Include="Views\Journals\Details.cshtml" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js.map">
+      <DependentUpon>jquery.unobtrusive-ajax.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\respond.min.js.map">
+      <DependentUpon>respond.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\spin.min.js.map">
+      <DependentUpon>spin.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js.map">
+      <DependentUpon>respond.matchmedia.addListener.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js.map">
+      <DependentUpon>jquery.validate.unobtrusive.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.validate.min.js.map">
+      <DependentUpon>jquery.validate.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery-1.10.2.min.js.map">
+      <DependentUpon>jquery-1.10.2.min.js</DependentUpon>
+    </Content>
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

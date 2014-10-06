@@ -61,6 +61,21 @@
             return this.View(model);
         }
 
+        [GET("{id:int}")]
+        public ActionResult Details(int id, string returnUrl)
+        {
+            var journal = this.journalRepository.Find(id);
+            
+            if (journal == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            this.ViewBag.ReturnUrl = returnUrl;
+
+            return this.View(journal);
+        }
+
         [GET("{id:int}/prices")]
         public PartialViewResult Prices(PricesViewModel model)
         {
