@@ -105,9 +105,13 @@
                 query = query.Where(j => j.ValuationScoreCards.Any(v => v.State == ScoreCardState.Published));
             }
 
-            if (filter.MustHaveBeenScored)
+            if (filter.MustHaveBeenScored && filter.SwotMatrix.Count == 0)
             {
                 query = query.Where(j => j.JournalScore.NumberOfBaseReviewers > 0 || j.JournalScore.NumberOfValuationReviewers > 0);
+            }
+            else if (filter.MustHaveBeenScored && filter.SwotMatrix.Count > 0)
+            {
+                query = query.Where(j => j.JournalScore.NumberOfBaseReviewers > 0 && j.JournalScore.NumberOfValuationReviewers > 0);
             }
 
             if (filter.SwotMatrix.Count > 0)
