@@ -42,7 +42,7 @@
         [DisplayName("Language")]
         public int? Language { get; set; }
 
-        [DisplayName("Only journals with Valuation Score Card")]
+        [DisplayName("All journals with Valuation Score Card")]
         public bool SubmittedOnly { get; set; }
 
         public string SwotMatrix { get; set; } 
