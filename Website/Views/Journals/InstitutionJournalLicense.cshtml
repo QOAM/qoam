@@ -17,9 +17,20 @@
 
         <fieldset>
             <legend>@ViewBag.Title</legend>
-            
+
             @Html.HiddenFor(m => m.RefererUrl)
             
+            @if (User.IsInRole(ApplicationRole.Admin))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Institution, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.Institution, Model.Institutions, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Institution, null, new { @class = "control-label" })
+                    </div>
+                </div>
+            }
+
             <div class="form-group">
                 @Html.LabelFor(m => m.Link, new { @class = "col-lg-2 control-label" })
                 <div class="col-lg-10">
@@ -27,13 +38,13 @@
                     @Html.ValidationMessageFor(m => m.Link, null, new { @class = "control-label" })
                 </div>
             </div>
-            
+
             @if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin))
             {
                 <div class="form-group">
-                    @Html.LabelFor(m => m.UpdateAllJournalsOfPublisher, new { @class = "col-lg-2 control-label" })
-                    <div class="col-lg-10">
-                        @Html.CheckBoxFor(m => m.UpdateAllJournalsOfPublisher, new { placeholder = "Link", @class = "form-control" })
+                    <div class="col-lg-10 col-lg-offset-2">
+                        @Html.CheckBoxFor(m => m.UpdateAllJournalsOfPublisher, new { placeholder = "Link", @class = "control-label" })
+                        @Html.LabelFor(m => m.UpdateAllJournalsOfPublisher, new { @class = "control-label" })
                         @Html.ValidationMessageFor(m => m.UpdateAllJournalsOfPublisher, null, new { @class = "control-label" })
                     </div>
                 </div>

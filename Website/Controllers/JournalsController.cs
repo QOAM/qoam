@@ -28,11 +28,11 @@
         private readonly IBaseScoreCardRepository baseScoreCardRepository;
         private readonly IValuationScoreCardRepository valuationScoreCardRepository;
         private readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
+        private readonly IInstitutionRepository institutionRepository;
 
-        public JournalsController(IJournalRepository journalRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IInstitutionJournalRepository institutionJournalRepository, IBaseScoreCardRepository baseScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication)
+        public JournalsController(IJournalRepository journalRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IInstitutionJournalRepository institutionJournalRepository, IBaseScoreCardRepository baseScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository)
             : base(userProfileRepository, authentication)
         {
-            this.valuationJournalPriceRepository = valuationJournalPriceRepository;
             Requires.NotNull(journalRepository, "journalRepository");
             Requires.NotNull(baseJournalPriceRepository, "baseJournalPriceRepository");
             Requires.NotNull(valuationJournalPriceRepository, "valuationJournalPriceRepository");
@@ -41,7 +41,9 @@
             Requires.NotNull(subjectRepository, "keywordRepository");
             Requires.NotNull(institutionJournalRepository, "institutionJournalRepository");
             Requires.NotNull(baseScoreCardRepository, "scoreCardRepository");
-
+            Requires.NotNull(institutionRepository, "institutionRepository");
+            Requires.NotNull(valuationJournalPriceRepository, "valuationJournalPriceRepository");
+            
             this.journalRepository = journalRepository;
             this.baseJournalPriceRepository = baseJournalPriceRepository;
             this.languageRepository = languageRepository;
@@ -49,6 +51,8 @@
             this.institutionJournalRepository = institutionJournalRepository;
             this.baseScoreCardRepository = baseScoreCardRepository;
             this.valuationScoreCardRepository = valuationScoreCardRepository;
+            this.institutionRepository = institutionRepository;
+            this.valuationJournalPriceRepository = valuationJournalPriceRepository;
         }
         
         [GET("")]
@@ -177,7 +181,8 @@
             var model = new InstitutionJournalLicenseViewModel(
                 this.journalRepository.Find(id),
                 this.institutionJournalRepository.Find(id, this.Authentication.CurrentUserId), 
-                refererUrl);
+                refererUrl,
+                this.institutionRepository.All.ToSelectListItems("<Select institution>"));
             
             return this.View(model);
         }

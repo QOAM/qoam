@@ -294,7 +294,7 @@ fieldset legend { display: none; }
 /********************** table ****************************************/
 
 .table thead th {
-    background-color: #0088CC;
+    background-color: #428bca;
     color: #FFFFFF;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
     vertical-align: top;
