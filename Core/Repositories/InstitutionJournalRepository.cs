@@ -15,13 +15,11 @@
         {
         }
 
-        public InstitutionJournal Find(int journalId, int userProfileId)
+        public InstitutionJournal Find(int journalId, int institutionId)
         {
             return (from i in this.DbContext.InstitutionJournals
-                    from u in this.DbContext.UserProfiles
                     where i.JournalId == journalId
-                    where i.InstitutionId == u.InstitutionId
-                    where u.Id == userProfileId
+                    where i.InstitutionId == institutionId
                     select i).FirstOrDefault();
         }
 
@@ -39,8 +37,7 @@
                 query = query.Where(i => i.UserProfileId == filter.UserProfileId.Value);
             }
 
-            return query.OrderByDescending(i => i.DateAdded)
-                        .ToPagedList(filter.PageNumber.Value, filter.PageSize.Value);
+            return query.OrderByDescending(i => i.DateAdded).ToPagedList(filter.PageNumber.Value, filter.PageSize.Value);
         }
 
         public IList<InstitutionJournal> FindAll(InstitutionJournalFilter filter)

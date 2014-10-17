@@ -31,22 +31,11 @@
 
                 @if (User.Identity.IsAuthenticated)
                 {
-                    if (Model.InstitutionJournal == null)
-                    {
-                        <p>Your institution does not have a special license for this journal.</p>
-                    }
-                    else
-                    {
-                        <p>Your institution has a special license for this journal:</p>
-
-                        <p>
-                            For the institution's price see the <a href="@Model.InstitutionJournal.Link" title="Journal website">web site</a>
-                        </p>
-                    }
-
                     if (User.IsInRole(ApplicationRole.InstitutionAdmin) || User.IsInRole(ApplicationRole.Admin))
                     {
-                        <p>@Html.ActionLink("Edit the institution's journal license", "InstitutionJournalLicense", new { Model.Id, Model.RefererUrl })</p>
+                        <p>
+                            If your institute has a price arrangement with the publisher for this journal please link @Html.ActionLink("here", "InstitutionJournalLicense", new { Model.Id, ViewBag.User.InstitutionId, Model.RefererUrl }) to your informative web site. 
+                        </p>
                     }
                 }
 
@@ -57,7 +46,7 @@
                 else
                 {
                     <p>
-                        Currently, @Model.InstitutionJournals.TotalItemCount institution(s) have a special license for this journal.
+                        Special price arrangements for:
                     </p>
 
                     <table class="table table-striped table-bordered">

@@ -105,7 +105,10 @@ img.pull-right { margin-left: 10px; }
     margin: 5px 10px;
 }
 
-.btn-primary { font-size: 12px !important; }
+.btn-danger,
+.btn-primary {
+     font-size: 12px !important;
+}
 
 .btn i { margin-right: 5px; }
 

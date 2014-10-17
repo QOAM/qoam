@@ -8,11 +8,16 @@
 
     public interface IInstitutionJournalRepository
     {
-        InstitutionJournal Find(int journalId, int userProfileId);
+        InstitutionJournal Find(int journalId, int institutionId);
+
         IPagedList<InstitutionJournal> Find(InstitutionJournalFilter filter);
+
         IList<InstitutionJournal> FindAll(InstitutionJournalFilter filter);
 
         void InsertOrUpdate(InstitutionJournal journalPrice);
+
+        void Delete(InstitutionJournal journalPrice);
+
         void Save();
     }
 }

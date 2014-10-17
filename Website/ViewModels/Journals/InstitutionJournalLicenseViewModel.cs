@@ -28,6 +28,7 @@
             }
 
             this.Link = institutionJournal.Link;
+            this.Institution = institutionJournal.InstitutionId;
         }
 
         public string JournalTitle { get; set; }
@@ -38,7 +39,7 @@
 
         public IEnumerable<SelectListItem> Institutions { get; set; }
 
-        public int? Institution { get; set; }
+        public int Institution { get; set; }
 
         [Required]
         [Url]

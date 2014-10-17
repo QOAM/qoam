@@ -57,7 +57,7 @@
         public void InstitutionJournalLicenseActionAuthorizedForCorrectRoles(string authorizedRole)
         {
             // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.InstitutionJournalLicense(5, (string)null), authorizedRole));
+            Assert.True(ActionAuthorizedForUserWithRole(x => x.InstitutionJournalLicense(5, 1, (string)null), authorizedRole));
         }
 
         [Theory]
@@ -66,7 +66,7 @@
         public void InstitutionJournalLicenseActionNotAuthorizedForInvalidRoles(string unauthorizedRole)
         {
             // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.InstitutionJournalLicense(5, (string)null), unauthorizedRole));
+            Assert.False(ActionAuthorizedForUserWithRole(x => x.InstitutionJournalLicense(5, 1, (string)null), unauthorizedRole));
         }
 
         [Theory]

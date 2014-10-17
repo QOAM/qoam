@@ -13,7 +13,7 @@
             <td>
                 @if (User.IsInRole(ApplicationRole.Admin) || (User.IsInRole(ApplicationRole.InstitutionAdmin) && institutionJournal.InstitutionId == ViewBag.User.InstitutionId))
                 {
-                    @Html.ActionLink("Edit", "InstitutionJournalLicense", new { Id = institutionJournal.JournalId, ViewBag.RefererUrl })
+                    @Html.ActionLink("Edit", "InstitutionJournalLicense", new { Id = institutionJournal.JournalId, institutionJournal.InstitutionId, ViewBag.RefererUrl })
                 }
             </td>
         }

@@ -287,6 +287,7 @@
     <Compile Include="ViewModels\Import\ImportViewModel.cs" />
     <Compile Include="ViewModels\Import\UpdatedViewModel.cs" />
     <Compile Include="ViewModels\Import\UpdateViewModel.cs" />
+    <Compile Include="ViewModels\Journals\InstitutionJournalLicenseDeleteViewModel.cs" />
     <Compile Include="ViewModels\Journals\CommentsViewModel.cs" />
     <Compile Include="ViewModels\Journals\InstitutionJournalLicenseViewModel.cs" />
     <Compile Include="ViewModels\PagedViewModel.cs" />

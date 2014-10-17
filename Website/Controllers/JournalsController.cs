@@ -86,7 +86,6 @@
             this.ViewBag.RefererUrl = model.RefererUrl;
 
             model.InstitutionJournals = this.institutionJournalRepository.Find(model.ToInstitutionJournalPriceFilter());
-            model.InstitutionJournal = this.institutionJournalRepository.Find(model.Id, this.Authentication.CurrentUserId);
             model.BaseJournalPrices = this.baseJournalPriceRepository.Find(model.ToJournalPriceFilter(null));
             model.ValuationJournalPrices = this.valuationJournalPriceRepository.Find(model.ToJournalPriceFilter(FeeType.Article));
             model.Journal = this.journalRepository.Find(model.Id);
@@ -176,11 +175,11 @@
 
         [GET("{id:int}/institutionjournallicense")]
         [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
-        public ViewResult InstitutionJournalLicense(int id, string refererUrl)
+        public ViewResult InstitutionJournalLicense(int id, int institutionId, string refererUrl)
         {
             var model = new InstitutionJournalLicenseViewModel(
                 this.journalRepository.Find(id),
-                this.institutionJournalRepository.Find(id, this.Authentication.CurrentUserId), 
+                this.institutionJournalRepository.Find(id, institutionId), 
                 refererUrl,
                 this.institutionRepository.All.ToSelectListItems("<Select institution>"));
             
@@ -208,7 +207,7 @@
                 {
                     var institutionJournals = this.institutionJournalRepository.FindAll(new InstitutionJournalFilter
                                                                                             {
-                                                                                                InstitutionId = this.ViewBag.User.InstitutionId,
+                                                                                                InstitutionId = model.Institution,
                                                                                                 PublisherId = journal.PublisherId
                                                                                             });
 
@@ -221,19 +220,19 @@
                         institutionJournal.Link = model.Link;
                         institutionJournal.JournalId = publisherJournal.Id;
                         institutionJournal.UserProfileId = this.Authentication.CurrentUserId;
-                        institutionJournal.InstitutionId = this.ViewBag.User.InstitutionId;
+                        institutionJournal.InstitutionId = model.Institution;
 
                         institutionJournalsToModify.Add(institutionJournal);
                     }
                 }
                 else
                 {
-                    var institutionJournal = this.institutionJournalRepository.Find(id, this.Authentication.CurrentUserId) ?? new InstitutionJournal();
+                    var institutionJournal = this.institutionJournalRepository.Find(id, model.Institution) ?? new InstitutionJournal();
                     institutionJournal.DateAdded = DateTime.Now;
                     institutionJournal.Link = model.Link;
                     institutionJournal.JournalId = journal.Id;
                     institutionJournal.UserProfileId = this.Authentication.CurrentUserId;
-                    institutionJournal.InstitutionId = this.ViewBag.User.InstitutionId;
+                    institutionJournal.InstitutionId = model.Institution;
 
                     institutionJournalsToModify.Add(institutionJournal);
                 }
@@ -253,6 +252,33 @@
             model.JournalPublisher = journal.Publisher.Name;
 
             return this.View(model);
+        }
+
+        [POST("{id:int}/institutionjournallicensedelete")]
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        [ValidateAntiForgeryToken]
+        public ActionResult InstitutionJournalLicenseDelete(int id, InstitutionJournalLicenseDeleteViewModel model)
+        {
+            if (!this.User.IsInRole(ApplicationRole.Admin) && !this.User.IsInRole(ApplicationRole.InstitutionAdmin))
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            if (this.ModelState.IsValid)
+            {
+                var institutionJournal = this.institutionJournalRepository.Find(id, model.Institution);
+                if (institutionJournal == null)
+                {
+                    return new HttpNotFoundResult();
+                }
+
+                this.institutionJournalRepository.Delete(institutionJournal);
+                this.institutionJournalRepository.Save();
+
+                return this.Redirect(model.RefererUrl);
+            }
+
+            return this.RedirectToAction("InstitutionJournalLicense", new { id, InstitutionId = model.Institution, model.RefererUrl });
         }
 
         [GET("titles")]

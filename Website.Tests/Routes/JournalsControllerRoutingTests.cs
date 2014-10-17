@@ -127,14 +127,14 @@
         public void InstitutionJournalLicenseActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/institutionjournallicense/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.InstitutionJournalLicense(5, (string)null));
+            "~/journals/5/institutionjournallicense/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.InstitutionJournalLicense(5, 1, (string)null));
         }
 
         [Fact]
         public void InstitutionJournalLicenseActionDoesNotRequireHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.InstitutionJournalLicense(5, (string)null)));
+            Assert.False(ActionRequiresHttps(x => x.InstitutionJournalLicense(5, 1, (string)null)));
         }
 
         [Fact]

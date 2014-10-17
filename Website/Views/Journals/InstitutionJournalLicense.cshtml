@@ -6,11 +6,9 @@
 }
 
 <div class="container main">
-    
-    <h2>@ViewBag.Title</h2>
-    
-    <p>Here you can set the institution price of the journal <a href="@Model.JournalLink" title="View online">@Model.JournalTitle</a></p>
-    
+
+    <p>Here you can set the institutional price of the journal <a href="@Model.JournalLink" title="View online">@Model.JournalTitle</a></p>
+
     @using (Html.BeginForm("InstitutionJournalLicense", "Journals", FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken()
@@ -19,7 +17,7 @@
             <legend>@ViewBag.Title</legend>
 
             @Html.HiddenFor(m => m.RefererUrl)
-            
+
             @if (User.IsInRole(ApplicationRole.Admin))
             {
                 <div class="form-group">
@@ -29,6 +27,10 @@
                         @Html.ValidationMessageFor(m => m.Institution, null, new { @class = "control-label" })
                     </div>
                 </div>
+            }
+            else
+            {
+                <input type="hidden" name="@Html.NameFor(m => m.Institution)" value="@ViewBag.User.InstitutionId" />
             }
 
             <div class="form-group">
@@ -51,11 +53,35 @@
             }
 
             <div class="col-lg-10 col-md-offset-2">
-                <input type="submit" value="Submit" class="btn btn-primary" />
+                <input type="submit" value="Update" class="btn btn-primary" />
             </div>
         </fieldset>
     }
+</div>
 
+<div class="container main">
+    <hr />
+</div>
+
+<div class="container main">
+    @if (Model.Link != null && (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin)))
+    {
+        using (Html.BeginForm("InstitutionJournalLicenseDelete", "Journals", FormMethod.Post, new { role = "form" }))
+        {
+            <div class="panel panel-danger">
+                <div class="panel-body">
+                    @Html.AntiForgeryToken()
+                    <p>
+                        You can also delete this institutional price. Please be aware that this action cannot be undone!
+                    </p>
+
+                    @Html.HiddenFor(m => m.RefererUrl)
+                    <input type="hidden" name="@Html.NameFor(m => m.Institution)" value="@ViewBag.User.InstitutionId" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
+            </div>
+        }
+    }
 </div>
 
 @section scripts

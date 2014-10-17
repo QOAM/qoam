@@ -9,7 +9,6 @@
     {
         public int Id { get; set; }
         public Journal Journal { get; set; }
-        public InstitutionJournal InstitutionJournal { get; set; }
         public IPagedList<InstitutionJournal> InstitutionJournals { get; set; }
         public IPagedList<BaseJournalPrice> BaseJournalPrices { get; set; }
         public IPagedList<ValuationJournalPrice> ValuationJournalPrices { get; set; }
