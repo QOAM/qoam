@@ -1,7 +1,5 @@
 ﻿namespace QOAM.Website.Helpers
 {
-    using Microsoft.Web.WebPages.OAuth;
-
     using WebMatrix.WebData;
 
     public class Authentication : IAuthentication
@@ -14,14 +12,57 @@
             }
         }
 
-        public bool Login(string providerName, string providerUserId, bool createPersistentCookie)
+        public string CurrentUserName
         {
-            return OAuthWebSecurity.Login(providerName, providerUserId, createPersistentCookie);
+            get
+            {
+                return WebSecurity.CurrentUserName;
+            }
         }
 
-        public void CreateOrUpdateAccount(string providerName, string providerUserId, string userName)
+        public bool Login(string userName, string password, bool createPersistentCookie)
         {
-            OAuthWebSecurity.CreateOrUpdateAccount(providerName, providerUserId, userName);
+            return WebSecurity.Login(userName, password, createPersistentCookie);
+        }
+
+        public string CreateUserAndAccount(string userName, string password, object propertyValues)
+        {
+            return WebSecurity.CreateUserAndAccount(userName, password, propertyValues, true);
+        }
+
+        public void CreateAccount(string userName, string password)
+        {
+            WebSecurity.CreateAccount(userName, password);
+        }
+
+        public bool ConfirmAccount(string token)
+        {
+            return WebSecurity.ConfirmAccount(token);
+        }
+
+        public bool ChangePassword(string userName, string oldPassword, string newPassword)
+        {
+            return WebSecurity.ChangePassword(userName, oldPassword, newPassword);
+        }
+
+        public string GeneratePasswordResetToken(string userName)
+        {
+            return WebSecurity.GeneratePasswordResetToken(userName);
+        }
+
+        public bool ResetPassword(string token, string newPassword)
+        {
+            return WebSecurity.ResetPassword(token, newPassword);
+        }
+
+        public bool UserExists(string userName)
+        {
+            return WebSecurity.UserExists(userName);
+        }
+
+        public bool UserIsConfirmed(string userName)
+        {
+            return WebSecurity.IsConfirmed(userName);
         }
 
         public void Logout()

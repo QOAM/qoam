@@ -12,24 +12,10 @@
 
     public class AccountControllerTests
     {
-        [Fact]
-        public void LoginFailureReturnsPassedLoginFailureReasonAsModel()
-        {
-            // Arrange
-            var accountController = CreateAccountController();
-            var loginFailureReason = LoginFailureReason.UsernameAlreadyExists;
-
-            // Actr
-
-            var externalLoginResult = accountController.LoginFailure(loginFailureReason);
-
-            // Assert
-            Assert.Equal(loginFailureReason, externalLoginResult.Model);
-        }
 
         private static AccountController CreateAccountController()
         {
-            return new AccountController(Mock.Of<IUserProfileRepository>(), new Mock<IAuthentication>().Object)
+            return new AccountController(Mock.Of<IUserProfileRepository>(), new Mock<IAuthentication>().Object, new Mock<IInstitutionRepository>().Object)
                    {
                        Url = HttpContextHelper.CreateUrlHelper()
                    };

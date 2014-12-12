@@ -16,7 +16,6 @@
             AttributeRoutingConfig.RegisterRoutes(RouteTable.Routes);
             ModelBinderConfig.RegisterModelBinders(ModelBinders.Binders);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AuthConfig.RegisterAuth();
             DatabaseConfig.Configure();
             WebSecurityConfig.Configure();
         }

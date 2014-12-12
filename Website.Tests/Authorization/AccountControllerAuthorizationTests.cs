@@ -7,18 +7,5 @@
 
     public class AccountControllerAuthorizationTests : ControllerAuthorizationTests<AccountController>
     {
-        [Fact]
-        public void LoginCallbackActionDoesNotRequireAuthorizedUser()
-        {
-            // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.LoginCallback(null)));
-        }
-
-        [Fact]
-        public void LoginFailureActionDoesNotRequireAuthorizedUser()
-        {
-            // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.LoginFailure(LoginFailureReason.ExternalAuthenticationFailed, null)));
-        }
     }
 }

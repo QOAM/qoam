@@ -53,7 +53,7 @@
                 else
                 {
                     <p>
-                        You may contact @Model.UserProfile.DisplayName if you are <a href="login.ashx?returnUrl=@Url.Action("Details", new { id = Model.UserProfile.Id })" title="Log in to contact @Model.UserProfile.DisplayName">logged in</a>
+                        You may contact @Model.UserProfile.DisplayName if you are <a href="@Url.Action("Login", "Account", new { returnUrl = Url.Action("Details", new { id = Model.UserProfile.Id }) })" title="Log in to contact @Model.UserProfile.DisplayName">logged in</a>
                     </p>
                 }
             </div>
