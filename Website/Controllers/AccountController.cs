@@ -3,6 +3,8 @@
     using System;
     using System.Linq;
     using System.Net.Mail;
+    using System.Security.Cryptography;
+    using System.Text;
     using System.Web.Mvc;
     using System.Web.Security;
 
@@ -269,9 +271,13 @@
                 return this.View(model);
             }
 
+            var enc = Encoding.Default;
+            var provider = new SHA1CryptoServiceProvider();
             foreach (var user in this.userProfileRepository.All.Where(u => !this.authentication.UserIsConfirmed(u.UserName)))
             {
-                var generatedPassword = "t3mp0r4ry";
+                var buffer = enc.GetBytes(user.Email);
+                var generatedPassword = BitConverter.ToString(provider.ComputeHash(buffer)).Replace("-", "").Substring(0, 8);
+                
                 this.authentication.CreateAccount(user.UserName, generatedPassword);
 
                 dynamic email = new Email("GeneratedPasswordEmail");
