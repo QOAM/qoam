@@ -13,7 +13,7 @@
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email address *")]
+        [Display(Name = "Inst. email address *")]
         public string Email { get; set; }
 
         [Required]

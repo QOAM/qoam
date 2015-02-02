@@ -6,6 +6,7 @@
     using System.Security.Cryptography;
     using System.Text;
     using System.Web.Mvc;
+    using System.Web.Routing;
     using System.Web.Security;
 
     using AttributeRouting;
@@ -158,10 +159,53 @@
             return this.View();
         }
 
+        [GET("account/settings")]
+        [Authorize]
+        public ActionResult Settings(bool saveSuccessful = false)
+        {
+            var userProfile = this.userProfileRepository.Find(this.authentication.CurrentUserId);
+            if (userProfile == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            var model = new SettingsViewModel { DisplayName = userProfile.DisplayName, OrcId = userProfile.OrcId };
+            this.ViewBag.SaveSuccessful = saveSuccessful;
+
+            return this.View(model);
+        }
+
+        [POST("account/settings")]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Settings(SettingsViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var userProfile = this.userProfileRepository.Find(this.authentication.CurrentUserId);
+                if (userProfile == null)
+                {
+                    return this.HttpNotFound();
+                }
+
+                userProfile.DisplayName = model.DisplayName;
+                userProfile.OrcId = model.OrcId;
+
+                this.userProfileRepository.InsertOrUpdate(userProfile);
+                this.userProfileRepository.Save();
+
+                return this.RedirectToAction("Settings", new { saveSuccessful = true });
+            }
+
+            return this.View(model);
+        }
+
         [GET("changepassword")]
         [Authorize]
-        public ActionResult ChangePassword()
+        public ActionResult ChangePassword(bool saveSuccessful = false)
         {
+            this.ViewBag.SaveSuccessful = saveSuccessful;
+
             return this.View();
         }
 
@@ -172,19 +216,12 @@
         {
             if (this.ModelState.IsValid && this.authentication.ChangePassword(this.authentication.CurrentUserName, model.OldPassword, model.NewPassword))
             {
-                return this.RedirectToAction("PasswordChanged");
+                return this.RedirectToAction("ChangePassword", new { saveSuccessful = true });
             }
 
             this.ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
 
             return this.View(model);
-        }
-
-        [GET("passwordchanged")]
-        [Authorize]
-        public ViewResult PasswordChanged()
-        {
-            return this.View();
         }
 
         [GET("resetpassword")]
@@ -202,7 +239,7 @@
             }
             
             var userProfile = this.userProfileRepository.FindByEmail(model.Email);
-            if (userProfile == null)
+            if (userProfile == null || !this.authentication.UserIsConfirmed(userProfile.UserName))
             {
                 return this.RedirectToAction("ResetPasswordFailure");
             }
@@ -253,42 +290,6 @@
         public ViewResult ResetPasswordFailure()
         {
             return this.View();
-        }
-
-        [GET("generatepasswords")]
-        [Authorize(Roles = ApplicationRole.Admin)]
-        public ViewResult GeneratePasswords()
-        {
-            return this.View();
-        }
-
-        [POST("generatepasswords")]
-        [Authorize(Roles = ApplicationRole.Admin)]
-        public ActionResult GeneratePasswords(GeneratePasswordsViewModel model)
-        {
-            if (!this.ModelState.IsValid)
-            {
-                return this.View(model);
-            }
-
-            var enc = Encoding.Default;
-            var provider = new SHA1CryptoServiceProvider();
-            foreach (var user in this.userProfileRepository.All.Where(u => !this.authentication.UserIsConfirmed(u.UserName)))
-            {
-                var buffer = enc.GetBytes(user.Email);
-                var generatedPassword = BitConverter.ToString(provider.ComputeHash(buffer)).Replace("-", "").Substring(0, 8);
-                
-                this.authentication.CreateAccount(user.UserName, generatedPassword);
-
-                dynamic email = new Email("GeneratedPasswordEmail");
-                email.To = user.Email;
-                email.DisplayName = user.DisplayName;
-                email.GeneratedPassword = generatedPassword;
-                email.Url = this.Url.Action("ChangePassword", "Account", null, this.Request.Url.Scheme);
-                email.Send();
-            }
-
-            return this.RedirectToAction("Index", "Home");
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

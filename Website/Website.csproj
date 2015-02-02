@@ -244,6 +244,7 @@
     <Compile Include="App_Start\WebSecurityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="ViewModels\Account\SettingsViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordConfirmedViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\GeneratePasswordsViewModel.cs" />
@@ -856,15 +857,14 @@
     <Content Include="Views\Account\RegisterFailure.cshtml" />
     <Content Include="Views\Emails\RegistrationEmail.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Account\PasswordChanged.cshtml" />
     <Content Include="Views\Emails\GeneratedPasswordEmail.cshtml" />
-    <Content Include="Views\Account\GeneratePasswords.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Emails\ResetPasswordEmail.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmed.cshtml" />
     <Content Include="Views\Account\ResetPasswordSuccess.cshtml" />
     <Content Include="Views\Account\ResetPasswordFailure.cshtml" />
     <Content Include="Views\Account\ResetPasswordPending.cshtml" />
+    <Content Include="Views\Account\Settings.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
