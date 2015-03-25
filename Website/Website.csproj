@@ -295,6 +295,8 @@
     <Compile Include="ViewModels\Home\ContactViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Import\CheckViewModel.cs" />
+    <Compile Include="ViewModels\Import\DeletedViewModel.cs" />
+    <Compile Include="ViewModels\Import\DeleteViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportedViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportViewModel.cs" />
     <Compile Include="ViewModels\Import\UpdatedViewModel.cs" />
@@ -865,6 +867,8 @@
     <Content Include="Views\Account\ResetPasswordFailure.cshtml" />
     <Content Include="Views\Account\ResetPasswordPending.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
+    <Content Include="Views\Admin\Delete.cshtml" />
+    <Content Include="Views\Admin\Deleted.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

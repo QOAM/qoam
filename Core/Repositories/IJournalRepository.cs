@@ -11,18 +11,29 @@
 
     public interface IJournalRepository
     {
-        IPagedList<Journal> Search(JournalFilter filter);
-        IList<Journal> SearchAll(JournalFilter filter);
-        Journal Find(int id);
-        IQueryable<string> Titles(string query);
-        IQueryable<string> Publishers(string query);
-        IQueryable<string> Issns(string query);
         IList<Journal> All { get; }
+
         IQueryable<string> AllIssns { get; }
+
+        IPagedList<Journal> Search(JournalFilter filter);
+
+        IList<Journal> SearchAll(JournalFilter filter);
+
+        Journal Find(int id);
+
+        IQueryable<string> Titles(string query);
+
+        IQueryable<string> Publishers(string query);
+
+        IQueryable<string> Issns(string query);
+
         IList<Journal> AllIncluding(params Expression<Func<Journal, object>>[] includeProperties);
 
         void InsertOrUpdate(Journal journal);
+
         void Save();
+
+        void Delete(Journal journal);
 
         int ScoredJournalsCount();
 

@@ -10,14 +10,18 @@
     </p>
 
     <ul>
-        @if (User.IsInRole(ApplicationRole.DataAdmin))
+        @if (User.IsInRole(ApplicationRole.DataAdmin) || User.IsInRole(ApplicationRole.Admin))
         {
             <li>@Html.ActionLink("Import journals", "Import")</li>
             <li>@Html.ActionLink("Update journals", "Update")</li>
             <li>@Html.ActionLink("Download journals", "Download")</li>
         }
-        
-        @if (User.IsInRole(ApplicationRole.InstitutionAdmin))
+        @if (User.IsInRole(ApplicationRole.Admin))
+        {
+            <li>@Html.ActionLink("Delete journals", "Delete")</li>
+        }
+
+        @if (User.IsInRole(ApplicationRole.InstitutionAdmin) || User.IsInRole(ApplicationRole.Admin))
         {
             <li>@Html.ActionLink("Check ISSNs", "Check")</li>
         }

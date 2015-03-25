@@ -120,6 +120,10 @@
     <Compile Include="Migrations\201501200812347_AddOrcID.Designer.cs">
       <DependentUpon>201501200812347_AddOrcID.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503231335566_CascadeOnDelete.cs" />
+    <Compile Include="Migrations\201503231335566_CascadeOnDelete.Designer.cs">
+      <DependentUpon>201503231335566_CascadeOnDelete.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\IValuationJournalPriceRepository.cs" />
     <Compile Include="Repositories\IValuationScoreCardRepository.cs" />
@@ -278,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501200812347_AddOrcID.resx">
       <DependentUpon>201501200812347_AddOrcID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503231335566_CascadeOnDelete.resx">
+      <DependentUpon>201503231335566_CascadeOnDelete.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

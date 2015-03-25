@@ -50,6 +50,48 @@
                 .HasOptional(t => t.JournalScore)
                 .WithMany(t => t.Journals)
                 .HasForeignKey(d => d.JournalScoreId);
+
+            modelBuilder.Entity<JournalScore>()
+                .HasRequired(t => t.Journal)
+                .WithMany(t => t.JournalScores)
+                .HasForeignKey(d => d.JournalId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<BaseJournalPrice>()
+                .HasRequired(t => t.Journal)
+                .WithMany(t => t.BaseJournalPrices)
+                .HasForeignKey(d => d.JournalId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<BaseScoreCard>()
+                .HasRequired(t => t.Journal)
+                .WithMany(t => t.BaseScoreCards)
+                .HasForeignKey(d => d.JournalId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<BaseQuestionScore>()
+                .HasRequired(t => t.BaseScoreCard)
+                .WithMany(t => t.QuestionScores)
+                .HasForeignKey(d => d.BaseScoreCardId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<ValuationJournalPrice>()
+                .HasRequired(t => t.Journal)
+                .WithMany(t => t.ValuationJournalPrices)
+                .HasForeignKey(d => d.JournalId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<ValuationScoreCard>()
+                .HasRequired(t => t.Journal)
+                .WithMany(t => t.ValuationScoreCards)
+                .HasForeignKey(d => d.JournalId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<ValuationQuestionScore>()
+                .HasRequired(t => t.ValuationScoreCard)
+                .WithMany(t => t.QuestionScores)
+                .HasForeignKey(d => d.ValuationScoreCardId)
+                .WillCascadeOnDelete(true);
         }
     }
 }

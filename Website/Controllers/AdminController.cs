@@ -159,6 +159,56 @@
             }
         }
 
+        [GET("delete")]
+        [Authorize(Roles = ApplicationRole.Admin)]
+        public ViewResult Delete()
+        {
+            return this.View(new DeleteViewModel());
+        }
+
+        [POST("delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = ApplicationRole.Admin)]
+        public ActionResult Delete(DeleteViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var journals = this.journalRepository.All;
+                var issns = GetISSNs(model);
+
+                var journalsISSNs = journals.Select(j => j.ISSN).ToSet(StringComparer.InvariantCultureIgnoreCase);
+                var issnsFound = issns.Intersect(journalsISSNs).ToList();
+                var issnsNotFound = issns.Except(journalsISSNs).ToList();
+
+                var journalsToDelete = journals.Where(j => issnsFound.Contains(j.ISSN)).ToList();
+                foreach (var journal in journalsToDelete)
+                {
+                    this.journalRepository.Delete(journal);
+                }
+                this.journalRepository.Save();
+
+                this.Session[FoundISSNsSessionKey] = issnsFound;
+                this.Session[NotFoundISSNsSessionKey] = issnsNotFound;
+
+                return this.RedirectToAction("Deleted");
+            }
+
+            return this.View(model);
+        }
+
+        [GET("deleted")]
+        [Authorize(Roles = ApplicationRole.Admin)]
+        public ViewResult Deleted()
+        {
+            var model = new DeletedViewModel
+            {
+                FoundISSNs = (IEnumerable<string>)this.Session[FoundISSNsSessionKey],
+                NotFoundISSNs = (IEnumerable<string>)this.Session[NotFoundISSNsSessionKey]
+            };
+
+            return this.View(model);
+        }
+
         [GET("check")]
         [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Check()
@@ -186,6 +236,11 @@
         }
 
         private static HashSet<string> GetISSNs(UpdateViewModel model)
+        {
+            return ParseISSNs(model.ISSNs);
+        }
+
+        private static HashSet<string> GetISSNs(DeleteViewModel model)
         {
             return ParseISSNs(model.ISSNs);
         }
