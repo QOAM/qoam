@@ -804,7 +804,6 @@
       <DependentUpon>Form.min.js</DependentUpon>
     </Content>
     <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
-    <Content Include="Views\Shared\_Usersnap.cshtml" />
     <Content Include="Views\Admin\Import.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Imported.cshtml" />
