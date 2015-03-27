@@ -175,8 +175,6 @@
     <Compile Include="Controllers\AdminControllerTests.cs" />
     <Compile Include="Controllers\Helpers\HttpContextHelper.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
-    <Compile Include="Models\SAML\SamlIdentityExtensionsTests.cs" />
-    <Compile Include="Models\SAML\SamlAttributesTests.cs" />
     <Compile Include="Helpers\UrlHelperExtensionsTests.cs" />
     <Compile Include="Models\QuestionExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -211,7 +209,9 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\SAML\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />

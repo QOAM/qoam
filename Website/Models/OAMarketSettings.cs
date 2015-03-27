@@ -11,7 +11,6 @@
         private const string OAMarketSectionGroupName = "oamarket";
         private const string ContactSectionName = "contact";
         private const string GeneralSectionName = "general";
-        private const string SurfContextSectionName = "surfContext";
         private const string GeneralImportSectionName = "generalImport";
         private const string UlrichsSectionName = "ulrichs";
         private const string DoajSectionName = "doaj";

@@ -26,9 +26,7 @@
     public class AccountController : ApplicationController
     {
         private readonly IAuthentication authentication;
-
         private readonly IInstitutionRepository institutionRepository;
-
         private readonly IUserProfileRepository userProfileRepository;
 
         public AccountController(IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository)
