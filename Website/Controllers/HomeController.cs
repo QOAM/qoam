@@ -60,6 +60,12 @@
             return this.View();
         }
 
+        [GET("references")]
+        public ViewResult References()
+        {
+            return this.View();
+        }
+
         [GET("journalscorecard")]
         public ViewResult JournalScoreCard()
         {

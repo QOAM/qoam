@@ -311,6 +311,7 @@
     <Content Include="Content\images\logo-big.png" />
     <Content Include="Content\images\organisation-small.png" />
     <Content Include="Content\images\rate-small.png" />
+    <Content Include="Content\images\references.png" />
     <Content Include="Content\iPicture.css" />
     <Content Include="Content\jquery.fancybox-buttons.css" />
     <Content Include="Content\jquery.fancybox-thumbs.css" />
