@@ -19,6 +19,7 @@
         @if (User.IsInRole(ApplicationRole.Admin))
         {
             <li>@Html.ActionLink("Delete journals", "Delete")</li>
+            <li>@Html.ActionLink("Add institution", "AddInstitution")</li>
         }
 
         @if (User.IsInRole(ApplicationRole.InstitutionAdmin) || User.IsInRole(ApplicationRole.Admin))

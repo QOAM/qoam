@@ -16,6 +16,8 @@
 
         void InsertOrUpdate(Institution institution);
 
+        void Save();
+
         IQueryable<string> Names(string query);
 
         IPagedList<Institution> Search(InstitutionFilter filter);

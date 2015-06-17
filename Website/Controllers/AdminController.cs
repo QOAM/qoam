@@ -17,6 +17,7 @@
     using QOAM.Website.Helpers;
     using QOAM.Website.Models;
     using QOAM.Website.ViewModels.Import;
+    using QOAM.Website.ViewModels.Institutions;
 
     using Validation;
 
@@ -32,8 +33,9 @@
         private readonly DoajImport doajImport;
         private readonly IJournalRepository journalRepository;
         private readonly JournalsExport journalsExport;
+        private readonly IInstitutionRepository institutionRepository;
 
-        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication)
+        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository)
             : base(userProfileRepository, authentication)
         {
             Requires.NotNull(journalsImport, "journalsImport");
@@ -41,12 +43,14 @@
             Requires.NotNull(doajImport, "doajImport");
             Requires.NotNull(journalsExport, "journalsExport");
             Requires.NotNull(journalRepository, "journalRepository");
+            Requires.NotNull(institutionRepository, "institutionRepository");
 
             this.journalsImport = journalsImport;
             this.ulrichsImport = ulrichsImport;
             this.doajImport = doajImport;
             this.journalsExport = journalsExport;
             this.journalRepository = journalRepository;
+            this.institutionRepository = institutionRepository;
         }
 
         [GET("")]
@@ -228,6 +232,35 @@
             }
 
             return this.View(model);
+        }
+
+        [GET("addinstitution")]
+        [Authorize(Roles = ApplicationRole.Admin)]
+        public ViewResult AddInstitution()
+        {
+            return this.View();
+        }
+
+        [POST("addinstitution")]
+        [Authorize(Roles = ApplicationRole.Admin)]
+        public ActionResult AddInstitution(AddViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                this.institutionRepository.InsertOrUpdate(model.ToInstitution());
+                this.institutionRepository.Save();
+                
+                return this.RedirectToAction("AddedInstitution");
+            }
+
+            return this.View(model);
+        }
+
+        [GET("addedinstitution")]
+        [Authorize(Roles = ApplicationRole.Admin)]
+        public ViewResult AddedInstitution()
+        {
+            return this.View();
         }
 
         private static HashSet<string> GetISSNs(ImportViewModel model)

@@ -1,0 +1,49 @@
+﻿@model QOAM.Website.ViewModels.Institutions.AddViewModel
+
+@{
+    ViewBag.Title = "Add institution";
+}
+
+<div class="container main">
+    
+    <h2>@ViewBag.Title</h2>
+    
+    <p>
+        In the textbox below you can enter a new institution.
+    </p>
+    
+    @using (Html.BeginForm("AddInstitution", "Admin", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <fieldset>
+            <legend>@ViewBag.Title</legend>
+
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "control-label" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(m => m.ShortName, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2">
+                    @Html.TextBoxFor(m => m.ShortName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ShortName, null, new { @class = "control-label" })
+                    <small>Without http:// or www. Just use the domain, like ru.nl.</small>
+                </div>
+            </div>
+
+            <div class="col-lg-10 col-md-offset-2">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </fieldset>
+    }
+</div>
+
+@section scripts
+{
+    @Html.Partial("_FormScripts")
+}
