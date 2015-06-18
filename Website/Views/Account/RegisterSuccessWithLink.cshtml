@@ -1,0 +1,16 @@
+﻿@model QOAM.Website.ViewModels.Score.ReqValuationViewModel
+@{
+    ViewBag.Title = "Thank you for registering!";
+    ViewBag.JournalTitle = Model.JournalTitle;
+}
+<div class="container main">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>@ViewBag.Title</h2>
+
+            <p>Thank you for registering with Quality Open Access Market!<br/>
+                Click the following link to continue to @Html.ActionLink("score "+(string)Model.JournalTitle, "ValuationScoreCard", "Score", new { id = Model.JournalId }, null)
+            </p>
+        </div>
+    </div>
+</div>

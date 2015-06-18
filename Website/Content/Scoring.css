@@ -1,0 +1,40 @@
+﻿.fullWidth {
+    width: 100%;
+    max-width: 100%;
+}
+
+.minHeight {
+    min-height: 200px;
+}
+
+.vcenter {
+    display: flex;
+    align-items: center;
+    height: 34px;
+}
+
+.red {
+    color: red;
+    font-weight: bold;
+}
+
+.multiline {
+    white-space: pre-line;
+    margin-top: -30px;
+}
+
+.scoringbuttons {
+  font-size: 12px;
+  text-align: left;
+  /*padding-top: 0px;
+  position: absolute;
+  margin-left: 25px;*/
+}
+
+.row.score.bottommargin {
+  /*margin-bottom: 2px;*/
+}
+
+#ModelMessage {
+    display: none;
+}

@@ -15,7 +15,7 @@
 
         private static AccountController CreateAccountController()
         {
-            return new AccountController(Mock.Of<IUserProfileRepository>(), new Mock<IAuthentication>().Object, new Mock<IInstitutionRepository>().Object)
+            return new AccountController(Mock.Of<IUserProfileRepository>(), new Mock<IAuthentication>().Object, new Mock<IInstitutionRepository>().Object, new Mock<IJournalRepository>().Object)
                    {
                        Url = HttpContextHelper.CreateUrlHelper()
                    };

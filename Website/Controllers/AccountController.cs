@@ -1,4 +1,6 @@
-﻿namespace QOAM.Website.Controllers
+﻿using QOAM.Website.ViewModels.Score;
+
+namespace QOAM.Website.Controllers
 {
     using System;
     using System.Linq;
@@ -28,23 +30,37 @@
         private readonly IAuthentication authentication;
         private readonly IInstitutionRepository institutionRepository;
         private readonly IUserProfileRepository userProfileRepository;
+        private readonly IJournalRepository journalRepository;
 
-        public AccountController(IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository)
+        public AccountController(IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IJournalRepository journalRepository)
             : base(userProfileRepository, authentication)
         {
             Requires.NotNull(authentication, "authentication");
             Requires.NotNull(userProfileRepository, "userProfileRepository");
             Requires.NotNull(institutionRepository, "institutionRepository");
+            Requires.NotNull(journalRepository, "journalRepository");
 
             this.authentication = authentication;
             this.userProfileRepository = userProfileRepository;
             this.institutionRepository = institutionRepository;
+            this.journalRepository = journalRepository;
         }
 
         [GET("login")]
         public ViewResult Login(string returnUrl)
         {
             this.ViewBag.ReturnUrl = returnUrl;
+
+            if (Request.Params["loginAddress"] != "")
+            {
+                var model = new LoginViewModel()
+                {
+                    Email = Request.Params["loginAddress"],
+                    Password = string.Empty,
+                    RememberMe = false
+                };
+                return this.View(model);
+            }
 
             return this.View();
         }
@@ -77,6 +93,28 @@
         [GET("register")]
         public ActionResult Register()
         {
+
+            if (Request.Params["AddLink"] != "")
+            {
+                var model = new RegisterViewModel()
+                {
+                    AddLink = Request.Params["AddLink"],
+                    Email = Request.Params["loginAddress"],
+                    Password = string.Empty,
+                };
+                return this.View(model);
+            }
+            
+            if (Request.Params["loginAddress"] != "")
+            {
+                var model = new RegisterViewModel()
+                {
+                    Email = Request.Params["loginAddress"],
+                    Password = string.Empty,
+                };
+                return this.View(model);
+            }
+
             return this.View();
         }
 
@@ -111,6 +149,22 @@
             try
             {
                 var confirmationToken = this.authentication.CreateUserAndAccount(model.UserName, model.Password, new { model.Email, model.DisplayName, model.DateRegistered, model.InstitutionId, model.OrcId });
+                if (!string.IsNullOrEmpty(model.AddLink))
+                {
+                    if (!this.Authentication.ConfirmAccount(confirmationToken))
+                    {
+                        return this.RedirectToAction("RegisterFailure");
+                    } 
+                    //login
+                    LoginViewModel lgmodel = new LoginViewModel()
+                    {
+                        Email = model.Email,
+                        Password = model.Password,
+                        RememberMe = false
+                    };
+                    Login(lgmodel, model.AddLink);
+                    return RedirectToAction("RegisterSuccessWithLink", "Account", new { addlink = model.AddLink });
+                }
 
                 dynamic email = new Email("RegistrationEmail");
                 email.To = model.Email;
@@ -119,7 +173,7 @@
                 email.Send();
 
                 return this.RedirectToAction("RegistrationPending");
-            }
+                }
             catch (MembershipCreateUserException)
             {
                 this.ModelState.AddModelError("", "Can't create the user.");
@@ -141,7 +195,6 @@
             {
                 return this.RedirectToAction("RegisterFailure");
             }
-
             return this.RedirectToAction("RegisterSuccess");
         }
 
@@ -149,6 +202,17 @@
         public ActionResult RegisterSuccess()
         {
             return this.View();
+        }
+
+        [GET("registersuccesswithlink")]
+        public ActionResult RegisterSuccessWithLink(string addlink)
+        {
+            var model = new ReqValuationViewModel
+            {
+                JournalId = Convert.ToInt32(addlink.Split('/').Last())
+            };
+            model.JournalTitle = journalRepository.Find(model.JournalId).Title;
+            return this.View(model);
         }
 
         [GET("registerfailure")]

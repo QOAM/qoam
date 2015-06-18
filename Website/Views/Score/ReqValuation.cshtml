@@ -1,0 +1,86 @@
+﻿@model QOAM.Website.ViewModels.Score.ReqValuationViewModel
+
+@{
+    ViewBag.Title = "Valuation SC request";
+}
+<link href="~/Content/scoring.css" rel="stylesheet"/>
+
+@using (Html.BeginForm("ReqValuation", "Score", FormMethod.Post))
+{
+        <div class="container main">
+        <div class="panel panel-primary">
+            @Html.HiddenFor(model => model.JournalId)
+            @Html.HiddenFor(model => model.JournalTitle)
+            @Html.HiddenFor(model => model.JournalISSN)
+            @Html.ValidationSummary(true)
+
+            <div class="panel-heading">
+                Invitation to publish a Valuation Score Card for journal: <strong>@Model.JournalTitle (ISSN: @Model.JournalISSN)</strong>
+            </div>
+            <div class="panel-body">
+                <div class="row bottommargin">
+                    <div class="col-xs-1 vcenter">
+                        From:
+                    </div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(model => model.EMailFrom, new { @class = "fullWidth form-control tt-input", @id = "MailFromAddress", @placeholder = "Insert your mail address here..." })
+                    </div>
+                    <div class="col-xs-2">
+                        @Html.ValidationMessageFor(model => model.EMailFrom, null, new { @class = "red" })
+                    </div>
+                </div>
+                <div class="row bottommargin">
+                    <div class="col-xs-1 vcenter">
+                        To:
+                        @if (Model.Message != string.Empty)
+                        {
+                            <span id="ster" class="red">*</span>
+                        }
+                    </div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(model => model.EMailTo, new { @class = "fullWidth form-control tt-input", @id = "MailToAddress", @placeholder = "Insert institutional mail address here..." })
+                    </div>
+                    <div class="col-xs-2">
+                        @Html.ValidationMessageFor(model => model.EMailTo, null, new { @class = "red" })
+                    </div>
+                </div>
+                <div class="row bottommargin">
+                    <div class="col-xs-1 vcenter">
+                        Subject:
+                    </div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(model => model.EMailSubject, new { @class = "fullWidth form-control tt-input" })
+                    </div>
+                </div>
+                <div class="row bottommargin">
+                    <div class="col-xs-1 vcenter">
+                        Message:
+                    </div>
+                    <div class="col-xs-9">
+                        @Html.TextAreaFor(model => model.EMailBody, new { @class = "fullWidth minHeight form-control tt-input", @placeholder = "Type your message here..." })
+                        <p>Note: an extra line containing the URL to the score card will automatically be added to this message.</p>
+                    </div>
+                    <div class="col-xs-2">
+                        @Html.ValidationMessageFor(model => model.EMailBody, null, new { @class = "red" })
+                    </div>
+                </div>
+                <div class="row bottommargin">
+                    <div class="col-xs-1 vcenter">
+                    </div>
+                    <div class="col-xs-9 red multiline">
+                        <span id="ModelMessage" class="multiline">
+                            @(new HtmlString(Model.Message))
+                        </span>
+                    </div>
+                    <div class="col-xs-2">
+                        <input type="submit" value="Send mail" class="btn btn-primary pull-right" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/Helpers/RequestValuationForm.js"></script>
+}

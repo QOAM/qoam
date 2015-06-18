@@ -15,14 +15,23 @@
     <AssemblyName>QOAM.Website</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>true</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44310</IISExpressSSLPort>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -284,6 +293,7 @@
     <Compile Include="ViewModels\Score\QuestionScoreViewModel.cs" />
     <Compile Include="ViewModels\Score\BaseScoreCardViewModel.cs" />
     <Compile Include="ViewModels\Score\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Score\ReqValuationViewModel.cs" />
     <Compile Include="ViewModels\Score\ValuationScoreCardViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +302,7 @@
     <None Include="App_Data\OAMarket_log.ldf">
       <DependentUpon>OAMarket.mdf</DependentUpon>
     </None>
+    <Content Include="App_Data\valuationinvitation.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\fancybox\blank.gif" />
@@ -312,12 +323,13 @@
     <Content Include="Content\images\logo-big.png" />
     <Content Include="Content\images\organisation-small.png" />
     <Content Include="Content\images\rate-small.png" />
-    <Content Include="Content\images\references.png" />
+    <Content Include="Content\images\rate-xtra-small.png" />
     <Content Include="Content\iPicture.css" />
     <Content Include="Content\jquery.fancybox-buttons.css" />
     <Content Include="Content\jquery.fancybox-thumbs.css" />
     <Content Include="Content\jquery.fancybox.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Scoring.css" />
     <Content Include="Content\slider.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\moreblack\button.png" />
@@ -699,6 +711,7 @@
     <Content Include="Scripts\globalize\cultures\globalize.culture.zu.js" />
     <Content Include="Scripts\globalize\cultures\globalize.cultures.js" />
     <Content Include="Scripts\globalize\globalize.js" />
+    <Content Include="Scripts\Helpers\RequestValuationForm.js" />
     <Content Include="Scripts\knockout.isdirty.js" />
     <Content Include="Scripts\Helpers\Ajax.js" />
     <Content Include="Scripts\Helpers\Ajax.min.js">
@@ -713,6 +726,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="ConnectionStrings.Debug.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Contact.Debug.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ExpirationChecker.Debug.config" />
+    <Content Include="MachineKey.Debug.config" />
+    <Content Include="NLog.Debug.config" />
     <None Include="Properties\PublishProfiles\Acceptatie.pubxml" />
     <None Include="Properties\PublishProfiles\Productie.pubxml" />
     <Content Include="Scripts\bootstrap.min.js.map">
@@ -830,8 +852,13 @@
     <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Admin\Deleted.cshtml" />
-    <Content Include="Views\Admin\AddInstitution.cshtml" />
+    <Content Include="Ulrichs.Debug.config" />
+    <Content Include="Views\Score\ReqValuation.cshtml" />
+    <Content Include="Views\Score\ReqValuationMailOk.cshtml" />
+    <Content Include="Views\Score\ReqValuationDomainOk.cshtml" />
+    <Content Include="Views\Account\RegisterSuccessWithLink.cshtml" />
     <Content Include="Views\Admin\AddedInstitution.cshtml" />
+    <Content Include="Views\Admin\AddInstitution.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -1031,7 +1058,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50268</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53969/</IISUrl>
+          <IISUrl>https://localhost/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

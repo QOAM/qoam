@@ -7,7 +7,7 @@
 @{
     ViewBag.Title = "Score a journal";
 }
-
+<link href="~/Content/scoring.css" rel="stylesheet"/>
 <div class="container main">
     <div class="row side">
         <div class="col-md-3">
@@ -80,7 +80,7 @@
                         </a>
                     </div>
                     <div class="panel-body">
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <div class="row">
                                 <label class="col-md-2">ISSN:</label>
                                 <div class="col-md-10">@journal.ISSN</div>
@@ -130,26 +130,25 @@
                             </div>-->
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="row score bottommargin">
-                                <div class="col-md-5a">
-                                    <a class="" href="@Url.Action("BaseScoreCard", new { id = journal.Id })">
-                                        <img src="~/Content/Images/rate-small.png" alt="Score this journal" />
+                                <div class="col-md-2">
+                                    <a class="" href="@Url.Action("BaseScoreCard", new {id = journal.Id})">
+                                        <img src="~/Content/Images/rate-xtra-small.png" alt="Score this journal"/>
                                     </a>
                                 </div>
-                                <div class="col-md-7a">
-                                    <a class="" href="@Url.Action("BaseScoreCard", new { id = journal.Id })">Publish a Base Score Card</a>
+                                <div class="col-md-10 scoringbuttons">
+                                    <a class="" href="@Url.Action("BaseScoreCard", new {id = journal.Id})">- Publish a Base Score Card</a>
                                 </div>
                             </div>
-                            
-                            <div class="row score">
-                                <div class="col-md-5a">
-                                    <a class="" href="@Url.Action("ValuationScoreCard", new { id = journal.Id })">
-                                        <img src="~/Content/Images/rate-small.png" alt="Score this journal" />
-                                    </a>
+
+                            <div class="row score bottommargin">
+                                <div class="col-md-2">
+                                    <img src="~/Content/Images/rate-xtra-small.png" alt="Score this journal"/>
                                 </div>
-                                <div class="col-md-7a">
-                                    <a class="" href="@Url.Action("ValuationScoreCard", new { id = journal.Id })">Publish a Valuation Score Card</a>
+                                <div class="col-md-10 scoringbuttons">
+                                    <a class="" href="@Url.Action("ValuationScoreCard", new {id = journal.Id})">- Publish a Valuation Score Card</a><br/>
+                                    <a class="" href="@Url.Action("ReqValuation", new {id = journal.Id})">- Invite someone else to do so</a>
                                 </div>
                             </div>
                         </div>
