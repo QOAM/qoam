@@ -131,10 +131,10 @@
                         </div>
 
                         <div class="col-md-4">
-                            <div class="row score bottommargin">
+                            <div class="row score bottommargin vertical-align">
                                 <div class="col-md-2">
                                     <a class="" href="@Url.Action("BaseScoreCard", new {id = journal.Id})">
-                                        <img src="~/Content/Images/rate-xtra-small.png" alt="Score this journal"/>
+                                        <img src="~/Content/Images/rate-xtra-small.png" alt="Score this journal" />
                                     </a>
                                 </div>
                                 <div class="col-md-10 scoringbuttons">
@@ -142,12 +142,12 @@
                                 </div>
                             </div>
 
-                            <div class="row score bottommargin">
+                            <div class="row score bottommargin vertical-align">
                                 <div class="col-md-2">
                                     <img src="~/Content/Images/rate-xtra-small.png" alt="Score this journal"/>
                                 </div>
-                                <div class="col-md-10 scoringbuttons">
-                                    <a class="" href="@Url.Action("ValuationScoreCard", new {id = journal.Id})">- Publish a Valuation Score Card</a><br/>
+                                <div class="col-md-10 scoringbuttons not-flex">
+                                    <a class="" href="@Url.Action("ValuationScoreCard", new {id = journal.Id})">- Publish a Valuation Score Card</a><br />
                                     <a class="" href="@Url.Action("ReqValuation", new {id = journal.Id})">- Invite someone else to do so</a>
                                 </div>
                             </div>
