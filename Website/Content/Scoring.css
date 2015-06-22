@@ -42,6 +42,7 @@
 .vertical-align > [class^="col-"] > img,
 .vertical-align > [class*=" col-"] > img {
     min-width: 37px;
+    width: 37px;
 }
 
 .not-flex {
