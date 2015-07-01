@@ -11,7 +11,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    @if (!string.IsNullOrEmpty(Model.AddLink))
+                    @if (this.ViewBag.ShortRegistration != null)
                     {
                         <h3 class="panel-title">Please fill in the form. Upon submission you will be logged on and you can continue scoring.</h3>
                     }

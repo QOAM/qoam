@@ -1,14 +1,9 @@
-﻿using QOAM.Website.ViewModels.Score;
-
-namespace QOAM.Website.Controllers
+﻿namespace QOAM.Website.Controllers
 {
     using System;
     using System.Linq;
     using System.Net.Mail;
-    using System.Security.Cryptography;
-    using System.Text;
     using System.Web.Mvc;
-    using System.Web.Routing;
     using System.Web.Security;
 
     using AttributeRouting;
@@ -18,8 +13,8 @@ namespace QOAM.Website.Controllers
 
     using QOAM.Core.Repositories;
     using QOAM.Website.Helpers;
-    using QOAM.Website.Models;
     using QOAM.Website.ViewModels.Account;
+    using QOAM.Website.ViewModels.Score;
 
     using Validation;
 
@@ -28,8 +23,11 @@ namespace QOAM.Website.Controllers
     public class AccountController : ApplicationController
     {
         private readonly IAuthentication authentication;
+
         private readonly IInstitutionRepository institutionRepository;
+
         private readonly IUserProfileRepository userProfileRepository;
+
         private readonly IJournalRepository journalRepository;
 
         public AccountController(IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IJournalRepository journalRepository)
@@ -47,22 +45,18 @@ namespace QOAM.Website.Controllers
         }
 
         [GET("login")]
-        public ViewResult Login(string returnUrl)
+        public ViewResult Login(string returnUrl, string loginAddress)
         {
             this.ViewBag.ReturnUrl = returnUrl;
 
-            if (Request.Params["loginAddress"] != "")
+            if (string.IsNullOrEmpty(loginAddress))
             {
-                var model = new LoginViewModel()
-                {
-                    Email = Request.Params["loginAddress"],
-                    Password = string.Empty,
-                    RememberMe = false
-                };
-                return this.View(model);
+                return this.View();
             }
 
-            return this.View();
+            var model = new LoginViewModel { Email = loginAddress, RememberMe = false };
+
+            return this.View(model);
         }
 
         [POST("login")]
@@ -91,31 +85,17 @@ namespace QOAM.Website.Controllers
         }
 
         [GET("register")]
-        public ActionResult Register()
+        public ActionResult Register(string addLink, string loginAddress)
         {
-
-            if (Request.Params["AddLink"] != "")
+            if (string.IsNullOrEmpty(addLink) && string.IsNullOrEmpty(loginAddress))
             {
-                var model = new RegisterViewModel()
-                {
-                    AddLink = Request.Params["AddLink"],
-                    Email = Request.Params["loginAddress"],
-                    Password = string.Empty,
-                };
-                return this.View(model);
-            }
-            
-            if (Request.Params["loginAddress"] != "")
-            {
-                var model = new RegisterViewModel()
-                {
-                    Email = Request.Params["loginAddress"],
-                    Password = string.Empty,
-                };
-                return this.View(model);
+                return this.View();
             }
 
-            return this.View();
+            var model = new RegisterViewModel { AddLink = addLink, Email = loginAddress };
+            this.ViewBag.ShortRegistration = true;
+
+            return this.View(model);
         }
 
         [POST("register")]
@@ -130,7 +110,7 @@ namespace QOAM.Website.Controllers
             var emailExists = this.userProfileRepository.FindByEmail(model.Email);
             if (emailExists != null)
             {
-                this.ModelState.AddModelError("", "Sorry, this email address is already in our database.");
+                this.ModelState.AddModelError("", "Sorry, unable to register with this email address.");
                 return this.View(model);
             }
 
@@ -149,31 +129,29 @@ namespace QOAM.Website.Controllers
             try
             {
                 var confirmationToken = this.authentication.CreateUserAndAccount(model.UserName, model.Password, new { model.Email, model.DisplayName, model.DateRegistered, model.InstitutionId, model.OrcId });
-                if (!string.IsNullOrEmpty(model.AddLink))
+
+                if (string.IsNullOrEmpty(model.AddLink))
                 {
-                    if (!this.Authentication.ConfirmAccount(confirmationToken))
-                    {
-                        return this.RedirectToAction("RegisterFailure");
-                    } 
-                    //login
-                    LoginViewModel lgmodel = new LoginViewModel()
-                    {
-                        Email = model.Email,
-                        Password = model.Password,
-                        RememberMe = false
-                    };
-                    Login(lgmodel, model.AddLink);
-                    return RedirectToAction("RegisterSuccessWithLink", "Account", new { addlink = model.AddLink });
+                    dynamic email = new Email("RegistrationEmail");
+                    email.To = model.Email;
+                    email.DisplayName = model.DisplayName;
+                    email.Url = this.Url.Action("RegisterConfirmation", "Account", new { token = confirmationToken }, this.Request.Url.Scheme);
+                    email.Send();
+
+                    return this.RedirectToAction("RegistrationPending");
                 }
 
-                dynamic email = new Email("RegistrationEmail");
-                email.To = model.Email;
-                email.DisplayName = model.DisplayName;
-                email.Url = this.Url.Action("RegisterConfirmation", "Account", new { token = confirmationToken }, this.Request.Url.Scheme);
-                email.Send();
-
-                return this.RedirectToAction("RegistrationPending");
+                if (!this.Authentication.ConfirmAccount(confirmationToken))
+                {
+                    return this.RedirectToAction("RegisterFailure");
                 }
+
+                var loginViewModel = new LoginViewModel { Email = model.Email, Password = model.Password, RememberMe = false };
+
+                this.Login(loginViewModel, model.AddLink);
+
+                return this.RedirectToAction("RegisterSuccessWithLink", "Account", new { addLink = model.AddLink });
+            }
             catch (MembershipCreateUserException)
             {
                 this.ModelState.AddModelError("", "Can't create the user.");
@@ -191,11 +169,7 @@ namespace QOAM.Website.Controllers
         [GET("registerconfirmation/{token}")]
         public ActionResult RegisterConfirmation(string token)
         {
-            if (!this.Authentication.ConfirmAccount(token))
-            {
-                return this.RedirectToAction("RegisterFailure");
-            }
-            return this.RedirectToAction("RegisterSuccess");
+            return this.RedirectToAction(!this.Authentication.ConfirmAccount(token) ? "RegisterFailure" : "RegisterSuccess");
         }
 
         [GET("registersuccess")]
@@ -205,13 +179,11 @@ namespace QOAM.Website.Controllers
         }
 
         [GET("registersuccesswithlink")]
-        public ActionResult RegisterSuccessWithLink(string addlink)
+        public ActionResult RegisterSuccessWithLink(string addLink)
         {
-            var model = new ReqValuationViewModel
-            {
-                JournalId = Convert.ToInt32(addlink.Split('/').Last())
-            };
-            model.JournalTitle = journalRepository.Find(model.JournalId).Title;
+            var model = new RequestValuationViewModel { JournalId = Convert.ToInt32(addLink.Split('/').Last()) };
+            model.JournalTitle = this.journalRepository.Find(model.JournalId).Title;
+            
             return this.View(model);
         }
 
@@ -299,13 +271,13 @@ namespace QOAM.Website.Controllers
             {
                 return this.View(model);
             }
-            
+
             var userProfile = this.userProfileRepository.FindByEmail(model.Email);
             if (userProfile == null || !this.authentication.UserIsConfirmed(userProfile.UserName))
             {
                 return this.RedirectToAction("ResetPasswordFailure");
             }
-            
+
             var passwordResetToken = this.authentication.GeneratePasswordResetToken(userProfile.UserName);
 
             dynamic email = new Email("ResetPasswordEmail");

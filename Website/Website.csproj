@@ -15,9 +15,8 @@
     <AssemblyName>QOAM.Website</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>true</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44301</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -222,6 +221,12 @@
     <Compile Include="App_Start\WebSecurityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Models\RequestValuationEmail.cs" />
+    <Compile Include="Resources\RequestValuation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequestValuation.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Account\SettingsViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordConfirmedViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
@@ -293,7 +298,7 @@
     <Compile Include="ViewModels\Score\QuestionScoreViewModel.cs" />
     <Compile Include="ViewModels\Score\BaseScoreCardViewModel.cs" />
     <Compile Include="ViewModels\Score\IndexViewModel.cs" />
-    <Compile Include="ViewModels\Score\ReqValuationViewModel.cs" />
+    <Compile Include="ViewModels\Score\RequestValuationViewModel.cs" />
     <Compile Include="ViewModels\Score\ValuationScoreCardViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -302,7 +307,6 @@
     <None Include="App_Data\OAMarket_log.ldf">
       <DependentUpon>OAMarket.mdf</DependentUpon>
     </None>
-    <Content Include="App_Data\valuationinvitation.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\fancybox\blank.gif" />
@@ -853,12 +857,12 @@
     <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Admin\Deleted.cshtml" />
     <Content Include="Ulrichs.Debug.config" />
-    <Content Include="Views\Score\ReqValuation.cshtml" />
-    <Content Include="Views\Score\ReqValuationMailOk.cshtml" />
-    <Content Include="Views\Score\ReqValuationDomainOk.cshtml" />
+    <Content Include="Views\Score\RequestValuation.cshtml" />
     <Content Include="Views\Account\RegisterSuccessWithLink.cshtml" />
     <Content Include="Views\Admin\AddedInstitution.cshtml" />
     <Content Include="Views\Admin\AddInstitution.cshtml" />
+    <Content Include="Views\Emails\RequestValuation.cshtml" />
+    <Content Include="Views\Score\RequestValuationResult.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -1024,6 +1028,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Questions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\RequestValuation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RequestValuation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
@@ -1058,7 +1066,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50268</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost/</IISUrl>
+          <IISUrl>http://localhost:53969/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
