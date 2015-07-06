@@ -1,0 +1,29 @@
+﻿@model QOAM.Website.Models.RequestValuationEmail
+
+@{
+    Layout = null;
+}
+
+To: @Html.Raw(Model.To)
+@if (string.IsNullOrEmpty(Model.From))
+{
+<text>From: no-reply@qoam.eu</text>
+}
+else
+{
+<text>From: @Html.Raw(Model.From)</text>
+}
+Subject: @Html.Raw(Model.Subject)
+
+@Html.Raw(Model.Message)
+
+@if (Model.IsKnownEmailAddress)
+{
+<text>Use the link below to go to QOAM and publish your Valuation Score Card.</text>
+}
+else
+{
+<text>Click the link below to register yourself in QOAM. After registration you will proceed to the Valuation Score Card.</text>
+}
+
+@Html.Raw(@Model.Url)

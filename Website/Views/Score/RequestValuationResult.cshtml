@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = ViewBag.Success ? "Valuation Score Card request sent" : "Valuation Score Card request has not been sent";
+}
+
+<div class="container main">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            @if (ViewBag.Success)
+            {
+                <text>Message sent</text>
+            }
+            else
+            {
+                <text>Message has not been sent</text>
+            }
+        </div>
+        <div class="panel-body">
+            <div class="row bottommargin">
+                <div class="col-xs-12">
+                    @if (ViewBag.Success)
+                    {
+                        <text>The message has been sent successfully.</text>
+                    }
+                    else
+                    {
+                        <text>The message has not been sent due to an error. Please try again or @Html.ActionLink("contact us", "Contact", "Home") via our contact form.</text>
+                    }
+
+                </div>
+            </div>
+            <div class="row bottommargin">
+                <div class="col-xs-10"></div>
+                <div class="col-xs-2">
+                    @Html.ActionLink("Return to scoring", "Index", null, new { @class = "btn btn-primary pull-right" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
