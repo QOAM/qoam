@@ -206,6 +206,7 @@
         }
 
         [GET("requestvaluation/{id:int}")]
+        [Authorize]
         public ViewResult RequestValuation(int id)
         {
             var journal = this.journalRepository.Find(id);
@@ -232,6 +233,7 @@
         }
 
         [POST("requestvaluation/{id:int}")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult RequestValuation(RequestValuationViewModel model)
         {
