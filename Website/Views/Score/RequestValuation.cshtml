@@ -3,23 +3,24 @@
 @{
     ViewBag.Title = "Valuation SC request";
 }
-<link href="~/Content/scoring.css" rel="stylesheet"/>
+<link href="~/Content/scoring.css" rel="stylesheet" />
 
 @using (Html.BeginForm("RequestValuation", "Score", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="container main">
         <div class="panel panel-primary">
             @Html.HiddenFor(model => model.JournalId)
             @Html.HiddenFor(model => model.JournalTitle)
             @Html.HiddenFor(model => model.JournalISSN)
-            @Html.ValidationSummary(true)
 
             <div class="panel-heading">
                 Invitation to publish a Valuation Score Card for journal: <strong>@Model.JournalTitle (ISSN: @Model.JournalISSN)</strong>
             </div>
             <div class="panel-body">
+                @Html.ValidationSummary(true, null, new { @class = "red" })
+
                 <div class="row bottommargin">
                     <div class="col-xs-1 vcenter">
                         From:
@@ -56,7 +57,7 @@
                     </div>
                     <div class="col-xs-9">
                         @Html.TextAreaFor(model => model.EmailBody, new { @class = "fullWidth minHeight form-control tt-input", @placeholder = "Type your message here..." })
-                        <sub>Note: an extra line containing the URL to the score card will automatically be added to this message.</sub>
+                        <sub>Note: an extra line containing the link to the Valuation Score Card of the journal will be added automatically at the bottom of this message.</sub>
                     </div>
                     <div class="col-xs-2">
                         @Html.ValidationMessageFor(model => model.EmailBody, null, new { @class = "red" })
