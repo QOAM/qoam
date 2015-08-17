@@ -15,11 +15,11 @@
             <li>@Html.ActionLink("Import journals", "Import")</li>
             <li>@Html.ActionLink("Update journals", "Update")</li>
             <li>@Html.ActionLink("Download journals", "Download")</li>
+            <li>@Html.ActionLink("Add institution", "AddInstitution")</li>
         }
         @if (User.IsInRole(ApplicationRole.Admin))
         {
             <li>@Html.ActionLink("Delete journals", "Delete")</li>
-            <li>@Html.ActionLink("Add institution", "AddInstitution")</li>
         }
 
         @if (User.IsInRole(ApplicationRole.InstitutionAdmin) || User.IsInRole(ApplicationRole.Admin))

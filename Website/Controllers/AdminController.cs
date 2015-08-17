@@ -235,14 +235,14 @@
         }
 
         [GET("addinstitution")]
-        [Authorize(Roles = ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult AddInstitution()
         {
             return this.View();
         }
 
         [POST("addinstitution")]
-        [Authorize(Roles = ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult AddInstitution(AddViewModel model)
         {
             if (this.ModelState.IsValid)
@@ -257,7 +257,7 @@
         }
 
         [GET("addedinstitution")]
-        [Authorize(Roles = ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult AddedInstitution()
         {
             return this.View();
