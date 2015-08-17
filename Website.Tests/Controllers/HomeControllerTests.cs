@@ -2,6 +2,7 @@
 {
     using System;
     using System.Net.Mail;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     using Moq;
@@ -73,7 +74,7 @@
         }
 
         [Fact]
-        public void ContactPostWithInvalidModelStateWillNotSendMail()
+        public async Task ContactPostWithInvalidModelStateWillNotSendMail()
         {
             // Arrange
             var mailSenderMock = new Mock<IMailSender>();
@@ -81,7 +82,7 @@
             homeController.ModelState.AddModelError("key", "error message");
 
             // Act
-            homeController.Contact(new ContactViewModel());
+            await homeController.Contact(new ContactViewModel());
 
             // Assert
             mailSenderMock.Verify(m => m.Send(It.IsAny<MailMessage>()), Times.Never());
