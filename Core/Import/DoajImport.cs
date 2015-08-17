@@ -58,6 +58,7 @@
 
             using (var csvReader = new CsvReader(new StringReader(csv), CsvConfiguration))
             {
+                csvReader.Configuration.RegisterClassMap<DoajImportRecordMap>();
                 var importRecords = csvReader.GetRecords<DoajImportRecord>().ToList();
                 return importRecords.Select(i => i.ToJournal()).Where(j => j.IsValid()).ToList();
             }
