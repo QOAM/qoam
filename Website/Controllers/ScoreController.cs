@@ -24,6 +24,8 @@
     [RoutePrefix("score")]
     public class ScoreController : ApplicationController
     {
+        private const int SubjectTruncationLength = 90;
+
         private readonly IBaseScoreCardRepository baseScoreCardRepository;
 
         private readonly IScoreCardVersionRepository scoreCardVersionRepository;
@@ -78,7 +80,7 @@
         public ActionResult Index(IndexViewModel model)
         {
             model.Languages = this.languageRepository.All.ToSelectListItems("<All languages>");
-            model.Disciplines = this.subjectRepository.All.ToSelectListItems("<All disciplines>");
+            model.Disciplines = this.subjectRepository.All.ToSelectListItems("<All disciplines>", SubjectTruncationLength);
             model.Journals = this.journalRepository.Search(model.ToFilter());
 
             return this.View(model);

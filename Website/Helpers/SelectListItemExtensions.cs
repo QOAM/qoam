@@ -4,7 +4,7 @@
     using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
-
+    using Core.Helpers;
     using QOAM.Core;
 
     using Validation;
@@ -18,11 +18,11 @@
             return languages.Select(ToSelectListItem).ToOptionalSelectListItems(optionalText);
         }
 
-        public static IEnumerable<SelectListItem> ToSelectListItems(this IList<Subject> keywords, string optionalText)
+        public static IEnumerable<SelectListItem> ToSelectListItems(this IList<Subject> keywords, string optionalText, int truncationLength)
         {
             Requires.NotNull(keywords, "keywords");
 
-            return keywords.Select(ToSelectListItem).ToOptionalSelectListItems(optionalText);
+            return keywords.Select(subject => ToSelectListItem(subject, truncationLength)).ToOptionalSelectListItems(optionalText);
         }
 
         public static IEnumerable<SelectListItem> ToSelectListItems(this IList<Institution> institutions, string optionalText)
@@ -37,9 +37,9 @@
             return new SelectListItem { Text = language.Name, Value = language.Id.ToString(CultureInfo.InvariantCulture) };
         }
 
-        private static SelectListItem ToSelectListItem(this Subject subject)
+        private static SelectListItem ToSelectListItem(this Subject subject, int truncationLength)
         {
-            return new SelectListItem { Text = subject.Name, Value = subject.Id.ToString(CultureInfo.InvariantCulture) };
+            return new SelectListItem { Text = subject.Name.Truncate(truncationLength), Value = subject.Id.ToString(CultureInfo.InvariantCulture) };
         }
 
         private static SelectListItem ToSelectListItem(this Institution institution)

@@ -20,6 +20,8 @@
     [RoutePrefix("journals")]
     public class JournalsController : ApplicationController
     {
+        private const int SubjectTruncationLength = 90;
+
         private readonly IJournalRepository journalRepository;
         private readonly IBaseJournalPriceRepository baseJournalPriceRepository;
         private readonly ILanguageRepository languageRepository;
@@ -59,7 +61,7 @@
         public ViewResult Index(IndexViewModel model)
         {
             model.Languages = this.languageRepository.All.ToSelectListItems("<All languages>");
-            model.Disciplines = this.subjectRepository.All.ToSelectListItems("<All disciplines>");
+            model.Disciplines = this.subjectRepository.All.ToSelectListItems("<All disciplines>", SubjectTruncationLength);
             model.Journals = this.journalRepository.Search(model.ToFilter());
             
             return this.View(model);
