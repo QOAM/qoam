@@ -507,6 +507,12 @@ ul {
     margin: 0;
 }
 
+.doajSeal {
+    float: left; 
+    position: relative;
+    top: -80px;
+}
+
 .swotFilterContainer .table-cell {
     height: 50px;
     line-height: 1em;

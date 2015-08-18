@@ -33,6 +33,7 @@
         public int CountryId { get; set; }
         public int PublisherId { get; set; }
         public int? JournalScoreId { get; set; }
+        public bool DoajSeal { get; set; }
         public virtual Country Country { get; set; }
         public virtual Publisher Publisher { get; set; }
         public virtual JournalScore JournalScore { get; set; }

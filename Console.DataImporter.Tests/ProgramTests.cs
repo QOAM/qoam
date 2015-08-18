@@ -2,9 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-
-    using QOAM.Core.Import;
-
+    using System.Linq;
+    using Core.Import;
     using Xunit;
     using Xunit.Extensions;
 
@@ -163,6 +162,80 @@
 
             // Assert
             Assert.Throws<ArgumentException>(() => Program.GetImportMode(args));
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(2)]
+        public void GetJournalUpdatePropertiesWithTooFewArgumentsReturnsSetWithAllJournalUpdatePropertiesExceptDoajSeal(int numberOfArguments)
+        {
+            // Arrange
+            var args = Enumerable.Repeat("", numberOfArguments).ToList();
+
+            // Act
+            var journalUpdateProperties = Program.GetJournalUpdateProperties(args);
+
+            // Assert
+            var expected = new HashSet<JournalUpdateProperty>((JournalUpdateProperty[])Enum.GetValues(typeof(JournalUpdateProperty)));
+            expected.Remove(JournalUpdateProperty.DoajSeal);
+
+            Assert.Equal(expected, journalUpdateProperties);
+        }
+
+        [Theory]
+        [InlineData("doajseal", JournalUpdateProperty.DoajSeal)]
+        [InlineData("country", JournalUpdateProperty.Country)]
+        [InlineData("languages", JournalUpdateProperty.Languages)]
+        [InlineData("link", JournalUpdateProperty.Link)]
+        [InlineData("publisher", JournalUpdateProperty.Publisher)]
+        [InlineData("subjects", JournalUpdateProperty.Subjects)]
+        [InlineData("title", JournalUpdateProperty.Title)]
+        public void GetJournalUpdatePropertiesWithOnePropertyReturnsCorrectJournalUpdateProperty(string propertiesArgument, JournalUpdateProperty expected)
+        {
+            // Arrange
+            var args = new List<string> { "Ulrichs", "InsertOnly", propertiesArgument };
+
+            // Act
+            var journalUpdateProperties = Program.GetJournalUpdateProperties(args);
+
+            // Assert
+            Assert.Contains(expected, journalUpdateProperties);
+            Assert.Equal(1, journalUpdateProperties.Count);
+        }
+
+        [Theory]
+        [InlineData("doajSEAL", JournalUpdateProperty.DoajSeal)]
+        [InlineData("Country", JournalUpdateProperty.Country)]
+        [InlineData("LanguageS", JournalUpdateProperty.Languages)]
+        [InlineData("LINK", JournalUpdateProperty.Link)]
+        public void GetJournalUpdatePropertiesIsCaseInsensitive(string propertiesArgument, JournalUpdateProperty expected)
+        {
+            // Arrange
+            var args = new List<string> { "Ulrichs", "InsertOnly", propertiesArgument };
+
+            // Act
+            var journalUpdateProperties = Program.GetJournalUpdateProperties(args);
+
+            // Assert
+            Assert.Contains(expected, journalUpdateProperties);
+            Assert.Equal(1, journalUpdateProperties.Count);
+        }
+
+        [Theory]
+        [InlineData("doajseal,country", JournalUpdateProperty.DoajSeal, JournalUpdateProperty.Country)]
+        [InlineData("link;subjects", JournalUpdateProperty.Link, JournalUpdateProperty.Subjects)]
+        public void GetJournalUpdatePropertiesSupportsMultiplesProperties(string propertiesArgument, JournalUpdateProperty expected1, JournalUpdateProperty expected2)
+        {
+            // Arrange
+            var args = new List<string> { "Ulrichs", "InsertOnly", propertiesArgument };
+
+            // Act
+            var journalUpdateProperties = Program.GetJournalUpdateProperties(args);
+
+            // Assert
+            var expected = new HashSet<JournalUpdateProperty> { expected1, expected2 };
+            Assert.Equal(expected, journalUpdateProperties);
         }
     }
 }

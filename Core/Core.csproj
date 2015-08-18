@@ -131,6 +131,8 @@
     <Compile Include="BaseQuestionScore.cs" />
     <Compile Include="Helpers\ValidatorExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Import\DoajImportRecordMap.cs" />
+    <Compile Include="Import\JournalUpdateProperty.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.Designer.cs">
       <DependentUpon>201404301016419_SplitJSC.cs</DependentUpon>
@@ -158,6 +160,10 @@
     <Compile Include="Migrations\201503231335566_CascadeOnDelete.cs" />
     <Compile Include="Migrations\201503231335566_CascadeOnDelete.Designer.cs">
       <DependentUpon>201503231335566_CascadeOnDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508171455246_doajseal.cs" />
+    <Compile Include="Migrations\201508171455246_doajseal.Designer.cs">
+      <DependentUpon>201508171455246_doajseal.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\IValuationJournalPriceRepository.cs" />
@@ -320,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503231335566_CascadeOnDelete.resx">
       <DependentUpon>201503231335566_CascadeOnDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508171455246_doajseal.resx">
+      <DependentUpon>201508171455246_doajseal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

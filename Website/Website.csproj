@@ -343,6 +343,7 @@
     <Content Include="Content\Scoring.css" />
     <Content Include="Content\slider.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Images\doaj-seal.png" />
     <Content Include="Images\moreblack\button.png" />
     <Content Include="Images\ScoreCards\journalscorecard-editorial-small.png" />
     <Content Include="Images\ScoreCards\journalscorecard-editorial.png" />

@@ -41,6 +41,14 @@
 
         public JournalsImportResult ImportJournals(IList<Journal> journals, JournalsImportMode journalsImportMode)
         {
+            var journalUpdateProperties = new HashSet<JournalUpdateProperty>((JournalUpdateProperty[])Enum.GetValues(typeof(JournalUpdateProperty)));
+            journalUpdateProperties.Remove(JournalUpdateProperty.DoajSeal);
+
+            return ImportJournals(journals, journalsImportMode, journalUpdateProperties);
+        }
+
+        public JournalsImportResult ImportJournals(IList<Journal> journals, JournalsImportMode journalsImportMode, ISet<JournalUpdateProperty> journalUpdateProperties)
+        {
             var distinctJournals = journals.Distinct(new JournalIssnEqualityComparer()).ToList();
             
             var countries = this.ImportCountries(distinctJournals);
@@ -68,7 +76,7 @@
 
             if (ShouldUpdateJournals(journalsImportMode))
             {
-                this.UpdateJournals(existingJournals, countries, publishers, languages, subjects, allJournals);
+                this.UpdateJournals(existingJournals, countries, publishers, languages, subjects, allJournals, journalUpdateProperties);
             }
 
             return new JournalsImportResult { NumberOfImportedJournals = distinctJournals.Count, NumberOfNewJournals = newJournals.Count };
@@ -96,7 +104,7 @@
             }
         }
 
-        private void UpdateJournals(List<Journal> existingJournals, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<Journal> allJournals)
+        private void UpdateJournals(List<Journal> existingJournals, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<Journal> allJournals, ISet<JournalUpdateProperty> journalUpdateProperties)
         {
             Logger.Info("Updating journals in batches of {0}...", this.importSettings.BatchSize);
 
@@ -108,8 +116,7 @@
 
                 try
                 {
-                    this.UpdateJournalsInChunk(existingJournalsChunk.ToList(), countries, publishers, languages, subjects, allJournals);
-
+                    this.UpdateJournalsInChunk(existingJournalsChunk.ToList(), countries, publishers, languages, subjects, allJournals, journalUpdateProperties);
                 }
                 catch (Exception ex)
                 {
@@ -118,28 +125,55 @@
             }
         }
 
-        private void UpdateJournalsInChunk(IList<Journal> existingJournalsChunk, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<Journal> allJournals)
+        private void UpdateJournalsInChunk(IList<Journal> existingJournalsChunk, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<Journal> allJournals, ISet<JournalUpdateProperty> journalUpdateProperties)
         {
             foreach (var journal in existingJournalsChunk)
             {
                 var currentJournal = allJournals.First(j => string.Equals(j.ISSN, journal.ISSN, StringComparison.InvariantCultureIgnoreCase));
-                currentJournal.Title = journal.Title;
-                currentJournal.Link = journal.Link;
 
-                currentJournal.Country = countries.First(p => string.Equals(p.Name, journal.Country.Name, StringComparison.InvariantCultureIgnoreCase));
-                currentJournal.Publisher = publishers.First(p => string.Equals(p.Name, journal.Publisher.Name, StringComparison.InvariantCultureIgnoreCase));
-
-                currentJournal.Languages.Clear();
-
-                foreach (var language in journal.Languages.Select(l => languages.First(a => string.Equals(a.Name, l.Name, StringComparison.InvariantCultureIgnoreCase))))
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.DoajSeal))
                 {
-                    currentJournal.Languages.Add(language);    
+                    currentJournal.DoajSeal = journal.DoajSeal;
                 }
-                
-                currentJournal.Subjects.Clear();
-                foreach (var subject in journal.Subjects.Select(s => subjects.First(u => string.Equals(u.Name, s.Name, StringComparison.InvariantCultureIgnoreCase))))
+
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.Title))
                 {
-                    currentJournal.Subjects.Add(subject);
+                    currentJournal.Title = journal.Title;
+                }
+
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.Link))
+                {
+                    currentJournal.Link = journal.Link;
+                }
+
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.Country))
+                {
+                    currentJournal.Country = countries.First(p => string.Equals(p.Name, journal.Country.Name, StringComparison.InvariantCultureIgnoreCase));
+                }
+
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.Publisher))
+                {
+                    currentJournal.Publisher = publishers.First(p => string.Equals(p.Name, journal.Publisher.Name, StringComparison.InvariantCultureIgnoreCase));
+                }
+
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.Languages))
+                {
+                    currentJournal.Languages.Clear();
+
+                    foreach (var language in journal.Languages.Select(l => languages.First(a => string.Equals(a.Name, l.Name, StringComparison.InvariantCultureIgnoreCase))))
+                    {
+                        currentJournal.Languages.Add(language);
+                    }
+                }
+
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.Subjects))
+                {
+                    currentJournal.Subjects.Clear();
+
+                    foreach (var subject in journal.Subjects.Select(s => subjects.First(u => string.Equals(u.Name, s.Name, StringComparison.InvariantCultureIgnoreCase))))
+                    {
+                        currentJournal.Subjects.Add(subject);
+                    }
                 }
 
                 this.journalRepository.InsertOrUpdate(currentJournal);
@@ -282,12 +316,27 @@
 
         private static bool ShouldInsertJournals(JournalsImportMode journalsImportMode)
         {
-            return journalsImportMode == JournalsImportMode.InsertAndUpdate || journalsImportMode == JournalsImportMode.InsertOnly;
+            switch (journalsImportMode)
+            {
+                case JournalsImportMode.InsertOnly:
+                case JournalsImportMode.InsertAndUpdate:
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         private static bool ShouldUpdateJournals(JournalsImportMode journalsImportMode)
         {
-            return journalsImportMode == JournalsImportMode.InsertAndUpdate || journalsImportMode == JournalsImportMode.UpdateOnly;
+            switch (journalsImportMode)
+            {
+                case JournalsImportMode.InsertAndUpdate:
+                case JournalsImportMode.UpdateSealOnly:
+                case JournalsImportMode.UpdateOnly:
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }

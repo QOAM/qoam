@@ -4,6 +4,7 @@
     {
         InsertOnly = 0,
         UpdateOnly,
-        InsertAndUpdate
+        InsertAndUpdate,
+        UpdateSealOnly,
     }
 }

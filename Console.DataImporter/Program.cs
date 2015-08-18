@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Linq;
     using Autofac;
 
     using NLog;
@@ -21,7 +21,7 @@
             {
                 container = DependencyInjectionConfig.RegisterComponents();
 
-                ImportJournals(GetImportType(args), GetImportMode(args));
+                ImportJournals(GetImportType(args), GetImportMode(args), GetJournalUpdateProperties(args));
             }
             catch (Exception ex)
             {
@@ -29,13 +29,13 @@
             }
         }
 
-        private static void ImportJournals(JournalsImportSource importSource, JournalsImportMode importMode)
+        private static void ImportJournals(JournalsImportSource importSource, JournalsImportMode importMode, ISet<JournalUpdateProperty> journalUpdateProperties)
         {
             Logger.Info("Import source: {0}", importSource);
             Logger.Info("Import mode: {0}", importMode);
             Logger.Info("Importing journals...");
 
-            var importResult = container.Resolve<JournalsImport>().ImportJournals(GetJournalsToImport(importSource), importMode);
+            var importResult = container.Resolve<JournalsImport>().ImportJournals(GetJournalsToImport(importSource), importMode, journalUpdateProperties);
 
             Logger.Info("Imported {0} journals total", importResult.NumberOfImportedJournals);
             Logger.Info("mported {0} new journals", importResult.NumberOfNewJournals);
@@ -72,6 +72,19 @@
             }
 
             return (JournalsImportMode)Enum.Parse(typeof(JournalsImportMode), args[1], true);
+        }
+
+        public static ISet<JournalUpdateProperty> GetJournalUpdateProperties(IList<string> args)
+        {
+            if (args.Count < 3)
+            {
+                var journalUpdateProperties = new HashSet<JournalUpdateProperty>((JournalUpdateProperty[]) Enum.GetValues(typeof (JournalUpdateProperty)));
+                journalUpdateProperties.Remove(JournalUpdateProperty.DoajSeal);
+
+                return journalUpdateProperties;
+            }
+
+            return new HashSet<JournalUpdateProperty>(args[2].Split(',', ';').Select(s => (JournalUpdateProperty)Enum.Parse(typeof(JournalUpdateProperty), s, true)));
         }
     }
 }

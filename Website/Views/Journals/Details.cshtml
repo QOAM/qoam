@@ -107,7 +107,7 @@
                             </div>
                         </div>
                     </a>
-
+                    
                     <a href="@Url.Action("JournalScoreCard", "Home")#basejournalscorecard">
                         <div class="col-md-2 pull-right">
                             <div class="score big">
@@ -115,6 +115,11 @@
                                 <h2>
                                     @Scores.AverageScore(Model.JournalScore.OverallScore)
                                 </h2>
+
+                                @if (Model.DoajSeal)
+                                {
+                                    <img src="~/Images/doaj-seal.png" title="DOAJ seal" class="doajSeal" />
+                                }
                             </div>
                         </div>
                     </a>
