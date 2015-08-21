@@ -160,7 +160,7 @@
     <value>The journal website allows ratings of papers and post-publication commentaries by the community</value>
   </data>
   <data name="WebsiteContainsAimsScopeAndReadership" xml:space="preserve">
-    <value>Aims, scope, and expected readership of the journal are clearly specified on the journal’s website</value>
+    <value>Aims, scope, and target audience of the journal are clearly specified on the journal’s website</value>
   </data>
   <data name="WebsiteContainsCriteriaUsedByReviewers" xml:space="preserve">
     <value>Criteria used by reviewers to rate submissions are specified on the website</value>
