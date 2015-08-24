@@ -474,6 +474,12 @@ p {
   font-weight: 200;
   line-height: 1.4;
 }
+.sublead {
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 1.1;
+}
 @media (min-width: 768px) {
   .lead {
     font-size: 21px;
