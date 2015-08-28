@@ -129,9 +129,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseQuestionScore.cs" />
+    <Compile Include="BlockedISSN.cs" />
     <Compile Include="Helpers\ValidatorExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Import\DoajImportRecordMap.cs" />
+    <Compile Include="Import\Import.cs" />
     <Compile Include="Import\JournalUpdateProperty.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.Designer.cs">
@@ -165,7 +167,13 @@
     <Compile Include="Migrations\201508171455246_doajseal.Designer.cs">
       <DependentUpon>201508171455246_doajseal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508271400052_BlockedISSNs.cs" />
+    <Compile Include="Migrations\201508271400052_BlockedISSNs.Designer.cs">
+      <DependentUpon>201508271400052_BlockedISSNs.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
+    <Compile Include="Repositories\BlockedISSNRepository.cs" />
+    <Compile Include="Repositories\IBlockedISSNRepository.cs" />
     <Compile Include="Repositories\IValuationJournalPriceRepository.cs" />
     <Compile Include="Repositories\IValuationScoreCardRepository.cs" />
     <Compile Include="Repositories\ValuationJournalPriceRepository.cs" />
@@ -329,6 +337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508171455246_doajseal.resx">
       <DependentUpon>201508171455246_doajseal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508271400052_BlockedISSNs.resx">
+      <DependentUpon>201508271400052_BlockedISSNs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

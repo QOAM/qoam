@@ -3,10 +3,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Xml.Linq;
-
+    using Moq;
     using QOAM.Core.Import;
     using QOAM.Core.Tests.Import.Resources;
-
+    using Repositories;
     using Xunit;
 
     public class UlrichsImportTests
@@ -15,8 +15,7 @@
         public void ParseJournalsWithJournalTypeIsAllAndXmlWithoutAlternateEditionsWillParseAllJournalsFromXml()
         {
             // Arrange
-            var ulrichsSettings = new UlrichsSettings();
-            var ulrichsImport = new UlrichsImport(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings));
+            var ulrichsImport = CreateUlrichsImport();
 
             // Act
             var journals = ulrichsImport.ParseJournals(GetUlrichsXml(), UlrichsImport.UlrichsJournalType.All);
@@ -29,8 +28,7 @@
         public void ParseJournalsWithJournalTypeIsAllAndXmlWithAlternateEditionsWillParseAllJournalsAndAlternateEditionsFromXml()
         {
             // Arrange
-            var ulrichsSettings = new UlrichsSettings();
-            var ulrichsImport = new UlrichsImport(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings));
+            var ulrichsImport = CreateUlrichsImport();
 
             // Act
             var journals = ulrichsImport.ParseJournals(GetUlrichsXmlWithAlternateEditions(), UlrichsImport.UlrichsJournalType.All);
@@ -43,8 +41,7 @@
         public void ParseJournalsWithJournalTypeIsOpenAccessAndXmlWithoutAlternateEditionsWillParseOnlyOpenAccessJournalsFromXml()
         {
             // Arrange
-            var ulrichsSettings = new UlrichsSettings();
-            var ulrichsImport = new UlrichsImport(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings));
+            var ulrichsImport = CreateUlrichsImport();
 
             // Act
             var journals = ulrichsImport.ParseJournals(GetUlrichsXml(), UlrichsImport.UlrichsJournalType.OpenAccess);
@@ -57,8 +54,7 @@
         public void ParseJournalsWithJournalTypeIsOpenAccessAndXmlWithAlternateEditionsWillParseOnlyOpenAccessJournalsFromXml()
         {
             // Arrange
-            var ulrichsSettings = new UlrichsSettings();
-            var ulrichsImport = new UlrichsImport(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings));
+            var ulrichsImport = CreateUlrichsImport();
 
             // Act
             var journals = ulrichsImport.ParseJournals(GetUlrichsXmlWithAlternateEditions(), UlrichsImport.UlrichsJournalType.OpenAccess);
@@ -71,8 +67,7 @@
         public void ParseJournalWithJournalWithoutAlternateEditionsReturnsCorrectlyParsedJournal()
         {
             // Arrange
-            var ulrichsSettings = new UlrichsSettings();
-            var ulrichsImport = new UlrichsImport(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings));
+            var ulrichsImport = CreateUlrichsImport();
 
             // Act
             var journals = ulrichsImport.ParseJournal(XElement.Parse(GetUlrichsJournalXmlWithoutAlternateEditions()));
@@ -85,8 +80,7 @@
         public void ParseJournalWithJournalWithoutAlternateEditionsReturnsOneJournal()
         {
             // Arrange
-            var ulrichsSettings = new UlrichsSettings();
-            var ulrichsImport = new UlrichsImport(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings));
+            var ulrichsImport = CreateUlrichsImport();
 
             // Act
             var journals = ulrichsImport.ParseJournal(XElement.Parse(GetUlrichsJournalXmlWithoutAlternateEditions()));
@@ -99,8 +93,7 @@
         public void ParseJournalWithJournalWithAlternateEditionsReturnsCorrectlyParsedJournal()
         {
             // Arrange
-            var ulrichsSettings = new UlrichsSettings();
-            var ulrichsImport = new UlrichsImport(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings));
+            var ulrichsImport = CreateUlrichsImport();
 
             // Act
             var journals = ulrichsImport.ParseJournal(XElement.Parse(GetUlrichsJournalXmlWithAlternateEditions()));
@@ -113,8 +106,7 @@
         public void ParseJournalWithJournalWithAlternateEditionsReturnsMultipleJournals()
         {
             // Arrange
-            var ulrichsSettings = new UlrichsSettings();
-            var ulrichsImport = new UlrichsImport(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings));
+            var ulrichsImport = CreateUlrichsImport();
 
             // Act
             var journals = ulrichsImport.ParseJournal(XElement.Parse(GetUlrichsJournalXmlWithAlternateEditions()));
@@ -127,8 +119,7 @@
         public void ParseJournalWithJournalWithCeasedAlternateEditionReturnsOneJournal()
         {
             // Arrange
-            var ulrichsSettings = new UlrichsSettings();
-            var ulrichsImport = new UlrichsImport(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings));
+            var ulrichsImport = CreateUlrichsImport();
 
             // Act
             var journals = ulrichsImport.ParseJournal(XElement.Parse(GetUlrichsJournalXmlWithCeasedAlternateEdition()));
@@ -142,8 +133,7 @@
         public void ParseJournalWithJournalWithoutPublisherReturnsJournalWithDefaultPublisherName()
         {
             // Arrange
-            var ulrichsSettings = new UlrichsSettings();
-            var ulrichsImport = new UlrichsImport(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings));
+            var ulrichsImport = CreateUlrichsImport();
 
             // Act
             var journals = ulrichsImport.ParseJournal(XElement.Parse(GetUlrichsJournalXmlWithoutPublisher()));
@@ -206,6 +196,12 @@
         private static string GetUlrichsJournalXmlWithoutPublisher()
         {
             return ResourceReader.GetContentsOfResource("ulrichsjournalwithoutpublisher.xml");
+        }
+
+        private static UlrichsImport CreateUlrichsImport()
+        {
+            var ulrichsSettings = new UlrichsSettings();
+            return new UlrichsImport(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings), Mock.Of<IBlockedISSNRepository>());
         }
     }
 }

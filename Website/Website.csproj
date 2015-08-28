@@ -228,6 +228,7 @@
     <Compile Include="App_Start\WebSecurityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="ViewModels\Journals\RemoveBlockedIssnViewModel.cs" />
     <Compile Include="Models\RequestValuationEmail.cs" />
     <Compile Include="Resources\RequestValuation.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -286,9 +287,11 @@
     <Compile Include="ViewModels\Import\UpdatedViewModel.cs" />
     <Compile Include="ViewModels\Import\UpdateViewModel.cs" />
     <Compile Include="ViewModels\Institutions\AddViewModel.cs" />
+    <Compile Include="ViewModels\Journals\BlockIssnViewModel.cs" />
     <Compile Include="ViewModels\Journals\InstitutionJournalLicenseDeleteViewModel.cs" />
     <Compile Include="ViewModels\Journals\CommentsViewModel.cs" />
     <Compile Include="ViewModels\Journals\InstitutionJournalLicenseViewModel.cs" />
+    <Compile Include="Models\IssnsAttribute.cs" />
     <Compile Include="ViewModels\PagedViewModel.cs" />
     <Compile Include="ViewModels\Journals\PricesViewModel.cs" />
     <Compile Include="ViewModels\Journals\ScoreCardsViewModel.cs" />
@@ -861,6 +864,8 @@
     <Content Include="Views\Admin\AddInstitution.cshtml" />
     <Content Include="Views\Emails\RequestValuation.cshtml" />
     <Content Include="Views\Score\RequestValuationResult.cshtml" />
+    <Content Include="Views\Admin\BlockIssn.cshtml" />
+    <Content Include="Views\Admin\RemoveBlockedIssn.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

@@ -32,6 +32,7 @@
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<BlockedISSN> BlockedISSNs { get; set; }
 
         public ObjectContext ObjectContext
         {

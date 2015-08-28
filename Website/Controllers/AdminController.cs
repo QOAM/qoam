@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Web.Mvc;
+    using System.Globalization;
 
     using AttributeRouting;
     using AttributeRouting.Web.Mvc;
@@ -17,6 +18,7 @@
     using QOAM.Website.Helpers;
     using QOAM.Website.Models;
     using QOAM.Website.ViewModels.Import;
+    using QOAM.Website.ViewModels.Journals;
     using QOAM.Website.ViewModels.Institutions;
 
     using Validation;
@@ -27,6 +29,7 @@
     {
         private const string FoundISSNsSessionKey = "FoundISSNs";
         private const string NotFoundISSNsSessionKey = "NotFoundISSNs";
+        private const int BlockedIssnsCount = 20;
 
         private readonly JournalsImport journalsImport;
         private readonly UlrichsImport ulrichsImport;
@@ -34,8 +37,9 @@
         private readonly IJournalRepository journalRepository;
         private readonly JournalsExport journalsExport;
         private readonly IInstitutionRepository institutionRepository;
+        private readonly IBlockedISSNRepository blockedIssnRepository;
 
-        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository)
+        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository)
             : base(userProfileRepository, authentication)
         {
             Requires.NotNull(journalsImport, "journalsImport");
@@ -44,6 +48,7 @@
             Requires.NotNull(journalsExport, "journalsExport");
             Requires.NotNull(journalRepository, "journalRepository");
             Requires.NotNull(institutionRepository, "institutionRepository");
+            Requires.NotNull(blockedIssnRepository, "blockedIssnRepository");
 
             this.journalsImport = journalsImport;
             this.ulrichsImport = ulrichsImport;
@@ -51,6 +56,7 @@
             this.journalsExport = journalsExport;
             this.journalRepository = journalRepository;
             this.institutionRepository = institutionRepository;
+            this.blockedIssnRepository = blockedIssnRepository;
         }
 
         [GET("")]
@@ -143,10 +149,10 @@
         public ViewResult Updated()
         {
             var model = new UpdatedViewModel
-                        {
-                            FoundISSNs = (IEnumerable<string>)this.Session[FoundISSNsSessionKey],
-                            NotFoundISSNs = (IEnumerable<string>)this.Session[NotFoundISSNsSessionKey]
-                        };
+                {
+                    FoundISSNs = (IEnumerable<string>)this.Session[FoundISSNsSessionKey],
+                    NotFoundISSNs = (IEnumerable<string>)this.Session[NotFoundISSNsSessionKey]
+                };
 
             return this.View(model);
         }
@@ -189,6 +195,7 @@
                 {
                     this.journalRepository.Delete(journal);
                 }
+
                 this.journalRepository.Save();
 
                 this.Session[FoundISSNsSessionKey] = issnsFound;
@@ -234,6 +241,68 @@
             return this.View(model);
         }
 
+        [GET("blockissn")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult BlockIssn()
+        {
+            var model = new BlockIssnViewModel { BlockedIssns = blockedIssnRepository.All.Take(BlockedIssnsCount) };
+
+            return this.View(model);
+        }
+
+        [POST("blockissn")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult BlockIssn(BlockIssnViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                foreach (var issn in ParseISSNs(model.ISSN))
+                {
+                    if (!blockedIssnRepository.Exists(issn))
+                    {
+                        this.blockedIssnRepository.InsertOrUpdate(new BlockedISSN { ISSN = issn });
+                    }
+                }
+
+                this.blockedIssnRepository.Save();
+
+                return this.RedirectToAction("BlockIssn");
+            }
+
+            model.BlockedIssns = blockedIssnRepository.All.Take(BlockedIssnsCount);
+
+            return this.View(model);
+        }
+
+        [GET("removeblockedissn")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult RemoveBlockedIssn()
+        {
+            var model = new RemoveBlockedIssnViewModel { BlockedIssns = blockedIssnRepository.All.Take(BlockedIssnsCount) };
+            return this.View(model);
+        }
+
+        [POST("removeblockedissn")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult RemoveBlockedIssn(RemoveBlockedIssnViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                foreach (var item in model.SelectedItems)
+                {
+                    blockedIssnRepository.Delete(blockedIssnRepository.Find(item));
+                }
+
+                blockedIssnRepository.Save();
+                
+                return this.RedirectToAction("RemoveBlockedIssn");
+            }
+
+            model.BlockedIssns = blockedIssnRepository.All.Take(BlockedIssnsCount);
+
+            return this.View(model);
+        }
+        
         [GET("addinstitution")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult AddInstitution()
@@ -280,7 +349,7 @@
 
         private static HashSet<string> ParseISSNs(string issns)
         {
-            return issns.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).Where(s => s.Trim().Length > 0).Select(s => s.Trim()).ToSet(StringComparer.InvariantCultureIgnoreCase);
+            return issns.ToLinesSet();
         }
 
         private IList<Journal> GetJournalsFromSource(JournalsImportSource importSource)

@@ -5,31 +5,43 @@
     using FsCheck;
     using FsCheck.Xunit;
     using Xunit;
+    using Xunit.Extensions;
 
     public class StringExtensionsTests
     {
-        private class NonNullStringsArbitrary
+        [Theory]
+        [InlineData("0378-5955")]
+        [InlineData("2090-424X")]
+        [InlineData("0024-9319")]
+        public void IsValidISSNOnValidIssnReturnsTrue(string validIssn)
         {
-            public static Arbitrary<string> String()
-            {
-                return Arb.Default.String().Generator.Where(s => s != null).ToArbitrary();
-            }
+            // Arrange
+
+            // Act
+            var isValidIssn = validIssn.IsValidISSN();
+
+            // Assert
+            Assert.True(isValidIssn);
         }
 
-        private class NonEmptyStringsArbitrary
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("1234")]
+        [InlineData("1234-")]
+        [InlineData("1234-567")]
+        [InlineData("1111-1111")]
+        [InlineData("0378-59555")]
+        public void IsValidISSNOnInvalidIssnReturnsFalse(string invalidIssn)
         {
-            public static Arbitrary<string> String()
-            {
-                return Arb.Default.String().Generator.Where(s => !string.IsNullOrEmpty(s)).ToArbitrary();
-            }
-        }
+            // Arrange
 
-        private class PositiveIntegersArbitrary
-        {
-            public static Arbitrary<int> Positive()
-            {
-                return Arb.Default.Int32().Generator.Where(n => n > 0).ToArbitrary();
-            }
+            // Act
+            var isValidIssn = invalidIssn.IsValidISSN();
+
+            // Assert
+            Assert.False(isValidIssn);
         }
 
         [Property(Arbitrary = new[] { typeof(PositiveIntegersArbitrary) })]
@@ -107,6 +119,29 @@
 
             // Assert
             Assert.Equal(string.Empty, truncated);
+        }
+        private class NonNullStringsArbitrary
+        {
+            public static Arbitrary<string> String()
+            {
+                return Arb.Default.String().Generator.Where(s => s != null).ToArbitrary();
+            }
+        }
+
+        private class NonEmptyStringsArbitrary
+        {
+            public static Arbitrary<string> String()
+            {
+                return Arb.Default.String().Generator.Where(s => !string.IsNullOrEmpty(s)).ToArbitrary();
+            }
+        }
+
+        private class PositiveIntegersArbitrary
+        {
+            public static Arbitrary<int> Positive()
+            {
+                return Arb.Default.Int32().Generator.Where(n => n > 0).ToArbitrary();
+            }
         }
     }
 }

@@ -1,0 +1,33 @@
+﻿@model QOAM.Website.ViewModels.Journals.RemoveBlockedIssnViewModel
+
+@{
+    ViewBag.Title = "Remove blocked ISSNs from blocklist";
+}
+
+<div class="container main">
+    <h2>@ViewBag.Title</h2>
+    <a class="btn btn-default return-button" title="Back to Admin" href="/admin">&lt; Back to Admin</a>
+    @using (Html.BeginForm("RemoveBlockedIssn", "Admin", FormMethod.Post, new {role = "form"}))
+    {
+        @Html.AntiForgeryToken()
+
+        <fieldset>
+            <legend>@ViewBag.Title</legend>
+
+            <div class="form-group row">
+                <div class="col-md-12">
+                    Current blocklist<br />
+                    @Html.ListBoxFor(model => model.SelectedItems, new MultiSelectList(Model.BlockedIssns, "Id", "ISSN"), new { @size = Math.Min(20, Model.BlockedIssns.Count()) })
+                    @Html.ValidationMessageFor(m => m.SelectedItems, null, new { @class = "control-label" })
+                    <br />
+                    Use CTRL or SHIFT keys to select multiple ISSNs.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" value="Remove selected ISSNs from blocklist" class="btn btn-primary" />
+                </div>
+            </div>
+        </fieldset>
+    }
+</div>

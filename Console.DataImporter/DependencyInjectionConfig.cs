@@ -21,6 +21,7 @@
 
         private static void RegisterRepositories(ContainerBuilder builder)
         {
+            builder.RegisterType<BlockedISSNRepository>().As<IBlockedISSNRepository>().SingleInstance();
             builder.RegisterType<CountryRepository>().As<ICountryRepository>().SingleInstance();
             builder.RegisterType<JournalRepository>().As<IJournalRepository>().SingleInstance();
             builder.RegisterType<LanguageRepository>().As<ILanguageRepository>().SingleInstance();

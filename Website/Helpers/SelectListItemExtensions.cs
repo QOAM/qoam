@@ -11,6 +11,13 @@
 
     public static class SelectListItemExtensions
     {
+        public static IEnumerable<SelectListItem> ToSelectListItems(this IList<BlockedISSN> blockedIssns)
+        {
+            Requires.NotNull(blockedIssns, "blockedIssns");
+
+            return blockedIssns.Select(ToSelectListItem);
+        }
+
         public static IEnumerable<SelectListItem> ToSelectListItems(this IList<Language> languages, string optionalText)
         {
             Requires.NotNull(languages, "languages");
@@ -30,6 +37,11 @@
             Requires.NotNull(institutions, "institutions");
 
             return institutions.Select(ToSelectListItem).ToOptionalSelectListItems(optionalText);
+        }
+
+        private static SelectListItem ToSelectListItem(this BlockedISSN blockedIssn)
+        {
+            return new SelectListItem { Text = blockedIssn.ISSN, Value = blockedIssn.ISSN };
         }
 
         private static SelectListItem ToSelectListItem(this Language language)

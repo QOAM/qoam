@@ -31,7 +31,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("Aims, scope, and expected readership of the journal are clearly specified on the journal’s website", localizedQuestion);
+            Assert.Equal("Aims, scope, and target audience of the journal are clearly specified on the journal’s website", localizedQuestion);
         }
 
         [Fact]

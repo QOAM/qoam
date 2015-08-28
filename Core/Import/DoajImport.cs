@@ -12,10 +12,10 @@
     using NLog;
 
     using QOAM.Core.Helpers;
-
+    using Repositories;
     using Validation;
 
-    public class DoajImport
+    public class DoajImport : Import
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -28,7 +28,7 @@
                                                                             TrimFields = true
                                                                         };
 
-        public DoajImport(DoajSettings doajSettings)
+        public DoajImport(DoajSettings doajSettings, IBlockedISSNRepository blockedIssnRepository) : base(blockedIssnRepository)
         {
             Requires.NotNull(doajSettings, "doajSettings");
             
@@ -37,7 +37,7 @@
 
         public IList<Journal> GetJournals()
         {
-            return this.ParseJournals(this.DownloadJournals());
+            return this.ExcludeBlockedIssns(this.ParseJournals(this.DownloadJournals()));
         }
 
         private string DownloadJournals()

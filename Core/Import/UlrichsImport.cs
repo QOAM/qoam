@@ -8,10 +8,10 @@
     using NLog;
 
     using QOAM.Core.Helpers;
-
+    using Repositories;
     using Validation;
 
-    public class UlrichsImport
+    public class UlrichsImport : Import
     {
         private const string MissingPublisherName = "<none indicated>";
 
@@ -20,7 +20,7 @@
         private readonly UlrichsClient ulrichsClient;
         private readonly UlrichsCache ulrichsCache;
 
-        public UlrichsImport(UlrichsClient ulrichsClient, UlrichsCache ulrichsCache)
+        public UlrichsImport(UlrichsClient ulrichsClient, UlrichsCache ulrichsCache, IBlockedISSNRepository blockedIssnRepository): base(blockedIssnRepository)
         {
             Requires.NotNull(ulrichsClient, "ulrichsClient");
             Requires.NotNull(ulrichsCache, "ulrichsCache");
@@ -39,7 +39,7 @@
         {
             this.DownloadJournals();
 
-            return this.ParseJournals(journalType);
+            return this.ExcludeBlockedIssns(this.ParseJournals(journalType));
         }
 
         private IList<Journal> ParseJournals(UlrichsJournalType journalType)

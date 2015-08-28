@@ -13,6 +13,8 @@
         @if (User.IsInRole(ApplicationRole.DataAdmin) || User.IsInRole(ApplicationRole.Admin))
         {
             <li>@Html.ActionLink("Import journals", "Import")</li>
+            <li>@Html.ActionLink("Add ISSNs to import blocklist", "BlockISSN")</li>
+            <li>@Html.ActionLink("Remove ISSNs from import blocklist", "RemoveBlockedISSN")</li>
             <li>@Html.ActionLink("Update journals", "Update")</li>
             <li>@Html.ActionLink("Download journals", "Download")</li>
             <li>@Html.ActionLink("Add institution", "AddInstitution")</li>

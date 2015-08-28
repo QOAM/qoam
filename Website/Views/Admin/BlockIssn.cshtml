@@ -1,0 +1,55 @@
+﻿@model QOAM.Website.ViewModels.Journals.BlockIssnViewModel
+
+@{
+    ViewBag.Title = "Block ISSN from import";
+}
+
+<div class="container main">
+    <h2>@ViewBag.Title</h2>
+    <a class="btn btn-default return-button" title="Back to Admin" href="/admin">&lt; Back to Admin</a>
+
+    @using (Html.BeginForm("BlockIssn", "Admin", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <fieldset>
+            <legend>@ViewBag.Title</legend>
+
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.LabelFor(m => m.ISSN, new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.TextAreaFor(m => @Model.ISSN, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ISSN, null, new { @class = "control-label" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-md-offset-2">
+                            <input type="submit" value="Add to blocklist" class="btn btn-primary"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        Current blocklist<br/>
+
+                        <ul>
+                            @foreach (var blockedIssn in Model.BlockedIssns)
+                            {
+                                <li>@blockedIssn.ISSN</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    }
+</div>
+
+@section scripts
+{
+    @Html.Partial("_FormScripts")
+}

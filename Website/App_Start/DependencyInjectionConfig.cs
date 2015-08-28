@@ -49,6 +49,7 @@
             builder.RegisterType<UserProfileRepository>().As<IUserProfileRepository>().InstancePerHttpRequest();
             builder.RegisterType<ValuationJournalPriceRepository>().As<IValuationJournalPriceRepository>().InstancePerHttpRequest();
             builder.RegisterType<ValuationScoreCardRepository>().As<IValuationScoreCardRepository>().InstancePerHttpRequest();
+            builder.RegisterType<BlockedISSNRepository>().As<IBlockedISSNRepository>().InstancePerHttpRequest();
         }
 
         private static void RegisterConfigurationSections(ContainerBuilder builder)

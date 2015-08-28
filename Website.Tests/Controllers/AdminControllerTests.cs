@@ -21,8 +21,8 @@
     public class AdminControllerTests
     {
         private const string ExpectedJournalsCsv = @"Title;ISSN;Link;DateAdded;Country;Publisher;Languages;Subjects
-027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 9:52:51;Switzerland;<none indicated>;English,German;library and information sciences
-16:9;1603-5194;http://www.16-9.dk;2-10-2013 9:52:51;Denmark;Springer;English,Danish;motion pictures,films
+027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 09:52:51;Switzerland;<none indicated>;English,German;library and information sciences
+16:9;1603-5194;http://www.16-9.dk;2-10-2013 09:52:51;Denmark;Springer;English,Danish;motion pictures,films
 ";
 
         [Fact]
@@ -34,7 +34,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(nullJournalsImport, this.CreateUlrichsClient(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(nullJournalsImport, this.CreateUlrichsClient(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>()));
         }
 
         [Fact]
@@ -46,7 +46,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), nullUlrichsImport, CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), nullUlrichsImport, CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>()));
         }
 
         [Fact]
@@ -58,7 +58,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), nullDoajImport, CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), nullDoajImport, CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>()));
         }
 
         [Fact]
@@ -70,7 +70,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), nullJournalsExport, Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), nullJournalsExport, Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>()));
         }
 
         [Fact]
@@ -82,7 +82,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), CreateJournalsExport(), nullJournalRepository, Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), CreateJournalsExport(), nullJournalRepository, Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>()));
         }
 
         [Fact]
@@ -94,7 +94,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), nullUserProfileRepository, Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), nullUserProfileRepository, Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>()));
         }
 
         [Fact]
@@ -106,7 +106,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), nullAuthentication, Mock.Of<IInstitutionRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), nullAuthentication, Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>()));
         }
 
         [Fact]
@@ -221,7 +221,7 @@
 
         private static DoajImport CreateDoajImport()
         {
-            return new DoajImport(new DoajSettings());
+            return new DoajImport(new DoajSettings(), Mock.Of<IBlockedISSNRepository>());
         }
 
         private static IJournalRepository CreateJournalsRepository(IList<Journal> journals)
@@ -264,24 +264,24 @@
 
         private AdminController CreateAdminController(IJournalRepository journalRepository)
         {
-            return new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), CreateJournalsExport(journalRepository), journalRepository, Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>());
+            return new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), CreateJournalsExport(journalRepository), journalRepository, Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>());
         }
 
         private AdminController CreateAdminController(JournalsExport journalsExport)
         {
-            return new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), journalsExport, Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>());
+            return new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), journalsExport, Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>());
         }
 
         private AdminController CreateAdminController()
         {
-            return new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>());
+            return new AdminController(CreateJournalsImport(), this.CreateUlrichsClient(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>());
         }
 
         private UlrichsImport CreateUlrichsClient()
         {
             var ulrichsSettings = new UlrichsSettings();
 
-            return new Mock<UlrichsImport>(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings)).Object;
+            return new Mock<UlrichsImport>(new UlrichsClient(ulrichsSettings), new UlrichsCache(ulrichsSettings), Mock.Of<IBlockedISSNRepository>()).Object;
         }
     }
 }
