@@ -118,7 +118,7 @@
             var institution = this.institutionRepository.All.FirstOrDefault(i => mailAddress.Host.Contains(i.ShortName));
             if (institution == null)
             {
-                this.ModelState.AddModelError("", "Sorry, the domain name in the email address of the addressee does not match the name of an academic institution known to us. If you want your institution to be included in our list, please enter it’s name and web address in our contact box and we will respond promptly.");
+                this.ModelState.AddModelError("", "Sorry, the domain name in your email address does not match the name of an academic institution known to us. If you want your institution to be included in our list, please enter it’s name and web address in our contact box and we will respond promptly.");
                 return this.View(model);
             }
 
