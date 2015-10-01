@@ -212,15 +212,14 @@
         public ViewResult RequestValuation(int id)
         {
             var journal = this.journalRepository.Find(id);
-            var resourceManager = new ResourceManager(typeof(RequestValuation));
             var model = new RequestValuationViewModel
                             {
                                 JournalId = id, 
                                 JournalTitle = journal.Title, 
                                 JournalISSN = journal.ISSN, 
-                                EmailBody = resourceManager.GetString("Body")
+                                EmailBody = Resources.RequestValuation.Body
                                                 .Replace("<<JournalTitle>>", journal.Title), 
-                                EmailSubject = resourceManager.GetString("Subject")
+                                EmailSubject = Resources.RequestValuation.Subject
                                                 .Replace("<<JournalTitle>>", journal.Title)
                                                 .Replace("<<JournalISSN>>", journal.ISSN),
                             };
