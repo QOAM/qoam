@@ -63,11 +63,7 @@ namespace QOAM.Website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Dear Sir/Madam,
         ///
-        ///You have recently published an open access article in the journal &lt;&lt;JournalTitle&gt;&gt;.
-        ///
-        ///Are you prepared to share your experiences with your colleagues? If so, please click on the link at the bottom of this message. After logging in, you will be forwarded to a Valuation Score Card for the journal. It will only take a few minutes to complete this mini-questionnaire. 
-        ///
-        ///Open access publishing is a relatively new phenomenon. More and more research funders require it and the number of open ac [rest of string was truncated]&quot;;.
+        ///Open access to research publications will be promoted worldwide during the forthcoming Open Access week. More and more research funders require it and the number of open access journals is growing rapidly. At the same time, both the quality of these journals and their publication fees vary widely. So, authors better inform themselves before submitting their article to such a journal. A place is needed where academia can share their publishing experiences. Quality Open Access Market is thi [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Body {
             get {
