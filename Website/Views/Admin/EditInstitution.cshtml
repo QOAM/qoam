@@ -1,18 +1,15 @@
 ﻿@model QOAM.Website.ViewModels.Institutions.UpsertViewModel
 
 @{
-    ViewBag.Title = "Add institution";
+    ViewBag.Title = "Edit institution";
 }
 
 <div class="container main">
     
-    <h2>@ViewBag.Title</h2>
-    
-    <p>
-        In the textbox below you can enter a new institution.
-    </p>
-    
-    @using (Html.BeginForm("AddInstitution", "Admin", FormMethod.Post, new { role = "form" }))
+    <h2>@ViewBag.Title: @Html.ActionLink(Model.Name, "Details", "Institutions", new { Model.Id }, null)</h2>
+
+    <br/>
+    @using (Html.BeginForm("EditInstitution", "Admin", FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken()
 
@@ -22,7 +19,7 @@
             @Html.Partial("_UpsertInstitution")
 
             <div class="col-lg-10 col-md-offset-2">
-                <input type="submit" value="Add" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </fieldset>
     }

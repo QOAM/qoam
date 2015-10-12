@@ -312,7 +312,7 @@
 
         [POST("addinstitution")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
-        public ActionResult AddInstitution(AddViewModel model)
+        public ActionResult AddInstitution(UpsertViewModel model)
         {
             if (this.ModelState.IsValid)
             {
@@ -330,6 +330,34 @@
         public ViewResult AddedInstitution()
         {
             return this.View();
+        }
+
+        [GET("{id:int}/editinstitution")]
+        [Authorize(Roles = ApplicationRole.Admin)]
+        public ViewResult EditInstitution(int id)
+        {
+            var institution = institutionRepository.Find(id);
+            var model = new UpsertViewModel
+            {
+                Name = institution.Name,
+                ShortName = institution.ShortName
+            };
+
+            return View(model);
+        }
+
+        [POST("{id:int}/editinstitution")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditInstitution(UpsertViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            institutionRepository.InsertOrUpdate(model.ToInstitution());
+            institutionRepository.Save();
+
+            return RedirectToAction("Index", "Institutions");
         }
 
         private static HashSet<string> GetISSNs(ImportViewModel model)

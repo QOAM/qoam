@@ -1,0 +1,20 @@
+﻿@model QOAM.Website.ViewModels.Institutions.UpsertViewModel
+
+@Html.HiddenFor(m => m.Id)
+
+<div class="form-group row">
+    @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
+    <div class="col-lg-2">
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name, null, new { @class = "control-label" })
+    </div>
+</div>
+
+<div class="form-group row">
+    @Html.LabelFor(m => m.ShortName, new { @class = "col-lg-2 control-label" })
+    <div class="col-lg-2">
+        @Html.TextBoxFor(m => m.ShortName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ShortName, null, new { @class = "control-label" })
+        <small>Without http:// or www. Just use the domain, like ru.nl.</small>
+    </div>
+</div>

@@ -2,6 +2,7 @@
 @using System.Web.Optimization
 @using PagedList.Mvc
 @using QOAM.Website.Helpers
+@using QOAM.Website.Models
 @model QOAM.Website.ViewModels.Institutions.IndexViewModel
 
 @{
@@ -67,6 +68,12 @@
                                 <td>@institution.NumberOfValuationScoreCards</td>
                                 <td>
                                     <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("View", "Details", "Institutions", new { id = institution.Id }, null)
+
+                                    @if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.DataAdmin))
+                                    {
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                        @Html.ActionLink("Edit", "EditInstitution", "Admin", new { institution.Id }, null)
+                                    }
                                 </td>
                             </tr>
                         }
