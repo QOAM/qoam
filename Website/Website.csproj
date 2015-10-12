@@ -286,7 +286,7 @@
     <Compile Include="ViewModels\Import\ImportViewModel.cs" />
     <Compile Include="ViewModels\Import\UpdatedViewModel.cs" />
     <Compile Include="ViewModels\Import\UpdateViewModel.cs" />
-    <Compile Include="ViewModels\Institutions\AddViewModel.cs" />
+    <Compile Include="ViewModels\Institutions\UpsertViewModel.cs" />
     <Compile Include="ViewModels\Journals\BlockIssnViewModel.cs" />
     <Compile Include="ViewModels\Journals\InstitutionJournalLicenseDeleteViewModel.cs" />
     <Compile Include="ViewModels\Journals\CommentsViewModel.cs" />
@@ -741,6 +741,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="ConnectionStrings.Debug.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Contact.Debug.config" />
+    <Content Include="MachineKey.Debug.config" />
+    <Content Include="NLog.Debug.config" />
     <None Include="Properties\PublishProfiles\Acceptatie.pubxml" />
     <None Include="Properties\PublishProfiles\Productie.pubxml" />
     <Content Include="Scripts\bootstrap.min.js.map">
@@ -749,6 +755,7 @@
     <Content Include="Scripts\Controllers\InstitutionsController.min.js.map">
       <DependentUpon>InstitutionsController.min.js</DependentUpon>
     </Content>
+    <Content Include="Saml2.Debug.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -866,6 +873,10 @@
     <Content Include="Views\Score\RequestValuationResult.cshtml" />
     <Content Include="Views\Admin\BlockIssn.cshtml" />
     <Content Include="Views\Admin\RemoveBlockedIssn.cshtml" />
+    <Content Include="SurfConext.Debug.config" />
+    <Content Include="Ulrichs.Debug.config" />
+    <Content Include="Views\Admin\_UpsertInstitution.cshtml" />
+    <Content Include="Views\Admin\EditInstitution.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
