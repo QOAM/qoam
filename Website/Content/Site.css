@@ -387,9 +387,10 @@ th a:hover {
 }
 
 .col-md-4 .container-inner {
-    border: solid 1px #000;
+    /*border: solid 1px #000;*/
+    border: solid 1px #428bca;
     margin: 20px;
-    padding: 10px;
+    padding: 16px;
 }
 
 .col-md-4 .container-inner:hover, .score:hover {
@@ -397,9 +398,20 @@ th a:hover {
     text-decoration: none;
 }
 
+p.sublead {
+    margin-bottom: 8px;
+}
+
 .col-md-4 .container-inner:hover, .score.nohover:hover { background: none; }
 
 a.home:hover, a.home, a.home:focus { text-decoration: none; }
+
+#highlightBox {
+    /*border-top: 1px solid #57BFFF;*/
+    border-top: 1px solid #ddddff;
+    margin-top: 32px;
+    padding-top: 24px;
+}
 
 #footer {
     background-color: #357EBD;
