@@ -56,10 +56,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CsvHelper.2.5.0\lib\net40-client\CsvHelper.dll</HintPath>
     </Reference>
-    <Reference Include="DCommon.LinqToNPOI, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LinqToNPOI.1.0.2\lib\net40\DCommon.LinqToNPOI.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
@@ -128,7 +124,9 @@
   <ItemGroup>
     <Compile Include="Helpers\StringExtensionsTests.cs" />
     <Compile Include="Helpers\ValidatorExtensionsTests.cs" />
-    <Compile Include="Import\Licenses\ExcelParserTests.cs" />
+    <Compile Include="Import\Licenses\ImportEntityConverterTests.cs" />
+    <Compile Include="Import\Licenses\LicenseFileImporterTests.cs" />
+    <Compile Include="Import\Licenses\Stubs\ImportFileStubs.cs" />
     <Compile Include="QuestionKeyExtensionsTests.cs" />
     <Compile Include="Export\JournalsExportTests.cs" />
     <Compile Include="Import\JournalIssnEqualityComparerTests.cs" />
@@ -144,6 +142,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Import\Licenses\Stubs\Invalid QOAMupload.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Import\Licenses\Stubs\QOAMupload.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
