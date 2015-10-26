@@ -1,5 +1,6 @@
 ﻿@using QOAM.Core
 @using QOAM.Website.Helpers
+@using QOAM.Website.Models
 @model QOAM.Core.Journal
 
 @{
@@ -18,7 +19,7 @@
             {
                 <a class="btn btn-default return-button" title="Back to search results" href="@ViewBag.ReturnUrl">&lt; Back to search results</a>
             }
-            
+
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <a href="@Model.Link" title="Go to website">
@@ -107,7 +108,7 @@
                             </div>
                         </div>
                     </a>
-                    
+
                     <a href="@Url.Action("JournalScoreCard", "Home")#basejournalscorecard">
                         <div class="col-md-2 pull-right">
                             <div class="score big">
@@ -118,7 +119,7 @@
 
                                 @if (Model.DoajSeal)
                                 {
-                                    <a href="https://doajournals.wordpress.com/2015/06/11/doaj-seal-is-now-live-on-the-site/" target="doaj"><img src="~/Images/doaj-seal.png" title="Accredited by DOAJ" class="doajSeal" /></a>
+                                    <a href="https://doajournals.wordpress.com/2015/06/11/doaj-seal-is-now-live-on-the-site/" target="doaj"><img src="~/Images/doaj-seal.png" title="Accredited by DOAJ" class="doajSeal"/></a>
                                 }
                             </div>
                         </div>
@@ -141,23 +142,27 @@
                                     <div class="row">
                                         <div class="col-md-2">
                                             <div class="score nohover">
-                                                @QuestionCategory.EditorialInformation.GetName():<h3>@Scores.AverageScore(Model.JournalScore.EditorialInformationScore)</h3>
+                                                @QuestionCategory.EditorialInformation.GetName():
+                                                <h3>@Scores.AverageScore(Model.JournalScore.EditorialInformationScore)</h3>
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
                                             <div class="score nohover">
-                                                @QuestionCategory.Governance:<h3>@Scores.AverageScore(Model.JournalScore.GovernanceScore)</h3>
+                                                @QuestionCategory.Governance:
+                                                <h3>@Scores.AverageScore(Model.JournalScore.GovernanceScore)</h3>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="score nohover">
-                                                @QuestionCategory.PeerReview.GetName():<h3>@Scores.AverageScore(Model.JournalScore.PeerReviewScore)</h3>
+                                                @QuestionCategory.PeerReview.GetName():
+                                                <h3>@Scores.AverageScore(Model.JournalScore.PeerReviewScore)</h3>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="score nohover">
-                                                @QuestionCategory.Process.GetName():<h3>@Scores.AverageScore(Model.JournalScore.ProcessScore)</h3>
+                                                @QuestionCategory.Process.GetName():
+                                                <h3>@Scores.AverageScore(Model.JournalScore.ProcessScore)</h3>
                                             </div>
                                         </div>
 
@@ -165,7 +170,7 @@
                                             <div class="row publish">
                                                 <div class="col-md-5a">
                                                     <a href="@Url.Action("BaseScoreCard", "Score", new { id = Model.Id })">
-                                                        <img src="~/Content/Images/rate-small.png" alt="Score this journal" />
+                                                        <img src="~/Content/Images/rate-small.png" alt="Score this journal"/>
                                                     </a>
                                                 </div>
                                                 <div class="col-md-7a">
@@ -188,7 +193,7 @@
                                             <div class="row publish">
                                                 <div class="col-md-5a">
                                                     <a href="@Url.Action("ValuationScoreCard", "Score", new { id = Model.Id })">
-                                                        <img src="~/Content/Images/rate-small.png" alt="Score this journal" />
+                                                        <img src="~/Content/Images/rate-small.png" alt="Score this journal"/>
                                                     </a>
                                                 </div>
                                                 <div class="col-md-7a">

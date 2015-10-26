@@ -10,7 +10,14 @@
     public abstract class ControllerTests<TController>
         where TController : Controller
     {
-        protected static TAttribute GetAttribute<TAttribute>(Expression<Func<TController, ActionResult>> action)
+        protected readonly GlobalFilterCollection GlobalApplicationFilters = new GlobalFilterCollection();
+
+        protected ControllerTests()
+        {
+            FilterConfig.RegisterGlobalFilters(GlobalApplicationFilters);
+        }
+
+        protected TAttribute GetAttribute<TAttribute>(Expression<Func<TController, ActionResult>> action)
             where TAttribute : Attribute
         {
             var methodCall = (MethodCallExpression)action.Body;
@@ -25,7 +32,7 @@
                 return methodCall.Method.DeclaringType.GetAttribute<TAttribute>();
             }
 
-            return GlobalFilters.Filters.Where(f => f.Instance.GetType() == typeof(TAttribute)).Select(f => f.Instance).Cast<TAttribute>().FirstOrDefault();
+            return GlobalApplicationFilters.Where(f => f.Instance.GetType() == typeof(TAttribute)).Select(f => f.Instance).Cast<TAttribute>().FirstOrDefault();
         }
     }
 }

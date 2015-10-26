@@ -1,9 +1,10 @@
 ﻿namespace QOAM.Website.Tests.Routes
 {
+    using System.Net.Http;
     using System.Web.Mvc;
 
     using MvcContrib.TestHelper;
-
+    using MvcRouteTester;
     using QOAM.Website.Controllers;
 
     using Xunit;
@@ -14,7 +15,7 @@
         public void IndexActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/".WithMethod(HttpVerbs.Get).ShouldMapTo<HomeController>(x => x.Index());
+            ApplicationRoutes.ShouldMap("~/").To<HomeController>(HttpMethod.Get, x => x.Index());
         }
 
         [Fact]
@@ -28,7 +29,7 @@
         public void AboutActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/about/".WithMethod(HttpVerbs.Get).ShouldMapTo<HomeController>(x => x.About());
+            ApplicationRoutes.ShouldMap("~/about/").To<HomeController>(HttpMethod.Get, x => x.About());
         }
 
         [Fact]
@@ -42,7 +43,7 @@
         public void OrganisationActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/organisation/".WithMethod(HttpVerbs.Get).ShouldMapTo<HomeController>(x => x.Organisation());
+            ApplicationRoutes.ShouldMap("~/organisation/").To<HomeController>(HttpMethod.Get, x => x.Organisation());
         }
 
         [Fact]
@@ -56,7 +57,7 @@
         public void PressActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/press/".WithMethod(HttpVerbs.Get).ShouldMapTo<HomeController>(x => x.Press());
+            ApplicationRoutes.ShouldMap("~/press/").To<HomeController>(HttpMethod.Get, x => x.Press());
         }
 
         [Fact]
@@ -70,7 +71,7 @@
         public void FaqActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/faq/".WithMethod(HttpVerbs.Get).ShouldMapTo<HomeController>(x => x.Faq());
+            ApplicationRoutes.ShouldMap("~/faq/").To<HomeController>(HttpMethod.Get, x => x.Faq());
         }
 
         [Fact]
@@ -85,7 +86,7 @@
         public void ContactActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/contact/".WithMethod(HttpVerbs.Get).ShouldMapTo<HomeController>(x => x.Contact());
+            ApplicationRoutes.ShouldMap("~/contact/").To<HomeController>(HttpMethod.Get, x => x.Contact());
         }
 
         [Fact]
@@ -99,7 +100,7 @@
         public void ContactSentActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/contact/sent/".WithMethod(HttpVerbs.Get).ShouldMapTo<HomeController>(x => x.ContactSent());
+            ApplicationRoutes.ShouldMap("~/contact/sent/").To<HomeController>(HttpMethod.Get, x => x.ContactSent());
         }
 
         [Fact]

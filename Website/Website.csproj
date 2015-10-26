@@ -121,6 +121,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Ploeh.AutoFixture, Version=3.36.9.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoFixture.3.36.9\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Postal">
       <HintPath>..\packages\Postal.Mvc4.1.2.0\lib\net40\Postal.dll</HintPath>
     </Reference>
@@ -228,7 +232,9 @@
     <Compile Include="App_Start\WebSecurityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="ViewModels\Institutions\MoveScoreCardsViewModel.cs" />
+    <Compile Include="ViewModels\Import\MoveScoreCardsViewModel.cs" />
+    <Compile Include="ViewModels\Import\RemoveBaseScoreCardViewModel.cs" />
+    <Compile Include="ViewModels\Import\RemoveValuationScoreCardViewModel.cs" />
     <Compile Include="ViewModels\Journals\RemoveBlockedIssnViewModel.cs" />
     <Compile Include="Models\RequestValuationEmail.cs" />
     <Compile Include="Resources\RequestValuation.Designer.cs">
@@ -870,6 +876,10 @@
     <Content Include="Views\Admin\_UpsertInstitution.cshtml" />
     <Content Include="Views\Admin\EditInstitution.cshtml" />
     <Content Include="Views\Admin\MoveScoreCards.cshtml" />
+    <Content Include="Views\Admin\RemoveBaseScoreCard.cshtml" />
+    <Content Include="Views\Admin\RemoveValuationScoreCard.cshtml" />
+    <Content Include="Views\Admin\RemovedValuationScoreCard.cshtml" />
+    <Content Include="Views\Admin\RemovedBaseScoreCard.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

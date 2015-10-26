@@ -120,6 +120,7 @@
             // Assert
             Assert.Equal(string.Empty, truncated);
         }
+
         private class NonNullStringsArbitrary
         {
             public static Arbitrary<string> String()

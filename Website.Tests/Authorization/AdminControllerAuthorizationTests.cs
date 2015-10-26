@@ -2,7 +2,7 @@
 {
     using QOAM.Website.Controllers;
     using QOAM.Website.Models;
-
+    using Website.ViewModels.Import;
     using Xunit;
     using Xunit.Extensions;
 
@@ -132,6 +132,90 @@
         {
             // Assert
             Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.MoveScoreCards((bool?)null), role));
+        }
+
+        [Theory]
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void MoveScoreCardsWithModelActionHasCorrectAuthorization(string role, bool expectedAuthorized)
+        {
+            // Assert
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.MoveScoreCards((MoveScoreCardsViewModel)null), role));
+        }
+        
+        [Theory]
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void RemoveBaseScoreCardActionHasCorrectAuthorization(string role, bool expectedAuthorized)
+        {
+            // Assert
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.RemoveBaseScoreCard(null), role));
+        }
+
+        [Theory]
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void RemoveBaseScoreCardPostActionHasCorrectAuthorization(string role, bool expectedAuthorized)
+        {
+            // Assert
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.RemoveBaseScoreCardPost(null), role));
+        }
+
+        [Theory]
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void RemovedBaseScoreCardActionHasCorrectAuthorization(string role, bool expectedAuthorized)
+        {
+            // Assert
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.RemovedBaseScoreCard(), role));
+        }
+
+        [Theory]
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void RemoveValuationScoreCardActionHasCorrectAuthorization(string role, bool expectedAuthorized)
+        {
+            // Assert
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.RemoveValuationScoreCard(null), role));
+        }
+
+        [Theory]
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void RemoveValuationScoreCardPostActionHasCorrectAuthorization(string role, bool expectedAuthorized)
+        {
+            // Assert
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.RemoveValuationScoreCardPost(null), role));
+        }
+
+        [Theory]
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void RemovedValuationScoreCardActionHasCorrectAuthorization(string role, bool expectedAuthorized)
+        {
+            // Assert
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.RemovedValuationScoreCard(), role));
         }
     }
 }

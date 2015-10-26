@@ -10,18 +10,12 @@
     public abstract class ControllerAuthorizationTests<TController> : ControllerTests<TController>
         where TController : Controller
     {
-        protected ControllerAuthorizationTests()
-        {
-            GlobalFilters.Filters.Clear();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-        }
-
-        protected static bool ActionRequiresAuthorizedUser(Expression<Func<TController, ActionResult>> action)
+        protected bool ActionRequiresAuthorizedUser(Expression<Func<TController, ActionResult>> action)
         {
             return GetAttribute<AuthorizeAttribute>(action) != null;
         }
 
-        protected static bool ActionAuthorizedForUserWithRole(Expression<Func<TController, ActionResult>> action, string role)
+        protected bool ActionAuthorizedForUserWithRole(Expression<Func<TController, ActionResult>> action, string role)
         {
             var authorizeAccessAttribute = GetAttribute<AuthorizeAttribute>(action);
 
@@ -35,7 +29,7 @@
             return roles.Contains(role);
         }
 
-        protected static bool ActionDoesNotRequireAuthorizedUser(Expression<Func<TController, ActionResult>> action)
+        protected bool ActionDoesNotRequireAuthorizedUser(Expression<Func<TController, ActionResult>> action)
         {
             return GetAttribute<AuthorizeAttribute>(action) == null;
         }

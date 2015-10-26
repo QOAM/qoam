@@ -1,9 +1,10 @@
 ﻿namespace QOAM.Website.Tests.Routes
 {
+    using System.Net.Http;
     using System.Web.Mvc;
 
     using MvcContrib.TestHelper;
-
+    using MvcRouteTester;
     using QOAM.Website.Controllers;
     using QOAM.Website.ViewModels.Profiles;
 
@@ -15,7 +16,7 @@
         public void IndexActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/profiles/".WithMethod(HttpVerbs.Get).ShouldMapTo<ProfilesController>(x => x.Index(null));
+            ApplicationRoutes.ShouldMap("~/profiles/").To<ProfilesController>(HttpMethod.Get, x => x.Index(null));
         }
 
         [Fact]
@@ -29,7 +30,7 @@
         public void DetailsActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/profiles/5/".WithMethod(HttpVerbs.Get).ShouldMapTo<ProfilesController>(x => x.Details(null));
+            ApplicationRoutes.ShouldMap("~/profiles/5/").To<ProfilesController>(HttpMethod.Get, x => x.Details(null));
         }
 
         [Fact]
@@ -43,7 +44,7 @@
         public void EditActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/profiles/5/edit/".WithMethod(HttpVerbs.Get).ShouldMapTo<ProfilesController>(x => x.Edit(5, (string)null));
+            ApplicationRoutes.ShouldMap("~/profiles/5/edit/").To<ProfilesController>(HttpMethod.Get, x => x.Edit(5, (string)null));
         }
 
         [Fact]
@@ -57,7 +58,7 @@
         public void EditActionWithModelRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/profiles/5/edit/".WithMethod(HttpVerbs.Post).ShouldMapTo<ProfilesController>(x => x.Edit(5, (EditViewModel)null));
+            ApplicationRoutes.ShouldMap("~/profiles/5/edit/").To<ProfilesController>(HttpMethod.Post, x => x.Edit(5, (EditViewModel)null));
         }
 
         [Fact]
@@ -71,7 +72,7 @@
         public void BaseScoreCardsActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/profiles/5/basescorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<ProfilesController>(x => x.BaseScoreCards(null));
+            ApplicationRoutes.ShouldMap("~/profiles/5/basescorecards/").To<ProfilesController>(HttpMethod.Get, x => x.BaseScoreCards(null));
         }
 
         [Fact]
@@ -85,7 +86,7 @@
         public void ValuationScoreCardsActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/profiles/5/valuationscorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<ProfilesController>(x => x.ValuationScoreCards(null));
+            ApplicationRoutes.ShouldMap("~/profiles/5/valuationscorecards/").To<ProfilesController>(HttpMethod.Get, x => x.ValuationScoreCards(null));
         }
 
         [Fact]
@@ -99,7 +100,7 @@
         public void NamesActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/profiles/names/".WithMethod(HttpVerbs.Get).ShouldMapTo<ProfilesController>(x => x.Names(null));
+            ApplicationRoutes.ShouldMap("~/profiles/names/").To<ProfilesController>(HttpMethod.Get, x => x.Names(null));
         }
 
         [Fact]

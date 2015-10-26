@@ -121,5 +121,14 @@
                 .Where(b => b.JournalId == oldJournal.Id)
                 .Update(b => new ValuationScoreCard { JournalId = newJournal.Id });
         }
+
+        public override void Delete(ValuationScoreCard entity)
+        {
+            this.DbContext.ValuationJournalPrices
+                .Where(b => b.ValuationScoreCardId == entity.Id)
+                .Delete();
+
+            base.Delete(entity);
+        }
     }
 }

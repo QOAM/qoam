@@ -36,7 +36,7 @@
             this.DbContext.Dispose();
         }
 
-        public void InsertOrUpdate(T entity)
+        public virtual void InsertOrUpdate(T entity)
         {
             Requires.NotNull(entity, nameof(entity));
 
@@ -50,7 +50,7 @@
             }
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             Requires.NotNull(entity, nameof(entity));
 

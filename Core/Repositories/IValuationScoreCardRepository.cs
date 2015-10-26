@@ -13,6 +13,7 @@
         ValuationScoreCard Find(int journalId, int userProfileId);
         IPagedList<ValuationScoreCard> Find(ScoreCardFilter filter);
         void InsertOrUpdate(ValuationScoreCard scoreCard);
+        void Delete(ValuationScoreCard entity);
         void Save();
         IPagedList<ValuationScoreCard> FindForUser(ScoreCardFilter filter);
         ScoreCardStats CalculateStats(UserProfile userProfile);

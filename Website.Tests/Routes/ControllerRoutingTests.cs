@@ -10,16 +10,15 @@
     public abstract class ControllerRoutingTests<TController> : ControllerTests<TController>
         where TController : Controller
     {
+        protected RouteCollection ApplicationRoutes { get; }
+
         protected ControllerRoutingTests()
         {
-            RouteTable.Routes.Clear();
-            AttributeRoutingConfig.RegisterRoutes(RouteTable.Routes);
-
-            GlobalFilters.Filters.Clear();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            ApplicationRoutes = new RouteCollection();
+            AttributeRoutingConfig.RegisterRoutes(ApplicationRoutes);
         }
 
-        protected static bool ActionRequiresHttps(Expression<Func<TController, ActionResult>> action)
+        protected bool ActionRequiresHttps(Expression<Func<TController, ActionResult>> action)
         {
             return GetAttribute<RequireHttpsAttribute>(action) != null;
         }

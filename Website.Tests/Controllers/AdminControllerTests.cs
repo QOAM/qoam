@@ -426,6 +426,364 @@
             valuationScoreCardRepository.Verify(j => j.MoveScoreCards(oldJournal, newJournal), Times.Once);
         }
 
+        [Fact]
+        public void RemoveBaseScoreCardRendersView()
+        {
+            // Arrange
+            var baseScoreCard = new BaseScoreCard { Id = 5 };
+            var baseScoreCardRepository = new Mock<IBaseScoreCardRepository>();
+            baseScoreCardRepository.Setup(b => b.Find(baseScoreCard.Id)).Returns(baseScoreCard);
+
+            var adminController = this.CreateAdminController(baseScoreCardRepository: baseScoreCardRepository.Object);
+
+            // Act
+            var actionResult = adminController.RemoveBaseScoreCard(CreateRemoveBaseScoreCardViewModel());
+
+            // Assert
+            actionResult.AssertViewRendered();
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardPassesModelArgumentToView()
+        {
+            // Arrange
+            var baseScoreCard = new BaseScoreCard { Id = 5 };
+            var baseScoreCardRepository = new Mock<IBaseScoreCardRepository>();
+            baseScoreCardRepository.Setup(b => b.Find(baseScoreCard.Id)).Returns(baseScoreCard);
+
+            var adminController = this.CreateAdminController(baseScoreCardRepository: baseScoreCardRepository.Object);
+
+            var removeBaseScoreCardViewModel = CreateRemoveBaseScoreCardViewModel();
+
+            // Act
+            var actionResult = adminController.RemoveBaseScoreCard(removeBaseScoreCardViewModel);
+
+            // Assert
+            Assert.Same(removeBaseScoreCardViewModel, actionResult.AssertViewRendered().WithViewData<RemoveBaseScoreCardViewModel>());
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardWithUnknownIdReturnsNotFound()
+        {
+            // Arrange
+            var baseScoreCardRepository = new Mock<IBaseScoreCardRepository>();
+            baseScoreCardRepository.Setup(b => b.Find(It.IsAny<int>())).Returns((BaseScoreCard)null);
+
+            var adminController = this.CreateAdminController(baseScoreCardRepository: baseScoreCardRepository.Object);
+
+            // Act
+            var actionResult = adminController.RemoveBaseScoreCard(CreateRemoveBaseScoreCardViewModel());
+
+            // Assert
+            actionResult.AssertResultIs<HttpNotFoundResult>();
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardPostWithUnknownIdReturnsNotFound()
+        {
+            // Arrange
+            var baseScoreCardRepository = new Mock<IBaseScoreCardRepository>();
+            baseScoreCardRepository.Setup(b => b.Find(It.IsAny<int>())).Returns((BaseScoreCard)null);
+
+            var adminController = this.CreateAdminController(baseScoreCardRepository: baseScoreCardRepository.Object);
+
+            // Act
+            var actionResult = adminController.RemoveBaseScoreCardPost(CreateRemoveBaseScoreCardViewModel());
+
+            // Assert
+            actionResult.AssertResultIs<HttpNotFoundResult>();
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardPostWithInvalidModelRendersView()
+        {
+            // Arrange
+            var baseScoreCard = new BaseScoreCard { Id = 5 };
+            var baseScoreCardRepository = new Mock<IBaseScoreCardRepository>();
+            baseScoreCardRepository.Setup(b => b.Find(baseScoreCard.Id)).Returns(baseScoreCard);
+
+            var adminController = this.CreateAdminController(baseScoreCardRepository: baseScoreCardRepository.Object);
+            adminController.ModelState.AddModelError("ISSNs", "Empty");
+
+            // Act
+            var actionResult = adminController.RemoveBaseScoreCardPost(CreateRemoveBaseScoreCardViewModel());
+
+            // Assert
+            actionResult.AssertViewRendered();
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardPosttWithInvalidModelPassesModelArgumentToView()
+        {
+            // Arrange
+            var baseScoreCard = new BaseScoreCard { Id = 5 };
+            var baseScoreCardRepository = new Mock<IBaseScoreCardRepository>();
+            baseScoreCardRepository.Setup(b => b.Find(baseScoreCard.Id)).Returns(baseScoreCard);
+
+            var adminController = this.CreateAdminController(baseScoreCardRepository: baseScoreCardRepository.Object);
+            adminController.ModelState.AddModelError("ISSNs", "Empty");
+
+            var removeBaseScoreCardViewModel = CreateRemoveBaseScoreCardViewModel();
+
+            // Act
+            var actionResult = adminController.RemoveBaseScoreCardPost(removeBaseScoreCardViewModel);
+
+            // Assert
+            Assert.Same(removeBaseScoreCardViewModel, actionResult.AssertViewRendered().WithViewData<RemoveBaseScoreCardViewModel>());
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardPostWithValidModelRedirectsToRemovedBaseScoreCardAction()
+        {
+            // Arrange
+            var baseScoreCard = new BaseScoreCard { Id = 5 };
+            var baseScoreCardRepository = new Mock<IBaseScoreCardRepository>();
+            baseScoreCardRepository.Setup(b => b.Find(baseScoreCard.Id)).Returns(baseScoreCard);
+
+            var adminController = this.CreateAdminController(baseScoreCardRepository: baseScoreCardRepository.Object);
+
+            // Act
+            var actionResult = adminController.RemoveBaseScoreCardPost(new RemoveBaseScoreCardViewModel { Id = baseScoreCard.Id });
+
+            // Assert
+            actionResult.AssertActionRedirect().ToAction("RemovedBaseScoreCard");
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardPostWithUnknownIdDoesNotRemoveBaseScoreCard()
+        {
+            // Arrange
+            var removeBaseScoreCardViewModel = CreateRemoveBaseScoreCardViewModel();
+
+            var baseScoreCardRepository = new Mock<IBaseScoreCardRepository>();
+            baseScoreCardRepository.Setup(j => j.Find(It.IsAny<int>())).Returns((BaseScoreCard)null);
+
+            var adminController = this.CreateAdminController(baseScoreCardRepository: baseScoreCardRepository.Object);
+
+            // Act
+            adminController.RemoveBaseScoreCardPost(removeBaseScoreCardViewModel);
+
+            // Assert
+            baseScoreCardRepository.Verify(b => b.Delete(It.IsAny<BaseScoreCard>()), Times.Never);
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardPostWithValidModelDeletesBaseScoreCardWithSpecifiedId()
+        {
+            // Arrange
+            var removeBaseScoreCardViewModel = CreateRemoveBaseScoreCardViewModel();
+            var baseScoreCard = new BaseScoreCard();
+
+            var baseScoreCardRepository = new Mock<IBaseScoreCardRepository>();
+            baseScoreCardRepository.Setup(j => j.Find(removeBaseScoreCardViewModel.Id)).Returns(baseScoreCard);
+
+            var adminController = this.CreateAdminController(baseScoreCardRepository: baseScoreCardRepository.Object);
+
+            // Act
+            adminController.RemoveBaseScoreCardPost(removeBaseScoreCardViewModel);
+
+            // Assert
+            baseScoreCardRepository.Verify(b => b.Delete(baseScoreCard), Times.Once);
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardPostWithValidModelSavesChanges()
+        {
+            // Arrange
+            var removeBaseScoreCardViewModel = CreateRemoveBaseScoreCardViewModel();
+            var baseScoreCard = new BaseScoreCard();
+
+            var baseScoreCardRepository = new Mock<IBaseScoreCardRepository>();
+            baseScoreCardRepository.Setup(j => j.Find(removeBaseScoreCardViewModel.Id)).Returns(baseScoreCard);
+
+            var adminController = this.CreateAdminController(baseScoreCardRepository: baseScoreCardRepository.Object);
+
+            // Act
+            adminController.RemoveBaseScoreCardPost(removeBaseScoreCardViewModel);
+
+            // Assert
+            baseScoreCardRepository.Verify(b => b.Save(), Times.Once);
+        }
+
+        [Fact]
+        public void RemoveValuationScoreCardRendersView()
+        {
+            // Arrange
+            var valuationScoreCard = new ValuationScoreCard { Id = 7 };
+            var valuationScoreCardRepository = new Mock<IValuationScoreCardRepository>();
+            valuationScoreCardRepository.Setup(b => b.Find(valuationScoreCard.Id)).Returns(valuationScoreCard);
+
+            var adminController = this.CreateAdminController(valuationScoreCardRepository: valuationScoreCardRepository.Object);
+
+            // Act
+            var actionResult = adminController.RemoveValuationScoreCard(CreateRemoveValuationScoreCardViewModel());
+
+            // Assert
+            actionResult.AssertViewRendered();
+        }
+        
+        [Fact]
+        public void RemoveValuationScoreCardPassesModelArgumentToView()
+        {
+            // Arrange
+            var valuationScoreCard = new ValuationScoreCard { Id = 7 };
+            var valuationScoreCardRepository = new Mock<IValuationScoreCardRepository>();
+            valuationScoreCardRepository.Setup(b => b.Find(valuationScoreCard.Id)).Returns(valuationScoreCard);
+
+            var adminController = this.CreateAdminController(valuationScoreCardRepository: valuationScoreCardRepository.Object);
+
+            var removeValuationScoreCardViewModel = CreateRemoveValuationScoreCardViewModel();
+
+            // Act
+            var actionResult = adminController.RemoveValuationScoreCard(removeValuationScoreCardViewModel);
+
+            // Assert
+            Assert.Same(removeValuationScoreCardViewModel, actionResult.AssertViewRendered().WithViewData<RemoveValuationScoreCardViewModel>());
+        }
+        
+        [Fact]
+        public void RemoveValuationScoreCardWithUnknownIdReturnsNotFound()
+        {
+            // Arrange
+            var valuationScoreCardRepository = new Mock<IValuationScoreCardRepository>();
+            valuationScoreCardRepository.Setup(b => b.Find(It.IsAny<int>())).Returns((ValuationScoreCard)null);
+
+            var adminController = this.CreateAdminController(valuationScoreCardRepository: valuationScoreCardRepository.Object);
+
+            // Act
+            var actionResult = adminController.RemoveValuationScoreCard(CreateRemoveValuationScoreCardViewModel());
+
+            // Assert
+            actionResult.AssertResultIs<HttpNotFoundResult>();
+        }
+
+        [Fact]
+        public void RemoveValuationScoreCardPostWithUnknownIdReturnsNotFound()
+        {
+            // Arrange
+            var valuationScoreCardRepository = new Mock<IValuationScoreCardRepository>();
+            valuationScoreCardRepository.Setup(b => b.Find(It.IsAny<int>())).Returns((ValuationScoreCard)null);
+
+            var adminController = this.CreateAdminController(valuationScoreCardRepository: valuationScoreCardRepository.Object);
+
+            // Act
+            var actionResult = adminController.RemoveValuationScoreCardPost(CreateRemoveValuationScoreCardViewModel());
+
+            // Assert
+            actionResult.AssertResultIs<HttpNotFoundResult>();
+        }
+
+        [Fact]
+        public void RemoveValuationScoreCardPostWithInvalidModelRendersView()
+        {
+            // Arrange
+            var valuationScoreCard = new ValuationScoreCard { Id = 7 };
+            var valuationScoreCardRepository = new Mock<IValuationScoreCardRepository>();
+            valuationScoreCardRepository.Setup(b => b.Find(valuationScoreCard.Id)).Returns(valuationScoreCard);
+
+            var adminController = this.CreateAdminController(valuationScoreCardRepository: valuationScoreCardRepository.Object);
+            adminController.ModelState.AddModelError("ISSNs", "Empty");
+
+            // Act
+            var actionResult = adminController.RemoveValuationScoreCardPost(CreateRemoveValuationScoreCardViewModel());
+
+            // Assert
+            actionResult.AssertViewRendered();
+        }
+
+        [Fact]
+        public void RemoveValuationScoreCardPostWithInvalidModelPassesModelArgumentToView()
+        {
+            // Arrange
+            var valuationScoreCard = new ValuationScoreCard { Id = 7 };
+            var valuationScoreCardRepository = new Mock<IValuationScoreCardRepository>();
+            valuationScoreCardRepository.Setup(b => b.Find(valuationScoreCard.Id)).Returns(valuationScoreCard);
+
+            var adminController = this.CreateAdminController(valuationScoreCardRepository: valuationScoreCardRepository.Object);
+            adminController.ModelState.AddModelError("ISSNs", "Empty");
+
+            var removeValuationScoreCardViewModel = CreateRemoveValuationScoreCardViewModel();
+
+            // Act
+            var actionResult = adminController.RemoveValuationScoreCardPost(removeValuationScoreCardViewModel);
+
+            // Assert
+            Assert.Same(removeValuationScoreCardViewModel, actionResult.AssertViewRendered().WithViewData<RemoveValuationScoreCardViewModel>());
+        }
+
+        [Fact]
+        public void RemoveValuationScoreCardPostWithValidModelRedirectsToRemovedValuationScoreCardAction()
+        {
+            // Arrange
+            var valuationScoreCard = new ValuationScoreCard { Id = 7 };
+            var valuationScoreCardRepository = new Mock<IValuationScoreCardRepository>();
+            valuationScoreCardRepository.Setup(b => b.Find(valuationScoreCard.Id)).Returns(valuationScoreCard);
+
+            var adminController = this.CreateAdminController(valuationScoreCardRepository: valuationScoreCardRepository.Object);
+
+            // Act
+            var actionResult = adminController.RemoveValuationScoreCardPost(new RemoveValuationScoreCardViewModel { Id = valuationScoreCard.Id });
+
+            // Assert
+            actionResult.AssertActionRedirect().ToAction("RemovedValuationScoreCard");
+        }
+
+        [Fact]
+        public void RemoveValuationScoreCardPostWithUnknownIdDoesNotRemoveValuationScoreCard()
+        {
+            // Arrange
+            var removeValuationScoreCardViewModel = CreateRemoveValuationScoreCardViewModel();
+
+            var valuationScoreCardRepository = new Mock<IValuationScoreCardRepository>();
+            valuationScoreCardRepository.Setup(j => j.Find(It.IsAny<int>())).Returns((ValuationScoreCard)null);
+
+            var adminController = this.CreateAdminController(valuationScoreCardRepository: valuationScoreCardRepository.Object);
+
+            // Act
+            adminController.RemoveValuationScoreCardPost(removeValuationScoreCardViewModel);
+
+            // Assert
+            valuationScoreCardRepository.Verify(b => b.Delete(It.IsAny<ValuationScoreCard>()), Times.Never);
+        }
+
+        [Fact]
+        public void RemoveValuationScoreCardPostWithValidModelDeletesValuationScoreCardWithSpecifiedId()
+        {
+            // Arrange
+            var removeValuationScoreCardViewModel = CreateRemoveValuationScoreCardViewModel();
+            var valuationScoreCard = new ValuationScoreCard();
+
+            var valuationScoreCardRepository = new Mock<IValuationScoreCardRepository>();
+            valuationScoreCardRepository.Setup(j => j.Find(removeValuationScoreCardViewModel.Id)).Returns(valuationScoreCard);
+
+            var adminController = this.CreateAdminController(valuationScoreCardRepository: valuationScoreCardRepository.Object);
+
+            // Act
+            adminController.RemoveValuationScoreCardPost(removeValuationScoreCardViewModel);
+
+            // Assert
+            valuationScoreCardRepository.Verify(b => b.Delete(valuationScoreCard), Times.Once);
+        }
+        
+        [Fact]
+        public void RemoveValuationScoreCardPostWithValidModelSavesChanges()
+        {
+            // Arrange
+            var removeValuationScoreCardViewModel = CreateRemoveValuationScoreCardViewModel();
+            var valuationScoreCard = new ValuationScoreCard();
+
+            var valuationScoreCardRepository = new Mock<IValuationScoreCardRepository>();
+            valuationScoreCardRepository.Setup(j => j.Find(removeValuationScoreCardViewModel.Id)).Returns(valuationScoreCard);
+
+            var adminController = this.CreateAdminController(valuationScoreCardRepository: valuationScoreCardRepository.Object);
+
+            // Act
+            adminController.RemoveValuationScoreCardPost(removeValuationScoreCardViewModel);
+
+            // Assert
+            valuationScoreCardRepository.Verify(b => b.Save(), Times.Once);
+        }
+        
         private static JournalsImport CreateJournalsImport()
         {
             return new JournalsImport(Mock.Of<IJournalRepository>(), Mock.Of<ILanguageRepository>(), Mock.Of<ICountryRepository>(), Mock.Of<ISubjectRepository>(), Mock.Of<IPublisherRepository>(), new GeneralImportSettings());
@@ -527,6 +885,16 @@
                            Subjects = new List<Subject> { new Subject { Name = "motion pictures" }, new Subject { Name = "films" } }
                        }
                    };
+        }
+
+        private static RemoveBaseScoreCardViewModel CreateRemoveBaseScoreCardViewModel()
+        {
+            return new RemoveBaseScoreCardViewModel { Id = 5 };
+        }
+
+        private static RemoveValuationScoreCardViewModel CreateRemoveValuationScoreCardViewModel()
+        {
+            return new RemoveValuationScoreCardViewModel { Id = 7 };
         }
     }
 }

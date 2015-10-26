@@ -1,9 +1,7 @@
 ﻿namespace QOAM.Website.Tests.Routes
 {
-    using System.Web.Mvc;
-
-    using MvcContrib.TestHelper;
-
+    using System.Net.Http;
+    using MvcRouteTester;
     using QOAM.Website.Controllers;
 
     using Xunit;
@@ -14,7 +12,7 @@
         public void IndexActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/institutions/".WithMethod(HttpVerbs.Get).ShouldMapTo<InstitutionsController>(x => x.Index(null));
+            ApplicationRoutes.ShouldMap("~/institutions/").To<InstitutionsController>(HttpMethod.Get, x => x.Index(null));
         }
 
         [Fact]
@@ -28,7 +26,7 @@
         public void DetailsActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/institutions/5/".WithMethod(HttpVerbs.Get).ShouldMapTo<InstitutionsController>(x => x.Details(null));
+            ApplicationRoutes.ShouldMap("~/institutions/5/").To<InstitutionsController>(HttpMethod.Get, x => x.Details(null));
         }
 
         [Fact]
@@ -42,7 +40,7 @@
         public void NamesActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/institutions/names/".WithMethod(HttpVerbs.Get).ShouldMapTo<InstitutionsController>(x => x.Names(null));
+            ApplicationRoutes.ShouldMap("~/institutions/names/").To<InstitutionsController>(HttpMethod.Get, x => x.Names(null));
         }
 
         [Fact]

@@ -408,6 +408,94 @@ namespace QOAM.Website.Controllers
             return View();
         }
 
+        [GET("removebasescorecard/{id:int}")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult RemoveBaseScoreCard(RemoveBaseScoreCardViewModel model)
+        {
+            var baseScoreCard = baseScoreCardRepository.Find(model.Id);
+
+            if (baseScoreCard == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(model);
+        }
+
+        [POST("removebasescorecard/{id:int}")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveBaseScoreCardPost(RemoveBaseScoreCardViewModel model)
+        {
+            var baseScoreCard = baseScoreCardRepository.Find(model.Id);
+
+            if (baseScoreCard == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                baseScoreCardRepository.Delete(baseScoreCard);
+                baseScoreCardRepository.Save();
+
+                return RedirectToAction("RemovedBaseScoreCard");
+            }
+
+            return View("RemoveBaseScoreCard", model);
+        }
+
+        [GET("removedbasescorecard")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult RemovedBaseScoreCard()
+        {
+            return View();
+        }
+
+        [GET("removevaluationscorecard/{id:int}")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult RemoveValuationScoreCard(RemoveValuationScoreCardViewModel model)
+        {
+            var valuationScoreCard = valuationScoreCardRepository.Find(model.Id);
+
+            if (valuationScoreCard == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(model);
+        }
+
+        [POST("removevaluationscorecard/{id:int}")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveValuationScoreCardPost(RemoveValuationScoreCardViewModel model)
+        {
+            var valuationScoreCard = valuationScoreCardRepository.Find(model.Id);
+
+            if (valuationScoreCard == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                valuationScoreCardRepository.Delete(valuationScoreCard);
+                valuationScoreCardRepository.Save();
+
+                return RedirectToAction("RemovedValuationScoreCard");
+            }
+
+            return View("RemoveValuationScoreCard", model);
+        }
+
+        [GET("removedvaluationscorecard")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult RemovedValuationScoreCard()
+        {
+            return View();
+        }
+
         private static HashSet<string> GetISSNs(ImportViewModel model)
         {
             return ParseISSNs(model.ISSNs);

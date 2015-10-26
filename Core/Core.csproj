@@ -179,6 +179,10 @@
     <Compile Include="Migrations\201510261346187_MoveScoreCards.Designer.cs">
       <DependentUpon>201510261346187_MoveScoreCards.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510270856032_RemoveScoreCards.cs" />
+    <Compile Include="Migrations\201510270856032_RemoveScoreCards.Designer.cs">
+      <DependentUpon>201510270856032_RemoveScoreCards.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\IBlockedISSNRepository.cs" />
@@ -352,6 +356,9 @@
     <EmbeddedResource Include="Migrations\201510261346187_MoveScoreCards.resx">
       <DependentUpon>201510261346187_MoveScoreCards.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510270856032_RemoveScoreCards.resx">
+      <DependentUpon>201510270856032_RemoveScoreCards.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
@@ -387,6 +394,8 @@
     <EmbeddedResource Include="Scripts\UpdateTotalNumberOfScoreCards.sql" />
     <EmbeddedResource Include="Scripts\20151026_Trigger_ValuationScorecards.Published.sql" />
     <EmbeddedResource Include="Scripts\20151026_Trigger_BaseScorecards.Published.sql" />
+    <EmbeddedResource Include="Scripts\20151027_Trigger_BaseScorecards.Deleted.sql" />
+    <EmbeddedResource Include="Scripts\20151027_Trigger_ValuationScorecards.Deleted.sql" />
     <Content Include="Scripts\CleanupAfterUlrichs.sql" />
     <EmbeddedResource Include="Scripts\201403171503325_InitialCreate_function_MinimumFloat.sql" />
   </ItemGroup>

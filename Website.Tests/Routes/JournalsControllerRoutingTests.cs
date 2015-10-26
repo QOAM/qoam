@@ -1,9 +1,10 @@
 ﻿namespace QOAM.Website.Tests.Routes
 {
+    using System.Net.Http;
     using System.Web.Mvc;
 
     using MvcContrib.TestHelper;
-
+    using MvcRouteTester;
     using QOAM.Website.Controllers;
     using QOAM.Website.ViewModels.Journals;
 
@@ -15,7 +16,7 @@
         public void IndexActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.Index(null));
+            ApplicationRoutes.ShouldMap("~/journals/").To<JournalsController>(HttpMethod.Get, x => x.Index(null));
         }
 
         [Fact]
@@ -29,7 +30,7 @@
         public void PricesActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/prices/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.Prices(null));
+            ApplicationRoutes.ShouldMap("~/journals/5/prices/").To<JournalsController>(HttpMethod.Get, x => x.Prices(null));
         }
 
         [Fact]
@@ -43,7 +44,7 @@
         public void BaseJournalPricesActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/basejournalprices/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.BaseJournalPrices(null));
+            ApplicationRoutes.ShouldMap("~/journals/5/basejournalprices/").To<JournalsController>(HttpMethod.Get, x => x.BaseJournalPrices(null));
         }
 
         [Fact]
@@ -57,7 +58,7 @@
         public void ValuationJournalPricesActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/valuationjournalprices/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.ValuationJournalPrices(null));
+            ApplicationRoutes.ShouldMap("~/journals/5/valuationjournalprices/").To<JournalsController>(HttpMethod.Get, x => x.ValuationJournalPrices(null));
         }
 
         [Fact]
@@ -71,7 +72,7 @@
         public void InstitutionJournalPricesActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/institutionalprices/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.InstitutionJournalPrices(null));
+            ApplicationRoutes.ShouldMap("~/journals/5/institutionalprices/").To<JournalsController>(HttpMethod.Get, x => x.InstitutionJournalPrices(null));
         }
 
         [Fact]
@@ -85,7 +86,7 @@
         public void BaseScoreCardsActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/basescorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.BaseScoreCards(null));
+            ApplicationRoutes.ShouldMap("~/journals/5/basescorecards/").To<JournalsController>(HttpMethod.Get, x => x.BaseScoreCards(null));
         }
 
         [Fact]
@@ -99,7 +100,7 @@
         public void ValuationScoreCardsActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/valuationscorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.ValuationScoreCards(null));
+            ApplicationRoutes.ShouldMap("~/journals/5/valuationscorecards/").To<JournalsController>(HttpMethod.Get, x => x.ValuationScoreCards(null));
         }
 
         [Fact]
@@ -113,7 +114,7 @@
         public void CommentsActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/comments/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.Comments(null));
+            ApplicationRoutes.ShouldMap("~/journals/5/comments/").To<JournalsController>(HttpMethod.Get, x => x.Comments(null));
         }
 
         [Fact]
@@ -127,35 +128,35 @@
         public void InstitutionJournalLicenseActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/institutionjournallicense/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.InstitutionJournalLicense(5, 1, (string)null));
+            ApplicationRoutes.ShouldMap("~/journals/5/institutionjournallicense/").To<JournalsController>(HttpMethod.Get, x => x.InstitutionJournalLicense(5, 1, null));
         }
 
         [Fact]
         public void InstitutionJournalLicenseActionDoesNotRequireHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.InstitutionJournalLicense(5, 1, (string)null)));
+            Assert.False(ActionRequiresHttps(x => x.InstitutionJournalLicense(5, 1, null)));
         }
 
         [Fact]
         public void InstitutionJournalLicenseActionWithModelRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/5/institutionjournallicense/".WithMethod(HttpVerbs.Post).ShouldMapTo<JournalsController>(x => x.InstitutionJournalLicense(5, (InstitutionJournalLicenseViewModel)null));
+            ApplicationRoutes.ShouldMap("~/journals/5/institutionjournallicense/").To<JournalsController>(HttpMethod.Post, x => x.InstitutionJournalLicense(5, null));
         }
 
         [Fact]
         public void InstitutionJournalLicenseActionWithModelDoesNotRequireHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.InstitutionJournalLicense(5, (InstitutionJournalLicenseViewModel)null)));
+            Assert.False(ActionRequiresHttps(x => x.InstitutionJournalLicense(5, null)));
         }
 
         [Fact]
         public void TitlesActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/titles/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.Titles(null));
+            ApplicationRoutes.ShouldMap("~/journals/titles/").To<JournalsController>(HttpMethod.Get, x => x.Titles(null));
         }
 
         [Fact]
@@ -169,7 +170,7 @@
         public void IssnsActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/issns/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.Issns(null));
+            ApplicationRoutes.ShouldMap("~/journals/issns/").To<JournalsController>(HttpMethod.Get, x => x.Issns(null));
         }
 
         [Fact]
@@ -183,7 +184,7 @@
         public void PublishersActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/journals/publishers/".WithMethod(HttpVerbs.Get).ShouldMapTo<JournalsController>(x => x.Publishers(null));
+            ApplicationRoutes.ShouldMap("~/journals/publishers/").To<JournalsController>(HttpMethod.Get, x => x.Publishers(null));
         }
 
         [Fact]

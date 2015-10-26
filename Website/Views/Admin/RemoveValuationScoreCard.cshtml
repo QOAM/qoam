@@ -1,0 +1,33 @@
+﻿@model QOAM.Website.ViewModels.Import.RemoveValuationScoreCardViewModel
+
+@{
+    ViewBag.Title = "Remove valuation score card";
+}
+
+<div class="container main">
+
+    <h2>@ViewBag.Title</h2>
+
+    <p>
+        Are you sure you want to remove @Html.ActionLink("this valuation score card", "ValuationScoreCardDetails", "Score", new { id = Model.Id }, null) ?
+    </p>
+
+    @using (Html.BeginForm("RemoveValuationScoreCardPost", "Admin", new { id = Model.Id }, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+
+        <fieldset>
+            <legend>@ViewBag.Title</legend>
+
+            <div class="col-lg-10 col-md-offset-2">
+                <input type="submit" value="Remove" class="btn btn-primary" />
+            </div>
+        </fieldset>
+    }
+</div>
+
+@section scripts
+{
+    @Html.Partial("_FormScripts")
+}

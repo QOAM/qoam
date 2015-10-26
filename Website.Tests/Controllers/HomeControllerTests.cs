@@ -6,7 +6,7 @@
     using System.Web.Mvc;
 
     using Moq;
-
+    using MvcContrib.TestHelper;
     using QOAM.Core.Repositories;
     using QOAM.Core.Services;
     using QOAM.Website.Controllers;
@@ -25,7 +25,7 @@
         private const string ContactName = "contact name";
 
         [Fact]
-        public async void ContactPostWithValidModelStateWillSendMailMessage()
+        public async Task ContactPostWithValidModelStateWillSendMailMessage()
         {
             // Arrange
             var mailSenderMock = new Mock<IMailSender>();
@@ -39,35 +39,34 @@
                                                                  a.Subject == ContactFormSubject &&
                                                                  a.Body == ContactFormMessage &&
                                                                  a.To[0].Address == ContactFormTo &&
-                                                                 a.Sender.Address == ContactFormEmail &&
-                                                                 a.Sender.DisplayName == ContactName)));
+                                                                 a.From.Address == ContactFormEmail &&
+                                                                 a.From.DisplayName == ContactName)), Times.Once);
         }
 
         [Fact]
-        public async void ContactPostAfterSendingMailWillRedirectToContactSentAction()
+        public async Task ContactPostAfterSendingMailWillRedirectToContactSentAction()
         {
             // Arrange
-            var homeController = new HomeController(Mock.Of<IJournalRepository>(), Mock.Of<IMailSender>(), new ContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = new HomeController(Mock.Of<IJournalRepository>(), Mock.Of<IMailSender>(), CreateContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
 
             // Act
-            var actionResult = (RedirectToRouteResult)await homeController.Contact(new ContactViewModel());
+            var actionResult = await homeController.Contact(CreateContactViewModel());
 
             // Assert
-            Assert.Equal("Home", actionResult.RouteValues["controller"]);
-            Assert.Equal("ContactSent", actionResult.RouteValues["action"]);
+            actionResult.AssertActionRedirect().ToAction("ContactSent");
         }
 
         [Fact]
-        public async void ContactPostWithErrorInMailSenderReturnsViewWithModelError()
+        public async Task ContactPostWithErrorInMailSenderReturnsViewWithModelError()
         {
             // Arrange
             var mailSenderMock = new Mock<IMailSender>();
             mailSenderMock.Setup(m => m.Send(It.IsAny<MailMessage>())).Throws<InvalidOperationException>();
 
-            var homeController = new HomeController(Mock.Of<IJournalRepository>(), mailSenderMock.Object, new ContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = new HomeController(Mock.Of<IJournalRepository>(), mailSenderMock.Object, CreateContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
 
             // Act
-            await homeController.Contact(new ContactViewModel());
+            await homeController.Contact(CreateContactViewModel());
 
             // Assert
             Assert.False(homeController.ModelState.IsValid);
@@ -78,25 +77,25 @@
         {
             // Arrange
             var mailSenderMock = new Mock<IMailSender>();
-            var homeController = new HomeController(Mock.Of<IJournalRepository>(), mailSenderMock.Object, new ContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = new HomeController(Mock.Of<IJournalRepository>(), mailSenderMock.Object, CreateContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
             homeController.ModelState.AddModelError("key", "error message");
 
             // Act
-            await homeController.Contact(new ContactViewModel());
+            await homeController.Contact(CreateContactViewModel());
 
             // Assert
             mailSenderMock.Verify(m => m.Send(It.IsAny<MailMessage>()), Times.Never());
         }
 
         [Fact]
-        public async void ContactPostWithInvalidModelStateWillRenderView()
+        public async Task ContactPostWithInvalidModelStateWillRenderView()
         {
             // Arrange
-            var homeController = new HomeController(Mock.Of<IJournalRepository>(), Mock.Of<IMailSender>(), new ContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = new HomeController(Mock.Of<IJournalRepository>(), Mock.Of<IMailSender>(), CreateContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
             homeController.ModelState.AddModelError("key", "error message");
 
             // Act
-            var actionResult = await homeController.Contact(new ContactViewModel());
+            var actionResult = await homeController.Contact(CreateContactViewModel());
 
             // Assert
             Assert.IsType<ViewResult>(actionResult);

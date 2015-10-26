@@ -34,18 +34,6 @@
         }
 
         [Fact]
-        public void ValidateWithValidObjectDoesNotThrowException()
-        {
-            // Arrange
-            var entity = TestableEntity.CreateValidEntity();
-
-            // Act
-
-            // Assert
-            Assert.DoesNotThrow(entity.Validate);
-        }
-
-        [Fact]
         public void IsValidOnNullInstanceThrowsArgumentNullException()
         {
             // Arrange

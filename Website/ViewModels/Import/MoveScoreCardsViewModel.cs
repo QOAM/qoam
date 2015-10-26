@@ -1,4 +1,4 @@
-﻿namespace QOAM.Website.ViewModels.Institutions
+﻿namespace QOAM.Website.ViewModels.Import
 {
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;

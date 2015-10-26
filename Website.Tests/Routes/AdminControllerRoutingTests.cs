@@ -1,11 +1,9 @@
 ﻿namespace QOAM.Website.Tests.Routes
 {
-    using System.Web.Mvc;
-
-    using MvcContrib.TestHelper;
-
+    using System.Net.Http;
+    using MvcRouteTester;
     using QOAM.Website.Controllers;
-    using Website.ViewModels.Institutions;
+    using Website.ViewModels.Import;
     using Xunit;
 
     public class AdminControllerRoutingTests : ControllerRoutingTests<AdminController>
@@ -13,8 +11,8 @@
         [Fact]
         public void IndexActionRoutedToWithCorrectUrlAndVerb()
         {
-            // Assert    
-            "~/admin/".WithMethod(HttpVerbs.Get).ShouldMapTo<AdminController>(x => x.Index());
+            // Assert
+            ApplicationRoutes.ShouldMap("~/admin/").To<AdminController>(HttpMethod.Get, x => x.Index());
         }
 
         [Fact]
@@ -28,7 +26,7 @@
         public void ImportActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/admin/import/".WithMethod(HttpVerbs.Get).ShouldMapTo<AdminController>(x => x.Import());
+            ApplicationRoutes.ShouldMap("~/admin/import/").To<AdminController>(HttpMethod.Get, x => x.Import());
         }
 
         [Fact]
@@ -42,7 +40,7 @@
         public void ImportActionWithModelRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/admin/import/".WithMethod(HttpVerbs.Post).ShouldMapTo<AdminController>(x => x.Import(null));
+            ApplicationRoutes.ShouldMap("~/admin/import/").To<AdminController>(HttpMethod.Post, x => x.Import(null));
         }
 
         [Fact]
@@ -56,7 +54,7 @@
         public void ImportedActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/admin/imported/".WithMethod(HttpVerbs.Get).ShouldMapTo<AdminController>(x => x.Imported());
+            ApplicationRoutes.ShouldMap("~/admin/imported/").To<AdminController>(HttpMethod.Get, x => x.Imported());
         }
 
         [Fact]
@@ -70,7 +68,7 @@
         public void UpdateActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/admin/update/".WithMethod(HttpVerbs.Get).ShouldMapTo<AdminController>(x => x.Update());
+            ApplicationRoutes.ShouldMap("~/admin/update/").To<AdminController>(HttpMethod.Get, x => x.Update());
         }
 
         [Fact]
@@ -84,7 +82,7 @@
         public void UpdateActionWithModelRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/admin/update/".WithMethod(HttpVerbs.Post).ShouldMapTo<AdminController>(x => x.Update(null));
+            ApplicationRoutes.ShouldMap("~/admin/update/").To<AdminController>(HttpMethod.Post, x => x.Update(null));
         }
 
         [Fact]
@@ -98,7 +96,7 @@
         public void UpdatedActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/admin/updated/".WithMethod(HttpVerbs.Get).ShouldMapTo<AdminController>(x => x.Updated());
+            ApplicationRoutes.ShouldMap("~/admin/updated/").To<AdminController>(HttpMethod.Get, x => x.Updated());
         }
 
         [Fact]
@@ -112,7 +110,7 @@
         public void DownloadActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/admin/download/".WithMethod(HttpVerbs.Get).ShouldMapTo<AdminController>(x => x.Download());
+            ApplicationRoutes.ShouldMap("~/admin/download/").To<AdminController>(HttpMethod.Get, x => x.Download());
         }
 
         [Fact]
@@ -125,8 +123,8 @@
         [Fact]
         public void CheckActionRoutedToWithCorrectUrlAndVerb()
         {
-            // Assert    
-            "~/admin/check/".WithMethod(HttpVerbs.Get).ShouldMapTo<AdminController>(x => x.Check());
+            // Assert
+            ApplicationRoutes.ShouldMap("~/admin/check/").To<AdminController>(HttpMethod.Get, x => x.Check());
         }
 
         [Fact]
@@ -140,7 +138,7 @@
         public void CheckActionWithModelRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/admin/check/".WithMethod(HttpVerbs.Post).ShouldMapTo<AdminController>(x => x.Check(null));
+            ApplicationRoutes.ShouldMap("~/admin/check/").To<AdminController>(HttpMethod.Post, x => x.Check(null));
         }
 
         [Fact]
@@ -154,7 +152,7 @@
         public void MoveScoreCardsActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/admin/movescorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<AdminController>(x => x.MoveScoreCards((bool?)null));
+            ApplicationRoutes.ShouldMap("~/admin/movescorecards/").To<AdminController>(HttpMethod.Get, x => x.MoveScoreCards((bool?)null));
         }
 
         [Fact]
@@ -168,7 +166,7 @@
         public void MoveScoreCardsActionWithModelRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            "~/admin/movescorecards/".WithMethod(HttpVerbs.Post).ShouldMapTo<AdminController>(x => x.MoveScoreCards((MoveScoreCardsViewModel) null));
+            ApplicationRoutes.ShouldMap("~/admin/movescorecards/").To<AdminController>(HttpMethod.Post, x => x.MoveScoreCards((MoveScoreCardsViewModel) null));
         }
 
         [Fact]
@@ -176,6 +174,90 @@
         {
             // Assert
             Assert.False(ActionRequiresHttps(x => x.MoveScoreCards((MoveScoreCardsViewModel) null)));
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardActionRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            ApplicationRoutes.ShouldMap("~/admin/removebasescorecard/5").To<AdminController>(HttpMethod.Get, x => x.RemoveBaseScoreCard(null));
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardActionDoesNotRequireHttps()
+        {
+            // Assert
+            Assert.False(ActionRequiresHttps(x => x.RemoveBaseScoreCard(null)));
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardPostActionRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            ApplicationRoutes.ShouldMap("~/admin/removebasescorecard/5").To<AdminController>(HttpMethod.Post, x => x.RemoveBaseScoreCardPost(null));
+        }
+
+        [Fact]
+        public void RemoveBaseScoreCardPostActionDoesNotRequireHttps()
+        {
+            // Assert
+            Assert.False(ActionRequiresHttps(x => x.RemoveBaseScoreCardPost(null)));
+        }
+
+        [Fact]
+        public void RemovedBaseScoreCardActionRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            ApplicationRoutes.ShouldMap("~/admin/removedbasescorecard/").To<AdminController>(HttpMethod.Get, x => x.RemovedBaseScoreCard());
+        }
+
+        [Fact]
+        public void RemovedBaseScoreCardActionDoesNotRequireHttps()
+        {
+            // Assert
+            Assert.False(ActionRequiresHttps(x => x.RemovedBaseScoreCard()));
+        }
+
+        [Fact]
+        public void RemoveValuationScoreCardActionRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            ApplicationRoutes.ShouldMap("~/admin/removevaluationscorecard/7").To<AdminController>(HttpMethod.Get, x => x.RemoveValuationScoreCard(null));
+        }
+
+        [Fact]
+        public void RemoveValuationScoreCardActionDoesNotRequireHttps()
+        {
+            // Assert
+            Assert.False(ActionRequiresHttps(x => x.RemoveValuationScoreCard(null)));
+        }
+
+        [Fact]
+        public void RemoveValuationScoreCardPostActionRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            ApplicationRoutes.ShouldMap("~/admin/removevaluationscorecard/7").To<AdminController>(HttpMethod.Post, x => x.RemoveValuationScoreCardPost(null));
+        }
+
+        [Fact]
+        public void RemoveValuationScoreCardPostActionDoesNotRequireHttps()
+        {
+            // Assert
+            Assert.False(ActionRequiresHttps(x => x.RemoveValuationScoreCardPost(null)));
+        }
+
+        [Fact]
+        public void RemovedValuationScoreCardActionRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            ApplicationRoutes.ShouldMap("~/admin/removedvaluationscorecard/").To<AdminController>(HttpMethod.Get, x => x.RemovedValuationScoreCard());
+        }
+
+        [Fact]
+        public void RemovedValuationScoreCardActionDoesNotRequireHttps()
+        {
+            // Assert
+            Assert.False(ActionRequiresHttps(x => x.RemovedValuationScoreCard()));
         }
     }
 }
