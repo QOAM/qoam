@@ -23,40 +23,30 @@
             Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.Details(null)));
         }
 
-        [Fact]
-        public void EditActionAuthorizedForAdminUser()
+        [Theory]
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, false)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("unknown", false)]
+        [InlineData("", false)]
+        public void EditActionHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.Edit(5, (string)null), ApplicationRole.Admin));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Edit(5, (string)null), role));
         }
 
         [Theory]
-        [InlineData(ApplicationRole.DataAdmin)]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        [InlineData("unknown")]
-        public void EditActionNotAuthorizedForNonAdminUser(string nonAdminUserRole)
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, false)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("unknown", false)]
+        [InlineData("", false)]
+        public void EditActionWithModelHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.Edit(5, (string)null), nonAdminUserRole));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Edit(5, (EditViewModel)null), role));
         }
-
-        [Fact]
-        public void EditActionWithModelAuthorizedForAdminUser()
-        {
-            // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.Edit(5, (EditViewModel)null), ApplicationRole.Admin));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.DataAdmin)]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        [InlineData("unknown")]
-        public void EditActionWithModelNotAuthorizedForNonAdminUser(string nonAdminUserRole)
-        {
-            // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.Edit(5, (EditViewModel)null), nonAdminUserRole));
-        }
-
+        
         [Fact]
         public void ScoreCardsActionDoesNotRequireAuthorizedUser()
         {

@@ -16,183 +16,122 @@
         }
 
         [Theory]
-        [InlineData(ApplicationRole.Admin)]
-        [InlineData(ApplicationRole.DataAdmin)]
-        public void ImportActionAuthorizedForCorrectRoles(string authorizedRole)
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void ImportActionHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.Import(), authorizedRole));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Import(), role));
+        }
+        
+        [Theory]
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void ImportActionWithModelHasCorrectAuthorization(string role, bool expectedAuthorized)
+        {
+            // Assert
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Import(null), role));
         }
 
         [Theory]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        [InlineData("invalid")]
-        public void ImportActionNotAuthorizedForInvalidRoles(string unauthorizedRole)
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void ImportedActionHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.Import(), unauthorizedRole));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Imported(), role));
         }
 
         [Theory]
-        [InlineData(ApplicationRole.Admin)]
-        [InlineData(ApplicationRole.DataAdmin)]
-        public void ImportActionWithModelAuthorizedForCorrectRoles(string authorizedRole)
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void UpdateActionHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.Import(null), authorizedRole));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Update(), role));
         }
 
         [Theory]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        [InlineData("invalid")]
-        public void ImportActionWithModelNotAuthorizedForInvalidRoles(string unauthorizedRole)
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void UpdateActionWithModelHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.Import(null), unauthorizedRole));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Update(null), role));
         }
-
         [Theory]
-        [InlineData(ApplicationRole.Admin)]
-        [InlineData(ApplicationRole.DataAdmin)]
-        public void ImportedActionAuthorizedForCorrectRoles(string authorizedRole)
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void UpdatedActionHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.Imported(), authorizedRole));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Updated(), role));
         }
-
+        
         [Theory]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        [InlineData("invalid")]
-        public void ImportedActionNotAuthorizedForInvalidRoles(string unauthorizedRole)
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void DownloadActionHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.Imported(), unauthorizedRole));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Download(), role));
         }
-
+        
         [Theory]
-        [InlineData(ApplicationRole.Admin)]
-        [InlineData(ApplicationRole.DataAdmin)]
-        public void UpdateActionAuthorizedForCorrectRoles(string authorizedRole)
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, false)]
+        [InlineData(ApplicationRole.InstitutionAdmin, true)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void CheckActionHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.Update(), authorizedRole));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Check(), role));
         }
-
+        
         [Theory]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        [InlineData("invalid")]
-        public void UpdateActionNotAuthorizedForInvalidRoles(string unauthorizedRole)
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, false)]
+        [InlineData(ApplicationRole.InstitutionAdmin, true)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void CheckActionWithModelHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.Update(), unauthorizedRole));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Check(null), role));
         }
-
+        
         [Theory]
-        [InlineData(ApplicationRole.Admin)]
-        [InlineData(ApplicationRole.DataAdmin)]
-        public void UpdateActionWithModelAuthorizedForCorrectRoles(string authorizedRole)
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void MoveScoreCardsActionHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.Update(null), authorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        [InlineData("invalid")]
-        public void UpdateActionWithModelNotAuthorizedForInvalidRoles(string unauthorizedRole)
-        {
-            // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.Update(null), unauthorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.Admin)]
-        [InlineData(ApplicationRole.DataAdmin)]
-        public void UpdatedActionAuthorizedForCorrectRoles(string authorizedRole)
-        {
-            // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.Updated(), authorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        [InlineData("invalid")]
-        public void UpdatedActionNotAuthorizedForInvalidRoles(string unauthorizedRole)
-        {
-            // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.Updated(), unauthorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.Admin)]
-        [InlineData(ApplicationRole.DataAdmin)]
-        public void DownloadActionAuthorizedForCorrectRoles(string authorizedRole)
-        {
-            // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.Download(), authorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        [InlineData("invalid")]
-        public void DownloadActionNotAuthorizedForInvalidRoles(string unauthorizedRole)
-        {
-            // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.Download(), unauthorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.Admin)]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        public void CheckActionAuthorizedForCorrectRoles(string authorizedRole)
-        {
-            // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.Check(), authorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.DataAdmin)]
-        [InlineData("invalid")]
-        public void CheckActionNotAuthorizedForInvalidRoles(string unauthorizedRole)
-        {
-            // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.Check(), unauthorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.Admin)]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        public void CheckActionWithModelAuthorizedForCorrectRoles(string authorizedRole)
-        {
-            // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.Check(null), authorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.DataAdmin)]
-        [InlineData("invalid")]
-        public void CheckActionWithModelNotAuthorizedForInvalidRoles(string unauthorizedRole)
-        {
-            // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.Check(null), unauthorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.Admin)]
-        [InlineData(ApplicationRole.DataAdmin)]
-        public void MoveScoreCardsActionAuthorizedForCorrectRoles(string authorizedRole)
-        {
-            // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.MoveScoreCards((bool?)null), authorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        [InlineData("invalid")]
-        public void MoveScoreCardsActionNotAuthorizedForInvalidRoles(string unauthorizedRole)
-        {
-            // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.MoveScoreCards((bool?)null), unauthorizedRole));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.MoveScoreCards((bool?)null), role));
         }
     }
 }

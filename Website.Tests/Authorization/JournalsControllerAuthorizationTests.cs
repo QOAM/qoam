@@ -52,39 +52,27 @@
         }
 
         [Theory]
-        [InlineData(ApplicationRole.Admin)]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        public void InstitutionJournalLicenseActionAuthorizedForCorrectRoles(string authorizedRole)
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, true)]
+        [InlineData(ApplicationRole.DataAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void InstitutionJournalLicenseActionHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.InstitutionJournalLicense(5, 1, (string)null), authorizedRole));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.InstitutionJournalLicense(5, 1, null), role));
         }
 
         [Theory]
-        [InlineData(ApplicationRole.DataAdmin)]
-        [InlineData("invalid")]
-        public void InstitutionJournalLicenseActionNotAuthorizedForInvalidRoles(string unauthorizedRole)
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, true)]
+        [InlineData(ApplicationRole.DataAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void InstitutionJournalLicenseActionWithModelHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.InstitutionJournalLicense(5, 1, (string)null), unauthorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.Admin)]
-        [InlineData(ApplicationRole.InstitutionAdmin)]
-        public void InstitutionJournalLicenseActionWithModelAuthorizedForCorrectRoles(string authorizedRole)
-        {
-            // Assert
-            Assert.True(ActionAuthorizedForUserWithRole(x => x.InstitutionJournalLicense(5, (InstitutionJournalLicenseViewModel)null), authorizedRole));
-        }
-
-        [Theory]
-        [InlineData(ApplicationRole.DataAdmin)]
-        [InlineData("invalid")]
-        public void InstitutionJournalLicenseActionWithModelNotAuthorizedForInvalidRoles(string unauthorizedRole)
-        {
-            // Assert
-            Assert.False(ActionAuthorizedForUserWithRole(x => x.InstitutionJournalLicense(5, (InstitutionJournalLicenseViewModel)null), unauthorizedRole));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.InstitutionJournalLicense(5, null), role));
         }
 
         [Fact]
