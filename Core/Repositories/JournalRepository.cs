@@ -28,6 +28,11 @@
             }
         }
 
+        public Journal FindByIssn(string issn)
+        {
+            return this.DbContext.Journals.FirstOrDefault(j => j.ISSN.ToLower() == issn.ToLower());
+        }
+
         public IQueryable<string> Titles(string query)
         {
             if (string.IsNullOrWhiteSpace(query))

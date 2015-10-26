@@ -1,4 +1,5 @@
-﻿namespace QOAM.Website.Controllers
+﻿using Validation;
+namespace QOAM.Website.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -38,8 +39,10 @@
         private readonly JournalsExport journalsExport;
         private readonly IInstitutionRepository institutionRepository;
         private readonly IBlockedISSNRepository blockedIssnRepository;
+        private readonly IBaseScoreCardRepository baseScoreCardRepository;
+        private readonly IValuationScoreCardRepository valuationScoreCardRepository;
 
-        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository)
+        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository)
             : base(userProfileRepository, authentication)
         {
             Requires.NotNull(journalsImport, "journalsImport");
@@ -49,7 +52,9 @@
             Requires.NotNull(journalRepository, "journalRepository");
             Requires.NotNull(institutionRepository, "institutionRepository");
             Requires.NotNull(blockedIssnRepository, "blockedIssnRepository");
-
+            Requires.NotNull(baseScoreCardRepository, "baseScoreCardRepository");
+            Requires.NotNull(valuationScoreCardRepository, "valuationScoreCardRepository");
+            
             this.journalsImport = journalsImport;
             this.ulrichsImport = ulrichsImport;
             this.doajImport = doajImport;
@@ -57,6 +62,8 @@
             this.journalRepository = journalRepository;
             this.institutionRepository = institutionRepository;
             this.blockedIssnRepository = blockedIssnRepository;
+            this.valuationScoreCardRepository = valuationScoreCardRepository;
+            this.baseScoreCardRepository = baseScoreCardRepository;
         }
 
         [GET("")]
@@ -358,6 +365,47 @@
             institutionRepository.Save();
 
             return RedirectToAction("Index", "Institutions");
+        }
+
+        [GET("movescorecards")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult MoveScoreCards(bool? saveSuccessful = null)
+        {
+            ViewBag.SaveSuccessful = saveSuccessful;
+
+            return View();
+        }
+
+        [POST("movescorecards")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [ValidateAntiForgeryToken]
+        public ActionResult MoveScoreCards(MoveScoreCardsViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var oldJournal = journalRepository.FindByIssn(model.OldIssn);
+                var newJournal = journalRepository.FindByIssn(model.NewIssn);
+
+                if (oldJournal != null && newJournal != null)
+                {
+                    baseScoreCardRepository.MoveScoreCards(oldJournal, newJournal);
+                    valuationScoreCardRepository.MoveScoreCards(oldJournal, newJournal);
+
+                    return RedirectToAction("MoveScoreCards", new { saveSuccessful = true });
+                }
+
+                if (oldJournal == null)
+                {
+                    ModelState.AddModelError(nameof(model.OldIssn), "ISSN does not exist.");
+                }
+
+                if (newJournal == null)
+                {
+                    ModelState.AddModelError(nameof(model.NewIssn), "ISSN does not exist.");
+                }
+            }
+
+            return View();
         }
 
         private static HashSet<string> GetISSNs(ImportViewModel model)

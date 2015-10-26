@@ -21,6 +21,8 @@
 
         Journal Find(int id);
 
+        Journal FindByIssn(string issn);
+
         IQueryable<string> Titles(string query);
 
         IQueryable<string> Publishers(string query);

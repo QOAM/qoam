@@ -5,7 +5,7 @@
     using MvcContrib.TestHelper;
 
     using QOAM.Website.Controllers;
-
+    using Website.ViewModels.Institutions;
     using Xunit;
 
     public class AdminControllerRoutingTests : ControllerRoutingTests<AdminController>
@@ -148,6 +148,34 @@
         {
             // Assert
             Assert.False(ActionRequiresHttps(x => x.Check(null)));
+        }
+
+        [Fact]
+        public void MoveScoreCardsActionRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            "~/admin/movescorecards/".WithMethod(HttpVerbs.Get).ShouldMapTo<AdminController>(x => x.MoveScoreCards((bool?)null));
+        }
+
+        [Fact]
+        public void MoveScoreCardsActionDoesNotRequireHttps()
+        {
+            // Assert
+            Assert.False(ActionRequiresHttps(x => x.MoveScoreCards((bool?)null)));
+        }
+
+        [Fact]
+        public void MoveScoreCardsActionWithModelRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            "~/admin/movescorecards/".WithMethod(HttpVerbs.Post).ShouldMapTo<AdminController>(x => x.MoveScoreCards((MoveScoreCardsViewModel) null));
+        }
+
+        [Fact]
+        public void MoveScoreCardsActionWithModelDoesNotRequireHttps()
+        {
+            // Assert
+            Assert.False(ActionRequiresHttps(x => x.MoveScoreCards((MoveScoreCardsViewModel) null)));
         }
     }
 }

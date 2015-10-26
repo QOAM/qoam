@@ -228,6 +228,7 @@
     <Compile Include="App_Start\WebSecurityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="ViewModels\Institutions\MoveScoreCardsViewModel.cs" />
     <Compile Include="ViewModels\Journals\RemoveBlockedIssnViewModel.cs" />
     <Compile Include="Models\RequestValuationEmail.cs" />
     <Compile Include="Resources\RequestValuation.Designer.cs">
@@ -868,6 +869,7 @@
     <Content Include="Views\Admin\RemoveBlockedIssn.cshtml" />
     <Content Include="Views\Admin\_UpsertInstitution.cshtml" />
     <Content Include="Views\Admin\EditInstitution.cshtml" />
+    <Content Include="Views\Admin\MoveScoreCards.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

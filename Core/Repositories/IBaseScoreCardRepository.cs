@@ -19,5 +19,6 @@
         ScoreCardStats CalculateStats(Institution institution);
         IList<BaseScoreCard> FindScoreCardsToBeArchived();
         IList<BaseScoreCard> FindScoreCardsThatWillBeArchived(TimeSpan toBeArchivedWindow);
+        void MoveScoreCards(Journal oldJournal, Journal newJournal);
     }
 }

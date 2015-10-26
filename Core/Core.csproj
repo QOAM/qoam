@@ -60,6 +60,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework.Extended, Version=6.0.0.0, Culture=neutral, PublicKeyToken=05b7e29bdd433584, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.Extended.6.1.0.168\lib\net45\EntityFramework.Extended.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
@@ -170,6 +174,10 @@
     <Compile Include="Migrations\201508271400052_BlockedISSNs.cs" />
     <Compile Include="Migrations\201508271400052_BlockedISSNs.Designer.cs">
       <DependentUpon>201508271400052_BlockedISSNs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510261346187_MoveScoreCards.cs" />
+    <Compile Include="Migrations\201510261346187_MoveScoreCards.Designer.cs">
+      <DependentUpon>201510261346187_MoveScoreCards.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
@@ -341,6 +349,9 @@
     <EmbeddedResource Include="Migrations\201508271400052_BlockedISSNs.resx">
       <DependentUpon>201508271400052_BlockedISSNs.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510261346187_MoveScoreCards.resx">
+      <DependentUpon>201510261346187_MoveScoreCards.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
@@ -374,6 +385,8 @@
     <EmbeddedResource Include="Scripts\20140523_Trigger_BaseScorecards.Published.sql" />
     <EmbeddedResource Include="Scripts\20140523_Trigger_ValuationScorecards.Published.sql" />
     <EmbeddedResource Include="Scripts\UpdateTotalNumberOfScoreCards.sql" />
+    <EmbeddedResource Include="Scripts\20151026_Trigger_ValuationScorecards.Published.sql" />
+    <EmbeddedResource Include="Scripts\20151026_Trigger_BaseScorecards.Published.sql" />
     <Content Include="Scripts\CleanupAfterUlrichs.sql" />
     <EmbeddedResource Include="Scripts\201403171503325_InitialCreate_function_MinimumFloat.sql" />
   </ItemGroup>

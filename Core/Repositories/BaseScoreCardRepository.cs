@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
-
+    using EntityFramework.Extensions;
     using PagedList;
 
     using QOAM.Core.Repositories.Filters;
@@ -113,6 +113,13 @@
                 .Include(s => s.Journal)
                 .Include(s => s.UserProfile)
                 .Where(s => s.State == ScoreCardState.Published && DbFunctions.TruncateTime(s.DateExpiration) == DbFunctions.TruncateTime(soonToBeArchivedDate)).ToList();
+        }
+
+        public void MoveScoreCards(Journal oldJournal, Journal newJournal)
+        {
+            this.DbContext.BaseScoreCards
+                .Where(b => b.JournalId == oldJournal.Id)
+                .Update(b => new BaseScoreCard { JournalId = newJournal.Id });
         }
     }
 }

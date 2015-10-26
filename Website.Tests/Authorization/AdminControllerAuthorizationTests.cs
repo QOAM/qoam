@@ -176,5 +176,23 @@
             // Assert
             Assert.False(ActionAuthorizedForUserWithRole(x => x.Check(null), unauthorizedRole));
         }
+
+        [Theory]
+        [InlineData(ApplicationRole.Admin)]
+        [InlineData(ApplicationRole.DataAdmin)]
+        public void MoveScoreCardsActionAuthorizedForCorrectRoles(string authorizedRole)
+        {
+            // Assert
+            Assert.True(ActionAuthorizedForUserWithRole(x => x.MoveScoreCards((bool?)null), authorizedRole));
+        }
+
+        [Theory]
+        [InlineData(ApplicationRole.InstitutionAdmin)]
+        [InlineData("invalid")]
+        public void MoveScoreCardsActionNotAuthorizedForInvalidRoles(string unauthorizedRole)
+        {
+            // Assert
+            Assert.False(ActionAuthorizedForUserWithRole(x => x.MoveScoreCards((bool?)null), unauthorizedRole));
+        }
     }
 }

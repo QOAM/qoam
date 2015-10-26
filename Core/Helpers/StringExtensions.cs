@@ -7,7 +7,9 @@
 
     public static class StringExtensions
     {
-        private static readonly Regex issnRegex = new Regex(@"^\d{4}-\d{3}(\d|X)$", RegexOptions.Compiled);
+        public const string IssnRegexPattern = @"^\d{4}-\d{3}(\d|X)$";
+
+        private static readonly Regex issnRegex = new Regex(IssnRegexPattern, RegexOptions.Compiled);
 
         public static bool IsValidISSN(this string str)
         {
