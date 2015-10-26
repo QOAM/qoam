@@ -50,7 +50,7 @@
                 case JournalsImportSource.Ulrichs:
                     return container.Resolve<UlrichsImport>().GetJournals(UlrichsImport.UlrichsJournalType.OpenAccess);    
                 default:
-                    throw new ArgumentOutOfRangeException("importSource");
+                    throw new ArgumentOutOfRangeException(nameof(importSource));
             }
         }
 

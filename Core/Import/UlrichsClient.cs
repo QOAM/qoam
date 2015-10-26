@@ -30,7 +30,7 @@
 
         public UlrichsClient(UlrichsSettings ulrichsSettings)
         {
-            Requires.NotNull(ulrichsSettings, "ulrichsSettings");
+            Requires.NotNull(ulrichsSettings, nameof(ulrichsSettings));
 
             this.ulrichsSettings = ulrichsSettings;
             this.webService = new UlrichsWebService { CookieContainer = new CookieContainer() };

@@ -25,7 +25,7 @@
 
         public MailMessage ToMailMessage(ContactSettings contactSettings)
         {
-            Requires.NotNull(contactSettings, "contactSettings");
+            Requires.NotNull(contactSettings, nameof(contactSettings));
             Validator.ValidateObject(this, new ValidationContext(this));
 
             return new MailMessage(new MailAddress(this.Email, this.Name), new MailAddress(contactSettings.ContactFormTo))

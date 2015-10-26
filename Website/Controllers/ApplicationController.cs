@@ -15,8 +15,8 @@
 
         protected ApplicationController(IUserProfileRepository userProfileRepository, IAuthentication authentication)
         {
-            Requires.NotNull(userProfileRepository, "userProfileRepository");
-            Requires.NotNull(authentication, "authentication");
+            Requires.NotNull(userProfileRepository, nameof(userProfileRepository));
+            Requires.NotNull(authentication, nameof(authentication));
 
             this.UserProfileRepository = userProfileRepository;
             this.Authentication = authentication;

@@ -22,8 +22,8 @@
 
         public UlrichsImport(UlrichsClient ulrichsClient, UlrichsCache ulrichsCache, IBlockedISSNRepository blockedIssnRepository): base(blockedIssnRepository)
         {
-            Requires.NotNull(ulrichsClient, "ulrichsClient");
-            Requires.NotNull(ulrichsCache, "ulrichsCache");
+            Requires.NotNull(ulrichsClient, nameof(ulrichsClient));
+            Requires.NotNull(ulrichsCache, nameof(ulrichsCache));
 
             this.ulrichsClient = ulrichsClient;
             this.ulrichsCache = ulrichsCache;

@@ -45,15 +45,15 @@ namespace QOAM.Website.Controllers
         public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository)
             : base(userProfileRepository, authentication)
         {
-            Requires.NotNull(journalsImport, "journalsImport");
-            Requires.NotNull(ulrichsImport, "ulrichsImport");
-            Requires.NotNull(doajImport, "doajImport");
-            Requires.NotNull(journalsExport, "journalsExport");
-            Requires.NotNull(journalRepository, "journalRepository");
-            Requires.NotNull(institutionRepository, "institutionRepository");
-            Requires.NotNull(blockedIssnRepository, "blockedIssnRepository");
-            Requires.NotNull(baseScoreCardRepository, "baseScoreCardRepository");
-            Requires.NotNull(valuationScoreCardRepository, "valuationScoreCardRepository");
+            Requires.NotNull(journalsImport, nameof(journalsImport));
+            Requires.NotNull(ulrichsImport, nameof(ulrichsImport));
+            Requires.NotNull(doajImport, nameof(doajImport));
+            Requires.NotNull(journalsExport, nameof(journalsExport));
+            Requires.NotNull(journalRepository, nameof(journalRepository));
+            Requires.NotNull(institutionRepository, nameof(institutionRepository));
+            Requires.NotNull(blockedIssnRepository, nameof(blockedIssnRepository));
+            Requires.NotNull(baseScoreCardRepository, nameof(baseScoreCardRepository));
+            Requires.NotNull(valuationScoreCardRepository, nameof(valuationScoreCardRepository));
             
             this.journalsImport = journalsImport;
             this.ulrichsImport = ulrichsImport;
@@ -437,7 +437,7 @@ namespace QOAM.Website.Controllers
                 case JournalsImportSource.Ulrichs:
                     return this.ulrichsImport.GetJournals(UlrichsImport.UlrichsJournalType.All);
                 default:
-                    throw new ArgumentOutOfRangeException("importSource");
+                    throw new ArgumentOutOfRangeException(nameof(importSource));
             }
         }
     }

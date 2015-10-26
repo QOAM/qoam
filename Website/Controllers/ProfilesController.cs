@@ -25,10 +25,10 @@
         public ProfilesController(IInstitutionRepository institutionRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IRoles roles, IUserProfileRepository userProfileRepository, IAuthentication authentication)
             : base(userProfileRepository, authentication)
         {
-            Requires.NotNull(institutionRepository, "institutionRepository");
-            Requires.NotNull(baseScoreCardRepository, "scoreCardRepository");
-            Requires.NotNull(valuationScoreCardRepository, "valuationScoreCardRepository");
-            Requires.NotNull(roles, "roles");
+            Requires.NotNull(institutionRepository, nameof(institutionRepository));
+            Requires.NotNull(baseScoreCardRepository, nameof(baseScoreCardRepository));
+            Requires.NotNull(valuationScoreCardRepository, nameof(valuationScoreCardRepository));
+            Requires.NotNull(roles, nameof(roles));
             
             this.institutionRepository = institutionRepository;
             this.baseScoreCardRepository = baseScoreCardRepository;

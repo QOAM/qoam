@@ -13,7 +13,7 @@
 
         public UlrichsCache(UlrichsSettings ulrichsSettings)
         {
-            Requires.NotNull(ulrichsSettings, "ulrichsSettings");
+            Requires.NotNull(ulrichsSettings, nameof(ulrichsSettings));
             
             this.ulrichsSettings = ulrichsSettings;
         }

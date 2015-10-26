@@ -23,9 +23,9 @@
         public InstitutionsController(IInstitutionRepository institutionRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication)
             : base(userProfileRepository, authentication)
         {
-            Requires.NotNull(institutionRepository, "institutionRepository");
-            Requires.NotNull(baseScoreCardRepository, "scoreCardRepository");
-            Requires.NotNull(valuationScoreCardRepository, "valuationScoreCardRepository");
+            Requires.NotNull(institutionRepository, nameof(institutionRepository));
+            Requires.NotNull(baseScoreCardRepository, nameof(baseScoreCardRepository));
+            Requires.NotNull(valuationScoreCardRepository, nameof(valuationScoreCardRepository));
             
             this.institutionRepository = institutionRepository;
             this.baseScoreCardRepository = baseScoreCardRepository;

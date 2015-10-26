@@ -22,8 +22,8 @@
         public HomeController(IJournalRepository journalRepository, IMailSender mailSender, ContactSettings contactSettings, IUserProfileRepository userProfileRepository, IAuthentication authentication)
             : base(userProfileRepository, authentication)
         {
-            Requires.NotNull(mailSender, "mailSender");
-            Requires.NotNull(contactSettings, "contactSettings");
+            Requires.NotNull(mailSender, nameof(mailSender));
+            Requires.NotNull(contactSettings, nameof(contactSettings));
 
             this.journalRepository = journalRepository;
             this.mailSender = mailSender;

@@ -19,7 +19,7 @@
 
         public Task Send(MailMessage message)
         {
-            Requires.NotNull(message, "message");
+            Requires.NotNull(message, nameof(message));
 
             return this.smtpClient.SendMailAsync(message);
         }

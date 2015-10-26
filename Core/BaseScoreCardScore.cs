@@ -20,7 +20,7 @@
 
         public BaseScoreCardScore(ICollection<BaseQuestionScore> questionScores)
         {
-            Requires.NotNull(questionScores, "questionScores");
+            Requires.NotNull(questionScores, nameof(questionScores));
 
             this.EditorialInformationScore = CalculateScoreForCategory(questionScores, QuestionCategory.EditorialInformation);
             this.PeerReviewScore = CalculateScoreForCategory(questionScores, QuestionCategory.PeerReview);
@@ -54,7 +54,7 @@
                     case QuestionCategory.Valuation:
                         return this.ValuationScore;
                     default:
-                        throw new ArgumentOutOfRangeException("questionCategory");
+                        throw new ArgumentOutOfRangeException(nameof(questionCategory));
                 }
             }
         }

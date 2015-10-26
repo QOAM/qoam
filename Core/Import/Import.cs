@@ -12,14 +12,14 @@ namespace QOAM.Core.Import
 
         protected Import(IBlockedISSNRepository blockedIssnRepository)
         {
-            Requires.NotNull(blockedIssnRepository, "blockedIssnRepository");
+            Requires.NotNull(blockedIssnRepository, nameof(blockedIssnRepository));
 
             this.blockedIssnRepository = blockedIssnRepository;
         }
 
         protected IList<Journal> ExcludeBlockedIssns(IList<Journal> journals)
         {
-            Requires.NotNull(journals, "journals");
+            Requires.NotNull(journals, nameof(journals));
 
             var issnsToBlock = new HashSet<string>(this.blockedIssnRepository.All.Select(b => b.ISSN), StringComparer.InvariantCultureIgnoreCase);
 

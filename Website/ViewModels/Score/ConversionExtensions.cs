@@ -10,7 +10,7 @@
     {
         public static BaseScoreCardViewModel ToBaseScoreCardViewModel(this BaseScoreCard scoreCard)
         {
-            Requires.NotNull(scoreCard, "scoreCard");
+            Requires.NotNull(scoreCard, nameof(scoreCard));
 
             return new BaseScoreCardViewModel
                        {
@@ -26,7 +26,7 @@
 
         public static ValuationScoreCardViewModel ToValuationScoreCardViewModel(this ValuationScoreCard scoreCard)
         {
-            Requires.NotNull(scoreCard, "scoreCard");
+            Requires.NotNull(scoreCard, nameof(scoreCard));
 
             return new ValuationScoreCardViewModel
             {
@@ -42,7 +42,7 @@
 
         public static JournalViewModel ToViewModel(this Journal journal)
         {
-            Requires.NotNull(journal, "journal");
+            Requires.NotNull(journal, nameof(journal));
 
             return new JournalViewModel
             {
@@ -90,7 +90,7 @@
 
         public static QuestionScoreViewModel ToViewModel(this BaseQuestionScore questionScore)
         {
-            Requires.NotNull(questionScore, "questionScore");
+            Requires.NotNull(questionScore, nameof(questionScore));
 
             return new QuestionScoreViewModel
                        {
@@ -105,7 +105,7 @@
 
         public static QuestionScoreViewModel ToViewModel(this ValuationQuestionScore questionScore)
         {
-            Requires.NotNull(questionScore, "questionScore");
+            Requires.NotNull(questionScore, nameof(questionScore));
 
             return new QuestionScoreViewModel
             {

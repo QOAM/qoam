@@ -11,7 +11,7 @@
     {
         public void OnAuthorization(AuthorizationContext filterContext)
         {
-            Requires.NotNull(filterContext, "filterContext");
+            Requires.NotNull(filterContext, nameof(filterContext));
 
             AntiForgery.Validate(GetAntiForgeryCookieToken(filterContext), GetAntiForgeryHeaderToken(filterContext));
         }

@@ -12,7 +12,7 @@
 
         public ExpirationCheckerNotification(ExpirationCheckerSettings expirationCheckerSettings)
         {
-            Requires.NotNull(expirationCheckerSettings, "expirationCheckerSettings");
+            Requires.NotNull(expirationCheckerSettings, nameof(expirationCheckerSettings));
 
             this.expirationCheckerSettings = expirationCheckerSettings;
         }
@@ -65,8 +65,8 @@
 
         private MailMessage CreateMailMessage(BaseScoreCard scoreCard, Func<BaseScoreCard, string> mailBodyFunc, string mailSubject)
         {
-            Requires.NotNull(scoreCard, "scoreCard");
-            Requires.NotNull(mailBodyFunc, "mailBodyFunc");
+            Requires.NotNull(scoreCard, nameof(scoreCard));
+            Requires.NotNull(mailBodyFunc, nameof(mailBodyFunc));
             Requires.NotNullOrEmpty(mailSubject, "mailSubject");
             
             return new MailMessage(this.GetMailSender(), new MailAddress(scoreCard.UserProfile.Email))

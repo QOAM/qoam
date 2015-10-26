@@ -23,7 +23,7 @@ namespace QOAM.Core.Import
 
         public int GetHashCode(Journal obj)
         {
-            Requires.NotNull(obj, "obj");
+            Requires.NotNull(obj, nameof(obj));
 
             return obj.ISSN.GetHashCode();
         }

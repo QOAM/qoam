@@ -24,12 +24,12 @@
 
         public JournalsImport(IJournalRepository journalRepository, ILanguageRepository languageRepository, ICountryRepository countryRepository, ISubjectRepository subjectRepository, IPublisherRepository publisherRepository, GeneralImportSettings importSettings)
         {
-            Requires.NotNull(journalRepository, "journalRepository");
-            Requires.NotNull(languageRepository, "languageRepository");
-            Requires.NotNull(countryRepository, "countryRepository");
-            Requires.NotNull(subjectRepository, "subjectRepository");
-            Requires.NotNull(publisherRepository, "publisherRepository");
-            Requires.NotNull(importSettings, "importSettings");
+            Requires.NotNull(journalRepository, nameof(journalRepository));
+            Requires.NotNull(languageRepository, nameof(languageRepository));
+            Requires.NotNull(countryRepository, nameof(countryRepository));
+            Requires.NotNull(subjectRepository, nameof(subjectRepository));
+            Requires.NotNull(publisherRepository, nameof(publisherRepository));
+            Requires.NotNull(importSettings, nameof(importSettings));
 
             this.journalRepository = journalRepository;
             this.languageRepository = languageRepository;

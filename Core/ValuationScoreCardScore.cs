@@ -15,7 +15,7 @@
 
         public ValuationScoreCardScore(ICollection<ValuationQuestionScore> questionScores)
         {
-            Requires.NotNull(questionScores, "questionScores");
+            Requires.NotNull(questionScores, nameof(questionScores));
 
             this.ValuationScore = CalculateScoreForCategory(questionScores, QuestionCategory.Valuation);
         }
@@ -31,7 +31,7 @@
                     case QuestionCategory.Valuation:
                         return this.ValuationScore;
                     default:
-                        throw new ArgumentOutOfRangeException("questionCategory");
+                        throw new ArgumentOutOfRangeException(nameof(questionCategory));
                 }
             }
         }

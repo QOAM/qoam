@@ -25,14 +25,14 @@
 
         public JournalsExport(IJournalRepository journalRepository)
         {
-            Requires.NotNull(journalRepository, "journalRepository");
+            Requires.NotNull(journalRepository, nameof(journalRepository));
 
             this.journalRepository = journalRepository;
         }
 
         public void ExportAllJournals(Stream stream)
         {
-            Requires.NotNull(stream, "stream");
+            Requires.NotNull(stream, nameof(stream));
             
             using (var streamWriter = new StreamWriter(stream))
             using (var csvWriter = new CsvWriter(streamWriter, CsvConfiguration))

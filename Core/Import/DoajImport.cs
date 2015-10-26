@@ -30,7 +30,7 @@
 
         public DoajImport(DoajSettings doajSettings, IBlockedISSNRepository blockedIssnRepository) : base(blockedIssnRepository)
         {
-            Requires.NotNull(doajSettings, "doajSettings");
+            Requires.NotNull(doajSettings, nameof(doajSettings));
             
             this.doajSettings = doajSettings;
         }

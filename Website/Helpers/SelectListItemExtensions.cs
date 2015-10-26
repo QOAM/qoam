@@ -13,28 +13,28 @@
     {
         public static IEnumerable<SelectListItem> ToSelectListItems(this IList<BlockedISSN> blockedIssns)
         {
-            Requires.NotNull(blockedIssns, "blockedIssns");
+            Requires.NotNull(blockedIssns, nameof(blockedIssns));
 
             return blockedIssns.Select(ToSelectListItem);
         }
 
         public static IEnumerable<SelectListItem> ToSelectListItems(this IList<Language> languages, string optionalText)
         {
-            Requires.NotNull(languages, "languages");
+            Requires.NotNull(languages, nameof(languages));
 
             return languages.Select(ToSelectListItem).ToOptionalSelectListItems(optionalText);
         }
 
         public static IEnumerable<SelectListItem> ToSelectListItems(this IList<Subject> keywords, string optionalText, int truncationLength)
         {
-            Requires.NotNull(keywords, "keywords");
+            Requires.NotNull(keywords, nameof(keywords));
 
             return keywords.Select(subject => ToSelectListItem(subject, truncationLength)).ToOptionalSelectListItems(optionalText);
         }
 
         public static IEnumerable<SelectListItem> ToSelectListItems(this IList<Institution> institutions, string optionalText)
         {
-            Requires.NotNull(institutions, "institutions");
+            Requires.NotNull(institutions, nameof(institutions));
 
             return institutions.Select(ToSelectListItem).ToOptionalSelectListItems(optionalText);
         }

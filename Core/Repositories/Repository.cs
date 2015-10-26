@@ -11,7 +11,7 @@
     {
         protected Repository(ApplicationDbContext dbContext)
         {
-            Requires.NotNull(dbContext, "dbContext");
+            Requires.NotNull(dbContext, nameof(dbContext));
 
             this.DbContext = dbContext;
         }
@@ -38,7 +38,7 @@
 
         public void InsertOrUpdate(T entity)
         {
-            Requires.NotNull(entity, "entity");
+            Requires.NotNull(entity, nameof(entity));
 
             if (entity.Id == default(int))
             {
@@ -52,7 +52,7 @@
 
         public void Delete(T entity)
         {
-            Requires.NotNull(entity, "entity");
+            Requires.NotNull(entity, nameof(entity));
 
             if (entity.Id == default(int))
             {

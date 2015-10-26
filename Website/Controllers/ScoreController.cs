@@ -51,17 +51,17 @@
         public ScoreController(IBaseScoreCardRepository baseScoreCardRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IScoreCardVersionRepository scoreCardVersionRepository, IJournalRepository journalRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IQuestionRepository questionRepository, GeneralSettings generalSettings, IUserProfileRepository userProfileRepository, IInstitutionRepository institutionRepository, IAuthentication authentication)
             : base(userProfileRepository, authentication)
         {
-            Requires.NotNull(baseScoreCardRepository, "baseScoreCardRepository");
-            Requires.NotNull(baseJournalPriceRepository, "baseJournalPriceRepository");
-            Requires.NotNull(valuationScoreCardRepository, "valuationScoreCardRepository");
-            Requires.NotNull(valuationJournalPriceRepository, "valuationJournalPriceRepository");
-            Requires.NotNull(scoreCardVersionRepository, "scoreCardVersionRepository");
-            Requires.NotNull(journalRepository, "journalRepository");
-            Requires.NotNull(languageRepository, "languageRepository");
-            Requires.NotNull(subjectRepository, "keywordRepository");
-            Requires.NotNull(questionRepository, "questionRepository");
-            Requires.NotNull(institutionRepository, "institutionRepository");
-            Requires.NotNull(generalSettings, "generalSettings");
+            Requires.NotNull(baseScoreCardRepository, nameof(baseScoreCardRepository));
+            Requires.NotNull(baseJournalPriceRepository, nameof(baseJournalPriceRepository));
+            Requires.NotNull(valuationScoreCardRepository, nameof(valuationScoreCardRepository));
+            Requires.NotNull(valuationJournalPriceRepository, nameof(valuationJournalPriceRepository));
+            Requires.NotNull(scoreCardVersionRepository, nameof(scoreCardVersionRepository));
+            Requires.NotNull(journalRepository, nameof(journalRepository));
+            Requires.NotNull(languageRepository, nameof(languageRepository));
+            Requires.NotNull(subjectRepository, nameof(subjectRepository));
+            Requires.NotNull(questionRepository, nameof(questionRepository));
+            Requires.NotNull(institutionRepository, nameof(institutionRepository));
+            Requires.NotNull(generalSettings, nameof(generalSettings));
 
             this.baseScoreCardRepository = baseScoreCardRepository;
             this.scoreCardVersionRepository = scoreCardVersionRepository;

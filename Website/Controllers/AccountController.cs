@@ -33,10 +33,10 @@
         public AccountController(IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IJournalRepository journalRepository)
             : base(userProfileRepository, authentication)
         {
-            Requires.NotNull(authentication, "authentication");
-            Requires.NotNull(userProfileRepository, "userProfileRepository");
-            Requires.NotNull(institutionRepository, "institutionRepository");
-            Requires.NotNull(journalRepository, "journalRepository");
+            Requires.NotNull(authentication, nameof(authentication));
+            Requires.NotNull(userProfileRepository, nameof(userProfileRepository));
+            Requires.NotNull(institutionRepository, nameof(institutionRepository));
+            Requires.NotNull(journalRepository, nameof(journalRepository));
 
             this.authentication = authentication;
             this.userProfileRepository = userProfileRepository;
