@@ -25,6 +25,8 @@
         public SortDirection Sort { get; set; }
 
         public IPagedList<Institution> Institutions { get; set; }
+        public int NumberOfBaseScoreCards { get; set; }
+        public int NumberOfValuationScoreCards { get; set; }
 
         public InstitutionFilter ToFilter()
         {

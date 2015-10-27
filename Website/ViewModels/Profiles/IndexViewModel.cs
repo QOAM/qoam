@@ -32,6 +32,8 @@
         public IPagedList<UserProfile> Profiles { get; set; }
 
         public IEnumerable<SelectListItem> Institutions { get; set; }
+        public int NumberOfBaseScoreCards { get; set; }
+        public int NumberOfValuationScoreCards { get; set; }
 
         public UserProfileFilter ToFilter()
         {

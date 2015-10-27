@@ -57,14 +57,22 @@
             <div class="row">
                 <table class="table table-striped table-bordered">
                     <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Institution</th>
-                            <th>Registration date</th>
-                            <th>Number of Base JSC's</th>
-                            <th>Number of Valuation JSC's</th>
-                            <th>Actions</th>
-                        </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Institution</th>
+                        <th>Registration date</th>
+                        <th>Number of Base JSC's</th>
+                        <th>Number of Valuation JSC's</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <th></th>
+                        <th></th>
+                        <th>@Model.NumberOfBaseScoreCards</th>
+                        <th>@Model.NumberOfValuationScoreCards</th>
+                        <th></th>
+                    </tr>
                     </thead>
                     <tbody>
                         @foreach (var profile in Model.Profiles)

@@ -5,7 +5,7 @@
 
     using AttributeRouting;
     using AttributeRouting.Web.Mvc;
-
+    using Core.Repositories.Filters;
     using QOAM.Core;
     using QOAM.Core.Repositories;
     using QOAM.Website.Helpers;
@@ -41,7 +41,9 @@
         {
             model.Institutions = this.institutionRepository.All.ToSelectListItems("<All institutions>");
             model.Profiles = this.UserProfileRepository.Search(model.ToFilter());
-            
+            model.NumberOfBaseScoreCards = this.baseScoreCardRepository.Count(new ScoreCardFilter { State = ScoreCardState.Published });
+            model.NumberOfValuationScoreCards = this.valuationScoreCardRepository.Count(new ScoreCardFilter { State = ScoreCardState.Published });
+
             return this.View(model);
         }
 

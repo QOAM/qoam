@@ -122,6 +122,18 @@
                 .Update(b => new ValuationScoreCard { JournalId = newJournal.Id });
         }
 
+        public int Count(ScoreCardFilter filter)
+        {
+            var query = this.DbContext.ValuationScoreCards.AsQueryable();
+
+            if (filter.State.HasValue)
+            {
+                query = query.Where(v => v.State == filter.State.Value);
+            }
+
+            return query.Count();
+        }
+
         public override void Delete(ValuationScoreCard entity)
         {
             this.DbContext.ValuationJournalPrices

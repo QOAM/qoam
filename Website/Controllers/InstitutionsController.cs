@@ -5,7 +5,8 @@
 
     using AttributeRouting;
     using AttributeRouting.Web.Mvc;
-
+    using Core;
+    using Core.Repositories.Filters;
     using QOAM.Core.Repositories;
     using QOAM.Website.Helpers;
     using QOAM.Website.Models;
@@ -36,7 +37,9 @@
         public ViewResult Index(IndexViewModel model)
         {
             model.Institutions = this.institutionRepository.Search(model.ToFilter());
-            
+            model.NumberOfBaseScoreCards = this.baseScoreCardRepository.Count(new ScoreCardFilter { State = ScoreCardState.Published });
+            model.NumberOfValuationScoreCards = this.valuationScoreCardRepository.Count(new ScoreCardFilter { State = ScoreCardState.Published });
+
             return this.View(model);
         }
 

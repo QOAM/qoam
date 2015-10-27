@@ -21,5 +21,6 @@
         IList<BaseScoreCard> FindScoreCardsToBeArchived();
         IList<BaseScoreCard> FindScoreCardsThatWillBeArchived(TimeSpan toBeArchivedWindow);
         void MoveScoreCards(Journal oldJournal, Journal newJournal);
+        int Count(ScoreCardFilter filter);
     }
 }
