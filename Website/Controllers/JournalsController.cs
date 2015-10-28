@@ -4,10 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-
-    using AttributeRouting;
-    using AttributeRouting.Web.Mvc;
-
     using QOAM.Core;
     using QOAM.Core.Repositories;
     using QOAM.Core.Repositories.Filters;
@@ -51,7 +47,7 @@
             this.valuationJournalPriceRepository = valuationJournalPriceRepository;
         }
         
-        [GET("")]
+        [HttpGet, Route("")]
         public ViewResult Index(IndexViewModel model)
         {
             model.Languages = this.languageRepository.All.ToSelectListItems("<All languages>");
@@ -61,7 +57,7 @@
             return this.View(model);
         }
 
-        [GET("{id:int}")]
+        [HttpGet, Route("{id:int}")]
         public ActionResult Details(int id, string returnUrl)
         {
             var journal = this.journalRepository.Find(id);
@@ -76,7 +72,7 @@
             return this.View(journal);
         }
 
-        [GET("{id:int}/prices")]
+        [HttpGet, Route("{id:int}/prices")]
         public PartialViewResult Prices(PricesViewModel model)
         {
             this.ViewBag.RefererUrl = model.RefererUrl;
@@ -89,7 +85,7 @@
             return this.PartialView(model);
         }
 
-        [GET("{id:int}/basejournalprices")]
+        [HttpGet, Route("{id:int}/basejournalprices")]
         public PartialViewResult BaseJournalPrices(PricesViewModel model)
         {
             this.ViewBag.RefererUrl = model.RefererUrl;
@@ -99,7 +95,7 @@
             return this.PartialView(journalPrices);
         }
 
-        [GET("{id:int}/valuationjournalprices")]
+        [HttpGet, Route("{id:int}/valuationjournalprices")]
         public PartialViewResult ValuationJournalPrices(PricesViewModel model)
         {
             this.ViewBag.RefererUrl = model.RefererUrl;
@@ -109,7 +105,7 @@
             return this.PartialView(journalPrices);
         }
 
-        [GET("{id:int}/institutionalprices")]
+        [HttpGet, Route("{id:int}/institutionalprices")]
         public PartialViewResult InstitutionJournalPrices(PricesViewModel model)
         {
             this.ViewBag.RefererUrl = model.RefererUrl;
@@ -119,7 +115,7 @@
             return this.PartialView(institutionJournals);
         }
 
-        [GET("{id:int}/scorecards")]
+        [HttpGet, Route("{id:int}/scorecards")]
         public PartialViewResult ScoreCards(ScoreCardsViewModel model)
         {
             model.BaseScoreCards = this.baseScoreCardRepository.Find(model.ToFilter());
@@ -128,7 +124,7 @@
             return this.PartialView(model);
         }
 
-        [GET("{id:int}/basescorecards")]
+        [HttpGet, Route("{id:int}/basescorecards")]
         public PartialViewResult BaseScoreCards(ScoreCardsViewModel model)
         {
             model.BaseScoreCards = this.baseScoreCardRepository.Find(model.ToFilter());
@@ -136,7 +132,7 @@
             return this.PartialView(model);
         }
 
-        [GET("{id:int}/valuationscorecards")]
+        [HttpGet, Route("{id:int}/valuationscorecards")]
         public PartialViewResult ValuationScoreCards(ScoreCardsViewModel model)
         {
             model.ValuationScoreCards = this.valuationScoreCardRepository.Find(model.ToFilter());
@@ -144,7 +140,7 @@
             return this.PartialView(model);
         }
 
-        [GET("{id:int}/comments")]
+        [HttpGet, Route("{id:int}/comments")]
         public PartialViewResult Comments(CommentsViewModel model)
         {
             model.CommentedBaseScoreCards = this.baseScoreCardRepository.Find(model.ToFilter());
@@ -153,7 +149,7 @@
             return this.PartialView(model);
         }
 
-        [GET("{id:int}/basescorecardcomments")]
+        [HttpGet, Route("{id:int}/basescorecardcomments")]
         public PartialViewResult BaseScoreCardComments(CommentsViewModel model)
         {
             model.CommentedBaseScoreCards = this.baseScoreCardRepository.Find(model.ToFilter());
@@ -161,7 +157,7 @@
             return this.PartialView(model);
         }
 
-        [GET("{id:int}/valuationscorecardcomments")]
+        [HttpGet, Route("{id:int}/valuationscorecardcomments")]
         public PartialViewResult ValuationScoreCardComments(CommentsViewModel model)
         {
             model.CommentedValuationScoreCards = this.valuationScoreCardRepository.Find(model.ToFilter());
@@ -169,7 +165,7 @@
             return this.PartialView(model);
         }
 
-        [GET("{id:int}/institutionjournallicense")]
+        [HttpGet, Route("{id:int}/institutionjournallicense")]
         [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
         public ViewResult InstitutionJournalLicense(int id, int institutionId, string refererUrl)
         {
@@ -182,7 +178,7 @@
             return this.View(model);
         }
 
-        [POST("{id:int}/institutionjournallicense")]
+        [HttpPost, Route("{id:int}/institutionjournallicense")]
         [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult InstitutionJournalLicense(int id, InstitutionJournalLicenseViewModel model)
@@ -250,7 +246,7 @@
             return this.View(model);
         }
 
-        [POST("{id:int}/institutionjournallicensedelete")]
+        [HttpPost, Route("{id:int}/institutionjournallicensedelete")]
         [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult InstitutionJournalLicenseDelete(int id, InstitutionJournalLicenseDeleteViewModel model)
@@ -277,21 +273,21 @@
             return this.RedirectToAction("InstitutionJournalLicense", new { id, InstitutionId = model.Institution, model.RefererUrl });
         }
 
-        [GET("titles")]
+        [HttpGet, Route("titles")]
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
         public JsonResult Titles(string query)
         {
             return this.Json(this.journalRepository.Titles(query).Select(s => new { value = s }).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
 
-        [GET("issns")]
+        [HttpGet, Route("issns")]
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
         public JsonResult Issns(string query)
         {
             return this.Json(this.journalRepository.Issns(query).Select(s => new { value = s }).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
 
-        [GET("publishers")]
+        [HttpGet, Route("publishers")]
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
         public JsonResult Publishers(string query)
         {

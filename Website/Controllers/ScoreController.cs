@@ -5,18 +5,11 @@
     using System.Linq;
     using System.Net;
     using System.Net.Mail;
-    using System.Resources;
     using System.Web.Mvc;
-
-    using AttributeRouting;
-    using AttributeRouting.Web.Mvc;
-
     using QOAM.Core;
     using QOAM.Core.Repositories;
-    using QOAM.Core.Services;
     using QOAM.Website.Helpers;
     using QOAM.Website.Models;
-    using QOAM.Website.Resources;
     using QOAM.Website.ViewModels.Score;
 
     using Validation;
@@ -60,7 +53,7 @@
             this.generalSettings = generalSettings;
         }
 
-        [GET("")]
+        [HttpGet, Route("")]
         public ActionResult Index(IndexViewModel model)
         {
             model.Languages = this.languageRepository.All.ToSelectListItems("<All languages>");
@@ -70,7 +63,7 @@
             return this.View(model);
         }
 
-        [GET("basescorecard/{id:int}")]
+        [HttpGet, Route("basescorecard/{id:int}")]
         [Authorize]
         public ViewResult BaseScoreCard(int id)
         {
@@ -101,7 +94,7 @@
             return this.View(scoreViewModel);
         }
 
-        [POST("basescorecard/{id:int}")]
+        [HttpPost, Route("basescorecard/{id:int}")]
         [Authorize]
         [ValidateJsonAntiForgeryToken]
         public ActionResult BaseScoreCard(int id, BaseScoreCardViewModel model)
@@ -130,7 +123,7 @@
             return this.Json(true);
         }
 
-        [GET("valuationscorecard/{id:int}")]
+        [HttpGet, Route("valuationscorecard/{id:int}")]
         [Authorize]
         public ViewResult ValuationScoreCard(int id)
         {
@@ -152,7 +145,7 @@
             return this.View(scoreViewModel);
         }
 
-        [POST("valuationscorecard/{id:int}")]
+        [HttpPost, Route("valuationscorecard/{id:int}")]
         [Authorize]
         [ValidateJsonAntiForgeryToken]
         public ActionResult ValuationScoreCard(int id, ValuationScoreCardViewModel model)
@@ -191,7 +184,7 @@
             return this.Json(true);
         }
 
-        [GET("requestvaluation/{id:int}")]
+        [HttpGet, Route("requestvaluation/{id:int}")]
         [Authorize]
         public ViewResult RequestValuation(int id)
         {
@@ -217,7 +210,7 @@
             return this.View(model);
         }
 
-        [POST("requestvaluation/{id:int}")]
+        [HttpPost, Route("requestvaluation/{id:int}")]
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult RequestValuation(RequestValuationViewModel model)
@@ -254,7 +247,7 @@
             }
         }
 
-        [GET("requestvaluationresult")]
+        [HttpGet, Route("requestvaluationresult")]
         public ActionResult RequestValuationResult(bool success = false)
         {
             this.ViewBag.Success = success;
@@ -262,7 +255,7 @@
             return this.View();
         }
 
-        [GET("basescorecard/details/{id:int}")]
+        [HttpGet, Route("basescorecard/details/{id:int}")]
         public ActionResult BaseScoreCardDetails(int id)
         {
             var scoreCard = this.baseScoreCardRepository.Find(id);
@@ -282,7 +275,7 @@
             return this.View(scoreCard);
         }
 
-        [GET("valuationscorecard/details/{id:int}")]
+        [HttpGet, Route("valuationscorecard/details/{id:int}")]
         public ActionResult ValuationScoreCardDetails(int id)
         {
             var scoreCard = this.valuationScoreCardRepository.Find(id);

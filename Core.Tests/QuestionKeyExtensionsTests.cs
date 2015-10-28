@@ -1,7 +1,6 @@
 ﻿namespace QOAM.Core.Tests
 {
     using Xunit;
-    using Xunit.Extensions;
 
     public class QuestionKeyExtensionsTests
     {

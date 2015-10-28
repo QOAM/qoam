@@ -7,11 +7,9 @@ namespace QOAM.Website.Tests.Controllers
     using Core;
     using Core.Repositories;
     using Core.Repositories.Filters;
-    using FsCheck.Xunit;
     using Moq;
     using MvcContrib.TestHelper;
     using PagedList;
-    using Ploeh.AutoFixture;
     using Ploeh.AutoFixture.Xunit2;
     using Website.Controllers;
     using Website.Helpers;

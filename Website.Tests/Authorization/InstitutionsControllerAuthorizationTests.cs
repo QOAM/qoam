@@ -1,7 +1,6 @@
 ﻿namespace QOAM.Website.Tests.Authorization
 {
-    using QOAM.Website.Controllers;
-
+    using Website.Controllers;
     using Xunit;
 
     public class InstitutionsControllerAuthorizationTests : ControllerAuthorizationTests<InstitutionsController>

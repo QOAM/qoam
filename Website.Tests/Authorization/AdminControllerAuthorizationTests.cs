@@ -1,10 +1,9 @@
 ﻿namespace QOAM.Website.Tests.Authorization
 {
-    using QOAM.Website.Controllers;
-    using QOAM.Website.Models;
+    using Website.Controllers;
+    using Website.Models;
     using Website.ViewModels.Import;
     using Xunit;
-    using Xunit.Extensions;
 
     public class AdminControllerAuthorizationTests : ControllerAuthorizationTests<AdminController>
     {

@@ -3,8 +3,7 @@
     using System.Web.Helpers;
 
     using QOAM.Core.Repositories.Filters;
-    using QOAM.Website.ViewModels.Profiles;
-
+    using Website.ViewModels.Profiles;
     using Xunit;
 
     public class IndexViewModelTests

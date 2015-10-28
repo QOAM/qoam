@@ -6,10 +6,9 @@
     using Moq;
     using MvcContrib.TestHelper;
     using QOAM.Core.Repositories;
-    using QOAM.Website.Controllers;
-    using QOAM.Website.Helpers;
-    using QOAM.Website.Models;
     using QOAM.Website.Tests.Controllers.Helpers;
+    using Website.Controllers;
+    using Website.Helpers;
     using Website.ViewModels.Account;
     using Xunit;
 
@@ -262,10 +261,7 @@
                 userProfileRepository ?? CreateUserProfileRepository(),
                 authentication ?? CreateAuthentication(),
                 institutionRepository ?? CreateInstitutionRepository(),
-                journalRepository ?? Mock.Of<IJournalRepository>())
-                   {
-                       Url = HttpContextHelper.CreateUrlHelper(),
-                   };
+                journalRepository ?? Mock.Of<IJournalRepository>());
         }
 
         private static IInstitutionRepository CreateInstitutionRepository()

@@ -3,10 +3,8 @@
     using System.Web.Helpers;
 
     using QOAM.Core.Repositories.Filters;
-    using QOAM.Website.Helpers;
-
+    using Website.Helpers;
     using Xunit;
-    using Xunit.Extensions;
 
     public class UrlHelperExtensionsTests
     {

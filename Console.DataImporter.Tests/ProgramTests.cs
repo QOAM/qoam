@@ -5,7 +5,6 @@
     using System.Linq;
     using Core.Import;
     using Xunit;
-    using Xunit.Extensions;
 
     public class ProgramTests
     {

@@ -1,7 +1,6 @@
 ﻿namespace QOAM.Website.Tests.Authorization
 {
-    using QOAM.Website.Controllers;
-    using QOAM.Website.Models;
+    using Website.Controllers;
     using Website.ViewModels.Account;
     using Xunit;
 

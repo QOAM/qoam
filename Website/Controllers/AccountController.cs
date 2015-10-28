@@ -5,10 +5,6 @@
     using System.Net.Mail;
     using System.Web.Mvc;
     using System.Web.Security;
-
-    using AttributeRouting;
-    using AttributeRouting.Web.Mvc;
-    using Core;
     using Postal;
 
     using QOAM.Core.Repositories;
@@ -41,7 +37,7 @@
             this.journalRepository = journalRepository;
         }
 
-        [GET("login")]
+        [HttpGet, Route("login")]
         public ViewResult Login(string returnUrl, string loginAddress)
         {
             this.ViewBag.ReturnUrl = returnUrl;
@@ -56,7 +52,7 @@
             return this.View(model);
         }
 
-        [POST("login")]
+        [HttpPost, Route("login")]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
@@ -74,7 +70,7 @@
             return this.View(model);
         }
 
-        [GET("logout")]
+        [HttpGet, Route("logout")]
         public RedirectToRouteResult Logout()
         {
             this.authentication.Logout();
@@ -82,7 +78,7 @@
             return this.RedirectToAction("Index", "Home");
         }
 
-        [GET("register")]
+        [HttpGet, Route("register")]
         public ActionResult Register(string addLink, string loginAddress)
         {
             if (string.IsNullOrEmpty(addLink) && string.IsNullOrEmpty(loginAddress))
@@ -96,7 +92,7 @@
             return this.View(model);
         }
 
-        [POST("register")]
+        [HttpPost, Route("register")]
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel model)
         {
@@ -158,25 +154,25 @@
             return View(model);
         }
 
-        [GET("registrationpending")]
+        [HttpGet, Route("registrationpending")]
         public ViewResult RegistrationPending()
         {
             return this.View();
         }
 
-        [GET("registerconfirmation/{token}")]
+        [HttpGet, Route("registerconfirmation/{token}")]
         public ActionResult RegisterConfirmation(string token)
         {
             return this.RedirectToAction(!this.Authentication.ConfirmAccount(token) ? "RegisterFailure" : "RegisterSuccess");
         }
 
-        [GET("registersuccess")]
+        [HttpGet, Route("registersuccess")]
         public ViewResult RegisterSuccess()
         {
             return this.View();
         }
 
-        [GET("registersuccesswithlink")]
+        [HttpGet, Route("registersuccesswithlink")]
         public ActionResult RegisterSuccessWithLink(string addLink)
         {
             var model = new RequestValuationViewModel { JournalId = Convert.ToInt32(addLink.Split('/').Last()) };
@@ -185,13 +181,13 @@
             return this.View(model);
         }
 
-        [GET("registerfailure")]
+        [HttpGet, Route("registerfailure")]
         public ViewResult RegisterFailure()
         {
             return this.View();
         }
 
-        [GET("account/settings")]
+        [HttpGet, Route("account/settings")]
         [Authorize]
         public ActionResult Settings(bool saveSuccessful = false)
         {
@@ -207,7 +203,7 @@
             return this.View(model);
         }
 
-        [POST("account/settings")]
+        [HttpPost, Route("account/settings")]
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Settings(SettingsViewModel model)
@@ -232,7 +228,7 @@
             return this.View(model);
         }
 
-        [GET("changepassword")]
+        [HttpGet, Route("changepassword")]
         [Authorize]
         public ViewResult ChangePassword(bool saveSuccessful = false)
         {
@@ -241,7 +237,7 @@
             return this.View();
         }
 
-        [POST("changepassword")]
+        [HttpPost, Route("changepassword")]
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePasswordViewModel model)
@@ -256,13 +252,13 @@
             return this.View(model);
         }
 
-        [GET("resetpassword")]
+        [HttpGet, Route("resetpassword")]
         public ViewResult ResetPassword()
         {
             return this.View();
         }
 
-        [POST("resetpassword")]
+        [HttpPost, Route("resetpassword")]
         [ValidateAntiForgeryToken]
         public ActionResult ResetPassword(ResetPasswordViewModel model)
         {
@@ -288,13 +284,13 @@
             return this.RedirectToAction("ResetPasswordPending");
         }
 
-        [GET("resetpasswordpending")]
+        [HttpGet, Route("resetpasswordpending")]
         public ViewResult ResetPasswordPending()
         {
             return this.View();
         }
 
-        [GET("resetpasswordconfirmed")]
+        [HttpGet, Route("resetpasswordconfirmed")]
         public ViewResult ResetPasswordConfirmed(string token)
         {
             var model = new ResetPasswordConfirmedViewModel { Token = token };
@@ -302,7 +298,7 @@
             return this.View(model);
         }
 
-        [POST("resetpasswordconfirmed")]
+        [HttpPost, Route("resetpasswordconfirmed")]
         [ValidateAntiForgeryToken]
         public ActionResult ResetPasswordConfirmed(ResetPasswordConfirmedViewModel model)
         {
@@ -314,19 +310,19 @@
             return this.RedirectToAction(this.authentication.ResetPassword(model.Token, model.NewPassword) ? "ResetPasswordSuccess" : "ResetPasswordFailure");
         }
 
-        [GET("resetpasswordsuccess")]
+        [HttpGet, Route("resetpasswordsuccess")]
         public ViewResult ResetPasswordSuccess()
         {
             return this.View();
         }
 
-        [GET("resetpasswordfailure")]
+        [HttpGet, Route("resetpasswordfailure")]
         public ViewResult ResetPasswordFailure()
         {
             return this.View();
         }
         
-        [GET("changeemail")]
+        [HttpGet, Route("changeemail")]
         [Authorize]
         public ViewResult ChangeEmail(bool? saveSuccessful = null)
         {
@@ -335,7 +331,7 @@
             return this.View();
         }
 
-        [POST("changeemail")]
+        [HttpPost, Route("changeemail")]
         [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult ChangeEmail(ChangeEmailViewModel model)

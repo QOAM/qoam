@@ -1,22 +1,17 @@
 ﻿namespace QOAM.Website.Tests.Controllers
 {
     using System;
-    using System.Globalization;
     using System.Net.Mail;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core;
-    using Core.Repositories.Filters;
     using Moq;
     using MvcContrib.TestHelper;
-    using Ploeh.AutoFixture.Xunit2;
     using QOAM.Core.Repositories;
     using QOAM.Core.Services;
-    using QOAM.Website.Controllers;
-    using QOAM.Website.Helpers;
-    using QOAM.Website.Models;
-    using QOAM.Website.ViewModels.Home;
-
+    using Website.Controllers;
+    using Website.Helpers;
+    using Website.Models;
+    using Website.ViewModels.Home;
     using Xunit;
 
     public class HomeControllerTests

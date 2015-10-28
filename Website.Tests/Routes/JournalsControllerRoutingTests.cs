@@ -1,13 +1,8 @@
 ﻿namespace QOAM.Website.Tests.Routes
 {
     using System.Net.Http;
-    using System.Web.Mvc;
-
-    using MvcContrib.TestHelper;
     using MvcRouteTester;
-    using QOAM.Website.Controllers;
-    using QOAM.Website.ViewModels.Journals;
-
+    using Website.Controllers;
     using Xunit;
 
     public class JournalsControllerRoutingTests : ControllerRoutingTests<JournalsController>

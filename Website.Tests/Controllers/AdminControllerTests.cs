@@ -12,12 +12,10 @@
     using QOAM.Core.Export;
     using QOAM.Core.Import;
     using QOAM.Core.Repositories;
-    using QOAM.Website.Controllers;
-    using QOAM.Website.Helpers;
-    using QOAM.Website.ViewModels.Import;
-    using Website.ViewModels.Institutions;
+    using Website.Controllers;
+    using Website.Helpers;
+    using Website.ViewModels.Import;
     using Xunit;
-    using Xunit.Extensions;
 
     public class AdminControllerTests
     {

@@ -4,8 +4,10 @@
     using System.Linq.Expressions;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using MvcRouteTester;
 
     using QOAM.Website.Tests.TestHelpers;
+    using Website.Controllers;
 
     public abstract class ControllerRoutingTests<TController> : ControllerTests<TController>
         where TController : Controller
@@ -15,7 +17,8 @@
         protected ControllerRoutingTests()
         {
             ApplicationRoutes = new RouteCollection();
-            AttributeRoutingConfig.RegisterRoutes(ApplicationRoutes);
+
+            ApplicationRoutes.MapAttributeRoutesInAssembly(typeof(HomeController).Assembly);
         }
 
         protected bool ActionRequiresHttps(Expression<Func<TController, ActionResult>> action)

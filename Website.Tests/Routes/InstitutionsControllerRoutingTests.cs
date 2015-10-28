@@ -2,8 +2,7 @@
 {
     using System.Net.Http;
     using MvcRouteTester;
-    using QOAM.Website.Controllers;
-
+    using Website.Controllers;
     using Xunit;
 
     public class InstitutionsControllerRoutingTests : ControllerRoutingTests<InstitutionsController>

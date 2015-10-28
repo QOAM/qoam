@@ -1,13 +1,9 @@
 ﻿namespace QOAM.Website.Tests.Routes
 {
     using System.Net.Http;
-    using System.Web.Mvc;
-
-    using MvcContrib.TestHelper;
     using MvcRouteTester;
-    using QOAM.Website.Controllers;
-    using QOAM.Website.ViewModels.Profiles;
-
+    using Website.Controllers;
+    using Website.ViewModels.Profiles;
     using Xunit;
 
     public class ProfilesControllerRoutingTests : ControllerRoutingTests<ProfilesController>

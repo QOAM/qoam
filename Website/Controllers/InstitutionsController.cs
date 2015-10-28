@@ -2,9 +2,6 @@
 {
     using System.Linq;
     using System.Web.Mvc;
-
-    using AttributeRouting;
-    using AttributeRouting.Web.Mvc;
     using Core;
     using Core.Repositories.Filters;
     using QOAM.Core.Repositories;
@@ -27,7 +24,7 @@
             this.institutionRepository = institutionRepository;
         }
 
-        [GET("")]
+        [HttpGet, Route("")]
         public ViewResult Index(IndexViewModel model)
         {
             model.Institutions = this.institutionRepository.Search(model.ToFilter());
@@ -37,7 +34,7 @@
             return this.View(model);
         }
 
-        [GET("{id:int}")]
+        [HttpGet, Route("{id:int}")]
         public ViewResult Details(DetailsViewModel model)
         {
             model.Institution = this.institutionRepository.Find(model.Id);
@@ -48,7 +45,7 @@
             return this.View(model);
         }
 
-        [GET("names")]
+        [HttpGet, Route("names")]
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
         public JsonResult Names(string query)
         {

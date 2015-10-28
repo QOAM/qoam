@@ -5,7 +5,6 @@
     using FsCheck;
     using FsCheck.Xunit;
     using Xunit;
-    using Xunit.Extensions;
 
     public class StringExtensionsTests
     {

@@ -2,9 +2,6 @@
 {
     using System.Linq;
     using System.Web.Mvc;
-
-    using AttributeRouting;
-    using AttributeRouting.Web.Mvc;
     using Core.Repositories.Filters;
     using QOAM.Core;
     using QOAM.Core.Repositories;
@@ -30,7 +27,7 @@
             this.roles = roles;
         }
 
-        [GET("")]
+        [HttpGet, Route("")]
         public ViewResult Index(IndexViewModel model)
         {
             model.Institutions = this.institutionRepository.All.ToSelectListItems("<All institutions>");
@@ -41,7 +38,7 @@
             return this.View(model);
         }
 
-        [GET("{id:int}")]
+        [HttpGet, Route("{id:int}")]
         public ViewResult Details(DetailsViewModel model)
         {
             model.UserProfile = this.UserProfileRepository.Find(model.Id);
@@ -53,7 +50,7 @@
             return this.View(model);
         }
 
-        [GET("{id:int}/edit")]
+        [HttpGet, Route("{id:int}/edit")]
         [Authorize(Roles = ApplicationRole.Admin)]
         public ViewResult Edit(int id, string returnUrl)
         {
@@ -72,7 +69,7 @@
             return this.View(model);
         }
 
-        [POST("{id:int}/edit")]
+        [HttpPost, Route("{id:int}/edit")]
         [Authorize(Roles = ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, EditViewModel model)
@@ -89,7 +86,7 @@
             return this.View(model);
         }
 
-        [GET("{id:int}/basescorecards")]
+        [HttpGet, Route("{id:int}/basescorecards")]
         public PartialViewResult BaseScoreCards(ScoreCardsViewModel model)
         {
             var scoreCards = this.baseScoreCardRepository.FindForUser(model.ToScoreCardFilter(this.GetScoreCardStateFilter(model.Id)));
@@ -97,7 +94,7 @@
             return this.PartialView(scoreCards);
         }
 
-        [GET("{id:int}/valuationscorecards")]
+        [HttpGet, Route("{id:int}/valuationscorecards")]
         public PartialViewResult ValuationScoreCards(ScoreCardsViewModel model)
         {
             var scoreCards = this.valuationScoreCardRepository.FindForUser(model.ToScoreCardFilter(this.GetScoreCardStateFilter(model.Id)));
@@ -105,7 +102,7 @@
             return this.PartialView(scoreCards);
         }
 
-        [GET("names")]
+        [HttpGet, Route("names")]
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
         public JsonResult Names(string query)
         {

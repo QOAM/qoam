@@ -1,11 +1,7 @@
 ﻿namespace QOAM.Website.Controllers
 {
-    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-
-    using AttributeRouting.Web.Mvc;
-
     using QOAM.Core.Repositories;
     using QOAM.Core.Services;
     using QOAM.Website.Helpers;
@@ -38,7 +34,7 @@
             this.contactSettings = contactSettings;
         }
 
-        [GET("/")]
+        [HttpGet, Route("")]
         public ViewResult Index()
         {
             var model = new IndexViewModel
@@ -48,43 +44,43 @@
             return this.View(model);
         }
 
-        [GET("about")]
+        [HttpGet, Route("about")]
         public ViewResult About()
         {
             return this.View();
         }
 
-        [GET("organisation")]
+        [HttpGet, Route("organisation")]
         public ViewResult Organisation()
         {
             return this.View();
         }
 
-        [GET("press")]
+        [HttpGet, Route("press")]
         public ViewResult Press()
         {
             return this.View();
         }
 
-        [GET("faq")]
+        [HttpGet, Route("faq")]
         public ViewResult Faq()
         {
             return this.View();
         }
 
-        [GET("journalscorecard")]
+        [HttpGet, Route("journalscorecard")]
         public ViewResult JournalScoreCard()
         {
             return this.View();
         }
 
-        [GET("contact")]
+        [HttpGet, Route("contact")]
         public ViewResult Contact()
         {
             return this.View();
         }
 
-        [POST("contact")]
+        [HttpPost, Route("contact")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Contact(ContactViewModel model)
         {
@@ -105,7 +101,7 @@
             return this.View();
         }
 
-        [GET("contact/sent")]
+        [HttpGet, Route("contact/sent")]
         public ViewResult ContactSent()
         {
             return this.View();

@@ -3,8 +3,7 @@
     using System;
 
     using QOAM.Core;
-    using QOAM.Website.Models;
-
+    using Website.Models;
     using Xunit;
 
     public class QuestionExtensionsTests

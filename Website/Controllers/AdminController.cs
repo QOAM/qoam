@@ -1,16 +1,10 @@
-﻿using Validation;
-namespace QOAM.Website.Controllers
+﻿namespace QOAM.Website.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Globalization;
-
-    using AttributeRouting;
-    using AttributeRouting.Web.Mvc;
-
     using QOAM.Core;
     using QOAM.Core.Export;
     using QOAM.Core.Helpers;
@@ -61,20 +55,20 @@ namespace QOAM.Website.Controllers
             this.blockedIssnRepository = blockedIssnRepository;
         }
 
-        [GET("")]
+        [HttpGet, Route("")]
         public ViewResult Index()
         {
             return this.View();
         }
 
-        [GET("import")]
+        [HttpGet, Route("import")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Import()
         {
             return this.View(new ImportViewModel());
         }
 
-        [POST("import")]
+        [HttpPost, Route("import")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult Import(ImportViewModel model)
@@ -100,7 +94,7 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
-        [GET("imported")]
+        [HttpGet, Route("imported")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Imported()
         {
@@ -113,14 +107,14 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
-        [GET("update")]
+        [HttpGet, Route("update")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Update()
         {
             return this.View(new UpdateViewModel());
         }
 
-        [POST("update")]
+        [HttpPost, Route("update")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult Update(UpdateViewModel model)
@@ -146,7 +140,7 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
-        [GET("updated")]
+        [HttpGet, Route("updated")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Updated()
         {
@@ -159,7 +153,7 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
-        [GET("download")]
+        [HttpGet, Route("download")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public FileContentResult Download()
         {
@@ -171,14 +165,14 @@ namespace QOAM.Website.Controllers
             }
         }
 
-        [GET("delete")]
+        [HttpGet, Route("delete")]
         [Authorize(Roles = ApplicationRole.Admin)]
         public ViewResult Delete()
         {
             return this.View(new DeleteViewModel());
         }
 
-        [POST("delete")]
+        [HttpPost, Route("delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = ApplicationRole.Admin)]
         public ActionResult Delete(DeleteViewModel model)
@@ -209,7 +203,7 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
-        [GET("deleted")]
+        [HttpGet, Route("deleted")]
         [Authorize(Roles = ApplicationRole.Admin)]
         public ViewResult Deleted()
         {
@@ -222,14 +216,14 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
-        [GET("check")]
+        [HttpGet, Route("check")]
         [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Check()
         {
             return this.View();
         }
 
-        [POST("check")]
+        [HttpPost, Route("check")]
         [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Check(CheckViewModel model)
         {
@@ -243,7 +237,7 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
-        [GET("blockissn")]
+        [HttpGet, Route("blockissn")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult BlockIssn()
         {
@@ -252,7 +246,7 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
-        [POST("blockissn")]
+        [HttpPost, Route("blockissn")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult BlockIssn(BlockIssnViewModel model)
         {
@@ -276,7 +270,7 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
-        [GET("removeblockedissn")]
+        [HttpGet, Route("removeblockedissn")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult RemoveBlockedIssn()
         {
@@ -284,7 +278,7 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
-        [POST("removeblockedissn")]
+        [HttpPost, Route("removeblockedissn")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult RemoveBlockedIssn(RemoveBlockedIssnViewModel model)
         {
@@ -305,14 +299,14 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
         
-        [GET("addinstitution")]
+        [HttpGet, Route("addinstitution")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult AddInstitution()
         {
             return this.View();
         }
 
-        [POST("addinstitution")]
+        [HttpPost, Route("addinstitution")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult AddInstitution(UpsertViewModel model)
         {
@@ -327,14 +321,14 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
-        [GET("addedinstitution")]
+        [HttpGet, Route("addedinstitution")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult AddedInstitution()
         {
             return this.View();
         }
 
-        [GET("{id:int}/editinstitution")]
+        [HttpGet, Route("{id:int}/editinstitution")]
         [Authorize(Roles = ApplicationRole.Admin)]
         public ViewResult EditInstitution(int id)
         {
@@ -348,7 +342,7 @@ namespace QOAM.Website.Controllers
             return View(model);
         }
 
-        [POST("{id:int}/editinstitution")]
+        [HttpPost, Route("{id:int}/editinstitution")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult EditInstitution(UpsertViewModel model)
@@ -362,7 +356,7 @@ namespace QOAM.Website.Controllers
             return RedirectToAction("Index", "Institutions");
         }
 
-        [GET("movescorecards")]
+        [HttpGet, Route("movescorecards")]
         [Authorize(Roles =  ApplicationRole.Admin)]
         public ViewResult MoveScoreCards(bool? saveSuccessful = null)
         {
@@ -371,7 +365,7 @@ namespace QOAM.Website.Controllers
             return View();
         }
 
-        [POST("movescorecards")]
+        [HttpPost, Route("movescorecards")]
         [Authorize(Roles = ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult MoveScoreCards(MoveScoreCardsViewModel model)
@@ -403,7 +397,7 @@ namespace QOAM.Website.Controllers
             return View();
         }
 
-        [GET("removebasescorecard/{id:int}")]
+        [HttpGet, Route("removebasescorecard/{id:int}")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult RemoveBaseScoreCard(RemoveBaseScoreCardViewModel model)
         {
@@ -417,7 +411,7 @@ namespace QOAM.Website.Controllers
             return View(model);
         }
 
-        [POST("removebasescorecard/{id:int}")]
+        [HttpPost, Route("removebasescorecard/{id:int}")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult RemoveBaseScoreCardPost(RemoveBaseScoreCardViewModel model)
@@ -440,14 +434,14 @@ namespace QOAM.Website.Controllers
             return View("RemoveBaseScoreCard", model);
         }
 
-        [GET("removedbasescorecard")]
+        [HttpGet, Route("removedbasescorecard")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult RemovedBaseScoreCard()
         {
             return View();
         }
 
-        [GET("removevaluationscorecard/{id:int}")]
+        [HttpGet, Route("removevaluationscorecard/{id:int}")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult RemoveValuationScoreCard(RemoveValuationScoreCardViewModel model)
         {
@@ -461,7 +455,7 @@ namespace QOAM.Website.Controllers
             return View(model);
         }
 
-        [POST("removevaluationscorecard/{id:int}")]
+        [HttpPost, Route("removevaluationscorecard/{id:int}")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult RemoveValuationScoreCardPost(RemoveValuationScoreCardViewModel model)
@@ -484,7 +478,7 @@ namespace QOAM.Website.Controllers
             return View("RemoveValuationScoreCard", model);
         }
 
-        [GET("removedvaluationscorecard")]
+        [HttpGet, Route("removedvaluationscorecard")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult RemovedValuationScoreCard()
         {

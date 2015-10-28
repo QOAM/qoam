@@ -2,10 +2,8 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-
-    using QOAM.Website.Models;
-    using QOAM.Website.ViewModels.Home;
-
+    using Website.Models;
+    using Website.ViewModels.Home;
     using Xunit;
 
     public class ContactViewModelTests

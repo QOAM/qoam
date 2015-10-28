@@ -3,8 +3,6 @@
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
-    using QOAM.Core.Import;
-
     public class DeleteViewModel
     {
         [DisplayName("ISSNs")]

@@ -99,7 +99,7 @@
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error("Error importing chunk", ex);
+                    Logger.Error(ex, "Error importing chunk");
                 }
             }
         }
@@ -120,7 +120,7 @@
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error("Error updating chunk", ex);
+                    Logger.Error(ex, "Error updating chunk");
                 }
             }
         }

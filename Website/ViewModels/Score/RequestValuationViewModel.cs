@@ -1,9 +1,6 @@
 ﻿namespace QOAM.Website.ViewModels.Score
 {
     using System.ComponentModel.DataAnnotations;
-
-    using Postal;
-
     using QOAM.Website.Models;
 
     public class RequestValuationViewModel

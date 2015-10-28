@@ -1,11 +1,8 @@
 ﻿namespace QOAM.Website.Tests.Authorization
 {
-    using QOAM.Website.Controllers;
-    using QOAM.Website.Models;
-    using QOAM.Website.ViewModels.Journals;
-
+    using Website.Controllers;
+    using Website.Models;
     using Xunit;
-    using Xunit.Extensions;
 
     public class JournalsControllerAuthorizationTests : ControllerAuthorizationTests<JournalsController>
     {
