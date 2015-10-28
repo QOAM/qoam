@@ -25,5 +25,6 @@
         bool UserIsConfirmed(string userName);
 
         void Logout();
+        bool ValidateUser(string userName, string password);
     }
 }

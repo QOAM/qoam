@@ -1,5 +1,6 @@
 ﻿namespace QOAM.Website.Helpers
 {
+    using System.Web.Security;
     using WebMatrix.WebData;
 
     public class Authentication : IAuthentication
@@ -68,6 +69,11 @@
         public void Logout()
         {
             WebSecurity.Logout();
+        }
+
+        public bool ValidateUser(string userName, string password)
+        {
+            return Membership.ValidateUser(userName, password);
         }
     }
 }

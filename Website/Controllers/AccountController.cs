@@ -8,7 +8,7 @@
 
     using AttributeRouting;
     using AttributeRouting.Web.Mvc;
-
+    using Core;
     using Postal;
 
     using QOAM.Core.Repositories;
@@ -60,6 +60,7 @@
         }
 
         [POST("login")]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (this.ModelState.IsValid)
@@ -115,7 +116,7 @@
             }
 
             var mailAddress = new MailAddress(model.Email);
-            var institution = this.institutionRepository.All.FirstOrDefault(i => mailAddress.Host.Contains(i.ShortName));
+            var institution = this.institutionRepository.Find(mailAddress);
             if (institution == null)
             {
                 this.ModelState.AddModelError("", "Sorry, the domain name in your email address does not match the name of an academic institution known to us. If you want your institution to be included in our list, please enter it’s name and web address in our contact box and we will respond promptly.");
@@ -161,7 +162,7 @@
         }
 
         [GET("registrationpending")]
-        public ActionResult RegistrationPending()
+        public ViewResult RegistrationPending()
         {
             return this.View();
         }
@@ -173,7 +174,7 @@
         }
 
         [GET("registersuccess")]
-        public ActionResult RegisterSuccess()
+        public ViewResult RegisterSuccess()
         {
             return this.View();
         }
@@ -188,7 +189,7 @@
         }
 
         [GET("registerfailure")]
-        public ActionResult RegisterFailure()
+        public ViewResult RegisterFailure()
         {
             return this.View();
         }
@@ -236,7 +237,7 @@
 
         [GET("changepassword")]
         [Authorize]
-        public ActionResult ChangePassword(bool saveSuccessful = false)
+        public ViewResult ChangePassword(bool saveSuccessful = false)
         {
             this.ViewBag.SaveSuccessful = saveSuccessful;
 
@@ -259,12 +260,13 @@
         }
 
         [GET("resetpassword")]
-        public ActionResult ResetPassword()
+        public ViewResult ResetPassword()
         {
             return this.View();
         }
 
         [POST("resetpassword")]
+        [ValidateAntiForgeryToken]
         public ActionResult ResetPassword(ResetPasswordViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -296,7 +298,7 @@
         }
 
         [GET("resetpasswordconfirmed")]
-        public ActionResult ResetPasswordConfirmed(string token)
+        public ViewResult ResetPasswordConfirmed(string token)
         {
             var model = new ResetPasswordConfirmedViewModel { Token = token };
 
@@ -304,6 +306,7 @@
         }
 
         [POST("resetpasswordconfirmed")]
+        [ValidateAntiForgeryToken]
         public ActionResult ResetPasswordConfirmed(ResetPasswordConfirmedViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -324,6 +327,58 @@
         public ViewResult ResetPasswordFailure()
         {
             return this.View();
+        }
+        
+        [GET("changeemail")]
+        [Authorize]
+        public ViewResult ChangeEmail(bool? saveSuccessful = null)
+        {
+            this.ViewBag.SaveSuccessful = saveSuccessful;
+
+            return this.View();
+        }
+
+        [POST("changeemail")]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeEmail(ChangeEmailViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            if (!this.authentication.ValidateUser(this.authentication.CurrentUserName, model.Password))
+            {
+                this.ModelState.AddModelError(nameof(model.Password), "The password is incorrect.");
+                return this.View(model);
+            }
+            
+            if (this.institutionRepository.Find(new MailAddress(model.NewEmail)) == null)
+            {
+                this.ModelState.AddModelError(nameof(model.NewEmail), "Sorry, the domain name in your email address does not match the name of an academic institution known to us. If you want your institution to be included in our list, please enter it’s name and web address in our contact box and we will respond promptly.");
+                return this.View(model);
+            }
+
+            var userProfile = this.userProfileRepository.Find(this.authentication.CurrentUserName);
+
+            if (string.Equals(userProfile.Email, model.NewEmail, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return this.RedirectToAction("ChangeEmail", new { saveSuccessful = true });
+            }
+
+            if (this.userProfileRepository.FindByEmail(model.NewEmail) != null)
+            {
+                this.ModelState.AddModelError(nameof(model.NewEmail), "Sorry, unable to use this email address.");
+                return this.View(model);
+            }
+
+            userProfile.Email = model.NewEmail;
+
+            this.userProfileRepository.InsertOrUpdate(userProfile);
+            this.userProfileRepository.Save();
+
+            return this.RedirectToAction("ChangeEmail", new { saveSuccessful = true });
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

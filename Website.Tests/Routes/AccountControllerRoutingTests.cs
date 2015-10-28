@@ -306,5 +306,32 @@
             Assert.True(ActionRequiresHttps(x => x.ResetPasswordFailure()));
         }
 
+        [Fact]
+        public void ChangeEmailActionRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            ApplicationRoutes.ShouldMap("~/changeemail/?saveSuccessful=false").To<AccountController>(HttpMethod.Get, x => x.ChangeEmail(false));
+        }
+
+        [Fact]
+        public void ChangeEmailActionRequiresHttps()
+        {
+            // Assert
+            Assert.True(ActionRequiresHttps(x => x.ChangeEmail(false)));
+        }
+
+        [Fact]
+        public void ChangeEmailActionWithModelRoutedToWithCorrectUrlAndVerb()
+        {
+            // Assert    
+            ApplicationRoutes.ShouldMap("~/changeemail/").To<AccountController>(HttpMethod.Post, x => x.ChangeEmail((ChangeEmailViewModel)null));
+        }
+
+        [Fact]
+        public void ChangeEmailActionWithModelRequiresHttps()
+        {
+            // Assert
+            Assert.True(ActionRequiresHttps(x => x.ChangeEmail((ChangeEmailViewModel)null)));
+        }
     }
 }

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Net.Mail;
     using PagedList;
 
     using QOAM.Core.Repositories.Filters;
@@ -21,5 +21,6 @@
         IQueryable<string> Names(string query);
 
         IPagedList<Institution> Search(InstitutionFilter filter);
+        Institution Find(MailAddress mailAddress);
     }
 }

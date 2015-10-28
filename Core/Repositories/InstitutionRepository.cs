@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Mail;
     using System.Web.Helpers;
 
     using PagedList;
@@ -54,6 +55,11 @@
         public Institution Find(int id)
         {
             return this.DbContext.Institutions.Find(id);
+        }
+        
+        public Institution Find(MailAddress mailAddress)
+        {
+            return this.DbContext.Institutions.FirstOrDefault(i => mailAddress.Host.Contains(i.ShortName));
         }
 
         private static IOrderedQueryable<Institution> ApplyOrdering(IQueryable<Institution> query, InstitutionFilter filter)
