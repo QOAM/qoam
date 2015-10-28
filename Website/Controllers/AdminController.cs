@@ -24,6 +24,7 @@ namespace QOAM.Website.Controllers
 
     using Validation;
 
+    [RequireHttps]
     [RoutePrefix("admin")]
     [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.DataAdmin + "," + ApplicationRole.InstitutionAdmin)]
     public class AdminController : ApplicationController

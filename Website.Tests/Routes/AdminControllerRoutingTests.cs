@@ -16,10 +16,10 @@
         }
 
         [Fact]
-        public void IndexActionDoesNotRequireHttps()
+        public void IndexActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.Index()));
+            Assert.True(ActionRequiresHttps(x => x.Index()));
         }
 
         [Fact]
@@ -30,10 +30,10 @@
         }
 
         [Fact]
-        public void ImportActionDoesNotRequireHttps()
+        public void ImportActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.Import()));
+            Assert.True(ActionRequiresHttps(x => x.Import()));
         }
         
         [Fact]
@@ -44,10 +44,10 @@
         }
 
         [Fact]
-        public void ImportActionWithModelDoesNotRequireHttps()
+        public void ImportActionWithModelRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.Import(null)));
+            Assert.True(ActionRequiresHttps(x => x.Import(null)));
         }
 
         [Fact]
@@ -58,10 +58,10 @@
         }
 
         [Fact]
-        public void ImportedActionDoesNotRequireHttps()
+        public void ImportedActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.Imported()));
+            Assert.True(ActionRequiresHttps(x => x.Imported()));
         }
 
         [Fact]
@@ -72,10 +72,10 @@
         }
 
         [Fact]
-        public void UpdateActionDoesNotRequireHttps()
+        public void UpdateActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.Update()));
+            Assert.True(ActionRequiresHttps(x => x.Update()));
         }
 
         [Fact]
@@ -86,10 +86,10 @@
         }
 
         [Fact]
-        public void UpdateActionWithModelDoesNotRequireHttps()
+        public void UpdateActionWithModelRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.Update(null)));
+            Assert.True(ActionRequiresHttps(x => x.Update(null)));
         }
 
         [Fact]
@@ -100,10 +100,10 @@
         }
 
         [Fact]
-        public void UpdatedActionDoesNotRequireHttps()
+        public void UpdatedActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.Updated()));
+            Assert.True(ActionRequiresHttps(x => x.Updated()));
         }
 
         [Fact]
@@ -114,10 +114,10 @@
         }
 
         [Fact]
-        public void DownloadActionDoesNotRequireHttps()
+        public void DownloadActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.Download()));
+            Assert.True(ActionRequiresHttps(x => x.Download()));
         }
 
         [Fact]
@@ -128,10 +128,10 @@
         }
 
         [Fact]
-        public void CheckActionDoesNotRequireHttps()
+        public void CheckActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.Check()));
+            Assert.True(ActionRequiresHttps(x => x.Check()));
         }
 
         [Fact]
@@ -142,10 +142,10 @@
         }
 
         [Fact]
-        public void CheckActionWithModelDoesNotRequireHttps()
+        public void CheckActionWithModelRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.Check(null)));
+            Assert.True(ActionRequiresHttps(x => x.Check(null)));
         }
 
         [Fact]
@@ -156,10 +156,10 @@
         }
 
         [Fact]
-        public void MoveScoreCardsActionDoesNotRequireHttps()
+        public void MoveScoreCardsActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.MoveScoreCards((bool?)null)));
+            Assert.True(ActionRequiresHttps(x => x.MoveScoreCards((bool?)null)));
         }
 
         [Fact]
@@ -170,10 +170,10 @@
         }
 
         [Fact]
-        public void MoveScoreCardsActionWithModelDoesNotRequireHttps()
+        public void MoveScoreCardsActionWithModelRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.MoveScoreCards((MoveScoreCardsViewModel) null)));
+            Assert.True(ActionRequiresHttps(x => x.MoveScoreCards((MoveScoreCardsViewModel) null)));
         }
 
         [Fact]
@@ -184,10 +184,10 @@
         }
 
         [Fact]
-        public void RemoveBaseScoreCardActionDoesNotRequireHttps()
+        public void RemoveBaseScoreCardActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.RemoveBaseScoreCard(null)));
+            Assert.True(ActionRequiresHttps(x => x.RemoveBaseScoreCard(null)));
         }
 
         [Fact]
@@ -198,10 +198,10 @@
         }
 
         [Fact]
-        public void RemoveBaseScoreCardPostActionDoesNotRequireHttps()
+        public void RemoveBaseScoreCardPostActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.RemoveBaseScoreCardPost(null)));
+            Assert.True(ActionRequiresHttps(x => x.RemoveBaseScoreCardPost(null)));
         }
 
         [Fact]
@@ -212,10 +212,10 @@
         }
 
         [Fact]
-        public void RemovedBaseScoreCardActionDoesNotRequireHttps()
+        public void RemovedBaseScoreCardActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.RemovedBaseScoreCard()));
+            Assert.True(ActionRequiresHttps(x => x.RemovedBaseScoreCard()));
         }
 
         [Fact]
@@ -226,10 +226,10 @@
         }
 
         [Fact]
-        public void RemoveValuationScoreCardActionDoesNotRequireHttps()
+        public void RemoveValuationScoreCardActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.RemoveValuationScoreCard(null)));
+            Assert.True(ActionRequiresHttps(x => x.RemoveValuationScoreCard(null)));
         }
 
         [Fact]
@@ -240,10 +240,10 @@
         }
 
         [Fact]
-        public void RemoveValuationScoreCardPostActionDoesNotRequireHttps()
+        public void RemoveValuationScoreCardPostActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.RemoveValuationScoreCardPost(null)));
+            Assert.True(ActionRequiresHttps(x => x.RemoveValuationScoreCardPost(null)));
         }
 
         [Fact]
@@ -254,10 +254,10 @@
         }
 
         [Fact]
-        public void RemovedValuationScoreCardActionDoesNotRequireHttps()
+        public void RemovedValuationScoreCardActionRequiresHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.RemovedValuationScoreCard()));
+            Assert.True(ActionRequiresHttps(x => x.RemovedValuationScoreCard()));
         }
     }
 }

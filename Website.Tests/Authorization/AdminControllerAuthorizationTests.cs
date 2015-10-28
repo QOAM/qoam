@@ -9,7 +9,7 @@
     public class AdminControllerAuthorizationTests : ControllerAuthorizationTests<AdminController>
     {
         [Fact]
-        public void IndexActionDoesNotRequireAuthorizedUser()
+        public void IndexActionRequiresAuthorizedUser()
         {
             // Assert
             Assert.True(ActionRequiresAuthorizedUser(x => x.Index()));
