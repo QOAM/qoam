@@ -249,12 +249,16 @@
         }
 
         private static AccountController CreateAccountController(
+            IBaseScoreCardRepository baseScoreCardRepository = null,
+            IValuationScoreCardRepository valuationScoreCardRepository = null,
             IUserProfileRepository userProfileRepository = null,
             IAuthentication authentication = null,
             IInstitutionRepository institutionRepository = null,
             IJournalRepository journalRepository = null)
         {
             return new AccountController(
+                baseScoreCardRepository ?? Mock.Of<IBaseScoreCardRepository>(),
+                valuationScoreCardRepository ?? Mock.Of<IValuationScoreCardRepository>(),
                 userProfileRepository ?? CreateUserProfileRepository(),
                 authentication ?? CreateAuthentication(),
                 institutionRepository ?? CreateInstitutionRepository(),

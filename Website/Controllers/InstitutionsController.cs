@@ -18,19 +18,13 @@
     public class InstitutionsController : ApplicationController
     {
         private readonly IInstitutionRepository institutionRepository;
-        private readonly IBaseScoreCardRepository baseScoreCardRepository;
-        private readonly IValuationScoreCardRepository valuationScoreCardRepository;
 
         public InstitutionsController(IInstitutionRepository institutionRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication)
-            : base(userProfileRepository, authentication)
+            : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(institutionRepository, nameof(institutionRepository));
-            Requires.NotNull(baseScoreCardRepository, nameof(baseScoreCardRepository));
-            Requires.NotNull(valuationScoreCardRepository, nameof(valuationScoreCardRepository));
             
             this.institutionRepository = institutionRepository;
-            this.baseScoreCardRepository = baseScoreCardRepository;
-            this.valuationScoreCardRepository = valuationScoreCardRepository;
         }
 
         [GET("")]

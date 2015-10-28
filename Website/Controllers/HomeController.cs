@@ -1,5 +1,6 @@
 ﻿namespace QOAM.Website.Controllers
 {
+    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
@@ -19,9 +20,16 @@
         private readonly ContactSettings contactSettings;
         private readonly IJournalRepository journalRepository;
 
-        public HomeController(IJournalRepository journalRepository, IMailSender mailSender, ContactSettings contactSettings, IUserProfileRepository userProfileRepository, IAuthentication authentication)
-            : base(userProfileRepository, authentication)
+        public HomeController(
+            IBaseScoreCardRepository baseScoreCardRepository, 
+            IValuationScoreCardRepository valuationScoreCardRepository, 
+            IJournalRepository journalRepository, IMailSender mailSender, 
+            ContactSettings contactSettings, 
+            IUserProfileRepository userProfileRepository, 
+            IAuthentication authentication)
+            : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
+            Requires.NotNull(journalRepository, nameof(journalRepository));
             Requires.NotNull(mailSender, nameof(mailSender));
             Requires.NotNull(contactSettings, nameof(contactSettings));
 
@@ -33,7 +41,11 @@
         [GET("/")]
         public ViewResult Index()
         {
-            return this.View(new IndexViewModel { NumberOfScoredJournals = this.journalRepository.ScoredJournalsCount() });
+            var model = new IndexViewModel
+            {
+                NumberOfScoredJournals = this.journalRepository.ScoredJournalsCount()
+            };
+            return this.View(model);
         }
 
         [GET("about")]

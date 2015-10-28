@@ -23,15 +23,12 @@
     public class AccountController : ApplicationController
     {
         private readonly IAuthentication authentication;
-
         private readonly IInstitutionRepository institutionRepository;
-
         private readonly IUserProfileRepository userProfileRepository;
-
         private readonly IJournalRepository journalRepository;
 
-        public AccountController(IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IJournalRepository journalRepository)
-            : base(userProfileRepository, authentication)
+        public AccountController(IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IJournalRepository journalRepository)
+            : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(authentication, nameof(authentication));
             Requires.NotNull(userProfileRepository, nameof(userProfileRepository));

@@ -1,5 +1,6 @@
 ﻿namespace QOAM.Website.Controllers
 {
+    using System;
     using System.Web.Mvc;
 
     using QOAM.Core.Repositories;
@@ -13,17 +14,27 @@
         protected const string CacheOneHour = "CacheOneHour";
         protected const int AutoCompleteItemsCount = 5;
 
-        protected ApplicationController(IUserProfileRepository userProfileRepository, IAuthentication authentication)
+        protected ApplicationController(
+            IBaseScoreCardRepository baseScoreCardRepository,
+            IValuationScoreCardRepository valuationScoreCardRepository, 
+            IUserProfileRepository userProfileRepository, 
+            IAuthentication authentication)
         {
+            Requires.NotNull(baseScoreCardRepository, nameof(baseScoreCardRepository));
+            Requires.NotNull(valuationScoreCardRepository, nameof(valuationScoreCardRepository));
             Requires.NotNull(userProfileRepository, nameof(userProfileRepository));
             Requires.NotNull(authentication, nameof(authentication));
 
             this.UserProfileRepository = userProfileRepository;
             this.Authentication = authentication;
+            this.valuationScoreCardRepository = valuationScoreCardRepository;
+            this.baseScoreCardRepository = baseScoreCardRepository;
         }
 
         public IUserProfileRepository UserProfileRepository { get; private set; }
         public IAuthentication Authentication { get; private set; }
+        public IBaseScoreCardRepository baseScoreCardRepository { get; private set; }
+        public IValuationScoreCardRepository valuationScoreCardRepository { get; private set; }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -31,6 +42,7 @@
 
             this.ViewBag.PageId = GetPageId(filterContext); 
             this.ViewBag.SelectedMenuItem = GetSelectedMenuItem(filterContext);
+            this.ViewBag.LastUpdate = GetLastUpdate();
             
             if (!this.User.Identity.IsAuthenticated)
             {
@@ -48,6 +60,19 @@
         private static string GetSelectedMenuItem(ActionExecutingContext filterContext)
         {
             return filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
+        }
+
+        private DateTime? GetLastUpdate()
+        {
+            var lastBaseScoreCardUpdate = this.baseScoreCardRepository.LastUpdate();
+            var lastValuationScoreCardUpdate = this.valuationScoreCardRepository.LastUpdate();
+
+            if (lastBaseScoreCardUpdate == null || lastValuationScoreCardUpdate == null)
+            {
+                return lastBaseScoreCardUpdate ?? lastValuationScoreCardUpdate;
+            }
+
+            return new DateTime(Math.Max(lastBaseScoreCardUpdate.Value.Ticks, lastValuationScoreCardUpdate.Value.Ticks));
         }
     }
 }

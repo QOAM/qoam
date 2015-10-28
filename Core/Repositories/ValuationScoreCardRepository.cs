@@ -134,6 +134,14 @@
             return query.Count();
         }
 
+        public DateTime? LastUpdate()
+        {
+            return this.DbContext.ValuationScoreCards
+                .Where(v => v.State == ScoreCardState.Published)
+                .OrderByDescending(v => v.DatePublished.Value).Select(v => v.DatePublished)
+                .FirstOrDefault();
+        }
+
         public override void Delete(ValuationScoreCard entity)
         {
             this.DbContext.ValuationJournalPrices

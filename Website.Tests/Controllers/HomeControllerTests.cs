@@ -1,12 +1,15 @@
 ﻿namespace QOAM.Website.Tests.Controllers
 {
     using System;
+    using System.Globalization;
     using System.Net.Mail;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-
+    using Core;
+    using Core.Repositories.Filters;
     using Moq;
     using MvcContrib.TestHelper;
+    using Ploeh.AutoFixture.Xunit2;
     using QOAM.Core.Repositories;
     using QOAM.Core.Services;
     using QOAM.Website.Controllers;
@@ -25,11 +28,24 @@
         private const string ContactName = "contact name";
 
         [Fact]
+        public void IndexRendersView()
+        {
+            // Arrange
+            var homeController = CreateHomeController();
+
+            // Act
+            var viewResult = homeController.Index();
+
+            // Assert
+            Assert.IsType<ViewResult>(viewResult);
+        }
+
+        [Fact]
         public async Task ContactPostWithValidModelStateWillSendMailMessage()
         {
             // Arrange
             var mailSenderMock = new Mock<IMailSender>();
-            var homeController = new HomeController(Mock.Of<IJournalRepository>(), mailSenderMock.Object, CreateContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = CreateHomeController(mailSender: mailSenderMock.Object);
 
             // Act
             await homeController.Contact(CreateContactViewModel());
@@ -47,7 +63,7 @@
         public async Task ContactPostAfterSendingMailWillRedirectToContactSentAction()
         {
             // Arrange
-            var homeController = new HomeController(Mock.Of<IJournalRepository>(), Mock.Of<IMailSender>(), CreateContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = CreateHomeController();
 
             // Act
             var actionResult = await homeController.Contact(CreateContactViewModel());
@@ -63,7 +79,7 @@
             var mailSenderMock = new Mock<IMailSender>();
             mailSenderMock.Setup(m => m.Send(It.IsAny<MailMessage>())).Throws<InvalidOperationException>();
 
-            var homeController = new HomeController(Mock.Of<IJournalRepository>(), mailSenderMock.Object, CreateContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = CreateHomeController(mailSender: mailSenderMock.Object);
 
             // Act
             await homeController.Contact(CreateContactViewModel());
@@ -77,7 +93,7 @@
         {
             // Arrange
             var mailSenderMock = new Mock<IMailSender>();
-            var homeController = new HomeController(Mock.Of<IJournalRepository>(), mailSenderMock.Object, CreateContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = CreateHomeController(mailSender: mailSenderMock.Object);
             homeController.ModelState.AddModelError("key", "error message");
 
             // Act
@@ -86,12 +102,12 @@
             // Assert
             mailSenderMock.Verify(m => m.Send(It.IsAny<MailMessage>()), Times.Never());
         }
-
+        
         [Fact]
         public async Task ContactPostWithInvalidModelStateWillRenderView()
         {
             // Arrange
-            var homeController = new HomeController(Mock.Of<IJournalRepository>(), Mock.Of<IMailSender>(), CreateContactSettings(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>());
+            var homeController = CreateHomeController();
             homeController.ModelState.AddModelError("key", "error message");
 
             // Act
@@ -99,6 +115,25 @@
 
             // Assert
             Assert.IsType<ViewResult>(actionResult);
+        }
+
+        private static HomeController CreateHomeController(
+            IBaseScoreCardRepository baseScoreCardRepository = null,
+            IValuationScoreCardRepository valuationScoreCardRepository = null,
+            IJournalRepository journalRepository = null,
+            IMailSender mailSender = null,
+            ContactSettings contactSettings = null,
+            IUserProfileRepository userProfileRepository = null,
+            IAuthentication authentication = null)
+        {
+            return new HomeController(
+                baseScoreCardRepository ?? Mock.Of<IBaseScoreCardRepository>(),
+                valuationScoreCardRepository ?? Mock.Of<IValuationScoreCardRepository>(),
+                journalRepository ?? Mock.Of<IJournalRepository>(),
+                mailSender ?? Mock.Of<IMailSender>(),
+                contactSettings ?? CreateContactSettings(),
+                userProfileRepository ?? Mock.Of<IUserProfileRepository>(),
+                authentication ?? Mock.Of<IAuthentication>());
         }
 
         private static ContactViewModel CreateContactViewModel()

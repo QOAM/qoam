@@ -18,21 +18,15 @@
     public class ProfilesController : ApplicationController
     {
         private readonly IInstitutionRepository institutionRepository;
-        private readonly IBaseScoreCardRepository baseScoreCardRepository;
-        private readonly IValuationScoreCardRepository valuationScoreCardRepository;
         private readonly IRoles roles;
 
         public ProfilesController(IInstitutionRepository institutionRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IRoles roles, IUserProfileRepository userProfileRepository, IAuthentication authentication)
-            : base(userProfileRepository, authentication)
+            : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(institutionRepository, nameof(institutionRepository));
-            Requires.NotNull(baseScoreCardRepository, nameof(baseScoreCardRepository));
-            Requires.NotNull(valuationScoreCardRepository, nameof(valuationScoreCardRepository));
             Requires.NotNull(roles, nameof(roles));
             
             this.institutionRepository = institutionRepository;
-            this.baseScoreCardRepository = baseScoreCardRepository;
-            this.valuationScoreCardRepository = valuationScoreCardRepository;
             this.roles = roles;
         }
 

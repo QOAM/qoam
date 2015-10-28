@@ -40,11 +40,9 @@ namespace QOAM.Website.Controllers
         private readonly JournalsExport journalsExport;
         private readonly IInstitutionRepository institutionRepository;
         private readonly IBlockedISSNRepository blockedIssnRepository;
-        private readonly IBaseScoreCardRepository baseScoreCardRepository;
-        private readonly IValuationScoreCardRepository valuationScoreCardRepository;
 
         public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository)
-            : base(userProfileRepository, authentication)
+            : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalsImport, nameof(journalsImport));
             Requires.NotNull(ulrichsImport, nameof(ulrichsImport));
@@ -53,8 +51,6 @@ namespace QOAM.Website.Controllers
             Requires.NotNull(journalRepository, nameof(journalRepository));
             Requires.NotNull(institutionRepository, nameof(institutionRepository));
             Requires.NotNull(blockedIssnRepository, nameof(blockedIssnRepository));
-            Requires.NotNull(baseScoreCardRepository, nameof(baseScoreCardRepository));
-            Requires.NotNull(valuationScoreCardRepository, nameof(valuationScoreCardRepository));
             
             this.journalsImport = journalsImport;
             this.ulrichsImport = ulrichsImport;
@@ -63,8 +59,6 @@ namespace QOAM.Website.Controllers
             this.journalRepository = journalRepository;
             this.institutionRepository = institutionRepository;
             this.blockedIssnRepository = blockedIssnRepository;
-            this.valuationScoreCardRepository = valuationScoreCardRepository;
-            this.baseScoreCardRepository = baseScoreCardRepository;
         }
 
         [GET("")]

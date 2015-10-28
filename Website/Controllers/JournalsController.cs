@@ -27,22 +27,18 @@
         private readonly ILanguageRepository languageRepository;
         private readonly ISubjectRepository subjectRepository;
         private readonly IInstitutionJournalRepository institutionJournalRepository;
-        private readonly IBaseScoreCardRepository baseScoreCardRepository;
-        private readonly IValuationScoreCardRepository valuationScoreCardRepository;
         private readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
         private readonly IInstitutionRepository institutionRepository;
 
         public JournalsController(IJournalRepository journalRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IInstitutionJournalRepository institutionJournalRepository, IBaseScoreCardRepository baseScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository)
-            : base(userProfileRepository, authentication)
+            : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalRepository, nameof(journalRepository));
             Requires.NotNull(baseJournalPriceRepository, nameof(baseJournalPriceRepository));
             Requires.NotNull(valuationJournalPriceRepository, nameof(valuationJournalPriceRepository));
-            Requires.NotNull(valuationScoreCardRepository, nameof(valuationScoreCardRepository));
             Requires.NotNull(languageRepository, nameof(languageRepository));
             Requires.NotNull(subjectRepository, nameof(subjectRepository));
             Requires.NotNull(institutionJournalRepository, nameof(institutionJournalRepository));
-            Requires.NotNull(baseScoreCardRepository, nameof(baseScoreCardRepository));
             Requires.NotNull(institutionRepository, nameof(institutionRepository));
             Requires.NotNull(valuationJournalPriceRepository, nameof(valuationJournalPriceRepository));
             
@@ -51,8 +47,6 @@
             this.languageRepository = languageRepository;
             this.subjectRepository = subjectRepository;
             this.institutionJournalRepository = institutionJournalRepository;
-            this.baseScoreCardRepository = baseScoreCardRepository;
-            this.valuationScoreCardRepository = valuationScoreCardRepository;
             this.institutionRepository = institutionRepository;
             this.valuationJournalPriceRepository = valuationJournalPriceRepository;
         }

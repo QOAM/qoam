@@ -1,8 +1,9 @@
 ﻿<div id="footer">
     <div class="container text-muted">
-        <p class="pull-left dark">@DateTime.Now.Year Radboud University Nijmegen</p>
-        <p class="pull-right dark"><a href="#">Back to top <i class="glyphicon glyphicon-circle-arrow-up"></i></a></p>
-        <ul class="list-inline text-center" >
+        <p class="pull-left dark">@DateTime.Now.Year Radboud University Nijmegen (Last update @ViewBag.LastUpdate.ToShortDateString())</p>
+        <p class="pull-right dark"><a href="#">Back to top <i class="glyphicon glyphicon-circle-arrow-up"></i></a>
+        </p>
+        <ul class="list-inline text-center">
             <li> @Html.ActionLink("About", "About", "Home")</li>
             <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("Contact", "Contact", "Home")</li>
             <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("FAQ", "Faq", "Home")</li>
@@ -10,6 +11,5 @@
             <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("Organisation", "Organisation", "Home")</li>
             <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("Press", "Press", "Home")</li>
         </ul>
-
     </div>
 </div>
