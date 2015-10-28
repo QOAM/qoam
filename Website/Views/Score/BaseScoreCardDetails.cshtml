@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            @if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.DataAdmin))
+            @if (User.IsInRole(ApplicationRole.Admin))
             {
                 <div class="text-center">
                     <a href="@Url.Action("RemoveBaseScoreCard", "Admin", new { id = Model.Id })" title="Delete JSC" class="btn btn-danger" role="button">

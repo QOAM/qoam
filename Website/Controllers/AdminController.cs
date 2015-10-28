@@ -369,7 +369,7 @@ namespace QOAM.Website.Controllers
         }
 
         [GET("movescorecards")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles =  ApplicationRole.Admin)]
         public ViewResult MoveScoreCards(bool? saveSuccessful = null)
         {
             ViewBag.SaveSuccessful = saveSuccessful;
@@ -378,7 +378,7 @@ namespace QOAM.Website.Controllers
         }
 
         [POST("movescorecards")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult MoveScoreCards(MoveScoreCardsViewModel model)
         {

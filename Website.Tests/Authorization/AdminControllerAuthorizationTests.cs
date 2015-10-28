@@ -124,7 +124,7 @@
         
         [Theory]
         [InlineData(ApplicationRole.Admin, true)]
-        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.DataAdmin, false)]
         [InlineData(ApplicationRole.InstitutionAdmin, false)]
         [InlineData("invalid", false)]
         [InlineData("", false)]
@@ -136,7 +136,7 @@
 
         [Theory]
         [InlineData(ApplicationRole.Admin, true)]
-        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.DataAdmin, false)]
         [InlineData(ApplicationRole.InstitutionAdmin, false)]
         [InlineData("invalid", false)]
         [InlineData("", false)]
