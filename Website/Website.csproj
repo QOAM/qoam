@@ -926,7 +926,7 @@
     <Content Include="Images\Badges\HelpingHand.png" />
     <Content Include="Images\NotificationType\BadgeReceived.png" />
     <Content Include="Images\Published.png" />
-    <Content Include="Images\ScorecardStates\Expired.png" />
+    <Content Include="Images\ScorecardStates\Archived.png" />
     <Content Include="Images\ScorecardStates\Published.png" />
     <Content Include="Images\ScorecardStates\Unpublished.png" />
     <Content Include="Images\Unpublished.png" />

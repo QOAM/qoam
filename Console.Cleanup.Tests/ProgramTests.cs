@@ -25,7 +25,10 @@
         [InlineData("UnpublishedScoreCards", CleanupMode.UnpublishedScoreCards)]
         [InlineData("unpublishedscorecards", CleanupMode.UnpublishedScoreCards)]
         [InlineData("UNPUBLISHEDSCORECARDS", CleanupMode.UnpublishedScoreCards)]
-        public void GetImportTypeWithFirstArgumentIsUlrichsReturnsUlrichsJournalsImportSource(string argument, CleanupMode expected)
+        [InlineData("DuplicateScoreCards", CleanupMode.DuplicateScoreCards)]
+        [InlineData("duplicatescorecards", CleanupMode.DuplicateScoreCards)]
+        [InlineData("DUPLICATESCORECARDS", CleanupMode.DuplicateScoreCards)]
+        public void GetCleanupModeReturnsCorrectCleanupMode(string argument, CleanupMode expected)
         {
             // Arrange
             var args = new List<string> { argument };
@@ -54,6 +57,7 @@
 
         [Theory]
         [InlineData(CleanupMode.UnpublishedScoreCards, typeof(UnpublishedScoreCardsCleanup))]
+        [InlineData(CleanupMode.DuplicateScoreCards, typeof(DuplicateScoreCardsCleanup))]
         public void GetCleanupReturnsCorrectCleanupType(CleanupMode cleanupMode, Type expected)
         {
             // Arrange

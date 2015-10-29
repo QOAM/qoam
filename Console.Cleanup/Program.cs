@@ -29,7 +29,8 @@
             Logger.Info("Cleanup mode: {0}", cleanupMode);
             Logger.Info("Cleaning up...");
 
-            GetCleanup(cleanupMode).Cleanup();
+            var cleanup = GetCleanup(cleanupMode);
+            cleanup.Cleanup();
 
             Logger.Info("Finished cleaning up.");
         }
@@ -40,6 +41,8 @@
             {
                 case CleanupMode.UnpublishedScoreCards:
                     return Container.Resolve<UnpublishedScoreCardsCleanup>();
+                case CleanupMode.DuplicateScoreCards:
+                    return Container.Resolve<DuplicateScoreCardsCleanup>();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(cleanupMode));
             }

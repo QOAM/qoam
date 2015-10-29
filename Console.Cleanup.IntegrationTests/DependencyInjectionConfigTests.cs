@@ -8,7 +8,7 @@
     public class DependencyInjectionConfigTests
     {
         [Fact]
-        public void CleanupUnpublishedScoreCardsComponentRegistered()
+        public void UnpublishedScoreCardsCleanupComponentRegistered()
         {
             // Arrange
             var container = DependencyInjectionConfig.RegisterComponents();
@@ -18,6 +18,19 @@
 
             // Assert
             Assert.NotNull(unpublishedScoreCardsCleanup);
+        }
+
+        [Fact]
+        public void DuplicateScoreCardsCleanupComponentRegistered()
+        {
+            // Arrange
+            var container = DependencyInjectionConfig.RegisterComponents();
+
+            // Act
+            var duplicateScoreCardsCleanup = container.Resolve<DuplicateScoreCardsCleanup>();
+
+            // Assert
+            Assert.NotNull(duplicateScoreCardsCleanup);
         }
     }
 }

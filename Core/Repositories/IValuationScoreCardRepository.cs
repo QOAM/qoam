@@ -24,5 +24,6 @@
         int Count(ScoreCardFilter filter);
         DateTime? LastUpdate();
         void RemoveUnpublishedScoreCards(TimeSpan toBeRemovedWindow);
+        void ArchiveDuplicateScoreCards();
     }
 }

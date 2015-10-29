@@ -4,6 +4,6 @@
     {
         Unpublished,
         Published,
-        Expired
+        Archived
     }
 }

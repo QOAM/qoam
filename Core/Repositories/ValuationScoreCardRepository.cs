@@ -79,7 +79,7 @@
             
             return new ScoreCardStats
                    {
-                       NumberOfExpiredScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Expired).Select(g => g.Count).FirstOrDefault(),
+                       NumberOfArchivedScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Archived).Select(g => g.Count).FirstOrDefault(),
                        NumberOfPublishedScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Published).Select(g => g.Count).FirstOrDefault(),
                        NumberOfUnpublishedScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Unpublished).Select(g => g.Count).FirstOrDefault(),
                    };
@@ -94,7 +94,7 @@
 
             return new ScoreCardStats
                    {
-                       NumberOfExpiredScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Expired).Select(g => g.Count).FirstOrDefault(),
+                       NumberOfArchivedScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Archived).Select(g => g.Count).FirstOrDefault(),
                        NumberOfPublishedScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Published).Select(g => g.Count).FirstOrDefault(),
                        NumberOfUnpublishedScoreCards = groupedStates.Where(g => g.State == ScoreCardState.Unpublished).Select(g => g.Count).FirstOrDefault(),
                    };
@@ -102,7 +102,7 @@
 
         public IList<ValuationScoreCard> FindScoreCardsToBeArchived()
         {
-            return this.DbContext.ValuationScoreCards.Where(s => s.State != ScoreCardState.Expired && s.DateExpiration < DateTime.Now).ToList();
+            return this.DbContext.ValuationScoreCards.Where(s => s.State != ScoreCardState.Archived && s.DateExpiration < DateTime.Now).ToList();
         }
 
         public IList<ValuationScoreCard> FindScoreCardsThatWillBeArchived(TimeSpan toBeArchivedWindow)
@@ -120,6 +120,8 @@
             this.DbContext.ValuationScoreCards
                 .Where(b => b.JournalId == oldJournal.Id)
                 .Update(b => new ValuationScoreCard { JournalId = newJournal.Id });
+
+            this.ArchiveDuplicateScoreCards();
         }
 
         public int Count(ScoreCardFilter filter)
@@ -155,6 +157,14 @@
                 .Where(b => b.State == ScoreCardState.Unpublished)
                 .Where(b => b.DateStarted <= toBeRemovedDate)
                 .Delete();
+        }
+
+        public void ArchiveDuplicateScoreCards()
+        {
+            this.DbContext.ValuationScoreCards
+                .Where(b => b.State == ScoreCardState.Published)
+                .Where(b => this.DbContext.ValuationScoreCards.Any(b2 => b2.State == ScoreCardState.Published && b2.JournalId == b.JournalId && b2.UserProfileId == b.UserProfileId && b2.DatePublished > b.DatePublished))
+                .Update(b => new ValuationScoreCard { DateExpiration = DateTime.Now, State = ScoreCardState.Archived });
         }
 
         public override void Delete(ValuationScoreCard entity)

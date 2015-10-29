@@ -28,6 +28,7 @@
         private static void RegisterCleanupComponents(ContainerBuilder builder)
         {
             builder.RegisterType<UnpublishedScoreCardsCleanup>().SingleInstance();
+            builder.RegisterType<DuplicateScoreCardsCleanup>().SingleInstance();
         }
 
         private static void RegisterConfigurationSections(ContainerBuilder builder)

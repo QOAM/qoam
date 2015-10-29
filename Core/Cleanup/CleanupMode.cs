@@ -2,6 +2,7 @@
 {
     public enum CleanupMode
     {
-        UnpublishedScoreCards
+        UnpublishedScoreCards,
+        DuplicateScoreCards
     }
 }

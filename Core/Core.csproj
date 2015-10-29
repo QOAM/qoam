@@ -140,6 +140,7 @@
     <Compile Include="BaseQuestionScore.cs" />
     <Compile Include="BlockedISSN.cs" />
     <Compile Include="Cleanup\CleanupMode.cs" />
+    <Compile Include="Cleanup\DuplicateScoreCardsCleanup.cs" />
     <Compile Include="Cleanup\UnpublishedScoreCardsCleanup.cs" />
     <Compile Include="Cleanup\ICleanup.cs" />
     <Compile Include="Cleanup\CleanupSettings.cs" />

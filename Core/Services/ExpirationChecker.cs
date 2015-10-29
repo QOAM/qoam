@@ -36,7 +36,7 @@
 
             foreach (var scoreCard in scoreCardsToBeArchived)
             {
-                scoreCard.State = ScoreCardState.Expired;
+                scoreCard.State = ScoreCardState.Archived;
 
                 this.baseScoreCardRepository.InsertOrUpdate(scoreCard);
                 this.baseScoreCardRepository.Save();
