@@ -9,7 +9,7 @@
     public class IndexViewModelTests
     {
         [Fact]
-        public void ConstructorSetsSortByToNumberOfJournalScoreCards()
+        public void ConstructorSetsSortByToDateRegistered()
         {
             // Arrange
             var indexViewModel = new IndexViewModel();
@@ -17,7 +17,7 @@
             // Act
 
             // Assert
-            Assert.Equal(UserProfileSortMode.NumberOfBaseJournalScoreCards, indexViewModel.SortBy);
+            Assert.Equal(UserProfileSortMode.DateRegistered, indexViewModel.SortBy);
         }
 
         [Fact]

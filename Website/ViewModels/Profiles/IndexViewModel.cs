@@ -15,7 +15,7 @@
     {
         public IndexViewModel()
         {
-            this.SortBy = UserProfileSortMode.NumberOfBaseJournalScoreCards;
+            this.SortBy = UserProfileSortMode.DateRegistered;
             this.Sort = SortDirection.Descending;
         }
 
