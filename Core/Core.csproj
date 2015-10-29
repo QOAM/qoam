@@ -139,6 +139,11 @@
   <ItemGroup>
     <Compile Include="BaseQuestionScore.cs" />
     <Compile Include="BlockedISSN.cs" />
+    <Compile Include="Cleanup\CleanupMode.cs" />
+    <Compile Include="Cleanup\UnpublishedScoreCardsCleanup.cs" />
+    <Compile Include="Cleanup\ICleanup.cs" />
+    <Compile Include="Cleanup\CleanupSettings.cs" />
+    <Compile Include="Cleanup\UnpublishedScoreCardsCleanupSettings.cs" />
     <Compile Include="Helpers\ValidatorExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Import\DoajImportRecordMap.cs" />

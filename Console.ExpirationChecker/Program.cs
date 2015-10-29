@@ -10,13 +10,12 @@
 
     internal static class Program
     {
-        private static IContainer container;
+        private static IContainer Container { get; } = DependencyInjectionConfig.RegisterComponents();
+
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private static void Main()
         {
-            container = DependencyInjectionConfig.RegisterComponents();
-
             try
             {
                 ArchiveScoreCardsThatHaveExpired();
@@ -40,7 +39,7 @@
         {
             Logger.Info("Sending notifications to owners of expired JSC's...");
 
-            var expirationChecker = container.Resolve<ExpirationChecker>();
+            var expirationChecker = Container.Resolve<ExpirationChecker>();
             var result = expirationChecker.ArchiveBaseScoreCardsThatHaveExpired();
 
             Logger.Info("Number of expired JSC's: {0}", result.NumberOfArchivedScoreCards);
@@ -50,7 +49,7 @@
         {
             Logger.Info("Sending notifications to owners of soon to expire JSC's...");
 
-            var expirationChecker = container.Resolve<ExpirationChecker>();
+            var expirationChecker = Container.Resolve<ExpirationChecker>();
             var result = expirationChecker.NotifyUsersOfScoreCardsThatAlmostExpire();
 
             Logger.Info("Number of soon to expire JSC's: {0}", result.NumberOfSoonToBeArchivedNotificationsSent);

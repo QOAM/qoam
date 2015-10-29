@@ -12,15 +12,14 @@
 
     public static class Program
     {
-        private static IContainer container;
+        private static IContainer Container { get; } = DependencyInjectionConfig.RegisterComponents();
+
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private static void Main(string[] args)
         {
             try
             {
-                container = DependencyInjectionConfig.RegisterComponents();
-
                 ImportJournals(GetImportType(args), GetImportMode(args), GetJournalUpdateProperties(args));
             }
             catch (Exception ex)
@@ -35,10 +34,10 @@
             Logger.Info("Import mode: {0}", importMode);
             Logger.Info("Importing journals...");
 
-            var importResult = container.Resolve<JournalsImport>().ImportJournals(GetJournalsToImport(importSource), importMode, journalUpdateProperties);
+            var importResult = Container.Resolve<JournalsImport>().ImportJournals(GetJournalsToImport(importSource), importMode, journalUpdateProperties);
 
             Logger.Info("Imported {0} journals total", importResult.NumberOfImportedJournals);
-            Logger.Info("mported {0} new journals", importResult.NumberOfNewJournals);
+            Logger.Info("Imported {0} new journals", importResult.NumberOfNewJournals);
         }
 
         private static IList<Journal> GetJournalsToImport(JournalsImportSource importSource)
@@ -46,9 +45,9 @@
             switch (importSource)
             {
                 case JournalsImportSource.DOAJ:
-                    return container.Resolve<DoajImport>().GetJournals();    
+                    return Container.Resolve<DoajImport>().GetJournals();    
                 case JournalsImportSource.Ulrichs:
-                    return container.Resolve<UlrichsImport>().GetJournals(UlrichsImport.UlrichsJournalType.OpenAccess);    
+                    return Container.Resolve<UlrichsImport>().GetJournals(UlrichsImport.UlrichsJournalType.OpenAccess);    
                 default:
                     throw new ArgumentOutOfRangeException(nameof(importSource));
             }

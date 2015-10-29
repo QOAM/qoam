@@ -142,6 +142,21 @@
                 .FirstOrDefault();
         }
 
+        public void RemoveUnpublishedScoreCards(TimeSpan toBeRemovedWindow)
+        {
+            var toBeRemovedDate = DateTime.Now - toBeRemovedWindow;
+
+            this.DbContext.BaseJournalPrices
+                .Where(b => b.BaseScoreCard.State == ScoreCardState.Unpublished)
+                .Where(b => b.BaseScoreCard.DateStarted <= toBeRemovedDate)
+                .Delete();
+
+            this.DbContext.BaseScoreCards
+                .Where(b => b.State == ScoreCardState.Unpublished)
+                .Where(b => b.DateStarted <= toBeRemovedDate)
+                .Delete();
+        }
+
         public override void Delete(BaseScoreCard entity)
         {
             this.DbContext.BaseJournalPrices

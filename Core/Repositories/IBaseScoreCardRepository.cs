@@ -23,5 +23,6 @@
         void MoveScoreCards(Journal oldJournal, Journal newJournal);
         int Count(ScoreCardFilter filter);
         DateTime? LastUpdate();
+        void RemoveUnpublishedScoreCards(TimeSpan toBeRemovedWindow);
     }
 }
