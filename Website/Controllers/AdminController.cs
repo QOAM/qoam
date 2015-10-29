@@ -357,7 +357,7 @@
         }
 
         [HttpGet, Route("movescorecards")]
-        [Authorize(Roles =  ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult MoveScoreCards(bool? saveSuccessful = null)
         {
             ViewBag.SaveSuccessful = saveSuccessful;
@@ -366,7 +366,7 @@
         }
 
         [HttpPost, Route("movescorecards")]
-        [Authorize(Roles = ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult MoveScoreCards(MoveScoreCardsViewModel model)
         {
@@ -398,7 +398,7 @@
         }
 
         [HttpGet, Route("removebasescorecard/{id:int}")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         public ActionResult RemoveBaseScoreCard(RemoveBaseScoreCardViewModel model)
         {
             var baseScoreCard = baseScoreCardRepository.Find(model.Id);
@@ -412,7 +412,7 @@
         }
 
         [HttpPost, Route("removebasescorecard/{id:int}")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult RemoveBaseScoreCardPost(RemoveBaseScoreCardViewModel model)
         {
