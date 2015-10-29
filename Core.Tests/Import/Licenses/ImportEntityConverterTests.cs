@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Linq;
-using NPOI.OpenXmlFormats.Dml;
+using QOAM.Core.Import.Licences;
 using QOAM.Core.Tests.Import.Licenses.Stubs;
 using Xunit;
 
@@ -26,36 +24,20 @@ namespace QOAM.Core.Tests.Import.Licenses
             var result = _converter.Convert();
 
             Assert.Equal(4, result.Count);
-            Assert.Equal(2, result[2].Licenses.Count);
+            Assert.Equal(8, result[2].Licenses.Count);
         }
-    }
 
-    public class ImportEntityConverter
-    {
-        readonly DataSet _data;
-
-        public ImportEntityConverter(DataSet data)
+        [Fact]
+        public void LicensesAreParsedIntoInstitutionJournalEntities()
         {
-            _data = data;
+            Initialize();
+
+            var result = _converter.Convert();
+
+            var firstLicense = result.First().Licenses.First();
+
+            Assert.IsType<LicenseInfo>(firstLicense);
+            Assert.Equal("Sage", firstLicense.LicenseName);
         }
-
-        public List<UniversityLicense> Convert()
-        {
-            var licenses = (from row in _data.Tables["Universities"].Rows.Cast<DataRow>()
-                            select new UniversityLicense
-                            {
-                                Domain = row["Domein"].ToString(),
-                                Licenses = row["Tabbladen"].ToString().Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).ToList()
-                            }).ToList();
-
-            return licenses;
-        }
-    }
-
-
-    public class UniversityLicense
-    {
-        public string Domain { get; set; }
-        public List<string> Licenses { get; set; }
     }
 }
