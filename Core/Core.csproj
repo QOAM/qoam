@@ -194,6 +194,10 @@
     <Compile Include="Migrations\201510270856032_RemoveScoreCards.Designer.cs">
       <DependentUpon>201510270856032_RemoveScoreCards.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510291351475_UserInstitutionChange.cs" />
+    <Compile Include="Migrations\201510291351475_UserInstitutionChange.Designer.cs">
+      <DependentUpon>201510291351475_UserInstitutionChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\IBlockedISSNRepository.cs" />
@@ -201,6 +205,8 @@
     <Compile Include="Repositories\IValuationScoreCardRepository.cs" />
     <Compile Include="Repositories\ValuationJournalPriceRepository.cs" />
     <Compile Include="Repositories\ValuationScoreCardRepository.cs" />
+    <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
+    <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />
     <Compile Include="SwotVerdict.cs" />
     <Compile Include="ValuationJournalPrice.cs" />
     <Compile Include="ValuationQuestionScore.cs" />
@@ -369,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510270856032_RemoveScoreCards.resx">
       <DependentUpon>201510270856032_RemoveScoreCards.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510291351475_UserInstitutionChange.resx">
+      <DependentUpon>201510291351475_UserInstitutionChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
