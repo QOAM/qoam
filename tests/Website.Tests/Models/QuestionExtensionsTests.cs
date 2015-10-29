@@ -95,7 +95,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("Editorial correspondence and reviewer's comments are published alongside papers", localizedQuestion);
+            Assert.Equal("The website of the journal indicates how open editorial correspondence and reviewer's comments are", localizedQuestion);
         }
 
         [Fact]
