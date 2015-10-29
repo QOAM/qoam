@@ -590,6 +590,10 @@ ul {
 
 .swotFilterContainer span { display: block; }
 
+.swotFilterContainer span.swot-matrix-icon {
+    display: inline;
+}
+
 /******************** icons ************************************/
 
 ul.nav span.icon-group {
