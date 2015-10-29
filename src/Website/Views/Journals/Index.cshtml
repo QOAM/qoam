@@ -1,0 +1,168 @@
+﻿@using System.Web.Mvc.Html5
+@using System.Web.Optimization
+@using PagedList.Mvc
+@using QOAM.Website.Helpers
+@using QOAM.Website.ViewModels.Journals
+@model IndexViewModel
+
+@{
+    ViewBag.Title = "OA Journals";
+}
+
+<div class="container main">
+    <div class="row side">
+        <div class="col-md-3">
+            <div id="filter" class="well">
+                <h3>
+                    Filter
+                    <img src="~/Images/zoom.png" class="pull-right clearfix" style="height: 30px;" />
+                </h3>
+
+                @using (Html.BeginForm("Index", "Journals", FormMethod.Get))
+                {
+                    <fieldset>
+                        <legend>Search</legend>
+
+                        <div class="form-group editor-label-placeholder">
+                            @Html.LabelFor(m => m.Title, null, new { @class = "control-label" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Html5TextBoxFor(m => m.Title, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by journal title")
+                            @Html.ValidationMessageFor(m => m.Title, null, new { @class = "control-label" })
+                        </div>
+
+                        <div class="form-group editor-label-placeholder">
+                            @Html.LabelFor(m => m.Issn, null, new { @class = "control-label" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Html5TextBoxFor(m => m.Issn, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by ISSN")
+                            @Html.ValidationMessageFor(m => m.Issn, null, new { @class = "control-label" })
+                        </div>
+
+                        <div class="form-group editor-label-placeholder">
+                            @Html.LabelFor(m => m.Publisher, null, new { @class = "control-label" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Html5TextBoxFor(m => m.Publisher, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by publisher")
+                            @Html.ValidationMessageFor(m => m.Publisher, null, new { @class = "control-label" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.Discipline, Model.Disciplines, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Discipline, null, new { @class = "control-label" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.Language, Model.Languages, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Language, null, new { @class = "control-label" })
+                        </div>
+
+                        <!--
+                        <div class="form-control high clearfix">
+                            <span class="pull-right">
+                                @Html.CheckBoxFor(m => m.SubmittedOnly, new { @class = "control-label" })
+                                @Html.ValidationMessageFor(m => m.SubmittedOnly, null, new { @class = "control-label" })
+                            </span>
+                            <span class="pull-left ">
+                                <small><label class="control-label" for="@Html.NameFor(m => m.SubmittedOnly)">All journals with <a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#valuationjournalscorecard">Valuation Score Card</a></label></small>
+                            </span>
+                        </div>-->
+
+                        <div class="form-group">
+                            <div id="swotFilterContainer" class="score swotFilterContainer">
+                                @Html.HiddenFor(m => m.SwotMatrix)
+                                <a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#swot" data-select-tab="false">SWOT matrix <span class="glyphicon glyphicon-info-sign swot-matrix-icon"></span></a>
+                                <div class="table">
+                                    <div class="table-row first-row">
+                                        <div class="table-cell strong first-column" data-swot-type="strong">Strong <span>journals</span></div>
+                                        <div class="table-cell threat second-column" data-swot-type="threat">Threat <span>(to authors)</span></div>
+                                    </div>
+                                    <div class="table-row second-row">
+                                        <div class="table-cell opportunity first-column" data-swot-type="opportunity">Opportunity <span>(to publishers)</span></div>
+                                        <div class="table-cell weak second-column" data-swot-type="weak">Weaker <span>journals</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p>
+                            <input id="submitForm" type="submit" value="Search" class="btn btn-primary" />
+                        </p>
+                    </fieldset>
+                }
+
+            </div>
+        </div>
+
+        <div class="col-md-9">
+
+            <div class="row">
+                <div class="col-md-9">
+                    <h3>Scored journals: @Model.Journals.TotalItemCount</h3>
+
+                </div>
+                <div class="col-md-3 text-right topmargin">
+                    <div class="topmargin">@Sorting.JournalSortMenu(Model.SortBy, Model.Sort)</div>
+                </div>
+            </div>
+
+            @if (Model.Journals.Any())
+            {
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="title">Title</th>
+                            <th class="publisher">Publisher</th>
+                            <th class="swot"><a href="@Url.Action("JournalScoreCard", "Home")#swot">SWOT color</a></th>
+                            <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#basejournalscorecard">Base score</a></th>
+                            <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#valuationjournalscorecard">Valuation score</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var journal in Model.Journals)
+                        {
+                            <tr>
+                                <td>@Html.ActionLink(journal.Title, "Details", new { id = journal.Id, returnUrl = Request.RawUrl })</td>
+                                <td>@Html.ActionLink(journal.Publisher.Name, "Index", new { Publisher = journal.Publisher.Name })</td>
+                                <td class="verdict-@journal.JournalScore.Swot">&#160;</td>
+                                <td>@Scores.AverageScore(journal.JournalScore.OverallScore)</td>
+                                <td>@Scores.AverageScore(journal.JournalScore.ValuationScore)</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+                @Html.PagedListPager(Model.Journals, page => Url.Action("Index", new { page, Model.Title, Model.Issn, Model.Publisher, Model.Discipline, Model.Language, Model.SubmittedOnly, Model.Sort, Model.SortBy, Model.SwotMatrix }), Html.PagedListRenderOptions())
+            }
+            else
+            {
+                <p class="text-warning">No journals could be found. This outcome is adressed in the FAQ <a href="@Url.Action("Faq", "Home")#cant-find-journal" title="Why don't I find a specific journal in QOAM?">Why don't I find a specific journal in QOAM?</a></p>
+            }
+        </div>
+    </div>
+
+</div>
+
+@section stylesheets
+{
+    @Styles.Render("~/styles/typeahead")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/typeahead")
+
+    @Html.Partial("_FormScripts")
+
+    <script type="text/javascript">
+        $(function () {
+            var journalsController = new JournalsController();
+            journalsController.index(
+                '@Url.Action("Titles", null, null, this.Request.Url.Scheme)',
+                '@Url.Action("Issns", null, null, this.Request.Url.Scheme)',
+                '@Url.Action("Publishers", null, null, this.Request.Url.Scheme)'
+            );
+        });
+    </script>
+}

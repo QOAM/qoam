@@ -1,0 +1,56 @@
+﻿@model QOAM.Website.ViewModels.Home.IndexViewModel
+@{
+    ViewBag.Title = "Quality Open Access Market";
+}
+
+<div class="carousel">
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="~/Content/images/banner3.jpg" alt="Quality Open Access Market" title="Only with a critical mass of several thousands quality checked journals QOAM becomes a real market place where authors may select a good journal for their open access article. Currently, QOAM has @Model.NumberOfScoredJournals checked journals. Please, help that number grow by publishing a Journal Score Card. See the item Journal Score Card behind the ‘Learn more’ button below.">
+
+            <div class="container">
+                <div class="carousel-caption">
+                    <span id="under-construction" class="text-center">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container main">
+    <p class="text-center">@Html.ActionLink("Learn more", "About", "Home", null, new { @class = "btn btn btn-primary topmargin" })</p>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+            <a href="@Url.Action("Index", "Journals")">
+                <div class="container-inner  text-center">
+                    <p class="lead">
+                        Visiting QOAM
+                    </p>
+                    <p class="sublead">to find a journal to publish in</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="@Url.Action("Index", "Score")">
+                <div class="container-inner text-center">
+                    <p class="lead">
+                        Enhancing QOAM
+                    </p>
+                    <p class="sublead">by sharing Journal Score Cards</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div id="highlightBox" class="text-center">
+                <p class="lead">
+                    <a href="#">Flyer Open Access week 2015</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
