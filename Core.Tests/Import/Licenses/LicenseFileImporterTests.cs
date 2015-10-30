@@ -25,7 +25,7 @@ namespace QOAM.Core.Tests.Import.Licenses
                 _workbook = WorkbookFactory.Create(file);
             }
 
-            _importer = new LicenseFileImporter(_workbook);
+            _importer = new LicenseFileImporter();
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace QOAM.Core.Tests.Import.Licenses
         {
             Initialize();
 
-            var result = _importer.Extract();
+            var result = _importer.Extract(_workbook);
 
             Assert.Equal(2, result.Tables.Cast<DataTable>().Count(dt => dt.TableName != UnivertitiesTab));
         }
@@ -66,14 +66,14 @@ namespace QOAM.Core.Tests.Import.Licenses
         {
             Initialize("Invalid QOAMupload");
 
-            Assert.Throws<ArgumentException>(() => _importer.Extract());
+            Assert.Throws<ArgumentException>(() => _importer.Extract(_workbook));
         }
         
         #region Private Methods
 
         DataTable GetTable(string name)
         {
-            var result = _importer.Extract();
+            var result = _importer.Extract(_workbook);
             return result.Tables[name];
         }
 

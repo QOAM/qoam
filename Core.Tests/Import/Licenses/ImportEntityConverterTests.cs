@@ -14,14 +14,14 @@ namespace QOAM.Core.Tests.Import.Licenses
         public void Initialize()
         {
             _validDataSet = ImportFileStubs.CompleteDataSet();
-            _converter = new ImportEntityConverter(_validDataSet);
+            _converter = new ImportEntityConverter();
         }
 
         [Fact]
         public void UniversitiesTableIsParsedIntoAUsableEntity()
         {
             Initialize();
-            var result = _converter.Convert();
+            var result = _converter.Convert(_validDataSet);
 
             Assert.Equal(4, result.Count);
             Assert.Equal(8, result[2].Licenses.Count);
@@ -32,7 +32,7 @@ namespace QOAM.Core.Tests.Import.Licenses
         {
             Initialize();
 
-            var result = _converter.Convert();
+            var result = _converter.Convert(_validDataSet);
 
             var firstLicense = result.First().Licenses.First();
 

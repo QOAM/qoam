@@ -5,22 +5,16 @@ using System.Linq;
 
 namespace QOAM.Core.Import.Licences
 {
-    public class ImportEntityConverter
+    public class ImportEntityConverter : IImportEntityConverter
     {
-        readonly DataSet _data;
 
-        public ImportEntityConverter(DataSet data)
+        public List<UniversityLicense> Convert(DataSet data)
         {
-            _data = data;
-        }
-
-        public List<UniversityLicense> Convert()
-        {
-            var licenses = (from row in _data.Tables["Universities"].Rows.Cast<DataRow>()
+            var licenses = (from row in data.Tables["Universities"].Rows.Cast<DataRow>()
                 select new UniversityLicense
                 {
                     Domain = row["Domein"].ToString(),
-                    Licenses = ExtractJournalLicenses(row["Tabbladen"].ToString().Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries))
+                    Licenses = ExtractJournalLicenses(row["Tabbladen"].ToString().Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries), data)
                 }).ToList();
 
             return licenses;
@@ -28,10 +22,10 @@ namespace QOAM.Core.Import.Licences
 
         #region Private Methods
 
-        IList<LicenseInfo> ExtractJournalLicenses(IEnumerable<string> licenseNames)
+        IList<LicenseInfo> ExtractJournalLicenses(IEnumerable<string> licenseNames, DataSet data)
         {
             return (from l in licenseNames
-                from row in _data.Tables[l].Rows.Cast<DataRow>()
+                from row in data.Tables[l].Rows.Cast<DataRow>()
                 select new LicenseInfo
                 {
                     LicenseName = l,

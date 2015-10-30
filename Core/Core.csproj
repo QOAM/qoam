@@ -155,11 +155,12 @@
     <Compile Include="Import\DoajImportRecordMap.cs" />
     <Compile Include="Import\Import.cs" />
     <Compile Include="Import\JournalUpdateProperty.cs" />
+    <Compile Include="Import\Licences\BulkImporter.cs" />
+    <Compile Include="Import\Licences\IImportEntityConverter.cs" />
     <Compile Include="Import\Licences\ILicenseFileImporter.cs" />
     <Compile Include="Import\Licences\ImportEntityConverter.cs" />
     <Compile Include="Import\Licences\LicenseFileImporter.cs" />
     <Compile Include="Import\Licences\LicenseInfo.cs" />
-    <Compile Include="Import\Licences\NPoi.cs" />
     <Compile Include="Import\Licences\UniversityLicense.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.Designer.cs">

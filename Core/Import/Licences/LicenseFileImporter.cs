@@ -7,41 +7,34 @@ namespace QOAM.Core.Import.Licences
 {
     public class LicenseFileImporter : ILicenseFileImporter
     {
-        readonly IWorkbook _workbook;
-        const string UniversitiesSheet = "Universities";
-
-        public LicenseFileImporter(IWorkbook workbook)
-        {
-            _workbook = workbook;
-        }
-
         DataSet _dataSet { get; } = new DataSet();
-
-        public DataSet Extract()
+        const string UniversitiesSheet = "Universities";
+        
+        public DataSet Extract(IWorkbook workbook)
         {
-            var universitiesSheetIndex = _workbook.GetSheetIndex(UniversitiesSheet);
+            var universitiesSheetIndex = workbook.GetSheetIndex(UniversitiesSheet);
 
             if(universitiesSheetIndex == -1)
                 throw new ArgumentException("Invalid QOAM import file!");
 
-            ExtractSheet(UniversitiesSheet);
+            ExtractSheet(UniversitiesSheet, workbook);
             
-            for (var i = 0; i < _workbook.NumberOfSheets; i++)
+            for (var i = 0; i < workbook.NumberOfSheets; i++)
             {
                 if(i == universitiesSheetIndex)
                     continue;
                 
-                ExtractSheet(_workbook.GetSheetName(i));
+                ExtractSheet(workbook.GetSheetName(i), workbook);
             }
 
             return _dataSet;
         }
 
-        void ExtractSheet(string sheetName)
+        void ExtractSheet(string sheetName, IWorkbook workbook)
         {
             var dt = new DataTable(sheetName);
 
-            var sheet = _workbook.GetSheet(sheetName);
+            var sheet = workbook.GetSheet(sheetName);
             var headerRow = sheet.GetRow(0);
             var rows = sheet.GetRowEnumerator();
 
