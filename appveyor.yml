@@ -1,16 +1,18 @@
 version: 1.0.{build}
+configuration: Release
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: CjTrB+5tfG+/V21zHNzUBlVQrY4A9wRCyUB5MVfAsBWZP3w8+n4eEkzahqvsdBX4
 before_build:
-- ps: >-
-    nuget restore
-
-    New-Item src\Website\MachineKey.Debug.config -type file -value "<?xml version=""1.0""?><machineKey />"
-
-    New-Item src\Website\ConnectionStrings.Debug.config -type file -value "<?xml version=""1.0""?><connectionStrings />"
-
-    New-Item src\Website\Contact.Debug.config -type file -value "<?xml version=""1.0""?><contact />"
-
-    New-Item src\Website\NLog.Debug.config -type file -value "<?xml version=""1.0""?><nlog />"
-
-    New-Item src\Website\Ulrichs.Debug.config -type file -value "<?xml version=""1.0""?><ulrichs />"
+- ps: nuget restore
+- ps: New-Item src\Website\MachineKey.Debug.config -type file -value "<?xml version=""1.0""?><machineKey />"
+- ps: New-Item src\Website\ConnectionStrings.Debug.config -type file -value "<?xml version=""1.0""?><connectionStrings />"
+- ps: New-Item src\Website\Contact.Debug.config -type file -value "<?xml version=""1.0""?><contact />"
+- ps: New-Item src\Website\NLog.Debug.config -type file -value "<?xml version=""1.0""?><nlog />"
+- ps: New-Item src\Website\Ulrichs.Debug.config -type file -value "<?xml version=""1.0""?><ulrichs />"
 build:
+  project: QOAM.sln
   verbosity: minimal
+test_script:
+- ps: .\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user -target:$env:xunit20\xunit.console.exe "-targetargs:"".\tests\Console.Cleanup.IntegrationTests\bin\$env:CONFIGURATION\QOAM.Console.Cleanup.IntegrationTests.dll"" "".\tests\Console.Cleanup.Tests\bin\$env:CONFIGURATION\QOAM.Console.Cleanup.Tests.dll"" "".\tests\Console.DataImporter.IntegrationTests\bin\$env:CONFIGURATION\QOAM.Console.DataImporter.IntegrationTests.dll"" "".\tests\Console.DataImporter.Tests\bin\$env:CONFIGURATION\QOAM.Console.DataImporter.Tests.dll"" "".\tests\Console.ExpirationChecker.IntegrationTests\bin\$env:CONFIGURATION\QOAM.Console.ExpirationChecker.IntegrationTests.dll"" "".\tests\Core.IntegrationTests\bin\$env:CONFIGURATION\QOAM.Core.IntegrationTests.dll"" "".\tests\Core.Tests\bin\$env:CONFIGURATION\QOAM.Core.Tests.dll"" "".\tests\Website.Tests\bin\$env:CONFIGURATION\QOAM.Website.Tests.dll"" -noshadow -appveyor" -filter:"+[QOAM*]*" -output:coverage.xml
+- ps: .\packages\coveralls.net.0.6.0\tools\csmacnz.Coveralls.exe --opencover -i coverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID

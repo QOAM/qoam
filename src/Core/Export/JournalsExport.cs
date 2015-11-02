@@ -1,6 +1,5 @@
 ﻿namespace QOAM.Core.Export
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -14,13 +13,6 @@
 
     public class JournalsExport
     {
-        private static readonly CsvConfiguration CsvConfiguration = new CsvConfiguration
-                                                                    {
-                                                                        HasHeaderRecord = true,
-                                                                        Delimiter = ";",
-                                                                        TrimFields = true
-                                                                    };
-
         private readonly IJournalRepository journalRepository;
 
         public JournalsExport(IJournalRepository journalRepository)
@@ -35,9 +27,9 @@
             Requires.NotNull(stream, nameof(stream));
             
             using (var streamWriter = new StreamWriter(stream))
-            using (var csvWriter = new CsvWriter(streamWriter, CsvConfiguration))
+            using (var csvWriter = new CsvWriter(streamWriter, CreateCsvConfiguration()))
             {
-                csvWriter.WriteRecords((IEnumerable)this.GetExportJournals());
+                csvWriter.WriteRecords(this.GetExportJournals());
             }
         }
 
@@ -55,6 +47,16 @@
                                             Languages = string.Join(",", j.Languages.Select(l => l.Name)),
                                             Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
                                         });
+        }
+
+        private static CsvConfiguration CreateCsvConfiguration()
+        {
+            return new CsvConfiguration
+            {
+                HasHeaderRecord = true,
+                Delimiter = ";",
+                TrimFields = true,
+            };
         }
     }
 }

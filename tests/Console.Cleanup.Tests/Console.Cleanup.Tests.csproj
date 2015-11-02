@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>QOAM.Console.Cleanup.Tests</RootNamespace>
-    <AssemblyName>Console.Cleanup.Tests</AssemblyName>
+    <AssemblyName>QOAM.Console.Cleanup.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>

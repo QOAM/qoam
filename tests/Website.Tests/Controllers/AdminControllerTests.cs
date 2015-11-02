@@ -20,7 +20,7 @@
 
     public class AdminControllerTests
     {
-        private const string ExpectedJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 09:52:51;Switzerland;<none indicated>;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2-10-2013 09:52:51;Denmark;Springer;English,Danish;motion pictures,films\r\n";
+        private const string ExpectedJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;English,Danish;motion pictures,films\r\n";
         private const string OldIssn = "2296-0597";
         private const string NewIssn = "1603-5194";
 
@@ -133,7 +133,7 @@
         }
         
         [Fact]
-        [UseCulture("nl-NL")]
+        [UseCulture("en-US")]
         public void DownloadReturnsFileContentResultWithCorrectCsvFileForAllJournals()
         {
             // Arrange
