@@ -177,6 +177,7 @@
     <Compile Include="Routes\ProfilesControllerRoutingTests.cs" />
     <Compile Include="Routes\ScoreControllerRoutingTests.cs" />
     <Compile Include="TestHelpers\ControllerTests.cs" />
+    <Compile Include="TestHelpers\UseCultureAttribute.cs" />
     <Compile Include="ViewModels\Home\ContactViewModelTests.cs" />
     <Compile Include="ViewModels\Institutions\DetailsViewModelTests.cs" />
     <Compile Include="ViewModels\Institutions\IndexViewModelTests.cs" />
