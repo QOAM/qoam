@@ -1,6 +1,5 @@
 ﻿namespace QOAM.Core.Cleanup
 {
-    using System;
     using Repositories;
     using Validation;
 

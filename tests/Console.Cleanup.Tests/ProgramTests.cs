@@ -28,6 +28,9 @@
         [InlineData("DuplicateScoreCards", CleanupMode.DuplicateScoreCards)]
         [InlineData("duplicatescorecards", CleanupMode.DuplicateScoreCards)]
         [InlineData("DUPLICATESCORECARDS", CleanupMode.DuplicateScoreCards)]
+        [InlineData("InactiveProfiles", CleanupMode.InactiveProfiles)]
+        [InlineData("inactiveprofiles", CleanupMode.InactiveProfiles)]
+        [InlineData("INACTIVEPROFILES", CleanupMode.InactiveProfiles)]
         public void GetCleanupModeReturnsCorrectCleanupMode(string argument, CleanupMode expected)
         {
             // Arrange
@@ -58,6 +61,7 @@
         [Theory]
         [InlineData(CleanupMode.UnpublishedScoreCards, typeof(UnpublishedScoreCardsCleanup))]
         [InlineData(CleanupMode.DuplicateScoreCards, typeof(DuplicateScoreCardsCleanup))]
+        [InlineData(CleanupMode.InactiveProfiles, typeof(InactiveProfilesCleanup))]
         public void GetCleanupReturnsCorrectCleanupType(CleanupMode cleanupMode, Type expected)
         {
             // Arrange

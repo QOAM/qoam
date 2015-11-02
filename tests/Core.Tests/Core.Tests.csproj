@@ -112,6 +112,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cleanup\InactiveProfilesCleanupTests.cs" />
     <Compile Include="Cleanup\UnpublishedScoreCardsCleanupTests.cs" />
     <Compile Include="Helpers\StringExtensionsTests.cs" />
     <Compile Include="Helpers\ValidatorExtensionsTests.cs" />

@@ -3,6 +3,7 @@
     public enum CleanupMode
     {
         UnpublishedScoreCards,
-        DuplicateScoreCards
+        DuplicateScoreCards,
+        InactiveProfiles
     }
 }

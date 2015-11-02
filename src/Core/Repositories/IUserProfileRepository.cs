@@ -1,5 +1,6 @@
 ﻿namespace QOAM.Core.Repositories
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -23,5 +24,6 @@
         UserProfile FindByEmail(string email);
 
         void UpdateProviderUserId(UserProfile userProfile, string providerUserId);
+        void RemoveInactive(TimeSpan toBeRemovedWindow);
     }
 }

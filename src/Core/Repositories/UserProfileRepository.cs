@@ -6,7 +6,7 @@
     using System.Data.SqlClient;
     using System.Linq;
     using System.Web.Helpers;
-
+    using EntityFramework.Extensions;
     using PagedList;
 
     using QOAM.Core.Repositories.Filters;
@@ -73,6 +73,18 @@
             userProfile.UserName = providerUserId;
 
             this.DbContext.Database.ExecuteSqlCommand("UPDATE [dbo].[webpages_OAuthMembership] SET [ProviderUserId] = @providerUserId WHERE [UserId] = @userId", new SqlParameter("@providerUserId", providerUserId), new SqlParameter("@userId", userProfile.Id));
+        }
+
+        public void RemoveInactive(TimeSpan toBeRemovedWindow)
+        {
+            var toBeRemovedDate = DateTime.Now - toBeRemovedWindow;
+
+            this.DbContext.UserProfiles
+                .Where(u => !u.BaseScoreCards.Any(b => b.State == ScoreCardState.Published || b.State == ScoreCardState.Archived))
+                .Where(u => !u.ValuationScoreCards.Any(b => b.State == ScoreCardState.Published || b.State == ScoreCardState.Archived))
+                .Where(u => u.DateLastLogin.HasValue)
+                .Where(u => u.DateLastLogin < toBeRemovedDate)
+                .Delete();
         }
 
         private static IOrderedQueryable<UserProfile> ApplyOrdering(IQueryable<UserProfile> query, UserProfileFilter filter)

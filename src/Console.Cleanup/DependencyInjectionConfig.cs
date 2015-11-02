@@ -2,7 +2,6 @@
 {
     using Autofac;
     using Core.Cleanup;
-    using Core.Import;
     using Core.Repositories;
 
     public static class DependencyInjectionConfig
@@ -22,6 +21,7 @@
         private static void RegisterRepositories(ContainerBuilder builder)
         {
             builder.RegisterType<BaseScoreCardRepository>().As<IBaseScoreCardRepository>().SingleInstance();
+            builder.RegisterType<UserProfileRepository>().As<IUserProfileRepository>().SingleInstance();
             builder.RegisterType<ValuationScoreCardRepository>().As<IValuationScoreCardRepository>().SingleInstance();
         }
 
@@ -29,12 +29,14 @@
         {
             builder.RegisterType<UnpublishedScoreCardsCleanup>().SingleInstance();
             builder.RegisterType<DuplicateScoreCardsCleanup>().SingleInstance();
+            builder.RegisterType<InactiveProfilesCleanup>().SingleInstance();
         }
 
         private static void RegisterConfigurationSections(ContainerBuilder builder)
         {
             builder.Register(_ => CleanupSettings.Current).SingleInstance();
-            builder.Register(c => c.Resolve<CleanupSettings>().UnpublishedScoreCardsCleanup).SingleInstance();
+            builder.Register(c => c.Resolve<CleanupSettings>().UnpublishedScoreCards).SingleInstance();
+            builder.Register(c => c.Resolve<CleanupSettings>().InactiveProfiles).SingleInstance();
         }
 
         private static void RegisterMiscellaneousComponents(ContainerBuilder builder)

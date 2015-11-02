@@ -43,6 +43,8 @@
                     return Container.Resolve<UnpublishedScoreCardsCleanup>();
                 case CleanupMode.DuplicateScoreCards:
                     return Container.Resolve<DuplicateScoreCardsCleanup>();
+                case CleanupMode.InactiveProfiles:
+                    return Container.Resolve<InactiveProfilesCleanup>();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(cleanupMode));
             }

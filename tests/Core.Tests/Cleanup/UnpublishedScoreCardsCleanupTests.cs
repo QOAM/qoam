@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QOAM.Core.Tests.Cleanup
+﻿namespace QOAM.Core.Tests.Cleanup
 {
+    using System;
     using Core.Cleanup;
     using Moq;
     using Repositories;
@@ -20,7 +15,7 @@ namespace QOAM.Core.Tests.Cleanup
             var settings = CreateUnpublishedScoreCardsCleanupSettings();
             var baseScoreCardRepository = new Mock<IBaseScoreCardRepository>();
 
-            var unpublishedScoreCardsCleanup = CreateUnpublishedScoreCardsCleanup(baseScoreCardRepository: baseScoreCardRepository.Object, settings: settings);
+            var unpublishedScoreCardsCleanup = CreateUnpublishedScoreCardsCleanup(baseScoreCardRepository.Object, settings: settings);
             var toBeRemovedWindow = TimeSpan.FromDays(settings.NumberOfDaysBeforeArchiving);
 
             // Act
@@ -59,8 +54,7 @@ namespace QOAM.Core.Tests.Cleanup
         {
             return new UnpublishedScoreCardsCleanup(
                 baseScoreCardRepository ?? Mock.Of<IBaseScoreCardRepository>(),
-                valuationScoreCardRepository ?? Mock.Of<IValuationScoreCardRepository>(),
-                settings: settings ?? CreateUnpublishedScoreCardsCleanupSettings());
+                valuationScoreCardRepository ?? Mock.Of<IValuationScoreCardRepository>(), settings ?? CreateUnpublishedScoreCardsCleanupSettings());
         }
     }
 }

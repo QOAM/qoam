@@ -32,5 +32,18 @@
             // Assert
             Assert.NotNull(duplicateScoreCardsCleanup);
         }
+
+        [Fact]
+        public void InactiveProfilesCleanupComponentRegistered()
+        {
+            // Arrange
+            var container = DependencyInjectionConfig.RegisterComponents();
+
+            // Act
+            var inactiveProfilesCleanup = container.Resolve<InactiveProfilesCleanup>();
+
+            // Assert
+            Assert.NotNull(inactiveProfilesCleanup);
+        }
     }
 }
