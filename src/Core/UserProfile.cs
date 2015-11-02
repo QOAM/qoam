@@ -28,6 +28,8 @@
 
         public DateTime DateRegistered { get; set; }
 
+        public DateTime? DateLastLogin { get; set; }
+
         public string OrcId { get; set; }
 
         public int NumberOfBaseScoreCards { get; set; }

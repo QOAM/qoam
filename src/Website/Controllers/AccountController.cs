@@ -59,8 +59,14 @@
             if (this.ModelState.IsValid)
             {
                 var userProfile = this.userProfileRepository.FindByEmail(model.Email);
+
                 if (userProfile != null && this.authentication.Login(userProfile.UserName, model.Password, model.RememberMe))
                 {
+                    userProfile.DateLastLogin = DateTime.Now;
+
+                    this.userProfileRepository.InsertOrUpdate(userProfile);
+                    this.userProfileRepository.Save();
+
                     return this.RedirectToLocal(returnUrl);
                 }
             }

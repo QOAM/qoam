@@ -198,6 +198,10 @@
     <Compile Include="Migrations\201510291351475_UserInstitutionChange.Designer.cs">
       <DependentUpon>201510291351475_UserInstitutionChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511021020473_LastLogin.cs" />
+    <Compile Include="Migrations\201511021020473_LastLogin.Designer.cs">
+      <DependentUpon>201511021020473_LastLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\IBlockedISSNRepository.cs" />
@@ -205,6 +209,9 @@
     <Compile Include="Repositories\IValuationScoreCardRepository.cs" />
     <Compile Include="Repositories\ValuationJournalPriceRepository.cs" />
     <Compile Include="Repositories\ValuationScoreCardRepository.cs" />
+    <EmbeddedResource Include="Migrations\201511021020473_LastLogin.resx">
+      <DependentUpon>201511021020473_LastLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />
     <Compile Include="SwotVerdict.cs" />

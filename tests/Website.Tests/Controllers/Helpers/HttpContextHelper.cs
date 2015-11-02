@@ -7,6 +7,8 @@
     using System.Web.Routing;
 
     using Moq;
+    using MvcRouteTester;
+    using Website.Controllers;
 
     public static class HttpContextHelper
     {
@@ -33,7 +35,7 @@
             context.SetupGet(x => x.Response).Returns(response.Object);
 
             var routes = new RouteCollection();
-            AttributeRoutingConfig.RegisterRoutes(routes);
+            routes.MapAttributeRoutesInAssembly(typeof(HomeController).Assembly);
 
             return new UrlHelper(new RequestContext(context.Object, new RouteData()), routes);
         }

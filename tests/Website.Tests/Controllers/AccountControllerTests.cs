@@ -1,5 +1,6 @@
 ﻿namespace QOAM.Website.Tests.Controllers
 {
+    using System;
     using System.Net.Mail;
     using System.Web.Mvc;
     using Core;
@@ -14,6 +15,63 @@
 
     public class AccountControllerTests
     {
+        [Fact]
+        public void LoginWithValidLoginUpdatesDateLastLoginToCurrentDate()
+        {
+            // Arrange
+            var userProfile = new UserProfile { Id = 2, DateLastLogin = new DateTime(2015, 2, 8) };
+
+            var userProfileRepository = new Mock<IUserProfileRepository>();
+            userProfileRepository.Setup(u => u.FindByEmail(It.IsAny<string>())).Returns(userProfile);
+
+            var accountController = CreateAccountController(userProfileRepository: userProfileRepository.Object);
+
+            // Act
+            accountController.Login(new LoginViewModel(), string.Empty);
+
+            // Assert
+            userProfileRepository.Verify(u => u.InsertOrUpdate(It.Is<UserProfile>(p => p.Id == userProfile.Id && DateTime.Now - p.DateLastLogin < TimeSpan.FromSeconds(2))), Times.Once);
+        }
+
+        [Fact]
+        public void LoginWithValidLoginSavesUserProfile()
+        {
+            // Arrange
+            var userProfile = new UserProfile { Id = 2, DateLastLogin = new DateTime(2015, 2, 8) };
+
+            var userProfileRepository = new Mock<IUserProfileRepository>();
+            userProfileRepository.Setup(u => u.FindByEmail(It.IsAny<string>())).Returns(userProfile);
+
+            var accountController = CreateAccountController(userProfileRepository: userProfileRepository.Object);
+
+            // Act
+            accountController.Login(new LoginViewModel(), string.Empty);
+
+            // Assert
+            userProfileRepository.Verify(u => u.Save(), Times.Once);
+        }
+
+        [Fact]
+        public void LoginWithInvalidLoginDoesNotUpdateDateLastLogin()
+        {
+            // Arrange
+            var userProfile = new UserProfile { Id = 2, DateLastLogin = new DateTime(2015, 2, 8) };
+
+            var userProfileRepository = new Mock<IUserProfileRepository>();
+            userProfileRepository.Setup(u => u.FindByEmail(It.IsAny<string>())).Returns(userProfile);
+
+            var authentication = new Mock<IAuthentication>();
+            authentication.Setup(a => a.Login(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(false);
+
+            var accountController = CreateAccountController(userProfileRepository: userProfileRepository.Object, authentication: authentication.Object);
+
+            // Act
+            accountController.Login(new LoginViewModel(), string.Empty);
+
+            // Assert
+            userProfileRepository.Verify(u => u.InsertOrUpdate(It.IsAny<UserProfile>()), Times.Never);
+        }
+
         [Fact]
         public void ChangeEmailRendersView()
         {
@@ -261,7 +319,10 @@
                 userProfileRepository ?? CreateUserProfileRepository(),
                 authentication ?? CreateAuthentication(),
                 institutionRepository ?? CreateInstitutionRepository(),
-                journalRepository ?? Mock.Of<IJournalRepository>());
+                journalRepository ?? Mock.Of<IJournalRepository>())
+            {
+                Url = HttpContextHelper.CreateUrlHelper()
+            };
         }
 
         private static IInstitutionRepository CreateInstitutionRepository()
@@ -284,6 +345,7 @@
         {
             var authentication = new Mock<IAuthentication>();
             authentication.Setup(a => a.ValidateUser(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
+            authentication.Setup(a => a.Login(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>())).Returns(true);
 
             return authentication.Object;
         }
