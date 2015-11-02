@@ -9,7 +9,6 @@ namespace QOAM.Website.Tests.Controllers
     using Moq;
     using MvcContrib.TestHelper;
     using PagedList;
-    using Ploeh.AutoFixture.Xunit2;
     using Website.Controllers;
     using Website.Helpers;
     using Website.ViewModels.Institutions;
@@ -115,7 +114,10 @@ namespace QOAM.Website.Tests.Controllers
             Assert.IsType<ViewResult>(viewResult);
         }
 
-        [Theory, AutoData]
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
         public void IndexSetsNumberOfBaseScoreCardsInModel(int numberOfActiveBaseScoreCards)
         {
             // Arrange
@@ -131,7 +133,10 @@ namespace QOAM.Website.Tests.Controllers
             Assert.Equal(numberOfActiveBaseScoreCards, viewResult.WithViewData<IndexViewModel>().NumberOfBaseScoreCards);
         }
 
-        [Theory, AutoData]
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
         public void IndexSetsNumberOfValuationScoreCardsInModel(int numberOfActiveValuationScoreCards)
         {
             // Arrange

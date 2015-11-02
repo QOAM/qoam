@@ -119,6 +119,7 @@
     <Compile Include="Export\JournalsExportTests.cs" />
     <Compile Include="Import\JournalIssnEqualityComparerTests.cs" />
     <Compile Include="Import\DoajImportTests.cs" />
+    <Compile Include="TestHelpers\UseCultureAttribute.cs" />
     <EmbeddedResource Include="Import\Resources\doaj.csv" />
     <EmbeddedResource Include="Import\Resources\ulrichs.xml">
       <SubType>Designer</SubType>

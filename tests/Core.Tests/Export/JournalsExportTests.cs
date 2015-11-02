@@ -10,15 +10,12 @@
 
     using QOAM.Core.Export;
     using QOAM.Core.Repositories;
-
+    using TestHelpers;
     using Xunit;
 
     public class JournalsExportTests
     {
-        private const string ExpectedJournalsCsv = @"Title;ISSN;Link;DateAdded;Country;Publisher;Languages;Subjects
-027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 09:52:51;Switzerland;<none indicated>;English,German;library and information sciences
-16:9;1603-5194;http://www.16-9.dk;2-10-2013 09:52:51;Denmark;Springer;English,Danish;motion pictures,films
-";
+        private const string ExpectedJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 09:52:51;Switzerland;<none indicated>;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2-10-2013 09:52:51;Denmark;Springer;English,Danish;motion pictures,films\r\n";
 
         [Fact]
         public void ConstructorWithNullJournalRepositoryThrowsArgumentNullException()
@@ -33,6 +30,7 @@
         }
 
         [Fact]
+        [UseCulture("nl-NL")]
         public void ExportAllJournalsExportAllJournalsInCorrectCsvFormat()
         {
             // Arrange
@@ -46,7 +44,7 @@
             journalsExport.ExportAllJournals(memoryStream);
 
             // Assert
-            var csvContent = Encoding.Default.GetString(memoryStream.ToArray());
+            var csvContent = Encoding.UTF8.GetString(memoryStream.ToArray());
             Assert.Equal(ExpectedJournalsCsv, csvContent);
         }
 
