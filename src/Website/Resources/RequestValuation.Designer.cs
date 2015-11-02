@@ -63,7 +63,7 @@ namespace QOAM.Website.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Dear Sir/Madam,
         ///
-        ///Open access to research publications will be promoted worldwide during the forthcoming Open Access week. More and more research funders require it and the number of open access journals is growing rapidly. At the same time, both the quality of these journals and their publication fees vary widely. So, authors better inform themselves before submitting their article to such a journal. A place is needed where academia can share their publishing experiences. Quality Open Access Market is thi [rest of string was truncated]&quot;;.
+        ///More and more research funders require open access to research publications and the number of open access journals is growing rapidly. At the same time, both the quality of these journals and their publication fees vary widely. So, authors better inform themselves before submitting their article to such a journal. A place is needed where academia can share their publishing experiences. Quality Open Access Market is this place, fully based on academic crowd sourcing, independent of publish [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Body {
             get {
