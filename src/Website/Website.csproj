@@ -737,6 +737,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\documents\15-10-03-Flyer-OA-week-2015.pdf" />
     <None Include="Properties\PublishProfiles\Acceptatie.pubxml" />
     <None Include="Properties\PublishProfiles\Productie.pubxml" />
     <Content Include="Scripts\bootstrap.min.js.map">
