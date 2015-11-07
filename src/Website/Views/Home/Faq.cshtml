@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "FAQ";
+}
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-3">
+            @{ Html.RenderPartial("_SidebarMenu", "Faq"); }
+        </div>
+        <div class="col-md-9">
+            <h2>@ViewBag.Title</h2>
+
+            <ul class="list-unstyled">
+                <li><a href="#hybrid-journals"><em>Why are hybrid journals also included in QOAM?</em></a></li>
+                <li><a href="#subscription-journals"><em>Why are subscription journals not included in QOAM?</em></a></li>
+                <li><a href="#cant-find-journal"><em>Why don’t I find a specific journal in QOAM?</em></a></li>
+                <li><a href="#no-metrics"><em>Why does QOAM not include metrics as a quality proxy?</em></a></li>
+                <li><a href="#framing"><em>Is QOAM prone to improper use?</em></a></li>
+                <li><a href="#login"><em>How can I log in to QOAM’s scoring section?</em></a></li>
+            </ul>
+
+            <h3 id="hybrid-journals">Why are hybrid journals also included in QOAM?</h3>
+            <p>Author centric, QOAM provides all journals that offer open access publishing. This entails hybrid journals. Some hybrid journals manage to generate a double income by charging both readers (via full library subscriptions) and authors (via full publication fees).<br />The initiators of QOAM despise this ‘double dipping’ but QOAM is not the instrument to combat this directly. However, if institutions succeed in negotiating journal licenses that stop these practices, the license results and more specifically their effect on the publication fees will be mentioned on QOAM’s web site site under the tab ‘Price information’ of each journal.  Thus, market forces will bring this deviation to an end.</p>
+
+            <h3 id="subscription-journals">Why are subscription journals not included in QOAM?</h3>
+            <p>QOAM is in the overlap of three domains: (1) Quality, (2) Open Access, (3) Market. Do subscription journals fit into these domains?<br />Ad 1. Quality. Yes. The Journal Score Card is business model neutral.<br />Ad 2. Open Access. No. Subscription is at odds with Open Access.<br />Ad 3. Market. No. The current Big Deal packages obscure any market idea.<br />So, subscription journals do not fit in QOAM. Yet, the initiators of QOAM are convinced that quality control as such is equally well necessary for subscription journals. Especially for new journals which are simply included in existing packages. The Journal Score Card, or an adapted version of it, might be applicable here and the initiators of QOAM are open to discuss this.</p>
+
+            <h3 id="cant-find-journal">Why don’t I find a specific journal</h3>
+            <h4>A. in QOAM’s <a href="@Url.Action("Index", "Journals")" title="searching section">searching section?</a></h4>
+            <p>The reason is that for this journal no Journal Score Cards have been published yet. To remedy this, go to the “I want to publish a Journal Score Card” section on QOAM’s main page and publish a JSC for the journal in question. Alternatively, ask your library to do so.</p>
+
+            <h4>B. in QOAM’s <a href="@Url.Action("Index", "Score")" title="scoring section">scoring section?</a></h4>
+            <p>If an OA or hybrid journal is not included in QOAM’s scoring section, please notify this via QOAM’s Contact box. We will include this journal in QOAM provided that it can be found in Ulrich’s database, currently the metadata resource that QOAM relies on.</p>
+
+            <!--<table id="qoamComposition" class="text-center">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th class="text-center">QOAM’s scoring section</th>
+                        <th>&nbsp;</th>
+                        <th>QOAM’s searching section</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border">Underlying external databases</td>
+                        <td>»</td>
+                        <td class="border">OA and hybrid journals in QOAM</td>
+                        <td>»</td>
+                        <td class="border">Journal Score Cards in QOAM</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                        <td><em>The composition of QOAM</em></td>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                </tfoot>
+            </table>-->
+
+            <h3 id="no-metrics">Why does QOAM not include metrics as a quality proxy?</h3>
+            <p>Metrics for QOAM must apply to young journals because most journals which are born OA are in their infancy.  This is the main reason for not including the Journal Impact Factor in QOAM. Honestly, the controversies over the JIF played a role as well. 
+Upon request of QOAM, the Leiden institute CWTS developed an Editorial Board Indicator, a metric for the scientific impact of the editorial board. Unfortunately, it is not (yet) applicable. The main obstacle is the problem of identifying the board members; just a name and an affiliation are not enough for that. The importance of having a clear identification of the Editorial Board members of scientific journals (i.e. their full names, affiliations, e-mail and/or their ORCID identifier) can also be considered as an element of transparency and quality. Should these data be more transparent and accessible, indicators on the scientific impact of the editorial board could then be extensively developed and included in QOAM. 
+ See <a href="http://www.surf.nl/en/publicaties/Pages/CWTSrapport.aspx">SURF</a>. Other straightforward young journal metrics would be welcomed by QOAM as well.</p>
+
+            <h3 id="framing">Is QOAM prone to improper use?</h3>
+            <p>
+                To avoid unqualified contributions to QOAM, only members of the academic community may log in to QOAM and publish Journal Score Cards. Per person only one JSC may be published for a specific journal. Published Journal Score Cards are non-anonymous and their authors may contact each other via the <a href="@Url.Action("Index", "Profiles")" title="Profiles section">Profiles section</a> of QOAM. Read more about QOAM’s <a href="@Url.Action("About")#privacy" title="Privacy policy">Privacy policy.</a><br />
+
+                Currently, QOAM has no resources to organize any form of social control or moderation. We have to rely on academic vigilance. Jeffrey Beall’s <a href="http://scholarlyoa.com/individual-journals/" title="list of predatory journals">list of predatory journals</a> and John Bohannon’s article <a href="http://www.sciencemag.org/content/342/6154/60.full" title="Who is Afraid of Peer Review?">Who is Afraid of Peer Review?</a> are examples of this.
+            </p>
+
+            <div id="login"><h3 id="connect-institute">How can I log in to QOAM’s scoring section?</h3></div>
+            <p>In order to publish a Journal Score Card in QOAM you have to log in. If you want to log in for the first time, please register with your institutional email address and a password of your choice (which may be your institutional password as well). You will receive a prompt request to confirm your registration.  Confirmation will activate your account. Next time you may log in directly.  We have built in the option to submit your ORCID, provided you have one. Thus you will be identified if you change institute, hence email address.<br />
+                QOAM’s privacy policy is explained <a href="About#privacy">here</a>.  For more specific questions, please use the @Html.ActionLink("Contact form", "Contact") in QOAM.</p>
+        </div>
+    </div>
+</div>

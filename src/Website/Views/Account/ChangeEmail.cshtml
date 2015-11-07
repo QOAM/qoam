@@ -1,0 +1,71 @@
+﻿@using System.Web.Optimization
+@model QOAM.Website.ViewModels.Account.ChangeEmailViewModel
+
+@{
+    ViewBag.Title = "Change your e-mail address";
+}
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>@ViewBag.Title</h2>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please fill in the fields and submit the form</h3>
+                </div>
+                <div class="panel-body">
+                    @if (ViewBag.SaveSuccessful ?? false) 
+                    {
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            Your e-mail address has been changed!
+                        </div>
+                    }
+
+                    @using (Html.BeginForm("ChangeEmail", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(excludePropertyErrors: true)
+
+                        <fieldset>
+                            <legend>Please fill in the fields and submit the form</legend>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Password, null, new { @class = "control-label" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.NewEmail, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(m => m.NewEmail, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.NewEmail, null, new { @class = "control-label" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ConfirmEmail, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(m => m.ConfirmEmail, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.ConfirmEmail, null, new { @class = "control-label" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-10 col-md-offset-2">
+                                <input type="submit" value="Change e-mail address" class="btn btn-primary" />
+                            </div>
+                        </fieldset>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

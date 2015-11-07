@@ -3,39 +3,39 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{11531FDB-5C48-4E0B-98BF-0E8299F368D1}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9DA9D1A6-9F49-41A6-B30A-08BB492D888B}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
 		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website.Tests", "Website.Tests\Website.Tests.csproj", "{6F4C1001-0A68-4A76-AEB5-85F44AB890FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website.Tests", "tests\Website.Tests\Website.Tests.csproj", "{6F4C1001-0A68-4A76-AEB5-85F44AB890FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.csproj", "{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.DataImporter", "src\Console.DataImporter\Console.DataImporter.csproj", "{0E2EE273-E64D-4E7B-A514-1A7E0E3F2458}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.DataImporter", "Console.DataImporter\Console.DataImporter.csproj", "{0E2EE273-E64D-4E7B-A514-1A7E0E3F2458}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.ExpirationChecker", "src\Console.ExpirationChecker\Console.ExpirationChecker.csproj", "{69F76461-E5E7-4CB0-B368-AAF7CD4F852B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.ExpirationChecker", "Console.ExpirationChecker\Console.ExpirationChecker.csproj", "{69F76461-E5E7-4CB0-B368-AAF7CD4F852B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{48695F3E-A754-4A33-B22B-86CD55939CC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{48695F3E-A754-4A33-B22B-86CD55939CC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.IntegrationTests", "tests\Core.IntegrationTests\Core.IntegrationTests.csproj", "{A2D0C45D-EA33-4C28-A275-664C4D5AD157}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.IntegrationTests", "Core.IntegrationTests\Core.IntegrationTests.csproj", "{A2D0C45D-EA33-4C28-A275-664C4D5AD157}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "tests\Core.Tests\Core.Tests.csproj", "{2360E298-C958-47FF-A7A0-97939EFE0D7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "Core.Tests\Core.Tests.csproj", "{2360E298-C958-47FF-A7A0-97939EFE0D7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.DataImporter.Tests", "tests\Console.DataImporter.Tests\Console.DataImporter.Tests.csproj", "{8D4F553B-E05F-4FF9-B156-136ED315A2DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.DataImporter.Tests", "Console.DataImporter.Tests\Console.DataImporter.Tests.csproj", "{8D4F553B-E05F-4FF9-B156-136ED315A2DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.DataImporter.IntegrationTests", "tests\Console.DataImporter.IntegrationTests\Console.DataImporter.IntegrationTests.csproj", "{E4E5026B-2EB5-4805-A156-6341ECEDC14D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.DataImporter.IntegrationTests", "Console.DataImporter.IntegrationTests\Console.DataImporter.IntegrationTests.csproj", "{E4E5026B-2EB5-4805-A156-6341ECEDC14D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.ExpirationChecker.IntegrationTests", "tests\Console.ExpirationChecker.IntegrationTests\Console.ExpirationChecker.IntegrationTests.csproj", "{BBB0F43D-5376-456B-9DC3-B8CB96C8661A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.ExpirationChecker.IntegrationTests", "Console.ExpirationChecker.IntegrationTests\Console.ExpirationChecker.IntegrationTests.csproj", "{BBB0F43D-5376-456B-9DC3-B8CB96C8661A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "src\Website\Website.csproj", "{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.Cleanup.Tests", "tests\Console.Cleanup.Tests\Console.Cleanup.Tests.csproj", "{4B5A45CE-6FCC-4516-AF35-51D0D52BE277}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.Cleanup", "src\Console.Cleanup\Console.Cleanup.csproj", "{B2513468-A7EC-4655-B584-4B43ED3C1D30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.Cleanup.IntegrationTests", "tests\Console.Cleanup.IntegrationTests\Console.Cleanup.IntegrationTests.csproj", "{E0FA5520-068C-43B5-9A68-3CFFA73C10E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,12 +50,6 @@ Global
 		{6F4C1001-0A68-4A76-AEB5-85F44AB890FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6F4C1001-0A68-4A76-AEB5-85F44AB890FE}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
 		{6F4C1001-0A68-4A76-AEB5-85F44AB890FE}.Staging|Any CPU.Build.0 = Staging|Any CPU
-		{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
-		{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}.Staging|Any CPU.Build.0 = Staging|Any CPU
 		{0E2EE273-E64D-4E7B-A514-1A7E0E3F2458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E2EE273-E64D-4E7B-A514-1A7E0E3F2458}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E2EE273-E64D-4E7B-A514-1A7E0E3F2458}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -90,20 +84,44 @@ Global
 		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Staging|Any CPU.ActiveCfg = Release|Any CPU
-		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{8D4F553B-E05F-4FF9-B156-136ED315A2DB}.Staging|Any CPU.Build.0 = Staging|Any CPU
 		{E4E5026B-2EB5-4805-A156-6341ECEDC14D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E4E5026B-2EB5-4805-A156-6341ECEDC14D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4E5026B-2EB5-4805-A156-6341ECEDC14D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4E5026B-2EB5-4805-A156-6341ECEDC14D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4E5026B-2EB5-4805-A156-6341ECEDC14D}.Staging|Any CPU.ActiveCfg = Release|Any CPU
-		{E4E5026B-2EB5-4805-A156-6341ECEDC14D}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{E4E5026B-2EB5-4805-A156-6341ECEDC14D}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{E4E5026B-2EB5-4805-A156-6341ECEDC14D}.Staging|Any CPU.Build.0 = Staging|Any CPU
 		{BBB0F43D-5376-456B-9DC3-B8CB96C8661A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BBB0F43D-5376-456B-9DC3-B8CB96C8661A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBB0F43D-5376-456B-9DC3-B8CB96C8661A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBB0F43D-5376-456B-9DC3-B8CB96C8661A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBB0F43D-5376-456B-9DC3-B8CB96C8661A}.Staging|Any CPU.ActiveCfg = Release|Any CPU
-		{BBB0F43D-5376-456B-9DC3-B8CB96C8661A}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{BBB0F43D-5376-456B-9DC3-B8CB96C8661A}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{BBB0F43D-5376-456B-9DC3-B8CB96C8661A}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{55FFB776-3638-4D3F-8D07-E9FAB6415BCA}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{4B5A45CE-6FCC-4516-AF35-51D0D52BE277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B5A45CE-6FCC-4516-AF35-51D0D52BE277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B5A45CE-6FCC-4516-AF35-51D0D52BE277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B5A45CE-6FCC-4516-AF35-51D0D52BE277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B5A45CE-6FCC-4516-AF35-51D0D52BE277}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{4B5A45CE-6FCC-4516-AF35-51D0D52BE277}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{B2513468-A7EC-4655-B584-4B43ED3C1D30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2513468-A7EC-4655-B584-4B43ED3C1D30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2513468-A7EC-4655-B584-4B43ED3C1D30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2513468-A7EC-4655-B584-4B43ED3C1D30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2513468-A7EC-4655-B584-4B43ED3C1D30}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{B2513468-A7EC-4655-B584-4B43ED3C1D30}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{E0FA5520-068C-43B5-9A68-3CFFA73C10E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0FA5520-068C-43B5-9A68-3CFFA73C10E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0FA5520-068C-43B5-9A68-3CFFA73C10E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0FA5520-068C-43B5-9A68-3CFFA73C10E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0FA5520-068C-43B5-9A68-3CFFA73C10E1}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{E0FA5520-068C-43B5-9A68-3CFFA73C10E1}.Staging|Any CPU.Build.0 = Staging|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

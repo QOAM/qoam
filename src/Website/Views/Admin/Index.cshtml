@@ -1,0 +1,33 @@
+﻿@using QOAM.Website.Models
+@{
+    ViewBag.Title = "Admin";
+}
+
+<div class="container main">
+
+    <p>
+        Here you can choose from several administrative tasks
+    </p>
+
+    <ul>
+        @if (User.IsInRole(ApplicationRole.DataAdmin) || User.IsInRole(ApplicationRole.Admin))
+        {
+            <li>@Html.ActionLink("Import journals", "Import")</li>
+            <li>@Html.ActionLink("Add ISSNs to import blocklist", "BlockISSN")</li>
+            <li>@Html.ActionLink("Remove ISSNs from import blocklist", "RemoveBlockedISSN")</li>
+            <li>@Html.ActionLink("Update journals", "Update")</li>
+            <li>@Html.ActionLink("Download journals", "Download")</li>
+            <li>@Html.ActionLink("Add institution", "AddInstitution")</li>
+            <li>@Html.ActionLink("Move score cards", "MoveScoreCards")</li>
+        }
+        @if (User.IsInRole(ApplicationRole.Admin))
+        {
+            <li>@Html.ActionLink("Delete journals", "Delete")</li>
+        }
+
+        @if (User.IsInRole(ApplicationRole.InstitutionAdmin) || User.IsInRole(ApplicationRole.Admin))
+        {
+            <li>@Html.ActionLink("Check ISSNs", "Check")</li>
+        }
+    </ul>
+</div>

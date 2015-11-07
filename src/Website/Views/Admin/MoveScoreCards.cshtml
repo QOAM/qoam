@@ -1,0 +1,58 @@
+﻿@model QOAM.Website.ViewModels.Import.MoveScoreCardsViewModel
+
+@{
+    ViewBag.Title = "Move score cards";
+}
+
+<div class="container main">
+
+    <h2>@ViewBag.Title</h2>
+    
+    @if (ViewBag.SaveSuccessful ?? false)
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            The score cards have been moved to the new journal!
+        </div>
+    }
+
+    @using (Html.BeginForm("MoveScoreCards", "Admin", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <fieldset>
+            <legend>@ViewBag.Title</legend>
+
+            <div class="form-group row">
+                @Html.LabelFor(m => m.OldIssn, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2">
+                    @Html.TextBoxFor(m => m.OldIssn, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.OldIssn, null, new { @class = "control-label" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(m => m.NewIssn, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2">
+                    @Html.TextBoxFor(m => m.NewIssn, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.NewIssn, null, new { @class = "control-label" })
+                </div>
+            </div>
+
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                Please note that this step cannot be undone!
+            </div>
+
+            <div class="col-lg-10 col-md-offset-2">
+                <input type="submit" value="Move score cards" class="btn btn-primary" />
+            </div>
+        </fieldset>
+    }
+</div>
+
+@section scripts
+{
+    @Html.Partial("_FormScripts")
+}
+
+

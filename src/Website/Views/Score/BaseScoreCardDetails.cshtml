@@ -1,0 +1,202 @@
+﻿@using QOAM.Core
+@using QOAM.Website.Helpers
+@using QOAM.Website.Models
+@model BaseScoreCard
+
+@{
+    ViewBag.Title = "Score card";
+}
+
+@helper QuestionRating(QuestionKey questionKey)
+{
+    <div class="score">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-left">@questionKey.ToDescription()</p>
+
+                @{
+                    var questionScore = Model.QuestionScores.First(q => q.Question.Key == questionKey).Score;
+                    var questionScoreName = "questionScore" + questionKey;
+                }
+
+                @Html.RadioButton(questionScoreName, Score.Absent, Score.Absent == questionScore, new { @disabled = "disabled" }) @Score.Absent.GetValue(): @Score.Absent.GetName()
+                @Html.RadioButton(questionScoreName, Score.Poor, Score.Poor == questionScore, new { @disabled = "disabled" }) @Score.Poor.GetValue(): @Score.Poor.GetName()
+                @Html.RadioButton(questionScoreName, Score.Moderate, Score.Moderate == questionScore, new { @disabled = "disabled" }) @Score.Moderate.GetValue(): @Score.Moderate.GetName()
+                @Html.RadioButton(questionScoreName, Score.Good, Score.Good == questionScore, new { @disabled = "disabled" }) @Score.Good.GetValue(): @Score.Good.GetName()
+                @Html.RadioButton(questionScoreName, Score.Excellent, Score.Excellent == questionScore, new { @disabled = "disabled" }) @Score.Excellent.GetValue(): @Score.Excellent.GetName()
+            </div>
+        </div>
+    </div>
+}
+
+@helper ScoreCardAspect(QuestionCategory questionCategory)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <small><a href="#@(questionCategory)ScoreTab" data-select-tab="true">@questionCategory.GetName()</a></small>
+        </div>
+        <div class="panel-body">
+            <a href="#@(questionCategory)ScoreTab" data-select-tab="true">
+                <h3>@Model.Score[questionCategory].AverageScore.Value.ToString("0.0")</h3>
+            </a>
+        </div>
+    </div>
+}
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="scoreCardAspects well text-center">
+                <h3>Score Card</h3>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        @ScoreCardAspect(QuestionCategory.EditorialInformation)
+                    </div>
+                    <div class="col-md-6">
+                        @ScoreCardAspect(QuestionCategory.PeerReview)
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        @ScoreCardAspect(QuestionCategory.Governance)
+                    </div>
+                    <div class="col-md-6">
+                        @ScoreCardAspect(QuestionCategory.Process)
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Base Score for this journal:</div>
+                            <div class="panel-body">
+                                <h1>@Model.Score.OverallScore.AverageScore.Value.ToString("0.0")</h1>
+                            </div>
+                            <div class="panel-footer">
+                                <small>by" @Html.ActionLink(Model.UserProfile.DisplayName, "Details", "Profiles", new { id = Model.UserProfileId }, null) <i class="icon-user"></i></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (User.IsInRole(ApplicationRole.Admin))
+            {
+                <div class="text-center">
+                    <a href="@Url.Action("RemoveBaseScoreCard", "Admin", new { id = Model.Id })" title="Delete JSC" class="btn btn-danger" role="button">
+                        Remove score card <i class="glyphicon glyphicon-remove"></i>
+                    </a>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-9">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <a href="@Model.Journal.Link" title="Go to website">
+                        <div>
+                            @Model.Journal.Title
+                            <span class="pull-right clearfix"><i class="glyphicon glyphicon-new-window"></i></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="panel-body">
+
+                    <div class="row">
+                        <label class="col-md-2">ISSN:</label>
+                        <div class="col-md-10">@Model.Journal.ISSN</div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-md-2">Publisher:</label>
+                        <div class="col-md-10">@Model.Journal.Publisher.Name</div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-md-2">Language:</label>
+                        <div class="col-md-10">@string.Join(", ", Model.Journal.Languages.Select(l => l.Name))</div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-md-2">Disciplines:</label>
+                        <div class="col-md-10">@string.Join(", ", Model.Journal.Subjects.Select(s => s.Name))</div>
+                    </div>
+
+                    <div class="row">
+
+                        @using (Html.BeginForm())
+                        {
+                            <div class="tabbable">
+                                <ul id="scoreTabs" class="nav nav-tabs">
+                                    <li class="active"><a href="#@(QuestionCategory.EditorialInformation)ScoreTab" data-toggle="tab">@QuestionCategory.EditorialInformation.GetName()</a></li>
+                                    <li><a href="#@(QuestionCategory.PeerReview)ScoreTab" data-toggle="tab">@QuestionCategory.PeerReview.GetName()</a></li>
+                                    <li><a href="#@(QuestionCategory.Governance)ScoreTab" data-toggle="tab">@QuestionCategory.Governance.GetName()</a></li>
+                                    <li><a href="#@(QuestionCategory.Process)ScoreTab" data-toggle="tab">@QuestionCategory.Process.GetName()</a></li>
+                                    <li><a href="#@(QuestionCategory.Valuation)ScoreTab" data-toggle="tab">@QuestionCategory.Valuation.GetName()</a></li>
+                                </ul>
+                                <div class="tab-content text-center">
+                                    <div class="tab-pane active" id="@(QuestionCategory.EditorialInformation)ScoreTab">
+                                        @QuestionRating(QuestionKey.WebsiteContainsAimsScopeAndReadership)
+                                        @QuestionRating(QuestionKey.WebsiteContainsNameAndAffiliationsOfMembersEditorialBoard)
+                                        @QuestionRating(QuestionKey.ReviewsCommentsArePublished)
+                                        @QuestionRating(QuestionKey.WebsiteContainsRoleOfMembersEditorialBoard)
+                                    </div>
+
+                                    <div class="tab-pane" id="@(QuestionCategory.PeerReview)ScoreTab">
+                                        @QuestionRating(QuestionKey.WebsiteContainsSubmissionsReviewDetails)
+                                        @QuestionRating(QuestionKey.WebsiteContainsCriteriaUsedByReviewers)
+                                        @QuestionRating(QuestionKey.AuthorsAllowedToIndicateDesiredReviewers)
+                                        @QuestionRating(QuestionKey.WebsiteAllowsRatingsAndCommentariesOfPapers)
+                                    </div>
+
+                                    <div class="tab-pane" id="@(QuestionCategory.Governance)ScoreTab">
+                                        @QuestionRating(QuestionKey.HasClearGuidelinesConcerningSharing)
+                                        @QuestionRating(QuestionKey.CopiesAreMadeInThirdPartyRepositories)
+                                        @QuestionRating(QuestionKey.TakesCareOfInclusionInRelevantIndexingServices)
+                                        @QuestionRating(QuestionKey.HighlightsIssuesOfPublicationEthics)
+                                    </div>
+
+                                    <div class="tab-pane" id="@(QuestionCategory.Process)ScoreTab">
+                                        @QuestionRating(QuestionKey.ProvidesTrackAndTraceService)
+                                        @QuestionRating(QuestionKey.PublishedPapersIncludeInformationOnDatesOfSubmissionAndAcceptance)
+                                        @QuestionRating(QuestionKey.ProvidesArticlesWithDigitalObjectIdentifier)
+                                        @QuestionRating(QuestionKey.DisclosesNumberOfSubmissionsPublicationsAndRejectionRates)
+                                    </div>
+
+                                    <div class="tab-pane" id="@(QuestionCategory.Valuation)ScoreTab">
+                                        @if (ViewBag.JournalPrice != null)
+                                        {
+                                            <div class="row">
+                                                <p>Publication of my article in this journal did cost: @Html.Partial("DisplayTemplates/Price", (object)ViewBag.JournalPrice.Price)</p>
+                                            </div>
+                                        }
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>Additional comments</p>
+
+                                                <textarea rows="3" class="form-control" disabled="disabled">@Model.Remarks</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            var scoreController = new ScoreController();
+            scoreController.baseScoreCardDetails();
+        });
+    </script>
+}

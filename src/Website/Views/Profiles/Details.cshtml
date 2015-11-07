@@ -1,0 +1,160 @@
+﻿@model QOAM.Website.ViewModels.Profiles.DetailsViewModel
+
+@{
+    ViewBag.Title = string.Format("Profile of {0}", Model.UserProfile.DisplayName);
+}
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="well">
+                <h3 class="text-align">Profile<img src="~/Content/images/profile.png" alt="Profile"></h3>
+
+                <h5>@Model.UserProfile.DisplayName</h5>
+                <div class="institute bottommargin">@Model.UserProfile.Institution.Name</div>
+
+                <div>
+                    @Model.BaseScoreCardStats.NumberOfPublishedScoreCards Base Score card(s) published
+                </div>
+
+                <div>
+                    @Model.BaseScoreCardStats.NumberOfArchivedScoreCards Base Score card(s) archived
+                </div>
+
+                <div class="bottommargin">
+                    @Model.BaseScoreCardStats.NumberOfUnpublishedScoreCards Base Score card(s) unfinished
+                </div>
+
+                <div>
+                    @Model.ValuationScoreCardStats.NumberOfPublishedScoreCards Valuation Score card(s) published
+                </div>
+
+                <div>
+                    @Model.ValuationScoreCardStats.NumberOfArchivedScoreCards Valuation Score card(s) archived
+                </div>
+
+                <div class="bottommargin">
+                    @Model.ValuationScoreCardStats.NumberOfUnpublishedScoreCards Valuation Score card(s) unfinished
+                </div>
+
+                @if (User.Identity.IsAuthenticated && Model.UserProfile.Id == ViewBag.User.Id)
+                {
+                    <div class="score">
+                        <a class="" href="@Url.Action("Index", "Score")">Rate another journal</a><br />
+                        <a class="" href="@Url.Action("Index", "Score")"><img src="~/Content/Images/rate.png" alt="Rate another journal" /></a>
+                    </div>
+                }
+                else if (User.Identity.IsAuthenticated)
+                {
+                    <div>
+                        <a href="mailto:@Model.UserProfile.Email" class="btn btn-success" title="Send email">Send email</a>
+                    </div>
+                }
+                else
+                {
+                    <p>
+                        You may contact @Model.UserProfile.DisplayName if you are <a href="@Url.Action("Login", "Account", new { returnUrl = Url.Action("Details", new { id = Model.UserProfile.Id }) })" title="Log in to contact @Model.UserProfile.DisplayName">logged in</a>
+                    </p>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="row">
+                <h3>Base Journal Score Cards</h3>
+
+                @if (Model.BaseScoreCards.TotalItemCount > 0)
+                {
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>OA Journal</th>
+                                <th>Base Score</th>
+                                <th>Avg. Base Score</th>
+                                <th>State</th>
+                                <th>Expiration date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="baseScorecards">
+                            @Html.Partial("BaseScoreCards", Model.BaseScoreCards)
+                        </tbody>
+                        <tfoot id="loadMoreBaseScoreCards">
+                            @if (Model.BaseScoreCards.HasNextPage)
+                            {
+                                <tr>
+                                    <td colspan="9">
+                                        @Ajax.ActionLink("Load more", "BaseScoreCards", new { Model.Id, Page = Model.Page + 1 }, new AjaxOptions
+                                                                                                                                      {
+                                                                                                                                          UpdateTargetId = "baseScorecards",
+                                                                                                                                          InsertionMode = InsertionMode.InsertAfter,
+                                                                                                                                          OnSuccess = "afterLoadMore(data, 'loadMoreBaseScoreCards', 'loadMoreBaseScoreCardsLink')"
+                                                                                                                                      }, new { id = "loadMoreBaseScoreCardsLink" })
+                                    </td>
+                                </tr>
+                            }
+                        </tfoot>
+                    </table>
+                }
+                else
+                {
+                    <p>
+                        @Model.UserProfile.DisplayName has not yet published any Base Journal Score Cards.
+                    </p>
+                }
+
+            </div>
+
+            <div class="row">
+                <h3>Valuation Journal Score Cards</h3>
+
+                @if (Model.ValuationScoreCards.TotalItemCount > 0)
+                {
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+								<th>OA Journal</th>
+                                <th>Valuation Score</th>
+                                <th>Avg. Valuation Score</th>
+                                <th>State</th>
+                                <th>Expiration date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="valuationScorecards">
+                            @Html.Partial("ValuationScoreCards", Model.ValuationScoreCards)
+                        </tbody>
+                        <tfoot id="loadMoreValuationScoreCards">
+                            @if (Model.ValuationScoreCards.HasNextPage)
+                            {
+                                <tr>
+                                    <td colspan="9">
+                                        @Ajax.ActionLink("Load more", "ValuationScoreCards", new { Model.Id, Page = Model.Page + 1 }, new AjaxOptions
+                                                                                                                                  {
+                                                                                                                                      UpdateTargetId = "valuationScorecards",
+                                                                                                                                      InsertionMode = InsertionMode.InsertAfter,
+                                                                                                                                      OnSuccess = "afterLoadMore(data, 'loadMoreValuationScoreCards', 'loadMoreValuationScoreCardsLink')"
+                                                                                                                                  }, new { id = "loadMoreValuationScoreCardsLink" })
+                                    </td>
+                                </tr>
+                            }
+                        </tfoot>
+                    </table>
+                }
+                else
+                {
+                    <p>
+                        @Model.UserProfile.DisplayName has not yet published any Valuation Journal Score Cards.
+                    </p>
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts
+{
+    @Html.Partial("_FormScripts")
+}
