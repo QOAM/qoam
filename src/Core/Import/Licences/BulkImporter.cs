@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using NPOI.SS.UserModel;
 
 namespace QOAM.Core.Import.Licences
@@ -15,16 +16,21 @@ namespace QOAM.Core.Import.Licences
             _entityConverter = entityConverter;
         }
 
-        public void StartImport(Stream importFile)
+        public IList<UniversityLicense> Execute(Stream importFile)
         {
             _workbook = WorkbookFactory.Create(importFile);
 
-            var data = _fileImporter.Extract(_workbook);
+            var data = _fileImporter.Execute(_workbook);
+            var convertedData = _entityConverter.Execute(data);
 
-            var convertedData = _entityConverter.Convert(data);
+            //return ToInstitutionJournals(convertedData);
+            
+            return convertedData;
+        }
 
-            // TODO: Should this method return a List<InstitutionJournal>? Is there a nice pattern for this?
-            // TODO: Chain of Responsibility maybe?
+        IList<InstitutionJournal> ToInstitutionJournals(List<UniversityLicense> convertedData)
+        {
+            return new List<InstitutionJournal>();
         }
     }
 }

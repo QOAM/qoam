@@ -21,7 +21,7 @@ namespace QOAM.Core.Tests.Import.Licenses
         public void UniversitiesTableIsParsedIntoAUsableEntity()
         {
             Initialize();
-            var result = _converter.Convert(_validDataSet);
+            var result = _converter.Execute(_validDataSet);
 
             Assert.Equal(4, result.Count);
             Assert.Equal(8, result[2].Licenses.Count);
@@ -32,7 +32,7 @@ namespace QOAM.Core.Tests.Import.Licenses
         {
             Initialize();
 
-            var result = _converter.Convert(_validDataSet);
+            var result = _converter.Execute(_validDataSet);
 
             var firstLicense = result.First().Licenses.First();
 

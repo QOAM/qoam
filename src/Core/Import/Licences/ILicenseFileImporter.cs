@@ -5,6 +5,6 @@ namespace QOAM.Core.Import.Licences
 {
     public interface ILicenseFileImporter
     {
-        DataSet Extract(IWorkbook workbook);
+        DataSet Execute(IWorkbook workbook);
     }
 }

@@ -10,7 +10,7 @@ namespace QOAM.Core.Import.Licences
         DataSet _dataSet { get; } = new DataSet();
         const string UniversitiesSheet = "Universities";
         
-        public DataSet Extract(IWorkbook workbook)
+        public DataSet Execute(IWorkbook workbook)
         {
             var universitiesSheetIndex = workbook.GetSheetIndex(UniversitiesSheet);
 
