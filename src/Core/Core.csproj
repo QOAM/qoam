@@ -168,6 +168,7 @@
     <Compile Include="Import\Import.cs" />
     <Compile Include="Import\JournalUpdateProperty.cs" />
     <Compile Include="Import\Licences\BulkImporter.cs" />
+    <Compile Include="Import\Licences\IBulkImporter.cs" />
     <Compile Include="Import\Licences\IImportEntityConverter.cs" />
     <Compile Include="Import\Licences\ILicenseFileImporter.cs" />
     <Compile Include="Import\Licences\ImportEntityConverter.cs" />

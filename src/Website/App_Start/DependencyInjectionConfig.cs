@@ -1,4 +1,6 @@
-﻿namespace QOAM.Website
+﻿using QOAM.Core.Import.Licences;
+
+namespace QOAM.Website
 {
     using System.Web.Mvc;
 
@@ -70,6 +72,10 @@
             builder.RegisterType<UlrichsClient>().AsSelf().InstancePerRequest();
             builder.RegisterType<UlrichsImport>().AsSelf().InstancePerRequest();
             builder.RegisterType<UlrichsCache>().AsSelf().InstancePerRequest();
+
+            builder.RegisterType<LicenseFileImporter>().As<ILicenseFileImporter>().InstancePerRequest();
+            builder.RegisterType<ImportEntityConverter>().As<IImportEntityConverter>().InstancePerRequest();
+            builder.RegisterType<BulkImporter>().As<IBulkImporter>().InstancePerRequest();
         }
 
         private static void RegisterMiscellaneousComponents(ContainerBuilder builder)

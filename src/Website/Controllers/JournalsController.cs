@@ -7,6 +7,7 @@
     using QOAM.Core;
     using QOAM.Core.Repositories;
     using QOAM.Core.Repositories.Filters;
+    using QOAM.Core.Import.Licences;
     using QOAM.Website.Helpers;
     using QOAM.Website.Models;
     using QOAM.Website.ViewModels.Journals;
@@ -25,8 +26,9 @@
         private readonly IInstitutionJournalRepository institutionJournalRepository;
         private readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
         private readonly IInstitutionRepository institutionRepository;
+        private readonly IBulkImporter _bulkImporter;
 
-        public JournalsController(IJournalRepository journalRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IInstitutionJournalRepository institutionJournalRepository, IBaseScoreCardRepository baseScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository)
+        public JournalsController(IJournalRepository journalRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IInstitutionJournalRepository institutionJournalRepository, IBaseScoreCardRepository baseScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBulkImporter bulkImporter)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalRepository, nameof(journalRepository));
@@ -37,6 +39,7 @@
             Requires.NotNull(institutionJournalRepository, nameof(institutionJournalRepository));
             Requires.NotNull(institutionRepository, nameof(institutionRepository));
             Requires.NotNull(valuationJournalPriceRepository, nameof(valuationJournalPriceRepository));
+            Requires.NotNull(bulkImporter, nameof(bulkImporter));
             
             this.journalRepository = journalRepository;
             this.baseJournalPriceRepository = baseJournalPriceRepository;
@@ -45,6 +48,8 @@
             this.institutionJournalRepository = institutionJournalRepository;
             this.institutionRepository = institutionRepository;
             this.valuationJournalPriceRepository = valuationJournalPriceRepository;
+
+            _bulkImporter = bulkImporter;
         }
         
         [HttpGet, Route("")]
@@ -271,6 +276,89 @@
             }
 
             return this.RedirectToAction("InstitutionJournalLicense", new { id, InstitutionId = model.Institution, model.RefererUrl });
+        }
+
+        [HttpGet, Route("institutionalPrices")]
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult BulkImportInstitutionalPrices()
+        {
+            return View(new InstitutionalPricesViewModel());
+        }
+
+        [HttpPost, Route("institutionalPrices")]
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        [ValidateAntiForgeryToken]
+        public ActionResult BulkImportInstitutionalPrices(InstitutionalPricesViewModel model)
+        {
+            try
+            {
+                var data = _bulkImporter.Execute(model.File.InputStream);
+
+                var institutionJournals = (from u in data
+                                           let institution = institutionRepository.Find(u.Domain)
+                                           where institution != null
+                                           from info in u.Licenses
+                                           let journal = journalRepository.FindByIssn(info.ISSN)
+                                           where journal != null
+                                           select new InstitutionJournal
+                                           {
+                                               DateAdded = DateTime.Now,
+                                               Link = info.Text,
+                                               JournalId = journal.Id,
+                                               UserProfileId = Authentication.CurrentUserId,
+                                               InstitutionId = institution.Id
+                                           }).ToList();
+
+                // This is gonna be quite an expensive operation... Rethink!
+                foreach (var institutionJournal in institutionJournals)
+                {
+                    var existing = institutionJournalRepository.Find(institutionJournal.JournalId, institutionJournal.InstitutionId);
+
+                    if (existing != null)
+                    {
+                        existing.DateAdded = DateTime.Now;
+                        existing.Link = institutionJournal.Link;
+                        existing.UserProfileId = institutionJournal.UserProfileId;
+
+                        institutionJournalRepository.InsertOrUpdate(existing);
+                    }
+                    else
+                        institutionJournalRepository.InsertOrUpdate(institutionJournal);
+                }
+
+                institutionJournalRepository.Save();
+
+                return RedirectToAction("BulkImportSuccessful", new { amountImported = institutionJournals.Count });
+            }
+            catch (ArgumentException invalidFileException)
+            {
+                ModelState.AddModelError("generalError", invalidFileException.Message);
+            }
+            catch (Exception exception)
+            {
+                ModelState.AddModelError("generalError", $"An error has ocurred: {exception.Message}");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet, Route("bulkImportSuccessful")]
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult BulkImportSuccessful(InstitutionalPricesImportedViewModel model)
+        {
+            return View(model);
+        }
+
+        [HttpGet, Route("{id:int}/institutionJournalText")]
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult InstitutionJournalText(int id, int institutionId)
+        {
+            var model = institutionJournalRepository.Find(id, institutionId);
+
+            if (model == null)
+                return new HttpNotFoundResult();
+
+            return View(model);
         }
 
         [HttpGet, Route("titles")]

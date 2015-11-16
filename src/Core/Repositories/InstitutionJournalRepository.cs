@@ -10,10 +10,8 @@
 
     public class InstitutionJournalRepository : Repository<InstitutionJournal>, IInstitutionJournalRepository
     {
-        public InstitutionJournalRepository(ApplicationDbContext dbContext)
-            : base(dbContext)
-        {
-        }
+        public InstitutionJournalRepository(ApplicationDbContext dbContext) : base(dbContext)
+        { }
 
         public InstitutionJournal Find(int journalId, int institutionId)
         {
