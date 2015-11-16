@@ -164,6 +164,7 @@
     <Compile Include="Controllers\Helpers\HttpContextHelper.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Controllers\InstitutionsControllerTests.cs" />
+    <Compile Include="Controllers\JournalsControllerTests.cs" />
     <Compile Include="Controllers\ProfilesControllerTests.cs" />
     <Compile Include="Helpers\UrlHelperExtensionsTests.cs" />
     <Compile Include="Models\QuestionExtensionsTests.cs" />

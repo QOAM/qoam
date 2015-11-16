@@ -1,4 +1,7 @@
-﻿namespace QOAM.Website.Controllers
+﻿using System.Web;
+using QOAM.Core.Import.Licences;
+
+namespace QOAM.Website.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -25,8 +28,9 @@
         private readonly IInstitutionJournalRepository institutionJournalRepository;
         private readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
         private readonly IInstitutionRepository institutionRepository;
+        private readonly IBulkImporter _bulkImporter;
 
-        public JournalsController(IJournalRepository journalRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IInstitutionJournalRepository institutionJournalRepository, IBaseScoreCardRepository baseScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository)
+        public JournalsController(IJournalRepository journalRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IInstitutionJournalRepository institutionJournalRepository, IBaseScoreCardRepository baseScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBulkImporter bulkImporter)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalRepository, nameof(journalRepository));
@@ -37,6 +41,7 @@
             Requires.NotNull(institutionJournalRepository, nameof(institutionJournalRepository));
             Requires.NotNull(institutionRepository, nameof(institutionRepository));
             Requires.NotNull(valuationJournalPriceRepository, nameof(valuationJournalPriceRepository));
+            Requires.NotNull(bulkImporter, nameof(bulkImporter));
             
             this.journalRepository = journalRepository;
             this.baseJournalPriceRepository = baseJournalPriceRepository;
@@ -45,6 +50,8 @@
             this.institutionJournalRepository = institutionJournalRepository;
             this.institutionRepository = institutionRepository;
             this.valuationJournalPriceRepository = valuationJournalPriceRepository;
+
+            _bulkImporter = bulkImporter;
         }
         
         [HttpGet, Route("")]
@@ -271,6 +278,35 @@
             }
 
             return this.RedirectToAction("InstitutionJournalLicense", new { id, InstitutionId = model.Institution, model.RefererUrl });
+        }
+
+        [HttpPost, Route("bulkLicenseImport")]
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        [ValidateAntiForgeryToken]
+        public ActionResult BulkLicenseImport(HttpPostedFileBase file)
+        {
+            // Ensure that only admin and institutional admin users can use the update all journals of a publisher
+            if (!User.IsInRole(ApplicationRole.Admin) && !User.IsInRole(ApplicationRole.InstitutionAdmin))
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            var data = _bulkImporter.Execute(file.InputStream);
+
+            var institutionJournals = (from u in data
+                                       let insitution = institutionRepository.Find(u.Domain)
+                                       from info in u.Licenses
+                                       let journal = journalRepository.FindByIssn(info.ISSN)
+                                       select new InstitutionJournal
+                                       {
+                                           DateAdded = DateTime.Now,
+                                           Link = info.Text, // TODO: This needs to point to an Action that will display the text
+                                           JournalId = journal.Id,
+                                           UserProfileId = Authentication.CurrentUserId,
+                                           InstitutionId = insitution.Id
+                                       }).ToList();
+
+            return new EmptyResult();
         }
 
         [HttpGet, Route("titles")]

@@ -4,7 +4,7 @@ using NPOI.SS.UserModel;
 
 namespace QOAM.Core.Import.Licences
 {
-    public class BulkImporter
+    public class BulkImporter : IBulkImporter
     {
         readonly ILicenseFileImporter _fileImporter;
         readonly IImportEntityConverter _entityConverter;
