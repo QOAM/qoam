@@ -285,28 +285,58 @@ namespace QOAM.Website.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult BulkLicenseImport(HttpPostedFileBase file)
         {
-            // Ensure that only admin and institutional admin users can use the update all journals of a publisher
-            if (!User.IsInRole(ApplicationRole.Admin) && !User.IsInRole(ApplicationRole.InstitutionAdmin))
+            try
             {
-                return new HttpUnauthorizedResult();
+                var data = _bulkImporter.Execute(file.InputStream);
+
+                var institutionJournals = (from u in data
+                                           let institution = institutionRepository.Find(u.Domain)
+                                           where institution != null
+                                           from info in u.Licenses
+                                           let journal = journalRepository.FindByIssn(info.ISSN)
+                                           where journal != null
+                                           select new InstitutionJournal
+                                           {
+                                               DateAdded = DateTime.Now,
+                                               Link = Url.Action("InstitutionJournalText", new { journalId = journal.Id, institutionId = institution.Id }),
+                                               JournalId = journal.Id,
+                                               UserProfileId = Authentication.CurrentUserId,
+                                               InstitutionId = institution.Id
+                                           }).ToList();
+
+                // This is gonna be quite an expensive operation... Rethink!
+                foreach (var institutionJournal in institutionJournals)
+                {
+                    var existing = institutionJournalRepository.Find(institutionJournal.JournalId, institutionJournal.InstitutionId);
+
+                    if (existing != null)
+                        institutionJournal.Id = existing.Id;
+
+                    institutionJournalRepository.InsertOrUpdate(institutionJournal);
+                }
+
+            }
+            catch (ArgumentException invalidFileException)
+            {
+                ModelState.AddModelError("invalidFile", invalidFileException);
+            }
+            catch (Exception exception)
+            {
+                ModelState.AddModelError("unknownError", exception);
             }
 
-            var data = _bulkImporter.Execute(file.InputStream);
-
-            var institutionJournals = (from u in data
-                                       let insitution = institutionRepository.Find(u.Domain)
-                                       from info in u.Licenses
-                                       let journal = journalRepository.FindByIssn(info.ISSN)
-                                       select new InstitutionJournal
-                                       {
-                                           DateAdded = DateTime.Now,
-                                           Link = info.Text, // TODO: This needs to point to an Action that will display the text
-                                           JournalId = journal.Id,
-                                           UserProfileId = Authentication.CurrentUserId,
-                                           InstitutionId = insitution.Id
-                                       }).ToList();
-
             return new EmptyResult();
+        }
+
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult InstitutionJournalText(int journalId, int institutionId)
+        {
+            var model = institutionJournalRepository.Find(journalId, institutionId);
+
+            if (model == null)
+                return new HttpNotFoundResult();
+
+            return View(model);
         }
 
         [HttpGet, Route("titles")]

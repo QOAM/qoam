@@ -137,10 +137,8 @@
     <Compile Include="Cleanup\UnpublishedScoreCardsCleanupTests.cs" />
     <Compile Include="Helpers\StringExtensionsTests.cs" />
     <Compile Include="Helpers\ValidatorExtensionsTests.cs" />
-    <Compile Include="Import\Licenses\BulkImporterTest.cs" />
     <Compile Include="Import\Licenses\ImportEntityConverterTests.cs" />
     <Compile Include="Import\Licenses\LicenseFileImporterTests.cs" />
-    <Compile Include="Import\Licenses\Stubs\ConvertedEntitiyStubs.cs" />
     <Compile Include="Import\Licenses\Stubs\ImportFileStubs.cs" />
     <Compile Include="QuestionKeyExtensionsTests.cs" />
     <Compile Include="Export\JournalsExportTests.cs" />

@@ -22,15 +22,8 @@ namespace QOAM.Core.Import.Licences
 
             var data = _fileImporter.Execute(_workbook);
             var convertedData = _entityConverter.Execute(data);
-
-            //return ToInstitutionJournals(convertedData);
             
             return convertedData;
-        }
-
-        IList<InstitutionJournal> ToInstitutionJournals(List<UniversityLicense> convertedData)
-        {
-            return new List<InstitutionJournal>();
         }
     }
 }

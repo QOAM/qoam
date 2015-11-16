@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using QOAM.Core.Import.Licences;
 
-namespace QOAM.Core.Tests.Import.Licenses.Stubs
+namespace QOAM.Website.Tests.Controllers.Stubs
 {
     public static class ConvertedEntitiyStubs
     {
