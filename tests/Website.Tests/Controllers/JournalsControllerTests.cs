@@ -10,6 +10,7 @@ using QOAM.Website.Controllers;
 using QOAM.Website.Helpers;
 using QOAM.Website.Tests.Controllers.Helpers;
 using QOAM.Website.Tests.Controllers.Stubs;
+using QOAM.Website.ViewModels.Journals;
 using Xunit;
 
 namespace QOAM.Website.Tests.Controllers
@@ -34,6 +35,7 @@ namespace QOAM.Website.Tests.Controllers
         Mock<IBulkImporter> _bulkImporter;
 
         Mock<HttpPostedFileBase> _uploadFile;
+        InstitutionalPricesViewModel _viewModel;
 
         #endregion
 
@@ -56,6 +58,7 @@ namespace QOAM.Website.Tests.Controllers
             _controller = new JournalsController(_journalRepository.Object, _baseJournalPriceRepository.Object, _valuationJournalPriceRepository.Object, _valuationScoreCardRepository.Object, _languageRepository.Object, _subjectRepository.Object, _institutionJournalRepository.Object, _baseScoreCardRepository.Object, _userProfileRepository.Object, _authentication.Object, _institutionRepository.Object, _bulkImporter.Object);
 
             _uploadFile = new Mock<HttpPostedFileBase>();
+            _viewModel = new InstitutionalPricesViewModel { File = _uploadFile.Object };
         }
 
         #endregion
@@ -68,10 +71,10 @@ namespace QOAM.Website.Tests.Controllers
 
             _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Throws<ArgumentException>();
 
-            _controller.BulkLicenseImport(_uploadFile.Object);
+            _controller.BulkImportInstitutionalPrices(_viewModel);
 
-            Assert.Equal(1, _controller.ModelState["invalidFile"].Errors.Count);
-            Assert.IsType<ArgumentException>(_controller.ModelState["invalidFile"].Errors[0].Exception);
+            Assert.Equal(1, _controller.ModelState["File"].Errors.Count);
+            Assert.IsType<ArgumentException>(_controller.ModelState["File"].Errors[0].Exception);
         }
 
         [Fact]
@@ -90,7 +93,7 @@ namespace QOAM.Website.Tests.Controllers
             _institutionRepository.Setup(x => x.Find(It.IsAny<string>())).Returns(institution);
             _journalRepository.Setup(x => x.FindByIssn(It.IsAny<string>())).Returns(journal);
 
-            _controller.BulkLicenseImport(_uploadFile.Object);
+            _controller.BulkImportInstitutionalPrices(_viewModel);
 
             _institutionJournalRepository.Verify(x => x.InsertOrUpdate(It.IsAny<InstitutionJournal>()), Times.Exactly(16));
         }

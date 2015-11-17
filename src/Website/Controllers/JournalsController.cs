@@ -1,7 +1,4 @@
-﻿using System.Web;
-using QOAM.Core.Import.Licences;
-
-namespace QOAM.Website.Controllers
+﻿namespace QOAM.Website.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -10,6 +7,7 @@ namespace QOAM.Website.Controllers
     using QOAM.Core;
     using QOAM.Core.Repositories;
     using QOAM.Core.Repositories.Filters;
+    using QOAM.Core.Import.Licences;
     using QOAM.Website.Helpers;
     using QOAM.Website.Models;
     using QOAM.Website.ViewModels.Journals;
@@ -280,14 +278,21 @@ namespace QOAM.Website.Controllers
             return this.RedirectToAction("InstitutionJournalLicense", new { id, InstitutionId = model.Institution, model.RefererUrl });
         }
 
-        [HttpPost, Route("bulkLicenseImport")]
+        [HttpGet, Route("institutionalPrices")]
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult BulkImportInstitutionalPrices()
+        {
+            return View(new InstitutionalPricesViewModel());
+        }
+
+        [HttpPost, Route("institutionalPrices")]
         [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
-        public ActionResult BulkLicenseImport(HttpPostedFileBase file)
+        public ActionResult BulkImportInstitutionalPrices(InstitutionalPricesViewModel model)
         {
             try
             {
-                var data = _bulkImporter.Execute(file.InputStream);
+                var data = _bulkImporter.Execute(model.File.InputStream);
 
                 var institutionJournals = (from u in data
                                            let institution = institutionRepository.Find(u.Domain)
@@ -298,7 +303,7 @@ namespace QOAM.Website.Controllers
                                            select new InstitutionJournal
                                            {
                                                DateAdded = DateTime.Now,
-                                               Link = Url.Action("InstitutionJournalText", new { journalId = journal.Id, institutionId = institution.Id }),
+                                               Link = info.Text,
                                                JournalId = journal.Id,
                                                UserProfileId = Authentication.CurrentUserId,
                                                InstitutionId = institution.Id
@@ -310,28 +315,45 @@ namespace QOAM.Website.Controllers
                     var existing = institutionJournalRepository.Find(institutionJournal.JournalId, institutionJournal.InstitutionId);
 
                     if (existing != null)
-                        institutionJournal.Id = existing.Id;
+                    {
+                        existing.DateAdded = DateTime.Now;
+                        existing.Link = institutionJournal.Link;
+                        existing.UserProfileId = institutionJournal.UserProfileId;
 
-                    institutionJournalRepository.InsertOrUpdate(institutionJournal);
+                        institutionJournalRepository.InsertOrUpdate(existing);
+                    }
+                    else
+                        institutionJournalRepository.InsertOrUpdate(institutionJournal);
                 }
 
+                institutionJournalRepository.Save();
+
+                return RedirectToAction("BulkImportSuccessful", new { amountImported = institutionJournals.Count });
             }
             catch (ArgumentException invalidFileException)
             {
-                ModelState.AddModelError("invalidFile", invalidFileException);
+                ModelState.AddModelError("File", invalidFileException);
             }
             catch (Exception exception)
             {
-                ModelState.AddModelError("unknownError", exception);
+                ModelState.AddModelError("unknownError", $"An error has ocurred: {exception.Message}");
             }
 
-            return new EmptyResult();
+            return View(model);
         }
 
+        [HttpGet, Route("bulkImportSuccessful")]
         [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
-        public ActionResult InstitutionJournalText(int journalId, int institutionId)
+        public ActionResult BulkImportSuccessful(InstitutionalPricesImportedViewModel model)
         {
-            var model = institutionJournalRepository.Find(journalId, institutionId);
+            return View(model);
+        }
+
+        [HttpGet, Route("{id:int}/institutionJournalText")]
+        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult InstitutionJournalText(int id, int institutionId)
+        {
+            var model = institutionJournalRepository.Find(id, institutionId);
 
             if (model == null)
                 return new HttpNotFoundResult();
