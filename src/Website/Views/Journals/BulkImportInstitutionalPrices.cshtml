@@ -25,8 +25,8 @@
                     @Html.TextBoxFor(m => m.File, new { type = "file", accept = ".xlsx" })
                     @Html.ValidationMessageFor(m => m.File, null, new { @class = "control-label" })
                 </div>
-                <div class="col-lg-6">
-                    @Html.ValidationMessage("unknownError", new { @class = "control-label" })
+                <div class="col-lg-6 col-md-offset-3">
+                    @Html.ValidationMessage("generalError", new { @class = "control-label" })
                 </div>
             </div>
 

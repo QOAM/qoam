@@ -156,9 +156,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Import\Licenses\Stubs\Invalid QOAMupload.xlsx">
+    <None Include="Import\Licenses\Stubs\Invalid Column names - QOAMupload.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Import\Licenses\Stubs\Missing main Sheet - QOAMupload.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Import\Licenses\Stubs\QOAMupload - With Errors.xlsx" />
     <None Include="Import\Licenses\Stubs\QOAMupload.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

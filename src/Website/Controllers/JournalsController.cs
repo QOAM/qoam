@@ -332,11 +332,11 @@
             }
             catch (ArgumentException invalidFileException)
             {
-                ModelState.AddModelError("File", invalidFileException);
+                ModelState.AddModelError("generalError", invalidFileException.Message);
             }
             catch (Exception exception)
             {
-                ModelState.AddModelError("unknownError", $"An error has ocurred: {exception.Message}");
+                ModelState.AddModelError("generalError", $"An error has ocurred: {exception.Message}");
             }
 
             return View(model);

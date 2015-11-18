@@ -29,7 +29,7 @@ namespace QOAM.Core.Import.Licences
                     {
                         LicenseName = l,
                         ISSN = row["ISSN"].ToString(),
-                        Text = row["text"].ToString()
+                        Text = row["Text"].ToString()
                     }).ToList();
         }  
 

@@ -17,9 +17,6 @@ namespace QOAM.Core.Tests.Import.Licenses
 
         void Initialize(string fileName = "QOAMupload")
         {
-            // from row in dt.AsEnumerable()
-
-
             using (var file = new FileStream($"Import\\Licenses\\Stubs\\{fileName}.xlsx", FileMode.Open, FileAccess.Read))
             {
                 _workbook = WorkbookFactory.Create(file);
@@ -64,11 +61,19 @@ namespace QOAM.Core.Tests.Import.Licenses
         [Fact]
         public void AnExceptionIsThrownIfUniversitiesTableIsNotPresentInFile()
         {
-            Initialize("Invalid QOAMupload");
+            Initialize("Missing main Sheet - QOAMupload");
 
             Assert.Throws<ArgumentException>(() => _importer.Execute(_workbook));
         }
-        
+
+        [Fact]
+        public void AnExceptionIsThrownIfColumnNamesAreNotValid()
+        {
+            Initialize("Invalid Column names - QOAMupload");
+
+            Assert.Throws<ArgumentException>(() => _importer.Execute(_workbook));
+        }
+
         #region Private Methods
 
         DataTable GetTable(string name)

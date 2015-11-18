@@ -73,8 +73,7 @@ namespace QOAM.Website.Tests.Controllers
 
             _controller.BulkImportInstitutionalPrices(_viewModel);
 
-            Assert.Equal(1, _controller.ModelState["File"].Errors.Count);
-            Assert.IsType<ArgumentException>(_controller.ModelState["File"].Errors[0].Exception);
+            Assert.Equal(1, _controller.ModelState["generalError"].Errors.Count);
         }
 
         [Fact]
