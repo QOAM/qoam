@@ -7,7 +7,16 @@
     var rowClass = User.Identity.IsAuthenticated && ViewBag.User.InstitutionId == institutionJournal.InstitutionId ? "highlighted" : null;
 
     <tr class="@rowClass" data-next-page="@nextPage">
-        <td><a href="@institutionJournal.Link" title="View website">@institutionJournal.Institution.Name</a></td>
+        <td>
+            @if (Uri.IsWellFormedUriString(institutionJournal.Link, UriKind.RelativeOrAbsolute))
+            {
+                <a href="@institutionJournal.Link" title="View website">@institutionJournal.Institution.Name</a>
+            }
+            else
+            {
+                @Html.ActionLink(institutionJournal.Institution.Name, "InstitutionJournalText", new { id = institutionJournal.JournalId, institutionId = institutionJournal.InstitutionId })
+            }
+        </td>
         @if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin))
         {
             <td>
