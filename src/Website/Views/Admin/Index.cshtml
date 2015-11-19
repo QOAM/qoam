@@ -25,6 +25,7 @@
         @if (User.IsInRole(ApplicationRole.InstitutionAdmin) || User.IsInRole(ApplicationRole.Admin))
         {
             <li>@Html.ActionLink("Check ISSNs", "Check")</li>
+            <li>@Html.ActionLink("Institutional prices", "BulkImportInstitutionalPrices", "Journals")</li>
         }
     </ul>
 </div>

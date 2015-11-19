@@ -1,0 +1,44 @@
+﻿@model QOAM.Core.InstitutionJournal
+
+@{
+    ViewBag.Title = "License Information";
+}
+<div class="container main">
+    <div class="row side">
+        <h4>License information</h4>
+        <br/>
+        <div class="form-group row">
+            <div class="col-lg-2">
+                Institution:
+            </div>
+            <div class="col-lg-6">
+                @Model.Institution.Name
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-2">
+                Journal:
+            </div>
+            <div class="col-lg-6">
+                @Model.Journal.Title
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-2">
+                Publisher:
+            </div>
+            <div class="col-lg-6">
+                @Model.Journal.Publisher.Name
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-2">
+                License:
+            </div>
+            <div class="col-lg-6">
+                @Html.Raw(Model.Link)
+            </div>
+        </div>
+    </div>
+</div>
+
