@@ -17,7 +17,7 @@
                 @Html.ActionLink(institutionJournal.Institution.Name, "InstitutionJournalText", new { id = institutionJournal.JournalId, institutionId = institutionJournal.InstitutionId })
             }
         </td>
-        @if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin))
+        @*@if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin))
         {
             <td>
                 @if (User.IsInRole(ApplicationRole.Admin) || (User.IsInRole(ApplicationRole.InstitutionAdmin) && institutionJournal.InstitutionId == ViewBag.User.InstitutionId))
@@ -25,6 +25,6 @@
                     @Html.ActionLink("Edit", "InstitutionJournalLicense", new { Id = institutionJournal.JournalId, institutionJournal.InstitutionId, ViewBag.RefererUrl })
                 }
             </td>
-        }
+        }*@
     </tr>
 }

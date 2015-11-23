@@ -351,7 +351,6 @@
         }
 
         [HttpGet, Route("{id:int}/institutionJournalText")]
-        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
         public ActionResult InstitutionJournalText(int id, int institutionId)
         {
             var model = institutionJournalRepository.Find(id, institutionId);

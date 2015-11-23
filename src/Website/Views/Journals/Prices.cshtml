@@ -53,10 +53,10 @@
                         <thead>
                             <tr>
                                 <th>Institution</th>
-                                @if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin))
+                                @*@if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin))
                                 {
                                     <th>Action</th>
-                                }
+                                }*@
                             </tr>
                         </thead>
                         <tbody id="@Model.Id-institutional-prices">
