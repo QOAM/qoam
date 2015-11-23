@@ -22,5 +22,6 @@
 
         IPagedList<Institution> Search(InstitutionFilter filter);
         Institution Find(MailAddress mailAddress);
+        void Delete(Institution entity);
     }
 }

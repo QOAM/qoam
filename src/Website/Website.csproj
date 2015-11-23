@@ -871,6 +871,8 @@
     <Content Include="Views\Admin\RemovedBaseScoreCard.cshtml" />
     <Content Include="Views\Account\ChangeEmail.cshtml" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
+    <Content Include="Views\Admin\DeleteInstitution.cshtml" />
+    <Content Include="Views\Admin\InstitutionDeleted.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

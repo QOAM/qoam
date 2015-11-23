@@ -1,4 +1,6 @@
-﻿namespace QOAM.Website.Controllers
+﻿using System.Diagnostics;
+
+namespace QOAM.Website.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -329,17 +331,10 @@
         }
 
         [HttpGet, Route("{id:int}/editinstitution")]
-        [Authorize(Roles = ApplicationRole.Admin)]
-        public ViewResult EditInstitution(int id)
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.Admin)]
+        public ActionResult EditInstitution(int id)
         {
-            var institution = institutionRepository.Find(id);
-            var model = new UpsertViewModel
-            {
-                Name = institution.Name,
-                ShortName = institution.ShortName
-            };
-
-            return View(model);
+            return FetchUpsertViewModel(id);
         }
 
         [HttpPost, Route("{id:int}/editinstitution")]
@@ -354,6 +349,43 @@
             institutionRepository.Save();
 
             return RedirectToAction("Index", "Institutions");
+        }
+
+        [HttpGet, Route("{id:int}/deleteinstitution")]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.Admin)]
+        public ActionResult DeleteInstitution(int id)
+        {
+            return FetchUpsertViewModel(id);
+        }
+
+        [HttpPost, Route("{id:int}/deleteinstitution")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteInstitution(UpsertViewModel model)
+        {
+            if (!model.Id.HasValue)
+                return HttpNotFound();
+
+            var institution = institutionRepository.Find(model.Id.Value);
+
+            if (institution == null)
+                return HttpNotFound();
+
+            if (!ModelState.IsValid)
+                return View("DeleteInstitution", model);
+
+
+            institutionRepository.Delete(institution);
+            institutionRepository.Save();
+
+            return RedirectToAction("InstitutionDeleted");
+        }
+
+        [HttpGet, Route("insitutiondeleted")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult InstitutionDeleted()
+        {
+            return View();
         }
 
         [HttpGet, Route("movescorecards")]
@@ -485,6 +517,8 @@
             return View();
         }
 
+        #region Private Methods
+        
         private static HashSet<string> GetISSNs(ImportViewModel model)
         {
             return ParseISSNs(model.ISSNs);
@@ -517,5 +551,24 @@
                     throw new ArgumentOutOfRangeException(nameof(importSource));
             }
         }
+
+        ActionResult FetchUpsertViewModel(int id)
+        {
+            var institution = institutionRepository.Find(id);
+
+            if(institution == null)
+                return HttpNotFound();
+
+            var model = new UpsertViewModel
+            {
+                Id = id,
+                Name = institution.Name,
+                ShortName = institution.ShortName
+            };
+
+            return View(model);
+        }
+
+        #endregion
     }
 }
