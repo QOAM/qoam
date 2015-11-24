@@ -62,31 +62,31 @@
             return this.DbContext.Institutions.FirstOrDefault(i => mailAddress.Host.Contains(i.ShortName));
         }
 
-        public override void Delete(Institution entity)
-        {
-            var userProfiles = entity.UserProfiles.Select(u => u.Id).ToList();
+        //public override void Delete(Institution entity)
+        //{
+        //    var userProfiles = entity.UserProfiles.Select(u => u.Id).ToList();
 
-            if (userProfiles.Any())
-            { 
-                DbContext.BaseJournalPrices
-                    .Where(b => userProfiles.Contains(b.UserProfileId))
-                    .Delete();
+        //    if (userProfiles.Any())
+        //    { 
+        //        DbContext.BaseJournalPrices
+        //            .Where(b => userProfiles.Contains(b.UserProfileId))
+        //            .Delete();
 
-                DbContext.BaseScoreCards
-                    .Where(b => userProfiles.Contains(b.UserProfileId))
-                    .Delete();
+        //        DbContext.BaseScoreCards
+        //            .Where(b => userProfiles.Contains(b.UserProfileId))
+        //            .Delete();
 
-                DbContext.ValuationJournalPrices
-                    .Where(p => userProfiles.Contains(p.UserProfileId))
-                    .Delete();
+        //        DbContext.ValuationJournalPrices
+        //            .Where(p => userProfiles.Contains(p.UserProfileId))
+        //            .Delete();
 
-                DbContext.ValuationScoreCards
-                    .Where(c => userProfiles.Contains(c.UserProfileId))
-                    .Delete();
-            }
+        //        DbContext.ValuationScoreCards
+        //            .Where(c => userProfiles.Contains(c.UserProfileId))
+        //            .Delete();
+        //    }
 
-            base.Delete(entity);
-        }
+        //    base.Delete(entity);
+        //}
 
         private static IOrderedQueryable<Institution> ApplyOrdering(IQueryable<Institution> query, InstitutionFilter filter)
         {

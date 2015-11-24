@@ -331,14 +331,14 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpGet, Route("{id:int}/editinstitution")]
-        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         public ActionResult EditInstitution(int id)
         {
             return FetchUpsertViewModel(id);
         }
 
         [HttpPost, Route("{id:int}/editinstitution")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult EditInstitution(UpsertViewModel model)
         {
@@ -352,27 +352,33 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpGet, Route("{id:int}/deleteinstitution")]
-        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         public ActionResult DeleteInstitution(int id)
         {
             return FetchUpsertViewModel(id);
         }
 
         [HttpPost, Route("{id:int}/deleteinstitution")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteInstitution(UpsertViewModel model)
         {
             if (!model.Id.HasValue)
-                return HttpNotFound();
+                return new HttpNotFoundResult();
 
             var institution = institutionRepository.Find(model.Id.Value);
 
             if (institution == null)
-                return HttpNotFound();
+                return new HttpNotFoundResult();
 
             if (!ModelState.IsValid)
                 return View("DeleteInstitution", model);
+
+            if (institution.UserProfiles.Any())
+            {
+                ModelState.AddModelError("noetempty", $"There are {institution.UserProfiles.Count} users registered under this domain. Institution {institution.Name} cannot be deleted.");
+                return View("DeleteInstitution", model);
+            }
 
 
             institutionRepository.Delete(institution);
@@ -557,7 +563,7 @@ namespace QOAM.Website.Controllers
             var institution = institutionRepository.Find(id);
 
             if(institution == null)
-                return HttpNotFound();
+                return new HttpNotFoundResult();
 
             var model = new UpsertViewModel
             {
