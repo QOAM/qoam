@@ -6,7 +6,7 @@
 
     public class InstitutionalPricesViewModel
     {
-        [Required, FileExtensions(Extensions = "xslx", ErrorMessage = "The selected file does not conatin valid license information!")]
+        [Required, FileExtensions(Extensions = "xslx", ErrorMessage = "The selected file does not contain valid license information!")]
         [DisplayName("Select a file to import (xlsx)")]
         public HttpPostedFileBase File { get; set; }
     }
