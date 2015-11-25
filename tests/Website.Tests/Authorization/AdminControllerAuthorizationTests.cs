@@ -96,7 +96,43 @@
             // Assert
             Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Download(), role));
         }
-        
+
+        [Theory]
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void DeleteActionHasCorrectAuthorization(string role, bool expectedAuthorized)
+        {
+            // Assert
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Delete(), role));
+        }
+
+        [Theory]
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void DeleteActionWithModelHasCorrectAuthorization(string role, bool expectedAuthorized)
+        {
+            // Assert
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Delete(null), role));
+        }
+
+        [Theory]
+        [InlineData(ApplicationRole.Admin, true)]
+        [InlineData(ApplicationRole.DataAdmin, true)]
+        [InlineData(ApplicationRole.InstitutionAdmin, false)]
+        [InlineData("invalid", false)]
+        [InlineData("", false)]
+        public void DeletedActionHasCorrectAuthorization(string role, bool expectedAuthorized)
+        {
+            // Assert
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Deleted(), role));
+        }
+
         [Theory]
         [InlineData(ApplicationRole.Admin, true)]
         [InlineData(ApplicationRole.DataAdmin, false)]

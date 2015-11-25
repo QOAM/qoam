@@ -166,7 +166,7 @@
         }
 
         [HttpGet, Route("delete")]
-        [Authorize(Roles = ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Delete()
         {
             return this.View(new DeleteViewModel());
@@ -174,7 +174,7 @@
 
         [HttpPost, Route("delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult Delete(DeleteViewModel model)
         {
             if (this.ModelState.IsValid)
@@ -204,7 +204,7 @@
         }
 
         [HttpGet, Route("deleted")]
-        [Authorize(Roles = ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Deleted()
         {
             var model = new DeletedViewModel

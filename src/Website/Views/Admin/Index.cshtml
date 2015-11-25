@@ -19,9 +19,6 @@
             <li>@Html.ActionLink("Download journals", "Download")</li>
             <li>@Html.ActionLink("Add institution", "AddInstitution")</li>
             <li>@Html.ActionLink("Move score cards", "MoveScoreCards")</li>
-        }
-        @if (User.IsInRole(ApplicationRole.Admin))
-        {
             <li>@Html.ActionLink("Delete journals", "Delete")</li>
         }
 
