@@ -9,7 +9,7 @@
 
     <tr class="@rowClass" data-next-page="@nextPage">
         <td>
-            @if (Uri.IsWellFormedUriString(institutionJournal.Link, UriKind.RelativeOrAbsolute) && institutionJournal.Link.StartsWith("http"))
+            @if (institutionJournal.Link.StartsWith("http") && Uri.IsWellFormedUriString(institutionJournal.Link, UriKind.RelativeOrAbsolute))
             {
                 <a href="@institutionJournal.Link" title="View website">@institutionJournal.Institution.Name</a>
             }
