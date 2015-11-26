@@ -1,45 +1,47 @@
-﻿namespace QOAM.Website.Tests.Controllers
-{
-    using System;
-    using System.Web;
-    using Core;
-    using Core.Import.Licences;
-    using Core.Repositories;
-    using Helpers;
-    using Moq;
-    using Stubs;
-    using Website.Controllers;
-    using Website.Helpers;
-    using Website.ViewModels.Journals;
-    using Xunit;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Moq;
+using QOAM.Core;
+using QOAM.Core.Import.Licences;
+using QOAM.Core.Repositories;
+using QOAM.Website.Controllers;
+using QOAM.Website.Helpers;
+using QOAM.Website.Tests.Controllers.Helpers;
+using QOAM.Website.Tests.Controllers.Stubs;
+using QOAM.Website.ViewModels.Journals;
+using Xunit;
 
+namespace QOAM.Website.Tests.Controllers
+{
     public class JournalsControllerTests
     {
         #region Fields
 
-        private JournalsController _controller;
+        JournalsController _controller;
 
-        private Mock<IJournalRepository> _journalRepository;
-        private Mock<IBaseJournalPriceRepository> _baseJournalPriceRepository;
-        private Mock<ILanguageRepository> _languageRepository;
-        private Mock<ISubjectRepository> _subjectRepository;
-        private Mock<IInstitutionJournalRepository> _institutionJournalRepository;
-        private Mock<IValuationJournalPriceRepository> _valuationJournalPriceRepository;
-        private Mock<IValuationScoreCardRepository> _valuationScoreCardRepository;
-        private Mock<IInstitutionRepository> _institutionRepository;
-        private Mock<IBaseScoreCardRepository> _baseScoreCardRepository;
-        private Mock<IUserProfileRepository> _userProfileRepository;
-        private Mock<IAuthentication> _authentication;
-        private Mock<IBulkImporter> _bulkImporter;
+        Mock<IJournalRepository> _journalRepository;
+        Mock<IBaseJournalPriceRepository> _baseJournalPriceRepository;
+        Mock<ILanguageRepository> _languageRepository;
+        Mock<ISubjectRepository> _subjectRepository;
+        Mock<IInstitutionJournalRepository> _institutionJournalRepository;
+        Mock<IValuationJournalPriceRepository> _valuationJournalPriceRepository;
+        Mock<IValuationScoreCardRepository> _valuationScoreCardRepository;
+        Mock<IInstitutionRepository> _institutionRepository;
+        Mock<IBaseScoreCardRepository> _baseScoreCardRepository;
+        Mock<IUserProfileRepository> _userProfileRepository;
+        Mock<IAuthentication> _authentication;
+        Mock<IBulkImporter> _bulkImporter;
 
-        private Mock<HttpPostedFileBase> _uploadFile;
-        private InstitutionalPricesViewModel _viewModel;
+        Mock<HttpPostedFileBase> _uploadFile;
+        InstitutionalPricesViewModel _viewModel;
 
         #endregion
 
         #region Setup()
 
-        private void Initialize()
+        void Initialize()
         {
             _journalRepository = new Mock<IJournalRepository>();
             _baseJournalPriceRepository = new Mock<IBaseJournalPriceRepository>();
@@ -54,12 +56,13 @@
             _authentication = new Mock<IAuthentication>();
             _bulkImporter = new Mock<IBulkImporter>();
 
-            _controller = new JournalsController(_journalRepository.Object, _baseJournalPriceRepository.Object, _valuationJournalPriceRepository.Object, _valuationScoreCardRepository.Object,
-                _languageRepository.Object, _subjectRepository.Object, _institutionJournalRepository.Object, _baseScoreCardRepository.Object, _userProfileRepository.Object, _authentication.Object,
-                _institutionRepository.Object, _bulkImporter.Object);
+            _controller = new JournalsController(_journalRepository.Object, _baseJournalPriceRepository.Object, _valuationJournalPriceRepository.Object, _valuationScoreCardRepository.Object, _languageRepository.Object, _subjectRepository.Object, _institutionJournalRepository.Object, _baseScoreCardRepository.Object, _userProfileRepository.Object, _authentication.Object, _institutionRepository.Object, _bulkImporter.Object);
 
             _uploadFile = new Mock<HttpPostedFileBase>();
-            _viewModel = new InstitutionalPricesViewModel { File = _uploadFile.Object };
+            _viewModel = new InstitutionalPricesViewModel
+            {
+                File = _uploadFile.Object
+            };
         }
 
         #endregion
@@ -69,7 +72,8 @@
         {
             Initialize();
 
-            _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Throws<ArgumentException>();
+            _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream))
+                .Throws<ArgumentException>();
 
             _controller.BulkImportInstitutionalPrices(_viewModel);
 
@@ -77,7 +81,7 @@
         }
 
         [Fact]
-        public void BulkLicenseImportConvertsImportResultsToInstitutionJournals()
+        public void BulkLicenseImportConvertsInsertsNonExistingInstitutionJournals()
         {
             Initialize();
             _controller.Url = HttpContextHelper.CreateUrlHelper();
@@ -95,6 +99,89 @@
             _controller.BulkImportInstitutionalPrices(_viewModel);
 
             _institutionJournalRepository.Verify(x => x.InsertOrUpdate(It.IsAny<InstitutionJournal>()), Times.Exactly(16));
+        }
+
+        [Fact]
+        public void BulkLicenseImportUpdatesExisting()
+        {
+            Initialize();
+            _controller.Url = HttpContextHelper.CreateUrlHelper();
+
+            var data = ConvertedEntityStubs.Licenses();
+
+            var journalCount = 0;
+            var institutionCount = 0;
+
+            var journals = new List<Journal>();
+            var institutions = new List<Institution>();
+
+            _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
+            _institutionRepository.Setup(x => x.Find(It.IsAny<string>())).Returns<string>(s =>
+            {
+                var institution = new Institution { Id = ++institutionCount, ShortName = s };
+                institutions.Add(institution);
+
+                return institution;
+            });
+            _journalRepository.Setup(x => x.FindByIssn(It.IsAny<string>())).Returns<string>(s =>
+            {
+                var journal = new Journal { Id = ++journalCount, ISSN = s };
+                journals.Add(journal);
+
+                return journal;
+            });
+
+            _institutionJournalRepository.Setup(x => x.Find(It.IsAny<int>(), It.IsAny<int>())).Returns<int, int>((i, j) => new InstitutionJournal
+            {
+                Journal = journals.SingleOrDefault(journal => journal.Id == j),
+                Institution = institutions.SingleOrDefault(insitution => insitution.Id == i),
+            });
+
+            _controller.BulkImportInstitutionalPrices(_viewModel);
+
+            _institutionJournalRepository.Verify(x => x.InsertOrUpdate(It.IsAny<InstitutionJournal>()), Times.Exactly(16));
+        }
+
+        [Fact]
+        public void BulkLicenseImportDeletesInstitutionJournalsWithEmptyLicenseTexts()
+        {
+            Initialize();
+            _controller.Url = HttpContextHelper.CreateUrlHelper();
+
+            var data = ConvertedEntityStubs.SomeLicensesToDelete();
+
+            var journalCount = 0;
+            var institutionCount = 0;
+
+            var journals = new List<Journal>();
+            var institutions = new List<Institution>();
+
+            _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
+            _institutionRepository.Setup(x => x.Find(It.IsAny<string>())).Returns<string>(s =>
+            {
+                var institution = new Institution { Id = ++institutionCount, ShortName = s };
+                institutions.Add(institution);
+
+                return institution;
+            });
+            _journalRepository.Setup(x => x.FindByIssn(It.IsAny<string>())).Returns<string>(s =>
+            {
+                var journal = new Journal { Id = ++journalCount, ISSN = s };
+                journals.Add(journal);
+
+                return journal;
+            });
+
+            _institutionJournalRepository.Setup(x => x.Find(It.IsAny<int>(), It.IsAny<int>())).Returns<int, int>((i, j) => new InstitutionJournal
+            {
+                Journal = journals.SingleOrDefault(journal => journal.Id == j),
+                Institution = institutions.SingleOrDefault(insitution => insitution.Id == i),
+            });
+
+            _controller.BulkImportInstitutionalPrices(_viewModel);
+
+            _institutionJournalRepository.Verify(x => x.InsertOrUpdate(It.IsAny<InstitutionJournal>()), Times.Exactly(3));
+            _institutionJournalRepository.Verify(x => x.Delete(It.Is<InstitutionJournal>(y => y.Journal.ISSN == "0219-3094")), Times.Exactly(1));
         }
     }
 }
