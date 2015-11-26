@@ -50,5 +50,25 @@
 
             return licenses;
         }
+
+        public static List<UniversityLicense> SomeLicensesToDelete()
+        {
+            var licenses = new List<UniversityLicense>
+            {
+                new UniversityLicense
+                {
+                    Domain = "ru.nl",
+                    Licenses = new List<LicenseInfo>
+                    {
+                        new LicenseInfo { ISSN = "0219-3094", LicenseName = "Sage", Text = "" },
+                        new LicenseInfo { ISSN = "0219-3116", LicenseName = "Sage", Text = "Some random text" },
+                        new LicenseInfo { ISSN = "0814-6039", LicenseName = "Sage", Text = "I'm Batman" },
+                        new LicenseInfo { ISSN = "0942-0940", LicenseName = "Sage", Text = "No, really." }
+                    }
+                }
+            };
+
+            return licenses;
+        }
     }
 }

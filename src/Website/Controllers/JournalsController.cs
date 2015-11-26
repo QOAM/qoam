@@ -1,4 +1,6 @@
-﻿namespace QOAM.Website.Controllers
+﻿using System.Data.Entity.Validation;
+
+namespace QOAM.Website.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -293,22 +295,26 @@
         {
             try
             {
+                var imported = 0;
+                var deleted = 0;
+                var updated = 0;
+
                 var data = _bulkImporter.Execute(model.File.InputStream);
 
                 var institutionJournals = (from u in data
-                    let institution = institutionRepository.Find(u.Domain)
-                    where institution != null
-                    from info in u.Licenses
-                    let journal = journalRepository.FindByIssn(info.ISSN)
-                    where journal != null
-                    select new InstitutionJournal
-                    {
-                        DateAdded = DateTime.Now,
-                        Link = info.Text,
-                        JournalId = journal.Id,
-                        UserProfileId = Authentication.CurrentUserId,
-                        InstitutionId = institution.Id
-                    }).ToList();
+                                           let institution = institutionRepository.Find(u.Domain)
+                                           where institution != null
+                                           from info in u.Licenses
+                                           let journal = journalRepository.FindByIssn(info.ISSN)
+                                           where journal != null
+                                           select new InstitutionJournal
+                                           {
+                                               DateAdded = DateTime.Now,
+                                               Link = info.Text,
+                                               JournalId = journal.Id,
+                                               UserProfileId = Authentication.CurrentUserId,
+                                               InstitutionId = institution.Id
+                                           }).ToList();
 
                 // This is gonna be quite an expensive operation... Rethink!
                 foreach (var institutionJournal in institutionJournals)
@@ -317,23 +323,48 @@
 
                     if (existing != null)
                     {
-                        existing.DateAdded = DateTime.Now;
-                        existing.Link = institutionJournal.Link;
-                        existing.UserProfileId = institutionJournal.UserProfileId;
+                        if (string.IsNullOrWhiteSpace(institutionJournal.Link))
+                        {
+                            institutionJournalRepository.Delete(existing);
+                            deleted++;
+                        }
+                        else
+                        {
+                            existing.DateAdded = DateTime.Now;
+                            existing.Link = institutionJournal.Link;
+                            existing.UserProfileId = institutionJournal.UserProfileId;
 
-                        institutionJournalRepository.InsertOrUpdate(existing);
+                            institutionJournalRepository.InsertOrUpdate(existing);
+
+                            updated++;
+                        }
                     }
-                    else
+                    else if (!string.IsNullOrWhiteSpace(institutionJournal.Link))
+                    {
                         institutionJournalRepository.InsertOrUpdate(institutionJournal);
+                        imported++;
+                    }
                 }
 
                 institutionJournalRepository.Save();
 
-                return RedirectToAction("BulkImportSuccessful", new { amountImported = institutionJournals.Count });
+                return RedirectToAction("BulkImportSuccessful", new { amountImported = imported, amountDeleted = deleted, amountUpdated = updated });
             }
             catch (ArgumentException invalidFileException)
             {
                 ModelState.AddModelError("generalError", invalidFileException.Message);
+            }
+            catch (DbEntityValidationException)
+            {
+                //foreach (var eve in e.EntityValidationErrors)
+                //{
+                //    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                //    foreach (var ve in eve.ValidationErrors)
+                //    {
+                //        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage);
+                //    }
+                //}
+                //throw;
             }
             catch (Exception exception)
             {
