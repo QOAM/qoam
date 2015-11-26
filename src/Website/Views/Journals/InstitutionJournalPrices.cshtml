@@ -1,4 +1,5 @@
-﻿@using QOAM.Website.Models
+﻿
++@using QOAM.Website.Models
 @model PagedList.IPagedList<QOAM.Core.InstitutionJournal>
 
 @foreach (var institutionJournal in Model)
@@ -8,7 +9,7 @@
 
     <tr class="@rowClass" data-next-page="@nextPage">
         <td>
-            @if (Uri.IsWellFormedUriString(institutionJournal.Link, UriKind.RelativeOrAbsolute))
+            @if (Uri.IsWellFormedUriString(institutionJournal.Link, UriKind.RelativeOrAbsolute) && institutionJournal.Link.StartsWith("http"))
             {
                 <a href="@institutionJournal.Link" title="View website">@institutionJournal.Institution.Name</a>
             }

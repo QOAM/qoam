@@ -295,9 +295,7 @@ namespace QOAM.Website.Controllers
         {
             try
             {
-                var imported = 0;
-                var deleted = 0;
-                var updated = 0;
+                int imported = 0, deleted = 0, updated = 0;
 
                 var data = _bulkImporter.Execute(model.File.InputStream);
 
