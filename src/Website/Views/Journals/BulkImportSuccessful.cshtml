@@ -1,0 +1,18 @@
+﻿@model QOAM.Website.ViewModels.Journals.InstitutionalPricesImportedViewModel
+
+@{ ViewBag.Title = "Institutional Prices imported"; }
+
+<div class="container main">
+    <div class="row side">
+        <a class="btn btn-default return-button" title="Back to search results" href="@Url.Action("Index")">&lt; Back to Journals</a>
+        <p>
+            <strong>@Model.AmountImported</strong> institutional prices have been imported.
+        </p>
+        <p>
+            <strong>@Model.AmountDeleted</strong> institutional prices have been deleted.
+        </p>
+        <p>
+            <strong>@Model.AmountUpdated</strong> institutional prices have been updated.
+        </p>
+    </div>
+</div>

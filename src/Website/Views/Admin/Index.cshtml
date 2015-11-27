@@ -19,15 +19,13 @@
             <li>@Html.ActionLink("Download journals", "Download")</li>
             <li>@Html.ActionLink("Add institution", "AddInstitution")</li>
             <li>@Html.ActionLink("Move score cards", "MoveScoreCards")</li>
-        }
-        @if (User.IsInRole(ApplicationRole.Admin))
-        {
             <li>@Html.ActionLink("Delete journals", "Delete")</li>
         }
 
         @if (User.IsInRole(ApplicationRole.InstitutionAdmin) || User.IsInRole(ApplicationRole.Admin))
         {
             <li>@Html.ActionLink("Check ISSNs", "Check")</li>
+            <li>@Html.ActionLink("Institutional prices", "BulkImportInstitutionalPrices", "Journals")</li>
         }
     </ul>
 </div>

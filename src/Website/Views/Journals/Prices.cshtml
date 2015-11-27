@@ -29,7 +29,7 @@
             <div class="panel-heading">Institutional price</div>
             <div class="panel-body">
 
-                @if (User.Identity.IsAuthenticated)
+                @*@if (User.Identity.IsAuthenticated)
                 {
                     if (User.IsInRole(ApplicationRole.InstitutionAdmin) || User.IsInRole(ApplicationRole.Admin))
                     {
@@ -37,7 +37,7 @@
                             If your institute has a price arrangement with the publisher for this journal please link @Html.ActionLink("here", "InstitutionJournalLicense", new { Model.Id, ViewBag.User.InstitutionId, Model.RefererUrl }) to your informative web site. 
                         </p>
                     }
-                }
+                }*@
 
                 @if (Model.InstitutionJournals.TotalItemCount == 0)
                 {
@@ -53,10 +53,10 @@
                         <thead>
                             <tr>
                                 <th>Institution</th>
-                                @if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin))
+                                @*@if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin))
                                 {
                                     <th>Action</th>
-                                }
+                                }*@
                             </tr>
                         </thead>
                         <tbody id="@Model.Id-institutional-prices">

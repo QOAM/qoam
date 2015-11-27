@@ -1,16 +1,15 @@
 ﻿namespace QOAM.Website
 {
     using System.Web.Mvc;
-
     using Autofac;
     using Autofac.Integration.Mvc;
-
-    using QOAM.Core.Export;
-    using QOAM.Core.Import;
-    using QOAM.Core.Repositories;
-    using QOAM.Core.Services;
-    using QOAM.Website.Helpers;
-    using QOAM.Website.Models;
+    using Core.Export;
+    using Core.Import;
+    using Core.Import.Licences;
+    using Core.Repositories;
+    using Core.Services;
+    using Helpers;
+    using Models;
 
     public static class DependencyInjectionConfig
     {
@@ -30,7 +29,7 @@
 
         private static void RegisterControllers(ContainerBuilder builder)
         {
-            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterControllers(typeof (MvcApplication).Assembly);
         }
 
         private static void RegisterRepositories(ContainerBuilder builder)
@@ -70,6 +69,10 @@
             builder.RegisterType<UlrichsClient>().AsSelf().InstancePerRequest();
             builder.RegisterType<UlrichsImport>().AsSelf().InstancePerRequest();
             builder.RegisterType<UlrichsCache>().AsSelf().InstancePerRequest();
+
+            builder.RegisterType<LicenseFileImporter>().As<ILicenseFileImporter>().InstancePerRequest();
+            builder.RegisterType<ImportEntityConverter>().As<IImportEntityConverter>().InstancePerRequest();
+            builder.RegisterType<BulkImporter>().As<IBulkImporter>().InstancePerRequest();
         }
 
         private static void RegisterMiscellaneousComponents(ContainerBuilder builder)
