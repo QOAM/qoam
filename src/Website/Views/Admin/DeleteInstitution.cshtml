@@ -12,7 +12,7 @@
         Are you sure you want to delete @Html.ActionLink(Model.Name, "Details", "Institutions", new { id = Model.Id }, null) ?
     </p>
 
-    @using (Html.BeginForm("DeleteInsitution", "Admin", new { id = Model.Id }, FormMethod.Post, new { role = "form" }))
+    @using (Html.BeginForm("DeleteInstitution", "Admin", new { id = Model.Id }, FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(false)
