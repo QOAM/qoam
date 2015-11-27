@@ -366,6 +366,9 @@ namespace QOAM.Website.Controllers
             }
             catch (Exception exception)
             {
+                while (exception.InnerException != null)
+                    exception = exception.InnerException;
+                
                 ModelState.AddModelError("generalError", $"An error has ocurred: {exception.Message}");
             }
 
