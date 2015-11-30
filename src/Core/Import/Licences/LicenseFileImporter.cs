@@ -61,7 +61,7 @@ namespace QOAM.Core.Import.Licences
                     var cell = row.GetCell(i);
 
                     if (cell != null)
-                        dr[i] = cell.ToString();
+                        dr[i] = cell.ToString().Trim();
                 }
                 dt.Rows.Add(dr);
             }
