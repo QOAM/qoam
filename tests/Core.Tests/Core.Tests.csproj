@@ -137,9 +137,13 @@
     <Compile Include="Cleanup\UnpublishedScoreCardsCleanupTests.cs" />
     <Compile Include="Helpers\StringExtensionsTests.cs" />
     <Compile Include="Helpers\ValidatorExtensionsTests.cs" />
-    <Compile Include="Import\Licenses\ImportEntityConverterTests.cs" />
+    <Compile Include="Import\InvitationModule\ImportAuthorEntityConverterTests.cs" />
+    <Compile Include="Import\InvitationModule\InvitationFileImporterTests.cs" />
+    <Compile Include="Import\InvitationModule\Stubs\InvitationStubs.cs" />
+    <Compile Include="Import\Licenses\ImportLicenseEntityConverterTests.cs" />
     <Compile Include="Import\Licenses\LicenseFileImporterTests.cs" />
     <Compile Include="Import\Licenses\Stubs\ImportFileStubs.cs" />
+    <Compile Include="Import\StubHelpers\StubExtensions.cs" />
     <Compile Include="QuestionKeyExtensionsTests.cs" />
     <Compile Include="Export\JournalsExportTests.cs" />
     <Compile Include="Import\JournalIssnEqualityComparerTests.cs" />
@@ -156,6 +160,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Import\InvitationModule\Stubs\Invalid column names - Authors.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Import\InvitationModule\Stubs\Invitation-Module - Authors.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Import\Licenses\Stubs\Invalid Column names - QOAMupload.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

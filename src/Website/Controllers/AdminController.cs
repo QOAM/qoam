@@ -219,14 +219,14 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpGet, Route("check")]
-        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.DataAdmin)]
         public ViewResult Check()
         {
             return this.View();
         }
 
         [HttpPost, Route("check")]
-        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.DataAdmin)]
         public ViewResult Check(CheckViewModel model)
         {
             if (this.ModelState.IsValid)
@@ -302,14 +302,14 @@ namespace QOAM.Website.Controllers
         }
         
         [HttpGet, Route("addinstitution")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ViewResult AddInstitution()
         {
             return this.View();
         }
 
         [HttpPost, Route("addinstitution")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ActionResult AddInstitution(UpsertViewModel model)
         {
             if (this.ModelState.IsValid)
@@ -324,21 +324,21 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpGet, Route("addedinstitution")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ViewResult AddedInstitution()
         {
             return this.View();
         }
 
         [HttpGet, Route("{id:int}/editinstitution")]
-        [Authorize(Roles = ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ActionResult EditInstitution(int id)
         {
             return FetchUpsertViewModel(id);
         }
 
         [HttpPost, Route("{id:int}/editinstitution")]
-        [Authorize(Roles = ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         [ValidateAntiForgeryToken]
         public ActionResult EditInstitution(UpsertViewModel model)
         {
@@ -352,14 +352,14 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpGet, Route("{id:int}/deleteinstitution")]
-        [Authorize(Roles = ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ActionResult DeleteInstitution(int id)
         {
             return FetchUpsertViewModel(id);
         }
 
         [HttpPost, Route("{id:int}/deleteinstitution")]
-        [Authorize(Roles = ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteInstitution(UpsertViewModel model)
         {
@@ -388,14 +388,14 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpGet, Route("insitutiondeleted")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ViewResult InstitutionDeleted()
         {
             return View();
         }
 
         [HttpGet, Route("movescorecards")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         public ViewResult MoveScoreCards(bool? saveSuccessful = null)
         {
             ViewBag.SaveSuccessful = saveSuccessful;
@@ -404,7 +404,7 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpPost, Route("movescorecards")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult MoveScoreCards(MoveScoreCardsViewModel model)
         {
@@ -473,14 +473,14 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpGet, Route("removedbasescorecard")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         public ViewResult RemovedBaseScoreCard()
         {
             return View();
         }
 
         [HttpGet, Route("removevaluationscorecard/{id:int}")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         public ActionResult RemoveValuationScoreCard(RemoveValuationScoreCardViewModel model)
         {
             var valuationScoreCard = valuationScoreCardRepository.Find(model.Id);
@@ -494,7 +494,7 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpPost, Route("removevaluationscorecard/{id:int}")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult RemoveValuationScoreCardPost(RemoveValuationScoreCardViewModel model)
         {
@@ -517,7 +517,7 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpGet, Route("removedvaluationscorecard")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin)]
         public ViewResult RemovedValuationScoreCard()
         {
             return View();

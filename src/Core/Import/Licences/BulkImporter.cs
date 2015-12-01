@@ -4,19 +4,19 @@
     using System.IO;
     using NPOI.SS.UserModel;
 
-    public class BulkImporter : IBulkImporter
+    public class BulkImporter<T> : IBulkImporter<T>
     {
-        private readonly ILicenseFileImporter _fileImporter;
-        private readonly IImportEntityConverter _entityConverter;
-        private IWorkbook _workbook;
+        readonly IFileImporter _fileImporter;
+        readonly IImportEntityConverter<T> _entityConverter;
+        IWorkbook _workbook;
 
-        public BulkImporter(ILicenseFileImporter fileImporter, IImportEntityConverter entityConverter)
+        public BulkImporter(IFileImporter fileImporter, IImportEntityConverter<T> entityConverter)
         {
             _fileImporter = fileImporter;
             _entityConverter = entityConverter;
         }
 
-        public IList<UniversityLicense> Execute(Stream importFile)
+        public IList<T> Execute(Stream importFile)
         {
             _workbook = WorkbookFactory.Create(importFile);
 

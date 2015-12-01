@@ -6,15 +6,15 @@
     using Stubs;
     using Xunit;
 
-    public class ImportEntityConverterTests
+    public class ImportLicenseEntityConverterTests
     {
-        private ImportEntityConverter _converter;
+        private ImportLicenseEntityConverter _converter;
         private DataSet _validDataSet;
 
         public void Initialize()
         {
             _validDataSet = ImportFileStubs.CompleteDataSet();
-            _converter = new ImportEntityConverter();
+            _converter = new ImportLicenseEntityConverter();
         }
 
         [Fact]

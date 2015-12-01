@@ -6,7 +6,7 @@
 
 <div class="container main">
     <h2>@ViewBag.Title</h2>
-    <a class="btn btn-default return-button" title="Back to Admin" href="/admin">&lt; Back to Admin</a>
+    <a class="btn btn-default return-button" title="Back to Admin" href="@Url.Action("Index", "Admin")">&lt; Back to Admin</a>
 
     @using (Html.BeginForm("BlockIssn", "Admin", FormMethod.Post, new { role = "form" }))
     {
@@ -17,12 +17,12 @@
 
             <div class="form-group row">
                 <div class="col-md-6">
-                    <div class="row">
+                    <div class="row bottommargin">
                         <div class="col-md-2">
                             @Html.LabelFor(m => m.ISSN, new { @class = "control-label" })
                         </div>
                         <div class="col-md-4">
-                            @Html.TextAreaFor(m => @Model.ISSN, new { @class = "form-control" })
+                            @Html.TextAreaFor(m => @Model.ISSN, new { @class = "form-control", rows = 10 })
                             @Html.ValidationMessageFor(m => m.ISSN, null, new { @class = "control-label" })
                         </div>
                     </div>

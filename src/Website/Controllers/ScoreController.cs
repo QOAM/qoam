@@ -1,19 +1,23 @@
-﻿namespace QOAM.Website.Controllers
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
+using System.Web.Mvc;
+using QOAM.Core;
+using QOAM.Core.Helpers;
+using QOAM.Core.Import.Invitations;
+using QOAM.Core.Import.Licences;
+using QOAM.Core.Repositories;
+using QOAM.Website.Helpers;
+using QOAM.Website.Models;
+using QOAM.Website.ViewModels.Score;
+using Validation;
+
+namespace QOAM.Website.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Mail;
-    using System.Web.Mvc;
-    using QOAM.Core;
-    using QOAM.Core.Repositories;
-    using QOAM.Website.Helpers;
-    using QOAM.Website.Models;
-    using QOAM.Website.ViewModels.Score;
-
-    using Validation;
-
     [RoutePrefix("score")]
     public class ScoreController : ApplicationController
     {
@@ -28,8 +32,9 @@
         private readonly GeneralSettings generalSettings;
         private readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
         private readonly IInstitutionRepository institutionRepository;
+        readonly IBulkImporter<AuthorToInvite> _bulkImporter;
 
-        public ScoreController(IBaseScoreCardRepository baseScoreCardRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IScoreCardVersionRepository scoreCardVersionRepository, IJournalRepository journalRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IQuestionRepository questionRepository, GeneralSettings generalSettings, IUserProfileRepository userProfileRepository, IInstitutionRepository institutionRepository, IAuthentication authentication)
+        public ScoreController(IBaseScoreCardRepository baseScoreCardRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IScoreCardVersionRepository scoreCardVersionRepository, IJournalRepository journalRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IQuestionRepository questionRepository, GeneralSettings generalSettings, IUserProfileRepository userProfileRepository, IInstitutionRepository institutionRepository, IAuthentication authentication, IBulkImporter<AuthorToInvite> bulkImporter)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(baseJournalPriceRepository, nameof(baseJournalPriceRepository));
@@ -51,6 +56,8 @@
             this.baseJournalPriceRepository = baseJournalPriceRepository;
             this.institutionRepository = institutionRepository;
             this.generalSettings = generalSettings;
+
+            _bulkImporter = bulkImporter;
         }
 
         [HttpGet, Route("")]
@@ -184,8 +191,118 @@
             return this.Json(true);
         }
 
+        [HttpGet, Route("bulkrequestvaluation")]
+        public ActionResult BulkRequestValuation()
+        {
+            var regex = new Regex(@"Dear Sir/Madam,\s*[\r\n]*", RegexOptions.Compiled);
+            var model = new BulkRequestValuationViewModel
+            {
+                EmailBody = regex.Replace(Resources.RequestValuation.Body, ""),
+                EmailSubject = Resources.RequestValuation.Subject
+            };
+
+            var currentUser = UserProfileRepository.Find(Authentication.CurrentUserId);
+
+            if (currentUser != null)
+                model.EmailFrom = currentUser.Email;
+
+            return View(model);
+        }
+
+        [HttpPost, Route("bulkrequestvaluation")]
+        [ValidateAntiForgeryToken]
+        public ActionResult BulkRequestValuation(BulkRequestValuationViewModel model)
+        {
+            if (model.File == null)
+                return View(model);
+
+            try
+            {
+                var invited = 0;
+                var notInvited = new List<NotInvitedViewModel>();
+
+                var data = _bulkImporter.Execute(model.File.InputStream);
+                
+                var emails = (from a in data
+                              where !string.IsNullOrWhiteSpace(a.ISSN) && !string.IsNullOrWhiteSpace(a.AuthorEmail)
+                              let journal = journalRepository.FindByIssn(a.ISSN)
+                              where journal != null
+                              select new RequestValuationViewModel
+                              {
+                                  JournalId = journal.Id,
+                                  JournalTitle = journal.Title,
+                                  JournalISSN = journal.ISSN,
+                                  EmailFrom = model.EmailFrom,
+                                  EmailTo = a.AuthorEmail,
+                                  RecipientName = a.AuthorName,
+                                  EmailBody = $"Dear {a.AuthorName},\r\n\r\n{model.EmailBody.Replace("<<JournalTitle>>", journal.Title)}",
+                                  EmailSubject = model.EmailSubject.Replace("<<JournalTitle>>", journal.Title).Replace("<<JournalISSN>>", journal.ISSN),
+                                  IsKnownEmailAddress = IsKnownEmailAddress(a.AuthorEmail),
+                                  HasKnownEmailDomain = HasKnownEmailDomain(a.AuthorEmail)
+                              }).ToList();
+
+                foreach (var item in emails.Select(e => new { Email = e.ToRequestValuationEmail(), Model = e }))
+                {
+                    // NOTE: Requirements have changed. Leo Waaijers requested that e-mail addresses with unknown domains could be invited to fill in a Score Card - Sergi Papaseit (2015-12-10)
+                    //if (!item.Model.IsKnownEmailAddress && !item.Model.HasKnownEmailDomain)
+                    //{
+                    //    notInvited.Add(new NotInvitedViewModel
+                    //    {
+                    //        ISSN = item.Model.JournalISSN,
+                    //        JournalTitle = item.Model.JournalTitle,
+                    //        AuthorEmail = item.Model.EmailTo,
+                    //        AuthorName = item.Model.RecipientName
+                    //    });
+
+                    //    continue;
+                    //}
+
+                    invited++;
+
+                    item.Email.Url = FillEmailUrl(item.Model);
+                    item.Email.Send();
+                }
+
+                notInvited.AddRange((from a in data
+                                     where string.IsNullOrWhiteSpace(a.ISSN) || string.IsNullOrWhiteSpace(a.AuthorEmail)
+                                     select new NotInvitedViewModel
+                                     {
+                                         ISSN = string.IsNullOrWhiteSpace(a.ISSN) ? "Unknown" : a.ISSN,
+                                         AuthorName = a.AuthorName,
+                                         AuthorEmail = string.IsNullOrWhiteSpace(a.AuthorEmail) ? "Unknown" : a.AuthorEmail
+                                     }));
+
+                return View("BulkInviteSuccessful", new AuthorsInvitedViewModel
+                {
+                    AmountInvited = invited,
+                    AuthorsNotInvited = notInvited
+                });
+            }
+            catch (ArgumentException invalidFileException)
+            {
+                ModelState.AddModelError("generalError", invalidFileException.Message);
+            }
+            catch (DbEntityValidationException)
+            {
+                //foreach (var eve in e.EntityValidationErrors)
+                //{
+                //    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                //    foreach (var ve in eve.ValidationErrors)
+                //    {
+                //        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage);
+                //    }
+                //}
+                //throw;
+            }
+            catch (Exception exception)
+            {
+                ModelState.AddModelError("generalError", $"An error has ocurred: {exception.InnermostMessage()}");
+            }
+
+            return View(model);
+        }
+
         [HttpGet, Route("requestvaluation/{id:int}")]
-        [Authorize]
         public ViewResult RequestValuation(int id)
         {
             var journal = this.journalRepository.Find(id);
@@ -211,7 +328,6 @@
         }
 
         [HttpPost, Route("requestvaluation/{id:int}")]
-        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult RequestValuation(RequestValuationViewModel model)
         {
@@ -220,20 +336,19 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            model.IsKnownEmailAddress = this.IsKnownEmailAddress(model.EmailTo);
-            model.HasKnownEmailDomain = this.HasKnownEmailDomain(model.EmailTo);
+            model.IsKnownEmailAddress = IsKnownEmailAddress(model.EmailTo);
+            model.HasKnownEmailDomain = HasKnownEmailDomain(model.EmailTo);
 
-            if (!model.IsKnownEmailAddress && !model.HasKnownEmailDomain)
-            {
-                this.ModelState.AddModelError("", "Sorry, the domain name in the email address of the addressee does not match the name of an academic institution known to us. If you want this institution to be included in our list, please enter it’s name and web address in our contact box and we will respond promptly.");
+            // NOTE: Requirements have changed. Leo Waaijers requested that e-mail addresses with unknown domains could be invited to fill in a Score Card - Sergi Papaseit (2015-12-10)
+            //if (!model.IsKnownEmailAddress && !model.HasKnownEmailDomain)
+            //{
+            //    ModelState.AddModelError("", "Sorry, the domain name in the email address of the addressee does not match the name of an academic institution known to us. If you want this institution to be included in our list, please enter it’s name and web address in our contact box and we will respond promptly.");
 
-                return this.View(model);
-            }
+            //    return View(model);
+            //}
 
             var email = model.ToRequestValuationEmail();
-            email.Url = model.IsKnownEmailAddress 
-                ? this.Url.Action("Login", "Account", new { ReturnUrl = this.Url.Action("ValuationScoreCard", new { id = model.JournalId }), loginAddress = model.EmailTo }, this.Request.Url.Scheme) 
-                : this.Url.Action("Register", "Account", new { loginAddress = model.EmailTo, addLink = this.Url.Action("ValuationScoreCard", new { id = model.JournalId }) }, this.Request.Url.Scheme);
+            email.Url = FillEmailUrl(model);
 
             try
             {
@@ -327,6 +442,13 @@
             var addressList = address.Split(new[] { ',', ';' });
 
             return addressList.All(a => !string.IsNullOrEmpty(a) && this.UserProfileRepository.FindByEmail(a) != null);
+        }
+
+        string FillEmailUrl(RequestValuationViewModel model)
+        {
+            return model.IsKnownEmailAddress
+                ? Url.Action("Login", "Account", new { ReturnUrl = Url.Action("ValuationScoreCard", new { id = model.JournalId }), loginAddress = model.EmailTo }, Request.Url?.Scheme)
+                : Url.Action("Register", "Account", new { loginAddress = model.EmailTo, addLink = Url.Action("ValuationScoreCard", new { id = model.JournalId }) }, Request.Url?.Scheme);
         }
     }
 }

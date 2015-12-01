@@ -1,4 +1,8 @@
-﻿namespace QOAM.Website
+﻿using Autofac.Core;
+using QOAM.Core.Import.Invitations;
+using QOAM.Website.Controllers;
+
+namespace QOAM.Website
 {
     using System.Web.Mvc;
     using Autofac;
@@ -70,9 +74,14 @@
             builder.RegisterType<UlrichsImport>().AsSelf().InstancePerRequest();
             builder.RegisterType<UlrichsCache>().AsSelf().InstancePerRequest();
 
-            builder.RegisterType<LicenseFileImporter>().As<ILicenseFileImporter>().InstancePerRequest();
-            builder.RegisterType<ImportEntityConverter>().As<IImportEntityConverter>().InstancePerRequest();
-            builder.RegisterType<BulkImporter>().As<IBulkImporter>().InstancePerRequest();
+            builder.RegisterType<LicenseFileImporter>().As<IFileImporter>().InstancePerRequest();
+            builder.RegisterType<InvitationFileImporter>().Named<IFileImporter>("invitation").InstancePerRequest();
+
+            builder.RegisterType<ImportLicenseEntityConverter>().As<IImportEntityConverter<UniversityLicense>>().InstancePerRequest();
+            builder.RegisterType<ImportAuthorEntityConverter>().As<IImportEntityConverter<AuthorToInvite>>().InstancePerRequest();
+
+            builder.RegisterType<BulkImporter<UniversityLicense>>().As<IBulkImporter<UniversityLicense>>().InstancePerRequest();
+            builder.RegisterType<BulkImporter<AuthorToInvite>>().As<IBulkImporter<AuthorToInvite>>().WithParameter(ResolvedParameter.ForNamed<IFileImporter>("invitation")).InstancePerRequest();
         }
 
         private static void RegisterMiscellaneousComponents(ContainerBuilder builder)
