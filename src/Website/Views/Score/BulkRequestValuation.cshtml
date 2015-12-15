@@ -1,0 +1,129 @@
+﻿@model QOAM.Website.ViewModels.Score.BulkRequestValuationViewModel
+
+@{
+    ViewBag.Title = "Import Bulk Invitation File";
+}
+<link href="~/Content/scoring.css" rel="stylesheet" />
+
+@using (Html.BeginForm("BulkRequestValuation", "Score", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container main">
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">
+                Group invitations to publish a Valuation Score Card
+            </div>
+
+            <div id="info-text" class="collapse">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    @*<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                    Here you may adapt the text of the standard invitation message. If you do not use this option, the standard text will be mailed.
+                </div>
+            </div>
+
+            <div class="panel-body">
+                @Html.ValidationSummary(true, null, new { @class = "red" })
+
+                <div class="row bottommargin">
+                    <div class="col-xs-1 vcenter">
+                    </div>
+                    <div class="col-xs-11">
+                        <a id="toggle-editor" href="javascript:void(0)" class="btn btn-default">Adapt invitation letter</a>
+                        <a id="custom-text-info" class="help-window" href="#" data-select-tab="false" title="Here you may adapt the text of the standard invitation message. If you do not use this option, the standard text will be mailed." alt="Here you may adapt the text of the standard invitation message. If you do not use this option, the standard text will be mailed.">
+                            <span class="glyphicon glyphicon-info-sign swot-matrix-icon"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row bottommargin">
+                    <div class="col-xs-1 vcenter">
+                        From:
+                    </div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(model => model.EmailFrom, new { @class = "fullWidth form-control tt-input", @id = "MailFromAddress", @placeholder = "Insert your mail address here..." })
+                    </div>
+                    <div class="col-xs-2">
+                        @Html.ValidationMessageFor(model => model.EmailFrom, null, new { @class = "red" })
+                    </div>
+                </div>
+                <div id="collapsible-panel">
+                    <div class="row bottommargin">
+                        <div class="col-xs-1 vcenter">
+                            To:
+                        </div>
+                        <div class="col-xs-9 vcenter">
+                            Will be automatically generated from the import file.
+                        </div>
+                        <div class="col-xs-2">
+                        </div>
+                    </div>
+                    <div class="row bottommargin">
+                        <div class="col-xs-1 vcenter">
+                            Subject:
+                        </div>
+                        <div class="col-xs-9">
+                            @Html.TextBoxFor(model => model.EmailSubject, new { @class = "fullWidth form-control tt-input" })
+                            <sub class="text-muted">Note: &lt;&lt;JournalTitle&gt;&gt; and &lt;&lt;JournalISSN&gt;&gt; will be automatically replaced by the journal's name and ISSN from the import file.</sub>
+                        </div>
+                    </div>
+                    <div class="row bottommargin">
+                        <div class="col-xs-1 vcenter">
+                            Message:
+                        </div>
+                        <div class="col-xs-9 vcenter">
+                            Dear &lt;&lt;Author Name&gt;&gt;, &nbsp;&nbsp;&nbsp;&nbsp;
+                            <br />
+                            <sub class="text-muted">Note: Author name will be automatically generated from the import file.</sub>
+                        </div>
+                        <div class="col-xs-2">
+                        </div>
+                    </div>
+                    <div class="row bottommargin">
+                        <div class="col-xs-1 vcenter">
+                        </div>
+                        <div class="col-xs-9">
+                            @Html.TextAreaFor(model => model.EmailBody, new { @class = "fullWidth minHeight form-control tt-input", @placeholder = "Type your message here..." })
+                            <sub class="text-muted">Note: &lt;&lt;JournalTitle&gt;&gt; name will be automatically replaced by the journal name from the import file.</sub>
+                            <br />
+                            <sub class="text-muted">Note: an extra line containing the link to the Valuation Score Card of the journal will be added automatically at the bottom of this message.</sub>
+                        </div>
+                        <div class="col-xs-2">
+                            @Html.ValidationMessageFor(model => model.EmailBody, null, new { @class = "red" })
+                        </div>
+                    </div>
+                </div>
+
+                <div id="highlightBox">
+                    @Html.Partial("_FileUpload")
+
+                    <div class="row bottommargin">
+                        <div class="col-xs-1 vcenter">
+                        </div>
+                        <div class="col-xs-11">
+                            <p class="text-muted">
+                                The Excel file has three required columns: "eissn" (the ISSN the journal uses for its electronic version), "Author email address" and "Author name".
+                                Multiple e-mail addresses can be used, separated by a semicolon, e.g.: author1@test.uni;author1@somemail.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row bottommargin">
+                    <div class="col-xs-1 vcenter">
+                    </div>
+                    <div class="col-xs-11">
+                        <input type="submit" value="Import" class="btn btn-primary" />
+                        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}

@@ -3,8 +3,8 @@ namespace QOAM.Core.Import.Licences
     using System.Collections.Generic;
     using System.IO;
 
-    public interface IBulkImporter
+    public interface IBulkImporter<T>
     {
-        IList<UniversityLicense> Execute(Stream importFile);
+        IList<T> Execute(Stream importFile);
     }
 }

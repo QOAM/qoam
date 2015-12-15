@@ -1,0 +1,21 @@
+﻿@model QOAM.Website.ViewModels.IFileUploadViewModel
+
+<div class="row bottommargin">
+    <div class="col-xs-1 vcenter">
+        @Html.LabelFor(m => m.File)
+    </div>
+    <div class="col-xs-9">
+        @Html.TextBoxFor(m => m.File, new { type = "file", accept = ".xlsx", @class = "fullWidth  tt-input" })
+    </div>
+    <div class="col-xs-2">
+        @Html.ValidationMessageFor(m => m.File, null, new { @class = "red" })
+    </div>
+</div>
+<div class="row bottommargin">
+    <div class="col-xs-1 vcenter">
+
+    </div>
+    <div class="col-xs-9">
+        @Html.ValidationMessage("generalError", new { @class = "fullWidth red" })
+    </div>
+</div>

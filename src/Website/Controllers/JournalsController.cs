@@ -27,12 +27,12 @@ namespace QOAM.Website.Controllers
         private readonly IInstitutionJournalRepository institutionJournalRepository;
         private readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
         private readonly IInstitutionRepository institutionRepository;
-        private readonly IBulkImporter _bulkImporter;
+        private readonly IBulkImporter<UniversityLicense> _bulkImporter;
 
         public JournalsController(IJournalRepository journalRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationJournalPriceRepository valuationJournalPriceRepository,
             IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository,
             IInstitutionJournalRepository institutionJournalRepository, IBaseScoreCardRepository baseScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication,
-            IInstitutionRepository institutionRepository, IBulkImporter bulkImporter)
+            IInstitutionRepository institutionRepository, IBulkImporter<UniversityLicense> bulkImporter)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalRepository, nameof(journalRepository));
@@ -282,17 +282,20 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpGet, Route("institutionalPrices")]
-        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ActionResult BulkImportInstitutionalPrices()
         {
             return View(new InstitutionalPricesViewModel());
         }
 
-        [HttpPost, Route("institutionalPrices")]
-        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        [HttpPost, Route("institutionalprices")]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         [ValidateAntiForgeryToken]
         public ActionResult BulkImportInstitutionalPrices(InstitutionalPricesViewModel model)
         {
+            if (model.File == null)
+                return View(model);
+
             try
             {
                 int imported = 0, deleted = 0, updated = 0;
@@ -375,14 +378,14 @@ namespace QOAM.Website.Controllers
             return View(model);
         }
 
-        [HttpGet, Route("bulkImportSuccessful")]
-        [Authorize(Roles = ApplicationRole.InstitutionAdmin + "," + ApplicationRole.Admin)]
+        [HttpGet, Route("bulkImportsuccessful")]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ActionResult BulkImportSuccessful(InstitutionalPricesImportedViewModel model)
         {
             return View(model);
         }
 
-        [HttpGet, Route("{id:int}/institutionJournalText")]
+        [HttpGet, Route("{id:int}/institutionjournaltext")]
         public ActionResult InstitutionJournalText(int id, int institutionId)
         {
             var model = institutionJournalRepository.Find(id, institutionId);

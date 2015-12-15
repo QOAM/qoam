@@ -1,7 +1,7 @@
 ﻿@model QOAM.Website.ViewModels.Journals.InstitutionalPricesViewModel
 
 @{
-    ViewBag.Title = "Import Institutional Prices";
+    ViewBag.Title = "Import Licensed Prices";
 }
 
 <div class="container main">
@@ -19,19 +19,14 @@
         <fieldset>
             <legend>@ViewBag.Title</legend>
 
-            <div class="form-group row">
-                @Html.LabelFor(m => m.File, new { @class = "col-lg-3 control-label" })
-                <div class="col-lg-6">
-                    @Html.TextBoxFor(m => m.File, new { type = "file", accept = ".xlsx" })
-                    @Html.ValidationMessageFor(m => m.File, null, new { @class = "control-label" })
-                </div>
-                <div class="col-lg-6 col-md-offset-3">
-                    @Html.ValidationMessage("generalError", new { @class = "control-label" })
-                </div>
-            </div>
+            @Html.Partial("_FileUpload")
 
-            <div class="col-lg-10 col-md-offset-3">
-                <input type="submit" value="Import" class="btn btn-primary" />
+            <div class="row bottommargin">
+                <div class="col-xs-1 vcenter">
+                </div>
+                <div class="col-xs-11">
+                    <input type="submit" value="Import" class="btn btn-primary" />
+                </div>
             </div>
         </fieldset>
     }

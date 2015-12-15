@@ -1,4 +1,5 @@
-﻿@using QOAM.Website.Models
+﻿@using QOAM.Website.Helpers
+@using QOAM.Website.Models
 @{
     ViewBag.Title = "Admin";
 }
@@ -9,23 +10,44 @@
         Here you can choose from several administrative tasks
     </p>
 
-    <ul>
-        @if (User.IsInRole(ApplicationRole.DataAdmin) || User.IsInRole(ApplicationRole.Admin))
-        {
-            <li>@Html.ActionLink("Import journals", "Import")</li>
-            <li>@Html.ActionLink("Add ISSNs to import blocklist", "BlockISSN")</li>
-            <li>@Html.ActionLink("Remove ISSNs from import blocklist", "RemoveBlockedISSN")</li>
-            <li>@Html.ActionLink("Update journals", "Update")</li>
-            <li>@Html.ActionLink("Download journals", "Download")</li>
-            <li>@Html.ActionLink("Add institution", "AddInstitution")</li>
-            <li>@Html.ActionLink("Move score cards", "MoveScoreCards")</li>
-            <li>@Html.ActionLink("Delete journals", "Delete")</li>
-        }
+    <div class="list-group">
+        <a href="javascript:void(0)" class="list-group-item active">Journals</a>
+        @Html.AdminLink("Import journals", User, "Import", null, "list-group-item", "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
+        @Html.AdminLink("Update journals", User, "Update", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
+        @Html.AdminLink("Download journals", User, "Download", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
+        @Html.AdminLink("Delete journals", User, "Delete", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
 
-        @if (User.IsInRole(ApplicationRole.InstitutionAdmin) || User.IsInRole(ApplicationRole.Admin))
-        {
-            <li>@Html.ActionLink("Check ISSNs", "Check")</li>
-            <li>@Html.ActionLink("Institutional prices", "BulkImportInstitutionalPrices", "Journals")</li>
-        }
-    </ul>
+        @Html.AdminLink("Check ISSNs", User, "Check", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
+        @Html.AdminLink("Add ISSNs to import blocklist", User, "BlockISSN", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
+        @Html.AdminLink("Remove ISSNs from import blocklist", User, "RemoveBlockedISSN", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
+    </div>
+    <div class="list-group">
+        <a href="javascript:void(0)" class="list-group-item active">Score cards</a>
+        @Html.AdminLink("Move score cards", User, "MoveScoreCards", null, "list-group-item", ApplicationRole.Admin)
+        <a class="list-group-item non-clickable @(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.DataAdmin) ? "" : "disabled")">Remove score card <sup>1</sup></a>
+    </div>
+
+    <div class="list-group">
+        <a href="javascript:void(0)" class="list-group-item active">Institutions</a>
+        @Html.AdminLink("Add institution", User, "AddInstitution", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin)
+        <a class="list-group-item non-clickable @(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin) ? "" : "disabled")">Add insitution <sup>2</sup></a>
+        <a class="list-group-item non-clickable @(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin) ? "" : "disabled")">Edit insitution <sup>2</sup></a>
+    </div>
+
+    <div class="list-group">
+        <a href="javascript:void(0)" class="list-group-item active">Prices</a>
+        @Html.AdminLink("Import licensed prices", User, "BulkImportInstitutionalPrices", "Journals", "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin)
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 vcenter">
+            <p class="@(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.DataAdmin) ? " " : "disabled")">
+                <sup>1</sup> Via 'Remove score card' on the details page of a Journal Score Card
+            </p>
+            <p class="@(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin) ? " " : "disabled")">
+                <sup>2</sup> Via 'Edit' and 'Delete' respectively on the Institutions overview page
+            </p>
+        </div>
+
+    </div>
 </div>

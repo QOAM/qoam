@@ -1,4 +1,10 @@
-﻿namespace QOAM.Website.Helpers
+﻿using System.Linq;
+using System.Security.Principal;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Mvc.Html;
+
+namespace QOAM.Website.Helpers
 {
     using PagedList.Mvc;
 
@@ -15,6 +21,16 @@
         public static PagedListRenderOptions PagedListRenderOptions(this HtmlHelper helper)
         {
             return DefaultPagedListRenderOptions;
+        }
+
+        public static MvcHtmlString AdminLink(this HtmlHelper helper, string linkText, IPrincipal user, string actionName, string controllerName, string cssClass, params string[] necessaryRoles)
+        {
+            return user.IsInRoles(necessaryRoles) ? helper.ActionLink(linkText, actionName, controllerName, null, new { @class = cssClass }) : helper.ActionLink(linkText, "", "", new { href = "javascript:void(0)", @class = $"{cssClass} disabled" });
+        }
+
+        public static bool IsInRoles(this IPrincipal user, params string[] necessaryRoles)
+        {
+            return necessaryRoles.Any(user.IsInRole);
         }
     }
 }

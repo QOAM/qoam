@@ -1,0 +1,50 @@
+﻿@model QOAM.Website.ViewModels.Score.AuthorsInvitedViewModel
+
+@{
+    ViewBag.Title = "Valuation Score Card requests sent";
+}
+
+<div class="container main">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <p>
+                <strong>@Model.AmountInvited</strong> authors have been invited.
+            </p>
+            @if (Model.AmountNotInvited > 0)
+            {
+                <p>
+                    <strong>@Model.AmountNotInvited</strong> could not be invited.
+                </p>
+            }
+        </div>
+        <div class="panel-body">
+            @if (Model.AmountNotInvited > 0)
+            {
+                <div class="row bottommargin">
+                    <div class="col-xs-12">
+                        <p>
+                            The following authors could not be invited:
+                            @*because the domain name in the email address of the addressee does not match the name of an academic institution known to us.
+                            If you want said institution to be included in our list, please enter it’s name and web address in our @Html.ActionLink("contact box", "Contact", "Home") and we will respond promptly.*@
+                        </p>
+                        <ul>
+                            @foreach (var author in Model.AuthorsNotInvited)
+                            {
+                                <li><strong>Name:</strong> @author.AuthorName with <strong>E-mail address:</strong> @author.AuthorEmail for <strong>journal:</strong> @author.JournalTitle with <strong>ISSN:</strong> @author.ISSN</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+            <div class="row bottommargin">
+                <div class="col-xs-8"></div>
+                <div class="col-xs-2">
+                    @Html.ActionLink("Import again", "BulkRequestValuation", null, new { @class = "btn btn-default pull-right" })
+                </div>
+                <div class="col-xs-2">
+                    @Html.ActionLink("Return to scoring", "Index", null, new { @class = "btn btn-primary pull-right" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

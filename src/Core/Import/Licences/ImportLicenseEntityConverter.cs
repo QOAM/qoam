@@ -5,7 +5,7 @@ namespace QOAM.Core.Import.Licences
     using System.Data;
     using System.Linq;
 
-    public class ImportEntityConverter : IImportEntityConverter
+    public class ImportLicenseEntityConverter : IImportEntityConverter<UniversityLicense>
     {
         public List<UniversityLicense> Execute(DataSet data)
         {

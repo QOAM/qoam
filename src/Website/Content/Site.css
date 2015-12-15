@@ -29,6 +29,32 @@ ul.inline > li {
     float: left;
 }
 
+div.list-group > a.separator {
+    margin-top: 12px;
+}
+
+div.list-group > a.disabled {
+  color: #999999;
+}
+div.list-group > a.disabled:hover,
+div.list-group > a.disabled:focus {
+  color: #999999;
+  text-decoration: none;
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+div.list-group > a.non-clickable:hover,
+div.list-group > a.non-clickable:focus {
+    cursor: default;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+p.disabled {
+  color: #999999;  
+}
+
 .well {
     padding: 10px;
     margin-top: 16px;
@@ -645,4 +671,8 @@ a.return-button {
         max-height: 150px;
         overflow: hidden;
     }
+}
+
+#collapsible-panel {
+    display: none;
 }

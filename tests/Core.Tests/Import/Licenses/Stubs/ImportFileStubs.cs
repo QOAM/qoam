@@ -1,8 +1,8 @@
-﻿namespace QOAM.Core.Tests.Import.Licenses.Stubs
+﻿using QOAM.Core.Tests.Import.StubHelpers;
+
+namespace QOAM.Core.Tests.Import.Licenses.Stubs
 {
-    using System.Collections.Generic;
     using System.Data;
-    using System.Linq;
 
     public static class ImportFileStubs
     {
@@ -43,36 +43,7 @@
             table.AddRow(new[] { "0942-0940", "No, really." });
 
             return table;
-        }
-
-        #region Private Methods
-
-        private static void AddColumns(this DataTable table, params string[] columns)
-        {
-            foreach (var column in columns)
-            {
-                table.Columns.Add(column);
-            }
-        }
-
-        private static void AddRow(this DataTable table, Dictionary<string, string> values)
-        {
-            var row = table.NewRow();
-
-            foreach (var kvp in values)
-                row[kvp.Key] = kvp.Value;
-        }
-
-        private static void AddRow(this DataTable table, IEnumerable<string> values)
-        {
-            var row = table.NewRow();
-
-            foreach (var kvp in values.Select((v, i) => new { Value = v, Index = i }))
-                row[kvp.Index] = kvp.Value;
-
-            table.Rows.Add(row);
-        }
-
-        #endregion
+        
+       }
     }
 }
