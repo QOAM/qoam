@@ -118,60 +118,60 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AuthorsAllowedToIndicateDesiredReviewers" xml:space="preserve">
-    <value>The website indicates if authors have a say in suggesting names of (non-)desired reviewers</value>
+    <value>The website indicates if authors have a say in suggesting names of (non-)desired reviewers.</value>
   </data>
   <data name="CopiesAreMadeInThirdPartyRepositories" xml:space="preserve">
-    <value>The journal (publisher) makes copies of published articles available in trusted third-party repositories (e.g. PubMed Central) immediately upon publication</value>
+    <value>The journal (publisher) makes copies of published articles available in trusted third-party repositories (e.g. PubMed Central) immediately upon publication.</value>
   </data>
   <data name="DisclosesNumberOfSubmissionsPublicationsAndRejectionRates" xml:space="preserve">
-    <value>The journal discloses the past (yearly) number of submissions, publications, and rejection rates</value>
+    <value>The journal discloses the past (yearly) number of submissions, publications, and rejection rates.</value>
   </data>
   <data name="GoodValueForMoney" xml:space="preserve">
     <value>I would deem this journal good value for money</value>
   </data>
   <data name="HasClearGuidelinesConcerningSharing" xml:space="preserve">
-    <value>The journal (publisher) has clear guidelines concerning sharing and availability of data for verification purposes</value>
+    <value>The journal (publisher) has clear guidelines concerning sharing and availability of data for verification purposes.</value>
   </data>
   <data name="HighlightsIssuesOfPublicationEthics" xml:space="preserve">
-    <value>Journal’s website highlights issues of publication ethics (e.g. plagiarism, retraction policy), conflicts of interest, and (if applicable) codes of conduct for research in life sciences and social sciences</value>
+    <value>Journal’s website highlights issues of publication ethics (e.g. plagiarism, retraction policy), conflicts of interest, and (if applicable) codes of conduct for research in life sciences and social sciences.</value>
   </data>
   <data name="PeerReviewProcessTransparent" xml:space="preserve">
-    <value>I would consider the peer-review process in this journal to be transparent</value>
+    <value>I would consider the peer-review process in this journal to be transparent.</value>
   </data>
   <data name="ProvidesArticlesWithDigitalObjectIdentifier" xml:space="preserve">
-    <value>The journal (publisher) provides the articles with a Digital Object Identifier</value>
+    <value>The journal (publisher) provides the articles with a Digital Object Identifier.</value>
   </data>
   <data name="ProvidesTrackAndTraceService" xml:space="preserve">
-    <value>The website provides a track &amp; trace service enabling authors to follow the status of their submission (e.g. under review)</value>
+    <value>The website provides a track &amp; trace service enabling authors to follow the status of their submission (e.g. under review).</value>
   </data>
   <data name="PublishedPapersIncludeInformationOnDatesOfSubmissionAndAcceptance" xml:space="preserve">
-    <value>Published papers include information on dates of original submission and acceptance</value>
+    <value>Published papers include information on dates of original submission and acceptance.</value>
   </data>
   <data name="RecommendScholarsToSubmit" xml:space="preserve">
-    <value>I would recommend scholars to submit their work to this journal</value>
+    <value>I would recommend scholars to submit their work to this journal.</value>
   </data>
   <data name="ReviewsCommentsArePublished" xml:space="preserve">
-    <value>The website of the journal indicates how open editorial correspondence and reviewer's comments are</value>
+    <value>The website of the journal indicates how open editorial correspondence and reviewer's comments are.</value>
   </data>
   <data name="TakesCareOfInclusionInRelevantIndexingServices" xml:space="preserve">
-    <value>The journal (publisher) takes care of inclusion of its articles in relevant indexing services</value>
+    <value>The journal (publisher) takes care of inclusion of its articles in relevant indexing services.</value>
   </data>
   <data name="WebsiteAllowsRatingsAndCommentariesOfPapers" xml:space="preserve">
-    <value>The journal website allows ratings of papers and post-publication commentaries by the community</value>
+    <value>The journal website allows ratings of papers and post-publication commentaries by the community.</value>
   </data>
   <data name="WebsiteContainsAimsScopeAndReadership" xml:space="preserve">
-    <value>Aims, scope, and target audience of the journal are clearly specified on the journal’s website</value>
+    <value>Aims, scope, and expected readership of the journal are clearly specified on the journal’s website.</value>
   </data>
   <data name="WebsiteContainsCriteriaUsedByReviewers" xml:space="preserve">
-    <value>Criteria used by reviewers to rate submissions are specified on the website</value>
+    <value>Criteria used by reviewers to rate submissions are specified on the website.</value>
   </data>
   <data name="WebsiteContainsNameAndAffiliationsOfMembersEditorialBoard" xml:space="preserve">
-    <value>The names and affiliations of members of the editorial board are listed on the website</value>
+    <value>The names and affiliations of members of the editorial board are listed on the website.</value>
   </data>
   <data name="WebsiteContainsRoleOfMembersEditorialBoard" xml:space="preserve">
-    <value>The role of members of the editorial board is explicated on the website including who will make final decisions about article acceptance (e.g., editor, associate/action editor)</value>
+    <value>The role of members of the editorial board is explicated on the website including who will make final decisions about article acceptance (e.g. editor, associate/action editor).</value>
   </data>
   <data name="WebsiteContainsSubmissionsReviewDetails" xml:space="preserve">
-    <value>The website indicates whether all submissions are sent out for review</value>
+    <value>The website indicates whether all submissions are sent out for review.</value>
   </data>
 </root>

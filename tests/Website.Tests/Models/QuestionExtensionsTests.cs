@@ -30,7 +30,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("Aims, scope, and target audience of the journal are clearly specified on the journal’s website", localizedQuestion);
+            Assert.Equal("Aims, scope, and expected readership of the journal are clearly specified on the journal’s website.", localizedQuestion);
         }
 
         [Fact]
@@ -43,7 +43,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The names and affiliations of members of the editorial board are listed on the website", localizedQuestion);
+            Assert.Equal("The names and affiliations of members of the editorial board are listed on the website.", localizedQuestion);
         }
 
         [Fact]
@@ -56,7 +56,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The website indicates whether all submissions are sent out for review", localizedQuestion);
+            Assert.Equal("The website indicates whether all submissions are sent out for review.", localizedQuestion);
         }
 
         [Fact]
@@ -69,7 +69,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The role of members of the editorial board is explicated on the website including who will make final decisions about article acceptance (e.g., editor, associate/action editor)", localizedQuestion);
+            Assert.Equal("The role of members of the editorial board is explicated on the website including who will make final decisions about article acceptance (e.g. editor, associate/action editor).", localizedQuestion);
         }
 
         [Fact]
@@ -82,7 +82,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("Criteria used by reviewers to rate submissions are specified on the website", localizedQuestion);
+            Assert.Equal("Criteria used by reviewers to rate submissions are specified on the website.", localizedQuestion);
         }
 
         [Fact]
@@ -95,7 +95,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The website of the journal indicates how open editorial correspondence and reviewer's comments are", localizedQuestion);
+            Assert.Equal("The website of the journal indicates how open editorial correspondence and reviewer's comments are.", localizedQuestion);
         }
 
         [Fact]
@@ -108,7 +108,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The website indicates if authors have a say in suggesting names of (non-)desired reviewers", localizedQuestion);
+            Assert.Equal("The website indicates if authors have a say in suggesting names of (non-)desired reviewers.", localizedQuestion);
         }
 
         [Fact]
@@ -121,7 +121,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The journal website allows ratings of papers and post-publication commentaries by the community", localizedQuestion);
+            Assert.Equal("The journal website allows ratings of papers and post-publication commentaries by the community.", localizedQuestion);
         }
 
         [Fact]
@@ -134,7 +134,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The journal (publisher) has clear guidelines concerning sharing and availability of data for verification purposes", localizedQuestion);
+            Assert.Equal("The journal (publisher) has clear guidelines concerning sharing and availability of data for verification purposes.", localizedQuestion);
         }
 
         [Fact]
@@ -147,7 +147,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The journal (publisher) makes copies of published articles available in trusted third-party repositories (e.g. PubMed Central) immediately upon publication", localizedQuestion);
+            Assert.Equal("The journal (publisher) makes copies of published articles available in trusted third-party repositories (e.g. PubMed Central) immediately upon publication.", localizedQuestion);
         }
 
         [Fact]
@@ -160,7 +160,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("Journal’s website highlights issues of publication ethics (e.g. plagiarism, retraction policy), conflicts of interest, and (if applicable) codes of conduct for research in life sciences and social sciences", localizedQuestion);
+            Assert.Equal("Journal’s website highlights issues of publication ethics (e.g. plagiarism, retraction policy), conflicts of interest, and (if applicable) codes of conduct for research in life sciences and social sciences.", localizedQuestion);
         }
 
         [Fact]
@@ -173,7 +173,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The website provides a track & trace service enabling authors to follow the status of their submission (e.g. under review)", localizedQuestion);
+            Assert.Equal("The website provides a track & trace service enabling authors to follow the status of their submission (e.g. under review).", localizedQuestion);
         }
 
         [Fact]
@@ -186,7 +186,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("Published papers include information on dates of original submission and acceptance", localizedQuestion);
+            Assert.Equal("Published papers include information on dates of original submission and acceptance.", localizedQuestion);
         }
 
         [Fact]
@@ -199,7 +199,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The journal discloses the past (yearly) number of submissions, publications, and rejection rates", localizedQuestion);
+            Assert.Equal("The journal discloses the past (yearly) number of submissions, publications, and rejection rates.", localizedQuestion);
         }
 
         [Fact]
@@ -212,7 +212,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("I would consider the peer-review process in this journal to be transparent", localizedQuestion);
+            Assert.Equal("I would consider the peer-review process in this journal to be transparent.", localizedQuestion);
         }
 
         [Fact]
@@ -225,7 +225,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("I would recommend scholars to submit their work to this journal", localizedQuestion);
+            Assert.Equal("I would recommend scholars to submit their work to this journal.", localizedQuestion);
         }
 
         [Fact]
@@ -251,7 +251,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The journal (publisher) takes care of inclusion of its articles in relevant indexing services", localizedQuestion);
+            Assert.Equal("The journal (publisher) takes care of inclusion of its articles in relevant indexing services.", localizedQuestion);
         }
 
         [Fact]
@@ -264,7 +264,7 @@
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("The journal (publisher) provides the articles with a Digital Object Identifier", localizedQuestion);
+            Assert.Equal("The journal (publisher) provides the articles with a Digital Object Identifier.", localizedQuestion);
         }
     }
 }

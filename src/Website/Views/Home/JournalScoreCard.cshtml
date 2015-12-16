@@ -3,7 +3,7 @@
 @using QOAM.Website.Helpers
 @using QOAM.Website.Models
 @{
-    ViewBag.Title = "Journal Score Card";
+    ViewBag.Title = "Journal Score Cards";
 }
 
 @helper JournalScoreCardImage(string name, string description)
@@ -22,15 +22,15 @@
             <h2>@ViewBag.Title</h2>
 
             <ul class="list-unstyled">
-                <li><a href="#basejournalscorecard">Base Journal Score Card</a></li>
-                <li><a href="#valuationjournalscorecard">Valuation Journal Score Card</a></li>
-                <li><a href="#how-used">How are JSCs used in QOAM?</a></li>
-                <li><a href="#swot">The SWOT matrix</a></li>
-                <li><a href="#life-cycle">The life cycle of  Journal Score Cards</a></li>
+                <li><em><a href="#basejournalscorecard">Base Journal Score Card</a></em></li>
+                <li><em><a href="#valuationjournalscorecard">Valuation Journal Score Card</a></em></li>
+                <li><em><a href="#how-used">How are JSCs used in QOAM?</a></em></li>
+                <li><em><a href="#swot">The SWOT matrix</a></em></li>
+                <li><em><a href="#life-cycle">The life cycle of  Journal Score Cards</a></em></li>
             </ul>
 
             <h3 id="basejournalscorecard">Base Journal Score Card</h3>
-            <p>The Base Score Card is a questionnaire on the transparancy of the journal’s website with respect to the following aspects:  Editorial information, Peer review, Governance and Process. Every aspect has some bullets and each bullet can be rated from 1 to 5. The average of these ratings is called the subscore for this aspect. The lowest subscore of these four aspects is called the <strong>Base Score</strong> of the journal.</p>
+            <p>The Base Score Card is a questionnaire on the transparency of the journal’s website with respect to the following aspects:  Editorial information, Peer review, Governance and Workflow. Every aspect has four bullets and each bullet can be rated from 1 to 5. The average of these ratings is called the subscore for this aspect. The lowest subscore of these four aspects is called the <strong>Base Score</strong> of the journal.</p>
 
             <p>1. @QuestionCategory.EditorialInformation.GetName()</p>
             <ul>
@@ -86,7 +86,7 @@
                     </em>
                     <input type="radio" id="outdatedPublication-absent">
                     <em>
-                        <label for="outdatedPublication-absent">Absent or diffuse</label>
+                        <label for="outdatedPublication-absent">Absent or unclear</label>
                     </em>
                 </div>
             </p>
@@ -110,29 +110,27 @@
             </p>
 
             <h3 id="valuationjournalscorecard">Valuation Journal Score Card</h3>
-            <p>The Valuation Score Card is a reality check, preferably based on experience as an author, editor or peer reviewer of the journal.  It has three bullets that can be rated from 1 to 5 and the average of these ratings is called the <strong>Valuation Score</strong> of the journal. </p>
+            <p>The Valuation Score Card is a reality check, preferably based on experience as an author, editor or peer reviewer of the journal.  It has three bullets that can be rated from 1 to 5 and the average of these ratings is called the <strong>Valuation Score</strong> of the journal.</p>
 
             <p>@QuestionCategory.Valuation.GetName()</p>
             <ul>
-                <li>I have published an article in this journal less than a year ago</li>
                 <li>@QuestionKey.PeerReviewProcessTransparent.ToDescription()</li>
                 <li>@QuestionKey.RecommendScholarsToSubmit.ToDescription()</li>
                 <li>@QuestionKey.GoodValueForMoney.ToDescription()</li>
-                <li>Publication of my article in this journal did cost</li>
             </ul>
 
             <p>Additional questions</p>
             <p>
-                <input type="checkbox" /> I have published an article in this journal less than a year ago
+                <input type="checkbox" /> I have published an article in this journal less than a year ago <span style="font-size: 75%;">(If ‘Yes’, please tick the box)</span>
             </p>
 
             <p>
-                Pop up box in case the first or second checkbox is ticked:
+                Pop up question in case of ‘Yes’:
             </p>
 
             <p>
-                Publication of my article in this journal did cost
-                
+                Publishing my article in this journal did cost
+
                 <select class="priceBox">
                     <option value="0">US Dollar</option>
                     <option value="1">Euro</option>
@@ -143,26 +141,26 @@
             </p>
 
             <p>
-                <input type="checkbox" /> I am an editor of this journal
+                <input type="checkbox" /> I am an editor or peer reviewer of this journal <span style="font-size: 75%;">(If ‘Yes’, please tick the box)</span>
             </p>
-
+            <p>In case of ‘Yes’ a text box with two questions pops up:</p>
+            <p>
+                <div style="border: 1px solid #ccc; padding: 3px;">
+                    <ol>
+                        <li><em>How high is the publication fee of your journal? What do you think of it?</em></li>
+                        <li><em>Does your journal have third party revenues? If so, is there any risk of a potential conflict of interest?</em></li>
+                    </ol>
+                </div>
+            </p>
             <p>
                 <input type="text" class="form-control" placeholder="Free text box for supplementary comments." />
             </p>
 
             <h3 id="how-used">How are JSCs used in QOAM?</h3>
-            <p>Journals in QOAM may have a Base Score, a Valuation Score or both. Journals can be sorted on both scores. It is possible to confine a search to journals with a Valuation Score.</p>
+            <p>Journals in QOAM may have a Base Score, a Valuation Score or both. Journals can be sorted on both scores.</p>
 
             <p>
-                Because the Base Score is the lowest of the four web based subscores, a journal with a high Base Score, has a web site that addresses all the journal aspects adequately. On the other hand, a journal with a low Base Score has at least one weak aspect, but may still be strong in other respects. In order to climb on the list a journal must address its weakest aspect.
-            </p>
-
-            <p>
-                QOAM has the option to filter journals per title key word, ISSN, publisher, discipline and language. Filtering per discipline enables to take the varied recognition of different aspects over disciplines into account. E.g. if speed of publication is less important in a specific discipline all journals in this discipline will produce a lower subscore for the aspect ‘process’, which might be their Base Score. In a general search this would result in a place at the bottom of the ranking. Within their own discipline the other aspects become more profiling.
-            </p>
-
-            <p>
-                On top of that, every author can decide for herself which aspects she deems most relevant. Per journal all aspect subscores are produced.
+                Per journal all aspect subscores are produced.  Because the Base Score is the lowest of the four web based subscores, a journal with a high Base Score, has a web site that addresses the four critical journal aspects adequately. On the other hand, a journal with a low Base Score has at least one weak aspect, but may still be strong in other respects. In order to climb on the list a journal must address its weakest aspect.
             </p>
 
             <h3 id="swot">The SWOT matrix</h3>
@@ -291,7 +289,7 @@
 
             <h3 id="life-cycle">The life cycle of  Journal Score Cards</h3>
             <p>
-                To avoid framing only members of the academic community can publish Journal Score Cards. Therefore, their institute must be connected to QOAM so that they can log in to the scoring section of QOAM with their institutional id. Usually, library staff publish Base JSCs; authors, editors and peer reviewers publish Valuation JSCs. Per person only one JSC may be published for a specific journal. In case several people publish a JSC for the same journal the averaged subscores will be attributed to the journal.
+                To avoid framing only members of the academic community can publish Journal Score Cards. Therefore,  only people with an academic email address can log in to the scoring section of QOAM. Usually, library staff publish Base Score Cards; authors, editors and peer reviewers publish Valuation Score Cards. Per person only one JSC may be published for a specific journal. In case several people publish a JSC for the same journal the subscores will be averaged. For calculating the scores the scorecards of the preceding two years are used.  A month before a scorecard  becomes ineffective its author will be notified of this and will be invited to update their JSC (provided they are still a member of the academic community). In case of no response the Journal Score Card will be open-archived in QOAM.
             </p>
 
             <p>
@@ -299,13 +297,8 @@
             </p>
 
             <p>
-                The Base Score and the Valuation Score are averaged from the scores of the preceding year.  A month before a JSC becomes ineffective its author will be notified of this and will be invited to update their JSC (provided they are still a member of the academic community.) In case of no response the Journal Score Card will be open-archived in QOAM.
+                The Journal Score Card’s format will be evaluated periodically and possibly adapted to new insights. However, changes will not be abrupt and draft versions will be circulated for comment prior to installation. As JSCs are only effective for two years the migration period in which ‘old’ and ‘new’ subscores sit together is limited. Effectively the migration period could be shorter because everybody may renew their JSC at any time. Thus, the JSC may evolve organically.
             </p>
-
-            <p>
-                The Journal Score Card’s format will be evaluated periodically and possibly adapted to new insights. However, changes will not be abrupt and draft versions will be circulated for comment prior to installation. As JSCs are only effective for a year the migration period in which ‘old’ and ‘new’ subscores sit together lasts a year at most. Effectively the migration period could be shorter because everybody may edit their JSC at any time. Thus, the JSC may evolve organically.
-            </p>
-
         </div>
     </div>
 </div>

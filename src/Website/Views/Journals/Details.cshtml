@@ -8,8 +8,14 @@
 
 <div class="container main">
     <div class="row side">
-
         <div class="col-md-12">
+            @if (ViewBag.MyQoamMessage != null)
+            {
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @ViewBag.MyQoamMessage
+                </div>
+            }
             @if (string.IsNullOrEmpty(ViewBag.ReturnUrl))
             {
                 <a class="btn btn-default return-button" title="Back to search results" href="@Url.Action("Index")">&lt; Back to search results</a>
@@ -121,7 +127,7 @@
 
                                 @if (Model.DoajSeal)
                                 {
-                                    <a href="https://doajournals.wordpress.com/2015/06/11/doaj-seal-is-now-live-on-the-site/" target="doaj"><img src="~/Images/doaj-seal.png" title="Accredited by DOAJ" class="doajSeal"/></a>
+                                    <a href="https://doajournals.wordpress.com/2015/06/11/doaj-seal-is-now-live-on-the-site/" target="doaj"><img src="~/Images/doaj-seal.png" title="Accredited by DOAJ" class="doajSeal" /></a>
                                 }
                             </div>
                         </div>
@@ -172,7 +178,7 @@
                                             <div class="row publish">
                                                 <div class="col-md-5a">
                                                     <a href="@Url.Action("BaseScoreCard", "Score", new { id = Model.Id })">
-                                                        <img src="~/Content/Images/rate-small.png" alt="Score this journal"/>
+                                                        <img src="~/Content/Images/rate-small.png" alt="Score this journal" />
                                                     </a>
                                                 </div>
                                                 <div class="col-md-7a">
@@ -195,7 +201,7 @@
                                             <div class="row publish">
                                                 <div class="col-md-5a">
                                                     <a href="@Url.Action("ValuationScoreCard", "Score", new { id = Model.Id })">
-                                                        <img src="~/Content/Images/rate-small.png" alt="Score this journal"/>
+                                                        <img src="~/Content/Images/rate-small.png" alt="Score this journal" />
                                                     </a>
                                                 </div>
                                                 <div class="col-md-7a">
@@ -225,7 +231,7 @@
     @Html.Partial("_FormScripts")
 
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             var journalsController = new JournalsController();
             journalsController.details();
         });

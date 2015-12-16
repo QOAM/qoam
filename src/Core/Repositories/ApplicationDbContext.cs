@@ -27,6 +27,7 @@
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Institution> Institutions { get; set; }
         public DbSet<InstitutionJournal> InstitutionJournals { get; set; }
+        public DbSet<UserJournal> UserJournals { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Subject> Subjects { get; set; }

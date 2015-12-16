@@ -168,6 +168,7 @@
     <Compile Include="Cleanup\UnpublishedScoreCardsCleanupSettings.cs" />
     <Compile Include="Cleanup\InactiveProfilesCleanup.cs" />
     <Compile Include="Helpers\ExceptionExtensions.cs" />
+    <Compile Include="Helpers\FilterExtensions.cs" />
     <Compile Include="Helpers\ValidatorExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Import\FileImporterBase.cs" />
@@ -237,9 +238,16 @@
     <Compile Include="Migrations\201511021020473_LastLogin.Designer.cs">
       <DependentUpon>201511021020473_LastLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512160931424_MyQoam.cs" />
+    <Compile Include="Migrations\201512160931424_MyQoam.Designer.cs">
+      <DependentUpon>201512160931424_MyQoam.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
+    <Compile Include="Repositories\Filters\UserJournalFilter.cs" />
     <Compile Include="Repositories\IBlockedISSNRepository.cs" />
+    <Compile Include="Repositories\IUserJournalRepository.cs" />
+    <Compile Include="Repositories\UserJournalRepository.cs" />
     <Compile Include="Repositories\IValuationJournalPriceRepository.cs" />
     <Compile Include="Repositories\IValuationScoreCardRepository.cs" />
     <Compile Include="Repositories\ValuationJournalPriceRepository.cs" />
@@ -247,9 +255,13 @@
     <EmbeddedResource Include="Migrations\201511021020473_LastLogin.resx">
       <DependentUpon>201511021020473_LastLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512160931424_MyQoam.resx">
+      <DependentUpon>201512160931424_MyQoam.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />
     <Compile Include="SwotVerdict.cs" />
+    <Compile Include="UserJournal.cs" />
     <Compile Include="ValuationJournalPrice.cs" />
     <Compile Include="ValuationQuestionScore.cs" />
     <Compile Include="ValuationScoreCardScore.cs" />
