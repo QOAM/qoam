@@ -67,8 +67,28 @@
                            SortDirection = this.Sort,
                            PageNumber = this.Page,
                            PageSize = this.PageSize,
-                           SwotMatrix = !string.IsNullOrEmpty(this.SwotMatrix) ? this.SwotMatrix.Split(',').ToList() : new List<string>(),
+                           SwotMatrix = !string.IsNullOrEmpty(this.SwotMatrix) ? this.SwotMatrix.Split(',').ToList() : new List<string>()
                        };
+        }
+
+        public UserJournalFilter ToFilter(int userProfileId)
+        {
+            return new UserJournalFilter
+            {
+                Title = Title.TrimSafe(),
+                Issn = Issn.TrimSafe(),
+                Publisher = Publisher.TrimSafe(),
+                Discipline = Discipline,
+                Language = Language,
+                SubmittedOnly = SubmittedOnly,
+                MustHaveBeenScored = true,
+                SortMode = SortBy,
+                SortDirection = Sort,
+                PageNumber = Page,
+                PageSize = PageSize,
+                SwotMatrix = !string.IsNullOrEmpty(SwotMatrix) ? SwotMatrix.Split(',').ToList() : new List<string>(),
+                UserProfileId = userProfileId
+            };
         }
     }
 }

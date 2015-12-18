@@ -61,7 +61,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The website indicates if authors have a say in suggesting names of (non-)desired reviewers.
+        ///   Looks up a localized string similar to The website indicates if authors have a say in suggesting names of (non-)desired reviewers..
         /// </summary>
         public static string AuthorsAllowedToIndicateDesiredReviewers {
             get {
@@ -70,7 +70,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The journal (publisher) makes copies of published articles available in trusted third-party repositories (e.g. PubMed Central) immediately upon publication.
+        ///   Looks up a localized string similar to The journal (publisher) makes copies of published articles available in trusted third-party repositories (e.g. PubMed Central) immediately upon publication..
         /// </summary>
         public static string CopiesAreMadeInThirdPartyRepositories {
             get {
@@ -79,7 +79,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The journal discloses the past (yearly) number of submissions, publications, and rejection rates.
+        ///   Looks up a localized string similar to The journal discloses the past (yearly) number of submissions, publications, and rejection rates..
         /// </summary>
         public static string DisclosesNumberOfSubmissionsPublicationsAndRejectionRates {
             get {
@@ -97,7 +97,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The journal (publisher) has clear guidelines concerning sharing and availability of data for verification purposes.
+        ///   Looks up a localized string similar to The journal (publisher) has clear guidelines concerning sharing and availability of data for verification purposes..
         /// </summary>
         public static string HasClearGuidelinesConcerningSharing {
             get {
@@ -106,7 +106,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Journal’s website highlights issues of publication ethics (e.g. plagiarism, retraction policy), conflicts of interest, and (if applicable) codes of conduct for research in life sciences and social sciences.
+        ///   Looks up a localized string similar to Journal’s website highlights issues of publication ethics (e.g. plagiarism, retraction policy), conflicts of interest, and (if applicable) codes of conduct for research in life sciences and social sciences..
         /// </summary>
         public static string HighlightsIssuesOfPublicationEthics {
             get {
@@ -115,7 +115,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I would consider the peer-review process in this journal to be transparent.
+        ///   Looks up a localized string similar to I would consider the peer-review process in this journal to be transparent..
         /// </summary>
         public static string PeerReviewProcessTransparent {
             get {
@@ -124,7 +124,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The journal (publisher) provides the articles with a Digital Object Identifier.
+        ///   Looks up a localized string similar to The journal (publisher) provides the articles with a Digital Object Identifier..
         /// </summary>
         public static string ProvidesArticlesWithDigitalObjectIdentifier {
             get {
@@ -133,7 +133,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The website provides a track &amp; trace service enabling authors to follow the status of their submission (e.g. under review).
+        ///   Looks up a localized string similar to The website provides a track &amp; trace service enabling authors to follow the status of their submission (e.g. under review)..
         /// </summary>
         public static string ProvidesTrackAndTraceService {
             get {
@@ -142,7 +142,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Published papers include information on dates of original submission and acceptance.
+        ///   Looks up a localized string similar to Published papers include information on dates of original submission and acceptance..
         /// </summary>
         public static string PublishedPapersIncludeInformationOnDatesOfSubmissionAndAcceptance {
             get {
@@ -151,7 +151,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I would recommend scholars to submit their work to this journal.
+        ///   Looks up a localized string similar to I would recommend scholars to submit their work to this journal..
         /// </summary>
         public static string RecommendScholarsToSubmit {
             get {
@@ -160,7 +160,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The website of the journal indicates how open editorial correspondence and reviewer&apos;s comments are.
+        ///   Looks up a localized string similar to The website of the journal indicates how open editorial correspondence and reviewer&apos;s comments are..
         /// </summary>
         public static string ReviewsCommentsArePublished {
             get {
@@ -169,7 +169,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The journal (publisher) takes care of inclusion of its articles in relevant indexing services.
+        ///   Looks up a localized string similar to The journal (publisher) takes care of inclusion of its articles in relevant indexing services..
         /// </summary>
         public static string TakesCareOfInclusionInRelevantIndexingServices {
             get {
@@ -178,7 +178,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The journal website allows ratings of papers and post-publication commentaries by the community.
+        ///   Looks up a localized string similar to The journal website allows ratings of papers and post-publication commentaries by the community..
         /// </summary>
         public static string WebsiteAllowsRatingsAndCommentariesOfPapers {
             get {
@@ -187,7 +187,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aims, scope, and target audience of the journal are clearly specified on the journal’s website.
+        ///   Looks up a localized string similar to Aims, scope, and expected readership of the journal are clearly specified on the journal’s website..
         /// </summary>
         public static string WebsiteContainsAimsScopeAndReadership {
             get {
@@ -196,7 +196,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Criteria used by reviewers to rate submissions are specified on the website.
+        ///   Looks up a localized string similar to Criteria used by reviewers to rate submissions are specified on the website..
         /// </summary>
         public static string WebsiteContainsCriteriaUsedByReviewers {
             get {
@@ -205,7 +205,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The names and affiliations of members of the editorial board are listed on the website.
+        ///   Looks up a localized string similar to The names and affiliations of members of the editorial board are listed on the website..
         /// </summary>
         public static string WebsiteContainsNameAndAffiliationsOfMembersEditorialBoard {
             get {
@@ -214,7 +214,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The role of members of the editorial board is explicated on the website including who will make final decisions about article acceptance (e.g., editor, associate/action editor).
+        ///   Looks up a localized string similar to The role of members of the editorial board is explicated on the website including who will make final decisions about article acceptance (e.g. editor, associate/action editor)..
         /// </summary>
         public static string WebsiteContainsRoleOfMembersEditorialBoard {
             get {
@@ -223,7 +223,7 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The website indicates whether all submissions are sent out for review.
+        ///   Looks up a localized string similar to The website indicates whether all submissions are sent out for review..
         /// </summary>
         public static string WebsiteContainsSubmissionsReviewDetails {
             get {

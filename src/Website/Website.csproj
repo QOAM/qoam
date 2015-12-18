@@ -240,6 +240,12 @@
     <Compile Include="App_Start\WebSecurityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\MyQoamController.cs" />
+    <Compile Include="Resources\Questions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Questions.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Account\ChangeEmailViewModel.cs" />
     <Compile Include="ViewModels\IFileUploadViewModel.cs" />
     <Compile Include="ViewModels\Import\MoveScoreCardsViewModel.cs" />
@@ -288,11 +294,6 @@
     <Compile Include="Models\QuestionExtensions.cs" />
     <Compile Include="Models\QuestionKeyExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Questions.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Questions.resx</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\Account\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
@@ -352,6 +353,9 @@
     <Content Include="Content\images\banner2.gif" />
     <Content Include="Content\images\banner3.jpg" />
     <Content Include="Content\images\faq.png" />
+    <Content Include="Content\images\faq\invite-preparation-step-3.png" />
+    <Content Include="Content\images\faq\invite-preparation-step-4.png" />
+    <Content Include="Content\images\faq\invite-preparation-step-completion.png" />
     <Content Include="Content\images\icon_group.png" />
     <Content Include="Content\images\icon_group_active.png" />
     <Content Include="Content\images\journalscorecard.png" />
@@ -904,6 +908,9 @@
     <Content Include="Views\Score\BulkRequestValuation.cshtml" />
     <Content Include="Views\Score\BulkInviteSuccessful.cshtml" />
     <Content Include="Views\Shared\_FileUpload.cshtml" />
+    <Content Include="Views\Shared\JournalsIndex.cshtml" />
+    <Content Include="Views\MyQoam\_EmptyText.cshtml" />
+    <Content Include="Views\Journals\_EmptyText.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -1032,7 +1039,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Profiles\Index.cshtml" />
-    <Content Include="Views\Journals\Index.cshtml" />
     <Content Include="Views\Score\Index.cshtml" />
     <Content Include="Views\Score\BaseScoreCard.cshtml" />
     <Content Include="Views\Profiles\Details.cshtml" />

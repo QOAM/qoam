@@ -62,7 +62,7 @@ namespace QOAM.Website.Controllers
             model.Disciplines = subjectRepository.All.ToSelectListItems("<All disciplines>", SubjectTruncationLength);
             model.Journals = journalRepository.Search(model.ToFilter());
 
-            return View(model);
+            return View("JournalsIndex", model);
         }
 
         [HttpGet, Route("{id:int}")]
@@ -76,6 +76,11 @@ namespace QOAM.Website.Controllers
             }
 
             ViewBag.ReturnUrl = returnUrl;
+
+            object saved;
+
+            if (TempData.TryGetValue("MyQoamMessage", out saved))
+                ViewBag.MyQoamMessage = saved.ToString();
 
             return View(journal);
         }

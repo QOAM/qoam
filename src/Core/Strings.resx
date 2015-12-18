@@ -172,7 +172,7 @@
     <value>Published score card</value>
   </data>
   <data name="QuestionCategory_EditorialInformation" xml:space="preserve">
-    <value>Editorial info</value>
+    <value>Editorial information</value>
   </data>
   <data name="QuestionCategory_Governance" xml:space="preserve">
     <value>Governance</value>
@@ -184,7 +184,7 @@
     <value>Peer review</value>
   </data>
   <data name="QuestionCategory_Process" xml:space="preserve">
-    <value>Process</value>
+    <value>Workflow</value>
   </data>
   <data name="QuestionCategory_Valuation" xml:space="preserve">
     <value>Valuation</value>

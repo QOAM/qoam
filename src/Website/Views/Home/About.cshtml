@@ -10,55 +10,49 @@
         <div class="col-md-9">
             <h2>@ViewBag.Title</h2>
 
-            <p><strong>Quality Open Access Market is primarily for authors who want to publish their article in open access in a high quality journal and for a reasonable price.</strong></p>
-
-            <ul class="list-unstyled">
-                <li><a href="#quality-of-service">QOAM – quality of service matched against price</a></li>
-                <li><a href="#journal-score-cards">Journal Score Cards</a></li>
-                <li><a href="#filtering-per-discipline">Filtering per discipline</a></li>
-                <li><a href="#price-information">Price information</a></li>
-                <li><a href="#privacy">Privacy policy</a></li>
-                <li><a href="#brief-history">A brief history</a></li>
-                <li><a href="#einsteins-razor">Einstein’s razor</a></li>
-            </ul>
-
-            <h3 id="quality-of-service">QOAM – quality of service matched against price</h3>
             <p>
-                When scientific and scholarly publishing is no longer seen as copyright exploitation but as a service, as is the case in the OA paradigm, there is a need for a market where quality of the service can be matched against price. Quality Open Access Market – QOAM – aims to be that place. The information in QOAM is based on academic crowd sourcing, coming from authors, editors and peer reviewers who bring in their real life experience with a journal and from libraries who analyze the web site of a journal. Additional price information comes from institutions which have settled open access licenses with publishers for their own authors. Thus, QOAM becomes the meeting point where shopping authors select a journal to publish their article in, publishers may find out how to improve their journal and funders, policy makers, journalists and the public at large enter a transparent academic publishing environment.
+                <strong>QOAM</strong> /kju:əʊm/ abbr. Quality Open Access Market. QOAM is a market place for scientific and scholarly journals which publish articles in open access. Quality scoring of the journals in QOAM is based on academic crowd sourcing; price information includes institutional licensed pricing.
             </p>
- 
+
+            <p>
+                More in:
+                <ul class="list-unstyled">
+                    <li><em><a href="#journal-score-cards">Journal Score Cards</a></em></li>
+                    <li><em><a href="#filtering-per-discipline">Filtering per discipline</a></em></li>
+                    <li><em><a href="#price-information">Price information</a></em></li>
+                    <li><em><a href="#privacy">Privacy policy</a></em></li>
+                    <li><em><a href="#brief-history">A brief history</a></em></li>
+                    <li><em><a href="#einsteins-razor">Einstein’s razor</a></em></li>
+                </ul>
+            </p>
+
             <h3 id="journal-score-cards">Journal Score Cards</h3>
-            <p>In QOAM quality of a journal is determined by the academic community itself via so called Journal Score Cards. A Journal Score Card is a questionnaire on  critical aspects of a journal. Four aspects – Editorial information, Peer review, Governance and Process - are usually analyzed by library staff, based on the journal’s website. The fifth – Valuation – is a reality check, preferably based on experience of authors, editors or peer reviewers with the  journal. The lowest sub score of the four web site related aspects is called the <strong>Base Score</strong> of the journal. The score of the fifth aspect is called the <strong>Valuation Score</strong> of the journal. The Base Score defines the default ranking of the journals in QOAM but ranking according to the Valuation Score is also possible. Read more about @Html.ActionLink("Journal Score Cards", "JournalScoreCard").</p>
+            <p>
+                In QOAM libraries use a <strong>Base Score Card</strong> to score the transparency of a journal’s website with respect to four critical journal aspects: Editorial information, Peer review, Governance and Workflow.
+                Authors share their experience by completing a 2-minute <strong>Valuation Score Card</strong>.<br/>
+                QOAM has a light weight procedure to invite authors to publish a Valuation Score Card for a journal they just published in.<br />
+                Both score cards constitute the SWOT matrix of a journal thus categorizing the journals into Strong, Weaker, Opportunity (to publishers) and Threat (to authors).
+                Read more about @Html.ActionLink("Journal Score Cards", "JournalScoreCard"). QOAM also mirrors the <a href="https://doajournals.wordpress.com/2015/06/11/doaj-seal-is-now-live-on-the-site/">DOAJ Seal of Approval</a>
+            </p>
 
             <h3 id="filtering-per-discipline">Filtering per discipline</h3>
-            <p>QOAM allows filtering per discipline. Thus the varied recognition of the different aspects over the disciplines can be taken into account. E.g. if speed of publication is less important in a specific discipline all journals in this discipline will produce a low sub score for the aspect ‘process’, which might be their Base Score. As in QOAM journals are ranked by default according to their Base Score, a general search would result in a place at the bottom of the list for these journals. Within their own discipline the other aspects are more profiling. </p>
+            <p>QOAM allows filtering per discipline. Thus the varied recognition of the different aspects over the disciplines can be taken into account. E.g. if speed of publication is less important in a specific discipline all journals in this discipline will produce a low sub score for the aspect ‘Workflow’. Within their own discipline the other aspects are more profiling. </p>
 
             <h3 id="price-information">Price information</h3>
             <p>
-                Price information in QOAM comes primarily from the website of a journal via the Base Score Card.  However, a growing number of institutions, and more specifically their libraries, succeed in negotiating better prices for their community via memberships, licenses or other agreements. Per journal QOAM will list the licensed institutes with their negotiated discount on the publication fee. 
-            </p>
-            <p>
-                Currently, prices vary widely. According to <a href="http://legacy.earlham.edu/~peters/fos/newsletter/11-02-06.htm#nofee" title="No-fee open-access journals">Peter Suber</a> the vast majority of peer-reviewed OA journals are no-fee. OA journals that do charge have an <a href="http://www.openaccesspublishing.org/apc2/" title="A Study of Open Access Journals Using Article Processing Charges">average price of &euro;700</a> per article, <a href="http://www.wellcome.ac.uk/stellent/groups/corporatesite/@("@")policy_communications/documents/web_document/wtp055910.pdf" title="Hybrid journals">hybrid journals are the most expensive of all</a> with an average of €1970. Individual price quotations may mount to €3000 and up. In such a bewildering situation sharing price experiences might give some guidance. For that reason a question is included in the Valuation Score Card asking for the actual publication price of a published article. The replies are shown in reverse chronological order under the heading ‘Recently paid’, next to ‘Institutional price’ and ‘Price on web site’. All three are found by clicking on ‘Price information’ on QOAM’s Search page.
+                Currently, publication fees vary widely. According to <a href="http://legacy.earlham.edu/~peters/fos/newsletter/11-02-06.htm#nofee" title="No-fee open-access journals">Peter Suber</a> the vast majority of peer-reviewed OA journals are no-fee. OA journals that do charge have an <a href="http://www.openaccesspublishing.org/apc2/" title="A Study of Open Access Journals Using Article Processing Charges">average price of &euro;700</a> per article, <a href="http://www.wellcome.ac.uk/stellent/groups/corporatesite/@("@")policy_communications/documents/web_document/wtp055910.pdf" title="Hybrid journals">hybrid journals are the most expensive of all</a> with an average of €1970. Individual price quotations may amount to €3000+ and non-disclosure clauses are a common practice in the world of academic publishing. In such a bewildering situation sharing price experiences is crucial.<br/>
+                Price information in QOAM comes primarily from the website of a journal via the Base Score Card.  However, a growing number of institutions succeed in negotiating better prices for their community via memberships, licences or other agreements. Per journal QOAM lists the licensed institutes with their negotiated discount on the publication fee. Finally, a question is included in the Valuation Score Card asking for the actual publication fee paid by an author. All three outcomes are found at ‘Price information’ on QOAM’s Search page under the headings ‘Recently paid’, ‘Institutional price’ and ‘Price on web site’.
             </p>
 
             <h3 id="privacy">Privacy policy</h3>
             <p>
                 QOAM is a free service, based on academic crowd sourcing. QOAM uses no cookies and can be visited anonymously. Conversely, contributions to QOAM’s content via Journal Score Cards are named.
-            </p>
-            <p>
-                In order to publish a Journal Score Card in QOAM – via “Score journal” on the main page – one has to log in via one’s institutional email address. 
-            </p>
-            <p>
-                In practice this means that QOAM collects the names and institutional email addresses of the authors of Journal Score Cards. No other information is collected. The names are used to sign the Journal Score Cards and are publicly visible. However, an author’s institutional email adress is only shown to other authors of Journal Score Cards. No other uses of these data are foreseen.
-
-            </p>
-            <p>
-                Underlying this policy are the views that (1) anonymous Journal Score Cards are prone to misuse and should be avoided in QOAM and (2) authors of Journal Score Cards should be able to contact each other for dialogue.
-            </p>
-            <p>
+                In order to publish a Journal Score Card in QOAM – via “Score journal” on the main page – one has to log in via one’s institutional email address.<br/>
+                In practice this means that QOAM collects the names and institutional email addresses of the authors of Journal Score Cards. No other information is collected. The names are used to sign the Journal Score Cards and are publicly visible. However, an author’s institutional email adress is only shown to other authors of Journal Score Cards. No other uses of these data are foreseen.<br/>
+                Underlying this policy are the views that (1) anonymous Journal Score Cards are prone to misuse and should be avoided in QOAM and (2) authors of Journal Score Cards should be able to contact each other for dialogue.<br/>
                 Finally, QOAM uses the https protocol for secure exchange of data. QOAM data are stored in the Netherlands and governed by Dutch c.q. European law.
             </p>
-
+            
             <h3 id="brief-history">A brief history</h3>
 
             <p>For long, SURF has been convinced that in the OA paradigm, next to price <em>quality</em> is a critical issue. For established journals the Journal Impact Factor, though controversial, is used as a proxy for quality but for young journals there is no such quality indicator whatsoever. This is a specific handicap for young OA journals whereas young subscription journals are often just included in Big Deal packages. The outcomes of the <a href="http://project-soap.eu/report-from-the-soap-symposium/" title="EC-project SOAP">EC-project SOAP</a> confirmed a growing urgency to address the quality issue for OA journals (later alarmingly demonstrated by  the emergence of <a href="http://scholarlyoa.com/individual-journals/" title="predatory journals">predatory journals</a> and John Bohannon’s article <a href="http://www.sciencemag.org/content/342/6154/60.full" title="Who is Afraid of Peer Review?">Who is Afraid of Peer Review?</a>)</p>

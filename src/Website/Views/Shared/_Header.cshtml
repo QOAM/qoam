@@ -1,8 +1,8 @@
-﻿@helper MenuItemClass(string menuItem)
+﻿@helper MenuItemClass(string menuItem, string additionalClass = "")
 {
     if (menuItem == ViewBag.SelectedMenuItem)
     {
-        <text>class="active"</text>
+        <text>class="active @(additionalClass)"</text>
     }
 }
 
@@ -23,6 +23,21 @@
                 <li @MenuItemClass("Score")><a href="@Url.Action("Index", "Score")"><i class="glyphicon glyphicon-list-alt"></i> Score journal</a></li>
                 <li @MenuItemClass("Profiles")><a href="@Url.Action("Index", "Profiles")"><i class="glyphicon glyphicon-user"></i> Profiles</a></li>
                 <li @MenuItemClass("Institutions")><a href="@Url.Action("Index", "Institutions")"><span class="icon-group"></span> Institutions</a></li>
+                @if (User.Identity.IsAuthenticated && ViewBag.PageId == "journals-details-page") {
+                    <li @MenuItemClass("MyQoam", "dropdown")>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "MyQoam")"><i class="glyphicon glyphicon-home"></i> My QOAM <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Add", "MyQoam")"><i class="glyphicon glyphicon-plus"></i> Add to My QOAM</a></li>
+                            @*<li role="separator" class="divider"></li>*@
+                            <li><a href="@Url.Action("Delete", "MyQoam")"><i class="glyphicon glyphicon-remove"></i> Delete from My QOAM</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="@Url.Action("Index", "MyQoam")"><i class="glyphicon glyphicon-home"></i> Go to My QOAM</a></li>
+                        </ul>
+                    </li>
+                }
+                else {
+                    <li @MenuItemClass("MyQoam")><a href="@Url.Action("Index", "MyQoam")"><i class="glyphicon glyphicon-home"></i> My QOAM</a></li>
+                }
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @{ Html.RenderPartial("_LoginPartial"); }
