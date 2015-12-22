@@ -220,11 +220,12 @@ namespace QOAM.Website.Controllers
             {
                 var invited = 0;
                 var notInvited = new List<NotInvitedViewModel>();
-
-                var data = _bulkImporter.Execute(model.File.InputStream);
+                var emailRegex = new Regex(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" + @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" + @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
                 
+                var data = _bulkImporter.Execute(model.File.InputStream);
+
                 var emails = (from a in data
-                              where !string.IsNullOrWhiteSpace(a.ISSN) && !string.IsNullOrWhiteSpace(a.AuthorEmail)
+                              where !string.IsNullOrWhiteSpace(a.ISSN) && !string.IsNullOrWhiteSpace(a.AuthorEmail) && emailRegex.IsMatch(a.AuthorEmail)
                               let journal = journalRepository.FindByIssn(a.ISSN)
                               where journal != null
                               select new RequestValuationViewModel
@@ -264,7 +265,7 @@ namespace QOAM.Website.Controllers
                 }
 
                 notInvited.AddRange((from a in data
-                                     where string.IsNullOrWhiteSpace(a.ISSN) || string.IsNullOrWhiteSpace(a.AuthorEmail)
+                                     where string.IsNullOrWhiteSpace(a.ISSN) || string.IsNullOrWhiteSpace(a.AuthorEmail) || !emailRegex.IsMatch(a.AuthorEmail)
                                      select new NotInvitedViewModel
                                      {
                                          ISSN = string.IsNullOrWhiteSpace(a.ISSN) ? "Unknown" : a.ISSN,
@@ -293,6 +294,10 @@ namespace QOAM.Website.Controllers
                 //    }
                 //}
                 //throw;
+            }
+            catch (FormatException fe)
+            {
+                ModelState.AddModelError("generalError", $"An error has ocurred: {fe.Message}");
             }
             catch (Exception exception)
             {

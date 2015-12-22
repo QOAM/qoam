@@ -17,7 +17,7 @@ namespace QOAM.Core.Import.Invitations
                                    select new AuthorToInvite
                                    {
                                        ISSN = row["eissn"].ToString(),
-                                       AuthorEmail = email.Trim(),
+                                       AuthorEmail = email.Replace(" ", ""),
                                        AuthorName = row["Author name"].ToString()
                                    }).ToList();
 
