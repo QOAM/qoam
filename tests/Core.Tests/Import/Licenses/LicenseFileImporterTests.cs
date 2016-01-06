@@ -32,8 +32,8 @@
 
             var table = GetTable(UnivertitiesTab);
 
-            Assert.Equal("Domein", table.Columns[0].ColumnName);
-            Assert.Equal("Tabbladen", table.Columns[1].ColumnName);
+            Assert.Equal("Domain", table.Columns[0].ColumnName);
+            Assert.Equal("Tabs", table.Columns[1].ColumnName);
         }
 
         [Fact]

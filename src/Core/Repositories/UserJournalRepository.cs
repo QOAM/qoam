@@ -47,6 +47,11 @@ namespace QOAM.Core.Repositories
             return query.OrderByDescending(x => x.DateAdded).ToList();
         }
 
+        public IList<UserJournal> All(int userProfileId)
+        {
+            return DbContext.UserJournals.Where(uj => uj.UserProfileId == userProfileId).ToList();
+        }
+
         public IPagedList<Journal> Search(UserJournalFilter filter)
         {
             var query = DbContext.UserJournals

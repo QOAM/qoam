@@ -39,7 +39,7 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpGet, Route("{id:int}/add")]
-        public ActionResult Add(int id)
+        public ActionResult Add(int id, string returnUrl = "")
         {
             var currentUserId = Authentication.CurrentUserId;
 
@@ -59,14 +59,14 @@ namespace QOAM.Website.Controllers
                 _userJournalRepository.InsertOrUpdate(entity);
                 _userJournalRepository.Save();
 
-                TempData[MyQoamMessage] = "This journal has been added to My QOAM!";
+                TempData[MyQoamMessage] = "Journal has been added to My QOAM!";
             }
 
-            return RedirectToAction("Details", "Journals", new { id = id });
+            return string.IsNullOrWhiteSpace(returnUrl) ? (ActionResult) RedirectToAction("Details", "Journals", new { id }) : Redirect(returnUrl);
         }
 
         [HttpGet, Route("{id:int}/delete")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, string returnUrl = "")
         {
             var userJournal = _userJournalRepository.Find(id, Authentication.CurrentUserId);
 
@@ -75,12 +75,25 @@ namespace QOAM.Website.Controllers
                 _userJournalRepository.Delete(userJournal);
                 _userJournalRepository.Save();
 
-                TempData[MyQoamMessage] = "This journal has been deleted from My QOAM.";
+                TempData[MyQoamMessage] = "Journal has been deleted from My QOAM.";
             }
             else
                 TempData[MyQoamMessage] = "This journal isn't linked to My QOAM.";
 
-            return RedirectToAction("Details", "Journals", new { id = id });
+            return string.IsNullOrWhiteSpace(returnUrl) ? (ActionResult) RedirectToAction("Details", "Journals", new { id }) : Redirect(returnUrl);
+        }
+
+        [HttpGet, Route("empty")]
+        public ActionResult Empty()
+        {
+            var userJournals = _userJournalRepository.All(Authentication.CurrentUserId);
+
+            foreach (var userJournal in userJournals)
+                _userJournalRepository.Delete(userJournal);
+
+            _userJournalRepository.Save();
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "Manuals";
+}
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-3">
+            @{ Html.RenderPartial("_SidebarMenu", "Manuals"); }
+        </div>
+        <div class="col-md-9">
+            <h2>@ViewBag.Title</h2>
+
+            <ul class="list-unstyled">
+                <li><a href="#invite"><em>Personal invitation to complete a Valuation Score Card</em></a></li>
+                <li><a href="#group-invite"><em>Group invitation to complete a Valuation Score Card</em></a></li>
+                <li><a href="#base-score-card"><em>Points of attention when completing a Base Score Card</em></a></li>
+                <li><a href="#licenses"><em>Including licensed prices in QOAM</em></a></li>
+            </ul>
+
+            <h3 id="invite">Personal invitation to complete a Valuation Score Card</h3>
+            <p>
+                Necessary ingredients:
+                <ul>
+                    <li>The ISSN of a journal with a freshly published open access article</li>
+                    <li>The institutional email address of the author of the article</li>
+                </ul>
+            </p>
+            <p>
+                Preparation:
+                <ol>
+                    <li>Go to @Html.ActionLink("QOAM", "Index", "Home") and log in.</li>
+                    <li>Click on ‘Score journal’ in the black toolbar on top of the page.</li>
+                    <li>
+                        Fill in the ISSN box in Select and press ‘Search’. This brings you to the journal to be scored. E.g.
+                        <img src="@Url.Content("~/Content/images/faq/invite-preparation-step-3.png")" />
+                    </li>
+                    <li>
+                        Click on <strong>Invite someone else to do so</strong> in the lower text box on the right side. The draft invitation pops up.
+                        <img src="@Url.Content("~/Content/images/faq/invite-preparation-step-4.png")" />
+                    </li>
+                    <li>
+                        Fill in the institutional email address of the author in the ‘To’ field and flavour the draft invitation if desired e.g. by replacing ‘Sir/Madam’ with the author’s name, undersigning the invitation yourself, adding something personal, etc.
+                    </li>
+                    <li>Press the Send mail button.</li>
+                </ol>
+            </p>
+            <p>
+                <h4>Receiving</h4>
+                The author of the article receives your invitation. The bottom line has a link to QOAM’s Valuation Score Card for the journal. If the author clicks on this there are two options:
+                <ul>
+                    <li>The author visits QOAM for the first time. In that case (s)he is asked to give a user name and a password.</li>
+                    <li>The author has been in QOAM before. In that case (s)he is asked to transmit his existing password.</li>
+                </ul>
+                Upon this step the Valuation Score Card pops up with a few questions about the journal.
+                <img src="@Url.Content("~/Content/images/faq/invite-preparation-step-completion.png")" />
+            </p>
+            <p>Completion of the Card takes a few minutes. By pressing ‘Publish your Score Card’ the meal is over. Fast food indeed.</p>
+
+            <h3 id="group-invite">Group invitation to complete a Valuation Score Card</h3>
+            <p>
+                Naturally, publishers and editors-in-chief may be interested in feedback from their authors but sometimes find it difficult to organize this.
+                Institutions may want to find out good and bad journals.
+                Now, QOAM has developed a straightforward evaluation tool.
+            </p>
+            <p>
+                What is needed are the ISSNs of journals to be evaluated, plus names and email addresses of authors you want to invite to do so.
+                These data have to be organized in an Excel file with three required columns: "eissn" (the ISSN the journal uses for its electronic version), "Author email address" and "Author name".
+                (Multiple e-mail addresses per author can be used, separated by a semicolon or a comma, e.g.: author1@test.uni; author1@somemail.com.)
+            </p>
+            <p>
+                Next, go to the Score page of QOAM (@Html.ActionLink("https://www.qoam.eu/score", "Index", "Score")) and click the blue button in the box ‘Group invitation’ left below at the page.
+                If you want to send the standard invitation mail, simply import the Excel file.
+                In case you want to send a customized mail, the button ‘Adapt invitation letter’ offers the option to adapt the invitation first.
+                Don’t forget to insert your own email address.
+            </p>
+            <p>
+                After some time, depending on the length of the invitation list, a short result report pops up telling how many invitations have been sent plus a list of mails which have not been sent with a reason why. In general, it concerns deficiencies in the mail addresses.  After having repaired them you may resend those mails (but take care that you do not send again the ones that went OK).
+            </p>
+
+            <h3 id="base-score-card">Points of attention when scoring Base Score Cards</h3>
+            <p>
+                <em>General</em><br />
+                <ul>
+                    <li>Base Score Cards are based on the information on the website of the journal. In QOAM, you could click on the title of the journal to be directed to the corresponding website. By using the right mouse button, you may choose whether to do so in a new tab or a new window.</li>
+                    <li>QOAM uses a scoring system from “1. Absent” to “5. Excellent”. Don’t be afraid to use these extremes! You could use the middle scores to indicate that one or several parts of the aspect are missing, for instance that the aims and scope of the journal are specified on the website, but the target audience isn’t.</li>
+                </ul>
+            </p>
+            <p>
+                <em>Peer Review</em><br />
+                <ul>
+                    <li>“The website indicates whether all submissions are sent out for review.” The keyword in this aspect is “indicates”. It’s not about whether the submissions are reviewed or not, but whether the website indicates something about this.</li>
+                </ul>
+            </p>
+            <p>
+                <em>Process</em><br />
+                <ul>
+                    <li>Indications of an “track & trace service” are often briefly mentioned near a login button for authors, e.g. “To submit an article online, and to <span style="text-decoration: underline;">check the status of your submission</span>, you need to have an account with […]”.</li>
+                    <li>“Published papers include information on dates of original submission and acceptance” is about the submission date (before the review process) and the acceptance date (after the review process and before the definite publication of the article). The publication date isn’t relevant for this aspect.</li>
+                    <li>The ‘Digital Object Identifier’ is usually abbreviated to DOI. It could look as follows: http://doi.org/10.1000/182. </li>
+                    <li>A synonym for “Publication Fee” is “Article Processing Charges”.</li>
+                </ul>
+            </p>
+            <p>
+                <em>Special attention: Reviewer’s comments vs. commentaries by the community</em><br />
+                <ul>
+                    <li>“Reviewer’s comments” are the comments that are given by the reviewers during the peer review process, before the definite publication of the article in the journal.</li>
+                    <li>“Commentaries by the community” are the comments that are given by the readers of the article, after the definite publication of the article in the journal.</li>
+                </ul>
+            </p>
+            <p>
+                <em>Special attention: Indexing service vs. repository</em><br />
+                <ul>
+                    <li>An “indexing service” is a database which refers to an article. To read the article, one has to visit the journal’s website.</li>
+                    <li>A “repository” is a database which includes an article. To read this article, one doesn’t have to leave the repository’s website.</li>
+                </ul>
+            </p>
+
+            <h3 id="licenses">Including licensed prices in QOAM</h3>
+            <p>
+                A licence is an agreement of a university with a publisher about a (discount on) the publication fee of a journal for the employees of that university. QOAM shows these discounts under the tab ‘Price information’ on the detail page of the journal.
+            </p>
+            <p>
+                As a publisher or a licence manager, to have the discounts included please arrange the relevant data as instructed below and post it to info@qoam.eu. Your data will be imported the other day. 
+            </p>
+            <p>
+                Alternatively, if you are a QOAM InstitutionAdmin you may use the function ‘Import licensed prices’ on the admin page of QOAM: @Html.ActionLink("https://www.qoam.eu/admin/", "Index", "Admin").
+            </p>
+            <p>
+                <h4>1. Import</h4>
+                The import of licensed prices in QOAM requires an Excel file with the following format.
+            </p>
+            <p>
+                The main worksheet (first tab) is called ‘Universities’ and has two columns. One is ‘Domains’ with the top level domain names of concerned universities (e.g. university1.nl or university2.ac.uk). The other one is called ‘Tabs’. It has the names of the other tabs, the so called licence tabs. Usually these tabs have the name of a publisher (e.g. publisherA or, in case a publisher has more licences, publisherB1, publisherB2, etc.).  It is possible to have several comma or semicolon separated tab names in one field. 
+            </p>
+            <p>
+                Every licence tab has two columns. The first one is called ‘eISSN’ and has the ISSN numbers of the digital versions of the journals included in a specific licence. The second column is called ‘Text’ and nutshells the discount for that journal in the given licence, typically as follows, “Discount of xy% on publication fee. Please contact your library for more information.”
+            </p>
+            <p>
+                If a licence is applicable to a university, the name of the corresponding licence tab is coupled to that university by placing it behind the domain of that university in the main worksheet, either in a separate field or several comma or semicolon separated licence tabs in one field.
+            </p>
+            <p>
+                NB<br/>
+                <ul>
+                    <li>The combination ISSN-domain name must be unique; if an ISSN is included in two different licences, these two licences cannot be coupled to the same university.</li>
+                    <li>All text, including the headers of the columns, must be in ASCII, although the headers of the columns are not case sensitive.</li>
+                </ul>
+            </p>
+            <p>
+                <h4>2. Maintenance</h4>
+                All changes can be managed via existing or new Excel files. In case an existing file is changed, importing it will overwrite the old data. So, in case a university cancels a licence, skip the name of the corresponding licence tab behind the domain name of that university in the main worksheet and import the whole file again. Or import a new file with only the domain name of that university and leave the column with licence tabs blank. In that case all licences of that university will be skipped.
+            </p>
+        </div>
+    </div>
+</div>

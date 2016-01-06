@@ -11,9 +11,9 @@ namespace QOAM.Core.Import.Invitations
         public List<AuthorToInvite> Execute(DataSet data)
         {
             var authorsToInvite = (from row in data.Tables["Authors"].Rows.Cast<DataRow>()
-                                   // Trim before splitting to remove any trailing ';'. Splitting without removing empty entries so 
+                                   // Trim before splitting to remove any trailing ';' and ','. Splitting without removing empty entries so 
                                    // that we can present the user with a proper overview of who hasn't been invited and why
-                                   from email in row["Author email address"].ToString().Trim(';').Split(new[] { ";" }, StringSplitOptions.None)
+                                   from email in row["Author email address"].ToString().Trim(';', ',').Split(new[] { ";", "," }, StringSplitOptions.None)
                                    select new AuthorToInvite
                                    {
                                        ISSN = row["eissn"].ToString(),

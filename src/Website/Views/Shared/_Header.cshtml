@@ -23,7 +23,8 @@
                 <li @MenuItemClass("Score")><a href="@Url.Action("Index", "Score")"><i class="glyphicon glyphicon-list-alt"></i> Score journal</a></li>
                 <li @MenuItemClass("Profiles")><a href="@Url.Action("Index", "Profiles")"><i class="glyphicon glyphicon-user"></i> Profiles</a></li>
                 <li @MenuItemClass("Institutions")><a href="@Url.Action("Index", "Institutions")"><span class="icon-group"></span> Institutions</a></li>
-                @if (User.Identity.IsAuthenticated && ViewBag.PageId == "journals-details-page") {
+                @if (User.Identity.IsAuthenticated && ViewBag.PageId == "journals-details-page")
+                {
                     <li @MenuItemClass("MyQoam", "dropdown")>
                         <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "MyQoam")"><i class="glyphicon glyphicon-home"></i> My QOAM <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -32,6 +33,14 @@
                             <li><a href="@Url.Action("Delete", "MyQoam")"><i class="glyphicon glyphicon-remove"></i> Delete from My QOAM</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="@Url.Action("Index", "MyQoam")"><i class="glyphicon glyphicon-home"></i> Go to My QOAM</a></li>
+                        </ul>
+                    </li>
+                }
+                else if (User.Identity.IsAuthenticated && ViewBag.PageId == "myqoam-index-page") {
+                    <li @MenuItemClass("MyQoam", "dropdown")>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "MyQoam")"><i class="glyphicon glyphicon-home"></i> My QOAM <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Empty", "MyQoam")"><i class="glyphicon glyphicon-ban-circle"></i> Empty My QOAM</a></li>
                         </ul>
                     </li>
                 }

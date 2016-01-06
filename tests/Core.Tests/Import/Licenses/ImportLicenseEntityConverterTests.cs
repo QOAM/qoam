@@ -8,8 +8,8 @@
 
     public class ImportLicenseEntityConverterTests
     {
-        private ImportLicenseEntityConverter _converter;
-        private DataSet _validDataSet;
+        ImportLicenseEntityConverter _converter;
+        DataSet _validDataSet;
 
         public void Initialize()
         {
@@ -23,7 +23,7 @@
             Initialize();
             var result = _converter.Execute(_validDataSet);
 
-            Assert.Equal(4, result.Count);
+            Assert.Equal(6, result.Count);
             Assert.Equal(8, result[2].Licenses.Count);
         }
 
