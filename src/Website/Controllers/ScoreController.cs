@@ -11,6 +11,7 @@ using QOAM.Core.Helpers;
 using QOAM.Core.Import.Invitations;
 using QOAM.Core.Import.Licences;
 using QOAM.Core.Repositories;
+using QOAM.Core.Repositories.Filters;
 using QOAM.Website.Helpers;
 using QOAM.Website.Models;
 using QOAM.Website.ViewModels.Score;
@@ -33,8 +34,9 @@ namespace QOAM.Website.Controllers
         private readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
         private readonly IInstitutionRepository institutionRepository;
         readonly IBulkImporter<AuthorToInvite> _bulkImporter;
+        readonly IUserJournalRepository _userJournalRepository;
 
-        public ScoreController(IBaseScoreCardRepository baseScoreCardRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IScoreCardVersionRepository scoreCardVersionRepository, IJournalRepository journalRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IQuestionRepository questionRepository, GeneralSettings generalSettings, IUserProfileRepository userProfileRepository, IInstitutionRepository institutionRepository, IAuthentication authentication, IBulkImporter<AuthorToInvite> bulkImporter)
+        public ScoreController(IBaseScoreCardRepository baseScoreCardRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IScoreCardVersionRepository scoreCardVersionRepository, IJournalRepository journalRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IQuestionRepository questionRepository, GeneralSettings generalSettings, IUserProfileRepository userProfileRepository, IInstitutionRepository institutionRepository, IAuthentication authentication, IBulkImporter<AuthorToInvite> bulkImporter, IUserJournalRepository userJournalRepository)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(baseJournalPriceRepository, nameof(baseJournalPriceRepository));
@@ -58,6 +60,7 @@ namespace QOAM.Website.Controllers
             this.generalSettings = generalSettings;
 
             _bulkImporter = bulkImporter;
+            _userJournalRepository = userJournalRepository;
         }
 
         [HttpGet, Route("")]
@@ -66,6 +69,12 @@ namespace QOAM.Website.Controllers
             model.Languages = this.languageRepository.All.ToSelectListItems("<All languages>");
             model.Disciplines = this.subjectRepository.All.ToSelectListItems("<All disciplines>", SubjectTruncationLength);
             model.Journals = this.journalRepository.Search(model.ToFilter());
+            model.JournalIdsInMyQOAM = _userJournalRepository.Search(model.ToFilter(Authentication.CurrentUserId)).Select(x => x.Id);
+
+            object saved;
+
+            if (TempData.TryGetValue("MyQoamMessage", out saved))
+                ViewBag.MyQoamMessage = saved.ToString();
 
             return this.View(model);
         }

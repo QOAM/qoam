@@ -14,5 +14,6 @@ namespace QOAM.Core.Repositories
         void InsertOrUpdate(UserJournal entity);
         void Delete(UserJournal entity);
         IPagedList<Journal> Search(UserJournalFilter filter);
+        IList<UserJournal> All(int userProfileId);
     }
 }

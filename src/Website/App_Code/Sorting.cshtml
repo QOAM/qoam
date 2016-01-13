@@ -11,7 +11,7 @@
         </a>
 
         <ul class="dropdown-menu pull-right">
-            @foreach (var sortMode in ((JournalSortMode[])Enum.GetValues(typeof(JournalSortMode))).Where(s => s != JournalSortMode.Name))
+            @foreach (var sortMode in ((JournalSortMode[])Enum.GetValues(typeof(JournalSortMode))))
             {
                 var isActive = sortMode == currentSortMode;
                 var activeClass = isActive ? "active" : null;

@@ -30,8 +30,8 @@
     <div class="list-group">
         <a href="javascript:void(0)" class="list-group-item active">Institutions</a>
         @Html.AdminLink("Add institution", User, "AddInstitution", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin)
-        <a class="list-group-item non-clickable @(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin) ? "" : "disabled")">Add insitution <sup>2</sup></a>
         <a class="list-group-item non-clickable @(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin) ? "" : "disabled")">Edit insitution <sup>2</sup></a>
+        <a class="list-group-item non-clickable @(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin) ? "" : "disabled")">Delete insitution <sup>2</sup></a>
     </div>
 
     <div class="list-group">

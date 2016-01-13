@@ -12,7 +12,7 @@ namespace QOAM.Core.Import.Licences
 
         protected override void ProcessSheets(IWorkbook workbook, int mainSheetIndex)
         {
-            ExtractSheet(MainSheet, workbook, "Domein", "Tabbladen");
+            ExtractSheet(MainSheet, workbook, "Domain", "Tabs");
 
             for (var i = 0; i < workbook.NumberOfSheets; i++)
             {

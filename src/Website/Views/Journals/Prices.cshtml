@@ -28,17 +28,6 @@
         <div class="panel panel-primary text-center">
             <div class="panel-heading">Institutional price</div>
             <div class="panel-body">
-
-                @*@if (User.Identity.IsAuthenticated)
-                {
-                    if (User.IsInRole(ApplicationRole.InstitutionAdmin) || User.IsInRole(ApplicationRole.Admin))
-                    {
-                        <p>
-                            If your institute has a price arrangement with the publisher for this journal please link @Html.ActionLink("here", "InstitutionJournalLicense", new { Model.Id, ViewBag.User.InstitutionId, Model.RefererUrl }) to your informative web site. 
-                        </p>
-                    }
-                }*@
-
                 @if (Model.InstitutionJournals.TotalItemCount == 0)
                 {
                     <p>Currently, there are no institutions with a special license for this journal.</p>
@@ -53,10 +42,6 @@
                         <thead>
                             <tr>
                                 <th>Institution</th>
-                                @*@if (User.IsInRole(ApplicationRole.Admin) || User.IsInRole(ApplicationRole.InstitutionAdmin))
-                                {
-                                    <th>Action</th>
-                                }*@
                             </tr>
                         </thead>
                         <tbody id="@Model.Id-institutional-prices">
@@ -66,7 +51,7 @@
                             @if (Model.InstitutionJournals.HasNextPage)
                             {
                                 <tr>
-                                    <td colspan="9">
+                                    <td>
                                         @Ajax.ActionLink("Load more", "InstitutionJournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions { UpdateTargetId = Model.Id + "-institutional-prices", InsertionMode = InsertionMode.InsertAfter, OnSuccess = "afterLoadMore(data, 'loadMoreInstitutionalPrice', 'loadMoreInstitutionalPriceLink')" }, new { id = "loadMoreInstitutionalPriceLink" })
                                     </td>
                                 </tr>

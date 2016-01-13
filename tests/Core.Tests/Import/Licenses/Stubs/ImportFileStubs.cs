@@ -21,12 +21,14 @@ namespace QOAM.Core.Tests.Import.Licenses.Stubs
         {
             var table = new DataTable("Universities");
 
-            table.AddColumns("Domein", "Tabbladen");
+            table.AddColumns("Domain", "Tabs");
 
             table.AddRow(new[] { "ru.nl", "Sage" });
             table.AddRow(new[] { "uu.nl", "Springer" });
             table.AddRow(new[] { "uva.nl", "Springer, Sage" });
-            table.AddRow(new[] { "rug.nl", "Springer, Sage" });
+            table.AddRow(new[] { "rug.nl", "Springer,Sage" });
+            table.AddRow(new[] { "ugent.be", "Springer; Sage" });
+            table.AddRow(new[] { "upc.cat", "Springer;Sage" });
 
             return table;
         }

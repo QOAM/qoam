@@ -68,6 +68,12 @@
             return this.View();
         }
 
+        [HttpGet, Route("manuals")]
+        public ViewResult Manuals()
+        {
+            return this.View();
+        }
+
         [HttpGet, Route("journalscorecard")]
         public ViewResult JournalScoreCard()
         {

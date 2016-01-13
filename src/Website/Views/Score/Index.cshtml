@@ -65,7 +65,7 @@
 
             <div id="filter" class="well">
                 <h3>Group invitations<img src="~/Images/scoresheet.png" class="pull-right clearfix" style="height:30px;" /></h3>
-                <br/>
+                <br />
                 <p>
                     <a href="@Url.Action("BulkRequestValuation", "Score")" class="btn btn-primary">Invitations for Valuation Score Cards</a>
                 </p>
@@ -73,7 +73,13 @@
         </div>
 
         <div id="journals" class="col-md-9">
-
+            @if (ViewBag.MyQoamMessage != null)
+            {
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @ViewBag.MyQoamMessage
+                </div>
+            }
             <h3>Journals to score: @Model.Journals.TotalItemCount</h3>
 
             @if (Model.Journals.Any())
@@ -160,6 +166,15 @@
                                         <a class="" href="@Url.Action("ValuationScoreCard", new {id = journal.Id})">- Publish a Valuation Score Card</a><br />
                                         <a class="" href="@Url.Action("RequestValuation", new {id = journal.Id})">- Invite someone else to do so</a>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    @if (Model.IsInMyQOAM(journal.Id))
+                                    {
+                                        <span class="pull-right clearfix"><a href="@Url.Action("Delete", "MyQoam", new { id = @journal.Id, returnUrl = Request.RawUrl })" alt="Delete from My QOAM" title="Delete from My QOAM"><i class="glyphicon glyphicon-remove"></i> Delete from My QOAM</a></span>
+                                    }
+                                    else {
+                                        <span class="pull-right clearfix"><a href="@Url.Action("Add", "MyQoam", new { id = @journal.Id, returnUrl = Request.RawUrl })" alt="Add to My QOAM" title="Add to My QOAM"><i class="glyphicon glyphicon-plus"></i> Add to My QOAM</a></span>
+                                    }
                                 </div>
                             </div>
                         </div>

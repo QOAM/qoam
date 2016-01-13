@@ -17,7 +17,7 @@
             <div class="form-group row">
                 <div class="col-md-12">
                     Current blocklist<br />
-                    @Html.ListBoxFor(model => model.SelectedItems, new MultiSelectList(Model.BlockedIssns, "Id", "ISSN"), new { @size = Math.Min(20, Model.BlockedIssns.Count()) })
+                    @Html.ListBoxFor(model => model.SelectedItems, new MultiSelectList(Model.BlockedIssns, "Id", "ISSN"), new { @size = Math.Min(20, Model.BlockedIssns.Count()), style = "height: 600px; width:200px;" })
                     @Html.ValidationMessageFor(m => m.SelectedItems, null, new { @class = "control-label" })
                     <br />
                     Use CTRL or SHIFT keys to select multiple ISSNs.

@@ -81,7 +81,7 @@
                 Discipline = Discipline,
                 Language = Language,
                 SubmittedOnly = SubmittedOnly,
-                MustHaveBeenScored = true,
+                MustHaveBeenScored = false,
                 SortMode = SortBy,
                 SortDirection = Sort,
                 PageNumber = Page,
