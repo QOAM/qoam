@@ -2,11 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
     using QOAM.Core;
 
-    public class BaseScoreCardViewModel
+    public class BaseScoreCardViewModel : IValidatableObject
     {
         public int Id { get; set; }
         public string Remarks { get; set; }
@@ -47,6 +48,21 @@
             journalPrice.Price.Currency = hasPrice ? this.Price.Currency : null;
             journalPrice.Price.FeeType = this.Price.FeeType;
             journalPrice.DateAdded = DateTime.Now;
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (QuestionScores == null || QuestionScores.Count <= 0)
+            {
+                return new[] { new ValidationResult("Not all questions have been scored.", new[] { nameof(QuestionScores) }) };
+            }
+
+            if (QuestionScores.Any(q => q.Score == Score.Undecided))
+            {
+                return new[] { new ValidationResult("Not all questions have been scored.", new[] { nameof(QuestionScores) }) };
+            }
+
+            return Enumerable.Empty<ValidationResult>();
         }
     }
 }

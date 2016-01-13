@@ -163,7 +163,7 @@
                             });
                     })
                     .fail(function () {
-                        alert('Something failed!');
+                        alert('An error occured.\nPlease ensure you scored all questions and try again.');
                         self.publishing(false);
                     });
             };
@@ -438,7 +438,7 @@
                             });
                     })
                     .fail(function () {
-                        alert('Something failed!');
+                        alert('An error occured.\nPlease ensure you scored all questions and try again.');
                         self.publishing(false);
                     });
             };

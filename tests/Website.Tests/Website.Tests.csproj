@@ -185,6 +185,8 @@
     <Compile Include="ViewModels\Institutions\DetailsViewModelTests.cs" />
     <Compile Include="ViewModels\Institutions\IndexViewModelTests.cs" />
     <Compile Include="ViewModels\Profiles\IndexViewModelTests.cs" />
+    <Compile Include="ViewModels\Score\BaseScoreCardViewModelTests.cs" />
+    <Compile Include="ViewModels\Score\ValuationScoreCardViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

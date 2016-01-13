@@ -2,11 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
     using QOAM.Core;
 
-    public class ValuationScoreCardViewModel
+    public class ValuationScoreCardViewModel : IValidatableObject
     {
         public int Id { get; set; }
         public string Remarks { get; set; }
@@ -19,13 +20,7 @@
         public IEnumerable<KeyValuePair<Currency, string>> Currencies { get; set; }
         public ScoreCardState State { get; set; }
 
-        public bool HasPrice
-        {
-            get
-            {
-                return this.Submitted && this.Price.Amount.HasValue;
-            }
-        }
+        public bool HasPrice => this.Submitted && this.Price.Amount.HasValue;
 
         public void UpdateScoreCard(ValuationScoreCard scoreCard, TimeSpan scoreCardLifeTime)
         {
@@ -53,6 +48,21 @@
             journalPrice.Price.Currency = this.HasPrice ? this.Price.Currency : null;
             journalPrice.Price.FeeType = this.HasPrice ? FeeType.Article : FeeType.Absent;
             journalPrice.DateAdded = DateTime.Now;
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (QuestionScores == null || QuestionScores.Count <= 0)
+            {
+                return new [] { new ValidationResult("Not all questions have been scored.", new[] { nameof(QuestionScores) })};
+            }
+
+            if (QuestionScores.Any(q => q.Score == Score.Undecided))
+            {
+                return new[] { new ValidationResult("Not all questions have been scored.", new [] { nameof(QuestionScores) })};
+            }
+
+            return Enumerable.Empty<ValidationResult>();
         }
     }
 }
