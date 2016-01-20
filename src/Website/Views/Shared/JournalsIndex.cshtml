@@ -90,7 +90,6 @@
                         </p>
                     </fieldset>
                 }
-
             </div>
         </div>
 
@@ -98,7 +97,8 @@
 
             <div class="row">
                 <div class="col-md-9">
-                    @if (ViewBag.PageId == "myqoam-index-page") {
+                    @if (ViewBag.PageId == "myqoam-index-page")
+                    {
                         <h3>Saved journals: @Model.Journals.TotalItemCount</h3>
                     }
                     else {
@@ -127,7 +127,7 @@
                         @foreach (var journal in Model.Journals)
                         {
                             <tr>
-                                <td>@Html.ActionLink(journal.Title, "Details", "Journals",  new { id = journal.Id, returnUrl = Request.RawUrl }, null)</td>
+                                <td>@Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, null)</td>
                                 <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name }, null)</td>
                                 <td class="verdict-@journal.JournalScore.Swot">&#160;</td>
                                 <td>@Scores.AverageScore(journal.JournalScore.OverallScore)</td>
@@ -138,7 +138,7 @@
                     </tbody>
                 </table>
 
-                @Html.PagedListPager(Model.Journals, page => Url.Action("Index", "Journals", new { page, Model.Title, Model.Issn, Model.Publisher, Model.Discipline, Model.Language, Model.SubmittedOnly, Model.Sort, Model.SortBy, Model.SwotMatrix }), Html.PagedListRenderOptions())
+                @Html.PagedListPager(Model.Journals, page => Url.Action("Index", new { page, Model.Title, Model.Issn, Model.Publisher, Model.Discipline, Model.Language, Model.SubmittedOnly, Model.Sort, Model.SortBy, Model.SwotMatrix }), Html.PagedListRenderOptions())
             }
             else
             {
@@ -146,7 +146,6 @@
             }
         </div>
     </div>
-
 </div>
 
 @section stylesheets

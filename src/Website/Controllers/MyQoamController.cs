@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Web.Mvc;
 using QOAM.Core;
-using QOAM.Core.Import.Invitations;
 using QOAM.Core.Repositories;
 using QOAM.Website.Helpers;
 using QOAM.Website.ViewModels.Journals;
 
 namespace QOAM.Website.Controllers
 {
-    [RequireHttps, Authorize]
+    [RequireHttps]
     [RoutePrefix("myqoam")]
+    [Authorize]
     public class MyQoamController : ApplicationController
     {
         const int SubjectTruncationLength = 90;
@@ -18,22 +18,27 @@ namespace QOAM.Website.Controllers
         readonly ILanguageRepository _languageRepository;
         readonly ISubjectRepository _subjectRepository;
         readonly IUserJournalRepository _userJournalRepository;
-        readonly IJournalRepository _journalRepository;
 
-        public MyQoamController(IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IUserJournalRepository userJournalRepository, IJournalRepository journalRepository) : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
+        public MyQoamController(IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IUserJournalRepository userJournalRepository) : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             _languageRepository = languageRepository;
             _subjectRepository = subjectRepository;
             _userJournalRepository = userJournalRepository;
-            _journalRepository = journalRepository;
         }
 
         [HttpGet, Route("")]
         public ActionResult Index(IndexViewModel model)
         {
-            model.Languages = _languageRepository.All.ToSelectListItems("<All languages>");
-            model.Disciplines = _subjectRepository.All.ToSelectListItems("<All disciplines>", SubjectTruncationLength);
-            model.Journals = _userJournalRepository.Search(model.ToFilter(Authentication.CurrentUserId));
+            try
+            {
+                model.Languages = _languageRepository.All.ToSelectListItems("<All languages>");
+                model.Disciplines = _subjectRepository.All.ToSelectListItems("<All disciplines>", SubjectTruncationLength);
+                model.Journals = _userJournalRepository.Search(model.ToFilter(Authentication.CurrentUserId));
+            }
+            catch (Exception exception)
+            {
+                ModelState.AddModelError("", exception);
+            }
 
             return View("JournalsIndex", model);
         }
@@ -62,7 +67,7 @@ namespace QOAM.Website.Controllers
                 TempData[MyQoamMessage] = "Journal has been added to My QOAM!";
             }
 
-            return string.IsNullOrWhiteSpace(returnUrl) ? (ActionResult) RedirectToAction("Details", "Journals", new { id }) : Redirect(returnUrl);
+            return string.IsNullOrWhiteSpace(returnUrl) ? (ActionResult)RedirectToAction("Details", "Journals", new { id }) : Redirect(returnUrl);
         }
 
         [HttpGet, Route("{id:int}/delete")]
@@ -80,7 +85,7 @@ namespace QOAM.Website.Controllers
             else
                 TempData[MyQoamMessage] = "This journal isn't linked to My QOAM.";
 
-            return string.IsNullOrWhiteSpace(returnUrl) ? (ActionResult) RedirectToAction("Details", "Journals", new { id }) : Redirect(returnUrl);
+            return string.IsNullOrWhiteSpace(returnUrl) ? (ActionResult)RedirectToAction("Details", "Journals", new { id }) : Redirect(returnUrl);
         }
 
         [HttpGet, Route("empty")]

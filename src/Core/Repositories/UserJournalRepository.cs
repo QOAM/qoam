@@ -28,8 +28,7 @@ namespace QOAM.Core.Repositories
             if (filter.JournalId.HasValue)
                 query = query.Where(x => x.JournalId == filter.JournalId.Value);
 
-            if (filter.UserProfileId.HasValue)
-                query = query.Where(x => x.UserProfileId == filter.UserProfileId.Value);
+            query = query.Where(x => x.UserProfileId == filter.UserProfileId);
 
             return query.OrderByDescending(x => x.DateAdded).ToPagedList(filter.PageNumber, filter.PageSize);
         }
@@ -41,8 +40,7 @@ namespace QOAM.Core.Repositories
             if (filter.JournalId.HasValue)
                 query = query.Where(x => x.JournalId == filter.JournalId.Value);
 
-            if (filter.UserProfileId.HasValue)
-                query = query.Where(x => x.UserProfileId == filter.UserProfileId.Value);
+            query = query.Where(x => x.UserProfileId == filter.UserProfileId);
 
             return query.OrderByDescending(x => x.DateAdded).ToList();
         }
@@ -56,11 +54,14 @@ namespace QOAM.Core.Repositories
         {
             var query = DbContext.UserJournals
                 .Include(uj => uj.Journal)
+                .Include(uj => uj.Journal.Publisher)
+                .Include(uj => uj.Journal.Languages)
+                .Include(uj => uj.Journal.Subjects)
+                .Include(uj => uj.Journal.JournalScore)
                 .Include(uj => uj.UserProfile)
-                .AsExpandable();
+                .AsExpandable()
+                .Where(x => x.UserProfileId == filter.UserProfileId);
 
-            if (filter.UserProfileId.HasValue)
-                query = query.Where(x => x.UserProfileId == filter.UserProfileId.Value);
 
             return query.Select(uj => uj.Journal).Search(filter);
         }

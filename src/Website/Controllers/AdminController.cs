@@ -243,7 +243,7 @@ namespace QOAM.Website.Controllers
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult BlockIssn()
         {
-            var model = new BlockIssnViewModel { BlockedIssns = blockedIssnRepository.All.Take(BlockedIssnsCount) };
+            var model = new BlockIssnViewModel { BlockedIssns = blockedIssnRepository.All };
 
             return this.View(model);
         }
@@ -267,7 +267,7 @@ namespace QOAM.Website.Controllers
                 return this.RedirectToAction("BlockIssn");
             }
 
-            model.BlockedIssns = blockedIssnRepository.All.Take(BlockedIssnsCount);
+            //model.BlockedIssns = blockedIssnRepository.All.Take(BlockedIssnsCount);
 
             return this.View(model);
         }
@@ -276,7 +276,7 @@ namespace QOAM.Website.Controllers
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult RemoveBlockedIssn()
         {
-            var model = new RemoveBlockedIssnViewModel { BlockedIssns = blockedIssnRepository.All.Take(BlockedIssnsCount) };
+            var model = new RemoveBlockedIssnViewModel { BlockedIssns = blockedIssnRepository.All };
             return this.View(model);
         }
 
@@ -296,7 +296,7 @@ namespace QOAM.Website.Controllers
                 return this.RedirectToAction("RemoveBlockedIssn");
             }
 
-            model.BlockedIssns = blockedIssnRepository.All.Take(BlockedIssnsCount);
+            model.BlockedIssns = blockedIssnRepository.All;
 
             return this.View(model);
         }
