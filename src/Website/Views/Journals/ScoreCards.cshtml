@@ -21,7 +21,7 @@
         @if (Model.BaseScoreCards.HasNextPage)
         {
             <tr>
-                <td colspan="9">
+                <td colspan="7">
                     @Ajax.ActionLink("Load more", "BaseScoreCards", new { Model.Id, Page = Model.Page + 1 }, new AjaxOptions
                                                                                                                   {
                                                                                                                       UpdateTargetId = Model.Id + "-baseScorecards",
@@ -50,7 +50,7 @@
         @if (Model.ValuationScoreCards.HasNextPage)
         {
             <tr>
-                <td colspan="9">
+                <td colspan="4">
                     @Ajax.ActionLink("Load more", "ValuationScoreCards", new { Model.Id, Page = Model.Page + 1 }, new AjaxOptions
                                                                                                                   {
                                                                                                                       UpdateTargetId = Model.Id + "-valuationScorecards",

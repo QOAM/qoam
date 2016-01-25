@@ -1,0 +1,38 @@
+﻿@model QOAM.Website.ViewModels.Admin.ImportSubmissionLinksViewModel
+
+@{
+    ViewBag.Title = "Import Submission Links";
+}
+
+<div class="container main">
+
+    <h2>@ViewBag.Title</h2>
+
+    <p>
+        Select an Excel file containing multiple Submission Page Links for journals. Importing might take a while, depending on the size of the file.
+    </p>
+    <br/>
+    @using (Html.BeginForm("ImportSubmissionLinks", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <fieldset>
+            <legend>@ViewBag.Title</legend>
+
+            @Html.Partial("_FileUpload")
+
+            <div class="row bottommargin">
+                <div class="col-xs-1 vcenter">
+                </div>
+                <div class="col-xs-11">
+                    <input type="submit" value="Import" class="btn btn-primary" />
+                </div>
+            </div>
+        </fieldset>
+    }
+</div>
+
+@section scripts
+{
+    @Html.Partial("_FormScripts")
+}

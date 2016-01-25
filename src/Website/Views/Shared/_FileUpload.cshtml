@@ -8,7 +8,7 @@
         @Html.TextBoxFor(m => m.File, new { type = "file", accept = ".xlsx", @class = "fullWidth  tt-input" })
     </div>
     <div class="col-xs-2">
-        @Html.ValidationMessageFor(m => m.File, null, new { @class = "red" })
+        @Html.ValidationMessageFor(m => m.File, null, new { @class = "red", style="color: red;" })
     </div>
 </div>
 <div class="row bottommargin">

@@ -1,6 +1,7 @@
 ﻿@using System.Web.Mvc.Html5
 @using System.Web.Optimization
 @using PagedList.Mvc
+@using QOAM.Core
 @using QOAM.Website.Helpers
 @using QOAM.Website.ViewModels.Journals
 @model IndexViewModel
@@ -91,6 +92,16 @@
                     </fieldset>
                 }
             </div>
+            @*@if (ViewBag.PageId == "journals-index-page")
+            {
+                <div class="well">
+                    <h3>Group invitations<img src="~/Images/scoresheet.png" class="pull-right clearfix" style="height:30px;" /></h3>
+                    <br />
+                    <p>
+                        <a href="@Url.Action("BulkRequestValuation", "Score")" class="btn btn-primary">Invitations for Valuation Score Cards</a>
+                    </p>
+                </div>
+            }*@
         </div>
 
         <div class="col-md-9">
@@ -102,7 +113,7 @@
                         <h3>Saved journals: @Model.Journals.TotalItemCount</h3>
                     }
                     else {
-                        <h3>Scored journals: @Model.Journals.TotalItemCount</h3>
+                        <h3>@Model.Journals.TotalItemCount journals</h3>
                     }
 
                 </div>
@@ -129,7 +140,16 @@
                             <tr>
                                 <td>@Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, null)</td>
                                 <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name }, null)</td>
-                                <td class="verdict-@journal.JournalScore.Swot">&#160;</td>
+                                <td class="verdict-@journal.JournalScore.Swot">
+                                    @if (!string.IsNullOrWhiteSpace(journal.SubmissionPageLink) && journal.JournalScore.Swot == SwotVerdict.StrongJournal)
+                                    {
+                                        <a href="@journal.SubmissionPageLink" alt="Go to submission page" title="Go to submission page" class="submission-link" target="_blank">S</a>
+                                    }
+                                    else
+                                    {
+                                        @:&#160;
+                                    }
+                                </td>
                                 <td>@Scores.AverageScore(journal.JournalScore.OverallScore)</td>
                                 <td>@Scores.AverageScore(journal.JournalScore.ValuationScore)</td>
                             </tr>

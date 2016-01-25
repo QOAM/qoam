@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using Core.Import.Licences;
 
-    public static class ConvertedEntityStubs
+    public static class UniversityLicenseStubs
     {
         public static List<UniversityLicense> Licenses()
         {

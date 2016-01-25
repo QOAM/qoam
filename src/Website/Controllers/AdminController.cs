@@ -1,4 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System.Data.Entity.Validation;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
+using QOAM.Core.Import.SubmissionLinks;
+using QOAM.Website.ViewModels.Admin;
 
 namespace QOAM.Website.Controllers
 {
@@ -37,7 +41,9 @@ namespace QOAM.Website.Controllers
         private readonly IInstitutionRepository institutionRepository;
         private readonly IBlockedISSNRepository blockedIssnRepository;
 
-        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository)
+        readonly IBulkImporter<SubmissionPageLink> _bulkImporter;
+
+        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalsImport, nameof(journalsImport));
@@ -47,6 +53,7 @@ namespace QOAM.Website.Controllers
             Requires.NotNull(journalRepository, nameof(journalRepository));
             Requires.NotNull(institutionRepository, nameof(institutionRepository));
             Requires.NotNull(blockedIssnRepository, nameof(blockedIssnRepository));
+            Requires.NotNull(bulkImporter, nameof(bulkImporter));
             
             this.journalsImport = journalsImport;
             this.ulrichsImport = ulrichsImport;
@@ -55,6 +62,7 @@ namespace QOAM.Website.Controllers
             this.journalRepository = journalRepository;
             this.institutionRepository = institutionRepository;
             this.blockedIssnRepository = blockedIssnRepository;
+            _bulkImporter = bulkImporter;
         }
 
         [HttpGet, Route("")]
@@ -523,8 +531,84 @@ namespace QOAM.Website.Controllers
             return View();
         }
 
+        [HttpGet, Route("submissionlinks")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult ImportSubmissionLinks()
+        {
+            return View(new ImportSubmissionLinksViewModel());
+        }
+
+        [HttpPost, Route("submissionlinks")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [ValidateAntiForgeryToken]
+        public ActionResult ImportSubmissionLinks(ImportSubmissionLinksViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var domainRegex = new Regex(@"\b((xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\b", RegexOptions.Compiled);
+
+            try
+            {
+                int imported = 0, rejected = 0;
+                var rejectedUrls = new List<SubmissionPageLink>();
+
+                var data = _bulkImporter.Execute(model.File.InputStream);
+
+                foreach (var submissionPageLink in data)
+                {
+                    var journal = journalRepository.FindByIssn(submissionPageLink.ISSN);
+                    
+                    if (journal == null || !submissionPageLink.Url.Contains(domainRegex.Match(journal.Link).Value))
+                    {
+                        rejected++;
+
+                        rejectedUrls.Add(submissionPageLink);
+                        continue;
+                    }
+
+                    journal.SubmissionPageLink = submissionPageLink.Url;
+                    imported++;
+                }
+
+                journalRepository.Save();
+
+                return View("SubmissionLinksImportSuccessful", new SubmissionLinksImportedViewModel
+                {
+                    AmountImported = imported,
+                    AmountRejected = rejected,
+                    RejectedUrls = rejectedUrls
+                });
+            }
+            catch (ArgumentException invalidFileException)
+            {
+                ModelState.AddModelError("generalError", invalidFileException.Message);
+            }
+            catch (DbEntityValidationException)
+            {
+                //foreach (var eve in e.EntityValidationErrors)
+                //{
+                //    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                //    foreach (var ve in eve.ValidationErrors)
+                //    {
+                //        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage);
+                //    }
+                //}
+                //throw;
+            }
+            catch (Exception exception)
+            {
+                while (exception.InnerException != null)
+                    exception = exception.InnerException;
+
+                ModelState.AddModelError("generalError", $"An error has ocurred: {exception.Message}");
+            }
+
+            return View(model);
+        }
+
         #region Private Methods
-        
+
         private static HashSet<string> GetISSNs(ImportViewModel model)
         {
             return ParseISSNs(model.ISSNs);

@@ -1,4 +1,9 @@
-﻿namespace QOAM.Website.Tests.Controllers
+﻿using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Mail;
+
+namespace QOAM.Website.Tests.Controllers
 {
     using System;
     using System.Net.Mail;
@@ -52,6 +57,29 @@
                                                                  a.To[0].Address == ContactFormTo &&
                                                                  a.From.Address == ContactFormEmail &&
                                                                  a.From.DisplayName == ContactName)), Times.Once);
+        }
+
+        [Fact]
+        public async Task ContactPostWithAttachmentWillSendMailMessage()
+        {
+            // Arrange
+            var mailSenderMock = new Mock<IMailSender>();
+            var homeController = CreateHomeController(mailSender: mailSenderMock.Object);
+            var mockFile = new Mock<HttpPostedFileBase>();
+            var fileStream = new FileStream("Controllers\\Stubs\\Upload file stub.xlsx", FileMode.Open, FileAccess.Read);
+
+            mockFile.Setup(f => f.FileName).Returns(fileStream.Name);
+            mockFile.Setup(f => f.InputStream).Returns(fileStream);
+            mockFile.Setup(x => x.ContentLength).Returns((int)fileStream.Length);
+
+            // Act
+            await homeController.Contact(CreateContactViewModel(mockFile.Object));
+            
+            // Assert
+
+            var attachment = new Attachment("Controllers\\Stubs\\Upload file stub.xlsx");
+
+            mailSenderMock.Verify(m => m.Send(It.Is<MailMessage>(a => a.Attachments.Any(x => x.Name == mockFile.Object.FileName) )), Times.Once);
         }
 
         [Fact]
@@ -131,13 +159,14 @@
                 authentication ?? Mock.Of<IAuthentication>());
         }
 
-        private static ContactViewModel CreateContactViewModel()
+        private static ContactViewModel CreateContactViewModel(HttpPostedFileBase file = null)
         {
             return new ContactViewModel
                        {
                            Email = ContactFormEmail,
                            Message = ContactFormMessage,
-                           Name = ContactName
+                           Name = ContactName,
+                           File = file
                        };
         }
 

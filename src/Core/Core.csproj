@@ -171,21 +171,24 @@
     <Compile Include="Helpers\FilterExtensions.cs" />
     <Compile Include="Helpers\ValidatorExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Import\BulkImporter.cs" />
     <Compile Include="Import\FileImporterBase.cs" />
     <Compile Include="Import\DoajImportRecordMap.cs" />
+    <Compile Include="Import\IBulkImporter.cs" />
     <Compile Include="Import\IFileImporter.cs" />
     <Compile Include="Import\Import.cs" />
     <Compile Include="Import\Invitations\AuthorToInvite.cs" />
     <Compile Include="Import\Invitations\ImportAuthorEntityConverter.cs" />
     <Compile Include="Import\Invitations\InvitationFileImporter.cs" />
     <Compile Include="Import\JournalUpdateProperty.cs" />
-    <Compile Include="Import\Licences\BulkImporter.cs" />
-    <Compile Include="Import\Licences\IBulkImporter.cs" />
     <Compile Include="Import\Licences\IImportEntityConverter.cs" />
     <Compile Include="Import\Licences\ImportLicenseEntityConverter.cs" />
     <Compile Include="Import\Licences\LicenseFileImporter.cs" />
     <Compile Include="Import\Licences\LicenseInfo.cs" />
     <Compile Include="Import\Licences\UniversityLicense.cs" />
+    <Compile Include="Import\SubmissionLinks\SubmissionLinksFileImporter.cs" />
+    <Compile Include="Import\SubmissionLinks\SubmissionPageLink.cs" />
+    <Compile Include="Import\SubmissionLinks\SubmissionPageLinkEntityConverter.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.Designer.cs">
       <DependentUpon>201404301016419_SplitJSC.cs</DependentUpon>
@@ -242,6 +245,10 @@
     <Compile Include="Migrations\201512160931424_MyQoam.Designer.cs">
       <DependentUpon>201512160931424_MyQoam.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601280928572_SubmissionPageLink.cs" />
+    <Compile Include="Migrations\201601280928572_SubmissionPageLink.Designer.cs">
+      <DependentUpon>201601280928572_SubmissionPageLink.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\Filters\UserJournalFilter.cs" />
@@ -257,6 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512160931424_MyQoam.resx">
       <DependentUpon>201512160931424_MyQoam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601280928572_SubmissionPageLink.resx">
+      <DependentUpon>201601280928572_SubmissionPageLink.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />

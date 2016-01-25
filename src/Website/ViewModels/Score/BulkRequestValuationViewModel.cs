@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
 
@@ -7,7 +6,7 @@ namespace QOAM.Website.ViewModels.Score
 {
     public class BulkRequestValuationViewModel : IFileUploadViewModel
     {
-        [Required(ErrorMessage = "Please select a file"), FileExtensions(Extensions = "xslx", ErrorMessage = "The selected file does not contain valid author information!")]
+        [Required(ErrorMessage = "Please select a file"), FileExtensions(Extensions = "xlsx", ErrorMessage = "The selected file does not contain valid author information!")]
         public HttpPostedFileBase File { get; set; }
 
         [Required(ErrorMessage = "Email is Required")]
