@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity.Validation;
+using Microsoft.Ajax.Utilities;
 using QOAM.Core.Import;
 
 namespace QOAM.Website.Controllers
@@ -91,7 +92,7 @@ namespace QOAM.Website.Controllers
         {
             ViewBag.RefererUrl = model.RefererUrl;
 
-            model.InstitutionJournals = institutionJournalRepository.Find(model.ToInstitutionJournalPriceFilter());
+            model.InstitutionJournals = institutionJournalRepository.FindAll(model.ToInstitutionJournalPriceFilter());
             model.BaseJournalPrices = baseJournalPriceRepository.Find(model.ToJournalPriceFilter(null));
             model.ValuationJournalPrices = valuationJournalPriceRepository.Find(model.ToJournalPriceFilter(FeeType.Article));
             model.Journal = journalRepository.Find(model.Id);
@@ -324,7 +325,7 @@ namespace QOAM.Website.Controllers
                                            }).ToList();
 
                 // This is gonna be quite an expensive operation... Rethink!
-                foreach (var institutionJournal in institutionJournals)
+                foreach (var institutionJournal in institutionJournals.Distinct())
                 {
                     var existing = institutionJournalRepository.Find(institutionJournal.JournalId, institutionJournal.InstitutionId);
 

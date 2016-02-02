@@ -106,9 +106,19 @@ namespace QOAM.Core.Repositories
             return this.DbContext.Journals.Find(id);
         }
 
-        public int ScoredJournalsCount()
+        public int BaseScoredJournalsCount()
         {
             return this.DbContext.Journals.Count(j => j.JournalScore.NumberOfBaseReviewers > 0);
+        }
+
+        public int ValuationScoredJournalsCount()
+        {
+            return DbContext.Journals.Count(j => j.JournalScore.NumberOfValuationReviewers > 0);
+        }
+
+        public int JournalsWithSwotCount()
+        {
+            return DbContext.Journals.Count(j => j.JournalScore.OverallScore.AverageScore > 0 && j.JournalScore.ValuationScore.AverageScore > 0);
         }
 
         public IList<Journal> AllIncluding(params Expression<Func<Journal, object>>[] includeProperties)

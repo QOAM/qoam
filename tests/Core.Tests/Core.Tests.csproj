@@ -169,6 +169,9 @@
     <None Include="Import\InvitationModule\Stubs\Invitation-Module - Authors.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Import\Licenses\Stubs\Extra blank sheet.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Import\Licenses\Stubs\Invalid Column names - QOAMupload.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

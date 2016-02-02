@@ -39,7 +39,7 @@
         {
             var model = new IndexViewModel
             {
-                NumberOfScoredJournals = this.journalRepository.ScoredJournalsCount()
+                NumberOfScoredJournals = this.journalRepository.BaseScoredJournalsCount()
             };
             return this.View(model);
         }

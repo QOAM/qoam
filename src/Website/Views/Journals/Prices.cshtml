@@ -1,4 +1,5 @@
-﻿@using QOAM.Website.Models
+﻿@using System.Web.Mvc.Html5
+@using QOAM.Website.Models
 @model QOAM.Website.ViewModels.Journals.PricesViewModel
 <div class="row">
 
@@ -28,17 +29,26 @@
         <div class="panel panel-primary text-center">
             <div class="panel-heading">Institutional price</div>
             <div class="panel-body">
-                @if (Model.InstitutionJournals.TotalItemCount == 0)
+                @if (Model.InstitutionJournals.Count == 0)
                 {
                     <p>Currently, there are no institutions with a special license for this journal.</p>
                 }
                 else
                 {
+                    if (Model.InstitutionJournals.Count > 15)
+                    {
+                            <div class="form-group">
+                                Enter the name of an institution to see if it has a licence for this journal
+                            </div>
+                            <div class="form-group">
+                                @Html.Html5TextBoxFor(m => m.FilterInstitution, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by name")
+                            </div>
+                    }
                     <p>
                         Special price arrangements for:
                     </p>
 
-                    <table class="table table-striped table-bordered">
+                    <table id="licenses" class="table table-striped table-bordered" data-page-length="15">
                         <thead>
                             <tr>
                                 <th>Institution</th>
@@ -48,14 +58,14 @@
                             @Html.Partial("InstitutionJournalPrices", Model.InstitutionJournals)
                         </tbody>
                         <tfoot id="loadMoreInstitutionalPrice">
-                            @if (Model.InstitutionJournals.HasNextPage)
-                            {
-                                <tr>
-                                    <td>
-                                        @Ajax.ActionLink("Load more", "InstitutionJournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions { UpdateTargetId = Model.Id + "-institutional-prices", InsertionMode = InsertionMode.InsertAfter, OnSuccess = "afterLoadMore(data, 'loadMoreInstitutionalPrice', 'loadMoreInstitutionalPriceLink')" }, new { id = "loadMoreInstitutionalPriceLink" })
-                                    </td>
-                                </tr>
-                            }
+                            @*@if (Model.InstitutionJournals.HasNextPage)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Ajax.ActionLink("Load more", "InstitutionJournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions { UpdateTargetId = Model.Id + "-institutional-prices", InsertionMode = InsertionMode.InsertAfter, OnSuccess = "afterLoadMore(data, 'loadMoreInstitutionalPrice', 'loadMoreInstitutionalPriceLink')" }, new { id = "loadMoreInstitutionalPriceLink" })
+                                        </td>
+                                    </tr>
+                                }*@
                         </tfoot>
                     </table>
                 }
@@ -119,11 +129,11 @@
                                 <tr>
                                     <td colspan="9">
                                         @(Ajax.ActionLink("Load more", "BaseJournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions
-                                                                                                                                                                 {
-                                                                                                                                                                     UpdateTargetId = Model.Id + "-journal-base-prices",
-                                                                                                                                                                     InsertionMode = InsertionMode.InsertAfter,
-                                                                                                                                                                     OnSuccess = "afterLoadMore(data, '@Model.Id-loadMoreBaseJournalPrices', '@Model.Id-loadMoreBaseJournalPricesLink')"
-                                                                                                                                                                 }, new { id = "@Model.Id-loadMoreBaseJournalPricesLink" }))
+                                    {
+                                        UpdateTargetId = Model.Id + "-journal-base-prices",
+                                        InsertionMode = InsertionMode.InsertAfter,
+                                        OnSuccess = "afterLoadMore(data, '@Model.Id-loadMoreBaseJournalPrices', '@Model.Id-loadMoreBaseJournalPricesLink')"
+                                    }, new { id = "@Model.Id-loadMoreBaseJournalPricesLink" }))
                                     </td>
                                 </tr>
                             }
@@ -169,11 +179,11 @@
                                 <tr>
                                     <td colspan="9">
                                         @(Ajax.ActionLink("Load more", "ValuationJournalPrices", new { Model.Id, Model.RefererUrl, Page = Model.Page + 1 }, new AjaxOptions
-                                                                                                                                                                 {
-                                                                                                                                                                     UpdateTargetId = Model.Id + "-valuation-journal-prices",
-                                                                                                                                                                     InsertionMode = InsertionMode.InsertAfter,
-                                                                                                                                                                     OnSuccess = "afterLoadMore(data, 'loadMoreValuationJournalPrices', 'loadMoreValuationJournalPricesLink')"
-                                                                                                                                                                 }, new { id = "loadMoreValuationJournalPricesLink" }))
+                                    {
+                                        UpdateTargetId = Model.Id + "-valuation-journal-prices",
+                                        InsertionMode = InsertionMode.InsertAfter,
+                                        OnSuccess = "afterLoadMore(data, 'loadMoreValuationJournalPrices', 'loadMoreValuationJournalPricesLink')"
+                                    }, new { id = "loadMoreValuationJournalPricesLink" }))
                                     </td>
                                 </tr>
                             }

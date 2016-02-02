@@ -12,7 +12,7 @@ namespace QOAM.Core.Import.Licences
             var licenses = (from row in data.Tables["Universities"].Rows.Cast<DataRow>()
                 select new UniversityLicense
                 {
-                    Domain = row["Domain"].ToString(),
+                    Domain = row["Domains"].ToString(),
                     Licenses = ExtractJournalLicenses(row["Tabs"].ToString().Split(new[] { ", ", ",", "; ", ";" }, StringSplitOptions.RemoveEmptyEntries), data)
                 }).ToList();
 
@@ -28,7 +28,7 @@ namespace QOAM.Core.Import.Licences
                 select new LicenseInfo
                 {
                     LicenseName = l,
-                    ISSN = row["ISSN"].ToString(),
+                    ISSN = row["eISSN"].ToString(),
                     Text = row["Text"].ToString()
                 }).ToList();
         }

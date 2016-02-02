@@ -37,8 +37,10 @@
 
         void Delete(Journal journal);
 
-        int ScoredJournalsCount();
+        int BaseScoredJournalsCount();
 
         IQueryable<Journal> SearchByISSN(IEnumerable<string> issns);
+        int ValuationScoredJournalsCount();
+        int JournalsWithSwotCount();
     }
 }

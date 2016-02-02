@@ -39,6 +39,11 @@
         <a href="javascript:void(0)" class="list-group-item active">Prices</a>
         @Html.AdminLink("Import licensed prices", User, "BulkImportInstitutionalPrices", "Journals", "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin)
     </div>
+    
+    <div class="list-group">
+        <a href="javascript:void(0)" class="list-group-item active">Statistics</a>
+        @Html.AdminLink("QOAM Statistics", User, "Statistics", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin, ApplicationRole.DataAdmin)
+    </div>
 
     <div class="row">
         <div class="col-xs-12 vcenter">

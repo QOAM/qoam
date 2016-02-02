@@ -1,0 +1,18 @@
+﻿@model QOAM.Website.ViewModels.Admin.StatisticsViewModel
+
+@{ ViewBag.Title = "QOAM Statistics"; }
+
+<div class="container main">
+    <div class="row side">
+        <a class="btn btn-default return-button" title="Back to search admin page" href="@Url.Action("Index")">&lt; Back to Admin</a>
+        <p>
+            <strong>@Model.BaseScoreCardCount</strong> Journals with a Base Score Card.
+        </p>
+        <p>
+            <strong>@Model.ValuationScoreCardCount</strong> Journals with a Valuation Score Card.
+        </p>
+        <p>
+            <strong>@Model.SwotCount</strong> Journals with SWOT.
+        </p>
+    </div>
+</div>
