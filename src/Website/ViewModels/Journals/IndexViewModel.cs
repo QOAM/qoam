@@ -62,7 +62,7 @@
                            Discipline = this.Discipline,
                            Language = this.Language,
                            SubmittedOnly = this.SubmittedOnly,
-                           MustHaveBeenScored = false,
+                           MustHaveBeenScored = !string.IsNullOrEmpty(this.SwotMatrix),
                            SortMode = this.SortBy,
                            SortDirection = this.Sort,
                            PageNumber = this.Page,
