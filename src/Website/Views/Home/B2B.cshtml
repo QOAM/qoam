@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "B2B Services";
+}
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-3">
+            @{ Html.RenderPartial("_SidebarMenu", "B2B"); }
+        </div>
+        <div class="col-md-9">
+            <h2>@ViewBag.Title</h2>
+
+            <ul class="list-unstyled">
+                <li><a href="#group-invite"><em>Group invitation to complete a Valuation Score Card</em></a></li>
+                <li><a href="#licenses"><em>Including licensed prices in QOAM</em></a></li>
+                <li><a href="#submission"><em>Including a submission button in QOAM</em></a></li>
+
+            </ul>
+
+            <h3 id="group-invite">Group invitation to complete a Valuation Score Card</h3>
+            <p>
+                Naturally, publishers and editors-in-chief may be interested in feedback from their authors but sometimes find it difficult to organize this. Institutions may want to find out good and bad journals. Now, QOAM has developed a straightforward evaluation tool.
+            </p>
+            <p>
+                What is needed are the ISSNs of journals to be evaluated, plus names and email addresses of authors you want to invite to do so.
+                These data have to be organized in an Excel file with three required columns: "eissn" (the ISSN the journal uses for its electronic version), "Author email address" and "Author name".
+                (Multiple e-mail addresses per author can be used, separated by a semicolon or a comma, e.g.: author1@test.uni; author1@somemail.com.)
+            </p>
+            <p>
+                Next, go to @Html.ActionLink("https://www.qoam.eu/score/bulkrequestvaluation", "BulkRequestValuation", "Score"). If you want to send the standard invitation mail, simply import the Excel file. In case you want to send a customized mail, the button ‘Adapt invitation letter’ offers the option to adapt the invitation first. Don’t forget to insert your own email address.
+            </p>
+            <p>
+                After some time, depending on the length of the invitation list, a short result report pops up telling how many invitations have been sent plus a list of mails which have not been sent with a reason why. In general it concerns deficiencies in the mail addresses.  After having repaired them you may resend those mails (but take care that you do not send again the ones that went OK).
+            </p>
+
+            <h3 id="licenses">Including licensed prices in QOAM</h3>
+            <p>
+                A licence is an agreement of a university with a publisher about a (discount on) the publication fee of a journal for the employees of that university. QOAM shows these discounts under the tab ‘Price information’ on the detail page of the journal.
+                <br />
+                As a publisher or a licence manager, to have the discounts included please arrange the relevant data as instructed below and post it to info@qoam.eu. Your data will be imported the other day.
+            </p>
+            <p>
+                Alternatively, if you are a QOAM InstitutionAdmin you may use the function ‘Import licensed prices’ on the admin page of QOAM: @Html.ActionLink("https://www.qoam.eu/admin/", "Index", "Admin").
+            </p>
+            <p>
+                <h4>1. Import</h4>
+                The import of licensed prices in QOAM requires an Excel file with the following format.
+            </p>
+            <p>
+                The main worksheet (first tab) is called ‘Universities’ and has two columns. One is ‘Domains’ with the top level domain names of concerned universities (e.g. university1.nl or university2.ac.uk). The other one is called ‘Tabs’. It has the names of the other tabs, the so called licence tabs. Usually these tabs have the name of a publisher (e.g. publisherA or, in case a publisher has more licences, publisherB1, publisherB2, etc.).  It is possible to have several comma or semicolon separated tab names in one field.
+            </p>
+            <p>
+                Every licence tab has two columns. The first one is called ‘eISSN’ and has the ISSN numbers of the digital versions of the journals included in a specific licence. The second column is called ‘Text’ and nutshells the discount for that journal in the given licence, typically as follows, “Discount of xy% on publication fee. Please contact your library for more information.”
+            </p>
+            <p>
+                If a licence is applicable to a university, the name of the corresponding licence tab is coupled to that university by placing it behind the domain of that university in the main worksheet, either in a separate field or several comma or semicolon separated licence tabs in one field.
+            </p>
+            <p>
+                NB<br />
+                <ul>
+                    <li>The combination ISSN-domain name must be unique; if an ISSN is included in two different licences, these two licences cannot be coupled to the same university.</li>
+                    <li>All text, including the headers of the columns, must be in ASCII, although the headers of the columns are not case sensitive.</li>
+                </ul>
+            </p>
+            <p>
+                <h4>2. Maintenance</h4>
+                All changes can be managed via existing or new Excel files. In case an existing file is changed, importing it will overwrite the old data. So, in case a university cancels a licence, skip the name of the corresponding licence tab behind the domain name of that university in the main worksheet and import the whole file again. Or import a new file with only the domain name of that university and leave the column with licence tabs blank. In that case all licences of that university will be skipped.
+            </p>
+
+            <h3 id="submission">Including a submission button in QOAM</h3>
+            <p>
+                QOAM offers publishers the option to include a submission button for their journals in the @Html.ActionLink("SWOT", "JournalScoreCard", "Home", null, null, "swot", null, null) category ‘Strong’. The button is shown as a capital ‘S’ in the green field which marks this category.
+                <div style="text-align: center;"><img src="~/Content/images/faq/submisstion-button.png" /></div>
+                If the cursor moves over this field the text “Go to submission page” is popping up. By clicking on it you are redirected to the submission page of the journal.
+            </p>
+            <p>
+                All a publisher, or an editor for that matter, has to do is sending an Excel file with two columns to the @Html.ActionLink("Contact box of QOAM", "Contact").
+                The first column is named “eissn” and has the ISSNs the publisher uses for the digital versions of their journals.
+                The second column is headed “url” and has per ISSN the URL of the submission page of the journal. Mind: this URL has to start with the domain name of the journal in order to avoid mischievous redirections.
+            </p>
+        </div>
+    </div>
+</div>

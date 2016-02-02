@@ -144,6 +144,9 @@
     <Compile Include="Import\Licenses\LicenseFileImporterTests.cs" />
     <Compile Include="Import\Licenses\Stubs\ImportFileStubs.cs" />
     <Compile Include="Import\StubHelpers\StubExtensions.cs" />
+    <Compile Include="Import\SubmissionLinks\Stubs\SubmissionLinkImportStubs.cs" />
+    <Compile Include="Import\SubmissionLinks\SubmissionPageLinksEntityConverterTests.cs" />
+    <Compile Include="Import\SubmissionLinks\SubmissionLinksFileImporterTests.cs" />
     <Compile Include="QuestionKeyExtensionsTests.cs" />
     <Compile Include="Export\JournalsExportTests.cs" />
     <Compile Include="Import\JournalIssnEqualityComparerTests.cs" />
@@ -179,6 +182,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Import\Licenses\Stubs\QOAMupload.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Import\SubmissionLinks\Stubs\Invalid column names -Submission-links.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Import\SubmissionLinks\Stubs\Submission-links - Invalid data.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Import\SubmissionLinks\Stubs\Submission-links.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

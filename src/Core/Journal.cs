@@ -28,7 +28,8 @@
 
         [Required]
         public string Link { get; set; }
-        
+
+        public string SubmissionPageLink { get; set; }
         public DateTime DateAdded { get; set; }
         public int CountryId { get; set; }
         public int PublisherId { get; set; }

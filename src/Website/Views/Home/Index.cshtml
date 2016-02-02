@@ -19,26 +19,21 @@
 </div>
 
 <div class="container main">
-    <p class="text-center">@Html.ActionLink("Learn more", "About", "Home", null, new { @class = "btn btn btn-primary topmargin" })</p>
     <div class="row">
-        <div class="col-md-4 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
+            <p class="text-center"><strong style="color: #428bca">QOAM</strong> /kju:əʊm/ abbr. Quality Open Access Market. QOAM is a market place for scientific and scholarly journals which publish articles in open access. Quality scoring of the journals in QOAM is based on academic crowd sourcing; price information includes institutional licensed pricing.</p>
+        </div>
+    </div>
+
+    <p class="text-center">@Html.ActionLink("Learn more", "About", "Home", null, new { @class = "btn btn btn-primary topmargin" })</p>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
             <a href="@Url.Action("Index", "Journals")">
                 <div class="container-inner  text-center">
-                    <p class="lead">
-                        Visiting QOAM
-                    </p>
-                    <p class="sublead">to find a journal to publish in</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-md-4">
-            <a href="@Url.Action("Index", "Score")">
-                <div class="container-inner text-center">
-                    <p class="lead">
-                        Enhancing QOAM
-                    </p>
-                    <p class="sublead">by sharing Journal Score Cards</p>
+                    <span class="lead-large">
+                        Journal market
+                    </span>
                 </div>
             </a>
         </div>

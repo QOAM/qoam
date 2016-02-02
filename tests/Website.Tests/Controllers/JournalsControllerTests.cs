@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Moq;
 using QOAM.Core;
+using QOAM.Core.Import;
 using QOAM.Core.Import.Licences;
 using QOAM.Core.Repositories;
 using QOAM.Website.Controllers;
@@ -86,7 +87,7 @@ namespace QOAM.Website.Tests.Controllers
             Initialize();
             _controller.Url = HttpContextHelper.CreateUrlHelper();
 
-            var data = ConvertedEntityStubs.Licenses();
+            var data = UniversityLicenseStubs.Licenses();
             var institution = new Institution { Id = 1, Name = "Test Institution" };
             var journal = new Journal { Id = 1, ISSN = "Some ISSN" };
 
@@ -107,7 +108,7 @@ namespace QOAM.Website.Tests.Controllers
             Initialize();
             _controller.Url = HttpContextHelper.CreateUrlHelper();
 
-            var data = ConvertedEntityStubs.Licenses();
+            var data = UniversityLicenseStubs.Licenses();
 
             var journalCount = 0;
             var institutionCount = 0;
@@ -148,7 +149,7 @@ namespace QOAM.Website.Tests.Controllers
             Initialize();
             _controller.Url = HttpContextHelper.CreateUrlHelper();
 
-            var data = ConvertedEntityStubs.SomeLicensesToDelete();
+            var data = UniversityLicenseStubs.SomeLicensesToDelete();
 
             var journalCount = 0;
             var institutionCount = 0;

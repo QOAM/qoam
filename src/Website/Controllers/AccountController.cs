@@ -40,7 +40,7 @@
         [HttpGet, Route("login")]
         public ViewResult Login(string returnUrl, string loginAddress)
         {
-            this.ViewBag.ReturnUrl = returnUrl;
+            this.ViewBag.ReturnUrl = returnUrl ?? Url.Action("Index", "Journals");
 
             if (string.IsNullOrEmpty(loginAddress))
             {

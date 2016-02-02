@@ -1,4 +1,10 @@
-﻿namespace QOAM.Website.Tests.Controllers
+﻿using System.Web;
+using QOAM.Core.Import.SubmissionLinks;
+using QOAM.Website.Tests.Controllers.Stubs;
+using QOAM.Website.ViewModels.Admin;
+using QOAM.Website.ViewModels.Journals;
+
+namespace QOAM.Website.Tests.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -8,10 +14,10 @@
     using System.Web.Mvc;
     using Moq;
     using MvcContrib.TestHelper;
-    using QOAM.Core;
-    using QOAM.Core.Export;
-    using QOAM.Core.Import;
-    using QOAM.Core.Repositories;
+    using Core;
+    using Core.Export;
+    using Core.Import;
+    using Core.Repositories;
     using TestHelpers;
     using Website.Controllers;
     using Website.Helpers;
@@ -24,6 +30,10 @@
         private const string OldIssn = "2296-0597";
         private const string NewIssn = "1603-5194";
 
+        Mock<IBulkImporter<SubmissionPageLink>> _bulkImporter;
+        Mock<HttpPostedFileBase> _uploadFile;
+        ImportSubmissionLinksViewModel _viewModel;
+
         [Fact]
         public void ConstructorWithNullJournalsImportThrowsArgumentNullException()
         {
@@ -33,7 +43,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(nullJournalsImport, CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(nullJournalsImport, CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>()));
         }
 
         [Fact]
@@ -45,7 +55,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), nullUlrichsImport, CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), nullUlrichsImport, CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>()));
         }
 
         [Fact]
@@ -57,7 +67,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), nullDoajImport, CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), nullDoajImport, CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>()));
         }
 
         [Fact]
@@ -69,7 +79,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), nullJournalsExport, Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), nullJournalsExport, Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>()));
         }
 
         [Fact]
@@ -81,7 +91,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), nullJournalRepository, Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), nullJournalRepository, Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>()));
         }
 
         [Fact]
@@ -93,7 +103,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), nullUserProfileRepository, Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), nullUserProfileRepository, Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>()));
         }
 
         [Fact]
@@ -105,7 +115,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), nullAuthentication, Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), nullAuthentication, Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>()));
         }
 
         [Fact]
@@ -117,7 +127,7 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), nullBaseScoreCardRepository, Mock.Of<IValuationScoreCardRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), nullBaseScoreCardRepository, Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>()));
         }
 
         [Fact]
@@ -129,9 +139,21 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), nullValuationScoreCardRepository));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), nullValuationScoreCardRepository, Mock.Of<IBulkImporter<SubmissionPageLink>>()));
         }
-        
+
+        [Fact]
+        public void ConstructorWithNullBulkImporterThrowsArgumentNullException()
+        {
+            // Arrange
+            IBulkImporter<SubmissionPageLink> nullBulkImporter = null;
+
+            // Act
+
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), nullBulkImporter));
+        }
+
         [Fact]
         [UseCulture("en-US")]
         public void DownloadReturnsFileContentResultWithCorrectCsvFileForAllJournals()
@@ -780,7 +802,60 @@
             // Assert
             valuationScoreCardRepository.Verify(b => b.Save(), Times.Once);
         }
-        
+
+        [Fact]
+        public void ImportSubmissionLinksRejectsInvalidImportFilesAndShowsAnErrorToTheUser()
+        { 
+            PrepareFileUpload();
+
+            var controller = CreateAdminController();
+            _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Throws<ArgumentException>();
+
+            controller.ImportSubmissionLinks(_viewModel);
+
+            Assert.Equal(1, controller.ModelState["generalError"].Errors.Count);
+        }
+
+        [Fact]
+        public void ImportSubmissionLinksSetsTheLinkInTheCorresponsingJournal()
+        {
+            PrepareFileUpload();
+
+            var data = SubmissionPageLinkStubs.Links();
+            var journals = SubmissionPageLinkStubs.Journals();
+            var controller = CreateAdminController(journalRepository: CreateJournalRepository(journals));
+
+            _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
+
+            controller.ImportSubmissionLinks(_viewModel);
+
+            for (int i = 0; i < data.Count - 1; i++)
+            {
+                Assert.Equal(data[i].Url, journals[i].SubmissionPageLink);
+            }
+        }
+
+        [Fact]
+        public void ImportSubmissionLinksVerifiesDatTheSubmissionLinkDomainCorrestomdsWithTheJournalDomain()
+        {
+            PrepareFileUpload();
+
+            var data = SubmissionPageLinkStubs.InvalidLinks();
+            var journals = SubmissionPageLinkStubs.Journals();
+            var controller = CreateAdminController(journalRepository: CreateJournalRepository(journals));
+
+            _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
+
+            controller.ImportSubmissionLinks(_viewModel);
+
+            for (int i = 0; i < data.Count - 1; i++)
+            {
+                Assert.NotEqual(data[i].Url, journals[i].SubmissionPageLink);
+            }
+        }
+
+        #region Private Methods
+
         private static JournalsImport CreateJournalsImport()
         {
             return new JournalsImport(Mock.Of<IJournalRepository>(), Mock.Of<ILanguageRepository>(), Mock.Of<ICountryRepository>(), Mock.Of<ISubjectRepository>(), Mock.Of<IPublisherRepository>(), new GeneralImportSettings());
@@ -809,38 +884,21 @@
         private static IJournalRepository CreateJournalRepository(IList<Journal> journals)
         {
             var journalRepository = new Mock<IJournalRepository>();
-            journalRepository.Setup(j => j.AllIncluding(It.IsAny<Expression<Func<Journal, object>>[]>())).Returns(journals);
-            journalRepository.Setup(j => j.SearchByISSN(It.IsAny<IEnumerable<string>>())).Returns<IEnumerable<string>>(x => journals.Where(j => x.Contains(j.ISSN)).AsQueryable());
-            journalRepository.Setup(j => j.FindByIssn(It.IsAny<string>())).Returns<string>(issn => journals.FirstOrDefault(j => j.ISSN == issn));
+            journalRepository.Setup(j => j.AllIncluding(It.IsAny<Expression<Func<Journal, object>>[]>()))
+                .Returns(journals);
+            journalRepository.Setup(j => j.SearchByISSN(It.IsAny<IEnumerable<string>>()))
+                .Returns<IEnumerable<string>>(x => journals.Where(j => x.Contains(j.ISSN))
+                    .AsQueryable());
+            journalRepository.Setup(j => j.FindByIssn(It.IsAny<string>()))
+                .Returns<string>(issn => journals.FirstOrDefault(j => j.ISSN == issn));
 
             return journalRepository.Object;
         }
 
-        private AdminController CreateAdminController(
-            JournalsImport journalsImport = null, 
-            UlrichsImport ulrichsImport = null, 
-            DoajImport doajImport = null, 
-            JournalsExport journalsExport = null,
-            IJournalRepository journalRepository = null,
-            IUserProfileRepository userProfileRepository = null,
-            IAuthentication authentication = null, 
-            IInstitutionRepository institutionRepository = null, 
-            IBlockedISSNRepository blockedIssnRepository = null, 
-            IBaseScoreCardRepository baseScoreCardRepository = null,
-            IValuationScoreCardRepository valuationScoreCardRepository = null)
+        private AdminController CreateAdminController(JournalsImport journalsImport = null, UlrichsImport ulrichsImport = null, DoajImport doajImport = null, JournalsExport journalsExport = null, IJournalRepository journalRepository = null, IUserProfileRepository userProfileRepository = null, IAuthentication authentication = null, IInstitutionRepository institutionRepository = null, IBlockedISSNRepository blockedIssnRepository = null, IBaseScoreCardRepository baseScoreCardRepository = null, IValuationScoreCardRepository valuationScoreCardRepository = null)
         {
-            return new AdminController(
-                journalsImport ?? CreateJournalsImport(),
-                ulrichsImport ?? CreateUlrichsImport(), 
-                doajImport ?? CreateDoajImport(), 
-                journalsExport ?? CreateJournalsExport(), 
-                journalRepository ?? CreateJournalRepository(),
-                userProfileRepository ?? Mock.Of<IUserProfileRepository>(), 
-                authentication ?? Mock.Of<IAuthentication>(), 
-                institutionRepository ?? Mock.Of<IInstitutionRepository>(), 
-                blockedIssnRepository ?? Mock.Of<IBlockedISSNRepository>(), 
-                baseScoreCardRepository ?? Mock.Of<IBaseScoreCardRepository>(), 
-                valuationScoreCardRepository ?? Mock.Of<IValuationScoreCardRepository>());
+            _bulkImporter = new Mock<IBulkImporter<SubmissionPageLink>>();
+            return new AdminController(journalsImport ?? CreateJournalsImport(), ulrichsImport ?? CreateUlrichsImport(), doajImport ?? CreateDoajImport(), journalsExport ?? CreateJournalsExport(), journalRepository ?? CreateJournalRepository(), userProfileRepository ?? Mock.Of<IUserProfileRepository>(), authentication ?? Mock.Of<IAuthentication>(), institutionRepository ?? Mock.Of<IInstitutionRepository>(), blockedIssnRepository ?? Mock.Of<IBlockedISSNRepository>(), baseScoreCardRepository ?? Mock.Of<IBaseScoreCardRepository>(), valuationScoreCardRepository ?? Mock.Of<IValuationScoreCardRepository>(), _bulkImporter.Object);
         }
 
         private static UlrichsImport CreateUlrichsImport()
@@ -852,46 +910,113 @@
 
         private static MoveScoreCardsViewModel CreateMoveScoreCardsViewModel()
         {
-            return new MoveScoreCardsViewModel { NewIssn = NewIssn, OldIssn = OldIssn };
+            return new MoveScoreCardsViewModel
+            {
+                NewIssn = NewIssn,
+                OldIssn = OldIssn
+            };
         }
 
         private static List<Journal> CreateJournals()
         {
             return new List<Journal>
-                   {
-                       new Journal
-                       {
-                           Title = "027.7 : Zeitschrift fuer Bibliothekskultur",
-                           ISSN = OldIssn,
-                           Link = "http://www.0277.ch/ojs/index.php/cdrs_0277",
-                           DateAdded = DateTime.Parse("2-10-2013 9:52:51"),
-                           Country = new Country { Name = "Switzerland" },
-                           Publisher = new Publisher { Name = "<none indicated>" },
-                           Languages = new List<Language> { new Language { Name = "English" }, new Language { Name = "German" } },
-                           Subjects = new List<Subject> { new Subject { Name = "library and information sciences" } }
-                       },
-                       new Journal
-                       {
-                           Title = "16:9",
-                           ISSN = NewIssn,
-                           Link = "http://www.16-9.dk",
-                           DateAdded = DateTime.Parse("2-10-2013 9:52:51"),
-                           Country = new Country { Name = "Denmark" },
-                           Publisher = new Publisher { Name = "Springer" },
-                           Languages = new List<Language> { new Language { Name = "English" }, new Language { Name = "Danish" } },
-                           Subjects = new List<Subject> { new Subject { Name = "motion pictures" }, new Subject { Name = "films" } }
-                       }
-                   };
+            {
+                new Journal
+                {
+                    Title = "027.7 : Zeitschrift fuer Bibliothekskultur",
+                    ISSN = OldIssn,
+                    Link = "http://www.0277.ch/ojs/index.php/cdrs_0277",
+                    DateAdded = DateTime.Parse("2-10-2013 9:52:51"),
+                    Country = new Country
+                    {
+                        Name = "Switzerland"
+                    },
+                    Publisher = new Publisher
+                    {
+                        Name = "<none indicated>"
+                    },
+                    Languages = new List<Language>
+                    {
+                        new Language
+                        {
+                            Name = "English"
+                        },
+                        new Language
+                        {
+                            Name = "German"
+                        }
+                    },
+                    Subjects = new List<Subject>
+                    {
+                        new Subject
+                        {
+                            Name = "library and information sciences"
+                        }
+                    }
+                },
+                new Journal
+                {
+                    Title = "16:9",
+                    ISSN = NewIssn,
+                    Link = "http://www.16-9.dk",
+                    DateAdded = DateTime.Parse("2-10-2013 9:52:51"),
+                    Country = new Country
+                    {
+                        Name = "Denmark"
+                    },
+                    Publisher = new Publisher
+                    {
+                        Name = "Springer"
+                    },
+                    Languages = new List<Language>
+                    {
+                        new Language
+                        {
+                            Name = "English"
+                        },
+                        new Language
+                        {
+                            Name = "Danish"
+                        }
+                    },
+                    Subjects = new List<Subject>
+                    {
+                        new Subject
+                        {
+                            Name = "motion pictures"
+                        },
+                        new Subject
+                        {
+                            Name = "films"
+                        }
+                    }
+                }
+            };
         }
 
         private static RemoveBaseScoreCardViewModel CreateRemoveBaseScoreCardViewModel()
         {
-            return new RemoveBaseScoreCardViewModel { Id = 5 };
+            return new RemoveBaseScoreCardViewModel
+            {
+                Id = 5
+            };
         }
 
         private static RemoveValuationScoreCardViewModel CreateRemoveValuationScoreCardViewModel()
         {
-            return new RemoveValuationScoreCardViewModel { Id = 7 };
+            return new RemoveValuationScoreCardViewModel
+            {
+                Id = 7
+            };
         }
+
+        void PrepareFileUpload()
+        {
+            _uploadFile = new Mock<HttpPostedFileBase>();
+            _viewModel = new ImportSubmissionLinksViewModel { File = _uploadFile.Object };
+        }
+
+        #endregion
+
     }
 }

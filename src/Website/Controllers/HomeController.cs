@@ -74,6 +74,12 @@
             return this.View();
         }
 
+        [HttpGet, Route("b2b")]
+        public ViewResult B2B()
+        {
+            return this.View();
+        }
+
         [HttpGet, Route("journalscorecard")]
         public ViewResult JournalScoreCard()
         {

@@ -1,9 +1,10 @@
-﻿namespace QOAM.Core.Import.Licences
-{
-    using System.Collections.Generic;
-    using System.IO;
-    using NPOI.SS.UserModel;
+﻿using System.Collections.Generic;
+using System.IO;
+using NPOI.SS.UserModel;
+using QOAM.Core.Import.Licences;
 
+namespace QOAM.Core.Import
+{
     public class BulkImporter<T> : IBulkImporter<T>
     {
         readonly IFileImporter _fileImporter;

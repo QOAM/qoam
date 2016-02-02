@@ -13,7 +13,7 @@
 
             @Html.ValidationSummary()
 
-            @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
 
@@ -41,6 +41,13 @@
                         <div class="col-lg-10">
                             @Html.TextAreaFor(m => m.Message, 5, 40, new {  @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Message, null, new { @class = "control-label " })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.File, new { @class = "col-lg-2 control-label" })
+                        <div class="col-lg-10">
+                            @Html.TextBoxFor(m => m.File, new { type = "file", accept = ".xlsx", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.File, null, new { @class = "control-label " })
                         </div>
                     </div>
 

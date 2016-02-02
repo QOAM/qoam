@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity.Validation;
+using QOAM.Core.Import;
 
 namespace QOAM.Website.Controllers
 {
@@ -298,7 +299,7 @@ namespace QOAM.Website.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult BulkImportInstitutionalPrices(InstitutionalPricesViewModel model)
         {
-            if (model.File == null)
+            if (!ModelState.IsValid)
                 return View(model);
 
             try
@@ -383,7 +384,7 @@ namespace QOAM.Website.Controllers
             return View(model);
         }
 
-        [HttpGet, Route("bulkImportsuccessful")]
+        [HttpGet, Route("bulkimportsuccessful")]
         [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ActionResult BulkImportSuccessful(InstitutionalPricesImportedViewModel model)
         {

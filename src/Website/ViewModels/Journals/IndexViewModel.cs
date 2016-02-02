@@ -62,7 +62,7 @@
                            Discipline = this.Discipline,
                            Language = this.Language,
                            SubmittedOnly = this.SubmittedOnly,
-                           MustHaveBeenScored = true,
+                           MustHaveBeenScored = false,
                            SortMode = this.SortBy,
                            SortDirection = this.Sort,
                            PageNumber = this.Page,

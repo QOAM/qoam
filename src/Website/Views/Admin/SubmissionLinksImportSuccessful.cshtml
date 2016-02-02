@@ -1,0 +1,39 @@
+﻿@model QOAM.Website.ViewModels.Admin.SubmissionLinksImportedViewModel
+
+@{ ViewBag.Title = "Submission links imported"; }
+
+<div class="container main">
+    <a class="btn btn-default return-button" title="Back to search results" href="@Url.Action("Index")">&lt; Back to the Admin page</a>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <p>
+                <strong>@Model.AmountImported</strong> submission links have been imported.
+            </p>
+            @if (Model.AmountRejected > 0)
+            {
+                <p>
+                    <strong>@Model.AmountRejected</strong> submission links have been rejected.
+                </p>
+            }
+        </div>
+        <div class="panel-body">
+            @if (Model.AmountRejected > 0)
+            {
+                <div class="row bottommargin">
+                    <div class="col-xs-12">
+                        <p>
+                            The following submission links where rejected, either because there is no journal with the given ISSN or, more likely, because the domain in the given Url
+                            doesn't match with the domain of the journal:
+                        </p>
+                        <ul>
+                            @foreach (var link in Model.RejectedUrls)
+                            {
+                                <li><strong>ISSN:</strong> @link.ISSN. <strong>Url:</strong> @link.Url</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
