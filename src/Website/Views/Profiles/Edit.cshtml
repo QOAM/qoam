@@ -43,6 +43,14 @@
                 </div>
             </div>
 
+            <div class="form-group row">
+                @Html.LabelFor(m => m.IsDeveloper, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2">
+                    @Html.CheckBoxFor(m => m.IsDeveloper, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.IsDeveloper, null, new { @class = "control-label" })
+                </div>
+            </div>
+
             <div class="col-lg-10 col-md-offset-2">
                 <input type="submit" value="Submit" class="btn btn-primary" />
             </div>

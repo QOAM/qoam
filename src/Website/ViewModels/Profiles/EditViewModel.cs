@@ -11,6 +11,7 @@
         public bool IsAdmin { get; set; }
         public bool IsInstitutionAdmin { get; set; }
         public bool IsDataAdmin { get; set; }
+        public bool IsDeveloper { get; set; }
         public string ReturnUrl { get; set; }
 
         public IEnumerable<string> Roles
@@ -30,6 +31,11 @@
                 if (this.IsDataAdmin)
                 {
                     yield return ApplicationRole.DataAdmin;
+                }
+
+                if (this.IsDeveloper)
+                {
+                    yield return ApplicationRole.Developer;
                 }
             }
         }

@@ -65,6 +65,7 @@
             model.IsAdmin = currentRoles.Contains(ApplicationRole.Admin);
             model.IsInstitutionAdmin = currentRoles.Contains(ApplicationRole.InstitutionAdmin);
             model.IsDataAdmin = currentRoles.Contains(ApplicationRole.DataAdmin);
+            model.IsDeveloper = currentRoles.Contains(ApplicationRole.Developer);
             
             return this.View(model);
         }

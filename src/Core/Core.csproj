@@ -249,6 +249,10 @@
     <Compile Include="Migrations\201601280928572_SubmissionPageLink.Designer.cs">
       <DependentUpon>201601280928572_SubmissionPageLink.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602051231059_DeveloperRole.cs" />
+    <Compile Include="Migrations\201602051231059_DeveloperRole.Designer.cs">
+      <DependentUpon>201602051231059_DeveloperRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\Filters\UserJournalFilter.cs" />
@@ -267,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601280928572_SubmissionPageLink.resx">
       <DependentUpon>201601280928572_SubmissionPageLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602051231059_DeveloperRole.resx">
+      <DependentUpon>201602051231059_DeveloperRole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />
