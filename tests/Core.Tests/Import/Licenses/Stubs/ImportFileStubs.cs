@@ -21,7 +21,7 @@ namespace QOAM.Core.Tests.Import.Licenses.Stubs
         {
             var table = new DataTable("Universities");
 
-            table.AddColumns("Domain", "Tabs");
+            table.AddColumns("Domains", "Tabs");
 
             table.AddRow(new[] { "ru.nl", "Sage" });
             table.AddRow(new[] { "uu.nl", "Springer" });
@@ -37,7 +37,7 @@ namespace QOAM.Core.Tests.Import.Licenses.Stubs
         {
             var table = new DataTable(licenseName);
 
-            table.AddColumns("ISSN", "text");
+            table.AddColumns("eISSN", "text");
 
             table.AddRow(new[] { "0219-3094", "Discount of 100% on publication fee. Please contact your library for more information." });
             table.AddRow(new[] { "0219-3116", "Some random text" });

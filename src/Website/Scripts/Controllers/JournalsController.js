@@ -36,8 +36,9 @@
         });
     };
 
-    JournalsController.prototype.details = function() {
-        $('ul.journal-tabs').on('shown.bs.tab', function(e) {
+    JournalsController.prototype.details = function () {
+
+        $('ul.journal-tabs').on('shown.bs.tab', function (e) {
             var targetElement = $(e.target);
             var dataUrl = targetElement.attr('data-url');
 
@@ -59,7 +60,23 @@
     };
 
     JournalsController.prototype.prices = function (viewJournalPricesElementId, viewJournalPricesModalElementId, viewJournalStandardPricesElementId, viewJournalStandardPricesModalElementId) {
-        $('#' + viewJournalPricesElementId).on('click', function () {            
+        var table = $("#licenses").DataTable({
+            "ordering": false,
+            "info": false,
+            "lengthChange": false,
+            "dom": "tp",
+            "pagingType": "numbers"
+        });
+
+        $('#FilterInstitution').on('keyup', function () {
+            table.search(this.value).draw();
+        });
+
+        if ($('#FilterInstitution').length === 0) {
+            $('#licenses_paginate').hide();
+        }
+
+        $('#' + viewJournalPricesElementId).on('click', function () {
             $('#' + viewJournalPricesModalElementId).modal();
             return false;
         });

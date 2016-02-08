@@ -1,4 +1,5 @@
-﻿@using QOAM.Core
+﻿@using System.Web.Optimization
+@using QOAM.Core
 @using QOAM.Website.Helpers
 @model QOAM.Core.Journal
 
@@ -7,6 +8,9 @@
 }
 
 <link href="~/Content/scoring.css" rel="stylesheet" />
+@*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs/dt-1.10.10/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/dataTables.custom.css" />*@
+
 <div class="container main">
     <div class="row side">
         <div class="col-md-12">
@@ -238,8 +242,16 @@
 
 </div>
 
+@section stylesheets
+{
+    @Styles.Render("~/styles/datatables")
+}
+
 @section scripts
 {
+    @*<script type="text/javascript" src="https://cdn.datatables.net/s/bs/dt-1.10.10/datatables.min.js"></script>*@
+    @Scripts.Render("~/scripts/datatables")
+
     @Html.Partial("_FormScripts")
 
     <script type="text/javascript">

@@ -1,12 +1,12 @@
 ﻿@using QOAM.Website.Models
-@model PagedList.IPagedList<QOAM.Core.InstitutionJournal>
+@model IList<QOAM.Core.InstitutionJournal>
 
 @foreach (var institutionJournal in Model)
 {
-    var nextPage = Model.IsLastPage ? (int?)null : (Model.PageNumber + 1);
+    //var nextPage = Model.IsLastPage ? (int?)null : (Model.PageNumber + 1);
     var rowClass = User.Identity.IsAuthenticated && ViewBag.User.InstitutionId == institutionJournal.InstitutionId ? "highlighted" : null;
 
-    <tr class="@rowClass" data-next-page="@nextPage">
+    <tr class="@rowClass" @*data-next-page="@nextPage"*@>
         <td>
             @if (institutionJournal.Link.StartsWith("http") && Uri.IsWellFormedUriString(institutionJournal.Link, UriKind.RelativeOrAbsolute))
             {

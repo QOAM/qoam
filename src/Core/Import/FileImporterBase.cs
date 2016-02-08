@@ -33,6 +33,10 @@ namespace QOAM.Core.Import
 
             var sheet = GetSheet(workbook, sheetName);
             var headerRow = sheet.GetRow(0);
+
+            if (headerRow == null)
+                return;
+
             var rows = sheet.GetRowEnumerator();
 
             int colCount = headerRow.LastCellNum;

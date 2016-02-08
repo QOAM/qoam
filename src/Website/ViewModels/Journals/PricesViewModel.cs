@@ -1,4 +1,6 @@
-﻿namespace QOAM.Website.ViewModels.Journals
+﻿using System.Collections.Generic;
+
+namespace QOAM.Website.ViewModels.Journals
 {
     using PagedList;
 
@@ -9,10 +11,11 @@
     {
         public int Id { get; set; }
         public Journal Journal { get; set; }
-        public IPagedList<InstitutionJournal> InstitutionJournals { get; set; }
+        public IList<InstitutionJournal> InstitutionJournals { get; set; }
         public IPagedList<BaseJournalPrice> BaseJournalPrices { get; set; }
         public IPagedList<ValuationJournalPrice> ValuationJournalPrices { get; set; }
         public string RefererUrl { get; set; }
+        public string FilterInstitution { get; set; }
 
         public InstitutionJournalFilter ToInstitutionJournalPriceFilter()
         {

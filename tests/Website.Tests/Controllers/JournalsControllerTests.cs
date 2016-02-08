@@ -88,14 +88,30 @@ namespace QOAM.Website.Tests.Controllers
             _controller.Url = HttpContextHelper.CreateUrlHelper();
 
             var data = UniversityLicenseStubs.Licenses();
-            var institution = new Institution { Id = 1, Name = "Test Institution" };
-            var journal = new Journal { Id = 1, ISSN = "Some ISSN" };
+
+            var journalCount = 0;
+            var institutionCount = 0;
+
+            var journals = new List<Journal>();
+            var institutions = new List<Institution>();
 
             //var institutions = 1.To(10).Select(i => new Institution { Id = i, Name = $"Test Institution #{i}", ShortName = $"www.{i}.nl"});
 
             _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
-            _institutionRepository.Setup(x => x.Find(It.IsAny<string>())).Returns(institution);
-            _journalRepository.Setup(x => x.FindByIssn(It.IsAny<string>())).Returns(journal);
+            _institutionRepository.Setup(x => x.Find(It.IsAny<string>())).Returns<string>(s =>
+            {
+                var institution = new Institution { Id = ++institutionCount, ShortName = s };
+                institutions.Add(institution);
+
+                return institution;
+            });
+            _journalRepository.Setup(x => x.FindByIssn(It.IsAny<string>())).Returns<string>(s =>
+            {
+                var journal = new Journal { Id = ++journalCount, ISSN = s };
+                journals.Add(journal);
+
+                return journal;
+            });
 
             _controller.BulkImportInstitutionalPrices(_viewModel);
 

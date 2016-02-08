@@ -546,7 +546,7 @@ namespace QOAM.Website.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var domainRegex = new Regex(@"\b((xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\b", RegexOptions.Compiled);
+            var domainRegex = new Regex(@"(?<=(http[s]?:\/\/(.*?)[.?]))\b([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b", RegexOptions.Compiled);
 
             try
             {
@@ -559,7 +559,7 @@ namespace QOAM.Website.Controllers
                 {
                     var journal = journalRepository.FindByIssn(submissionPageLink.ISSN);
                     
-                    if (journal == null || !submissionPageLink.Url.Contains(domainRegex.Match(journal.Link).Value))
+                    if (journal == null || (domainRegex.Match(submissionPageLink.Url).Value != domainRegex.Match(journal.Link).Value))
                     {
                         rejected++;
 
@@ -603,6 +603,20 @@ namespace QOAM.Website.Controllers
 
                 ModelState.AddModelError("generalError", $"An error has ocurred: {exception.Message}");
             }
+
+            return View(model);
+        }
+
+        [HttpGet, Route("statistics")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
+        public ActionResult Statistics()
+        {
+            var model = new StatisticsViewModel
+            {
+                BaseScoreCardCount = journalRepository.BaseScoredJournalsCount(),
+                ValuationScoreCardCount = journalRepository.ValuationScoredJournalsCount(),
+                SwotCount = journalRepository.JournalsWithSwotCount()
+            };
 
             return View(model);
         }

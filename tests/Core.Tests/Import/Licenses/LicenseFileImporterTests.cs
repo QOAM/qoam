@@ -32,7 +32,7 @@
 
             var table = GetTable(UnivertitiesTab);
 
-            Assert.Equal("Domain", table.Columns[0].ColumnName);
+            Assert.Equal("Domains", table.Columns[0].ColumnName);
             Assert.Equal("Tabs", table.Columns[1].ColumnName);
         }
 
@@ -72,6 +72,16 @@
             Initialize("Invalid Column names - QOAMupload");
 
             Assert.Throws<ArgumentException>(() => _importer.Execute(_workbook));
+        }
+
+        [Fact]
+        public void BlankSheetsAreIgnored()
+        {
+            Initialize("Extra blank sheet");
+
+            var result = _importer.Execute(_workbook);
+
+            Assert.Equal(2, result.Tables.Count);
         }
 
         #region Private Methods

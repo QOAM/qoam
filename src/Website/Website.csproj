@@ -249,6 +249,7 @@
     </Compile>
     <Compile Include="ViewModels\Account\ChangeEmailViewModel.cs" />
     <Compile Include="ViewModels\Admin\ImportSubmissionLinksViewModel.cs" />
+    <Compile Include="ViewModels\Admin\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\Admin\SubmissionLinksImportedViewModel.cs" />
     <Compile Include="ViewModels\IFileUploadViewModel.cs" />
     <Compile Include="ViewModels\Import\MoveScoreCardsViewModel.cs" />
@@ -344,6 +345,9 @@
     </None>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\dataTables.css" />
+    <Content Include="Content\dataTables.custom.css" />
+    <Content Include="Content\dataTables.min.css" />
     <Content Include="Content\fancybox\blank.gif" />
     <Content Include="Content\fancybox\fancybox_buttons.png" />
     <Content Include="Content\fancybox\fancybox_loading%402x.gif" />
@@ -401,6 +405,8 @@
     <Content Include="Scripts\Controllers\ProfilesController - Copy.min.js">
       <DependentUpon>InstitutionsController.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\dataTables.js" />
+    <Content Include="Scripts\dataTables.min.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af-ZA.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.af.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.am-ET.js" />
@@ -919,6 +925,7 @@
     <Content Include="Views\Home\B2B.cshtml" />
     <Content Include="Views\Admin\ImportSubmissionLinks.cshtml" />
     <Content Include="Views\Admin\SubmissionLinksImportSuccessful.cshtml" />
+    <Content Include="Views\Admin\Statistics.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -976,9 +983,6 @@
       <DependentUpon>HomeController.min.js</DependentUpon>
     </Content>
     <Content Include="App_Code\Bootstrap.cshtml" />
-    <Content Include="Scripts\Controllers\JournalsController.min.js">
-      <DependentUpon>JournalsController.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\Controllers\ProfilesController.min.js">
       <DependentUpon>ProfilesController.js</DependentUpon>
     </Content>
@@ -989,9 +993,6 @@
     <Content Include="Scripts\Helpers\Compatibility.js" />
     <Content Include="Scripts\Helpers\Compatibility.min.js">
       <DependentUpon>Compatibility.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Controllers\JournalsController.min.js.map">
-      <DependentUpon>JournalsController.min.js</DependentUpon>
     </Content>
     <Content Include="Scripts\Controllers\ScoreController.min.js.map">
       <DependentUpon>ScoreController.min.js</DependentUpon>
