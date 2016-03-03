@@ -16,6 +16,12 @@
                     <strong>@Model.AmountNotInvited</strong> could not be invited.
                 </p>
             }
+            @if (Model.AmountInvitedWithError > 0)
+            {
+                <p>
+                    <strong>@Model.AmountInvitedWithError</strong> attempted to be invited but failed.
+                </p>
+            }
         </div>
         <div class="panel-body">
             @if (Model.AmountNotInvited > 0)
@@ -29,6 +35,22 @@
                         </p>
                         <ul>
                             @foreach (var author in Model.AuthorsNotInvited)
+                            {
+                                <li><strong>Name:</strong> @author.AuthorName with <strong>E-mail address:</strong> @author.AuthorEmail for <strong>journal:</strong> @author.JournalTitle with <strong>ISSN:</strong> @author.ISSN</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+            @if (Model.AmountInvitedWithError > 0)
+            {
+                <div class="row bottommargin">
+                    <div class="col-xs-12">
+                        <p>
+                            The following authors had an error when being invited:
+                        </p>
+                        <ul>
+                            @foreach (var author in Model.AuthorsInvitedWithError)
                             {
                                 <li><strong>Name:</strong> @author.AuthorName with <strong>E-mail address:</strong> @author.AuthorEmail for <strong>journal:</strong> @author.JournalTitle with <strong>ISSN:</strong> @author.ISSN</li>
                             }

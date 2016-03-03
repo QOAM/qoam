@@ -18,11 +18,15 @@ using Validation;
 
 namespace QOAM.Website.Controllers
 {
+    using NLog;
+
     [RoutePrefix("score")]
     public class ScoreController : ApplicationController
     {
         private const int SubjectTruncationLength = 90;
-        
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private readonly IScoreCardVersionRepository scoreCardVersionRepository;
         private readonly IJournalRepository journalRepository;
         private readonly ILanguageRepository languageRepository;
@@ -228,12 +232,14 @@ namespace QOAM.Website.Controllers
             {
                 var invited = 0;
                 var notInvited = new List<NotInvitedViewModel>();
-                var emailRegex = new Regex(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" + @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" + @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+                var errorWhenInvited = new List<ErrorInvitedViewModel>();
                 
                 var data = _bulkImporter.Execute(model.File.InputStream);
 
+                Logger.Info("Sending bulk validation requests...");
+
                 var emails = (from a in data
-                              where !string.IsNullOrWhiteSpace(a.ISSN) && !string.IsNullOrWhiteSpace(a.AuthorEmail) && emailRegex.IsMatch(a.AuthorEmail)
+                              where !string.IsNullOrWhiteSpace(a.ISSN) && !string.IsNullOrWhiteSpace(a.AuthorEmail) && EmailValidator.IsValid(a.AuthorEmail)
                               let journal = journalRepository.FindByIssn(a.ISSN)
                               where journal != null
                               select new RequestValuationViewModel
@@ -253,38 +259,48 @@ namespace QOAM.Website.Controllers
                 foreach (var item in emails.Select(e => new { Email = e.ToRequestValuationEmail(), Model = e }))
                 {
                     // NOTE: Requirements have changed. Leo Waaijers requested that e-mail addresses with unknown domains could be invited to fill in a Score Card - Sergi Papaseit (2015-12-10)
-                    //if (!item.Model.IsKnownEmailAddress && !item.Model.HasKnownEmailDomain)
-                    //{
-                    //    notInvited.Add(new NotInvitedViewModel
-                    //    {
-                    //        ISSN = item.Model.JournalISSN,
-                    //        JournalTitle = item.Model.JournalTitle,
-                    //        AuthorEmail = item.Model.EmailTo,
-                    //        AuthorName = item.Model.RecipientName
-                    //    });
+                    try
+                    {
+                        item.Email.Url = FillEmailUrl(item.Model);
+                        item.Email.Send();
 
-                    //    continue;
-                    //}
+                        Logger.Info($"Sent validation request to {item.Email.To}.");
 
-                    invited++;
+                        invited++;
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error($"Error sending validation request to {item.Email.To}: {ex}.", ex.ToString());
 
-                    item.Email.Url = FillEmailUrl(item.Model);
-                    item.Email.Send();
+                        errorWhenInvited.Add(new ErrorInvitedViewModel
+                        {
+                            ISSN = string.IsNullOrWhiteSpace(item.Model.JournalISSN) ? "Unknown" : item.Model.JournalISSN,
+                            AuthorName = item.Model.RecipientName,
+                            AuthorEmail = string.IsNullOrWhiteSpace(item.Model.EmailTo) ? "Unknown" : item.Model.EmailTo
+                        });
+                    }
                 }
 
-                notInvited.AddRange((from a in data
-                                     where string.IsNullOrWhiteSpace(a.ISSN) || string.IsNullOrWhiteSpace(a.AuthorEmail) || !emailRegex.IsMatch(a.AuthorEmail)
-                                     select new NotInvitedViewModel
-                                     {
-                                         ISSN = string.IsNullOrWhiteSpace(a.ISSN) ? "Unknown" : a.ISSN,
-                                         AuthorName = a.AuthorName,
-                                         AuthorEmail = string.IsNullOrWhiteSpace(a.AuthorEmail) ? "Unknown" : a.AuthorEmail
-                                     }));
+                notInvited.AddRange(
+                    from a in data
+                    where string.IsNullOrWhiteSpace(a.ISSN) || string.IsNullOrWhiteSpace(a.AuthorEmail) || !EmailValidator.IsValid(a.AuthorEmail)
+                    select new NotInvitedViewModel
+                    {
+                        ISSN = string.IsNullOrWhiteSpace(a.ISSN) ? "Unknown" : a.ISSN,
+                        AuthorName = a.AuthorName,
+                        AuthorEmail = string.IsNullOrWhiteSpace(a.AuthorEmail) ? "Unknown" : a.AuthorEmail + " (invalid)"
+                    });
+
+                foreach (var notInvitedViewModel in notInvited)
+                {
+                    Logger.Info($"Skipped sending validation request to {notInvitedViewModel.AuthorEmail}.");
+                }
 
                 return View("BulkInviteSuccessful", new AuthorsInvitedViewModel
                 {
                     AmountInvited = invited,
-                    AuthorsNotInvited = notInvited
+                    AuthorsNotInvited = notInvited,
+                    AuthorsInvitedWithError = errorWhenInvited
                 });
             }
             catch (ArgumentException invalidFileException)

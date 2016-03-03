@@ -241,6 +241,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\MyQoamController.cs" />
+    <Compile Include="Helpers\EmailValidator.cs" />
     <Compile Include="Helpers\HttpPostedFileExtensionsAttribute.cs" />
     <Compile Include="Resources\Questions.Designer.cs">
       <AutoGen>True</AutoGen>
