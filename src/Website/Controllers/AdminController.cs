@@ -42,6 +42,7 @@ namespace QOAM.Website.Controllers
         private readonly IBlockedISSNRepository blockedIssnRepository;
 
         readonly IBulkImporter<SubmissionPageLink> _bulkImporter;
+        readonly Regex _domainRegex = new Regex(@"(?<=(http[s]?:\/\/(.*?)[.?]))\b([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b", RegexOptions.Compiled);
 
         public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
@@ -546,8 +547,6 @@ namespace QOAM.Website.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var domainRegex = new Regex(@"(?<=(http[s]?:\/\/(.*?)[.?]))\b([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b", RegexOptions.Compiled);
-
             try
             {
                 int imported = 0, rejected = 0;
@@ -558,8 +557,8 @@ namespace QOAM.Website.Controllers
                 foreach (var submissionPageLink in data)
                 {
                     var journal = journalRepository.FindByIssn(submissionPageLink.ISSN);
-                    
-                    if (journal == null || (domainRegex.Match(submissionPageLink.Url).Value != domainRegex.Match(journal.Link).Value))
+
+                    if (journal == null || !DomainMatches(journal.Link, submissionPageLink.Url))
                     {
                         rejected++;
 
@@ -671,6 +670,17 @@ namespace QOAM.Website.Controllers
             };
 
             return View(model);
+        }
+
+        bool DomainMatches(string journalLink, string submissionPageLink)
+        {
+            var submissionLinkDomain = _domainRegex.Match(submissionPageLink).Value;
+            var noSubdomainRegex = new Regex($@"(?<=(http[s]?:\/\/))({submissionLinkDomain})");
+
+            if ((submissionLinkDomain != _domainRegex.Match(journalLink).Value))
+                return submissionLinkDomain == noSubdomainRegex.Match(journalLink).Value;
+
+            return true;
         }
 
         #endregion
