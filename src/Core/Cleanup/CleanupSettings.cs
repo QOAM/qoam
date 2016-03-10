@@ -1,18 +1,42 @@
 ﻿namespace QOAM.Core.Cleanup
 {
+    using System;
     using System.Configuration;
 
-    public class CleanupSettings : ConfigurationSectionGroup
+    public class CleanupSettings : ConfigurationSection
     {
-        private const string UnpublishedScoreCardsSectionName = "unpublishedScoreCards";
-        private const string InactiveProfilesSectionName = "inactiveProfiles";
+        private const string SectionName = "cleanup";
+        private const string NumberOfDaysBeforeArchivingInactiveProfilesPropertyName = "numberOfInactiveDaysBeforeArchivingInactiveProfiles";
+        private const string NumberOfDaysBeforeArchivingUnpublishedScoreCardsPropertyName = "numberOfDaysBeforeArchivingUnpublishedScoreCards";
 
-        public static CleanupSettings Current { get; } = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).GetSectionGroup("cleanup") as CleanupSettings;
+        private static readonly Lazy<CleanupSettings> Instance = new Lazy<CleanupSettings>(() => ConfigurationManager.GetSection(SectionName) as CleanupSettings);
 
-        [ConfigurationProperty(UnpublishedScoreCardsSectionName)]
-        public UnpublishedScoreCardsCleanupSettings UnpublishedScoreCards => (UnpublishedScoreCardsCleanupSettings)this.Sections[UnpublishedScoreCardsSectionName];
-
-        [ConfigurationProperty(InactiveProfilesSectionName)]
-        public InactiveProfilesCleanupSettings InactiveProfiles => (InactiveProfilesCleanupSettings)this.Sections[InactiveProfilesSectionName];
+        public static CleanupSettings Current => Instance.Value;
+        
+        [ConfigurationProperty(NumberOfDaysBeforeArchivingInactiveProfilesPropertyName, IsRequired = true)]
+        public int NumberOfInactiveDaysBeforeArchivingInactiveProfiles
+        {
+            get
+            {
+                return (int)this[NumberOfDaysBeforeArchivingInactiveProfilesPropertyName];
+            }
+            set
+            {
+                this[NumberOfDaysBeforeArchivingInactiveProfilesPropertyName] = value;
+            }
+        }
+        
+        [ConfigurationProperty(NumberOfDaysBeforeArchivingUnpublishedScoreCardsPropertyName, IsRequired = true)]
+        public int NumberOfDaysBeforeArchivingUnpublishedScoreCards
+        {
+            get
+            {
+                return (int)this[NumberOfDaysBeforeArchivingUnpublishedScoreCardsPropertyName];
+            }
+            set
+            {
+                this[NumberOfDaysBeforeArchivingUnpublishedScoreCardsPropertyName] = value;
+            }
+        }
     }
 }

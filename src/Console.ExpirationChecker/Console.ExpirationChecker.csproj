@@ -80,18 +80,9 @@
       <SubType>Designer</SubType>
       <TransformOnBuild>true</TransformOnBuild>
     </None>
-    <None Include="App.Debug.config">
-      <DependentUpon>App.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App.Staging.config">
-      <DependentUpon>App.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App.Release.config">
-      <DependentUpon>App.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
+    <None Include="ConnectionStrings.config" />
+    <None Include="ExpirationChecker.config" />
+    <None Include="NLog.ExpirationChecker.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

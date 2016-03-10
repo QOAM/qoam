@@ -8,12 +8,12 @@
     {
         private readonly IBaseScoreCardRepository baseScoreCardRepository;
         private readonly IValuationScoreCardRepository valuationScoreCardRepository;
-        private readonly UnpublishedScoreCardsCleanupSettings settings;
+        private readonly CleanupSettings settings;
 
         public UnpublishedScoreCardsCleanup(
             IBaseScoreCardRepository baseScoreCardRepository,
             IValuationScoreCardRepository valuationScoreCardRepository,
-            UnpublishedScoreCardsCleanupSettings settings)
+            CleanupSettings settings)
         {
             Requires.NotNull(baseScoreCardRepository, nameof(baseScoreCardRepository));
             Requires.NotNull(valuationScoreCardRepository, nameof(valuationScoreCardRepository));
@@ -26,7 +26,7 @@
 
         public void Cleanup()
         {
-            var toBeRemovedWindow = TimeSpan.FromDays(settings.NumberOfDaysBeforeArchiving);
+            var toBeRemovedWindow = TimeSpan.FromDays(settings.NumberOfDaysBeforeArchivingUnpublishedScoreCards);
 
             this.baseScoreCardRepository.RemoveUnpublishedScoreCards(toBeRemovedWindow);
             this.valuationScoreCardRepository.RemoveUnpublishedScoreCards(toBeRemovedWindow);

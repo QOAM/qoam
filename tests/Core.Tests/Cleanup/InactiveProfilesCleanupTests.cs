@@ -16,7 +16,7 @@
             var userProfileRepository = new Mock<IUserProfileRepository>();
 
             var unpublishedScoreCardsCleanup = CreateUnpublishedScoreCardsCleanup(userProfileRepository.Object, settings: settings);
-            var toBeRemovedWindow = TimeSpan.FromDays(settings.NumberOfInactiveDaysBeforeRemoval);
+            var toBeRemovedWindow = TimeSpan.FromDays(settings.NumberOfInactiveDaysBeforeArchivingInactiveProfiles);
 
             // Act
             unpublishedScoreCardsCleanup.Cleanup();
@@ -25,14 +25,14 @@
             userProfileRepository.Verify(b => b.RemoveInactive(toBeRemovedWindow), Times.Once);
         }
 
-        private static InactiveProfilesCleanupSettings CreateInactiveProfilesCleanupSettings()
+        private static CleanupSettings CreateInactiveProfilesCleanupSettings()
         {
-            return new InactiveProfilesCleanupSettings { NumberOfInactiveDaysBeforeRemoval = 50 };
+            return new CleanupSettings { NumberOfInactiveDaysBeforeArchivingInactiveProfiles = 50 };
         }
 
         private static InactiveProfilesCleanup CreateUnpublishedScoreCardsCleanup(
             IUserProfileRepository userProfileRepository = null,
-            InactiveProfilesCleanupSettings settings = null)
+            CleanupSettings settings = null)
         {
             return new InactiveProfilesCleanup(
                 userProfileRepository ?? Mock.Of<IUserProfileRepository>(),

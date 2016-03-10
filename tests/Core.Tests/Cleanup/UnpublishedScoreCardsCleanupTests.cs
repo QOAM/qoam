@@ -16,7 +16,7 @@
             var baseScoreCardRepository = new Mock<IBaseScoreCardRepository>();
 
             var unpublishedScoreCardsCleanup = CreateUnpublishedScoreCardsCleanup(baseScoreCardRepository.Object, settings: settings);
-            var toBeRemovedWindow = TimeSpan.FromDays(settings.NumberOfDaysBeforeArchiving);
+            var toBeRemovedWindow = TimeSpan.FromDays(settings.NumberOfDaysBeforeArchivingUnpublishedScoreCards);
 
             // Act
             unpublishedScoreCardsCleanup.Cleanup();
@@ -33,7 +33,7 @@
             var valuationScoreCardRepository = new Mock<IValuationScoreCardRepository>();
 
             var unpublishedScoreCardsCleanup = CreateUnpublishedScoreCardsCleanup(valuationScoreCardRepository: valuationScoreCardRepository.Object, settings: settings);
-            var toBeRemovedWindow = TimeSpan.FromDays(settings.NumberOfDaysBeforeArchiving);
+            var toBeRemovedWindow = TimeSpan.FromDays(settings.NumberOfDaysBeforeArchivingUnpublishedScoreCards);
 
             // Act
             unpublishedScoreCardsCleanup.Cleanup();
@@ -42,15 +42,15 @@
             valuationScoreCardRepository.Verify(b => b.RemoveUnpublishedScoreCards(toBeRemovedWindow), Times.Once);
         }
 
-        private static UnpublishedScoreCardsCleanupSettings CreateUnpublishedScoreCardsCleanupSettings()
+        private static CleanupSettings CreateUnpublishedScoreCardsCleanupSettings()
         {
-            return new UnpublishedScoreCardsCleanupSettings { NumberOfDaysBeforeArchiving = 50 };
+            return new CleanupSettings { NumberOfDaysBeforeArchivingUnpublishedScoreCards = 50 };
         }
 
         private static UnpublishedScoreCardsCleanup CreateUnpublishedScoreCardsCleanup(
             IBaseScoreCardRepository baseScoreCardRepository = null,
             IValuationScoreCardRepository valuationScoreCardRepository = null,
-            UnpublishedScoreCardsCleanupSettings settings = null)
+            CleanupSettings settings = null)
         {
             return new UnpublishedScoreCardsCleanup(
                 baseScoreCardRepository ?? Mock.Of<IBaseScoreCardRepository>(),

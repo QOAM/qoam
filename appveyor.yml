@@ -5,11 +5,12 @@ environment:
     secure: CjTrB+5tfG+/V21zHNzUBlVQrY4A9wRCyUB5MVfAsBWZP3w8+n4eEkzahqvsdBX4
 before_build:
 - ps: nuget restore
-- ps: New-Item src\Website\MachineKey.Debug.config -type file -value "<?xml version=""1.0""?><machineKey />"
-- ps: New-Item src\Website\ConnectionStrings.Debug.config -type file -value "<?xml version=""1.0""?><connectionStrings />"
-- ps: New-Item src\Website\Contact.Debug.config -type file -value "<?xml version=""1.0""?><contact />"
-- ps: New-Item src\Website\NLog.Debug.config -type file -value "<?xml version=""1.0""?><nlog />"
-- ps: New-Item src\Website\Ulrichs.Debug.config -type file -value "<?xml version=""1.0""?><ulrichs />"
+- ps: New-Item src\Website\MachineKey.config -type file -value "<?xml version=""1.0""?><machineKey />"
+- ps: New-Item src\Website\ConnectionStrings.config -type file -value "<?xml version=""1.0""?><connectionStrings />"
+- ps: New-Item src\Website\Contact.config -type file -value "<?xml version=""1.0""?><contact />"
+- ps: New-Item src\Website\NLog.Website.config -type file -value "<?xml version=""1.0""?><nlog />"
+- ps: New-Item src\Website\Ulrichs.config -type file -value "<?xml version=""1.0""?><ulrichs />"
+- ps: New-Item src\Website\Smtp.config -type file -value "<?xml version=""1.0""?><smtp />"
 build:
   project: QOAM.sln
   verbosity: minimal

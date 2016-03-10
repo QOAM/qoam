@@ -34,7 +34,8 @@
             Logger.Info("Import mode: {0}", importMode);
             Logger.Info("Importing journals...");
 
-            var importResult = Container.Resolve<JournalsImport>().ImportJournals(GetJournalsToImport(importSource), importMode, journalUpdateProperties);
+            var journalsImport = Container.Resolve<JournalsImport>();
+            var importResult = journalsImport.ImportJournals(GetJournalsToImport(importSource), importMode, journalUpdateProperties);
 
             Logger.Info("Imported {0} journals total", importResult.NumberOfImportedJournals);
             Logger.Info("Imported {0} new journals", importResult.NumberOfNewJournals);

@@ -92,19 +92,10 @@
       <TransformOnBuild>true</TransformOnBuild>
       <SubType>Designer</SubType>
     </None>
-    <None Include="App.Debug.config">
-      <DependentUpon>App.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App.Release.config">
-      <DependentUpon>App.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
-    <None Include="App.Staging.config">
-      <DependentUpon>App.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
-    </None>
+    <None Include="ConnectionStrings.config" />
+    <None Include="NLog.DataImporter.config" />
     <None Include="packages.config" />
+    <None Include="Ulrichs.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

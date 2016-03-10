@@ -161,11 +161,9 @@
     <Compile Include="BlockedISSN.cs" />
     <Compile Include="Cleanup\CleanupMode.cs" />
     <Compile Include="Cleanup\DuplicateScoreCardsCleanup.cs" />
-    <Compile Include="Cleanup\InactiveProfilesCleanupSettings.cs" />
     <Compile Include="Cleanup\UnpublishedScoreCardsCleanup.cs" />
     <Compile Include="Cleanup\ICleanup.cs" />
     <Compile Include="Cleanup\CleanupSettings.cs" />
-    <Compile Include="Cleanup\UnpublishedScoreCardsCleanupSettings.cs" />
     <Compile Include="Cleanup\InactiveProfilesCleanup.cs" />
     <Compile Include="Helpers\ExceptionExtensions.cs" />
     <Compile Include="Helpers\FilterExtensions.cs" />
@@ -399,6 +397,7 @@
     <None Include="app.config">
       <TransformOnBuild>true</TransformOnBuild>
     </None>
+    <None Include="ConnectionStrings.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

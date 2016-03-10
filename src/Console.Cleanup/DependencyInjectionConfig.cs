@@ -35,8 +35,6 @@
         private static void RegisterConfigurationSections(ContainerBuilder builder)
         {
             builder.Register(_ => CleanupSettings.Current).SingleInstance();
-            builder.Register(c => c.Resolve<CleanupSettings>().UnpublishedScoreCards).SingleInstance();
-            builder.Register(c => c.Resolve<CleanupSettings>().InactiveProfiles).SingleInstance();
         }
 
         private static void RegisterMiscellaneousComponents(ContainerBuilder builder)
