@@ -7,6 +7,9 @@ using QOAM.Website.ViewModels.Journals;
 
 namespace QOAM.Website.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     [RequireHttps]
     [RoutePrefix("myqoam")]
     [Authorize]
@@ -31,8 +34,9 @@ namespace QOAM.Website.Controllers
         {
             try
             {
+                model.Disciplines = model.Disciplines ?? new List<string>();
+                model.Disciplines = model.Disciplines.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
                 model.Languages = _languageRepository.All.ToSelectListItems("<All languages>");
-                model.Disciplines = _subjectRepository.All.ToSelectListItems("<All disciplines>", SubjectTruncationLength);
                 model.Journals = _userJournalRepository.Search(model.ToFilter(Authentication.CurrentUserId));
             }
             catch (Exception exception)

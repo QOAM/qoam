@@ -65,6 +65,16 @@ namespace QOAM.Core.Repositories
             return this.DbContext.Journals.Where(j => j.ISSN.ToLower().StartsWith(query.ToLower())).Select(j => j.ISSN);
         }
 
+        public IQueryable<string> Subjects(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return Enumerable.Empty<string>().AsQueryable();
+            }
+
+            return this.DbContext.Subjects.Where(s => s.Name.ToLower().StartsWith(query.ToLower())).Where(s => s.Journals.Any()).Select(s => s.Name);
+        }
+
         public IQueryable<string> AllIssns
         {
             get
@@ -78,8 +88,7 @@ namespace QOAM.Core.Repositories
             var query = this.DbContext.Journals
                 .Include(j => j.Publisher)
                 .Include(j => j.Languages)
-                .Include(j => j.Subjects)
-                .Include(j => j.JournalScore);
+                .Include(j => j.Subjects);
 
             return query.Search(filter);
         }
@@ -108,17 +117,17 @@ namespace QOAM.Core.Repositories
 
         public int BaseScoredJournalsCount()
         {
-            return this.DbContext.Journals.Count(j => j.JournalScore.NumberOfBaseReviewers > 0);
+            return this.DbContext.Journals.Count(j => j.NumberOfBaseReviewers > 0);
         }
 
         public int ValuationScoredJournalsCount()
         {
-            return DbContext.Journals.Count(j => j.JournalScore.NumberOfValuationReviewers > 0);
+            return DbContext.Journals.Count(j => j.NumberOfValuationReviewers > 0);
         }
 
         public int JournalsWithSwotCount()
         {
-            return DbContext.Journals.Count(j => j.JournalScore.OverallScore.AverageScore > 0 && j.JournalScore.ValuationScore.AverageScore > 0);
+            return DbContext.Journals.Count(j => j.OverallScore.AverageScore > 0 && j.ValuationScore.AverageScore > 0);
         }
 
         public IList<Journal> AllIncluding(params Expression<Func<Journal, object>>[] includeProperties)

@@ -57,7 +57,6 @@ namespace QOAM.Core.Repositories
                 .Include(uj => uj.Journal.Publisher)
                 .Include(uj => uj.Journal.Languages)
                 .Include(uj => uj.Journal.Subjects)
-                .Include(uj => uj.Journal.JournalScore)
                 .Include(uj => uj.UserProfile)
                 .AsExpandable()
                 .Where(x => x.UserProfileId == filter.UserProfileId);

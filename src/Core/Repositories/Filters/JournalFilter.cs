@@ -8,6 +8,7 @@
         public JournalFilter()
         {
             this.SwotMatrix = new List<string>();
+            this.Disciplines = new List<string>();
         }
 
         public string Title { get; set; }
@@ -18,7 +19,7 @@
 
         public int? PublisherId { get; set; }
 
-        public int? Discipline { get; set; }
+        public IEnumerable<string> Disciplines { get; set; }
 
         public int? Language { get; set; }
 

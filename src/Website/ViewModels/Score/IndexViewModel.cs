@@ -18,6 +18,7 @@ namespace QOAM.Website.ViewModels.Score
         public IndexViewModel()
         {
             this.Journals = new PagedList<Journal>(new Journal[0], this.Page, this.PageSize);
+            this.Disciplines = new List<string>();
         }
 
         [DisplayName("Title")]
@@ -29,9 +30,6 @@ namespace QOAM.Website.ViewModels.Score
         [DisplayName("Publisher")]
         public string Publisher { get; set; }
 
-        [DisplayName("Discipline")]
-        public int? Discipline { get; set; }
-
         [DisplayName("Language")]
         public int? Language { get; set; }
 
@@ -41,7 +39,7 @@ namespace QOAM.Website.ViewModels.Score
 
         public IPagedList<Journal> Journals { get; set; }
 
-        public IEnumerable<SelectListItem> Disciplines { get; set; }
+        public IList<string> Disciplines { get; set; }
 
         public IEnumerable<SelectListItem> Languages { get; set; }
 
@@ -53,8 +51,8 @@ namespace QOAM.Website.ViewModels.Score
                    {
                        Title = this.Title.TrimSafe(), 
                        Issn = this.Issn.TrimSafe(), 
-                       Publisher = this.Publisher.TrimSafe(), 
-                       Discipline = this.Discipline, 
+                       Publisher = this.Publisher.TrimSafe(),
+                       Disciplines = this.Disciplines ?? Enumerable.Empty<string>(),
                        Language = this.Language, 
                        SortMode = this.SortBy, 
                        SortDirection = this.Sort, 
@@ -70,7 +68,7 @@ namespace QOAM.Website.ViewModels.Score
                 Title = Title.TrimSafe(),
                 Issn = Issn.TrimSafe(),
                 Publisher = Publisher.TrimSafe(),
-                Discipline = Discipline,
+                Disciplines = this.Disciplines ?? Enumerable.Empty<string>(),
                 Language = Language,
                 SortMode = SortBy,
                 SortDirection = Sort,

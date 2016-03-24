@@ -59,7 +59,6 @@
         {
             var query = this.DbContext.BaseScoreCards
                 .Include(s => s.Journal)
-                .Include(s => s.Journal.JournalScore)
                 .Where(s => s.UserProfileId == filter.UserProfileId);
 
             if (filter.State.HasValue)

@@ -86,17 +86,17 @@
                         </div>
                     </div>
 
-                    @if (Model.JournalScore.NumberOfBaseReviewers > 0 && Model.JournalScore.NumberOfValuationReviewers > 0)
+                    @if (Model.NumberOfBaseReviewers > 0 && Model.NumberOfValuationReviewers > 0)
                     {
                         <div class="col-md-2">
                             <div class="score swotContainer">
                                 <a href="@Url.Action("JournalScoreCard", "Home")#swot" data-select-tab="false">
                                     <small>SWOT matrix</small>
                                 </a>
-                                <div class="table verdict-@Model.JournalScore.Swot">
+                                <div class="table verdict-@Model.Swot">
                                     <div class="table-row first-row no-float">
                                         <div class="table-cell strong first-column">
-                                            @if (!string.IsNullOrWhiteSpace(Model.SubmissionPageLink) && Model.JournalScore.Swot == SwotVerdict.StrongJournal)
+                                            @if (!string.IsNullOrWhiteSpace(Model.SubmissionPageLink) && Model.Swot == SwotVerdict.StrongJournal)
                                             {
                                                 <a href="@Model.SubmissionPageLink" alt="Go to submission page" title="Go to submission page" class="submission-link" target="_blank">S</a>
                                             }
@@ -122,10 +122,10 @@
                             <div class="score big">
                                 <small>Valuation Score</small>
                                 <h2>
-                                    @Scores.AverageScore(Model.JournalScore.ValuationScore)
+                                    @Scores.AverageScore(Model.ValuationScore)
                                 </h2>
 
-                                <small>Scored by @Model.JournalScore.NumberOfValuationReviewers</small>
+                                <small>Scored by @Model.NumberOfValuationReviewers</small>
                             </div>
                         </div>
                     </a>
@@ -135,10 +135,10 @@
                             <div class="score big">
                                 <small>Base Score</small>
                                 <h2>
-                                    @Scores.AverageScore(Model.JournalScore.OverallScore)
+                                    @Scores.AverageScore(Model.OverallScore)
                                 </h2>
 
-                                <small>Scored by @Model.JournalScore.NumberOfBaseReviewers</small>
+                                <small>Scored by @Model.NumberOfBaseReviewers</small>
 
                                 @if (Model.DoajSeal)
                                 {
@@ -166,26 +166,26 @@
                                         <div class="col-md-2">
                                             <div class="score nohover">
                                                 @QuestionCategory.EditorialInformation.GetName():
-                                                <h3>@Scores.AverageScore(Model.JournalScore.EditorialInformationScore)</h3>
+                                                <h3>@Scores.AverageScore(Model.EditorialInformationScore)</h3>
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
                                             <div class="score nohover">
                                                 @QuestionCategory.Governance:
-                                                <h3>@Scores.AverageScore(Model.JournalScore.GovernanceScore)</h3>
+                                                <h3>@Scores.AverageScore(Model.GovernanceScore)</h3>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="score nohover">
                                                 @QuestionCategory.PeerReview.GetName():
-                                                <h3>@Scores.AverageScore(Model.JournalScore.PeerReviewScore)</h3>
+                                                <h3>@Scores.AverageScore(Model.PeerReviewScore)</h3>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="score nohover">
                                                 @QuestionCategory.Process.GetName():
-                                                <h3>@Scores.AverageScore(Model.JournalScore.ProcessScore)</h3>
+                                                <h3>@Scores.AverageScore(Model.ProcessScore)</h3>
                                             </div>
                                         </div>
 
@@ -207,7 +207,7 @@
                                             <div class="score nohover">
                                                 @QuestionCategory.Valuation.GetName():
                                                 <h3>
-                                                    @Scores.AverageScore(Model.JournalScore.ValuationScore)
+                                                    @Scores.AverageScore(Model.ValuationScore)
                                                 </h3>
                                             </div>
                                         </div>

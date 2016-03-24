@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Web.Helpers;
     using System.Web.Mvc;
-
+    using System.Web.Routing;
     using PagedList;
 
     using QOAM.Core;
@@ -23,6 +23,7 @@
             this.SortBy = JournalSortMode.BaseScore;
             this.Sort = SortDirection.Descending;
             this.SwotMatrix = string.Empty;
+            this.Disciplines = new List<string>();
         }
 
         [DisplayName("Title")]
@@ -35,7 +36,7 @@
         public string Publisher { get; set; }
 
         [DisplayName("Discipline")]
-        public int? Discipline { get; set; }
+        public IList<string> Disciplines { get; set; }
 
         [DisplayName("Language")]
         public int? Language { get; set; }
@@ -49,7 +50,6 @@
         public SortDirection Sort { get; set; }
 
         public IPagedList<Journal> Journals { get; set; }
-        public IEnumerable<SelectListItem> Disciplines { get; set; }
         public IEnumerable<SelectListItem> Languages { get; set; }
 
         public JournalFilter ToFilter()
@@ -59,7 +59,7 @@
                            Title = this.Title.TrimSafe(),
                            Issn = this.Issn.TrimSafe(),
                            Publisher = this.Publisher.TrimSafe(),
-                           Discipline = this.Discipline,
+                           Disciplines = this.Disciplines ?? Enumerable.Empty<string>(),
                            Language = this.Language,
                            SubmittedOnly = this.SubmittedOnly,
                            MustHaveBeenScored = !string.IsNullOrEmpty(this.SwotMatrix),
@@ -78,7 +78,7 @@
                 Title = Title.TrimSafe(),
                 Issn = Issn.TrimSafe(),
                 Publisher = Publisher.TrimSafe(),
-                Discipline = Discipline,
+                Disciplines = this.Disciplines ?? Enumerable.Empty<string>(),
                 Language = Language,
                 SubmittedOnly = SubmittedOnly,
                 MustHaveBeenScored = false,
@@ -89,6 +89,29 @@
                 SwotMatrix = !string.IsNullOrEmpty(SwotMatrix) ? SwotMatrix.Split(',').ToList() : new List<string>(),
                 UserProfileId = userProfileId
             };
+        }
+
+        public RouteValueDictionary ToRouteValueDictionary(int page)
+        {
+            var routeValueDictionary = new RouteValueDictionary
+            {
+                [nameof(page)] = page,
+                [nameof(Title)] = Title,
+                [nameof(Issn)] = Issn,
+                [nameof(Publisher)] = Publisher,
+                [nameof(Language)] = Language,
+                [nameof(SubmittedOnly)] = SubmittedOnly,
+                [nameof(Sort)] = Sort,
+                [nameof(SortBy)] = SortBy,
+                [nameof(SwotMatrix)] = SwotMatrix,
+            };
+
+            for (var i = 0; i < Disciplines.Count; i++)
+            {
+                routeValueDictionary[$"{nameof(Disciplines)}[{i}]"] = Disciplines[i];
+            }
+
+            return routeValueDictionary;
         }
     }
 }

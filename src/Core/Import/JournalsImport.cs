@@ -95,7 +95,6 @@
                 try
                 {
                     this.ImportJournalsInChunk(newJournalsChunk.ToList(), countries, publishers, languages, subjects);
-                    this.AddJournalScoreToImportedJournalsInChunk(newJournalsChunk.ToList());
                 }
                 catch (Exception ex)
                 {
@@ -198,18 +197,6 @@
             this.journalRepository.Save();
         }
 
-        private void AddJournalScoreToImportedJournalsInChunk(IList<Journal> newJournalsChunk)
-        {
-            foreach (var journal in newJournalsChunk)
-            {
-                journal.JournalScore = new JournalScore { JournalId = journal.Id };
-
-                this.journalRepository.InsertOrUpdate(journal);
-            }
-
-            this.journalRepository.Save();
-        }
-
         private IList<Country> ImportCountries(IEnumerable<Journal> journals)
         {
             Logger.Info("Importing countries...");
@@ -223,17 +210,17 @@
             return this.countryRepository.All;
         }
 
-        private IEnumerable<Country> GetNewCountries(IEnumerable<Journal> journals)
+        private IList<Country> GetNewCountries(IEnumerable<Journal> journals)
         {
-            return this.GetNewCountryNames(journals).Select(name => new Country { Name = name });
+            return this.GetNewCountryNames(journals).Select(name => new Country { Name = name }).ToList();
         }
 
-        private IEnumerable<string> GetNewCountryNames(IEnumerable<Journal> journals)
+        private IList<string> GetNewCountryNames(IEnumerable<Journal> journals)
         {
-            var currentCountryNames = this.countryRepository.All.Select(c => c.Name);
-            var importCountryNames = journals.Select(j => j.Country.Name.Trim()).Distinct();
+            var currentCountryNames = this.countryRepository.All.Select(c => c.Name.ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
+            var importCountryNames = journals.Select(j => j.Country.Name.Trim().ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
 
-            return importCountryNames.Except(currentCountryNames, StringComparer.InvariantCultureIgnoreCase);
+            return importCountryNames.Except(currentCountryNames, StringComparer.InvariantCultureIgnoreCase).ToList();
         }
 
         private IList<Language> ImportLanguages(IEnumerable<Journal> journals)
@@ -249,17 +236,17 @@
             return this.languageRepository.All;
         }
 
-        private IEnumerable<Language> GetNewLanguages(IEnumerable<Journal> journals)
+        private IList<Language> GetNewLanguages(IEnumerable<Journal> journals)
         {
-            return this.GetNewLanguageNames(journals).Select(name => new Language { Name = name });
+            return this.GetNewLanguageNames(journals).Select(name => new Language { Name = name }).ToList();
         }
 
-        private IEnumerable<string> GetNewLanguageNames(IEnumerable<Journal> journals)
+        private IList<string> GetNewLanguageNames(IEnumerable<Journal> journals)
         {
-            var currentLanguageNames = this.languageRepository.All.Select(c => c.Name);
-            var importLanguageNames = journals.SelectMany(j => j.Languages).Select(l => l.Name).Distinct();
+            var currentLanguageNames = this.languageRepository.All.Select(c => c.Name.ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
+            var importLanguageNames = journals.SelectMany(j => j.Languages).Select(l => l.Name.ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
 
-            return importLanguageNames.Except(currentLanguageNames, StringComparer.InvariantCultureIgnoreCase);
+            return importLanguageNames.Except(currentLanguageNames, StringComparer.InvariantCultureIgnoreCase).ToList();
         }
 
         private IList<Subject> ImportSubjects(IEnumerable<Journal> journals)
@@ -275,17 +262,17 @@
             return this.subjectRepository.All;
         }
 
-        private IEnumerable<Subject> GetNewSubjects(IEnumerable<Journal> journals)
+        private IList<Subject> GetNewSubjects(IEnumerable<Journal> journals)
         {
-            return this.GetNewSubjectNames(journals).Select(name => new Subject { Name = name });
+            return this.GetNewSubjectNames(journals).Select(name => new Subject { Name = name }).ToList();
         }
 
-        private IEnumerable<string> GetNewSubjectNames(IEnumerable<Journal> journals)
+        private IList<string> GetNewSubjectNames(IEnumerable<Journal> journals)
         {
-            var currentSubjectName = this.subjectRepository.All.Select(c => c.Name);
-            var importSubjectNames = journals.SelectMany(j => j.Subjects).Select(s => s.Name).Distinct();
+            var currentSubjectName = this.subjectRepository.All.Select(c => c.Name.ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
+            var importSubjectNames = journals.SelectMany(j => j.Subjects).Select(s => s.Name.ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
 
-            return importSubjectNames.Except(currentSubjectName, StringComparer.InvariantCultureIgnoreCase);
+            return importSubjectNames.Except(currentSubjectName, StringComparer.InvariantCultureIgnoreCase).ToList();
         }
 
         private IList<Publisher> ImportPublishers(IEnumerable<Journal> journals)
@@ -308,10 +295,10 @@
 
         private IEnumerable<string> GetNewPublisherNames(IEnumerable<Journal> journals)
         {
-            var currentPublisherNames = this.publisherRepository.All.Select(c => c.Name);
-            var importPublisherNames = journals.Select(j => j.Publisher.Name).Distinct();
+            var currentPublisherNames = this.publisherRepository.All.Select(c => c.Name.ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
+            var importPublisherNames = journals.Select(j => j.Publisher.Name.ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
 
-            return importPublisherNames.Except(currentPublisherNames, StringComparer.InvariantCultureIgnoreCase);
+            return importPublisherNames.Except(currentPublisherNames, StringComparer.InvariantCultureIgnoreCase).ToList();
         }
 
         private static bool ShouldInsertJournals(JournalsImportMode journalsImportMode)

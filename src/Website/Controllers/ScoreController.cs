@@ -69,8 +69,9 @@ namespace QOAM.Website.Controllers
         [HttpGet, Route("")]
         public ActionResult Index(IndexViewModel model)
         {
+            model.Disciplines = model.Disciplines ?? new List<string>();
+            model.Disciplines = model.Disciplines.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
             model.Languages = this.languageRepository.All.ToSelectListItems("<All languages>");
-            model.Disciplines = this.subjectRepository.All.ToSelectListItems("<All disciplines>", SubjectTruncationLength);
             model.Journals = this.journalRepository.Search(model.ToFilter());
             model.JournalIdsInMyQOAM = _userJournalRepository.Search(model.ToFilter(Authentication.CurrentUserId)).Select(x => x.Id);
 

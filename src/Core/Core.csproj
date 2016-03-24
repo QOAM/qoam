@@ -251,6 +251,10 @@
     <Compile Include="Migrations\201602051231059_DeveloperRole.Designer.cs">
       <DependentUpon>201602051231059_DeveloperRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603241623258_JournalScoreSimplification.cs" />
+    <Compile Include="Migrations\201603241623258_JournalScoreSimplification.Designer.cs">
+      <DependentUpon>201603241623258_JournalScoreSimplification.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\Filters\UserJournalFilter.cs" />
@@ -272,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602051231059_DeveloperRole.resx">
       <DependentUpon>201602051231059_DeveloperRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603241623258_JournalScoreSimplification.resx">
+      <DependentUpon>201603241623258_JournalScoreSimplification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />
@@ -363,7 +370,6 @@
     <Compile Include="JournalCategoryScore.cs" />
     <Compile Include="QuestionKey.cs" />
     <Compile Include="Import\JournalsImportResult.cs" />
-    <Compile Include="JournalScore.cs" />
     <Compile Include="Services\IMailSender.cs" />
     <Compile Include="Services\MailSender.cs" />
     <Compile Include="Subject.cs" />
@@ -486,6 +492,8 @@
     <EmbeddedResource Include="Scripts\20151026_Trigger_BaseScorecards.Published.sql" />
     <EmbeddedResource Include="Scripts\20151027_Trigger_BaseScorecards.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151027_Trigger_ValuationScorecards.Deleted.sql" />
+    <EmbeddedResource Include="Scripts\20160329_Trigger_ValuationScorecards.Modified.sql" />
+    <EmbeddedResource Include="Scripts\20160329_Trigger_BaseScorecards.Modified.sql" />
     <Content Include="Scripts\CleanupAfterUlrichs.sql" />
     <EmbeddedResource Include="Scripts\201403171503325_InitialCreate_function_MinimumFloat.sql" />
   </ItemGroup>

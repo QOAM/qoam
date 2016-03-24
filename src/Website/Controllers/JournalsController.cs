@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity.Validation;
-using Microsoft.Ajax.Utilities;
 using QOAM.Core.Import;
 
 namespace QOAM.Website.Controllers
@@ -60,8 +59,9 @@ namespace QOAM.Website.Controllers
         [HttpGet, Route("")]
         public ViewResult Index(IndexViewModel model)
         {
+            model.Disciplines = model.Disciplines ?? new List<string>();
+            model.Disciplines = model.Disciplines.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
             model.Languages = languageRepository.Active.ToSelectListItems("<All languages>");
-            model.Disciplines = subjectRepository.Active.ToSelectListItems("<All disciplines>", SubjectTruncationLength);
             model.Journals = journalRepository.Search(model.ToFilter());
 
             return View("JournalsIndex", model);
@@ -422,6 +422,13 @@ namespace QOAM.Website.Controllers
         public JsonResult Publishers(string query)
         {
             return Json(journalRepository.Publishers(query).Select(s => new { value = s }).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet, Route("subjects")]
+        [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
+        public JsonResult Subjects(string query)
+        {
+            return Json(journalRepository.Subjects(query).Select(s => new { value = s }).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
     }
 }

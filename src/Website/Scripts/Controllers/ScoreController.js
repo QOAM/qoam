@@ -1,10 +1,21 @@
 ﻿var ScoreController = (function () {
     function ScoreController() {
     }
-    ScoreController.prototype.index = function (journalTitlesUrl, journalIssnsUrl, journalPublishersUrl) {
+    ScoreController.prototype.index = function (journalTitlesUrl, journalIssnsUrl, journalPublishersUrl, subjectsUrl) {
         createTypeahead('#Title', journalTitlesUrl);
         createTypeahead('#Issn', journalIssnsUrl);
         createTypeahead('#Publisher', journalPublishersUrl);
+        createTypeahead('input.search-discipline', subjectsUrl);
+
+        $('.remove-discipline').on('click', function () {
+            $(this).closest('li').remove();
+
+            $('#disciplines input').each(function (index, element) {
+                $(element).attr('name', 'Disciplines[' + index + ']');
+            });
+
+            return false;
+        });
     };
 
     ScoreController.prototype.baseScoreCardDetails = function () {

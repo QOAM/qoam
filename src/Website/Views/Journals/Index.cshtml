@@ -47,11 +47,26 @@
                             @Html.ValidationMessageFor(m => m.Publisher, null, new { @class = "control-label" })
                         </div>
 
+                        <div class="form-group editor-label-placeholder">
+                            @Html.LabelFor(m => m.Disciplines, null, new { @class = "control-label" })
+                        </div>
                         <div class="form-group">
-                            @Html.DropDownListFor(m => m.Discipline, Model.Disciplines, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Discipline, null, new { @class = "control-label" })
+                            @Html.Html5TextBox(Html.NameFor(m => m.Disciplines) + "[" + Model.Disciplines.Count + "]", InputTypes.InputType.Text, new { @class = "form-control search-discipline" }, "Search by discipline")
+                            @Html.ValidationMessageFor(m => m.Disciplines, null, new { @class = "control-label" })
                         </div>
 
+                        <div class="form-group">
+                            <ul id="disciplines">
+                                @for (var i = 0; i < Model.Disciplines.Count; i++)
+                                {
+                                    <li class="discipline">
+                                        <input type="hidden" name="@(Html.NameFor(m => m.Disciplines))[@i]" value="@Model.Disciplines[i]" />
+                                        @Model.Disciplines[i] <a href="#" class="remove-discipline"><i class="glyphicon glyphicon-trash"></i></a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        
                         <div class="form-group">
                             @Html.DropDownListFor(m => m.Language, Model.Languages, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Language, null, new { @class = "control-label" })
@@ -124,16 +139,16 @@
                             <tr>
                                 <td>@Html.ActionLink(journal.Title, "Details", new { id = journal.Id, returnUrl = Request.RawUrl })</td>
                                 <td>@Html.ActionLink(journal.Publisher.Name, "Index", new { Publisher = journal.Publisher.Name })</td>
-                                <td class="verdict-@journal.JournalScore.Swot">&#160;</td>
-                                <td>@Scores.AverageScore(journal.JournalScore.OverallScore)</td>
-                                <td>@Scores.AverageScore(journal.JournalScore.ValuationScore)</td>
+                                <td class="verdict-@journal.Swot">&#160;</td>
+                                <td>@Scores.AverageScore(journal.OverallScore)</td>
+                                <td>@Scores.AverageScore(journal.ValuationScore)</td>
                             </tr>
                         }
 
                     </tbody>
                 </table>
 
-                @Html.PagedListPager(Model.Journals, page => Url.Action("Index", new { page, Model.Title, Model.Issn, Model.Publisher, Model.Discipline, Model.Language, Model.SubmittedOnly, Model.Sort, Model.SortBy, Model.SwotMatrix }), Html.PagedListRenderOptions())
+                @Html.PagedListPager(Model.Journals, page => Url.Action("Index", Model.ToRouteValueDictionary(page)), Html.PagedListRenderOptions())
             }
             else
             {
@@ -161,7 +176,8 @@
             journalsController.index(
                 '@Url.Action("Titles", null, null, this.Request.Url.Scheme)',
                 '@Url.Action("Issns", null, null, this.Request.Url.Scheme)',
-                '@Url.Action("Publishers", null, null, this.Request.Url.Scheme)'
+                '@Url.Action("Publishers", null, null, this.Request.Url.Scheme)',
+                '@Url.Action("Subjects", null, null, this.Request.Url.Scheme)'
             );
         });
     </script>

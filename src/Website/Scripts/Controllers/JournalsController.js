@@ -2,12 +2,23 @@
     function JournalsController() {
     }
 
-    JournalsController.prototype.index = function(journalTitlesUrl, journalIssnsUrl, journalPublishersUrl) {
+    JournalsController.prototype.index = function(journalTitlesUrl, journalIssnsUrl, journalPublishersUrl, subjectsUrl) {
         createTypeahead('#Title', journalTitlesUrl);
         createTypeahead('#Issn', journalIssnsUrl);
         createTypeahead('#Publisher', journalPublishersUrl);
+        createTypeahead('input.search-discipline', subjectsUrl);
 
         updateSwotMatrix('#swotFilterContainer', '#SwotMatrix');
+
+        $('.remove-discipline').on('click', function() {
+            $(this).closest('li').remove();
+
+            $('#disciplines input').each(function (index, element) {
+                $(element).attr('name', 'Disciplines[' + index + ']');
+            });
+
+            return false;
+        });
 
         $('#swotFilterContainer').on('click', 'div.table-cell', function() {
             $(this).toggleClass('verdict-' + $(this).attr('data-swot-type')).toggleClass('selected');
