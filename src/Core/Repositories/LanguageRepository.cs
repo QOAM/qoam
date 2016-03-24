@@ -13,13 +13,9 @@
         {
         }
 
-        public IList<Language> All
-        {
-            get
-            {
-                return this.DbContext.Languages.OrderBy(l => l.Name).ToList();
-            }
-        }
+        public IList<Language> All => this.DbContext.Languages.OrderBy(l => l.Name).ToList();
+
+        public IList<Language> Active => this.DbContext.Languages.Where(l => l.Journals.Any()).OrderBy(l => l.Name).ToList();
 
         public void InsertBulk(IEnumerable<Language> languages)
         {

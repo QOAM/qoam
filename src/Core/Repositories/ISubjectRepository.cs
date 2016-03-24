@@ -5,6 +5,7 @@
     public interface ISubjectRepository
     {
         IList<Subject> All { get; }
+        IList<Subject> Active { get; }
         
         void InsertBulk(IEnumerable<Subject> subjects);
     }

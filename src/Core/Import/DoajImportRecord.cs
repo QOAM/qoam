@@ -26,7 +26,7 @@
                            DoajSeal = this.HasSeal,
                            Country = new Country { Name = this.Country },
                            Publisher = new Publisher { Name = this.Publisher },
-                           Subjects = this.Subjects.Split(new[] { " --- " }, StringSplitOptions.RemoveEmptyEntries).Select(s => new Subject { Name = s.Trim().ToLowerInvariant() }).ToSet(),
+                           Subjects = this.Subjects.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => new Subject { Name = s.Trim().ToLowerInvariant() }).ToSet(),
                            Languages = this.Language.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => new Language { Name = s }).ToSet()
                        };
         }

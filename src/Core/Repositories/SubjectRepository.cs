@@ -13,13 +13,9 @@
         {
         }
 
-        public IList<Subject> All
-        {
-            get
-            {
-                return this.DbContext.Subjects.OrderBy(k => k.Name).ToList();
-            }
-        }
+        public IList<Subject> All => this.DbContext.Subjects.OrderBy(k => k.Name).ToList();
+
+        public IList<Subject> Active => this.DbContext.Subjects.Where(s => s.Journals.Any()).OrderBy(k => k.Name).ToList();
 
         public void InsertBulk(IEnumerable<Subject> subjects)
         {

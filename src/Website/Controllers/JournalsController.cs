@@ -60,8 +60,8 @@ namespace QOAM.Website.Controllers
         [HttpGet, Route("")]
         public ViewResult Index(IndexViewModel model)
         {
-            model.Languages = languageRepository.All.ToSelectListItems("<All languages>");
-            model.Disciplines = subjectRepository.All.ToSelectListItems("<All disciplines>", SubjectTruncationLength);
+            model.Languages = languageRepository.Active.ToSelectListItems("<All languages>");
+            model.Disciplines = subjectRepository.Active.ToSelectListItems("<All disciplines>", SubjectTruncationLength);
             model.Journals = journalRepository.Search(model.ToFilter());
 
             return View("JournalsIndex", model);
