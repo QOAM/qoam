@@ -2,10 +2,13 @@
 {
     using System;
     using System.Linq;
+    using System.Text;
     using QOAM.Core.Helpers;
 
     public class DoajImportRecord
     {
+        private static readonly Encoding Encoding = new UTF8Encoding(true);
+
         public string Title { get; set; }
         public string URL { get; set; }
         public string Publisher { get; set; }
@@ -26,8 +29,8 @@
                            DoajSeal = this.HasSeal,
                            Country = new Country { Name = this.Country },
                            Publisher = new Publisher { Name = this.Publisher },
-                           Subjects = this.Subjects.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => new Subject { Name = s.Trim().ToLowerInvariant() }).ToSet(),
-                           Languages = this.Language.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => new Language { Name = s }).ToSet()
+                           Subjects = this.Subjects.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim().ToLowerInvariant().RemovePreamble(Encoding)).Distinct().Select(s => new Subject { Name = s }).ToSet(),
+                           Languages = this.Language.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim().ToLowerInvariant().RemovePreamble(Encoding)).Distinct().Select(s => new Language { Name = s }).ToSet()
                        };
         }
     }

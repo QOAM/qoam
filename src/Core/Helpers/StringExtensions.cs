@@ -3,12 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Text.RegularExpressions;
 
     public static class StringExtensions
     {
         public const string IssnRegexPattern = @"^\d{4}-\d{3}(\d|X)$";
-
+        
         private static readonly Regex issnRegex = new Regex(IssnRegexPattern, RegexOptions.Compiled);
 
         public static bool IsValidISSN(this string str)
@@ -65,6 +66,19 @@
         public static HashSet<string> ToLinesSet(this string str)
         {
             return str.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).Where(s => s.Trim().Length > 0).Select(s => s.Trim()).ToSet(StringComparer.InvariantCultureIgnoreCase);
+        }
+
+        public static string RemovePreamble(this string str, Encoding encoding)
+        {
+            var bytes = encoding.GetBytes(str);
+            var preamble = encoding.GetPreamble();
+
+            if (bytes.Length < preamble.Length || preamble.Where((p, i) => p != bytes[i]).Any())
+            {
+                return str;
+            }
+                
+            return encoding.GetString(bytes.Skip(preamble.Length).ToArray());
         }
     }
 }

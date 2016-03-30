@@ -1,16 +1,15 @@
 ﻿namespace QOAM.Core.Import
 {
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Net;
     using System.Text;
-
     using CsvHelper;
     using CsvHelper.Configuration;
 
     using NLog;
-
     using QOAM.Core.Helpers;
     using Repositories;
     using Validation;
@@ -18,6 +17,7 @@
     public class DoajImport : Import
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Encoding Encoding = new UTF8Encoding(false);
 
         private readonly DoajSettings doajSettings;
 
@@ -25,8 +25,10 @@
                                                                         {
                                                                             HasHeaderRecord = true,
                                                                             Delimiter = ",",
-                                                                            TrimFields = true
-                                                                        };
+                                                                            TrimFields = true,
+                                                                            CultureInfo = new CultureInfo("en-US"),
+                                                                            Encoding = Encoding
+        };
 
         public DoajImport(DoajSettings doajSettings, IBlockedISSNRepository blockedIssnRepository) : base(blockedIssnRepository)
         {
@@ -46,7 +48,7 @@
 
             using (var webClient = new WebClient())
             {
-                webClient.Encoding = Encoding.UTF8;
+                webClient.Encoding = Encoding;
 
                 return webClient.DownloadString(this.doajSettings.CsvUrl);
             }
@@ -55,11 +57,14 @@
         public IList<Journal> ParseJournals(string csv)
         {
             Logger.Info("Parsing journals...");
-
-            using (var csvReader = new CsvReader(new StringReader(csv), CsvConfiguration))
+            
+            using (var streamReader = new StringReader(csv))
+            using (var csvParser = new CsvParser(streamReader, CsvConfiguration))
+            using (var csvReader = new CsvReader(csvParser))
             {
                 csvReader.Configuration.RegisterClassMap<DoajImportRecordMap>();
                 var importRecords = csvReader.GetRecords<DoajImportRecord>().ToList();
+
                 return importRecords.Select(i => i.ToJournal()).Where(j => j.IsValid()).ToList();
             }
         }
