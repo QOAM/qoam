@@ -27,7 +27,7 @@ namespace QOAM.Core.Helpers
             {
                 foreach (var discipline in filter.Disciplines)
                 {
-                    query = query.Where(j => j.Subjects.Any(s => s.Name.ToLower() == discipline.ToLower()));
+                    query = query.Where(j => j.Subjects.Any(s => s.Name.ToLower().Contains(discipline.ToLower())));
                 }
             }
 
