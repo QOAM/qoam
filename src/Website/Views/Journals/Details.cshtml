@@ -169,17 +169,16 @@
                                                 <h3>@Scores.AverageScore(Model.EditorialInformationScore)</h3>
                                             </div>
                                         </div>
-
-                                        <div class="col-md-2">
-                                            <div class="score nohover">
-                                                @QuestionCategory.Governance:
-                                                <h3>@Scores.AverageScore(Model.GovernanceScore)</h3>
-                                            </div>
-                                        </div>
                                         <div class="col-md-2">
                                             <div class="score nohover">
                                                 @QuestionCategory.PeerReview.GetName():
                                                 <h3>@Scores.AverageScore(Model.PeerReviewScore)</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="score nohover">
+                                                @QuestionCategory.Governance:
+                                                <h3>@Scores.AverageScore(Model.GovernanceScore)</h3>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -196,8 +195,8 @@
                                                         <img src="~/Content/Images/rate-small.png" alt="Score this journal" />
                                                     </a>
                                                 </div>
-                                                <div class="col-md-7a">
-                                                    <a href="@Url.Action("BaseScoreCard", "Score", new { id = Model.Id })">Publish a Base Score Card</a>
+                                                <div class="col-md-7a scoringbuttons">
+                                                    <a href="@Url.Action("BaseScoreCard", "Score", new { id = Model.Id })">- Publish a Base Score Card</a>
                                                 </div>
                                             </div>
                                         </div>

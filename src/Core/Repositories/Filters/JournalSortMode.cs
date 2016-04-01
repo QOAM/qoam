@@ -12,5 +12,8 @@
 
         [Display(Name = "JournalSortMode_Name", ResourceType = typeof(Strings))]
         Name,
+
+        [Display(Name = "JournalSortMode_NumberOfValuationJournalScoreCards", ResourceType = typeof(Strings))]
+        NumberOfValuationJournalScoreCards
     }
 }
