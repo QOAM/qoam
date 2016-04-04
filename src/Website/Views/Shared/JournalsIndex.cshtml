@@ -67,10 +67,25 @@
                                 }
                             </ul>
                         </div>
-                        
+
+                        <div class="form-group editor-label-placeholder">
+                            @Html.LabelFor(m => m.Languages, null, new { @class = "control-label" })
+                        </div>
                         <div class="form-group">
-                            @Html.DropDownListFor(m => m.Language, Model.Languages, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Language, null, new { @class = "control-label" })
+                            @Html.Html5TextBox(Html.NameFor(m => m.Languages) + "[" + Model.Languages.Count + "]", InputTypes.InputType.Text, new { @class = "form-control search-language" }, "Search by language")
+                            @Html.ValidationMessageFor(m => m.Languages, null, new { @class = "control-label" })
+                        </div>
+
+                        <div class="form-group">
+                            <ul id="languages">
+                                @for (var i = 0; i < Model.Languages.Count; i++)
+                                {
+                                    <li class="language">
+                                        <input type="hidden" name="@(Html.NameFor(m => m.Languages))[@i]" value="@Model.Languages[i]" />
+                                        @Model.Languages[i] <a href="#" class="remove-language"><i class="glyphicon glyphicon-trash"></i></a>
+                                    </li>
+                                }
+                            </ul>
                         </div>
 
                         <!--
@@ -201,7 +216,8 @@
                 '@Url.Action("Titles", null, null, this.Request.Url.Scheme)',
                 '@Url.Action("Issns", null, null, this.Request.Url.Scheme)',
                 '@Url.Action("Publishers", null, null, this.Request.Url.Scheme)',
-                '@Url.Action("Subjects", null, null, this.Request.Url.Scheme)'
+                '@Url.Action("Subjects", null, null, this.Request.Url.Scheme)',
+                '@Url.Action("Languages", null, null, this.Request.Url.Scheme)'
             );
         });
     </script>

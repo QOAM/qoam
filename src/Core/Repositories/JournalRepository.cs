@@ -75,6 +75,16 @@ namespace QOAM.Core.Repositories
             return this.DbContext.Subjects.Where(s => s.Name.ToLower().StartsWith(query.ToLower())).Where(s => s.Journals.Any()).Select(s => s.Name);
         }
 
+        public IQueryable<string> Languages(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return Enumerable.Empty<string>().AsQueryable();
+            }
+
+            return this.DbContext.Languages.Where(s => s.Name.ToLower().StartsWith(query.ToLower())).Where(s => s.Journals.Any()).Select(s => s.Name);
+        }
+
         public IQueryable<string> AllIssns
         {
             get

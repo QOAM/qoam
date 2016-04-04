@@ -6,7 +6,7 @@ namespace QOAM.Website.ViewModels.Score
     using System.ComponentModel;
     using System.Web.Helpers;
     using System.Web.Mvc;
-
+    using System.Web.Routing;
     using PagedList;
 
     using QOAM.Core;
@@ -30,18 +30,17 @@ namespace QOAM.Website.ViewModels.Score
         [DisplayName("Publisher")]
         public string Publisher { get; set; }
 
-        [DisplayName("Language")]
-        public int? Language { get; set; }
-
         public JournalSortMode SortBy { get; set; }
 
         public SortDirection Sort { get; set; }
 
         public IPagedList<Journal> Journals { get; set; }
 
+        [DisplayName("Discipline")]
         public IList<string> Disciplines { get; set; }
 
-        public IEnumerable<SelectListItem> Languages { get; set; }
+        [DisplayName("Language")]
+        public IList<string> Languages { get; set; }
 
         public IEnumerable<int> JournalIdsInMyQOAM { get; set; }
 
@@ -53,7 +52,7 @@ namespace QOAM.Website.ViewModels.Score
                        Issn = this.Issn.TrimSafe(), 
                        Publisher = this.Publisher.TrimSafe(),
                        Disciplines = this.Disciplines ?? Enumerable.Empty<string>(),
-                       Language = this.Language, 
+                       Languages = this.Languages ?? Enumerable.Empty<string>(),
                        SortMode = this.SortBy, 
                        SortDirection = this.Sort, 
                        PageNumber = this.Page, 
@@ -69,7 +68,7 @@ namespace QOAM.Website.ViewModels.Score
                 Issn = Issn.TrimSafe(),
                 Publisher = Publisher.TrimSafe(),
                 Disciplines = this.Disciplines ?? Enumerable.Empty<string>(),
-                Language = Language,
+                Languages = this.Languages ?? Enumerable.Empty<string>(),
                 SortMode = SortBy,
                 SortDirection = Sort,
                 PageNumber = Page,
@@ -81,6 +80,31 @@ namespace QOAM.Website.ViewModels.Score
         public bool IsInMyQOAM(int journalId)
         {
             return JournalIdsInMyQOAM.Any(id => id == journalId);
+        }
+
+        public RouteValueDictionary ToRouteValueDictionary(int page)
+        {
+            var routeValueDictionary = new RouteValueDictionary
+            {
+                [nameof(page)] = page,
+                [nameof(Title)] = Title,
+                [nameof(Issn)] = Issn,
+                [nameof(Publisher)] = Publisher,
+                [nameof(Sort)] = Sort,
+                [nameof(SortBy)] = SortBy,
+            };
+
+            for (var i = 0; i < Disciplines.Count; i++)
+            {
+                routeValueDictionary[$"{nameof(Disciplines)}[{i}]"] = Disciplines[i];
+            }
+
+            for (var i = 0; i < Languages.Count; i++)
+            {
+                routeValueDictionary[$"{nameof(Languages)}[{i}]"] = Languages[i];
+            }
+
+            return routeValueDictionary;
         }
     }
 }

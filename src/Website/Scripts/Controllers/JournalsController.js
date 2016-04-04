@@ -2,11 +2,12 @@
     function JournalsController() {
     }
 
-    JournalsController.prototype.index = function(journalTitlesUrl, journalIssnsUrl, journalPublishersUrl, subjectsUrl) {
+    JournalsController.prototype.index = function (journalTitlesUrl, journalIssnsUrl, journalPublishersUrl, subjectsUrl, languagesUrl) {
         createTypeahead('#Title', journalTitlesUrl);
         createTypeahead('#Issn', journalIssnsUrl);
         createTypeahead('#Publisher', journalPublishersUrl);
         createTypeahead('input.search-discipline', subjectsUrl);
+        createTypeahead('input.search-language', languagesUrl);
 
         updateSwotMatrix('#swotFilterContainer', '#SwotMatrix');
 
@@ -15,6 +16,16 @@
 
             $('#disciplines input').each(function (index, element) {
                 $(element).attr('name', 'Disciplines[' + index + ']');
+            });
+
+            return false;
+        });
+
+        $('.remove-language').on('click', function () {
+            $(this).closest('li').remove();
+
+            $('#languages input').each(function (index, element) {
+                $(element).attr('name', 'Languages[' + index + ']');
             });
 
             return false;

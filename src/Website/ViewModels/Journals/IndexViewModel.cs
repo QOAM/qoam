@@ -24,6 +24,7 @@
             this.Sort = SortDirection.Descending;
             this.SwotMatrix = string.Empty;
             this.Disciplines = new List<string>();
+            this.Languages = new List<string>();
         }
 
         [DisplayName("Title")]
@@ -37,10 +38,7 @@
 
         [DisplayName("Discipline")]
         public IList<string> Disciplines { get; set; }
-
-        [DisplayName("Language")]
-        public int? Language { get; set; }
-
+        
         [DisplayName("All journals with Valuation Score Card")]
         public bool SubmittedOnly { get; set; }
 
@@ -50,7 +48,9 @@
         public SortDirection Sort { get; set; }
 
         public IPagedList<Journal> Journals { get; set; }
-        public IEnumerable<SelectListItem> Languages { get; set; }
+
+        [DisplayName("Language")]
+        public IList<string> Languages { get; set; }
 
         public JournalFilter ToFilter()
         {
@@ -60,7 +60,7 @@
                            Issn = this.Issn.TrimSafe(),
                            Publisher = this.Publisher.TrimSafe(),
                            Disciplines = this.Disciplines ?? Enumerable.Empty<string>(),
-                           Language = this.Language,
+                           Languages = this.Languages ?? Enumerable.Empty<string>(),
                            SubmittedOnly = this.SubmittedOnly,
                            MustHaveBeenScored = !string.IsNullOrEmpty(this.SwotMatrix),
                            SortMode = this.SortBy,
@@ -79,7 +79,7 @@
                 Issn = Issn.TrimSafe(),
                 Publisher = Publisher.TrimSafe(),
                 Disciplines = this.Disciplines ?? Enumerable.Empty<string>(),
-                Language = Language,
+                Languages = this.Languages ?? Enumerable.Empty<string>(),
                 SubmittedOnly = SubmittedOnly,
                 MustHaveBeenScored = false,
                 SortMode = SortBy,
@@ -99,7 +99,6 @@
                 [nameof(Title)] = Title,
                 [nameof(Issn)] = Issn,
                 [nameof(Publisher)] = Publisher,
-                [nameof(Language)] = Language,
                 [nameof(SubmittedOnly)] = SubmittedOnly,
                 [nameof(Sort)] = Sort,
                 [nameof(SortBy)] = SortBy,
@@ -109,6 +108,11 @@
             for (var i = 0; i < Disciplines.Count; i++)
             {
                 routeValueDictionary[$"{nameof(Disciplines)}[{i}]"] = Disciplines[i];
+            }
+
+            for (var i = 0; i < Languages.Count; i++)
+            {
+                routeValueDictionary[$"{nameof(Languages)}[{i}]"] = Languages[i];
             }
 
             return routeValueDictionary;

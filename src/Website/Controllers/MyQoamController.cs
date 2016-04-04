@@ -18,14 +18,10 @@ namespace QOAM.Website.Controllers
         const int SubjectTruncationLength = 90;
         const string MyQoamMessage = "MyQoamMessage";
 
-        readonly ILanguageRepository _languageRepository;
-        readonly ISubjectRepository _subjectRepository;
         readonly IUserJournalRepository _userJournalRepository;
 
-        public MyQoamController(IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IUserJournalRepository userJournalRepository) : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
+        public MyQoamController(IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IUserJournalRepository userJournalRepository) : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
-            _languageRepository = languageRepository;
-            _subjectRepository = subjectRepository;
             _userJournalRepository = userJournalRepository;
         }
 
@@ -34,9 +30,8 @@ namespace QOAM.Website.Controllers
         {
             try
             {
-                model.Disciplines = model.Disciplines ?? new List<string>();
-                model.Disciplines = model.Disciplines.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
-                model.Languages = _languageRepository.All.ToSelectListItems("<All languages>");
+                model.Disciplines = NormalizeSearchStrings(model.Disciplines);
+                model.Languages = NormalizeSearchStrings(model.Languages);
                 model.Journals = _userJournalRepository.Search(model.ToFilter(Authentication.CurrentUserId));
             }
             catch (Exception exception)

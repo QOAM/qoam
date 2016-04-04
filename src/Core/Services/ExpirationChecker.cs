@@ -10,21 +10,18 @@
     public class ExpirationChecker
     {
         private readonly IBaseScoreCardRepository baseScoreCardRepository;
-        private readonly IValuationScoreCardRepository valuationScoreCardRepository;
         private readonly ExpirationCheckerNotification expirationCheckerNotification;
         private readonly ExpirationCheckerSettings expirationCheckerSettings;
         private readonly IMailSender mailSender;
 
-        public ExpirationChecker(IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, ExpirationCheckerNotification expirationCheckerNotification, ExpirationCheckerSettings expirationCheckerSettings, IMailSender mailSender)
+        public ExpirationChecker(IBaseScoreCardRepository baseScoreCardRepository, ExpirationCheckerNotification expirationCheckerNotification, ExpirationCheckerSettings expirationCheckerSettings, IMailSender mailSender)
         {
             Requires.NotNull(baseScoreCardRepository, nameof(baseScoreCardRepository));
-            Requires.NotNull(valuationScoreCardRepository, nameof(valuationScoreCardRepository));
             Requires.NotNull(expirationCheckerNotification, nameof(expirationCheckerNotification));
             Requires.NotNull(expirationCheckerSettings, nameof(expirationCheckerSettings));
             Requires.NotNull(mailSender, nameof(mailSender));
 
             this.baseScoreCardRepository = baseScoreCardRepository;
-            this.valuationScoreCardRepository = valuationScoreCardRepository;
             this.expirationCheckerNotification = expirationCheckerNotification;
             this.expirationCheckerSettings = expirationCheckerSettings;
             this.mailSender = mailSender;

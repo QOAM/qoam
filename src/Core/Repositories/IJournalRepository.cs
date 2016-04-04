@@ -31,6 +31,8 @@
 
         IQueryable<string> Subjects(string query);
 
+        IQueryable<string> Languages(string query);
+
         IList<Journal> AllIncluding(params Expression<Func<Journal, object>>[] includeProperties);
 
         void InsertOrUpdate(Journal journal);
@@ -44,6 +46,5 @@
         IQueryable<Journal> SearchByISSN(IEnumerable<string> issns);
         int ValuationScoredJournalsCount();
         int JournalsWithSwotCount();
-        
     }
 }

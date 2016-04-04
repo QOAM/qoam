@@ -9,6 +9,7 @@
         {
             this.SwotMatrix = new List<string>();
             this.Disciplines = new List<string>();
+            this.Languages = new List<string>();
         }
 
         public string Title { get; set; }
@@ -21,7 +22,7 @@
 
         public IEnumerable<string> Disciplines { get; set; }
 
-        public int? Language { get; set; }
+        public IEnumerable<string> Languages { get; set; }
 
         public bool MustHaveBeenScored { get; set; }
 

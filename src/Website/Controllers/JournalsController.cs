@@ -23,15 +23,13 @@ namespace QOAM.Website.Controllers
 
         private readonly IJournalRepository journalRepository;
         private readonly IBaseJournalPriceRepository baseJournalPriceRepository;
-        private readonly ILanguageRepository languageRepository;
-        private readonly ISubjectRepository subjectRepository;
         private readonly IInstitutionJournalRepository institutionJournalRepository;
         private readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
         private readonly IInstitutionRepository institutionRepository;
         private readonly IBulkImporter<UniversityLicense> _bulkImporter;
 
         public JournalsController(IJournalRepository journalRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationJournalPriceRepository valuationJournalPriceRepository,
-            IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository,
+            IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository,
             IInstitutionJournalRepository institutionJournalRepository, IBaseScoreCardRepository baseScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication,
             IInstitutionRepository institutionRepository, IBulkImporter<UniversityLicense> bulkImporter)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
@@ -40,7 +38,6 @@ namespace QOAM.Website.Controllers
             Requires.NotNull(baseJournalPriceRepository, nameof(baseJournalPriceRepository));
             Requires.NotNull(valuationJournalPriceRepository, nameof(valuationJournalPriceRepository));
             Requires.NotNull(languageRepository, nameof(languageRepository));
-            Requires.NotNull(subjectRepository, nameof(subjectRepository));
             Requires.NotNull(institutionJournalRepository, nameof(institutionJournalRepository));
             Requires.NotNull(institutionRepository, nameof(institutionRepository));
             Requires.NotNull(valuationJournalPriceRepository, nameof(valuationJournalPriceRepository));
@@ -48,8 +45,6 @@ namespace QOAM.Website.Controllers
 
             this.journalRepository = journalRepository;
             this.baseJournalPriceRepository = baseJournalPriceRepository;
-            this.languageRepository = languageRepository;
-            this.subjectRepository = subjectRepository;
             this.institutionJournalRepository = institutionJournalRepository;
             this.institutionRepository = institutionRepository;
             this.valuationJournalPriceRepository = valuationJournalPriceRepository;
@@ -59,9 +54,8 @@ namespace QOAM.Website.Controllers
         [HttpGet, Route("")]
         public ViewResult Index(IndexViewModel model)
         {
-            model.Disciplines = model.Disciplines ?? new List<string>();
-            model.Disciplines = model.Disciplines.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
-            model.Languages = languageRepository.Active.ToSelectListItems("<All languages>");
+            model.Disciplines = NormalizeSearchStrings(model.Disciplines);
+            model.Languages = NormalizeSearchStrings(model.Languages);
             model.Journals = journalRepository.Search(model.ToFilter());
 
             return View("JournalsIndex", model);
@@ -429,6 +423,13 @@ namespace QOAM.Website.Controllers
         public JsonResult Subjects(string query)
         {
             return Json(journalRepository.Subjects(query).Select(s => new { value = s }).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet, Route("languages")]
+        [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
+        public JsonResult Languages(string query)
+        {
+            return Json(journalRepository.Languages(query).Select(s => new { value = s }).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
     }
 }

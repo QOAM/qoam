@@ -1,17 +1,28 @@
 ﻿var ScoreController = (function () {
     function ScoreController() {
     }
-    ScoreController.prototype.index = function (journalTitlesUrl, journalIssnsUrl, journalPublishersUrl, subjectsUrl) {
+    ScoreController.prototype.index = function (journalTitlesUrl, journalIssnsUrl, journalPublishersUrl, subjectsUrl, languagesUrl) {
         createTypeahead('#Title', journalTitlesUrl);
         createTypeahead('#Issn', journalIssnsUrl);
         createTypeahead('#Publisher', journalPublishersUrl);
         createTypeahead('input.search-discipline', subjectsUrl);
+        createTypeahead('input.search-language', languagesUrl);
 
         $('.remove-discipline').on('click', function () {
             $(this).closest('li').remove();
 
             $('#disciplines input').each(function (index, element) {
                 $(element).attr('name', 'Disciplines[' + index + ']');
+            });
+
+            return false;
+        });
+
+        $('.remove-language').on('click', function () {
+            $(this).closest('li').remove();
+
+            $('#languages input').each(function (index, element) {
+                $(element).attr('name', 'Languages[' + index + ']');
             });
 
             return false;

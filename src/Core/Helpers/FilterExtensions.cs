@@ -31,8 +31,13 @@ namespace QOAM.Core.Helpers
                 }
             }
 
-            if (filter.Language.HasValue)
-                query = query.Where(j => j.Languages.Any(l => l.Id == filter.Language));
+            if (filter.Languages.Any())
+            {
+                foreach (var language in filter.Languages)
+                {
+                    query = query.Where(j => j.Languages.Any(l => l.Name.ToLower().Contains(language.ToLower())));
+                }
+            }
 
             if (filter.SubmittedOnly)
                 query = query.Where(j => j.ValuationScoreCards.Any(v => v.State == ScoreCardState.Published));

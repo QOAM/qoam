@@ -30,7 +30,6 @@ namespace QOAM.Website.Controllers
         private readonly IScoreCardVersionRepository scoreCardVersionRepository;
         private readonly IJournalRepository journalRepository;
         private readonly ILanguageRepository languageRepository;
-        private readonly ISubjectRepository subjectRepository;
         private readonly IQuestionRepository questionRepository;
         private readonly IBaseJournalPriceRepository baseJournalPriceRepository;
         private readonly GeneralSettings generalSettings;
@@ -39,7 +38,7 @@ namespace QOAM.Website.Controllers
         readonly IBulkImporter<AuthorToInvite> _bulkImporter;
         readonly IUserJournalRepository _userJournalRepository;
 
-        public ScoreController(IBaseScoreCardRepository baseScoreCardRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IScoreCardVersionRepository scoreCardVersionRepository, IJournalRepository journalRepository, ILanguageRepository languageRepository, ISubjectRepository subjectRepository, IQuestionRepository questionRepository, GeneralSettings generalSettings, IUserProfileRepository userProfileRepository, IInstitutionRepository institutionRepository, IAuthentication authentication, IBulkImporter<AuthorToInvite> bulkImporter, IUserJournalRepository userJournalRepository)
+        public ScoreController(IBaseScoreCardRepository baseScoreCardRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationScoreCardRepository valuationScoreCardRepository, IValuationJournalPriceRepository valuationJournalPriceRepository, IScoreCardVersionRepository scoreCardVersionRepository, IJournalRepository journalRepository, ILanguageRepository languageRepository, IQuestionRepository questionRepository, GeneralSettings generalSettings, IUserProfileRepository userProfileRepository, IInstitutionRepository institutionRepository, IAuthentication authentication, IBulkImporter<AuthorToInvite> bulkImporter, IUserJournalRepository userJournalRepository)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(baseJournalPriceRepository, nameof(baseJournalPriceRepository));
@@ -47,7 +46,6 @@ namespace QOAM.Website.Controllers
             Requires.NotNull(scoreCardVersionRepository, nameof(scoreCardVersionRepository));
             Requires.NotNull(journalRepository, nameof(journalRepository));
             Requires.NotNull(languageRepository, nameof(languageRepository));
-            Requires.NotNull(subjectRepository, nameof(subjectRepository));
             Requires.NotNull(questionRepository, nameof(questionRepository));
             Requires.NotNull(institutionRepository, nameof(institutionRepository));
             Requires.NotNull(generalSettings, nameof(generalSettings));
@@ -56,7 +54,6 @@ namespace QOAM.Website.Controllers
             this.valuationJournalPriceRepository = valuationJournalPriceRepository;
             this.journalRepository = journalRepository;
             this.languageRepository = languageRepository;
-            this.subjectRepository = subjectRepository;
             this.questionRepository = questionRepository;
             this.baseJournalPriceRepository = baseJournalPriceRepository;
             this.institutionRepository = institutionRepository;
@@ -69,9 +66,8 @@ namespace QOAM.Website.Controllers
         [HttpGet, Route("")]
         public ActionResult Index(IndexViewModel model)
         {
-            model.Disciplines = model.Disciplines ?? new List<string>();
-            model.Disciplines = model.Disciplines.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
-            model.Languages = this.languageRepository.All.ToSelectListItems("<All languages>");
+            model.Disciplines = NormalizeSearchStrings(model.Disciplines);
+            model.Languages = NormalizeSearchStrings(model.Languages);
             model.Journals = this.journalRepository.Search(model.ToFilter());
             model.JournalIdsInMyQOAM = _userJournalRepository.Search(model.ToFilter(Authentication.CurrentUserId)).Select(x => x.Id);
 

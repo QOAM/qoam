@@ -1,6 +1,8 @@
 ﻿namespace QOAM.Website.Controllers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
 
     using QOAM.Core.Repositories;
@@ -73,6 +75,16 @@
             }
 
             return new DateTime(Math.Max(lastBaseScoreCardUpdate.Value.Ticks, lastValuationScoreCardUpdate.Value.Ticks));
+        }
+
+        protected static List<string> NormalizeSearchStrings(IList<string> input)
+        {
+            if (input == null)
+            {
+                return new List<string>();
+            }
+
+            return input.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
         }
     }
 }
