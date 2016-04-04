@@ -82,8 +82,9 @@
             this.DbContext.UserProfiles
                 .Where(u => !u.BaseScoreCards.Any(b => b.State == ScoreCardState.Published || b.State == ScoreCardState.Archived))
                 .Where(u => !u.ValuationScoreCards.Any(b => b.State == ScoreCardState.Published || b.State == ScoreCardState.Archived))
-                .Where(u => u.DateLastLogin.HasValue)
-                .Where(u => u.DateLastLogin < toBeRemovedDate)
+                .Where(u => !u.JournalPrices.Any())
+                .Where(u => !u.InstitutionJournalPrices.Any())
+                .Where(u => (u.DateLastLogin.HasValue && u.DateLastLogin < toBeRemovedDate) || (u.DateLastLogin == null && u.DateRegistered < toBeRemovedDate))
                 .Delete();
         }
 

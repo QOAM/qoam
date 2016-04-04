@@ -255,6 +255,10 @@
     <Compile Include="Migrations\201603241623258_JournalScoreSimplification.Designer.cs">
       <DependentUpon>201603241623258_JournalScoreSimplification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604041225437_CascadeDelete.cs" />
+    <Compile Include="Migrations\201604041225437_CascadeDelete.Designer.cs">
+      <DependentUpon>201604041225437_CascadeDelete.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\Filters\UserJournalFilter.cs" />
@@ -279,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603241623258_JournalScoreSimplification.resx">
       <DependentUpon>201603241623258_JournalScoreSimplification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604041225437_CascadeDelete.resx">
+      <DependentUpon>201604041225437_CascadeDelete.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />

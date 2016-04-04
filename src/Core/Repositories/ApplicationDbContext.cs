@@ -47,6 +47,15 @@
         {
             modelBuilder.ComplexType<BaseScoreCardScore>();
             modelBuilder.ComplexType<ValuationScoreCardScore>();
+
+            modelBuilder.Entity<BaseScoreCard>().HasRequired(s => s.UserProfile).WithMany(u => u.BaseScoreCards).WillCascadeOnDelete(true);
+            modelBuilder.Entity<BaseScoreCard>().HasRequired(s => s.Journal).WithMany(u => u.BaseScoreCards).WillCascadeOnDelete(true);
+            modelBuilder.Entity<BaseJournalPrice>().HasRequired(s => s.UserProfile).WithMany(u => u.JournalPrices).WillCascadeOnDelete(true);
+            modelBuilder.Entity<BaseJournalPrice>().HasRequired(s => s.Journal).WithMany(u => u.BaseJournalPrices).WillCascadeOnDelete(true);
+            modelBuilder.Entity<ValuationScoreCard>().HasRequired(s => s.UserProfile).WithMany(u => u.ValuationScoreCards).WillCascadeOnDelete(true);
+            modelBuilder.Entity<ValuationScoreCard>().HasRequired(s => s.Journal).WithMany(u => u.ValuationScoreCards).WillCascadeOnDelete(true);
+            modelBuilder.Entity<InstitutionJournal>().HasRequired(s => s.UserProfile).WithMany(u => u.InstitutionJournalPrices).WillCascadeOnDelete(true);
+            modelBuilder.Entity<InstitutionJournal>().HasRequired(s => s.Journal).WithMany(u => u.InstitutionJournalPrices).WillCascadeOnDelete(true);
         }
     }
 }
