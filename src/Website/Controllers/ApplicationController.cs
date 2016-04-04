@@ -59,7 +59,7 @@
 
         private static string GetSelectedMenuItem(ActionExecutingContext filterContext)
         {
-            return filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
+           return $"{filterContext.ActionDescriptor.ControllerDescriptor.ControllerName}/{filterContext.ActionDescriptor.ActionName}";
         }
 
         private DateTime? GetLastUpdate()

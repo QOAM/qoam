@@ -78,6 +78,10 @@ namespace QOAM.Core.Helpers
         {
             switch (filter.SortMode)
             {
+                case JournalSortMode.NumberOfValuationJournalScoreCards:
+                    return filter.SortDirection == SortDirection.Ascending ?
+                        query.OrderBy(j => j.NumberOfBaseReviewers + j.NumberOfValuationReviewers).ThenBy(u => u.Title) :
+                        query.OrderByDescending(j => j.NumberOfBaseReviewers + j.NumberOfValuationReviewers).ThenBy(u => u.Title);
                 case JournalSortMode.BaseScore:
                     return filter.SortDirection == SortDirection.Ascending ?
                         query.OrderBy(j => j.OverallScore.AverageScore).ThenBy(j => j.ValuationScore.AverageScore).ThenBy(j => j.Title) :

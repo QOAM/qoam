@@ -5,8 +5,8 @@
 
 <div class="carousel">
     <div class="carousel-inner">
-        <div class="item active">
-            <img src="~/Content/images/banner3.jpg" alt="Quality Open Access Market" title="Only with a critical mass of several thousands quality checked journals QOAM becomes a real market place where authors may select a good journal for their open access article. Currently, QOAM has @Model.NumberOfScoredJournals checked journals. Please, help that number grow by publishing a Journal Score Card. See the item Journal Score Card behind the ‘Learn more’ button below.">
+        <div id="banner" class="item active">
+            <img src="~/Content/images/banner3.jpg" alt="Quality Open Access Market" />
 
             <div class="container">
                 <div class="carousel-caption">
@@ -18,6 +18,13 @@
     </div>
 </div>
 
+<div id="popover-container" style="display: none;">
+    <div>
+        <img src="@Url.Content("~/Content/images/banner-tooltip.png")" />
+        <p class="popover-link">Pay a mini-visit at <a href='https://vimeo.com/151882443' target="_blank">https://vimeo.com/151882443</a></p>
+    </div>
+</div>
+
 <div class="container main">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -25,7 +32,12 @@
         </div>
     </div>
 
-    <p class="text-center">@Html.ActionLink("Learn more", "About", "Home", null, new { @class = "btn btn btn-primary topmargin" })</p>
+    <p class="text-center">
+        <a href="@Url.Action("About", "Home")" class="topmargin">
+            <span class="glyphicon glyphicon-info-sign" style="color:#222;"></span>
+            About
+        </a>
+    </p>
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -38,14 +50,14 @@
             </a>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div id="highlightBox" class="text-center">
-                <p class="lead">
-                    <a href="@Url.Content("~/Content/documents/15-10-03-Flyer-OA-week-2015.pdf")" class="external">Flyer QOAM</a>
-                </p>
-            </div>
-        </div>
-    </div>
 </div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            var homeController = new HomeController();
+            homeController.index();
+        });
+    </script>
+}

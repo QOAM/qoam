@@ -356,6 +356,7 @@
     <Content Include="Content\fancybox\fancybox_overlay.png" />
     <Content Include="Content\fancybox\fancybox_sprite%402x.png" />
     <Content Include="Content\fancybox\fancybox_sprite.png" />
+    <Content Include="Content\images\banner-tooltip.png" />
     <Content Include="Content\images\banner.gif" />
     <Content Include="Content\images\banner.png" />
     <Content Include="Content\images\banner2.gif" />

@@ -40,8 +40,8 @@
                 @if (User.Identity.IsAuthenticated && Model.UserProfile.Id == ViewBag.User.Id)
                 {
                     <div class="score">
-                        <a class="" href="@Url.Action("Index", "Score")">Rate another journal</a><br />
-                        <a class="" href="@Url.Action("Index", "Score")"><img src="~/Content/Images/rate.png" alt="Rate another journal" /></a>
+                        <a class="" href="@Url.Action("Index", "Journals")">Rate another journal</a><br />
+                        <a class="" href="@Url.Action("Index", "Journals")"><img src="~/Content/Images/rate.png" alt="Rate another journal" /></a>
                     </div>
                 }
                 else if (User.Identity.IsAuthenticated)

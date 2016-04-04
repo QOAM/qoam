@@ -692,3 +692,23 @@ a.return-button {
 #collapsible-panel {
     display: none;
 }
+
+.popover{
+    max-width: 100%; /* Max Width of the popover (depending on the container!) */
+}
+
+.popover-link {
+    font-family: "Segoe UI";
+    font-weight: bold;
+    font-size: 90%;
+    padding-left: 4px;
+}
+.popover.custom-popover {
+    margin-top: -150px;
+	
+    /* Or: margin: -20px 0 0 15px; */
+}
+
+.popover.custom-popover img {
+    width: 400px;
+}
