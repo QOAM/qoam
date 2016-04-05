@@ -11,22 +11,28 @@
 
         updateSwotMatrix('#swotFilterContainer', '#SwotMatrix');
 
-        $('.remove-discipline').on('click', function() {
+        $('.remove-discipline').on('click', function(e) {
             $(this).closest('li').remove();
 
             $('#disciplines input').each(function (index, element) {
                 $(element).attr('name', 'Disciplines[' + index + ']');
             });
 
+            e.preventDefault();
+            $('#search-form').submit();
+
             return false;
         });
 
-        $('.remove-language').on('click', function () {
+        $('.remove-language').on('click', function (e) {
             $(this).closest('li').remove();
 
             $('#languages input').each(function (index, element) {
                 $(element).attr('name', 'Languages[' + index + ']');
             });
+
+            e.preventDefault();
+            $('#search-form').submit();
 
             return false;
         });

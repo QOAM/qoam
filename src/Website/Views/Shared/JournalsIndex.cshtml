@@ -19,7 +19,7 @@
                     <img src="~/Images/zoom.png" class="pull-right clearfix" style="height: 30px;" />
                 </h3>
 
-                @using (Html.BeginForm("Index", null, FormMethod.Get))
+                @using (Html.BeginForm("Index", null, FormMethod.Get, new { id = "search-form" }))
                 {
                     <fieldset>
                         <legend>Search</legend>

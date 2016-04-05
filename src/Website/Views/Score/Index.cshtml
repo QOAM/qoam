@@ -16,7 +16,7 @@
                     Select <img src="~/Images/scoresheet.png" class="pull-right clearfix" style="height: 30px;" />
                 </h3>
 
-                @using (Html.BeginForm("Index", "Score", FormMethod.Get))
+                @using (Html.BeginForm("Index", "Score", FormMethod.Get, new { id = "search-form" }))
                 {
                     <fieldset>
                         <legend>Search</legend>
