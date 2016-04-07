@@ -124,16 +124,19 @@ google33968cad0cb9676c.html
 *.ldf
 
 # Configuration files that contain sensitive information (like credentials)
-Cleanup*.config
-ConnectionStrings*.config
-SurfConext*.config
-Contact*.config
-Ulrichs*.config
-ExpirationChecker*.config
-MachineKey*.config
-Saml2*.config
-NLog*.config
-Smtp*.config
+Cleanup.config
+ConnectionStrings.config
+SurfConext.config
+Contact.config
+Ulrichs.config
+ExpirationChecker.config
+MachineKey.config
+Saml2.config
+NLog.Cleanup.config
+NLog.DataImporter.config
+NLog.ExpirationChecker.config
+NLog.Website.config
+Smtp.config
 
 # Markdown HTML files
 LICENSE.html
