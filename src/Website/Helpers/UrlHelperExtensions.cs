@@ -15,7 +15,7 @@
                                                                                                                   { JournalSortMode.Name, SortDirection.Ascending },
                                                                                                                   { JournalSortMode.ValuationScore, SortDirection.Descending },
                                                                                                                   { JournalSortMode.BaseScore, SortDirection.Descending },
-                                                                                                                  { JournalSortMode.NumberOfValuationJournalScoreCards, SortDirection.Descending },
+                                                                                                                  { JournalSortMode.RobustScores, SortDirection.Descending },
                                                                                                               };
 
         private static readonly IDictionary<UserProfileSortMode, SortDirection> DefaultSortDirectionUserProfile = new Dictionary<UserProfileSortMode, SortDirection>

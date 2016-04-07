@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Helpers;
@@ -83,10 +84,10 @@ namespace QOAM.Core.Helpers
         {
             switch (filter.SortMode)
             {
-                case JournalSortMode.NumberOfValuationJournalScoreCards:
+                case JournalSortMode.RobustScores:
                     return filter.SortDirection == SortDirection.Ascending ?
-                        query.OrderBy(j => j.NumberOfBaseReviewers + j.NumberOfValuationReviewers).ThenBy(u => u.Title) :
-                        query.OrderByDescending(j => j.NumberOfBaseReviewers + j.NumberOfValuationReviewers).ThenBy(u => u.Title);
+                        query.OrderBy(WeightedSort()).ThenBy(u => u.Title) :
+                        query.OrderByDescending(WeightedSort()).ThenBy(u => u.Title);
                 case JournalSortMode.BaseScore:
                     return filter.SortDirection == SortDirection.Ascending ?
                         query.OrderBy(j => j.OverallScore.AverageScore).ThenBy(j => j.ValuationScore.AverageScore).ThenBy(j => j.Title) :
@@ -100,6 +101,12 @@ namespace QOAM.Core.Helpers
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        static Expression<Func<Journal, double?>> WeightedSort()
+        {
+            return j => j.OverallScore.AverageScore > 0 && j.ValuationScore.AverageScore > 0 ?
+                (j.OverallScore.AverageScore * (1 + SqlFunctions.Log((double)j.NumberOfBaseReviewers))) * (j.ValuationScore.AverageScore * (1 + SqlFunctions.Log((double)j.NumberOfValuationReviewers))) : 0;
         }
     }
 }
