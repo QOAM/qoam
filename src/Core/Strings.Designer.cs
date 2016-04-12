@@ -223,11 +223,11 @@ namespace QOAM.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sort by number of JSC&apos;s.
+        ///   Looks up a localized string similar to Sort by robust scores.
         /// </summary>
-        public static string JournalSortMode_NumberOfValuationJournalScoreCards {
+        public static string JournalSortMode_RobustScores {
             get {
-                return ResourceManager.GetString("JournalSortMode_NumberOfValuationJournalScoreCards", resourceCulture);
+                return ResourceManager.GetString("JournalSortMode_RobustScores", resourceCulture);
             }
         }
         

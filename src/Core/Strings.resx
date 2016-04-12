@@ -237,7 +237,7 @@
   <data name="UserProfileSortMode_NumberOfValuationJournalScoreCards" xml:space="preserve">
     <value>Sort by number of valuation JSC's</value>
   </data>
-  <data name="JournalSortMode_NumberOfValuationJournalScoreCards" xml:space="preserve">
-    <value>Sort by number of JSC's</value>
+  <data name="JournalSortMode_RobustScores" xml:space="preserve">
+    <value>Sort by robust scores</value>
   </data>
 </root>
