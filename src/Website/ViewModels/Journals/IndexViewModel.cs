@@ -20,7 +20,7 @@
         public IndexViewModel()
         {
             this.Journals = new PagedList<Journal>(new Journal[0], this.Page, this.PageSize);
-            this.SortBy = JournalSortMode.BaseScore;
+            this.SortBy = JournalSortMode.RobustScores;
             this.Sort = SortDirection.Descending;
             this.SwotMatrix = string.Empty;
             this.Disciplines = new List<string>();
