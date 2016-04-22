@@ -20,7 +20,7 @@
 
                 <li class="@activeClass">
                     <a href="@url.SortUrl(sortMode, currentSortMode, currentSortDirection)" 
-                       title="@(hasInfo ? "The robustness of a score is defined as 1+log N, with N being the number of scorers.\nThe position of a journal on the list is defined by the product of four factors: Base score, robustness of base score, Valuation score, robustness of valuation score." : "")">
+                       title="@(hasInfo ? "The robustness of a score is defined as 1+log N, with N being the number of scorers. The position of a journal on the list is defined by the product of four factors: Base score, robustness of base score, Valuation score, robustness of valuation score." : "")">
                         @sortMode.GetName()<i class="@sortDirectionClass"></i>
                         @if (hasInfo) {
                             <span class="glyphicon glyphicon-info-sign"></span>
