@@ -8,14 +8,22 @@
     ViewBag.Title = "Base Score card";
 }
 
-@helper QuestionRating(QuestionKey questionKey)
+@helper QuestionRating(QuestionKey questionKey, string info = "")
 {
-    var index = Model.QuestionScores.IndexOf(Model.QuestionScores.First(q => q.QuestionKey == questionKey));
+var index = Model.QuestionScores.IndexOf(Model.QuestionScores.First(q => q.QuestionKey == questionKey));
 
     <div class="score">
         <div class="row">
             <div class="col-md-12">
-                <p class="text-left">@questionKey.ToDescription()</p>
+                <p class="text-left">
+                    @questionKey.ToDescription()
+                    @if (!string.IsNullOrWhiteSpace(info))
+                    {
+                        <a style="color: #333;" href="#" title="@info">
+                            <span class="glyphicon glyphicon-info-sign"></span>
+                        </a>
+                    }
+                </p>
 
                 <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Absent.GetValue()" data-bind="checked: questionScores()[@index].score" />
                 @Score.Absent.GetValue(): @Score.Absent.GetName()
@@ -50,7 +58,13 @@
     <div class="row">
         <div class="col-md-3">
             <div class="scoreCardAspects well">
-                <h3>Base Score Card</h3>
+                <h3>
+                    Base Score Card
+                    <a style="font-size: medium; color: #333;" href="#"
+                       title="The Base Score of a journal is equal to the lowest of the four subscores. The subscores – Editorial information, Peer review, Governance and Workflow – are the averages of the scores given to the corresponding questions.">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </a>
+                </h3>
                 <div class="text-center">
                     <div class="row">
                         <div class="col-md-6">
@@ -110,7 +124,14 @@
         </div>
 
         <div class="col-md-9">
-            <h3>Score Card</h3>
+            <h3>
+                Score Card
+                <a style="font-size: medium; color: #333;" href="#"
+                   title="• Base Score Cards are based on the information on the website of the journal. In QOAM, you could click on the title of the journal to be directed to the corresponding website. By using the right mouse button you may choose whether to do so in a new tab or a new window.
+• QOAM uses a scoring system from “1. Absent” to “5. Excellent”. Don’t be afraid to use these extremes! You could use the middle scores to indicate that one or several parts of the aspect are missing, for instance that the aims and scope of the journal are specified on the website, but the expected readership isn’t.">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                </a>
+            </h3>
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <a href="@Model.Journal.Link" title="Go to website">
@@ -165,29 +186,29 @@
                                 <div class="tab-content text-center">
                                     <div class="tab-pane active" id="@(QuestionCategory.EditorialInformation)ScoreTab">
                                         @QuestionRating(QuestionKey.WebsiteContainsAimsScopeAndReadership)
-                                        @QuestionRating(QuestionKey.WebsiteContainsNameAndAffiliationsOfMembersEditorialBoard)
-                                        @QuestionRating(QuestionKey.ReviewsCommentsArePublished)
+                                        @QuestionRating(QuestionKey.WebsiteContainsNameAndAffiliationsOfMembersEditorialBoard, "The “affiliations” are the institutions or organisations that the editors work for.")
+                                        @QuestionRating(QuestionKey.ReviewsCommentsArePublished, "“Reviewer’s comments” are the comments that are given by the reviewers during the peer review process, before the definite publication of the article in the journal. The reviewer’s comments should be distinguished from the commentaries by the community that are given after the publication of the article.")
                                         @QuestionRating(QuestionKey.WebsiteContainsRoleOfMembersEditorialBoard)
                                     </div>
 
                                     <div class="tab-pane" id="@(QuestionCategory.PeerReview)ScoreTab">
-                                        @QuestionRating(QuestionKey.WebsiteContainsSubmissionsReviewDetails)
+                                        @QuestionRating(QuestionKey.WebsiteContainsSubmissionsReviewDetails, "“The website indicates whether all submissions are sent out for review.” The keyword in this aspect is “indicates”. It’s not about whether the submissions are reviewed or not, but whether the website indicates something about this.")
                                         @QuestionRating(QuestionKey.WebsiteContainsCriteriaUsedByReviewers)
                                         @QuestionRating(QuestionKey.AuthorsAllowedToIndicateDesiredReviewers)
-                                        @QuestionRating(QuestionKey.WebsiteAllowsRatingsAndCommentariesOfPapers)
+                                        @QuestionRating(QuestionKey.WebsiteAllowsRatingsAndCommentariesOfPapers, "“Commentaries by the community” are the comments that are given by the readers of the article, after the definite publication of the article in the journal. The commentaries by the community should be distinguished from the reviewer’s comments that are given during the peer review process, before the definite publication of the article in the journal.")
                                     </div>
 
                                     <div class="tab-pane" id="@(QuestionCategory.Governance)ScoreTab">
-                                        @QuestionRating(QuestionKey.HasClearGuidelinesConcerningSharing)
-                                        @QuestionRating(QuestionKey.CopiesAreMadeInThirdPartyRepositories)
-                                        @QuestionRating(QuestionKey.TakesCareOfInclusionInRelevantIndexingServices)
+                                        @QuestionRating(QuestionKey.HasClearGuidelinesConcerningSharing, "The “data” this question is referring to, is research data, the data that was used to conduct the research that resulted in the published article. Other kinds of data, e.g. the biographic data of the author, aren’t relevant for this question.")
+                                        @QuestionRating(QuestionKey.CopiesAreMadeInThirdPartyRepositories, "A “repository” is a database which includes the full-text download of an article. To read this article, one doesn’t have to leave the repository’s website. A repository should be distinguished from an indexing service, which doesn’t include the article, but refers to the journal’s website instead.")
+                                        @QuestionRating(QuestionKey.TakesCareOfInclusionInRelevantIndexingServices, "An “indexing service” is a database which refers to an article. To read the article, one has to visit the journal’s website. An indexing service should be distinguished from a repository, which includes the full-text download of an article.")
                                         @QuestionRating(QuestionKey.HighlightsIssuesOfPublicationEthics)
                                     </div>
 
                                     <div class="tab-pane" id="@(QuestionCategory.Process)ScoreTab">
-                                        @QuestionRating(QuestionKey.ProvidesTrackAndTraceService)
-                                        @QuestionRating(QuestionKey.PublishedPapersIncludeInformationOnDatesOfSubmissionAndAcceptance)
-                                        @QuestionRating(QuestionKey.ProvidesArticlesWithDigitalObjectIdentifier)
+                                        @QuestionRating(QuestionKey.ProvidesTrackAndTraceService, "Indications of a “track & trace service” are often briefly mentioned near a login button for authors, e.g. “To submit an article online, and to check the status of your submission, you need to have an account with […]”.")
+                                        @QuestionRating(QuestionKey.PublishedPapersIncludeInformationOnDatesOfSubmissionAndAcceptance, "This question is only about the submission date (before the review process) and the acceptance date (after the review process and before the definite publication of the article). The publication date isn’t relevant for this question.")
+                                        @QuestionRating(QuestionKey.ProvidesArticlesWithDigitalObjectIdentifier, "The “Digital Object Identifier” is usually abbreviated to DOI. It could look as follows: http://doi.org/10.1000/182.")
                                         @QuestionRating(QuestionKey.DisclosesNumberOfSubmissionsPublicationsAndRejectionRates)
 
                                         <div class="row">
@@ -198,6 +219,9 @@
                                                             <div class="col-md-12">
                                                                 <em>
                                                                     <label for="Price.AmountPerArticle">What does the website of the journal tell about the publication fee?</label>
+                                                                    <a style="color: #333;" href="#" title="A synonym for “Publication Fee” is “Article Processing Charges”.">
+                                                                        <span class="glyphicon glyphicon-info-sign"></span>
+                                                                    </a>
                                                                 </em>
                                                                 <div>
                                                                     <input type="radio" id="outdatedPublication-article" name="outdatedPublication" value="Article" data-bind="checked: Price.FeeType" />
