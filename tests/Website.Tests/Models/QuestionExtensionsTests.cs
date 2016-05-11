@@ -206,13 +206,26 @@
         public void ToLocalizedStringOnPeerReviewProcessTransparentKeyReturnsCorrectQuestionString()
         {
             // Arrange
-            var question = new Question { Key = QuestionKey.PeerReviewProcessTransparent };
+            var question = new Question { Key = QuestionKey.PeerReviewHasAddedValue };
 
             // Act
             var localizedQuestion = question.ToLocalizedString();
 
             // Assert
-            Assert.Equal("I would consider the peer-review process in this journal to be transparent.", localizedQuestion);
+            Assert.Equal("The peer review of the journal has added value.", localizedQuestion);
+        }
+
+        [Fact]
+        public void ToLocalizedStringOnEditorIsResponsiveKeyReturnsCorrectQuestionString()
+        {
+            // Arrange
+            var question = new Question { Key = QuestionKey.EditorIsResponsive };
+
+            // Act
+            var localizedQuestion = question.ToLocalizedString();
+
+            // Assert
+            Assert.Equal("The editor of the journal is responsive.", localizedQuestion);
         }
 
         [Fact]

@@ -30,5 +30,7 @@
         PeerReviewProcessTransparent,
         RecommendScholarsToSubmit,
         GoodValueForMoney,
+        EditorIsResponsive,
+        PeerReviewHasAddedValue,
     }
 }

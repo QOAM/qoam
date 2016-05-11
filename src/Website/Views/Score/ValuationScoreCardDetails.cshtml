@@ -146,8 +146,15 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        @QuestionRating(QuestionKey.PeerReviewProcessTransparent)
+                                        
+                                        @if (Model.Version.Number == 1) {
+                                            @QuestionRating(QuestionKey.PeerReviewProcessTransparent)
+                                        }
+                                        else
+                                        {
+                                            @QuestionRating(QuestionKey.EditorIsResponsive)
+                                            @QuestionRating(QuestionKey.PeerReviewHasAddedValue)
+                                        }
                                         @QuestionRating(QuestionKey.RecommendScholarsToSubmit)
                                         @QuestionRating(QuestionKey.GoodValueForMoney)
 
