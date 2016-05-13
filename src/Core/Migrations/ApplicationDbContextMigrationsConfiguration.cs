@@ -32,16 +32,8 @@ namespace QOAM.Core.Migrations
 
             scoreCardVersionTwo = GetScoreCardVersionTwo();
             context.ScoreCardVersions.AddOrUpdate(scoreCardVersionTwo);
-            context.Questions.AddOrUpdate(new Question
-            {
-                Category = QuestionCategory.Valuation,
-                Key = QuestionKey.EditorIsResponsive
-            });
-            context.Questions.AddOrUpdate(new Question
-            {
-                Category = QuestionCategory.Valuation,
-                Key = QuestionKey.PeerReviewHasAddedValue
-            });
+            context.Questions.AddOrUpdate(new Question { Category = QuestionCategory.Valuation, Key = QuestionKey.EditorIsResponsive });
+            context.Questions.AddOrUpdate(new Question { Category = QuestionCategory.Valuation, Key = QuestionKey.PeerReviewHasAddedValue });
         }
 
         static ScoreCardVersion GetScoreCardVersionOne()
