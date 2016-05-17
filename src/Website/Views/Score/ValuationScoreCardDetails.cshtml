@@ -9,14 +9,19 @@
 }
 
 @helper QuestionRating(QuestionKey questionKey)
-{
+{ 
+    var question = Model.QuestionScores.FirstOrDefault(q => q.Question.Key == questionKey);
+    if (question == null) {
+        return;
+    }
+
     <div class="score">
         <div class="row">
             <div class="col-md-12">
                 <p class="text-left">@questionKey.ToDescription()</p>
 
                 @{
-                    var questionScore = Model.QuestionScores.First(q => q.Question.Key == questionKey).Score;
+                    var questionScore = question.Score;
                     var questionScoreName = "questionScore" + questionKey;
                 }
 
@@ -147,14 +152,9 @@
                                             </div>
                                         </div>
                                         
-                                        @if (Model.Version.Number == 1) {
-                                            @QuestionRating(QuestionKey.PeerReviewProcessTransparent)
-                                        }
-                                        else
-                                        {
-                                            @QuestionRating(QuestionKey.EditorIsResponsive)
-                                            @QuestionRating(QuestionKey.PeerReviewHasAddedValue)
-                                        }
+                                        @QuestionRating(QuestionKey.PeerReviewProcessTransparent)
+                                        @QuestionRating(QuestionKey.EditorIsResponsive)
+                                        @QuestionRating(QuestionKey.PeerReviewHasAddedValue)
                                         @QuestionRating(QuestionKey.RecommendScholarsToSubmit)
                                         @QuestionRating(QuestionKey.GoodValueForMoney)
 
