@@ -152,14 +152,15 @@
                 </div>
             </div>
 
-            @if (Model.Journals.Any())
-            {
+            @if (Model.Journals.Any()) {
+                const string title = "Italicized titles indicate institutional discounts.\nPlease click the tab 'Price information' on the detail page of the journal to find out more.";
+
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th class="title">
                                 Title&nbsp;&nbsp;
-                                <a href="#" title="Italicized titles indicate institutional discounts. Please click the tab 'Price information' on the detail page of the journal to find out more.">
+                                <a href="#" title="@title">
                                     <span class="glyphicon glyphicon-info-sign"></span>
                                 </a>
                             </th>
