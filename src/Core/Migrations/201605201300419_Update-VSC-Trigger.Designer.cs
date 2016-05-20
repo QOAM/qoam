@@ -13,7 +13,7 @@ namespace QOAM.Core.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201605201155561_Update-VSC-Trigger"; }
+            get { return "201605201300419_Update-VSC-Trigger"; }
         }
         
         string IMigrationMetadata.Source
