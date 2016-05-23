@@ -21,8 +21,6 @@
                     <li><em><a href="#filtering-per-discipline">Filtering per discipline</a></em></li>
                     <li><em><a href="#price-information">Price information</a></em></li>
                     <li><em><a href="#privacy">Privacy policy</a></em></li>
-                    <li><em><a href="#brief-history">A brief history</a></em></li>
-                    <li><em><a href="#einsteins-razor">Einstein’s razor</a></em></li>
                 </ul>
             </p>
 
@@ -34,42 +32,29 @@
                 Both score cards constitute the SWOT matrix of a journal thus categorizing the journals into Strong, Weaker, Opportunity (to publishers) and Threat (to authors).
                 Read more about @Html.ActionLink("Journal Score Cards", "JournalScoreCard"). QOAM also mirrors the <a href="https://doajournals.wordpress.com/2015/06/11/doaj-seal-is-now-live-on-the-site/">DOAJ Seal of Approval</a>
             </p>
+            <p>
+                The default sorting of the journal list is by robust scores. The robustness of a score is defined as 1 + logN, with N being the number of scorers. The postion of a journal on the list is defined by the product of four factors: Base score, robustness of base score, Valuation score, robustness of valuation score.
+            </p>
 
             <h3 id="filtering-per-discipline">Filtering per discipline</h3>
             <p>QOAM allows filtering per discipline. Thus the varied recognition of the different aspects over the disciplines can be taken into account. E.g. if speed of publication is less important in a specific discipline all journals in this discipline will produce a low sub score for the aspect ‘Workflow’. Within their own discipline the other aspects are more profiling. </p>
 
             <h3 id="price-information">Price information</h3>
             <p>
-                Price information in QOAM comes primarily from the website of a journal via the Base Score Card.  However, a growing number of institutions succeed in negotiating better prices for their community via memberships, licences or other agreements. Per journal QOAM lists the licensed institutes with their negotiated discount on the publication fee. Finally, a question is included in the Valuation Score Card asking for the actual publication fee paid by an author. All three outcomes are found at ‘Price information’ on QOAM’s Search page under the headings ‘Recently paid’, ‘Institutional price’ and ‘Price on web site’.
+                Price information in QOAM is found via the tab ‘Price information’ on the detail page of a journal under the respective headings ‘Price on web site’, ‘Institutional price’ and ‘Recently paid’.<br/>
+                The first one is gathered via a question in the Base Score Card.<br/>
+                Information about institutional prices comes from licence brokers, like SURFmarket, or from publishers. Italicized journal titles in the journal list indicate the presence of licences or memberships. The institutions involved are mentioned under ‘Institutional price’.<br />
+                Finally, a question is included in the Valuation Score Card asking for the actual publication fee paid by an author.
             </p>
 
             <h3 id="privacy">Privacy policy</h3>
             <p>
                 QOAM is a free service, based on academic crowd sourcing. QOAM uses no cookies and can be visited anonymously. Conversely, contributions to QOAM’s content via Journal Score Cards are named.
-                In order to publish a Journal Score Card in QOAM one has to log in via one’s institutional email address.<br/>
-                In practice this means that QOAM collects the names and institutional email addresses of the authors of Journal Score Cards. No other information is collected. The names are used to sign the Journal Score Cards and are publicly visible. However, an author’s institutional email adress is only shown to other authors of Journal Score Cards. No other uses of these data are foreseen.<br/>
-                Underlying this policy are the views that (1) anonymous Journal Score Cards are prone to misuse and should be avoided in QOAM and (2) authors of Journal Score Cards should be able to contact each other for dialogue.<br/>
+                In order to publish a Journal Score Card in QOAM one has to log in via one’s institutional email address.<br />
+                In practice this means that QOAM collects the names and institutional email addresses of the authors of Journal Score Cards. No other information is collected. The names are used to sign the Journal Score Cards and are publicly visible. However, an author’s institutional email adress is only shown to other authors of Journal Score Cards. No other uses of these data are foreseen.<br />
+                Underlying this policy are the views that (1) anonymous Journal Score Cards are prone to misuse and should be avoided in QOAM and (2) authors of Journal Score Cards should be able to contact each other for dialogue.<br />
                 Finally, QOAM uses the https protocol for secure exchange of data. QOAM data are stored in the Netherlands and governed by Dutch c.q. European law.
             </p>
-            
-            <h3 id="brief-history">A brief history</h3>
-
-            <p>For long, SURF has been convinced that in the OA paradigm, next to price <em>quality</em> is a critical issue. For established journals the Journal Impact Factor, though controversial, is used as a proxy for quality but for young journals there is no such quality indicator whatsoever. This is a specific handicap for young OA journals whereas young subscription journals are often just included in Big Deal packages. The outcomes of the <a href="http://project-soap.eu/report-from-the-soap-symposium/" title="EC-project SOAP">EC-project SOAP</a> confirmed a growing urgency to address the quality issue for OA journals (later alarmingly demonstrated by  the emergence of <a href="http://scholarlyoa.com/individual-journals/" title="predatory journals">predatory journals</a> and John Bohannon’s article <a href="http://www.sciencemag.org/content/342/6154/60.full" title="Who is Afraid of Peer Review?">Who is Afraid of Peer Review?</a>)</p>
-
-            <p>
-                As early as 2009 SURF took the initiative to investigate the feasibility of an accreditation system for young OA journals. The idea was embraced by the European Commission but rejected by SURF’s OpenAIRE project partners. Publishers and funders reacted expectantly. SURF left this approach after all and, in hindsight, it might have been too ambitious.
-            </p>
-
-            <p>
-                In autumn 2011 a new endeavor was started, this time aiming at tools that would enable a crowd sourced solution. For that purpose two indicators were prototyped: an Editorial Board Indicator, a metric for the scientific impact of the editorial board, and a Transparency Indicator, checking the transparency of the article admission process. Both indicators were presented, and the second one even tested, at an international expert colloquium in Rotterdam, October 2012.
-            </p>
-
-            <p>
-                The main obstacle for the first indicator was, and still is, the problem of identifying the board members; just a name and an affiliation are not enough for that. (See FAQ <a href="@Url.Action("Faq")#no-metrics" title="Why does QOAM not include metrics as a quality proxy?">“Why does QOAM not include metrics as a quality proxy?”</a>) The second indicator turned out to be more readily applicable as was demonstrated by the test in Rotterdam and subsequently by a group of Dutch university libraries. These encouraging results led to the development of the more comprehensive Journal Score Card as a first measure of young journal quality.
-            </p>
-
-            <h3 id="einsteins-razor">Einstein’s razor</h3>
-            <p>Overall, QOAM’s builders have tried to apply Einstein’s razor: “Make web sites as simple as possible, but not simpler.”</p>
         </div>
     </div>
 </div>
