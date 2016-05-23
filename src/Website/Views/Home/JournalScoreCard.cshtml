@@ -22,15 +22,17 @@
             <h2>@ViewBag.Title</h2>
 
             <ul class="list-unstyled">
-                <li><em><a href="#basejournalscorecard">Base Journal Score Card</a></em></li>
-                <li><em><a href="#valuationjournalscorecard">Valuation Journal Score Card</a></em></li>
-                <li><em><a href="#how-used">How are JSCs used in QOAM?</a></em></li>
+                <li><em><a href="#basejournalscorecard">Base Score Card</a></em></li>
+                <li><em><a href="#valuationjournalscorecard">Valuation Score Card</a></em></li>
                 <li><em><a href="#swot">The SWOT matrix</a></em></li>
                 <li><em><a href="#life-cycle">The life cycle of  Journal Score Cards</a></em></li>
             </ul>
 
-            <h3 id="basejournalscorecard">Base Journal Score Card</h3>
-            <p>The Base Score Card is a questionnaire on the transparency of the journal’s website with respect to the following aspects:  Editorial information, Peer review, Governance and Workflow. Every aspect has four bullets and each bullet can be rated from 1 to 5. The average of these ratings is called the subscore for this aspect. The lowest subscore of these four aspects is called the <strong>Base Score</strong> of the journal.</p>
+            <h3 id="basejournalscorecard">Base Score Card</h3>
+            <p>
+                The Base Score Card is a questionnaire on the transparency of the journal’s website with respect to the following aspects: Editorial information, Peer review, Governance and Workflow. Every aspect has four bullets and each bullet can be rated from 1 to 5. The average of these ratings is called the subscore for this aspect. The lowest subscore of these four aspects is called the <strong>Base Score</strong> of the journal.<br />
+                As a consequence a journal with a high Base Score, has a web site that addresses the four critical journal aspects adequately. On the other hand, a journal with a low Base Score has at least one weak aspect, but may still be strong in other respects. In order to climb on the list a journal must address its weakest aspect.
+            </p>
 
             <p>1. @QuestionCategory.EditorialInformation.GetName()</p>
             <ul>
@@ -109,15 +111,20 @@
                 <input type="text" class="form-control" placeholder="Free text box for supplementary comments." />
             </p>
 
-            <h3 id="valuationjournalscorecard">Valuation Journal Score Card</h3>
-            <p>The Valuation Score Card is a reality check, preferably based on experience as an author, editor or peer reviewer of the journal.  It has three bullets that can be rated from 1 to 5 and the average of these ratings is called the <strong>Valuation Score</strong> of the journal.</p>
+            <h3 id="valuationjournalscorecard">Valuation Score Card</h3>
+            <p>The Valuation Score Card is a reality check, preferably based on experience as an author, editor or peer reviewer of the journal.  It has four bullets that can be rated from 1 to 5 and the average of these ratings is called the <strong>Valuation Score</strong> of the journal.</p>
 
             <p>@QuestionCategory.Valuation.GetName()</p>
             <ul>
-                <li>@QuestionKey.PeerReviewProcessTransparent.ToDescription()</li>
+                <li>@QuestionKey.EditorIsResponsive.ToDescription()</li>
+                <li>@QuestionKey.PeerReviewHasAddedValue.ToDescription()</li>
                 <li>@QuestionKey.RecommendScholarsToSubmit.ToDescription()</li>
                 <li>@QuestionKey.GoodValueForMoney.ToDescription()</li>
             </ul>
+
+            <p>
+                <em>(NB As of May 20, 2016, the first two questions replace the question ‘I would consider the peer revview process of this journal to be transparent’ of the old version)</em>
+            </p>
 
             <p>Additional questions</p>
             <p>
@@ -156,17 +163,10 @@
                 <input type="text" class="form-control" placeholder="Free text box for supplementary comments." />
             </p>
 
-            <h3 id="how-used">How are JSCs used in QOAM?</h3>
-            <p>Journals in QOAM may have a Base Score, a Valuation Score or both. Journals can be sorted on both scores.</p>
-
-            <p>
-                Per journal all aspect subscores are produced.  Because the Base Score is the lowest of the four web based subscores, a journal with a high Base Score, has a web site that addresses the four critical journal aspects adequately. On the other hand, a journal with a low Base Score has at least one weak aspect, but may still be strong in other respects. In order to climb on the list a journal must address its weakest aspect.
-            </p>
-
             <h3 id="swot">The SWOT matrix</h3>
 
             <p>
-                Together, Base Score and Valuation Score determine the following SWOT matrix:
+                Together, <a href="#basejournalscorecard">Base Score</a> and <a href="#valuationjournalscorecard">Valuation Score</a> determine the following SWOT matrix:
             </p>
             <p></p>
 

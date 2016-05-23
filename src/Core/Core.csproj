@@ -259,6 +259,10 @@
     <Compile Include="Migrations\201604041225437_CascadeDelete.Designer.cs">
       <DependentUpon>201604041225437_CascadeDelete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605201300419_Update-VSC-Trigger.cs" />
+    <Compile Include="Migrations\201605201300419_Update-VSC-Trigger.Designer.cs">
+      <DependentUpon>201605201300419_Update-VSC-Trigger.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\Filters\UserJournalFilter.cs" />
@@ -286,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604041225437_CascadeDelete.resx">
       <DependentUpon>201604041225437_CascadeDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605201300419_Update-VSC-Trigger.resx">
+      <DependentUpon>201605201300419_Update-VSC-Trigger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />
@@ -501,6 +508,7 @@
     <EmbeddedResource Include="Scripts\20151027_Trigger_ValuationScorecards.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20160329_Trigger_ValuationScorecards.Modified.sql" />
     <EmbeddedResource Include="Scripts\20160329_Trigger_BaseScorecards.Modified.sql" />
+    <EmbeddedResource Include="Scripts\20160519_Trigger_ValuationScorecards_v2.Modified.sql" />
     <Content Include="Scripts\CleanupAfterUlrichs.sql" />
     <EmbeddedResource Include="Scripts\201403171503325_InitialCreate_function_MinimumFloat.sql" />
   </ItemGroup>

@@ -6,7 +6,8 @@
         {
             switch (questionKey)
             {
-                case QuestionKey.PeerReviewProcessTransparent:
+                case QuestionKey.PeerReviewHasAddedValue:
+                case QuestionKey.EditorIsResponsive:
                 case QuestionKey.RecommendScholarsToSubmit:
                 case QuestionKey.GoodValueForMoney:
                     return false;

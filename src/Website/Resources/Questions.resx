@@ -126,6 +126,9 @@
   <data name="DisclosesNumberOfSubmissionsPublicationsAndRejectionRates" xml:space="preserve">
     <value>The journal discloses the past (yearly) number of submissions, publications, and rejection rates.</value>
   </data>
+  <data name="EditorIsResponsive" xml:space="preserve">
+    <value>The editor of the journal is responsive.</value>
+  </data>
   <data name="GoodValueForMoney" xml:space="preserve">
     <value>I would deem this journal good value for money</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="HighlightsIssuesOfPublicationEthics" xml:space="preserve">
     <value>Journal’s website highlights issues of publication ethics (e.g. plagiarism, retraction policy), conflicts of interest, and (if applicable) codes of conduct for research in life sciences and social sciences.</value>
+  </data>
+  <data name="PeerReviewHasAddedValue" xml:space="preserve">
+    <value>The peer review of the journal has added value.</value>
   </data>
   <data name="PeerReviewProcessTransparent" xml:space="preserve">
     <value>I would consider the peer-review process in this journal to be transparent.</value>

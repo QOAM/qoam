@@ -545,6 +545,10 @@ ul {
     margin: 0;
 }
 
+.table td.has-prices {
+    font-style: italic;
+}
+
 .doajSeal {
     float: left; 
     position: relative;
