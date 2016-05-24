@@ -88,6 +88,15 @@ namespace QOAM.Website.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The editor of the journal is responsive..
+        /// </summary>
+        public static string EditorIsResponsive {
+            get {
+                return ResourceManager.GetString("EditorIsResponsive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I would deem this journal good value for money.
         /// </summary>
         public static string GoodValueForMoney {
@@ -111,6 +120,15 @@ namespace QOAM.Website.Resources {
         public static string HighlightsIssuesOfPublicationEthics {
             get {
                 return ResourceManager.GetString("HighlightsIssuesOfPublicationEthics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The peer review of the journal has added value..
+        /// </summary>
+        public static string PeerReviewHasAddedValue {
+            get {
+                return ResourceManager.GetString("PeerReviewHasAddedValue", resourceCulture);
             }
         }
         

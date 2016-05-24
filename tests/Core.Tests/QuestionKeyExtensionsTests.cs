@@ -33,7 +33,8 @@
         }
 
         [Theory]
-        [InlineData(QuestionKey.PeerReviewProcessTransparent)]
+        [InlineData(QuestionKey.PeerReviewHasAddedValue)]
+        [InlineData(QuestionKey.EditorIsResponsive)]
         [InlineData(QuestionKey.RecommendScholarsToSubmit)]
         [InlineData(QuestionKey.GoodValueForMoney)]
         public void IsBaseScoreCardQuestionOnValuationScoreCardQuestionReturnsFalse(QuestionKey valuationScoreCardQuestionKey)
@@ -77,7 +78,8 @@
         }
 
         [Theory]
-        [InlineData(QuestionKey.PeerReviewProcessTransparent)]
+        [InlineData(QuestionKey.EditorIsResponsive)]
+        [InlineData(QuestionKey.PeerReviewHasAddedValue)]
         [InlineData(QuestionKey.RecommendScholarsToSubmit)]
         [InlineData(QuestionKey.GoodValueForMoney)]
         public void IsValuationScoreCardQuestionOnValuationScoreCardQuestionReturnsTrue(QuestionKey valuationScoreCardQuestionKey)
