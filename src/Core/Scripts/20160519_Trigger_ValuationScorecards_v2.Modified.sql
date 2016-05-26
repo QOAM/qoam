@@ -78,8 +78,8 @@ AS BEGIN
 
             -- Recalculate the average of each of the categories. Here it is important that we take into account
             -- the fact that different score card versions can have a different number of questions for a category
-            ,COALESCE(v1.[ValuationScore_AverageScore], 0) * v1.[Count] AS [ValuationScore_AverageScore_v1]
-			,COALESCE(v2.[ValuationScore_AverageScore], 0) * v2.[Count] AS [ValuationScore_AverageScore_v2]
+            ,COALESCE(v1.[ValuationScore_AverageScore], 0) * COALESCE(v1.[Count], 0) AS [ValuationScore_AverageScore_v1]
+			,COALESCE(v2.[ValuationScore_AverageScore], 0) * COALESCE(v2.[Count], 0) AS [ValuationScore_AverageScore_v2]
         FROM [Journals] j
 
 		LEFT OUTER JOIN X on X.JournalId = j.Id
