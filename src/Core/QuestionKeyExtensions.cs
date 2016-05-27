@@ -6,6 +6,7 @@
         {
             switch (questionKey)
             {
+                case QuestionKey.PeerReviewProcessTransparent:
                 case QuestionKey.PeerReviewHasAddedValue:
                 case QuestionKey.EditorIsResponsive:
                 case QuestionKey.RecommendScholarsToSubmit:
@@ -20,5 +21,11 @@
         {
             return !questionKey.IsBaseScoreCardQuestion();
         }
+
+        public static bool IsOutdated(this QuestionKey questionKey)
+        {
+            return questionKey == QuestionKey.PeerReviewProcessTransparent;
+        }
+
     }
 }

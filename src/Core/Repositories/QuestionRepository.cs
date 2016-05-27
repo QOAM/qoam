@@ -14,7 +14,7 @@
         {
             get
             {
-                return this.DbContext.Questions.ToList().Where(q => q.Key.IsBaseScoreCardQuestion()).ToList();
+                return this.DbContext.Questions.ToList().Where(q => !q.Key.IsOutdated() && q.Key.IsBaseScoreCardQuestion()).ToList();
             }
         }
 
@@ -22,7 +22,7 @@
         {
             get
             {
-                return this.DbContext.Questions.ToList().Where(q => q.Key.IsValuationScoreCardQuestion()).ToList();
+                return this.DbContext.Questions.ToList().Where(q => !q.Key.IsOutdated() && q.Key.IsValuationScoreCardQuestion()).ToList();
             }
         }
     }

@@ -25,16 +25,26 @@ var index = Model.QuestionScores.IndexOf(Model.QuestionScores.First(q => q.Quest
                     }
                 </p>
 
-                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Absent.GetValue()" data-bind="checked: questionScores()[@index].score" />
-                @Score.Absent.GetValue(): @Score.Absent.GetName()
-                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Poor.GetValue()" data-bind="checked: questionScores()[@index].score" />
-                @Score.Poor.GetValue(): @Score.Poor.GetName()
-                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Moderate.GetValue()" data-bind="checked: questionScores()[@index].score" />
-                @Score.Moderate.GetValue(): @Score.Moderate.GetName()
-                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Good.GetValue()" data-bind="checked: questionScores()[@index].score" />
-                @Score.Good.GetValue(): @Score.Good.GetName()
-                <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Excellent.GetValue()" data-bind="checked: questionScores()[@index].score" />
-                @Score.Excellent.GetValue(): @Score.Excellent.GetName()
+                <label>
+                    <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Absent.GetValue()" data-bind="checked: questionScores()[@index].score" />
+                    @Score.Absent.GetValue(): @Score.Absent.GetName()
+                </label>
+                <label>
+                    <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Poor.GetValue()" data-bind="checked: questionScores()[@index].score" />
+                    @Score.Poor.GetValue(): @Score.Poor.GetName()
+                </label>
+                <label>
+                    <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Moderate.GetValue()" data-bind="checked: questionScores()[@index].score" />
+                    @Score.Moderate.GetValue(): @Score.Moderate.GetName()
+                </label>
+                <label>
+                    <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Good.GetValue()" data-bind="checked: questionScores()[@index].score" />
+                    @Score.Good.GetValue(): @Score.Good.GetName()
+                </label>
+                <label>
+                    <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Excellent.GetValue()" data-bind="checked: questionScores()[@index].score" />
+                    @Score.Excellent.GetValue(): @Score.Excellent.GetName()
+                </label>
             </div>
         </div>
     </div>
