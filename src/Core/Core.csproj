@@ -259,9 +259,9 @@
     <Compile Include="Migrations\201604041225437_CascadeDelete.Designer.cs">
       <DependentUpon>201604041225437_CascadeDelete.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605201300419_Update-VSC-Trigger.cs" />
-    <Compile Include="Migrations\201605201300419_Update-VSC-Trigger.Designer.cs">
-      <DependentUpon>201605201300419_Update-VSC-Trigger.cs</DependentUpon>
+    <Compile Include="Migrations\201605261346175_Update-VSC-Trigger.cs" />
+    <Compile Include="Migrations\201605261346175_Update-VSC-Trigger.Designer.cs">
+      <DependentUpon>201605261346175_Update-VSC-Trigger.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
@@ -291,8 +291,8 @@
     <EmbeddedResource Include="Migrations\201604041225437_CascadeDelete.resx">
       <DependentUpon>201604041225437_CascadeDelete.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605201300419_Update-VSC-Trigger.resx">
-      <DependentUpon>201605201300419_Update-VSC-Trigger.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605261346175_Update-VSC-Trigger.resx">
+      <DependentUpon>201605261346175_Update-VSC-Trigger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />

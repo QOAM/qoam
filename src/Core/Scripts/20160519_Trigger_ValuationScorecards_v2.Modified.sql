@@ -29,6 +29,7 @@ AS BEGIN
 				-- Recalculate the average of each of the categories. Here it is important that we take into account
 				-- the fact that different score card versions can have a different number of questions for a category
 				,CAST(COALESCE(SUM([Score_ValuationScore_TotalScore]), 0) AS FLOAT) / COALESCE(SUM(v.ValuationNumberOfQuestions), 1) AS [ValuationScore_AverageScore]
+				,COUNT(v.[Id]) AS [Count]
 			FROM [Journals] j
 
 			-- We are only interested in published score cards (published = 1)             
@@ -49,6 +50,7 @@ AS BEGIN
 				-- Recalculate the average of each of the categories. Here it is important that we take into account
 				-- the fact that different score card versions can have a different number of questions for a category
 				,CAST(COALESCE(SUM([Score_ValuationScore_TotalScore]), 0) AS FLOAT) / COALESCE(SUM(v.ValuationNumberOfQuestions), 1) AS [ValuationScore_AverageScore]
+				,COUNT(v.[Id]) AS [Count]
 			FROM [Journals] j
 
 			-- We are only interested in published score cards (published = 1)             
@@ -76,8 +78,8 @@ AS BEGIN
 
             -- Recalculate the average of each of the categories. Here it is important that we take into account
             -- the fact that different score card versions can have a different number of questions for a category
-            ,COALESCE(v1.[ValuationScore_AverageScore], 0) AS [ValuationScore_AverageScore_v1]
-			,COALESCE(v2.[ValuationScore_AverageScore], 0) AS [ValuationScore_AverageScore_v2]
+            ,COALESCE(v1.[ValuationScore_AverageScore], 0) * COALESCE(v1.[Count], 0) AS [ValuationScore_AverageScore_v1]
+			,COALESCE(v2.[ValuationScore_AverageScore], 0) * COALESCE(v2.[Count], 0) AS [ValuationScore_AverageScore_v2]
         FROM [Journals] j
 
 		LEFT OUTER JOIN X on X.JournalId = j.Id
