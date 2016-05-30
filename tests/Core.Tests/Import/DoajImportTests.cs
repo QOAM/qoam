@@ -1,4 +1,6 @@
-﻿namespace QOAM.Core.Tests.Import
+﻿using System.Linq;
+
+namespace QOAM.Core.Tests.Import
 {
     using Moq;
     using QOAM.Core.Import;
@@ -19,6 +21,19 @@
 
             // Assert
             Assert.True(journals.Count > 0);
+        }
+
+        [Fact]
+        public void DoajJournalsShouldAllBeOpenAccess()
+        {
+            // Arrange
+            var doajImport = new DoajImport(new DoajSettings(), Mock.Of<IBlockedISSNRepository>());
+
+            // Act
+            var journals = doajImport.ParseJournals(GetDoajCsv());
+
+            // Assert
+            Assert.True(journals.All(j => j.OpenAccess));
         }
 
         private static string GetDoajCsv()
