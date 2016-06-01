@@ -28,6 +28,11 @@ namespace QOAM.Website.Helpers
             return user.IsInRoles(necessaryRoles) ? helper.ActionLink(linkText, actionName, controllerName, null, new { @class = cssClass }) : helper.ActionLink(linkText, "", "", new { href = "javascript:void(0)", @class = $"{cssClass} disabled" });
         }
 
+        public static MvcHtmlString JavascriptLink(this HtmlHelper helper, string linkText, string id, IPrincipal user, string cssClass, params string[] necessaryRoles)
+        {
+            return user.IsInRoles(necessaryRoles) ? helper.ActionLink(linkText, "", "", new { id, href="#", @class = cssClass }) : helper.ActionLink(linkText, "", "", new { href = "javascript:void(0)", @class = $"{cssClass} disabled" });
+        }
+
         public static bool IsInRoles(this IPrincipal user, params string[] necessaryRoles)
         {
             return necessaryRoles.Any(user.IsInRole);
