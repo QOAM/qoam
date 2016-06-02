@@ -46,5 +46,6 @@
         IQueryable<Journal> SearchByISSN(IEnumerable<string> issns);
         int ValuationScoredJournalsCount();
         int JournalsWithSwotCount();
+        IList<Journal> AllWhereIncluding(Expression<Func<Journal, bool>> whereClause, params Expression<Func<Journal, object>>[] includeProperties);
     }
 }

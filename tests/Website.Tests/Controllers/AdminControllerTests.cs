@@ -26,7 +26,9 @@ namespace QOAM.Website.Tests.Controllers
 
     public class AdminControllerTests
     {
-        private const string ExpectedJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;English,Danish;motion pictures,films\r\n";
+
+        private const string ExpectedJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;English,Danish;motion pictures,films\r\nACIMED;1024-9435;http://scielo.sld.cu/scielo.php?script=sci_serial&pid=1024-9435&lng=en&nrm=iso;2/10/2013 9:52:51 AM;Cuba;Centro Nacional de Información de Ciencias Médicas;<none indicated>;health sciences\r\n";
+        private const string ExpectedOpenAccessJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;English,Danish;motion pictures,films\r\n";
         private const string OldIssn = "2296-0597";
         private const string NewIssn = "1603-5194";
 
@@ -162,7 +164,7 @@ namespace QOAM.Website.Tests.Controllers
             var adminController = this.CreateAdminController(journalsExport: CreateJournalsExport(CreateJournalRepository(CreateJournals())));
 
             // Act
-            var fileContentResult = adminController.Download();
+            var fileContentResult = adminController.Download("all");
 
             // Assert
             var fileContentResultAsString = Encoding.UTF8.GetString(fileContentResult.FileContents);
@@ -170,26 +172,43 @@ namespace QOAM.Website.Tests.Controllers
         }
 
         [Fact]
-        public void DownloadReturnsFileContentResultWithCsvContentType()
+        [UseCulture("en-US")]
+        public void DownloadReturnsFileContentResultWithOnlyOpenAccessJournals()
+        {
+            // Arrange
+            var adminController = CreateAdminController(journalsExport: CreateJournalsExport(CreateJournalRepository(CreateJournals())));
+
+            // Act
+            var fileContentResult = adminController.Download("open-access");
+
+            // Assert
+            var fileContentResultAsString = Encoding.UTF8.GetString(fileContentResult.FileContents);
+            Assert.Equal(ExpectedOpenAccessJournalsCsv, fileContentResultAsString);
+        }
+
+        [Theory]
+        [InlineData("all")]
+        public void DownloadReturnsFileContentResultWithCsvContentType(string downloadType)
         {
             // Arrange
             var adminController = this.CreateAdminController(journalsExport: CreateJournalsExport(CreateJournalRepository(CreateJournals())));
 
             // Act
-            var fileContentResult = adminController.Download();
+            var fileContentResult = adminController.Download(downloadType);
 
             // Assert
             Assert.Equal("application/csv", fileContentResult.ContentType);
         }
 
-        [Fact]
-        public void DownloadReturnsFileContentResultWithFileDownloadNameSet()
+        [Theory]
+        [InlineData("all")]
+        public void DownloadReturnsFileContentResultWithFileDownloadNameSet(string downloadType)
         {
             // Arrange
             var adminController = this.CreateAdminController(journalsExport: CreateJournalsExport(CreateJournalRepository(CreateJournals())));
 
             // Act
-            var fileContentResult = adminController.Download();
+            var fileContentResult = adminController.Download(downloadType);
 
             // Assert
             Assert.Equal("journals.csv", fileContentResult.FileDownloadName);
@@ -887,10 +906,11 @@ namespace QOAM.Website.Tests.Controllers
             journalRepository.Setup(j => j.AllIncluding(It.IsAny<Expression<Func<Journal, object>>[]>()))
                 .Returns(journals);
             journalRepository.Setup(j => j.SearchByISSN(It.IsAny<IEnumerable<string>>()))
-                .Returns<IEnumerable<string>>(x => journals.Where(j => x.Contains(j.ISSN))
-                    .AsQueryable());
+                .Returns<IEnumerable<string>>(x => journals.Where(j => x.Contains(j.ISSN)).AsQueryable());
             journalRepository.Setup(j => j.FindByIssn(It.IsAny<string>()))
                 .Returns<string>(issn => journals.FirstOrDefault(j => j.ISSN == issn));
+            journalRepository.Setup(j => j.AllWhereIncluding(It.IsAny<Expression<Func<Journal,bool>>>(), It.IsAny<Expression<Func<Journal, object>>[]>()))
+                .Returns(journals.Where(j => j.OpenAccess).ToList());
 
             return journalRepository.Object;
         }
@@ -952,7 +972,9 @@ namespace QOAM.Website.Tests.Controllers
                         {
                             Name = "library and information sciences"
                         }
-                    }
+                    },
+                    DataSource = "DOAJ",
+                    OpenAccess = true
                 },
                 new Journal
                 {
@@ -989,7 +1011,40 @@ namespace QOAM.Website.Tests.Controllers
                         {
                             Name = "films"
                         }
-                    }
+                    },
+                    DataSource = "Ulrich",
+                    OpenAccess = true
+                },
+                new Journal
+                {
+                    Title = "ACIMED",
+                    ISSN = "1024-9435",
+                    Link = "http://scielo.sld.cu/scielo.php?script=sci_serial&pid=1024-9435&lng=en&nrm=iso",
+                    DateAdded = DateTime.Parse("2-10-2013 9:52:51"),
+                    Country = new Country
+                    {
+                        Name = "Cuba"
+                    },
+                    Publisher = new Publisher
+                    {
+                        Name = "Centro Nacional de Información de Ciencias Médicas"
+                    },
+                    Languages = new List<Language>
+                    {
+                        new Language
+                        {
+                            Name = "<none indicated>"
+                        }
+                    },
+                    Subjects = new List<Subject>
+                    {
+                        new Subject
+                        {
+                            Name = "health sciences"
+                        }
+                    },
+                    DataSource = "Ulrich",
+                    OpenAccess = false
                 }
             };
         }

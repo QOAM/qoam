@@ -66,8 +66,10 @@
                 <h3>What would you like to download?</h3>
             </div>
             <div class="modal-body">
-                <label><input type="radio" value="all" name="downloadType"/> All journals</label><br/>
-                <label><input type="radio" value="open-access" name="downloadType"/> Only Open Access journals</label>
+                <form id="downloadForm">
+                    <label><input type="radio" value="all" name="type"/> All journals</label><br/>
+                    <label><input type="radio" value="open-access" name="type"/> Only Open Access journals</label>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>

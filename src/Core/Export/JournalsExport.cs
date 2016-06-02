@@ -26,16 +26,33 @@
         {
             Requires.NotNull(stream, nameof(stream));
             
+            ExportJournals(stream, false);
+        }
+
+        public void ExportOpenAccessJournals(Stream stream)
+        {
+            Requires.NotNull(stream, nameof(stream));
+
+            ExportJournals(stream, true);
+        }
+
+        private void ExportJournals(Stream stream, bool openAccessOnly)
+        {
+            Requires.NotNull(stream, nameof(stream));
+
             using (var streamWriter = new StreamWriter(stream))
             using (var csvWriter = new CsvWriter(streamWriter, CreateCsvConfiguration()))
             {
-                csvWriter.WriteRecords(this.GetExportJournals());
+                csvWriter.WriteRecords(this.GetExportJournals(openAccessOnly));
             }
         }
 
-        private IEnumerable<ExportJournal> GetExportJournals()
+        private IEnumerable<ExportJournal> GetExportJournals(bool openAccessOnly)
         {
-            var journals = this.journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects);
+            var journals = openAccessOnly ? 
+                journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects) : 
+                this.journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects);
+
             return journals.Select(j => new ExportJournal
                                         {
                                             Title = j.Title,
