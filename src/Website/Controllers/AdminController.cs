@@ -166,12 +166,15 @@ namespace QOAM.Website.Controllers
 
         [HttpGet, Route("download")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
-        public FileContentResult Download()
+        public FileContentResult Download(string type)
         {
             using (var memoryStream = new MemoryStream())
             {
-                this.journalsExport.ExportAllJournals(memoryStream);
-                
+                if (type == "all")
+                    journalsExport.ExportAllJournals(memoryStream);
+                else
+                    journalsExport.ExportOpenAccessJournals(memoryStream);
+
                 return this.File(memoryStream.ToArray(), "application/csv", "journals.csv");
             }
         }

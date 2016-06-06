@@ -110,14 +110,14 @@
         public void DownloadActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            ApplicationRoutes.ShouldMap("~/admin/download/").To<AdminController>(HttpMethod.Get, x => x.Download());
+            ApplicationRoutes.ShouldMap("~/admin/download/").To<AdminController>(HttpMethod.Get, x => x.Download(null));
         }
 
         [Fact]
         public void DownloadActionRequiresHttps()
         {
             // Assert
-            Assert.True(ActionRequiresHttps(x => x.Download()));
+            Assert.True(ActionRequiresHttps(x => x.Download("")));
         }
 
         [Fact]

@@ -48,6 +48,7 @@
 
             // Assert
             Assert.Equal(77, journals.Count);
+            Assert.True(journals.All(j => j.OpenAccess));
         }
 
         [Fact]
@@ -61,6 +62,7 @@
 
             // Assert
             Assert.Equal(123, journals.Count);
+            Assert.True(journals.All(j => j.OpenAccess));
         }
 
         [Fact]
@@ -154,6 +156,7 @@
                        Country = new Country { Name = "Poland" },
                        Languages = new List<Language> { new Language { Name = "English" }, new Language { Name = "Polish" } },
                        Subjects = new List<Subject> { new Subject { Name = "medical sciences-physical medicine and rehabilitation" } },
+                       OpenAccess = false
                    };
         }
 
@@ -166,6 +169,7 @@
             Assert.Equal(expectedJournal.Country.Name, parsedJournal.Country.Name);
             Assert.Equal(expectedJournal.Languages.Select(l => l.Name), parsedJournal.Languages.Select(l => l.Name));
             Assert.Equal(expectedJournal.Subjects.Select(s => s.Name), parsedJournal.Subjects.Select(s => s.Name));
+            Assert.Equal(expectedJournal.OpenAccess, parsedJournal.OpenAccess);
         }
 
         private static string GetUlrichsXml()

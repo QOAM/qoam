@@ -146,6 +146,16 @@
                     currentJournal.Link = journal.Link;
                 }
 
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.OpenAccess))
+                {
+                    currentJournal.OpenAccess = journal.OpenAccess;
+                }
+
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.DataSource))
+                {
+                    currentJournal.DataSource = journal.DataSource;
+                }
+
                 if (journalUpdateProperties.Contains(JournalUpdateProperty.Country))
                 {
                     currentJournal.Country = countries.First(p => string.Equals(p.Name, journal.Country.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase));
