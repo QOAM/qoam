@@ -143,10 +143,15 @@ namespace QOAM.Core.Repositories
         public IList<Journal> AllIncluding(params Expression<Func<Journal, object>>[] includeProperties)
         {
             IQueryable<Journal> query = this.DbContext.Journals;
-            foreach (var includeProperty in includeProperties)
-            {
-                query = query.Include(includeProperty);
-            }
+            query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+
+            return query.ToList();
+        }
+
+        public IList<Journal> AllWhereIncluding(Expression<Func<Journal, bool>> whereClause, params Expression<Func<Journal, object>>[] includeProperties)
+        {
+            var query = DbContext.Journals.Where(whereClause);
+            query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
             return query.ToList();
         }

@@ -94,7 +94,7 @@
         public void DownloadActionHasCorrectAuthorization(string role, bool expectedAuthorized)
         {
             // Assert
-            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Download(), role));
+            Assert.Equal(expectedAuthorized, ActionAuthorizedForUserWithRole(x => x.Download(""), role));
         }
 
         [Theory]

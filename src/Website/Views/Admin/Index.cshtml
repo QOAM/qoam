@@ -14,7 +14,7 @@
         <a href="javascript:void(0)" class="list-group-item active">Journals</a>
         @Html.AdminLink("Import journals", User, "Import", null, "list-group-item", "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
         @Html.AdminLink("Update journals", User, "Update", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
-        @Html.AdminLink("Download journals", User, "Download", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
+        @Html.JavascriptLink("Download journals", "download", User, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
         @Html.AdminLink("Delete journals", User, "Delete", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
         @Html.AdminLink("Import Submission-links file", User, "ImportSubmissionLinks", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
 
@@ -39,7 +39,7 @@
         <a href="javascript:void(0)" class="list-group-item active">Prices</a>
         @Html.AdminLink("Import licensed prices", User, "BulkImportInstitutionalPrices", "Journals", "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin)
     </div>
-    
+
     <div class="list-group">
         <a href="javascript:void(0)" class="list-group-item active">Statistics</a>
         @Html.AdminLink("QOAM Statistics", User, "Statistics", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin, ApplicationRole.DataAdmin)
@@ -57,3 +57,33 @@
 
     </div>
 </div>
+
+<div id="donwloadTypeModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>What would you like to download?</h3>
+            </div>
+            <div class="modal-body">
+                <form id="downloadForm">
+                    <label><input type="radio" value="all" name="type"/> All journals</label><br/>
+                    <label><input type="radio" value="open-access" name="type"/> Only Open Access journals</label>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            var adminController = new AdminController();
+            adminController.index('@Url.Action("Download")');
+        });
+    </script>
+}

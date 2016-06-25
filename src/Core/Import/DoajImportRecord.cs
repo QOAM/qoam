@@ -30,7 +30,9 @@
                            Country = new Country { Name = this.Country },
                            Publisher = new Publisher { Name = this.Publisher },
                            Subjects = this.Subjects.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim().ToLowerInvariant().RemovePreamble(Encoding)).Distinct().Select(s => new Subject { Name = s }).ToSet(),
-                           Languages = this.Language.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim().ToLowerInvariant().RemovePreamble(Encoding)).Distinct().Select(s => new Language { Name = s }).ToSet()
+                           Languages = this.Language.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim().ToLowerInvariant().RemovePreamble(Encoding)).Distinct().Select(s => new Language { Name = s }).ToSet(),
+                           DataSource = JournalsImportSource.DOAJ.ToString(),
+                           OpenAccess = true
                        };
         }
     }

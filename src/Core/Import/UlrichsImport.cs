@@ -67,30 +67,34 @@
         public IEnumerable<Journal> ParseJournal(XElement recordElement)
         {
             var regularJournal = new Journal
-                                 {
-                                     Title = recordElement.Element("Title").Value,
-                                     ISSN = recordElement.Element("ISSN").Value,
-                                     Link = recordElement.Element("JournalWebsiteURL").Value,
-                                     Publisher = ParsePublisher(recordElement),
-                                     Country = ParseCountry(recordElement),
-                                     Languages = this.ParseLanguages(recordElement),
-                                     Subjects = this.ParseSubjects(recordElement)
-                                 };
+            {
+                Title = recordElement.Element("Title").Value,
+                ISSN = recordElement.Element("ISSN").Value,
+                Link = recordElement.Element("JournalWebsiteURL").Value,
+                Publisher = ParsePublisher(recordElement),
+                Country = ParseCountry(recordElement),
+                Languages = this.ParseLanguages(recordElement),
+                Subjects = this.ParseSubjects(recordElement),
+                DataSource = JournalsImportSource.Ulrichs.ToString(),
+                OpenAccess = IsOpenAccessJournal(recordElement)
+            };
 
             yield return regularJournal;
 
             foreach (var alternateEditionElement in GetAlternateEditionElements(recordElement))
             {
                 yield return new Journal
-                             {
-                                 Title = regularJournal.Title,
-                                 ISSN = alternateEditionElement.Element("ISSN").Value,
-                                 Link = regularJournal.Link,
-                                 Publisher = ParsePublisher(recordElement),
-                                 Country = ParseCountry(recordElement),
-                                 Languages = this.ParseLanguages(recordElement),
-                                 Subjects = this.ParseSubjects(recordElement)
-                             };
+                {
+                    Title = regularJournal.Title,
+                    ISSN = alternateEditionElement.Element("ISSN").Value,
+                    Link = regularJournal.Link,
+                    Publisher = ParsePublisher(recordElement),
+                    Country = ParseCountry(recordElement),
+                    Languages = this.ParseLanguages(recordElement),
+                    Subjects = this.ParseSubjects(recordElement),
+                    DataSource = JournalsImportSource.Ulrichs.ToString(),
+                    OpenAccess = IsOpenAccessJournal(recordElement)
+                };
             }
         }
 
@@ -161,19 +165,7 @@
 
         private static bool IsOpenAccessJournal(XElement journalElement)
         {
-            if (IsJournal(journalElement))
-            {
-                var openAccessElement = journalElement.Element("OpenAccessIndicator");
-
-                if (openAccessElement == null)
-                {
-                    return false;
-                }
-
-                return openAccessElement.Value == "Y";
-            }
-
-            return false;
+            return IsJournal(journalElement) && journalElement.Element("OpenAccessIndicator")?.Value == "Y";
         }
 
         private void DownloadJournals()

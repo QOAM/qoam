@@ -400,6 +400,7 @@
     <Content Include="Scripts\bootstrap-slider.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Controllers\AdminController.js" />
     <Content Include="Scripts\Controllers\InstitutionsController.js" />
     <Content Include="Scripts\Controllers\InstitutionsController.min.js">
       <DependentUpon>InstitutionsController.js</DependentUpon>

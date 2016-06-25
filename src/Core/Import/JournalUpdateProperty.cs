@@ -8,6 +8,8 @@ namespace QOAM.Core.Import
         Country,
         Publisher,
         Languages,
-        Subjects
+        Subjects,
+        OpenAccess,
+        DataSource
     }
 }

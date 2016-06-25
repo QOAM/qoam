@@ -56,6 +56,10 @@
 
         public int NumberOfValuationReviewers { get; set; }
 
+        [StringLength(50)]
+        public string DataSource { get; set; }
+        public bool OpenAccess { get; set; }
+
         public string Swot
         {
             get
