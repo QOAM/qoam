@@ -56,8 +56,8 @@
             return this.View();
         }
 
-        [HttpGet, Route("press")]
-        public ViewResult Press()
+        [HttpGet, Route("references")]
+        public ViewResult References()
         {
             return this.View();
         }
