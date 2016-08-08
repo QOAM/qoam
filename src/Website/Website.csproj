@@ -1070,7 +1070,7 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Press.cshtml" />
+    <Content Include="Views\Home\References.cshtml" />
     <Content Include="Views\Home\Organisation.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Home\ContactSent.cshtml" />

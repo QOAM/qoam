@@ -53,14 +53,14 @@
         public void PressActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            ApplicationRoutes.ShouldMap("~/press/").To<HomeController>(HttpMethod.Get, x => x.Press());
+            ApplicationRoutes.ShouldMap("~/references/").To<HomeController>(HttpMethod.Get, x => x.References());
         }
 
         [Fact]
         public void PressActionDoesNotRequireHttps()
         {
             // Assert
-            Assert.False(ActionRequiresHttps(x => x.Press()));
+            Assert.False(ActionRequiresHttps(x => x.References()));
         }
 
         [Fact]

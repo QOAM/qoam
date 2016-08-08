@@ -30,7 +30,7 @@
         public void PressActionDoesNotRequireAuthorizedUser()
         {
             // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.Press()));
+            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.References()));
         }
 
         [Fact]
