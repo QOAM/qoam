@@ -11,7 +11,7 @@ namespace QOAM.Core.Import.Institutions
 
         protected override void ProcessSheets(IWorkbook workbook, int mainSheetIndex)
         {
-            ExtractSheet(MainSheet, workbook, "Institution", "Domains");
+            ExtractSheet(MainSheet, workbook, "Institution", "Domain");
         }
 
         protected override ISheet GetSheet(IWorkbook workbook, string sheetName)

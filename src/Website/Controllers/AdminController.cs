@@ -344,18 +344,26 @@ namespace QOAM.Website.Controllers
             if (model.File == null)
                 return View("AddInstitution", model);
 
-            var data = _institutionImporter.Execute(model.File.InputStream);
-
-            foreach (var institution in data)
+            try
             {
-                if (institutionRepository.Exists(institution.Name))
-                    continue;
+                var data = _institutionImporter.Execute(model.File.InputStream);
 
-                institutionRepository.InsertOrUpdate(institution);
-                institutionRepository.Save();
-            }
+                foreach (var institution in data)
+                {
+                    if (institutionRepository.Exists(institution.Name))
+                        continue;
+
+                    institutionRepository.InsertOrUpdate(institution);
+                    institutionRepository.Save();
+                }
             
-            return RedirectToAction("AddedInstitution");
+                return RedirectToAction("AddedInstitution");
+            }
+            catch (ArgumentException invalidFileException)
+            {
+                ModelState.AddModelError("generalError", invalidFileException.Message);
+                return View("AddInstitution", model);
+            }
         }
 
         [HttpGet, Route("addedinstitution")]

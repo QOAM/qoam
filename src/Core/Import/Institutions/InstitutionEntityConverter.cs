@@ -13,7 +13,7 @@ namespace QOAM.Core.Import.Institutions
                                    select new Institution
                                    {
                                        Name = row["Institution"].ToString(),
-                                       ShortName = row["Domains"].ToString(),
+                                       ShortName = row["Domain"].ToString(),
                                    }).ToList();
 
             return authorsToInvite;
