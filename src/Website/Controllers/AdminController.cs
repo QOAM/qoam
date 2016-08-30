@@ -42,9 +42,10 @@ namespace QOAM.Website.Controllers
         private readonly IBlockedISSNRepository blockedIssnRepository;
 
         readonly IBulkImporter<SubmissionPageLink> _bulkImporter;
+        readonly IBulkImporter<Institution> _institutionImporter;
         readonly Regex _domainRegex = new Regex(@"(?<=(http[s]?:\/\/(.*?)[.?]))\b([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b", RegexOptions.Compiled);
 
-        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter)
+        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter, IBulkImporter<Institution> institutionImporter )
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalsImport, nameof(journalsImport));
@@ -63,7 +64,9 @@ namespace QOAM.Website.Controllers
             this.journalRepository = journalRepository;
             this.institutionRepository = institutionRepository;
             this.blockedIssnRepository = blockedIssnRepository;
+
             _bulkImporter = bulkImporter;
+            _institutionImporter = institutionImporter;
         }
 
         [HttpGet, Route("")]
@@ -333,6 +336,24 @@ namespace QOAM.Website.Controllers
             }
 
             return this.View(model);
+        }
+
+        [HttpPost, Route("bulkaddinstitution")]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
+        public ActionResult BulkAddInstitution(UpsertViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View("AddInstitution", model);
+
+            var data = _institutionImporter.Execute(model.File.InputStream);
+
+            foreach (var institution in data)
+            {
+                institutionRepository.InsertOrUpdate(institution);
+                institutionRepository.Save();
+            }
+            
+            return RedirectToAction("AddedInstitution");
         }
 
         [HttpGet, Route("addedinstitution")]

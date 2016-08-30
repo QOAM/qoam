@@ -1,11 +1,14 @@
-﻿namespace QOAM.Website.ViewModels.Institutions
+﻿using System.Web;
+using QOAM.Website.Helpers;
+
+namespace QOAM.Website.ViewModels.Institutions
 {
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     using QOAM.Core;
 
-    public class UpsertViewModel
+    public class UpsertViewModel : IFileUploadViewModel
     {
         public int? Id { get; set; }
 
@@ -17,6 +20,9 @@
         [StringLength(1000)]
         [DisplayName("Domainname")]
         public string ShortName { get; set; }
+
+        [Required(ErrorMessage = "Please select a file"), HttpPostedFileExtensions(Extensions = "xlsx", ErrorMessage = "The selected file does not contain valid institution information!")]
+        public HttpPostedFileBase File { get; set; }
 
         public Institution ToInstitution()
         {

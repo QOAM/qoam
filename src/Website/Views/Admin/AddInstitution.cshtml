@@ -26,6 +26,28 @@
             </div>
         </fieldset>
     }
+    
+    <p>Alternatively, import several institutions from an Excel file.</p>
+    
+    <br />
+    @using (Html.BeginForm("BulkAddInstitution", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <fieldset>
+            <legend>@ViewBag.Title</legend>
+
+            @Html.Partial("_FileUpload")
+
+            <div class="row bottommargin">
+                <div class="col-xs-1 vcenter">
+                </div>
+                <div class="col-xs-11">
+                    <input type="submit" value="Import" class="btn btn-primary" />
+                </div>
+            </div>
+        </fieldset>
+    }
 </div>
 
 @section scripts

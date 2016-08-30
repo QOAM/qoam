@@ -175,6 +175,8 @@
     <Compile Include="Import\IBulkImporter.cs" />
     <Compile Include="Import\IFileImporter.cs" />
     <Compile Include="Import\Import.cs" />
+    <Compile Include="Import\Institutions\InstitutionEntityConverter.cs" />
+    <Compile Include="Import\Institutions\InstitutionFileImporter.cs" />
     <Compile Include="Import\Invitations\AuthorToInvite.cs" />
     <Compile Include="Import\Invitations\ImportAuthorEntityConverter.cs" />
     <Compile Include="Import\Invitations\InvitationFileImporter.cs" />
