@@ -56,6 +56,7 @@ namespace QOAM.Website.Controllers
             Requires.NotNull(institutionRepository, nameof(institutionRepository));
             Requires.NotNull(blockedIssnRepository, nameof(blockedIssnRepository));
             Requires.NotNull(bulkImporter, nameof(bulkImporter));
+            Requires.NotNull(institutionImporter, nameof(institutionImporter));
             
             this.journalsImport = journalsImport;
             this.ulrichsImport = ulrichsImport;
@@ -327,28 +328,29 @@ namespace QOAM.Website.Controllers
         [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ActionResult AddInstitution(UpsertViewModel model)
         {
-            if (this.ModelState.IsValid)
-            {
-                this.institutionRepository.InsertOrUpdate(model.ToInstitution());
-                this.institutionRepository.Save();
-                
-                return this.RedirectToAction("AddedInstitution");
-            }
+            if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.ShortName))
+                return this.View(model);
 
-            return this.View(model);
+            this.institutionRepository.InsertOrUpdate(model.ToInstitution());
+            this.institutionRepository.Save();
+                
+            return this.RedirectToAction("AddedInstitution");
         }
 
         [HttpPost, Route("bulkaddinstitution")]
         [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ActionResult BulkAddInstitution(UpsertViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (model.File == null)
                 return View("AddInstitution", model);
 
             var data = _institutionImporter.Execute(model.File.InputStream);
 
             foreach (var institution in data)
             {
+                if (institutionRepository.Exists(institution.Name))
+                    continue;
+
                 institutionRepository.InsertOrUpdate(institution);
                 institutionRepository.Save();
             }

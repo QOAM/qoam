@@ -18,14 +18,8 @@
 
         protected ApplicationDbContext DbContext { get; private set; }
 
-        protected static string ConnectionString
-        {
-            get
-            {
-                return ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            }
-        }
-        
+        protected static string ConnectionString => ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
         public void Save()
         {
             this.DbContext.SaveChanges();
