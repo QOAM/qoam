@@ -42,7 +42,7 @@ namespace QOAM.Core.Import
             int colCount = headerRow.LastCellNum;
 
             for (var c = 0; c < colCount; c++)
-                dt.Columns.Add(headerRow.GetCell(c)?.ToString());
+                dt.Columns.Add(headerRow.GetCell(c)?.ToString().Trim());
 
             dt.CaseSensitive = false;
 

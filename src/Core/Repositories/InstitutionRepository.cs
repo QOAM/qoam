@@ -62,6 +62,16 @@
             return this.DbContext.Institutions.FirstOrDefault(i => mailAddress.Host.Contains(i.ShortName));
         }
 
+        public bool Exists(string name)
+        {
+            return DbContext.Institutions.Any(i => i.Name == name);
+        }
+
+        public bool Exists(int id)
+        {
+            return DbContext.Institutions.Any(i => i.Id == id);
+        }
+
         //public override void Delete(Institution entity)
         //{
         //    var userProfiles = entity.UserProfiles.Select(u => u.Id).ToList();

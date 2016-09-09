@@ -42,9 +42,10 @@ namespace QOAM.Website.Controllers
         private readonly IBlockedISSNRepository blockedIssnRepository;
 
         readonly IBulkImporter<SubmissionPageLink> _bulkImporter;
+        readonly IBulkImporter<Institution> _institutionImporter;
         readonly Regex _domainRegex = new Regex(@"(?<=(http[s]?:\/\/(.*?)[.?]))\b([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b", RegexOptions.Compiled);
 
-        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter)
+        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter, IBulkImporter<Institution> institutionImporter )
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalsImport, nameof(journalsImport));
@@ -55,6 +56,7 @@ namespace QOAM.Website.Controllers
             Requires.NotNull(institutionRepository, nameof(institutionRepository));
             Requires.NotNull(blockedIssnRepository, nameof(blockedIssnRepository));
             Requires.NotNull(bulkImporter, nameof(bulkImporter));
+            Requires.NotNull(institutionImporter, nameof(institutionImporter));
             
             this.journalsImport = journalsImport;
             this.ulrichsImport = ulrichsImport;
@@ -63,7 +65,9 @@ namespace QOAM.Website.Controllers
             this.journalRepository = journalRepository;
             this.institutionRepository = institutionRepository;
             this.blockedIssnRepository = blockedIssnRepository;
+
             _bulkImporter = bulkImporter;
+            _institutionImporter = institutionImporter;
         }
 
         [HttpGet, Route("")]
@@ -324,15 +328,42 @@ namespace QOAM.Website.Controllers
         [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ActionResult AddInstitution(UpsertViewModel model)
         {
-            if (this.ModelState.IsValid)
-            {
-                this.institutionRepository.InsertOrUpdate(model.ToInstitution());
-                this.institutionRepository.Save();
-                
-                return this.RedirectToAction("AddedInstitution");
-            }
+            if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.ShortName))
+                return this.View(model);
 
-            return this.View(model);
+            this.institutionRepository.InsertOrUpdate(model.ToInstitution());
+            this.institutionRepository.Save();
+                
+            return this.RedirectToAction("AddedInstitution");
+        }
+
+        [HttpPost, Route("bulkaddinstitution")]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
+        public ActionResult BulkAddInstitution(UpsertViewModel model)
+        {
+            if (model.File == null)
+                return View("AddInstitution", model);
+
+            try
+            {
+                var data = _institutionImporter.Execute(model.File.InputStream);
+
+                foreach (var institution in data)
+                {
+                    if (institutionRepository.Exists(institution.Name))
+                        continue;
+
+                    institutionRepository.InsertOrUpdate(institution);
+                    institutionRepository.Save();
+                }
+            
+                return RedirectToAction("AddedInstitution");
+            }
+            catch (ArgumentException invalidFileException)
+            {
+                ModelState.AddModelError("generalError", invalidFileException.Message);
+                return View("AddInstitution", model);
+            }
         }
 
         [HttpGet, Route("addedinstitution")]
