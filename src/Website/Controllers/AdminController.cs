@@ -328,13 +328,24 @@ namespace QOAM.Website.Controllers
         [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ActionResult AddInstitution(UpsertViewModel model)
         {
-            if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.ShortName))
+            ModelState["File"].Errors.Clear();
+            
+            if (institutionRepository.Exists(model.Name))
+                ModelState.AddModelError("Name", $"There is already an institution with the name \"{model.Name}\".");
+
+            if (institutionRepository.DomainExists(model.ShortName))
+                ModelState.AddModelError("ShortName", $"There is already an institution with the domain \"{model.ShortName}\".");
+
+            if (!ModelState.IsValid)
                 return View(model);
 
-            this.institutionRepository.InsertOrUpdate(model.ToInstitution());
-            this.institutionRepository.Save();
-                
-            return this.RedirectToAction("AddedInstitution");
+            institutionRepository.InsertOrUpdate(model.ToInstitution());
+            institutionRepository.Save();
+
+            return View("AddedInstitution", new InstitutionsAddedViewModel
+            {
+                AmountImported = 1
+            });
         }
 
         [HttpPost, Route("bulkaddinstitution")]
@@ -348,29 +359,48 @@ namespace QOAM.Website.Controllers
             {
                 var data = _institutionImporter.Execute(model.File.InputStream);
 
+                List<Institution> invalidRecords = new List<Institution>(), existingNames = new List<Institution>(), existingDomains = new List<Institution>();
+                var imported = 0;
+
                 foreach (var institution in data)
                 {
-                    if (institutionRepository.Exists(institution.Name))
+                    if (string.IsNullOrWhiteSpace(institution.Name) || string.IsNullOrWhiteSpace(institution.ShortName))
+                    {
+                        invalidRecords.Add(institution);
                         continue;
+                    }
+
+                    if (institutionRepository.Exists(institution.Name))
+                    {
+                        existingNames.Add(institution);
+                        continue;
+                    }
+
+                    if (institutionRepository.DomainExists(institution.ShortName))
+                    {
+                        existingDomains.Add(institution);
+                        continue;
+                    }
 
                     institutionRepository.InsertOrUpdate(institution);
                     institutionRepository.Save();
+
+                    imported++;
                 }
-            
-                return RedirectToAction("AddedInstitution");
+
+                return View("AddedInstitution", new InstitutionsAddedViewModel
+                {
+                    AmountImported = imported,
+                    Invalid = invalidRecords,
+                    ExistingNames = existingNames,
+                    ExistingDomains = existingDomains
+                });
             }
             catch (ArgumentException invalidFileException)
             {
                 ModelState.AddModelError("generalError", invalidFileException.Message);
                 return View("AddInstitution", model);
             }
-        }
-
-        [HttpGet, Route("addedinstitution")]
-        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
-        public ViewResult AddedInstitution()
-        {
-            return this.View();
         }
 
         [HttpGet, Route("{id:int}/editinstitution")]

@@ -1,7 +1,10 @@
 ﻿using System.Web;
+using FizzWare.NBuilder;
 using QOAM.Core.Import.SubmissionLinks;
 using QOAM.Website.Tests.Controllers.Stubs;
+using QOAM.Website.ViewModels;
 using QOAM.Website.ViewModels.Admin;
+using QOAM.Website.ViewModels.Institutions;
 using QOAM.Website.ViewModels.Journals;
 
 namespace QOAM.Website.Tests.Controllers
@@ -35,7 +38,6 @@ namespace QOAM.Website.Tests.Controllers
         Mock<IBulkImporter<SubmissionPageLink>> _bulkImporter;
         Mock<IBulkImporter<Institution>> _institutionImporter;
         Mock<HttpPostedFileBase> _uploadFile;
-        ImportSubmissionLinksViewModel _viewModel;
 
         [Fact]
         public void ConstructorWithNullJournalsImportThrowsArgumentNullException()
@@ -835,14 +837,117 @@ namespace QOAM.Website.Tests.Controllers
         }
 
         [Fact]
+        public void BulkAddInstitutionsRejectsInvalidImportFilesAndShowsAnErrorToTheUser()
+        {
+            var viewModel = PrepareFileUpload<UpsertViewModel>();
+
+            var controller = CreateAdminController();
+            _institutionImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Throws<ArgumentException>();
+
+            controller.BulkAddInstitution(viewModel);
+
+            Assert.Equal(1, controller.ModelState["generalError"].Errors.Count);
+        }
+
+        [Fact]
+        public void BulkAddInstitutionsSavesNewInstitutions()
+        {
+            var viewModel = PrepareFileUpload<UpsertViewModel>();
+
+            var data = Builder<Institution>.CreateListOfSize(5).Build();
+            var institutionRepository = new Mock<IInstitutionRepository>();
+            institutionRepository.Setup(x => x.Exists(It.IsAny<string>())).Returns(false);
+
+            var controller = CreateAdminController(institutionRepository: institutionRepository.Object);
+
+            _institutionImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
+
+            controller.BulkAddInstitution(viewModel);
+
+            institutionRepository.Verify(x => x.InsertOrUpdate(It.IsAny<Institution>()), Times.Exactly(5));
+            institutionRepository.Verify(x => x.Save(), Times.Exactly(5));
+        }
+
+        [Fact]
+        public void BulkAddInstitutionsSkipsExistingInstitutionNames()
+        {
+            var viewModel = PrepareFileUpload<UpsertViewModel>();
+
+            var data = Builder<Institution>.CreateListOfSize(5)
+                .TheFirst(1)
+                .With(x => x.Name = "Test University")
+                .Build();
+
+            var institutionRepository = new Mock<IInstitutionRepository>();
+            institutionRepository.Setup(x => x.Exists("Test University")).Returns(true);
+
+            var controller = CreateAdminController(institutionRepository: institutionRepository.Object);
+
+            _institutionImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
+
+            controller.BulkAddInstitution(viewModel);
+
+            institutionRepository.Verify(x => x.InsertOrUpdate(It.IsAny<Institution>()), Times.Exactly(4));
+            institutionRepository.Verify(x => x.Save(), Times.Exactly(4));
+        }
+
+        [Fact]
+        public void BulkAddInstitutionsSkipsExistingDomains()
+        {
+            var viewModel = PrepareFileUpload<UpsertViewModel>();
+
+            var data = Builder<Institution>.CreateListOfSize(5)
+                .TheFirst(1)
+                .With(x => x.ShortName = "ru.nl")
+                .Build();
+
+            var institutionRepository = new Mock<IInstitutionRepository>();
+            institutionRepository.Setup(x => x.DomainExists("ru.nl")).Returns(true);
+
+            var controller = CreateAdminController(institutionRepository: institutionRepository.Object);
+
+            _institutionImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
+
+            controller.BulkAddInstitution(viewModel);
+
+            institutionRepository.Verify(x => x.InsertOrUpdate(It.IsAny<Institution>()), Times.Exactly(4));
+            institutionRepository.Verify(x => x.Save(), Times.Exactly(4));
+        }
+
+
+        [Fact]
+        public void BulkAddInstitutionsSkipsEmptyNamesOrDomains()
+        {
+            var viewModel = PrepareFileUpload<UpsertViewModel>();
+
+            var data = Builder<Institution>.CreateListOfSize(5)
+                .TheFirst(1)
+                .With(x => x.ShortName = "")
+                .TheNext(1)
+                .With(x => x.Name = "")
+                .Build();
+
+            var institutionRepository = new Mock<IInstitutionRepository>();
+
+            var controller = CreateAdminController(institutionRepository: institutionRepository.Object);
+
+            _institutionImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
+
+            controller.BulkAddInstitution(viewModel);
+
+            institutionRepository.Verify(x => x.InsertOrUpdate(It.IsAny<Institution>()), Times.Exactly(3));
+            institutionRepository.Verify(x => x.Save(), Times.Exactly(3));
+        }
+
+        [Fact]
         public void ImportSubmissionLinksRejectsInvalidImportFilesAndShowsAnErrorToTheUser()
-        { 
-            PrepareFileUpload();
+        {
+            var viewModel = PrepareFileUpload<ImportSubmissionLinksViewModel>();
 
             var controller = CreateAdminController();
             _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Throws<ArgumentException>();
 
-            controller.ImportSubmissionLinks(_viewModel);
+            controller.ImportSubmissionLinks(viewModel);
 
             Assert.Equal(1, controller.ModelState["generalError"].Errors.Count);
         }
@@ -850,7 +955,7 @@ namespace QOAM.Website.Tests.Controllers
         [Fact]
         public void ImportSubmissionLinksSetsTheLinkInTheCorresponsingJournal()
         {
-            PrepareFileUpload();
+            var viewModel = PrepareFileUpload<ImportSubmissionLinksViewModel>();
 
             var data = SubmissionPageLinkStubs.Links();
             var journals = SubmissionPageLinkStubs.Journals();
@@ -858,7 +963,7 @@ namespace QOAM.Website.Tests.Controllers
 
             _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
 
-            controller.ImportSubmissionLinks(_viewModel);
+            controller.ImportSubmissionLinks(viewModel);
 
             for (int i = 0; i < data.Count; i++)
             {
@@ -867,9 +972,9 @@ namespace QOAM.Website.Tests.Controllers
         }
 
         [Fact]
-        public void ImportSubmissionLinksVerifiesDatTheSubmissionLinkDomainCorrestomdsWithTheJournalDomain()
+        public void ImportSubmissionLinksVerifiesDatTheSubmissionLinkDomainCorrespondsWithTheJournalDomain()
         {
-            PrepareFileUpload();
+            var viewModel = PrepareFileUpload<ImportSubmissionLinksViewModel>();
 
             var data = SubmissionPageLinkStubs.InvalidLinks();
             var journals = SubmissionPageLinkStubs.Journals();
@@ -877,7 +982,7 @@ namespace QOAM.Website.Tests.Controllers
 
             _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
 
-            controller.ImportSubmissionLinks(_viewModel);
+            controller.ImportSubmissionLinks(viewModel);
 
             for (int i = 0; i < data.Count - 1; i++)
             {
@@ -1078,10 +1183,10 @@ namespace QOAM.Website.Tests.Controllers
             };
         }
 
-        void PrepareFileUpload()
+        T PrepareFileUpload<T>() where T: IFileUploadViewModel, new()
         {
             _uploadFile = new Mock<HttpPostedFileBase>();
-            _viewModel = new ImportSubmissionLinksViewModel { File = _uploadFile.Object };
+            return new T { File = _uploadFile.Object };
         }
 
         #endregion
