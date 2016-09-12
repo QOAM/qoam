@@ -329,7 +329,7 @@ namespace QOAM.Website.Controllers
         public ActionResult AddInstitution(UpsertViewModel model)
         {
             if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.ShortName))
-                return this.View(model);
+                return View(model);
 
             this.institutionRepository.InsertOrUpdate(model.ToInstitution());
             this.institutionRepository.Save();
@@ -385,7 +385,7 @@ namespace QOAM.Website.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditInstitution(UpsertViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.ShortName))
                 return View(model);
 
             institutionRepository.InsertOrUpdate(model.ToInstitution());
@@ -414,11 +414,9 @@ namespace QOAM.Website.Controllers
             if (institution == null)
                 return new HttpNotFoundResult();
 
-            if (!ModelState.IsValid)
-                return View("DeleteInstitution", model);
-
             if (institution.UserProfiles.Any())
             {
+                ModelState["File"].Errors.Clear();
                 ModelState.AddModelError("noetempty", $"There are {institution.UserProfiles.Count} users registered under this domain. Institution {institution.Name} cannot be deleted.");
                 return View("DeleteInstitution", model);
             }
