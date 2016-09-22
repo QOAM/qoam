@@ -67,6 +67,11 @@
             return DbContext.Institutions.Any(i => i.Name == name);
         }
 
+        public bool DomainExists(string domain)
+        {
+            return DbContext.Institutions.Any(i => i.ShortName == domain);
+        }
+
         public bool Exists(int id)
         {
             return DbContext.Institutions.Any(i => i.Id == id);

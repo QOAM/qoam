@@ -25,5 +25,6 @@
         void Delete(Institution entity);
         bool Exists(string name);
         bool Exists(int id);
+        bool DomainExists(string domain);
     }
 }

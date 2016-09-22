@@ -1,12 +1,86 @@
-﻿@{
+﻿@model QOAM.Website.ViewModels.Admin.InstitutionsAddedViewModel
+
+@{
     ViewBag.Title = "Institution(s) added";
 }
 
 <div class="container main">
+    <a class="btn btn-default return-button" title="Back to search results" href="@Url.Action("Index")">&lt; Back to the Admin page</a>
 
-    <p>
-        The institutions have been added successfully.
-    </p>
-    
-    @Html.ActionLink("Back to admin", "Index")
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <p>
+                @if (Model.AmountImported == 1)
+                {
+                    @:<strong>@Model.AmountImported</strong> institution has been added.
+                }
+                else
+                {
+                    @:<strong>@Model.AmountImported</strong> institutions have been added.
+                }
+            </p>
+        </div>
+    </div>
+
+    @if (Model.Invalid.Any() || Model.ExistingNames.Any() || Model.ExistingDomains.Any())
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <p>
+                    There are <strong>@(Model.Invalid.Count + Model.ExistingNames.Count + Model.ExistingDomains.Count)</strong> invalid institutions.
+                </p>
+            </div>
+            <div class="panel-body">
+                @if (Model.Invalid.Any())
+                {
+                    <div class="row bottommargin">
+                        <div class="col-xs-12">
+                            <p>
+                                The following institutions have either a blank name or blank domain:
+                            </p>
+                            <ul>
+                                @foreach (var institution in Model.Invalid)
+                                {
+                                    <li><strong>Name:</strong> @institution.Name. <strong>Domain:</strong> @institution.ShortName</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                }
+                @if (Model.ExistingNames.Any())
+                {
+                    <div class="row bottommargin">
+                        <div class="col-xs-12">
+                            <p>
+                                The following institution names already exist in the database:
+                            </p>
+                            <ul>
+                                @foreach (var institution in Model.ExistingNames)
+                                {
+                                    <li><strong>Name:</strong> @institution.Name. <strong>Domain:</strong> @institution.ShortName</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                }
+                @if (Model.ExistingDomains.Any())
+                {
+                    <div class="row bottommargin">
+                        <div class="col-xs-12">
+                            <p>
+                                The following domains already exist in the database:
+                            </p>
+                            <ul>
+                                @foreach (var institution in Model.ExistingDomains)
+                                {
+                                    <li><strong>Name:</strong> @institution.Name. <strong>Domain:</strong> @institution.ShortName</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
 </div>
+
