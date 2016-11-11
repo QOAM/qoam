@@ -5,7 +5,6 @@ using QOAM.Website.Tests.Controllers.Stubs;
 using QOAM.Website.ViewModels;
 using QOAM.Website.ViewModels.Admin;
 using QOAM.Website.ViewModels.Institutions;
-using QOAM.Website.ViewModels.Journals;
 
 namespace QOAM.Website.Tests.Controllers
 {

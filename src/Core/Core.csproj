@@ -180,6 +180,7 @@
     <Compile Include="Import\Invitations\AuthorToInvite.cs" />
     <Compile Include="Import\Invitations\ImportAuthorEntityConverter.cs" />
     <Compile Include="Import\Invitations\InvitationFileImporter.cs" />
+    <Compile Include="Import\JournalTocsSettings.cs" />
     <Compile Include="Import\JournalUpdateProperty.cs" />
     <Compile Include="Import\Licences\IImportEntityConverter.cs" />
     <Compile Include="Import\Licences\ImportLicenseEntityConverter.cs" />
