@@ -180,6 +180,7 @@
     <Compile Include="Import\Invitations\AuthorToInvite.cs" />
     <Compile Include="Import\Invitations\ImportAuthorEntityConverter.cs" />
     <Compile Include="Import\Invitations\InvitationFileImporter.cs" />
+    <Compile Include="Import\JournalTocsClient.cs" />
     <Compile Include="Import\JournalTocsSettings.cs" />
     <Compile Include="Import\JournalUpdateProperty.cs" />
     <Compile Include="Import\Licences\IImportEntityConverter.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Import\SubmissionLinks\SubmissionLinksFileImporter.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionPageLink.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionPageLinkEntityConverter.cs" />
+    <Compile Include="Import\JournalTocsImport.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.Designer.cs">
       <DependentUpon>201404301016419_SplitJSC.cs</DependentUpon>
