@@ -3,6 +3,7 @@
     public enum JournalsImportSource
     {
         DOAJ,
-        Ulrichs
+        Ulrichs,
+        JournalTOCs
     }
 }

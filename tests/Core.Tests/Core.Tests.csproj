@@ -147,6 +147,7 @@
     <Compile Include="Import\SubmissionLinks\Stubs\SubmissionLinkImportStubs.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionPageLinksEntityConverterTests.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionLinksFileImporterTests.cs" />
+    <Compile Include="Import\JournalTocsImportTests.cs" />
     <Compile Include="QuestionKeyExtensionsTests.cs" />
     <Compile Include="Export\JournalsExportTests.cs" />
     <Compile Include="Import\JournalIssnEqualityComparerTests.cs" />
@@ -231,6 +232,11 @@
       <Project>{48695F3E-A754-4A33-B22B-86CD55939CC6}</Project>
       <Name>Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Import\Resources\JournalTocs-no-more-items-notice.xml" />
+    <EmbeddedResource Include="Import\Resources\JournalTocs-setup-first-500.xml" />
+    <EmbeddedResource Include="Import\Resources\JournalTocs-setup-next-500.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
