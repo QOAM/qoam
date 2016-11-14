@@ -140,6 +140,7 @@
     <Compile Include="Import\InvitationModule\ImportAuthorEntityConverterTests.cs" />
     <Compile Include="Import\InvitationModule\InvitationFileImporterTests.cs" />
     <Compile Include="Import\InvitationModule\Stubs\InvitationStubs.cs" />
+    <Compile Include="Import\JournalTocsClientTests.cs" />
     <Compile Include="Import\Licenses\ImportLicenseEntityConverterTests.cs" />
     <Compile Include="Import\Licenses\LicenseFileImporterTests.cs" />
     <Compile Include="Import\Licenses\Stubs\ImportFileStubs.cs" />
