@@ -14,7 +14,7 @@ namespace QOAM.Core.Tests.Import
         Mock<IJournalTocsClient> _client;
 
         [Fact]
-        public void ParseJournals_fetches_a_patch_of_journal_xml_and_converts_it_to_Journals()
+        public void ParseJournals_fetches_a_batch_of_journal_xml_and_converts_it_to_Journals()
         {
             // Arrange
             var journalTocsImport = CreateJournalTocsImport();
