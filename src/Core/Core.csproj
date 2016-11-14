@@ -192,6 +192,9 @@
     <Compile Include="Import\SubmissionLinks\SubmissionPageLink.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionPageLinkEntityConverter.cs" />
     <Compile Include="Import\JournalTocsImport.cs" />
+    <Compile Include="Import\WebClientWrapper.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Migrations\201404301016419_SplitJSC.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.Designer.cs">
       <DependentUpon>201404301016419_SplitJSC.cs</DependentUpon>
