@@ -5,7 +5,7 @@ namespace QOAM.Core.Import
 {
     public interface IJournalTocsClient
     {
-        int ResumptionToken { get; set; }
+        //int ResumptionToken { get; set; }
         string DownloadJournals();
     }
 
@@ -16,7 +16,9 @@ namespace QOAM.Core.Import
         static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         static readonly Encoding _encoding = new UTF8Encoding(false);
 
-        public int ResumptionToken { get; set; }
+        const string EndOfBatchesNotice = "<noticeCode>11</noticeCode>";
+
+        int _resumptionToken;
 
         public JournalTocsClient(JournalTocsSettings settings, IWebClientFactory webClientFactory)
         {
@@ -28,11 +30,31 @@ namespace QOAM.Core.Import
         {
             _logger.Info("Downloading journals...");
 
+            var result = new StringBuilder();
             using (var webClient = _webClientFactory.Create())
             {
                 webClient.Encoding = _encoding;
+                var fetch = true;
 
-                return webClient.DownloadString(_settings.Url);
+                do
+                {
+                    _logger.Info($"\t...downloading batch #{_resumptionToken + 1}...");
+
+                    var batch = webClient.DownloadString($"{_settings.RequestUrl}&resumptionToken={_resumptionToken}");
+
+                    if (!batch.Contains(EndOfBatchesNotice))
+                    {
+                        result.Append(batch);
+                        _resumptionToken++;
+                    }
+                    else
+                        fetch = false;
+
+                } while (fetch);
+
+                _logger.Info("Finised downloading journals.");
+
+                return result.ToString();
             }
         }
     }

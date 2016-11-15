@@ -36,5 +36,7 @@ namespace QOAM.Core.Import
             get { return (bool)this[TestPropertyName]; }
             set { this[TestPropertyName] = value; }
         }
+
+        public string RequestUrl => $"{Url}?sui={Sui}&ip={Ip}&test={Test}";
     }
 }
