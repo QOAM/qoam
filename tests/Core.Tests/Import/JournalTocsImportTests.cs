@@ -18,7 +18,7 @@ namespace QOAM.Core.Tests.Import
         {
             // Arrange
             var journalTocsImport = CreateJournalTocsImport();
-            _client.Setup(x => x.DownloadJournals()).Returns(GetJournalTocsFirst500Xml());
+            _client.Setup(x => x.DownloadJournals("update")).Returns(GetJournalTocsFirst500Xml());
             // Act
             var journals = journalTocsImport.ParseJournals();
 

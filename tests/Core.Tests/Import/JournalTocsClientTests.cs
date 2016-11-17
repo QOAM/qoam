@@ -11,6 +11,20 @@ namespace QOAM.Core.Tests.Import
         Mock<IWebClient> _webClient;
         JournalTocsSettings _settings;
 
+        [Theory]
+        [InlineData("setup")]
+        [InlineData("update")]
+        public void DownloadJournals_uses_the_given_Action_to_fetch_journals(string action)
+        {
+            var sut = CreateClient();
+
+            _webClient.Setup(x => x.DownloadString(It.IsAny<string>())).Returns(GetJournalTocsNoMoreItemsNotice());
+
+            var result = sut.DownloadJournals(action);
+
+            _webClient.Verify(x => x.DownloadString($"{_settings.RequestUrl}&action={action}&resumptionToken=0"), Times.Once);
+        }
+
         [Fact]
         public void DownloadJournals_fetches_a_batch_of_journals()
         {
@@ -18,8 +32,8 @@ namespace QOAM.Core.Tests.Import
 
             var journalsXml = GetJournalTocsFirst500Xml();
 
-            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&resumptionToken=0")).Returns(journalsXml);
-            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&resumptionToken=1")).Returns(GetJournalTocsNoMoreItemsNotice());
+            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=0")).Returns(journalsXml);
+            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=1")).Returns(GetJournalTocsNoMoreItemsNotice());
 
             var result = sut.DownloadJournals();
 
@@ -34,13 +48,13 @@ namespace QOAM.Core.Tests.Import
             var firstBatch = GetJournalTocsFirst500Xml();
             var secondBatch = GetJournalTocsNext500Xml();
 
-            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&resumptionToken=0")).Returns(firstBatch);
-            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&resumptionToken=1")).Returns(secondBatch);
-            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&resumptionToken=2")).Returns(GetJournalTocsNoMoreItemsNotice());
+            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=0")).Returns(firstBatch);
+            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=1")).Returns(secondBatch);
+            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=2")).Returns(GetJournalTocsNoMoreItemsNotice());
 
             var result = sut.DownloadJournals();
 
-            _webClient.Verify(x => x.DownloadString($"{_settings.RequestUrl}&resumptionToken=0"), Times.Once());
+            _webClient.Verify(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=0"), Times.Once());
             _webClient.Verify(x => x.DownloadString(It.IsAny<string>()), Times.Exactly(3));
 
             Assert.Equal(firstBatch + secondBatch, result);
