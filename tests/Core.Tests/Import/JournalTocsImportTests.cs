@@ -12,20 +12,31 @@ namespace QOAM.Core.Tests.Import
     public class JournalTocsImportTests
     {
         Mock<IJournalTocsClient> _client;
+        Mock<IBlockedISSNRepository> _issnRepo;
+
 
         [Fact]
-        public void ParseJournals_fetches_a_batch_of_journal_xml_and_converts_it_to_Journals()
+        public void DownloadJournals_parses_journal_xml_and_converts_it_to_Journals()
         {
             // Arrange
+            var blockedIssns = new List<BlockedISSN>
+            {
+                new BlockedISSN { ISSN = "0001-3765" },
+                new BlockedISSN { ISSN = "2282-0035" }
+            };
+
+
             var journalTocsImport = CreateJournalTocsImport();
             _client.Setup(x => x.DownloadJournals("update")).Returns(GetJournalTocsFirst500Xml());
+            _issnRepo.Setup(x => x.All).Returns(blockedIssns);
+
             // Act
-            var journals = journalTocsImport.ParseJournals();
+            var journals = journalTocsImport.DownloadJournals();
 
             // Assert
             Assert.Equal(500, journals.Count);
+            _issnRepo.Verify(x => x.All, Times.Once());
         }
-
 
         private static Journal GetExpectedJournal()
         {
@@ -72,8 +83,10 @@ namespace QOAM.Core.Tests.Import
         JournalTocsImport CreateJournalTocsImport()
         {
             _client = new Mock<IJournalTocsClient>();
+            _issnRepo = new Mock<IBlockedISSNRepository>();
+
             //var journalTocsSettings = new JournalTocsSettings();;
-            return new JournalTocsImport(_client.Object, Mock.Of<IBlockedISSNRepository>());
+            return new JournalTocsImport(_client.Object, _issnRepo.Object);
         }
     }
 }

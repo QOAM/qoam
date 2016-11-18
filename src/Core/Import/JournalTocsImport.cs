@@ -17,15 +17,18 @@ namespace QOAM.Core.Import
             _client = client;
         }
 
-        public IList<Journal> ParseJournals()
+        public IList<Journal> DownloadJournals()
         {
-            var journalElements = XDocument.Parse(GetXml()).Descendants("journals").Descendants("journal").ToList();
-
-            var invalid = journalElements.SelectMany(ParseJournal).Where(j => !j.IsValid()).ToList();
-            return journalElements.SelectMany(ParseJournal).Where(j => j.IsValid()).ToList();
+            return ExcludeBlockedIssns(ParseJournals());
         }
 
         #region Private Methods
+
+        IList<Journal> ParseJournals()
+        {
+            var journalElements = XDocument.Parse(GetXml()).Descendants("journals").Descendants("journal").ToList();
+            return journalElements.SelectMany(ParseJournal).Where(j => j.IsValid()).ToList();
+        }
 
         public IEnumerable<Journal> ParseJournal(XElement recordElement)
         {
