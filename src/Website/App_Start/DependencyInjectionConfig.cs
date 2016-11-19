@@ -67,6 +67,7 @@ namespace QOAM.Website
             builder.Register(c => c.Resolve<OAMarketSettings>().GeneralImport).AsSelf().InstancePerRequest();
             builder.Register(c => c.Resolve<OAMarketSettings>().Doaj).AsSelf().InstancePerRequest();
             builder.Register(c => c.Resolve<OAMarketSettings>().Ulrichs).AsSelf().InstancePerRequest();
+            builder.Register(c => c.Resolve<OAMarketSettings>().JournalTocs).AsSelf().InstancePerRequest();
         }
 
         private static void RegisterImportAndExportComponents(ContainerBuilder builder)
@@ -77,6 +78,9 @@ namespace QOAM.Website
             builder.RegisterType<UlrichsClient>().AsSelf().InstancePerRequest();
             builder.RegisterType<UlrichsImport>().AsSelf().InstancePerRequest();
             builder.RegisterType<UlrichsCache>().AsSelf().InstancePerRequest();
+            builder.RegisterType<JournalTocsClient>().As<IJournalTocsClient>().InstancePerRequest();
+            builder.RegisterType<SystemWebClientFactory>().As<IWebClientFactory>().InstancePerRequest();
+            builder.RegisterType<JournalTocsImport>().AsSelf().InstancePerRequest();
 
             builder.RegisterType<LicenseFileImporter>().As<IFileImporter>().InstancePerRequest();
             builder.RegisterType<InvitationFileImporter>().Named<IFileImporter>("invitation").InstancePerRequest();

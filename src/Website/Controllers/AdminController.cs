@@ -44,12 +44,14 @@ namespace QOAM.Website.Controllers
         readonly IBulkImporter<SubmissionPageLink> _bulkImporter;
         readonly IBulkImporter<Institution> _institutionImporter;
         readonly Regex _domainRegex = new Regex(@"(?<=(http[s]?:\/\/(.*?)[.?]))\b([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b", RegexOptions.Compiled);
+        readonly JournalTocsImport _journalsTocImport;
 
-        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter, IBulkImporter<Institution> institutionImporter )
+        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalTocsImport journalsTocImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter, IBulkImporter<Institution> institutionImporter)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalsImport, nameof(journalsImport));
             Requires.NotNull(ulrichsImport, nameof(ulrichsImport));
+            Requires.NotNull(journalsTocImport, nameof(journalsTocImport));
             Requires.NotNull(doajImport, nameof(doajImport));
             Requires.NotNull(journalsExport, nameof(journalsExport));
             Requires.NotNull(journalRepository, nameof(journalRepository));
@@ -61,6 +63,7 @@ namespace QOAM.Website.Controllers
             this.journalsImport = journalsImport;
             this.ulrichsImport = ulrichsImport;
             this.doajImport = doajImport;
+            _journalsTocImport = journalsTocImport;
             this.journalsExport = journalsExport;
             this.journalRepository = journalRepository;
             this.institutionRepository = institutionRepository;
@@ -712,6 +715,8 @@ namespace QOAM.Website.Controllers
                     return this.doajImport.GetJournals();
                 case JournalsImportSource.Ulrichs:
                     return this.ulrichsImport.GetJournals(UlrichsImport.UlrichsJournalType.All);
+                    case JournalsImportSource.JournalTOCs:
+                    return _journalsTocImport.DownloadJournals();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(importSource));
             }
