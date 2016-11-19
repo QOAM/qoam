@@ -14,60 +14,28 @@
         private const string GeneralImportSectionName = "generalImport";
         private const string UlrichsSectionName = "ulrichs";
         private const string DoajSectionName = "doaj";
+        private const string JournalTocsSectionName = "journaltocs";
 
         private static readonly Lazy<OAMarketSettings> Instance = new Lazy<OAMarketSettings>(() => WebConfigurationManager.OpenWebConfiguration("~").GetSectionGroup(OAMarketSectionGroupName) as OAMarketSettings);
 
-        public static OAMarketSettings Current
-        {
-            get
-            {
-                return Instance.Value;
-            }
-        }
+        public static OAMarketSettings Current => Instance.Value;
 
         [ConfigurationProperty(ContactSectionName)]
-        public ContactSettings Contact
-        {
-            get
-            {
-                return (ContactSettings)this.Sections[ContactSectionName];
-            }
-        }
+        public ContactSettings Contact => (ContactSettings)Sections[ContactSectionName];
 
         [ConfigurationProperty(GeneralSectionName)]
-        public GeneralSettings General
-        {
-            get
-            {
-                return (GeneralSettings)this.Sections[GeneralSectionName];
-            }
-        }
+        public GeneralSettings General => (GeneralSettings)Sections[GeneralSectionName];
 
         [ConfigurationProperty(GeneralImportSectionName)]
-        public GeneralImportSettings GeneralImport
-        {
-            get
-            {
-                return (GeneralImportSettings)this.Sections[GeneralImportSectionName];
-            }
-        }
+        public GeneralImportSettings GeneralImport => (GeneralImportSettings)Sections[GeneralImportSectionName];
 
         [ConfigurationProperty(UlrichsSectionName)]
-        public UlrichsSettings Ulrichs
-        {
-            get
-            {
-                return (UlrichsSettings)this.Sections[UlrichsSectionName];
-            }
-        }
+        public UlrichsSettings Ulrichs => (UlrichsSettings)Sections[UlrichsSectionName];
 
         [ConfigurationProperty(DoajSectionName)]
-        public DoajSettings Doaj
-        {
-            get
-            {
-                return (DoajSettings)this.Sections[DoajSectionName];
-            }
-        }
+        public DoajSettings Doaj => (DoajSettings)Sections[DoajSectionName];
+
+        [ConfigurationProperty(JournalTocsSectionName)]
+        public JournalTocsSettings JournalTocs => (JournalTocsSettings)Sections[JournalTocsSectionName];
     }
 }
