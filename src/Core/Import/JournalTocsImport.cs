@@ -26,7 +26,13 @@ namespace QOAM.Core.Import
 
         IList<Journal> ParseJournals()
         {
-            var journalElements = XDocument.Parse(GetXml()).Descendants("journals").Descendants("journal").ToList();
+            var xml = GetXml();
+
+            var journalElements = new List<XElement>();
+
+            foreach (var doc in xml)
+                journalElements.AddRange(XDocument.Parse(doc).Descendants("journals").Descendants("journal").ToList());
+                                   
             return journalElements.SelectMany(ParseJournal).Where(j => j.IsValid()).ToList();
         }
 
@@ -46,9 +52,9 @@ namespace QOAM.Core.Import
             yield return regularJournal;
         }
 
-        string GetXml()
+        List<string> GetXml()
         {
-            return _client.DownloadJournals().Replace("&", "&amp;");
+            return _client.DownloadJournals();
         }
 
         static string ParseIssn(XElement journalElement)

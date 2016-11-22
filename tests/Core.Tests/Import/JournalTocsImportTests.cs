@@ -27,14 +27,14 @@ namespace QOAM.Core.Tests.Import
 
 
             var journalTocsImport = CreateJournalTocsImport();
-            _client.Setup(x => x.DownloadJournals("update")).Returns(GetJournalTocsFirst500Xml());
+            _client.Setup(x => x.DownloadJournals("update")).Returns(new List<string> { GetJournalTocsFirst500Xml(), GetJournalTocsNextXml() });
             _issnRepo.Setup(x => x.All).Returns(blockedIssns);
 
             // Act
             var journals = journalTocsImport.DownloadJournals();
 
             // Assert
-            Assert.Equal(500, journals.Count);
+            Assert.Equal(1000, journals.Count);
             _issnRepo.Verify(x => x.All, Times.Once());
         }
 
@@ -67,17 +67,17 @@ namespace QOAM.Core.Tests.Import
 
         static string GetJournalTocsFirst500Xml()
         {
-            return ResourceReader.GetContentsOfResource("JournalTocs-setup-first-500.xml");
+            return ResourceReader.GetContentsOfResource("JournalTocs-setup-first-500.xml").Replace("&", "&amp;");
         }
 
         static string GetJournalTocsNextXml()
         {
-            return ResourceReader.GetContentsOfResource("JournalTocs-setup-next-500.xml");
+            return ResourceReader.GetContentsOfResource("JournalTocs-setup-next-500.xml").Replace("&", "&amp;");
         }
 
         static string GetJournalTocsNoMoreItemsNotice()
         {
-            return ResourceReader.GetContentsOfResource("JournalTocs-no-more-items-notice.xml");
+            return ResourceReader.GetContentsOfResource("JournalTocs-no-more-items-notice.xml").Replace("&", "&amp;");
         }
 
         JournalTocsImport CreateJournalTocsImport()

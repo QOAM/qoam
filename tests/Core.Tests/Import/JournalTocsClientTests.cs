@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using System.Linq;
+using Moq;
 using QOAM.Core.Import;
 using QOAM.Core.Tests.Import.Resources;
 using Xunit;
@@ -20,7 +21,7 @@ namespace QOAM.Core.Tests.Import
 
             _webClient.Setup(x => x.DownloadString(It.IsAny<string>())).Returns(GetJournalTocsNoMoreItemsNotice());
 
-            var result = sut.DownloadJournals(action);
+            sut.DownloadJournals(action);
 
             _webClient.Verify(x => x.DownloadString($"{_settings.RequestUrl}&action={action}&resumptionToken=0"), Times.Once);
         }
@@ -37,7 +38,7 @@ namespace QOAM.Core.Tests.Import
 
             var result = sut.DownloadJournals();
 
-            Assert.Equal(journalsXml, result);
+            Assert.Equal(journalsXml.Replace("&", "&amp;"), result.First());
         }
 
         [Fact]
@@ -57,7 +58,8 @@ namespace QOAM.Core.Tests.Import
             _webClient.Verify(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=0"), Times.Once());
             _webClient.Verify(x => x.DownloadString(It.IsAny<string>()), Times.Exactly(3));
 
-            Assert.Equal(firstBatch + secondBatch, result);
+            Assert.Equal(firstBatch.Replace("&", "&amp;"), result[0]);
+            Assert.Equal(secondBatch.Replace("&", "&amp;"), result[1]);
         }
 
         #region Private Methods

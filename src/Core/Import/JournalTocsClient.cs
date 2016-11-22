@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using NLog;
 
 namespace QOAM.Core.Import
@@ -6,7 +7,7 @@ namespace QOAM.Core.Import
     public interface IJournalTocsClient
     {
         //int ResumptionToken { get; set; }
-        string DownloadJournals(string action = "update");
+        List<string> DownloadJournals(string action = "update");
     }
 
     public class JournalTocsClient : IJournalTocsClient
@@ -17,6 +18,7 @@ namespace QOAM.Core.Import
         static readonly Encoding _encoding = new UTF8Encoding(false);
 
         const string EndOfBatchesNotice = "<noticeCode>11</noticeCode>";
+        const string Notice = "<noticeCode>";
 
         int _resumptionToken;
 
@@ -26,11 +28,12 @@ namespace QOAM.Core.Import
             _webClientFactory = webClientFactory;
         }
 
-        public string DownloadJournals(string action = "update")
+        public List<string> DownloadJournals(string action = "update")
         {
             _logger.Info("Downloading journals...");
 
-            var result = new StringBuilder();
+            var result = new List<string>();
+
             using (var webClient = _webClientFactory.Create())
             {
                 webClient.Encoding = _encoding;
@@ -42,9 +45,9 @@ namespace QOAM.Core.Import
 
                     var batch = webClient.DownloadString($"{_settings.RequestUrl}&action={action}&resumptionToken={_resumptionToken}");
 
-                    if (!batch.Contains(EndOfBatchesNotice))
+                    if (!batch.Contains(EndOfBatchesNotice) || !batch.Contains(Notice))
                     {
-                        result.Append(batch);
+                        result.Add(batch.Replace("&", "&amp;"));
                         _resumptionToken++;
                     }
                     else
@@ -54,7 +57,7 @@ namespace QOAM.Core.Import
 
                 _logger.Info("Finised downloading journals.");
 
-                return result.ToString();
+                return result;
             }
         }
     }
