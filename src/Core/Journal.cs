@@ -36,6 +36,7 @@
 
         public string SubmissionPageLink { get; set; }
         public DateTime DateAdded { get; set; }
+        public DateTime LastUpdatedOn { get; set; }
         public int CountryId { get; set; }
         public int PublisherId { get; set; }
         public int JournalScoreId { get; set; }
