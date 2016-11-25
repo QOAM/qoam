@@ -17,16 +17,16 @@ namespace QOAM.Core.Import
             _client = client;
         }
 
-        public IList<Journal> DownloadJournals()
+        public IList<Journal> DownloadJournals(JournalTocsFetchMode action = JournalTocsFetchMode.Update)
         {
-            return ExcludeBlockedIssns(ParseJournals());
+            return ExcludeBlockedIssns(ParseJournals(action));
         }
 
         #region Private Methods
 
-        IList<Journal> ParseJournals()
+        IList<Journal> ParseJournals(JournalTocsFetchMode action = JournalTocsFetchMode.Update)
         {
-            var xml = GetXml();
+            var xml = GetXml(action);
 
             var journalElements = new List<XElement>();
 
@@ -52,9 +52,9 @@ namespace QOAM.Core.Import
             yield return regularJournal;
         }
 
-        List<string> GetXml()
+        IEnumerable<string> GetXml(JournalTocsFetchMode action = JournalTocsFetchMode.Update)
         {
-            return _client.DownloadJournals();
+            return _client.DownloadJournals(action);
         }
 
         static string ParseIssn(XElement journalElement)

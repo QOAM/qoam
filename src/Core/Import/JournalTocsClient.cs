@@ -6,8 +6,7 @@ namespace QOAM.Core.Import
 {
     public interface IJournalTocsClient
     {
-        //int ResumptionToken { get; set; }
-        List<string> DownloadJournals(string action = "update");
+        List<string> DownloadJournals(JournalTocsFetchMode action = JournalTocsFetchMode.Update);
     }
 
     public class JournalTocsClient : IJournalTocsClient
@@ -28,7 +27,7 @@ namespace QOAM.Core.Import
             _webClientFactory = webClientFactory;
         }
 
-        public List<string> DownloadJournals(string action = "update")
+        public List<string> DownloadJournals(JournalTocsFetchMode action = JournalTocsFetchMode.Update)
         {
             _logger.Info("Downloading journals...");
 
@@ -43,7 +42,7 @@ namespace QOAM.Core.Import
                 {
                     _logger.Info($"\t...downloading batch #{_resumptionToken + 1}...");
 
-                    var batch = webClient.DownloadString($"{_settings.RequestUrl}&action={action}&resumptionToken={_resumptionToken}");
+                    var batch = webClient.DownloadString($"{_settings.RequestUrl}&action={action.ToString().ToLowerInvariant()}&resumptionToken={_resumptionToken}");
 
                     if (!batch.Contains(EndOfBatchesNotice) || !batch.Contains(Notice))
                     {

@@ -13,9 +13,9 @@ namespace QOAM.Core.Tests.Import
         JournalTocsSettings _settings;
 
         [Theory]
-        [InlineData("setup")]
-        [InlineData("update")]
-        public void DownloadJournals_uses_the_given_Action_to_fetch_journals(string action)
+        [InlineData(JournalTocsFetchMode.Setup)]
+        [InlineData(JournalTocsFetchMode.Update)]
+        public void DownloadJournals_uses_the_given_Action_to_fetch_journals(JournalTocsFetchMode action)
         {
             var sut = CreateClient();
 
@@ -23,7 +23,7 @@ namespace QOAM.Core.Tests.Import
 
             sut.DownloadJournals(action);
 
-            _webClient.Verify(x => x.DownloadString($"{_settings.RequestUrl}&action={action}&resumptionToken=0"), Times.Once);
+            _webClient.Verify(x => x.DownloadString($"{_settings.RequestUrl}&action={action.ToString().ToLowerInvariant()}&resumptionToken=0"), Times.Once);
         }
 
         [Fact]

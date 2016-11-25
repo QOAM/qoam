@@ -1,0 +1,16 @@
+﻿@model QOAM.Core.Import.JournalsImportResult
+
+@{
+    ViewBag.Title = "Journals import result";
+}
+
+<div class="container main">
+
+    <p>
+        @Model.NumberOfNewJournals new journals were imported.
+    </p>
+
+    <p>
+        @Model.NumberOfImportedJournals journals have been updated.
+    </p>
+</div>

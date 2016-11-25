@@ -31,6 +31,7 @@ namespace QOAM.Website.Controllers
     {
         private const string FoundISSNsSessionKey = "FoundISSNs";
         private const string NotFoundISSNsSessionKey = "NotFoundISSNs";
+        const string ImportResultSessionKey = "ImportResult";
         private const int BlockedIssnsCount = 20;
 
         private readonly JournalsImport journalsImport;
@@ -112,6 +113,33 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
+        [HttpGet, Route("manageJournalTocs")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult ManageJournalTocs()
+        {
+            return View(new JournalTocsImportViewModel());
+        }
+
+        [HttpPost, Route("manageJournalTocs")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult ManageJournalTocs(JournalTocsImportViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var journals = GetJournalsFromSource(JournalsImportSource.JournalTOCs, model.FetchMode);
+
+                var importMode = model.FetchMode == JournalTocsFetchMode.Setup ? JournalsImportMode.InsertAndUpdate : JournalsImportMode.UpdateOnly;
+                var result = journalsImport.ImportJournals(journals, importMode);
+
+                Session[ImportResultSessionKey] = result;
+
+                return RedirectToAction("JournalTocsImported");
+            }
+
+            return View(model);
+        }
+
         [HttpGet, Route("imported")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Imported()
@@ -123,6 +151,15 @@ namespace QOAM.Website.Controllers
                         };
 
             return this.View(model);
+        }
+
+        [HttpGet, Route("journalTocsImported")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult JournalTocsImported()
+        {
+            var model = Session[ImportResultSessionKey] as JournalsImportResult;
+
+            return View(model);
         }
 
         [HttpGet, Route("update")]
@@ -707,16 +744,16 @@ namespace QOAM.Website.Controllers
             return issns.ToLinesSet();
         }
 
-        private IList<Journal> GetJournalsFromSource(JournalsImportSource importSource)
+        IList<Journal> GetJournalsFromSource(JournalsImportSource importSource, JournalTocsFetchMode action = JournalTocsFetchMode.Update)
         {
             switch (importSource)
             {
                 case JournalsImportSource.DOAJ:
-                    return this.doajImport.GetJournals();
+                    return doajImport.GetJournals();
                 case JournalsImportSource.Ulrichs:
-                    return this.ulrichsImport.GetJournals(UlrichsImport.UlrichsJournalType.All);
+                    return ulrichsImport.GetJournals(UlrichsImport.UlrichsJournalType.All);
                     case JournalsImportSource.JournalTOCs:
-                    return _journalsTocImport.DownloadJournals();
+                    return _journalsTocImport.DownloadJournals(action);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(importSource));
             }

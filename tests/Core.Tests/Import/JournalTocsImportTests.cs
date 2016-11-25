@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
 using Moq;
 using QOAM.Core.Import;
 using QOAM.Core.Repositories;
@@ -27,7 +25,7 @@ namespace QOAM.Core.Tests.Import
 
 
             var journalTocsImport = CreateJournalTocsImport();
-            _client.Setup(x => x.DownloadJournals("update")).Returns(new List<string> { GetJournalTocsFirst500Xml(), GetJournalTocsNextXml() });
+            _client.Setup(x => x.DownloadJournals(JournalTocsFetchMode.Update)).Returns(new List<string> { GetJournalTocsFirst500Xml(), GetJournalTocsNextXml() });
             _issnRepo.Setup(x => x.All).Returns(blockedIssns);
 
             // Act
@@ -36,33 +34,6 @@ namespace QOAM.Core.Tests.Import
             // Assert
             Assert.Equal(1000, journals.Count);
             _issnRepo.Verify(x => x.All, Times.Once());
-        }
-
-        private static Journal GetExpectedJournal()
-        {
-            return new Journal
-                   {
-                       Title = "Postepy Rehabilitacji",
-                       ISSN = "0860-6161",
-                       Link = "http://www.asla.org.au/pubs/access/access.htm",
-                       Publisher = new Publisher { Name = "L E D S Publishing Co. Inc." },
-                       Country = new Country { Name = "Poland" },
-                       Languages = new List<Language> { new Language { Name = "English" }, new Language { Name = "Polish" } },
-                       Subjects = new List<Subject> { new Subject { Name = "medical sciences-physical medicine and rehabilitation" } },
-                       OpenAccess = false
-                   };
-        }
-
-        private static void AssertEqualJournal(Journal expectedJournal, Journal parsedJournal)
-        {
-            Assert.Equal(expectedJournal.Title, parsedJournal.Title);
-            Assert.Equal(expectedJournal.ISSN, parsedJournal.ISSN);
-            Assert.Equal(expectedJournal.Link, parsedJournal.Link);
-            Assert.Equal(expectedJournal.Publisher.Name, parsedJournal.Publisher.Name);
-            Assert.Equal(expectedJournal.Country.Name, parsedJournal.Country.Name);
-            Assert.Equal(expectedJournal.Languages.Select(l => l.Name), parsedJournal.Languages.Select(l => l.Name));
-            Assert.Equal(expectedJournal.Subjects.Select(s => s.Name), parsedJournal.Subjects.Select(s => s.Name));
-            Assert.Equal(expectedJournal.OpenAccess, parsedJournal.OpenAccess);
         }
 
         static string GetJournalTocsFirst500Xml()
