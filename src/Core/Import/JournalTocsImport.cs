@@ -46,7 +46,8 @@ namespace QOAM.Core.Import
                 Publisher = ParsePublisher(recordElement),
                 Subjects = ParseSubjects(recordElement),
                 DataSource = JournalsImportSource.JournalTOCs.ToString(),
-                OpenAccess = IsOpenAccessJournal(recordElement)
+                OpenAccess = IsOpenAccessJournal(recordElement),
+                Country = new Country { Name = "" }
             };
 
             yield return regularJournal;
