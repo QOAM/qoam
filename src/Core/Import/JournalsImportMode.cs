@@ -7,10 +7,4 @@
         InsertAndUpdate,
         UpdateSealOnly,
     }
-
-    public enum JournalTocsFetchMode
-    {
-        Setup,
-        Update
-    }
 }

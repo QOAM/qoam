@@ -36,6 +36,9 @@
             builder.RegisterType<UlrichsClient>().SingleInstance();
             builder.RegisterType<UlrichsImport>().SingleInstance();
             builder.RegisterType<UlrichsCache>().SingleInstance();
+            builder.RegisterType<JournalTocsClient>().As<IJournalTocsClient>().SingleInstance();
+            builder.RegisterType<SystemWebClientFactory>().As<IWebClientFactory>().SingleInstance();
+            builder.RegisterType<JournalTocsImport>().SingleInstance();
         }
 
         private static void RegisterConfigurationSections(ContainerBuilder builder)
@@ -44,6 +47,7 @@
             builder.Register(c => c.Resolve<ImportSettings>().General).SingleInstance();
             builder.Register(c => c.Resolve<ImportSettings>().Doaj).SingleInstance();
             builder.Register(c => c.Resolve<ImportSettings>().Ulrichs).SingleInstance();
+            builder.Register(c => c.Resolve<ImportSettings>().JournalTocs).SingleInstance();
         }
 
         private static void RegisterMiscellaneousComponents(ContainerBuilder builder)
