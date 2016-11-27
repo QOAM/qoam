@@ -46,5 +46,22 @@
             // Assert
             Assert.NotNull(ulrichsImport);
         }
+
+        [Fact]
+        public void JournalTocsImportComponentRegistered()
+        {
+            // Arrange
+            var container = DependencyInjectionConfig.RegisterComponents();
+
+            // Act
+            var journalTocsImport = container.Resolve<JournalTocsImport>();
+            var journalTocsClient = container.Resolve<IJournalTocsClient>();
+            var webClientFactory = container.Resolve<IWebClientFactory>();
+
+            // Assert
+            Assert.NotNull(journalTocsImport);
+            Assert.NotNull(journalTocsClient);
+            Assert.NotNull(webClientFactory);
+        }
     }
 }

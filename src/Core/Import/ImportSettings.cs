@@ -1,48 +1,26 @@
-﻿namespace QOAM.Core.Import
-{
-    using System.Configuration;
+﻿using System.Configuration;
 
+namespace QOAM.Core.Import
+{
     public class ImportSettings : ConfigurationSectionGroup
     {
-        private const string GeneralSectionName = "general";
-        private const string UlrichsSectionName = "ulrichs";
-        private const string DoajSectionName = "doaj";
-        
-        private static readonly ImportSettings SettingsInstance = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).GetSectionGroup("import") as ImportSettings;
+        const string GeneralSectionName = "general";
+        const string UlrichsSectionName = "ulrichs";
+        const string DoajSectionName = "doaj";
+        const string JournalTocsSectionName = "journaltocs";
 
-        public static ImportSettings Current
-        {
-            get
-            {
-                return SettingsInstance;
-            }
-        }
+        public static ImportSettings Current { get; } = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).GetSectionGroup("import") as ImportSettings;
 
         [ConfigurationProperty(GeneralSectionName)]
-        public GeneralImportSettings General
-        {
-            get
-            {
-                return (GeneralImportSettings)this.Sections[GeneralSectionName];
-            }
-        }
+        public GeneralImportSettings General => (GeneralImportSettings) Sections[GeneralSectionName];
 
         [ConfigurationProperty(UlrichsSectionName)]
-        public UlrichsSettings Ulrichs
-        {
-            get
-            {
-                return (UlrichsSettings)this.Sections[UlrichsSectionName];
-            }
-        }
+        public UlrichsSettings Ulrichs => (UlrichsSettings) Sections[UlrichsSectionName];
 
         [ConfigurationProperty(DoajSectionName)]
-        public DoajSettings Doaj
-        {
-            get
-            {
-                return (DoajSettings)this.Sections[DoajSectionName];
-            }
-        }
+        public DoajSettings Doaj => (DoajSettings) Sections[DoajSectionName];
+
+        [ConfigurationProperty(JournalTocsSectionName)]
+        public JournalTocsSettings JournalTocs => (JournalTocsSettings) Sections[JournalTocsSectionName];
     }
 }
