@@ -34,14 +34,10 @@
         public DbSet<Question> Questions { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<BlockedISSN> BlockedISSNs { get; set; }
+        public DbSet<Corner> Corners { get; set; }
+        public DbSet<CornerJournal> CornerJournals { get; set; }
 
-        public ObjectContext ObjectContext
-        {
-            get
-            {
-                return ((IObjectContextAdapter)this).ObjectContext;
-            }
-        }
+        public ObjectContext ObjectContext => ((IObjectContextAdapter)this).ObjectContext;
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -56,6 +52,9 @@
             modelBuilder.Entity<ValuationScoreCard>().HasRequired(s => s.Journal).WithMany(u => u.ValuationScoreCards).WillCascadeOnDelete(true);
             modelBuilder.Entity<InstitutionJournal>().HasRequired(s => s.UserProfile).WithMany(u => u.InstitutionJournalPrices).WillCascadeOnDelete(true);
             modelBuilder.Entity<InstitutionJournal>().HasRequired(s => s.Journal).WithMany(u => u.InstitutionJournalPrices).WillCascadeOnDelete(true);
+            modelBuilder.Entity<CornerJournal>().HasRequired(s => s.Journal).WithMany(u => u.CornerJournals).WillCascadeOnDelete(true);
+            modelBuilder.Entity<CornerJournal>().HasRequired(s => s.Corner).WithMany(u => u.CornerJournals).WillCascadeOnDelete(true);
+            modelBuilder.Entity<Corner>().HasRequired(s => s.CornerAdmin).WithMany(u => u.Corners).WillCascadeOnDelete(true);
         }
     }
 }

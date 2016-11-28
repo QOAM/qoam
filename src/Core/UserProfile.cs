@@ -43,5 +43,6 @@
         public virtual ICollection<BaseJournalPrice> JournalPrices { get; set; }
         public virtual ICollection<BaseScoreCard> BaseScoreCards { get; set; }
         public virtual ICollection<ValuationScoreCard> ValuationScoreCards { get; set; }
+        public virtual ICollection<Corner>  Corners { get; set; }
     }
 }

@@ -165,6 +165,8 @@
     <Compile Include="Cleanup\ICleanup.cs" />
     <Compile Include="Cleanup\CleanupSettings.cs" />
     <Compile Include="Cleanup\InactiveProfilesCleanup.cs" />
+    <Compile Include="Corner.cs" />
+    <Compile Include="CornerJournal.cs" />
     <Compile Include="Helpers\ExceptionExtensions.cs" />
     <Compile Include="Helpers\FilterExtensions.cs" />
     <Compile Include="Helpers\ValidatorExtensions.cs" />
@@ -189,6 +191,7 @@
     <Compile Include="Import\Licences\LicenseFileImporter.cs" />
     <Compile Include="Import\Licences\LicenseInfo.cs" />
     <Compile Include="Import\Licences\UniversityLicense.cs" />
+    <Compile Include="Import\QOAMcorners\CornerFileImporter.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionLinksFileImporter.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionPageLink.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionPageLinkEntityConverter.cs" />
@@ -280,6 +283,10 @@
     <Compile Include="Migrations\201611221558190_New-LastUpdatedOn-column.Designer.cs">
       <DependentUpon>201611221558190_New-LastUpdatedOn-column.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611281437330_QOAMcorners.cs" />
+    <Compile Include="Migrations\201611281437330_QOAMcorners.Designer.cs">
+      <DependentUpon>201611281437330_QOAMcorners.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\Filters\UserJournalFilter.cs" />
@@ -316,6 +323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611221558190_New-LastUpdatedOn-column.resx">
       <DependentUpon>201611221558190_New-LastUpdatedOn-column.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611281437330_QOAMcorners.resx">
+      <DependentUpon>201611281437330_QOAMcorners.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />
