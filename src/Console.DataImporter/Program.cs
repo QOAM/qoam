@@ -21,9 +21,8 @@
             try
             {
                 var source = GetImportType(args);
-                var fetchMode = GetFetchMode(source, args);
 
-                ImportJournals(source, GetImportMode(source, args, fetchMode), fetchMode, GetJournalUpdateProperties(args));
+                ImportJournals(source, GetImportMode(source, args), GetFetchMode(source, args), GetJournalUpdateProperties(args));
             }
             catch (Exception ex)
             {
@@ -69,10 +68,10 @@
             return (JournalsImportSource)Enum.Parse(typeof(JournalsImportSource), args[0], true);
         }
 
-        public static JournalsImportMode GetImportMode(JournalsImportSource source, IList<string> args, JournalTocsFetchMode? fetchMode = null)
+        public static JournalsImportMode GetImportMode(JournalsImportSource source, IList<string> args)
         {
-            if (source == JournalsImportSource.JournalTOCs && fetchMode != null)
-                return fetchMode == JournalTocsFetchMode.Setup ? JournalsImportMode.InsertAndUpdate : JournalsImportMode.UpdateOnly;
+            if (source == JournalsImportSource.JournalTOCs)
+                return JournalsImportMode.InsertAndUpdate;
 
             if (args.Count < 2)
             {

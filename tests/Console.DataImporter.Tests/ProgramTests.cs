@@ -91,8 +91,7 @@
         [Theory]
         [InlineData(JournalsImportSource.Ulrichs)]
         [InlineData(JournalsImportSource.DOAJ)]
-        [InlineData(JournalsImportSource.JournalTOCs)]
-        public void GetImportModeWithEmptyArgsReturnsInsertOnlyJournalsImportMode(JournalsImportSource source)
+        public void GetImportModeWithEmptyArgsReturnsInsertOnlyJournalsImportModeForDoajAndUlrichs(JournalsImportSource source)
         {
             // Arrange
             var args = new List<string>();
@@ -169,23 +168,13 @@
         }
 
         [Fact]
-        public void GetImportMode_when_source_is_JournalTocs_and_fetchMode_is_setup_returns_InsertAndUpdate()
+        public void GetImportMode_when_source_is_JournalTocs_returns_InsertAndUpdate()
         {
-            var args = new List<string> { "JournalTocs", "setup" };
+            var args = new List<string> { "JournalTocs", "blabla" };
             
-            var journalsImportMode = Program.GetImportMode(JournalsImportSource.JournalTOCs, args, JournalTocsFetchMode.Setup);
+            var journalsImportMode = Program.GetImportMode(JournalsImportSource.JournalTOCs, args);
             
             Assert.Equal(JournalsImportMode.InsertAndUpdate, journalsImportMode);
-        }
-
-        [Fact]
-        public void GetImportMode_when_source_is_JournalTocs_and_fetchMode_is_update_returns_UpdateOnly()
-        {
-            var args = new List<string> { "JournalTocs", "setup" };
-
-            var journalsImportMode = Program.GetImportMode(JournalsImportSource.JournalTOCs, args, JournalTocsFetchMode.Update);
-
-            Assert.Equal(JournalsImportMode.UpdateOnly, journalsImportMode);
         }
 
         [Theory]
