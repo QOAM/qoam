@@ -21,6 +21,7 @@
             this.GovernanceScore = new JournalCategoryScore();
             this.ProcessScore = new JournalCategoryScore();
             this.ValuationScore = new JournalCategoryScore();
+            CornerJournals = new List<CornerJournal>();
         }
 
         [Required]
@@ -102,5 +103,6 @@
         public virtual ICollection<BaseScoreCard> BaseScoreCards { get; set; }
         public virtual ICollection<ValuationScoreCard> ValuationScoreCards { get; set; }
         public virtual ICollection<Subject> Subjects { get; set; }
+        public virtual ICollection<CornerJournal> CornerJournals { get; set; }
     }
 }
