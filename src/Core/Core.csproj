@@ -177,6 +177,7 @@
     <Compile Include="Import\IBulkImporter.cs" />
     <Compile Include="Import\IFileImporter.cs" />
     <Compile Include="Import\Import.cs" />
+    <Compile Include="Import\Institutions\CornerEntityConverter.cs" />
     <Compile Include="Import\Institutions\InstitutionEntityConverter.cs" />
     <Compile Include="Import\Institutions\InstitutionFileImporter.cs" />
     <Compile Include="Import\Invitations\AuthorToInvite.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Import\Licences\LicenseInfo.cs" />
     <Compile Include="Import\Licences\UniversityLicense.cs" />
     <Compile Include="Import\QOAMcorners\CornerFileImporter.cs" />
+    <Compile Include="Import\QOAMcorners\CornerToImport.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionLinksFileImporter.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionPageLink.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionPageLinkEntityConverter.cs" />

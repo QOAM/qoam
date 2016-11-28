@@ -142,6 +142,7 @@
     <Compile Include="Helpers\StringExtensionsTests.cs" />
     <Compile Include="Helpers\ValidatorExtensionsTests.cs" />
     <Compile Include="Import\Corners\CornerEntityConverterTests.cs" />
+    <Compile Include="Import\Corners\Stubs\CornerStubs.cs" />
     <Compile Include="Import\InvitationModule\ImportAuthorEntityConverterTests.cs" />
     <Compile Include="Import\InvitationModule\InvitationFileImporterTests.cs" />
     <Compile Include="Import\InvitationModule\Stubs\InvitationStubs.cs" />
