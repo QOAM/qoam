@@ -56,6 +56,24 @@
         }
 
         [Theory]
+        [InlineData("JournalTocs")]
+        [InlineData("JournalTOCs")]
+        [InlineData("JOURNALTOCS")]
+        [InlineData("journaltocs")]
+        [InlineData(" JournalTocs ")]
+        public void GetImportTypeWithFirstArgumentIsJournalTocsReturnsJournalTocsJournalsImportSource(string journalTocsArgument)
+        {
+            // Arrange
+            var args = new List<string> { journalTocsArgument };
+
+            // Actur
+            var journalsImportSource = Program.GetImportType(args);
+
+            // Assert
+            Assert.Equal(JournalsImportSource.JournalTOCs, journalsImportSource);
+        }
+
+        [Theory]
         [InlineData("invalid")]
         [InlineData("_doaj_")]
         [InlineData("#ulrichs#")]
@@ -70,14 +88,16 @@
             Assert.Throws<ArgumentException>(() => Program.GetImportType(args));
         }
         
-        [Fact]
-        public void GetImportModeWithEmptyArgsReturnsInsertOnlyJournalsImportMode()
+        [Theory]
+        [InlineData(JournalsImportSource.Ulrichs)]
+        [InlineData(JournalsImportSource.DOAJ)]
+        public void GetImportModeWithEmptyArgsReturnsInsertOnlyJournalsImportModeForDoajAndUlrichs(JournalsImportSource source)
         {
             // Arrange
             var args = new List<string>();
 
             // Act
-            var journalsImportMode = Program.GetImportMode(args);
+            var journalsImportMode = Program.GetImportMode(source, args);
 
             // Assert
             Assert.Equal(JournalsImportMode.InsertOnly, journalsImportMode);
@@ -90,7 +110,7 @@
             var args = new List<string> { "Ulrichs" };
 
             // Act
-            var journalsImportMode = Program.GetImportMode(args);
+            var journalsImportMode = Program.GetImportMode(JournalsImportSource.Ulrichs, args);
 
             // Assert
             Assert.Equal(JournalsImportMode.InsertOnly, journalsImportMode);
@@ -107,7 +127,7 @@
             var args = new List<string> { "Ulrichs", insertOnlyArgument };
 
             // Act
-            var journalsImportMode = Program.GetImportMode(args);
+            var journalsImportMode = Program.GetImportMode(JournalsImportSource.Ulrichs, args);
 
             // Assert
             Assert.Equal(JournalsImportMode.InsertOnly, journalsImportMode);
@@ -124,7 +144,7 @@
             var args = new List<string> { "Ulrichs", updateOnlyArgument };
 
             // Act
-            var journalsImportMode = Program.GetImportMode(args);
+            var journalsImportMode = Program.GetImportMode(JournalsImportSource.Ulrichs, args);
 
             // Assert
             Assert.Equal(JournalsImportMode.UpdateOnly, journalsImportMode);
@@ -141,9 +161,19 @@
             var args = new List<string> { "Ulrichs", insertAndUpdateArgument };
 
             // Actur
-            var journalsImportMode = Program.GetImportMode(args);
+            var journalsImportMode = Program.GetImportMode(JournalsImportSource.Ulrichs, args);
 
             // Assert
+            Assert.Equal(JournalsImportMode.InsertAndUpdate, journalsImportMode);
+        }
+
+        [Fact]
+        public void GetImportMode_when_source_is_JournalTocs_returns_InsertAndUpdate()
+        {
+            var args = new List<string> { "JournalTocs", "blabla" };
+            
+            var journalsImportMode = Program.GetImportMode(JournalsImportSource.JournalTOCs, args);
+            
             Assert.Equal(JournalsImportMode.InsertAndUpdate, journalsImportMode);
         }
 
@@ -160,7 +190,45 @@
             // Act
 
             // Assert
-            Assert.Throws<ArgumentException>(() => Program.GetImportMode(args));
+            Assert.Throws<ArgumentException>(() => Program.GetImportMode(JournalsImportSource.Ulrichs, args));
+        }
+
+        [Fact]
+        public void GetFetchMode_returns_null_when_source_is_not_JournalTocs()
+        {
+            var args = new List<string> { "Ulrichs", "bla" };
+
+            var fetchMode = Program.GetFetchMode(JournalsImportSource.Ulrichs, args);
+
+            Assert.Null(fetchMode);
+        }
+
+        [Theory]
+        [InlineData("update")]
+        [InlineData("Update")]
+        [InlineData("UPDATE")]
+        [InlineData(" Update ")]
+        public void GetFetchMode_is_parsed_as_update_when_source_is_JournalTocs(string updateArgument)
+        {
+            var args = new List<string> { "JournalTocs", updateArgument };
+
+            var fetchMode = Program.GetFetchMode(JournalsImportSource.JournalTOCs, args);
+
+            Assert.Equal(JournalTocsFetchMode.Update, fetchMode);
+        }
+
+        [Theory]
+        [InlineData("setup")]
+        [InlineData("Setup")]
+        [InlineData("SETUP")]
+        [InlineData(" Setup ")]
+        public void GetFetchMode_is_parsed_as_Setup_when_source_is_JournalTocs(string setupArgument)
+        {
+            var args = new List<string> { "JournalTocs", setupArgument };
+
+            var fetchMode = Program.GetFetchMode(JournalsImportSource.JournalTOCs, args);
+
+            Assert.Equal(JournalTocsFetchMode.Setup, fetchMode);
         }
 
         [Theory]

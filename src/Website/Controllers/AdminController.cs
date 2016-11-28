@@ -31,6 +31,7 @@ namespace QOAM.Website.Controllers
     {
         private const string FoundISSNsSessionKey = "FoundISSNs";
         private const string NotFoundISSNsSessionKey = "NotFoundISSNs";
+        const string ImportResultSessionKey = "ImportResult";
         private const int BlockedIssnsCount = 20;
 
         private readonly JournalsImport journalsImport;
@@ -44,12 +45,14 @@ namespace QOAM.Website.Controllers
         readonly IBulkImporter<SubmissionPageLink> _bulkImporter;
         readonly IBulkImporter<Institution> _institutionImporter;
         readonly Regex _domainRegex = new Regex(@"(?<=(http[s]?:\/\/(.*?)[.?]))\b([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b", RegexOptions.Compiled);
+        readonly JournalTocsImport _journalsTocImport;
 
-        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter, IBulkImporter<Institution> institutionImporter )
+        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalTocsImport journalsTocImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter, IBulkImporter<Institution> institutionImporter)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalsImport, nameof(journalsImport));
             Requires.NotNull(ulrichsImport, nameof(ulrichsImport));
+            Requires.NotNull(journalsTocImport, nameof(journalsTocImport));
             Requires.NotNull(doajImport, nameof(doajImport));
             Requires.NotNull(journalsExport, nameof(journalsExport));
             Requires.NotNull(journalRepository, nameof(journalRepository));
@@ -61,6 +64,7 @@ namespace QOAM.Website.Controllers
             this.journalsImport = journalsImport;
             this.ulrichsImport = ulrichsImport;
             this.doajImport = doajImport;
+            _journalsTocImport = journalsTocImport;
             this.journalsExport = journalsExport;
             this.journalRepository = journalRepository;
             this.institutionRepository = institutionRepository;
@@ -109,6 +113,33 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
+        [HttpGet, Route("manageJournalTocs")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult ManageJournalTocs()
+        {
+            return View(new JournalTocsImportViewModel());
+        }
+
+        [HttpPost, Route("manageJournalTocs")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult ManageJournalTocs(JournalTocsImportViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var journals = GetJournalsFromSource(JournalsImportSource.JournalTOCs, model.FetchMode);
+
+                var importMode = model.FetchMode == JournalTocsFetchMode.Setup ? JournalsImportMode.InsertAndUpdate : JournalsImportMode.UpdateOnly;
+                var result = journalsImport.ImportJournals(journals, importMode);
+
+                Session[ImportResultSessionKey] = result;
+
+                return RedirectToAction("JournalTocsImported");
+            }
+
+            return View(model);
+        }
+
         [HttpGet, Route("imported")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult Imported()
@@ -120,6 +151,15 @@ namespace QOAM.Website.Controllers
                         };
 
             return this.View(model);
+        }
+
+        [HttpGet, Route("journalTocsImported")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult JournalTocsImported()
+        {
+            var model = Session[ImportResultSessionKey] as JournalsImportResult;
+
+            return View(model);
         }
 
         [HttpGet, Route("update")]
@@ -704,14 +744,16 @@ namespace QOAM.Website.Controllers
             return issns.ToLinesSet();
         }
 
-        private IList<Journal> GetJournalsFromSource(JournalsImportSource importSource)
+        IList<Journal> GetJournalsFromSource(JournalsImportSource importSource, JournalTocsFetchMode action = JournalTocsFetchMode.Update)
         {
             switch (importSource)
             {
                 case JournalsImportSource.DOAJ:
-                    return this.doajImport.GetJournals();
+                    return doajImport.GetJournals();
                 case JournalsImportSource.Ulrichs:
-                    return this.ulrichsImport.GetJournals(UlrichsImport.UlrichsJournalType.All);
+                    return ulrichsImport.GetJournals(UlrichsImport.UlrichsJournalType.All);
+                    case JournalsImportSource.JournalTOCs:
+                    return _journalsTocImport.DownloadJournals(action);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(importSource));
             }

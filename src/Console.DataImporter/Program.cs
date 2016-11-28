@@ -20,7 +20,9 @@
         {
             try
             {
-                ImportJournals(GetImportType(args), GetImportMode(args), GetJournalUpdateProperties(args));
+                var source = GetImportType(args);
+
+                ImportJournals(source, GetImportMode(source, args), GetFetchMode(source, args), GetJournalUpdateProperties(args));
             }
             catch (Exception ex)
             {
@@ -28,27 +30,29 @@
             }
         }
 
-        private static void ImportJournals(JournalsImportSource importSource, JournalsImportMode importMode, ISet<JournalUpdateProperty> journalUpdateProperties)
+        private static void ImportJournals(JournalsImportSource importSource, JournalsImportMode importMode, JournalTocsFetchMode? action, ISet<JournalUpdateProperty> journalUpdateProperties)
         {
             Logger.Info("Import source: {0}", importSource);
             Logger.Info("Import mode: {0}", importMode);
             Logger.Info("Importing journals...");
 
             var journalsImport = Container.Resolve<JournalsImport>();
-            var importResult = journalsImport.ImportJournals(GetJournalsToImport(importSource), importMode, journalUpdateProperties);
+            var importResult = journalsImport.ImportJournals(GetJournalsToImport(importSource, action), importMode, journalUpdateProperties);
 
             Logger.Info("Imported {0} journals total", importResult.NumberOfImportedJournals);
             Logger.Info("Imported {0} new journals", importResult.NumberOfNewJournals);
         }
 
-        private static IList<Journal> GetJournalsToImport(JournalsImportSource importSource)
+        private static IList<Journal> GetJournalsToImport(JournalsImportSource importSource, JournalTocsFetchMode? action = JournalTocsFetchMode.Update)
         {
             switch (importSource)
             {
                 case JournalsImportSource.DOAJ:
                     return Container.Resolve<DoajImport>().GetJournals();    
                 case JournalsImportSource.Ulrichs:
-                    return Container.Resolve<UlrichsImport>().GetJournals(UlrichsImport.UlrichsJournalType.OpenAccess);    
+                    return Container.Resolve<UlrichsImport>().GetJournals(UlrichsImport.UlrichsJournalType.OpenAccess);
+                case JournalsImportSource.JournalTOCs:
+                    return Container.Resolve<JournalTocsImport>().DownloadJournals(action.GetValueOrDefault(JournalTocsFetchMode.Update));
                 default:
                     throw new ArgumentOutOfRangeException(nameof(importSource));
             }
@@ -64,14 +68,25 @@
             return (JournalsImportSource)Enum.Parse(typeof(JournalsImportSource), args[0], true);
         }
 
-        public static JournalsImportMode GetImportMode(IList<string> args)
+        public static JournalsImportMode GetImportMode(JournalsImportSource source, IList<string> args)
         {
+            if (source == JournalsImportSource.JournalTOCs)
+                return JournalsImportMode.InsertAndUpdate;
+
             if (args.Count < 2)
             {
                 return JournalsImportMode.InsertOnly;
             }
 
             return (JournalsImportMode)Enum.Parse(typeof(JournalsImportMode), args[1], true);
+        }
+
+        public static JournalTocsFetchMode? GetFetchMode(JournalsImportSource source, IList<string> args)
+        {
+            if(source != JournalsImportSource.JournalTOCs || args.Count < 2)
+                return null;
+
+            return (JournalTocsFetchMode) Enum.Parse(typeof(JournalTocsFetchMode), args[1], true);
         }
 
         public static ISet<JournalUpdateProperty> GetJournalUpdateProperties(IList<string> args)

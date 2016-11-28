@@ -186,6 +186,7 @@
                     }
                 }
 
+                currentJournal.LastUpdatedOn = DateTime.Now;
                 this.journalRepository.InsertOrUpdate(currentJournal);
             }
 
@@ -196,11 +197,12 @@
         {
             foreach (var journal in newJournalsChunk)
             {
-                journal.Country = countries.First(p => string.Equals(p.Name, journal.Country.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase));
+                journal.Country = countries.First(p => string.Equals(p.Name, journal.Country?.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase));
                 journal.Publisher = publishers.First(p => string.Equals(p.Name, journal.Publisher.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase));
                 journal.Languages = journal.Languages.Select(l => languages.First(a => string.Equals(a.Name, l.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase))).ToSet();
                 journal.Subjects = journal.Subjects.Select(s => subjects.First(u => string.Equals(u.Name, s.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase))).ToSet();
                 journal.DateAdded = DateTime.Now;
+                journal.LastUpdatedOn = DateTime.Now;
 
                 this.journalRepository.InsertOrUpdate(journal);
             }
@@ -229,7 +231,10 @@
         private IList<string> GetNewCountryNames(IEnumerable<Journal> journals)
         {
             var currentCountryNames = this.countryRepository.All.Select(c => c.Name.Trim().ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
-            var importCountryNames = journals.Select(j => j.Country.Name.Trim().ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
+            var importCountryNames = journals.Select(j => j.Country?.Name.Trim().ToLowerInvariant()).Where(c => c != null).ToSet(StringComparer.InvariantCultureIgnoreCase);
+
+            if(!importCountryNames.Any())
+                return new List<string>();
 
             return importCountryNames.Except(currentCountryNames, StringComparer.InvariantCultureIgnoreCase).ToList();
         }
@@ -255,7 +260,7 @@
         private IList<string> GetNewLanguageNames(IEnumerable<Journal> journals)
         {
             var currentLanguageNames = this.languageRepository.All.Select(c => c.Name.ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
-            var importLanguageNames = journals.SelectMany(j => j.Languages).Select(l => l.Name.ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
+            var importLanguageNames = journals.SelectMany(j => j.Languages).Select(l => l.Name?.ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
 
             return importLanguageNames.Except(currentLanguageNames, StringComparer.InvariantCultureIgnoreCase).ToList();
         }

@@ -13,8 +13,6 @@
 
     public class UlrichsImport : Import
     {
-        private const string MissingPublisherName = "<none indicated>";
-
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         private readonly UlrichsClient ulrichsClient;
