@@ -289,10 +289,16 @@
     <Compile Include="Migrations\201611281437330_QOAMcorners.Designer.cs">
       <DependentUpon>201611281437330_QOAMcorners.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611291514157_LastVisited-Column-On-Corner.cs" />
+    <Compile Include="Migrations\201611291514157_LastVisited-Column-On-Corner.Designer.cs">
+      <DependentUpon>201611291514157_LastVisited-Column-On-Corner.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
+    <Compile Include="Repositories\CornerRepository.cs" />
     <Compile Include="Repositories\Filters\UserJournalFilter.cs" />
     <Compile Include="Repositories\IBlockedISSNRepository.cs" />
+    <Compile Include="Repositories\ICornerRepository.cs" />
     <Compile Include="Repositories\IUserJournalRepository.cs" />
     <Compile Include="Repositories\UserJournalRepository.cs" />
     <Compile Include="Repositories\IValuationJournalPriceRepository.cs" />
@@ -328,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611281437330_QOAMcorners.resx">
       <DependentUpon>201611281437330_QOAMcorners.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611291514157_LastVisited-Column-On-Corner.resx">
+      <DependentUpon>201611291514157_LastVisited-Column-On-Corner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />

@@ -7,9 +7,6 @@ using QOAM.Website.ViewModels.Journals;
 
 namespace QOAM.Website.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
     [RequireHttps]
     [RoutePrefix("myqoam")]
     [Authorize]

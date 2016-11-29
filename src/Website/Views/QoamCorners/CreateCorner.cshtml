@@ -1,7 +1,7 @@
-﻿@model QOAM.Website.ViewModels.Journals.InstitutionalPricesViewModel
+﻿@model QOAM.Website.ViewModels.QoamCorners.CornerImportViewModel
 
 @{
-    ViewBag.Title = "Create a new Q";
+    ViewBag.Title = "Create new QOAMcorners";
 }
 
 <div class="container main">
@@ -9,10 +9,10 @@
     <h2>@ViewBag.Title</h2>
 
     <p>
-        Select an Excel file containing multiple Journal Licenses for Institutions. Importing might take a while, depending on the size of the file.
+        Select an Excel file containing one or more QOAMcorner definitions (one per column).
     </p>
-    <br/>
-    @using (Html.BeginForm("BulkImportInstitutionalPrices", "Journals", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+    <br />
+    @using (Html.BeginForm("CreateCorner", "QoamCorners", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 

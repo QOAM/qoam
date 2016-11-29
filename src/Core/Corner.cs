@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace QOAM.Core
 {
@@ -11,6 +12,7 @@ namespace QOAM.Core
         public string Name { get; set; }
         public int NumberOfVisitors { get; set; }
         public int UserProfileId { get; set; }
+        public DateTime LastVisitedOn { get; set; }
 
         public virtual ICollection<CornerJournal> CornerJournals { get; set; }
         public virtual UserProfile CornerAdmin { get; set; }

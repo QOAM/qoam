@@ -241,6 +241,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\MyQoamController.cs" />
+    <Compile Include="Controllers\QoamCornersController.cs" />
     <Compile Include="Helpers\EmailValidator.cs" />
     <Compile Include="Helpers\HttpPostedFileExtensionsAttribute.cs" />
     <Compile Include="Resources\Questions.Designer.cs">
@@ -328,6 +329,9 @@
     <Compile Include="ViewModels\Profiles\EditViewModel.cs" />
     <Compile Include="ViewModels\Profiles\IndexViewModel.cs" />
     <Compile Include="ViewModels\Profiles\ScoreCardsViewModel.cs" />
+    <Compile Include="ViewModels\QoamCorners\CornerImportViewModel.cs" />
+    <Compile Include="ViewModels\QoamCorners\CornersImportedViewModel.cs" />
+    <Compile Include="ViewModels\QoamCorners\CornersIndexViewModel.cs" />
     <Compile Include="ViewModels\Score\AuthorsInvitedViewModel.cs" />
     <Compile Include="ViewModels\Score\ConversionExtensions.cs" />
     <Compile Include="ViewModels\Journals\IndexViewModel.cs" />
@@ -946,6 +950,9 @@
     <None Include="Ulrichs.config" />
     <Content Include="Views\Admin\ManageJournalTocs.cshtml" />
     <Content Include="Views\Admin\JournalTocsImported.cshtml" />
+    <Content Include="Views\QoamCorners\CreateCorner.cshtml" />
+    <Content Include="Views\QoamCorners\CornersImported.cshtml" />
+    <Content Include="Views\QoamCorners\Index.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
