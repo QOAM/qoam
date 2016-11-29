@@ -1,0 +1,134 @@
+﻿@using System.Web.Mvc.Html5
+@using System.Web.Optimization
+@using PagedList.Mvc
+@using QOAM.Core
+@using QOAM.Website.Helpers
+@using QOAM.Website.Models
+@model QOAM.Website.ViewModels.QoamCorners.CornersIndexViewModel
+
+@{
+    ViewBag.Title = "Institutions";
+}
+
+<div class="container main">
+    <div class="row side">
+        <div class="col-md-3">
+            <div id="filter" class="well">
+                <h3>Avialable QOAMcorners</h3>
+
+                @using (Html.BeginForm("Index", "QoamCorners", FormMethod.Get))
+                {
+                    <fieldset>
+                        <legend>Visit a QOAMcorner</legend>
+
+                        <div class="form-group editor-label-placeholder">
+                            @Html.LabelFor(m => m.Name)
+                        </div>
+                        @*<div class="form-group">
+                                @Html.Html5TextBoxFor(m => m.Name, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by name")
+                                @Html.ValidationMessageFor(m => m.Name, null, new { @class = "control-label" })
+                            </div>*@
+
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.Corner, Model.Corners, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Corner, null, new { @class = "control-label" })
+                        </div>
+
+                        <p>
+                            <input type="submit" value="Open" class="btn btn-primary" />
+                        </p>
+                    </fieldset>
+                }
+
+            </div>
+        </div>
+
+        <div class="col-md-9">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>@Model.Journals.TotalItemCount journals</h3>
+                </div>
+                <div class="col-md-9 text-right" style="margin-top: 40px;">
+                    @*<div class="topmargin">@Sorting.JournalSortMenu(Model.SortBy, Model.Sort)</div>*@
+                    @if (Model.CornerAdmin != null)
+                    {
+                        <span>For updating this corner please contact the cornerAdmin </span>
+                        @Html.ActionLink(Model.CornerAdmin.DisplayName, "Details", "Profiles", new { id = Model.CornerAdmin.Id }, null)
+                    }
+                </div>
+            </div>
+
+            @if (Model.Journals.Any())
+            {
+                const string title = "Italicized titles indicate institutional discounts.\nPlease click the tab 'Price information' on the detail page of the journal to find out more.";
+
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="title">
+                                Title&nbsp;&nbsp;
+                                <a href="#" title="@title">
+                                    <span class="glyphicon glyphicon-info-sign"></span>
+                                </a>
+                            </th>
+                            <th class="publisher">Publisher</th>
+                            <th class="swot"><a href="@Url.Action("JournalScoreCard", "Home")#swot">SWOT color</a></th>
+                            <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#basejournalscorecard">Base score</a></th>
+                            <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#valuationjournalscorecard">Valuation score</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var journal in Model.Journals)
+                        {
+                            <tr>
+                                <td class="@(journal.InstitutionJournalPrices.Any() ? "has-prices" : "")">@Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, null)</td>
+                                <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name }, null)</td>
+                                <td class="verdict-@journal.Swot">
+                                    @if (!string.IsNullOrWhiteSpace(journal.SubmissionPageLink) && journal.Swot == SwotVerdict.StrongJournal)
+                                    {
+                                        <a href="@journal.SubmissionPageLink" alt="Go to submission page" title="Go to submission page" class="submission-link" target="_blank">S</a>
+                                    }
+                                    else
+                                    {
+                                        @:&#160;
+                                    }
+                                </td>
+                                <td>@Scores.AverageScore(journal.OverallScore)</td>
+                                <td>@Scores.AverageScore(journal.ValuationScore)</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+                @Html.PagedListPager(Model.Journals, page => Url.Action("Index", Model.ToRouteValueDictionary(page)), Html.PagedListRenderOptions())
+            }
+            else
+            {
+                <p class="text-warning">
+                    Please, select a QOAMcorner on the left-hand side to view its journals.
+                </p>
+            }
+        </div>
+    </div>
+</div>
+
+@section stylesheets
+{
+    @Styles.Render("~/styles/typeahead")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/typeahead")
+
+    @Html.Partial("_FormScripts")
+
+    <script type="text/javascript">
+        $(function () {
+            var institutionsController = new InstitutionsController();
+            institutionsController.index('@Url.Action("Names", null, null, Request.Url.Scheme)');
+        });
+    </script>
+}

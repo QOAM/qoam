@@ -1,0 +1,46 @@
+﻿@model QOAM.Website.ViewModels.QoamCorners.CornersImportedViewModel
+
+@{
+    ViewBag.Title = "Creating new QOAMcorners completed";
+}
+
+<div class="container main">
+    <div class="row">
+        <a class="btn btn-default return-button" title="Back to search results" href="@Url.Action("Index")">&lt; Browse QOAMcorners</a>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <p>
+                <strong>@Model.ImportedCorners.Count</strong> new QOAMcorners have been created.
+            </p>
+            <p>
+                <strong>@Model.UpdatedCorners.Count</strong> QOAMcorners have been updated.
+            </p>
+            @if (Model.ExistingCorners.Any())
+            {
+                <p>
+                    <strong>@Model.ExistingCorners.Count</strong> QOAMcorners could not be created.
+                </p>
+            }
+        </div>
+
+        @if (Model.ExistingCorners.Any())
+            {
+            <div class="panel-body">
+                <div class="row bottommargin">
+                    <div class="col-xs-12">
+                        <p>
+                            The following QOAMcorners could not be created because the names are already in use:
+                        </p>
+                        <ul>
+                            @foreach (var name in Model.ExistingCorners)
+                            {
+                                <li>@name</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

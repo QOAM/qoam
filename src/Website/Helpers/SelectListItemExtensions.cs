@@ -39,6 +39,13 @@
             return institutions.Select(ToSelectListItem).ToOptionalSelectListItems(optionalText);
         }
 
+        public static IEnumerable<SelectListItem> ToSelectListItems(this IList<Corner> corners, string optionalText)
+        {
+            Requires.NotNull(corners, nameof(corners));
+
+            return corners.Select(ToSelectListItem).ToOptionalSelectListItems(optionalText);
+        }
+
         private static SelectListItem ToSelectListItem(this BlockedISSN blockedIssn)
         {
             return new SelectListItem { Text = blockedIssn.ISSN, Value = blockedIssn.ISSN };
@@ -57,6 +64,11 @@
         private static SelectListItem ToSelectListItem(this Institution institution)
         {
             return new SelectListItem { Text = institution.Name, Value = institution.Id.ToString(CultureInfo.InvariantCulture) };
+        }
+
+        private static SelectListItem ToSelectListItem(this Corner corner)
+        {
+            return new SelectListItem { Text = corner.Name, Value = corner.Id.ToString(CultureInfo.InvariantCulture) };
         }
 
         private static IEnumerable<SelectListItem> ToOptionalSelectListItems(this IEnumerable<SelectListItem> selectListItems, string optionalText)
