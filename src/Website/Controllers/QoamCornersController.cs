@@ -30,6 +30,7 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpGet, Route("")]
+        [AllowAnonymous]
         public ActionResult Index(CornersIndexViewModel model)
         {
             var corner = GetCorner(model.Corner);
