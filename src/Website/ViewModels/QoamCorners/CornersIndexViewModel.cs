@@ -18,11 +18,13 @@ namespace QOAM.Website.ViewModels.QoamCorners
         public IEnumerable<SelectListItem> Corners { get; set; }
         public IPagedList<Journal> Journals { get; set; }
         public UserProfile CornerAdmin { get; set; }
+        public string CornerName { get; set; }
 
         public RouteValueDictionary ToRouteValueDictionary(int page)
         {
             var routeValueDictionary = new RouteValueDictionary
             {
+                [nameof(Corner)] = Corner,
                 [nameof(page)] = page
             };
 
