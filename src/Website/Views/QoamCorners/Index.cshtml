@@ -44,23 +44,25 @@
         </div>
 
         <div class="col-md-9">
-
-            <div class="row">
-                <div class="col-md-3">
-                    <h3>@Model.Journals.TotalItemCount journals</h3>
-                </div>
-                <div class="col-md-9 text-right" style="margin-top: 40px;">
-                    @*<div class="topmargin">@Sorting.JournalSortMenu(Model.SortBy, Model.Sort)</div>*@
-                    @if (Model.CornerAdmin != null)
-                    {
-                        <span>For updating this corner please contact the cornerAdmin </span>
-                        @Html.ActionLink(Model.CornerAdmin.DisplayName, "Details", "Profiles", new { id = Model.CornerAdmin.Id }, null)
-                    }
-                </div>
-            </div>
-
             @if (Model.Journals.Any())
             {
+                <div class="row">
+                    <h1>@Model.CornerName</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h3>@Model.Journals.TotalItemCount journals</h3>
+                    </div>
+                    <div class="col-md-9 text-right" style="margin-top: 40px;">
+                        @*<div class="topmargin">@Sorting.JournalSortMenu(Model.SortBy, Model.Sort)</div>*@
+                        @if (Model.CornerAdmin != null)
+                        {
+                            <span>For updating this corner please contact the cornerAdmin </span>
+                            @Html.ActionLink(Model.CornerAdmin.DisplayName, "Details", "Profiles", new { id = Model.CornerAdmin.Id }, null)
+                        }
+                    </div>
+                </div>
+
                 const string title = "Italicized titles indicate institutional discounts.\nPlease click the tab 'Price information' on the detail page of the journal to find out more.";
 
                 <table class="table table-striped table-bordered">
@@ -106,9 +108,11 @@
             }
             else
             {
-                <p class="text-warning">
-                    Please, select a QOAMcorner on the left-hand side to view its journals.
-                </p>
+                <div class="row">
+                    <h3 class="text-warning">
+                        Please, select a QOAMcorner on the left-hand side to view its journals.
+                    </h3>
+                </div>
             }
         </div>
     </div>

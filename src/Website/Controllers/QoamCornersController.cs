@@ -38,6 +38,7 @@ namespace QOAM.Website.Controllers
             model.Corners = _cornerRepository.All().OrderByDescending(c => c.NumberOfVisitors).ThenBy(c => c.Name).ToList().ToSelectListItems("<Select a QOAMcorner>");
             model.Journals = _cornerRepository.GetJournalsForCorner(model.Corner.GetValueOrDefault(), model.Page, model.PageSize);
             model.CornerAdmin = corner?.CornerAdmin;
+            model.CornerName = corner?.Name;
 
             return View(model);
         }
@@ -73,7 +74,8 @@ namespace QOAM.Website.Controllers
                         {
                             UserProfileId = currentUserId,
                             Name = cornerToImport.Name,
-                            CornerJournals = ParseJournalsFromIssns(cornerToImport)
+                            CornerJournals = ParseJournalsFromIssns(cornerToImport),
+                            LastVisitedOn = DateTime.Now
                         };
 
                         _cornerRepository.InsertOrUpdate(corner);
