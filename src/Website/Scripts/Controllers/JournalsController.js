@@ -6,8 +6,13 @@
         createTypeahead('#Title', journalTitlesUrl);
         createTypeahead('#Issn', journalIssnsUrl);
         createTypeahead('#Publisher', journalPublishersUrl);
-        createTypeahead('input.search-discipline', subjectsUrl);
+        //createTypeahead('input.search-discipline', subjectsUrl);
         createTypeahead('input.search-language', languagesUrl);
+
+        $("#SelectedDisciplines").chosen({
+            search_contains: true,
+            placeholder_text_multiple: "Search by discipline"
+        });
 
         updateSwotMatrix('#swotFilterContainer', '#SwotMatrix');
 
@@ -49,7 +54,7 @@
                 var currentValue = swotInput.val();
                 var swotType = $(this).attr('data-swot-type');
 
-                if (currentValue == '') {
+                if (currentValue === '') {
                     swotInput.val(swotType);
                 }
                 else {

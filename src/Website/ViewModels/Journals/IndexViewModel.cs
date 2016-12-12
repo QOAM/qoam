@@ -19,12 +19,13 @@
 
         public IndexViewModel()
         {
-            this.Journals = new PagedList<Journal>(new Journal[0], this.Page, this.PageSize);
-            this.SortBy = JournalSortMode.RobustScores;
-            this.Sort = SortDirection.Descending;
-            this.SwotMatrix = string.Empty;
-            this.Disciplines = new List<string>();
-            this.Languages = new List<string>();
+            Journals = new PagedList<Journal>(new Journal[0], this.Page, this.PageSize);
+            SortBy = JournalSortMode.RobustScores;
+            Sort = SortDirection.Descending;
+            SwotMatrix = string.Empty;
+            Disciplines = new List<SelectListItem>();
+            Languages = new List<string>();
+            SelectedDisciplines = new List<int>();
         }
 
         [DisplayName("Title")]
@@ -37,7 +38,9 @@
         public string Publisher { get; set; }
 
         [DisplayName("Discipline")]
-        public IList<string> Disciplines { get; set; }
+        public IEnumerable<SelectListItem> Disciplines { get; set; }
+
+        public IList<int> SelectedDisciplines { get; set; }
         
         [DisplayName("All journals with Valuation Score Card")]
         public bool SubmittedOnly { get; set; }
@@ -59,7 +62,7 @@
                            Title = this.Title.TrimSafe(),
                            Issn = this.Issn.TrimSafe(),
                            Publisher = this.Publisher.TrimSafe(),
-                           Disciplines = this.Disciplines ?? Enumerable.Empty<string>(),
+                           Disciplines = this.SelectedDisciplines ?? Enumerable.Empty<int>(),
                            Languages = this.Languages ?? Enumerable.Empty<string>(),
                            SubmittedOnly = this.SubmittedOnly,
                            MustHaveBeenScored = !string.IsNullOrEmpty(this.SwotMatrix),
@@ -78,7 +81,7 @@
                 Title = Title.TrimSafe(),
                 Issn = Issn.TrimSafe(),
                 Publisher = Publisher.TrimSafe(),
-                Disciplines = this.Disciplines ?? Enumerable.Empty<string>(),
+                Disciplines = this.SelectedDisciplines ?? Enumerable.Empty<int>(),
                 Languages = this.Languages ?? Enumerable.Empty<string>(),
                 SubmittedOnly = SubmittedOnly,
                 MustHaveBeenScored = false,
@@ -102,12 +105,12 @@
                 [nameof(SubmittedOnly)] = SubmittedOnly,
                 [nameof(Sort)] = Sort,
                 [nameof(SortBy)] = SortBy,
-                [nameof(SwotMatrix)] = SwotMatrix,
+                [nameof(SwotMatrix)] = SwotMatrix
             };
 
-            for (var i = 0; i < Disciplines.Count; i++)
+            for (var i = 0; i < SelectedDisciplines.Count; i++)
             {
-                routeValueDictionary[$"{nameof(Disciplines)}[{i}]"] = Disciplines[i];
+                routeValueDictionary[$"{nameof(Disciplines)}[{i}]"] = SelectedDisciplines[i];
             }
 
             for (var i = 0; i < Languages.Count; i++)

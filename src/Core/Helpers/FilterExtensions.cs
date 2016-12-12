@@ -26,10 +26,7 @@ namespace QOAM.Core.Helpers
 
             if (filter.Disciplines.Any())
             {
-                foreach (var discipline in filter.Disciplines)
-                {
-                    query = query.Where(j => j.Subjects.Any(s => s.Name.ToLower().Contains(discipline.ToLower())));
-                }
+                query = filter.Disciplines.Aggregate(query, (current, discipline) => current.Where(j => j.Subjects.Any(s => s.Id == discipline)));
             }
 
             if (filter.Languages.Any())

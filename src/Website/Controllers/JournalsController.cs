@@ -27,11 +27,12 @@ namespace QOAM.Website.Controllers
         private readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
         private readonly IInstitutionRepository institutionRepository;
         private readonly IBulkImporter<UniversityLicense> _bulkImporter;
+        readonly ISubjectRepository _subjectRepository;
 
         public JournalsController(IJournalRepository journalRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationJournalPriceRepository valuationJournalPriceRepository,
             IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository,
             IInstitutionJournalRepository institutionJournalRepository, IBaseScoreCardRepository baseScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication,
-            IInstitutionRepository institutionRepository, IBulkImporter<UniversityLicense> bulkImporter)
+            IInstitutionRepository institutionRepository, IBulkImporter<UniversityLicense> bulkImporter, ISubjectRepository subjectRepository)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalRepository, nameof(journalRepository));
@@ -49,12 +50,13 @@ namespace QOAM.Website.Controllers
             this.institutionRepository = institutionRepository;
             this.valuationJournalPriceRepository = valuationJournalPriceRepository;
             _bulkImporter = bulkImporter;
+            _subjectRepository = subjectRepository;
         }
 
         [HttpGet, Route("")]
         public ViewResult Index(IndexViewModel model)
         {
-            model.Disciplines = NormalizeSearchStrings(model.Disciplines);
+            model.Disciplines = _subjectRepository.Active.Where(s => !string.IsNullOrWhiteSpace(s.Name)).ToList().ToSelectListItems("Search by discipline"); //NormalizeSearchStrings(model.Disciplines);
             model.Languages = NormalizeSearchStrings(model.Languages);
             model.Journals = journalRepository.Search(model.ToFilter());
 
