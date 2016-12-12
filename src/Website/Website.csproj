@@ -352,6 +352,9 @@
     </None>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\chosen\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen\chosen-sprite.png" />
+    <Content Include="Content\chosen\chosen.css" />
     <Content Include="Content\dataTables.css" />
     <Content Include="Content\dataTables.custom.css" />
     <Content Include="Content\dataTables.min.css" />
@@ -406,6 +409,7 @@
     <Content Include="Scripts\bootstrap-slider.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\Controllers\AdminController.js" />
     <Content Include="Scripts\Controllers\InstitutionsController.js" />
     <Content Include="Scripts\Controllers\InstitutionsController.min.js">
@@ -1152,7 +1156,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50268</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53969/</IISUrl>
+          <IISUrl>https://localhost:44300</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

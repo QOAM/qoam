@@ -5,8 +5,13 @@
         createTypeahead('#Title', journalTitlesUrl);
         createTypeahead('#Issn', journalIssnsUrl);
         createTypeahead('#Publisher', journalPublishersUrl);
-        createTypeahead('input.search-discipline', subjectsUrl);
+        //createTypeahead('input.search-discipline', subjectsUrl);
         createTypeahead('input.search-language', languagesUrl);
+
+        $("#SelectedDisciplines").chosen({
+            search_contains: true,
+            placeholder_text_multiple: "Search by discipline"
+        });
 
         $('.remove-discipline').on('click', function (e) {
             $(this).closest('li').remove();

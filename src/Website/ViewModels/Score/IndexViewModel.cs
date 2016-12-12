@@ -17,8 +17,9 @@ namespace QOAM.Website.ViewModels.Score
     {
         public IndexViewModel()
         {
-            this.Journals = new PagedList<Journal>(new Journal[0], this.Page, this.PageSize);
-            this.Disciplines = new List<string>();
+            Journals = new PagedList<Journal>(new Journal[0], this.Page, this.PageSize);
+            Disciplines = new List<SelectListItem>();
+            SelectedDisciplines = new List<int>();
         }
 
         [DisplayName("Title")]
@@ -37,7 +38,9 @@ namespace QOAM.Website.ViewModels.Score
         public IPagedList<Journal> Journals { get; set; }
 
         [DisplayName("Discipline")]
-        public IList<string> Disciplines { get; set; }
+        public IEnumerable<SelectListItem> Disciplines { get; set; }
+
+        public IList<int> SelectedDisciplines { get; set; }
 
         [DisplayName("Language")]
         public IList<string> Languages { get; set; }
@@ -51,7 +54,7 @@ namespace QOAM.Website.ViewModels.Score
                        Title = this.Title.TrimSafe(), 
                        Issn = this.Issn.TrimSafe(), 
                        Publisher = this.Publisher.TrimSafe(),
-                       Disciplines = this.Disciplines ?? Enumerable.Empty<string>(),
+                       Disciplines = this.SelectedDisciplines ?? Enumerable.Empty<int>(),
                        Languages = this.Languages ?? Enumerable.Empty<string>(),
                        SortMode = this.SortBy, 
                        SortDirection = this.Sort, 
@@ -67,8 +70,8 @@ namespace QOAM.Website.ViewModels.Score
                 Title = Title.TrimSafe(),
                 Issn = Issn.TrimSafe(),
                 Publisher = Publisher.TrimSafe(),
-                Disciplines = this.Disciplines ?? Enumerable.Empty<string>(),
-                Languages = this.Languages ?? Enumerable.Empty<string>(),
+                Disciplines = SelectedDisciplines ?? Enumerable.Empty<int>(),
+                Languages = Languages ?? Enumerable.Empty<string>(),
                 SortMode = SortBy,
                 SortDirection = Sort,
                 PageNumber = Page,
@@ -94,9 +97,9 @@ namespace QOAM.Website.ViewModels.Score
                 [nameof(SortBy)] = SortBy,
             };
 
-            for (var i = 0; i < Disciplines.Count; i++)
+            for (var i = 0; i < SelectedDisciplines.Count; i++)
             {
-                routeValueDictionary[$"{nameof(Disciplines)}[{i}]"] = Disciplines[i];
+                routeValueDictionary[$"{nameof(Disciplines)}[{i}]"] = SelectedDisciplines[i];
             }
 
             for (var i = 0; i < Languages.Count; i++)

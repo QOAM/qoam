@@ -60,9 +60,9 @@ namespace QOAM.Core.Import
 
         static string ParseIssn(XElement journalElement)
         {
-            var pIssn = journalElement.Element("p_issn")?.Value;
+            var issn = journalElement.Element("e_issn")?.Value;
 
-            return !string.IsNullOrWhiteSpace(pIssn) ? pIssn : journalElement.Element("e_issn")?.Value;
+            return !string.IsNullOrWhiteSpace(issn) ? issn : journalElement.Element("p_issn")?.Value;
         }
 
         static Publisher ParsePublisher(XElement journalElement)

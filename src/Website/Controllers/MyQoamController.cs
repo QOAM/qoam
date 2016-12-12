@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using QOAM.Core;
 using QOAM.Core.Repositories;
@@ -16,10 +17,12 @@ namespace QOAM.Website.Controllers
         const string MyQoamMessage = "MyQoamMessage";
 
         readonly IUserJournalRepository _userJournalRepository;
+        readonly ISubjectRepository _subjectRepository;
 
-        public MyQoamController(IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IUserJournalRepository userJournalRepository) : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
+        public MyQoamController(IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IUserJournalRepository userJournalRepository, ISubjectRepository subjectRepository) : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             _userJournalRepository = userJournalRepository;
+            _subjectRepository = subjectRepository;
         }
 
         [HttpGet, Route("")]
@@ -27,7 +30,7 @@ namespace QOAM.Website.Controllers
         {
             try
             {
-                model.Disciplines = NormalizeSearchStrings(model.Disciplines);
+                model.Disciplines = _subjectRepository.Active.Where(s => !string.IsNullOrWhiteSpace(s.Name)).ToList().ToSelectListItems("Search by discipline"); //NormalizeSearchStrings(model.Disciplines);
                 model.Languages = NormalizeSearchStrings(model.Languages);
                 model.Journals = _userJournalRepository.Search(model.ToFilter(Authentication.CurrentUserId));
             }

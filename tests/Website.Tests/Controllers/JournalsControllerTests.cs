@@ -57,7 +57,7 @@ namespace QOAM.Website.Tests.Controllers
             _authentication = new Mock<IAuthentication>();
             _bulkImporter = new Mock<IBulkImporter<UniversityLicense>>();
 
-            _controller = new JournalsController(_journalRepository.Object, _baseJournalPriceRepository.Object, _valuationJournalPriceRepository.Object, _valuationScoreCardRepository.Object, _languageRepository.Object, _institutionJournalRepository.Object, _baseScoreCardRepository.Object, _userProfileRepository.Object, _authentication.Object, _institutionRepository.Object, _bulkImporter.Object);
+            _controller = new JournalsController(_journalRepository.Object, _baseJournalPriceRepository.Object, _valuationJournalPriceRepository.Object, _valuationScoreCardRepository.Object, _languageRepository.Object, _institutionJournalRepository.Object, _baseScoreCardRepository.Object, _userProfileRepository.Object, _authentication.Object, _institutionRepository.Object, _bulkImporter.Object, _subjectRepository.Object);
 
             _uploadFile = new Mock<HttpPostedFileBase>();
             _viewModel = new InstitutionalPricesViewModel
