@@ -716,3 +716,17 @@ a.return-button {
 .popover.custom-popover img {
     width: 400px;
 }
+
+#open-access-filter:active, #hybrid-filter:active {
+    text-decoration: none;
+}
+
+a.filter-enabled {
+    background-color: #428bca;
+    color: #fff;
+    text-decoration: underline;
+}
+
+a:hover.filter-enabled {
+    background-color: #2a6496;
+}

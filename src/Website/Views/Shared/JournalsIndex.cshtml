@@ -23,6 +23,8 @@
                 {
                     <fieldset>
                         <legend>Search</legend>
+                        
+                        @Html.HiddenFor(m => m.OpenAccess)
 
                         <div class="form-group editor-label-placeholder">
                             @Html.LabelFor(m => m.Title, null, new { @class = "control-label" })
@@ -69,7 +71,7 @@
                             </ul>
                         </div>*@
 
-                        <div class="form-group editor-label-placeholder">
+                        @*<div class="form-group editor-label-placeholder">
                             @Html.LabelFor(m => m.Languages, null, new { @class = "control-label" })
                         </div>
                         <div class="form-group">
@@ -87,7 +89,7 @@
                                     </li>
                                 }
                             </ul>
-                        </div>
+                        </div>*@
 
                         <!--
                         <div class="form-control high clearfix">
@@ -144,7 +146,7 @@
                         <h3>Saved journals: @Model.Journals.TotalItemCount</h3>
                     }
                     else {
-                        <h3>@Model.Journals.TotalItemCount journals</h3>
+                        <h3>@Model.Journals.TotalItemCount <a id="open-access-filter" href="#">OA</a> en <a id="hybrid-filter" href="#">hybrid</a> journals; <a id="institutional-discount-filter" href="#">institutional discounts</a></h3>
                     }
 
                 </div>

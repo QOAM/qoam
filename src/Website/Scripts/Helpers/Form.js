@@ -58,3 +58,33 @@ function updateSwotMatrix(selector, input) {
         }
     });
 }
+
+function setupLinkFilters() {
+    $("#open-access-filter").on("click", function (e) {
+        e.preventDefault();
+
+        var currentValue = $("#OpenAccess").val();
+
+        if (currentValue === "" || currentValue === false || currentValue.toLowerCase() === "false")
+            $("#OpenAccess").val(true);
+        else
+            $("#OpenAccess").val("");
+
+        $(this).toggleClass("filter-enabled");
+        $("#hybrid-filter").removeClass("filter-enabled");
+    });
+
+    $("#hybrid-filter").on("click", function (e) {
+        e.preventDefault();
+
+        var currentValue = $("#OpenAccess").val();
+
+        if (currentValue === "" || currentValue === true || currentValue.toLowerCase() === "true")
+            $("#OpenAccess").val(false);
+        else
+            $("#OpenAccess").val("");
+
+        $(this).toggleClass("filter-enabled");
+        $("#open-access-filter").removeClass("filter-enabled");
+    });
+}
