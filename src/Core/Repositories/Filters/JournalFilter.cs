@@ -38,5 +38,7 @@
         public bool SubmittedOnly { get; set; }
 
         public IList<string> SwotMatrix { get; set; }
+
+        public bool? OpenAccess { get; set; }
     }
 }

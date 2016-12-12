@@ -55,6 +55,8 @@
         [DisplayName("Language")]
         public IList<string> Languages { get; set; }
 
+        public bool? OpenAccess { get; set; }
+
         public JournalFilter ToFilter()
         {
             return new JournalFilter
@@ -70,7 +72,8 @@
                            SortDirection = this.Sort,
                            PageNumber = this.Page,
                            PageSize = this.PageSize,
-                           SwotMatrix = !string.IsNullOrEmpty(this.SwotMatrix) ? this.SwotMatrix.Split(',').ToList() : new List<string>()
+                           SwotMatrix = !string.IsNullOrEmpty(this.SwotMatrix) ? this.SwotMatrix.Split(',').ToList() : new List<string>(),
+                           OpenAccess = OpenAccess
                        };
         }
 
@@ -90,7 +93,8 @@
                 PageNumber = Page,
                 PageSize = PageSize,
                 SwotMatrix = !string.IsNullOrEmpty(SwotMatrix) ? SwotMatrix.Split(',').ToList() : new List<string>(),
-                UserProfileId = userProfileId
+                UserProfileId = userProfileId,
+                OpenAccess = OpenAccess
             };
         }
 
@@ -105,7 +109,8 @@
                 [nameof(SubmittedOnly)] = SubmittedOnly,
                 [nameof(Sort)] = Sort,
                 [nameof(SortBy)] = SortBy,
-                [nameof(SwotMatrix)] = SwotMatrix
+                [nameof(SwotMatrix)] = SwotMatrix,
+                [nameof(OpenAccess)] = OpenAccess
             };
 
             for (var i = 0; i < SelectedDisciplines.Count; i++)

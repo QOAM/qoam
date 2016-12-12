@@ -14,6 +14,8 @@
             placeholder_text_multiple: "Search by discipline"
         });
 
+        setupLinkFilters();
+
         updateSwotMatrix('#swotFilterContainer', '#SwotMatrix');
 
         $('.remove-discipline').on('click', function(e) {
