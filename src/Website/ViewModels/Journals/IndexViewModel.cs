@@ -102,7 +102,7 @@
             };
         }
 
-        public RouteValueDictionary ToRouteValueDictionary(int page)
+        public virtual RouteValueDictionary ToRouteValueDictionary(int page)
         {
             var routeValueDictionary = new RouteValueDictionary
             {

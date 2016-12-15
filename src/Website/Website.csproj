@@ -411,6 +411,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\Controllers\AdminController.js" />
+    <Content Include="Scripts\Controllers\QoamCornersController.js" />
     <Content Include="Scripts\Controllers\InstitutionsController.js" />
     <Content Include="Scripts\Controllers\InstitutionsController.min.js">
       <DependentUpon>InstitutionsController.js</DependentUpon>
@@ -775,6 +776,7 @@
     <Content Include="Scripts\globalize\cultures\globalize.cultures.js" />
     <Content Include="Scripts\globalize\globalize.js" />
     <Content Include="Scripts\Helpers\RequestValuationForm.js" />
+    <Content Include="Scripts\Helpers\swot-filter.js" />
     <Content Include="Scripts\knockout.isdirty.js" />
     <Content Include="Scripts\Helpers\Ajax.js" />
     <Content Include="Scripts\Helpers\Ajax.min.js">
@@ -957,6 +959,10 @@
     <Content Include="Views\QoamCorners\CreateCorner.cshtml" />
     <Content Include="Views\QoamCorners\CornersImported.cshtml" />
     <Content Include="Views\QoamCorners\Index.cshtml" />
+    <Content Include="Views\QoamCorners\_EmptyText.cshtml" />
+    <Content Include="Views\Shared\_SwotMatrix.cshtml" />
+    <Content Include="Views\Shared\_JournalFilters.cshtml" />
+    <Content Include="Views\QoamCorners\_Journals.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
