@@ -57,24 +57,27 @@
 
         public bool? OpenAccess { get; set; }
 
+        public bool? InstitutionalDiscounts { get; set; }
+
         public JournalFilter ToFilter()
         {
             return new JournalFilter
-                       {
-                           Title = this.Title.TrimSafe(),
-                           Issn = this.Issn.TrimSafe(),
-                           Publisher = this.Publisher.TrimSafe(),
-                           Disciplines = this.SelectedDisciplines ?? Enumerable.Empty<int>(),
-                           Languages = this.Languages ?? Enumerable.Empty<string>(),
-                           SubmittedOnly = this.SubmittedOnly,
-                           MustHaveBeenScored = !string.IsNullOrEmpty(this.SwotMatrix),
-                           SortMode = this.SortBy,
-                           SortDirection = this.Sort,
-                           PageNumber = this.Page,
-                           PageSize = this.PageSize,
-                           SwotMatrix = !string.IsNullOrEmpty(this.SwotMatrix) ? this.SwotMatrix.Split(',').ToList() : new List<string>(),
-                           OpenAccess = OpenAccess
-                       };
+            {
+                Title = this.Title.TrimSafe(),
+                Issn = this.Issn.TrimSafe(),
+                Publisher = this.Publisher.TrimSafe(),
+                Disciplines = this.SelectedDisciplines ?? Enumerable.Empty<int>(),
+                Languages = this.Languages ?? Enumerable.Empty<string>(),
+                SubmittedOnly = this.SubmittedOnly,
+                MustHaveBeenScored = !string.IsNullOrEmpty(this.SwotMatrix),
+                SortMode = this.SortBy,
+                SortDirection = this.Sort,
+                PageNumber = this.Page,
+                PageSize = this.PageSize,
+                SwotMatrix = !string.IsNullOrEmpty(this.SwotMatrix) ? this.SwotMatrix.Split(',').ToList() : new List<string>(),
+                OpenAccess = OpenAccess,
+                InstitutionalDiscounts = InstitutionalDiscounts
+            };
         }
 
         public UserJournalFilter ToFilter(int userProfileId)
@@ -94,7 +97,8 @@
                 PageSize = PageSize,
                 SwotMatrix = !string.IsNullOrEmpty(SwotMatrix) ? SwotMatrix.Split(',').ToList() : new List<string>(),
                 UserProfileId = userProfileId,
-                OpenAccess = OpenAccess
+                OpenAccess = OpenAccess,
+                InstitutionalDiscounts = InstitutionalDiscounts
             };
         }
 
@@ -110,7 +114,8 @@
                 [nameof(Sort)] = Sort,
                 [nameof(SortBy)] = SortBy,
                 [nameof(SwotMatrix)] = SwotMatrix,
-                [nameof(OpenAccess)] = OpenAccess
+                [nameof(OpenAccess)] = OpenAccess,
+                [nameof(InstitutionalDiscounts)] = InstitutionalDiscounts
             };
 
             for (var i = 0; i < SelectedDisciplines.Count; i++)

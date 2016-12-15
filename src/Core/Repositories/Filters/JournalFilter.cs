@@ -40,5 +40,7 @@
         public IList<string> SwotMatrix { get; set; }
 
         public bool? OpenAccess { get; set; }
+
+        public bool? InstitutionalDiscounts { get; set; }
     }
 }

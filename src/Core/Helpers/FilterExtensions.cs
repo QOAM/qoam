@@ -37,6 +37,12 @@ namespace QOAM.Core.Helpers
                 }
             }
 
+            if (filter.OpenAccess.HasValue)
+                query = query.Where(j => j.OpenAccess == filter.OpenAccess.Value);
+
+            if (filter.InstitutionalDiscounts.HasValue)
+                query = query.Where(j => j.InstitutionJournalPrices.Any() == filter.InstitutionalDiscounts.Value);
+
             if (filter.SubmittedOnly)
                 query = query.Where(j => j.ValuationScoreCards.Any(v => v.State == ScoreCardState.Published));
 

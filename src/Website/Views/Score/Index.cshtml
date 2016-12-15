@@ -49,9 +49,14 @@
                             @Html.LabelFor(m => m.Disciplines, null, new { @class = "control-label" })
                         </div>
                         <div class="form-group">
-                            @Html.ListBoxFor(m => m.SelectedDisciplines, Model.Disciplines, new { @class = "form-control" })
-                            @*@Html.Html5TextBox(Html.NameFor(m => m.Disciplines) + "[" + Model.Disciplines.Count + "]", InputTypes.InputType.Text, new { @class = "form-control search-discipline" }, "Search by discipline")*@
-                            @Html.ValidationMessageFor(m => m.Disciplines, null, new { @class = "control-label" })
+                            <div id="loading" style="text-align: center;">
+                                <i class="glyphicon glyphicon-refresh gly-spin"></i>
+                            </div>
+                            <div id="discipline-container" style="display: none;">
+                                @Html.ListBoxFor(m => m.SelectedDisciplines, Model.Disciplines, new { @class = "form-control" })
+                                @*@Html.Html5TextBox(Html.NameFor(m => m.Disciplines) + "[" + Model.Disciplines.Count + "]", InputTypes.InputType.Text, new { @class = "form-control search-discipline" }, "Search by discipline")*@
+                                @Html.ValidationMessageFor(m => m.Disciplines, null, new { @class = "control-label" })
+                            </div>
                         </div>
 
                         @*<div class="form-group">

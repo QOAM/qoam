@@ -9,12 +9,10 @@
         //createTypeahead('input.search-discipline', subjectsUrl);
         createTypeahead('input.search-language', languagesUrl);
 
-        $("#SelectedDisciplines").chosen({
-            search_contains: true,
-            placeholder_text_multiple: "Search by discipline"
-        });
-
         setupLinkFilters();
+        initialLinkFilterState();
+
+        initDisciplinesSelect();
 
         updateSwotMatrix('#swotFilterContainer', '#SwotMatrix');
 
