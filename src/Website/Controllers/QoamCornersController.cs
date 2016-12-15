@@ -19,14 +19,16 @@ namespace QOAM.Website.Controllers
         readonly IJournalRepository _journalRepository;
         readonly ICornerRepository _cornerRepository;
         readonly IBulkImporter<CornerToImport> _bulkImporter;
+        readonly ISubjectRepository _subjectRepository;
 
         const string ImportResultSessionKey = "ImportResult";
 
-        public QoamCornersController(IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IJournalRepository journalRepository, ICornerRepository cornerRepository, IBulkImporter<CornerToImport> bulkImporter) : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
+        public QoamCornersController(IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IJournalRepository journalRepository, ICornerRepository cornerRepository, IBulkImporter<CornerToImport> bulkImporter, ISubjectRepository subjectRepository) : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             _journalRepository = journalRepository;
             _cornerRepository = cornerRepository;
             _bulkImporter = bulkImporter;
+            _subjectRepository = subjectRepository;
         }
 
         [HttpGet, Route("")]
@@ -36,8 +38,9 @@ namespace QOAM.Website.Controllers
             var corner = GetCorner(model.Corner);
             IncreaseNumberOfVisitors(corner);
 
-            model.Corners = _cornerRepository.All().OrderByDescending(c => c.NumberOfVisitors).ThenBy(c => c.Name).ToList().ToSelectListItems("<Select a QOAMcorner>");
-            model.Journals = _cornerRepository.GetJournalsForCorner(model.Corner.GetValueOrDefault(), model.Page, model.PageSize);
+            model.Disciplines = _subjectRepository.Active.Where(s => !string.IsNullOrWhiteSpace(s.Name)).ToList().ToSelectListItems("Search by discipline"); //NormalizeSearchStrings(model.Disciplines);
+            model.Corners = _cornerRepository.All().OrderByDescending(c => c.NumberOfVisitors).ThenBy(c => c.Name).ToList();
+            model.Journals = _cornerRepository.GetJournalsForCorner(model.ToFilter());
             model.CornerAdmin = corner?.CornerAdmin;
             model.CornerName = corner?.Name;
 

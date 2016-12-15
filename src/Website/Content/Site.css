@@ -771,3 +771,7 @@ a:hover.filter-enabled {
     transform: rotate(359deg);
   }
 }
+
+.corner-admin-name {
+    font-size: small;
+}

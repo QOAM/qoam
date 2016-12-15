@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PagedList;
+using QOAM.Core.Repositories.Filters;
 
 namespace QOAM.Core.Repositories
 {
@@ -12,7 +13,7 @@ namespace QOAM.Core.Repositories
         void InsertOrUpdate(Corner entity);
         void Delete(Corner entity);
         IList<Corner> All();
-        IPagedList<Journal> GetJournalsForCorner(int cornerId, int page, int pageSize);
+        IPagedList<Journal> GetJournalsForCorner(QoamCornerJournalFilter filter);
         Corner Find(int id);
     }
 }

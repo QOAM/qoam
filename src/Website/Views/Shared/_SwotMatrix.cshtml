@@ -1,0 +1,18 @@
+﻿@model QOAM.Website.ViewModels.Journals.IndexViewModel
+
+<div class="form-group">
+    <div id="swotFilterContainer" class="score swotFilterContainer">
+        @Html.HiddenFor(m => m.SwotMatrix)
+        <a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#swot" data-select-tab="false">SWOT matrix <span class="glyphicon glyphicon-info-sign swot-matrix-icon"></span></a>
+        <div class="table">
+            <div class="table-row first-row">
+                <div class="table-cell strong first-column" data-swot-type="strong">Strong <span>journals</span></div>
+                <div class="table-cell threat second-column" data-swot-type="threat">Threat <span>(to authors)</span></div>
+            </div>
+            <div class="table-row second-row">
+                <div class="table-cell opportunity first-column" data-swot-type="opportunity">Opportunity <span>(to publishers)</span></div>
+                <div class="table-cell weak second-column" data-swot-type="weak">Weaker <span>journals</span></div>
+            </div>
+        </div>
+    </div>
+</div>

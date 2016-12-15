@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
+using LinqKit;
 using PagedList;
+using QOAM.Core.Helpers;
+using QOAM.Core.Repositories.Filters;
 
 namespace QOAM.Core.Repositories
 {
@@ -30,13 +34,19 @@ namespace QOAM.Core.Repositories
             return DbContext.Corners.ToList();
         }
 
-        public IPagedList<Journal> GetJournalsForCorner(int cornerId, int page, int pageSize)
+        public IPagedList<Journal> GetJournalsForCorner(QoamCornerJournalFilter filter)
         {
-            return DbContext.CornerJournals
-                .Where(cj => cj.CornerId == cornerId)
-                .Select(cj => cj.Journal)
-                .OrderBy(j => j.Title)
-                .ToPagedList(page, pageSize);
+            var cornerId = filter.CornerId.GetValueOrDefault();
+
+            var query = DbContext.CornerJournals
+                .Include(cj => cj.Journal)
+                .Include(cj => cj.Journal.Publisher)
+                .Include(cj => cj.Journal.Languages)
+                .Include(cj => cj.Journal.Subjects)
+                .AsExpandable()
+                .Where(cj => cj.CornerId == cornerId);
+
+            return query.Select(uj => uj.Journal).Search(filter);
         }
     }
 }

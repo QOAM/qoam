@@ -1,0 +1,86 @@
+﻿@using System.Web.Mvc.Html5
+@model QOAM.Website.ViewModels.Journals.IndexViewModel
+
+@Html.HiddenFor(m => m.OpenAccess)
+@Html.HiddenFor(m => m.InstitutionalDiscounts)
+
+<div class="form-group editor-label-placeholder">
+    @Html.LabelFor(m => m.Title, null, new { @class = "control-label" })
+</div>
+<div class="form-group">
+    @Html.Html5TextBoxFor(m => m.Title, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by journal title")
+    @Html.ValidationMessageFor(m => m.Title, null, new { @class = "control-label" })
+</div>
+
+<div class="form-group editor-label-placeholder">
+    @Html.LabelFor(m => m.Issn, null, new { @class = "control-label" })
+</div>
+<div class="form-group">
+    @Html.Html5TextBoxFor(m => m.Issn, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by ISSN")
+    @Html.ValidationMessageFor(m => m.Issn, null, new { @class = "control-label" })
+</div>
+
+<div class="form-group editor-label-placeholder">
+    @Html.LabelFor(m => m.Publisher, null, new { @class = "control-label" })
+</div>
+<div class="form-group">
+    @Html.Html5TextBoxFor(m => m.Publisher, InputTypes.InputType.Text, new { @class = "form-control" }, "Search by publisher")
+    @Html.ValidationMessageFor(m => m.Publisher, null, new { @class = "control-label" })
+</div>
+
+<div class="form-group editor-label-placeholder">
+    @Html.LabelFor(m => m.Disciplines, null, new { @class = "control-label" })
+</div>
+<div class="form-group">
+    <div id="loading" style="text-align: center;">
+        <i class="glyphicon glyphicon-refresh gly-spin"></i>
+    </div>
+    <div id="discipline-container" style="display: none;">
+        @Html.ListBoxFor(m => m.SelectedDisciplines, Model.Disciplines, new { @class = "form-control" })
+        @*@Html.Html5TextBox(Html.NameFor(m => m.Disciplines) + "[" + Model.Disciplines.Count + "]", InputTypes.InputType.Text, new { @class = "form-control search-discipline" }, "Search by discipline")*@
+        @Html.ValidationMessageFor(m => m.Disciplines, null, new { @class = "control-label" })
+    </div>
+</div>
+
+@*<div class="form-group">
+        <ul id="disciplines">
+            @for (var i = 0; i < Model.Disciplines.Count; i++)
+            {
+                <li class="discipline">
+                    <input type="hidden" name="@(Html.NameFor(m => m.Disciplines))[@i]" value="@Model.Disciplines[i]"/>
+                    @Model.Disciplines[i] <a href="#" class="remove-discipline"><i class="glyphicon glyphicon-trash"></i></a>
+                </li>
+            }
+        </ul>
+    </div>*@
+
+@*<div class="form-group editor-label-placeholder">
+        @Html.LabelFor(m => m.Languages, null, new { @class = "control-label" })
+    </div>
+    <div class="form-group">
+        @Html.Html5TextBox(Html.NameFor(m => m.Languages) + "[" + Model.Languages.Count + "]", InputTypes.InputType.Text, new { @class = "form-control search-language" }, "Search by language")
+        @Html.ValidationMessageFor(m => m.Languages, null, new { @class = "control-label" })
+    </div>
+
+    <div class="form-group">
+        <ul id="languages">
+            @for (var i = 0; i < Model.Languages.Count; i++)
+            {
+                <li class="language">
+                    <input type="hidden" name="@(Html.NameFor(m => m.Languages))[@i]" value="@Model.Languages[i]" />
+                    @Model.Languages[i] <a href="#" class="remove-language"><i class="glyphicon glyphicon-trash"></i></a>
+                </li>
+            }
+        </ul>
+    </div>*@
+
+<!--
+<div class="form-control high clearfix">
+    <span class="pull-right">
+        @Html.CheckBoxFor(m => m.SubmittedOnly, new { @class = "control-label" })
+        @Html.ValidationMessageFor(m => m.SubmittedOnly, null, new { @class = "control-label" })
+    </span>
+    <span class="pull-left ">
+        <small><label class="control-label" for="@Html.NameFor(m => m.SubmittedOnly)">All journals with <a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#valuationjournalscorecard">Valuation Score Card</a></label></small>
+    </span>
+</div>-->

@@ -42,26 +42,28 @@
             return false;
         });
 
-        $('#swotFilterContainer').on('click', 'div.table-cell', function() {
-            $(this).toggleClass('verdict-' + $(this).attr('data-swot-type')).toggleClass('selected');
-            return false;
-        });
+        initSwotFilter();
 
-        $('#submitForm').on('click', function () {
-            var swotInput = $('#SwotMatrix');
-            swotInput.val('');
-            $('#swotFilterContainer').find('div.selected').each(function () {
-                var currentValue = swotInput.val();
-                var swotType = $(this).attr('data-swot-type');
+        //$('#swotFilterContainer').on('click', 'div.table-cell', function() {
+        //    $(this).toggleClass('verdict-' + $(this).attr('data-swot-type')).toggleClass('selected');
+        //    return false;
+        //});
 
-                if (currentValue === '') {
-                    swotInput.val(swotType);
-                }
-                else {
-                    swotInput.val(currentValue + ',' + swotType);
-                }
-            });
-        });
+        //$('#submitForm').on('click', function () {
+        //    var swotInput = $('#SwotMatrix');
+        //    swotInput.val('');
+        //    $('#swotFilterContainer').find('div.selected').each(function () {
+        //        var currentValue = swotInput.val();
+        //        var swotType = $(this).attr('data-swot-type');
+
+        //        if (currentValue === '') {
+        //            swotInput.val(swotType);
+        //        }
+        //        else {
+        //            swotInput.val(currentValue + ',' + swotType);
+        //        }
+        //    });
+        //});
 
         $('a.help-window').on('click', function() {
             window.open($(this).attr('href'), 'Help', 'width=800,height=600,toolbar=no');
