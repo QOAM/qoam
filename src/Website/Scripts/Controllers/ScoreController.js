@@ -8,10 +8,7 @@
         //createTypeahead('input.search-discipline', subjectsUrl);
         createTypeahead('input.search-language', languagesUrl);
 
-        $("#SelectedDisciplines").chosen({
-            search_contains: true,
-            placeholder_text_multiple: "Search by discipline"
-        });
+        initDisciplinesSelect();
 
         $('.remove-discipline').on('click', function (e) {
             $(this).closest('li').remove();

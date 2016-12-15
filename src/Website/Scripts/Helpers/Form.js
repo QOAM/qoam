@@ -62,29 +62,74 @@ function updateSwotMatrix(selector, input) {
 function setupLinkFilters() {
     $("#open-access-filter").on("click", function (e) {
         e.preventDefault();
-
-        var currentValue = $("#OpenAccess").val();
+        var $field = $("#OpenAccess");
+        var currentValue = $field.val();
 
         if (currentValue === "" || currentValue === false || currentValue.toLowerCase() === "false")
-            $("#OpenAccess").val(true);
+            $field.val(true);
         else
-            $("#OpenAccess").val("");
+            $field.val("");
 
         $(this).toggleClass("filter-enabled");
         $("#hybrid-filter").removeClass("filter-enabled");
+
+        $("#search-form").submit();
     });
 
     $("#hybrid-filter").on("click", function (e) {
         e.preventDefault();
-
-        var currentValue = $("#OpenAccess").val();
+        var $field = $("#OpenAccess");
+        var currentValue = $field.val();
 
         if (currentValue === "" || currentValue === true || currentValue.toLowerCase() === "true")
-            $("#OpenAccess").val(false);
+            $field.val(false);
         else
-            $("#OpenAccess").val("");
+            $field.val("");
 
         $(this).toggleClass("filter-enabled");
         $("#open-access-filter").removeClass("filter-enabled");
+
+        $("#search-form").submit();
+    });
+
+    $("#institutional-discount-filter").on("click", function(e) {
+        e.preventDefault();
+        var $field = $("#InstitutionalDiscounts");
+        var currentValue = $field.val();
+
+        if (!currentValue)
+            $field.val(true);
+        else
+            $field.val("");
+
+        $(this).toggleClass("filter-enabled");
+        $("#search-form").submit();
+    });
+}
+
+function initialLinkFilterState() {
+    var openAccess = $("#OpenAccess").val();
+
+    if (openAccess !== undefined && openAccess !== null && openAccess !== "") {
+        if (openAccess === true || openAccess.toLowerCase() === "true")
+            $("#open-access-filter").addClass("filter-enabled");
+        else
+            $("#hybrid-filter").addClass("filter-enabled");
+    }
+
+    var institutionalDiscounts = $("#InstitutionalDiscounts").val();
+
+    if(institutionalDiscounts)
+        $("#institutional-discount-filter").addClass("filter-enabled");
+}
+
+function initDisciplinesSelect() {
+    $("#SelectedDisciplines").on("chosen:ready", function () {
+        $("#loading").hide();
+        $("#discipline-container").show();
+    }).chosen({
+        width: "100%",
+        search_contains: true,
+        placeholder_text_multiple: "Search by discipline"
     });
 }
