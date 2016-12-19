@@ -36,6 +36,7 @@
         public DbSet<BlockedISSN> BlockedISSNs { get; set; }
         public DbSet<Corner> Corners { get; set; }
         public DbSet<CornerJournal> CornerJournals { get; set; }
+        public DbSet<CornerVisitor> CornerVisitors { get; set; }
 
         public ObjectContext ObjectContext => ((IObjectContextAdapter)this).ObjectContext;
 
@@ -54,6 +55,7 @@
             modelBuilder.Entity<InstitutionJournal>().HasRequired(s => s.Journal).WithMany(u => u.InstitutionJournalPrices).WillCascadeOnDelete(true);
             modelBuilder.Entity<CornerJournal>().HasRequired(s => s.Journal).WithMany(u => u.CornerJournals).WillCascadeOnDelete(true);
             modelBuilder.Entity<CornerJournal>().HasRequired(s => s.Corner).WithMany(u => u.CornerJournals).WillCascadeOnDelete(true);
+            modelBuilder.Entity<CornerVisitor>().HasRequired(s => s.Corner).WithMany(u => u.CornerVisitors).WillCascadeOnDelete(true);
             modelBuilder.Entity<Corner>().HasRequired(s => s.CornerAdmin).WithMany(u => u.Corners).WillCascadeOnDelete(true);
         }
     }
