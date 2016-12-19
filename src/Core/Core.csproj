@@ -167,6 +167,7 @@
     <Compile Include="Cleanup\InactiveProfilesCleanup.cs" />
     <Compile Include="Corner.cs" />
     <Compile Include="CornerJournal.cs" />
+    <Compile Include="CornerVisitor.cs" />
     <Compile Include="Helpers\ExceptionExtensions.cs" />
     <Compile Include="Helpers\FilterExtensions.cs" />
     <Compile Include="Helpers\ValidatorExtensions.cs" />
@@ -293,6 +294,10 @@
     <Compile Include="Migrations\201611291514157_LastVisited-Column-On-Corner.Designer.cs">
       <DependentUpon>201611291514157_LastVisited-Column-On-Corner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612190828433_Corner-Visitors.cs" />
+    <Compile Include="Migrations\201612190828433_Corner-Visitors.Designer.cs">
+      <DependentUpon>201612190828433_Corner-Visitors.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\CornerRepository.cs" />
@@ -338,6 +343,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611291514157_LastVisited-Column-On-Corner.resx">
       <DependentUpon>201611291514157_LastVisited-Column-On-Corner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612190828433_Corner-Visitors.resx">
+      <DependentUpon>201612190828433_Corner-Visitors.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />
