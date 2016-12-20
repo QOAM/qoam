@@ -184,6 +184,7 @@
     <Compile Include="Controllers\InstitutionsControllerTests.cs" />
     <Compile Include="Controllers\JournalsControllerTests.cs" />
     <Compile Include="Controllers\ProfilesControllerTests.cs" />
+    <Compile Include="Controllers\QoamCornersControllerTests.cs" />
     <Compile Include="Controllers\Stubs\SubmissionPageLinkStubs.cs" />
     <Compile Include="Controllers\Stubs\UniversityLicenseStubs.cs" />
     <Compile Include="Helpers\EmailValidatorTests.cs" />

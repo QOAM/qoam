@@ -15,5 +15,6 @@ namespace QOAM.Core.Repositories
         IList<Corner> All();
         IPagedList<Journal> GetJournalsForCorner(QoamCornerJournalFilter filter);
         Corner Find(int id);
+        void RemoveJournal(CornerJournal entity);
     }
 }

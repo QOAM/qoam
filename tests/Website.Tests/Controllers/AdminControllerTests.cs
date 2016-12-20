@@ -1024,14 +1024,10 @@ namespace QOAM.Website.Tests.Controllers
         private static IJournalRepository CreateJournalRepository(IList<Journal> journals)
         {
             var journalRepository = new Mock<IJournalRepository>();
-            journalRepository.Setup(j => j.AllIncluding(It.IsAny<Expression<Func<Journal, object>>[]>()))
-                .Returns(journals);
-            journalRepository.Setup(j => j.SearchByISSN(It.IsAny<IEnumerable<string>>()))
-                .Returns<IEnumerable<string>>(x => journals.Where(j => x.Contains(j.ISSN)).AsQueryable());
-            journalRepository.Setup(j => j.FindByIssn(It.IsAny<string>()))
-                .Returns<string>(issn => journals.FirstOrDefault(j => j.ISSN == issn));
-            journalRepository.Setup(j => j.AllWhereIncluding(It.IsAny<Expression<Func<Journal,bool>>>(), It.IsAny<Expression<Func<Journal, object>>[]>()))
-                .Returns(journals.Where(j => j.OpenAccess).ToList());
+            journalRepository.Setup(j => j.AllIncluding(It.IsAny<Expression<Func<Journal, object>>[]>())).Returns(journals);
+            journalRepository.Setup(j => j.SearchByISSN(It.IsAny<IEnumerable<string>>())).Returns<IEnumerable<string>>(x => journals.Where(j => x.Contains(j.ISSN)).AsQueryable());
+            journalRepository.Setup(j => j.FindByIssn(It.IsAny<string>())).Returns<string>(issn => journals.FirstOrDefault(j => j.ISSN == issn));
+            journalRepository.Setup(j => j.AllWhereIncluding(It.IsAny<Expression<Func<Journal,bool>>>(), It.IsAny<Expression<Func<Journal, object>>[]>()))                .Returns(journals.Where(j => j.OpenAccess).ToList());
 
             return journalRepository.Object;
         }
