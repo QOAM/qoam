@@ -10,10 +10,17 @@
     <div class="col-md-8 text-right" style="margin-top: 25px;">
         @if (Model.CornerAdmin != null)
         {
-            <em class="corner-admin-name">
-                <span>For updating this corner please contact the cornerAdmin </span>
-                @Html.ActionLink(Model.CornerAdmin.DisplayName, "Details", "Profiles", new { id = Model.CornerAdmin.Id }, null)
-            </em>
+            if (Model.IsCornerAdmin)
+            {
+                @Html.ActionLink("Discontinue this corner", "DeleteCorner", new { id = Model.Corner }, new { id = "discard-corner", @class = "btn btn-danger"})
+            }
+            else {
+                <em class="corner-admin-name">
+                    <span>For updating this corner please contact the cornerAdmin </span>
+                    @Html.ActionLink(Model.CornerAdmin.DisplayName, "Details", "Profiles", new { id = Model.CornerAdmin.Id }, null)
+                </em>
+            }
+
         }
     </div>
 </div>
@@ -67,3 +74,6 @@
     </tbody>
 </table>
 @Html.PagedListPager(Model.Journals, page => Url.Action("Index", Model.ToRouteValueDictionary(page)), Html.PagedListRenderOptions())
+
+
+@Html.Partial("_DiscardCornerModal")

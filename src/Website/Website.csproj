@@ -252,6 +252,7 @@
     <Compile Include="ViewModels\Account\ChangeEmailViewModel.cs" />
     <Compile Include="ViewModels\Admin\ImportSubmissionLinksViewModel.cs" />
     <Compile Include="ViewModels\Admin\InstitutionsAddedViewModel.cs" />
+    <Compile Include="ViewModels\Admin\RemoveCornerViewModel.cs" />
     <Compile Include="ViewModels\Admin\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\Admin\SubmissionLinksImportedViewModel.cs" />
     <Compile Include="ViewModels\IFileUploadViewModel.cs" />
@@ -963,6 +964,8 @@
     <Content Include="Views\Shared\_SwotMatrix.cshtml" />
     <Content Include="Views\Shared\_JournalFilters.cshtml" />
     <Content Include="Views\QoamCorners\_Journals.cshtml" />
+    <Content Include="Views\Shared\_DiscardCornerModal.cshtml" />
+    <Content Include="Views\Admin\RemoveCorner.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

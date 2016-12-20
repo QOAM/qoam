@@ -43,6 +43,7 @@ namespace QOAM.Website.Controllers
             model.Corners = _cornerRepository.All().OrderByDescending(c => c.NumberOfVisitors).ThenBy(c => c.Name).ToList();
             model.Journals = _cornerRepository.GetJournalsForCorner(model.ToFilter());
             model.CornerAdmin = corner?.CornerAdmin;
+            model.IsCornerAdmin = VisitorIsCornerAdmin(corner);
             model.CornerName = corner?.Name;
 
             return View(model);
@@ -126,6 +127,19 @@ namespace QOAM.Website.Controllers
             return View(model);
         }
 
+        [HttpGet, Route("{id:int}/delete")]
+        public ActionResult DeleteCorner(int id)
+        {
+            var corner = GetCorner(id);
+
+            if (corner != null)
+            {
+                _cornerRepository.Delete(corner);
+                _cornerRepository.Save();
+            }
+
+            return RedirectToAction("Index");
+        }
         #region Private Methods
 
         List<CornerJournal> ParseJournalsFromIssns(CornerToImport cornerToImport)
@@ -174,7 +188,7 @@ namespace QOAM.Website.Controllers
 
         bool VisitorIsCornerAdmin(Corner corner)
         {
-            return corner.UserProfileId == Authentication.CurrentUserId;
+            return corner != null && corner.UserProfileId == Authentication.CurrentUserId;
         }
 
         void CreateNewCorner(CornerToImport cornerToImport, CornersImportedViewModel importResult)

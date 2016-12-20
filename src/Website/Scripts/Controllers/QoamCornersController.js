@@ -19,6 +19,16 @@
         });
 
         initSwotFilter();
+
+        $("#discard-corner").click(function (e) {
+            var deleteUrl = this.href;
+            e.preventDefault();
+            $("#discard-corner-modal").modal();
+
+            $("#confirm-discard").on("click", function () {
+                window.location.href = deleteUrl;
+            });
+        });
     };
     return QoamCornersController;
 })();

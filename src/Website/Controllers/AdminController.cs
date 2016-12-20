@@ -44,10 +44,11 @@ namespace QOAM.Website.Controllers
 
         readonly IBulkImporter<SubmissionPageLink> _bulkImporter;
         readonly IBulkImporter<Institution> _institutionImporter;
+        readonly ICornerRepository _cornerRepository;
         readonly Regex _domainRegex = new Regex(@"(?<=(http[s]?:\/\/(.*?)[.?]))\b([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b", RegexOptions.Compiled);
         readonly JournalTocsImport _journalsTocImport;
 
-        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalTocsImport journalsTocImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter, IBulkImporter<Institution> institutionImporter)
+        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalTocsImport journalsTocImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter, IBulkImporter<Institution> institutionImporter, ICornerRepository cornerRepository)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalsImport, nameof(journalsImport));
@@ -72,6 +73,7 @@ namespace QOAM.Website.Controllers
 
             _bulkImporter = bulkImporter;
             _institutionImporter = institutionImporter;
+            _cornerRepository = cornerRepository;
         }
 
         [HttpGet, Route("")]
@@ -719,6 +721,18 @@ namespace QOAM.Website.Controllers
                 SwotCount = journalRepository.JournalsWithSwotCount()
             };
 
+            return View(model);
+        }
+
+        [HttpGet, Route("removecorner")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult RemoveCorner()
+        {
+            var model = new RemoveCornerViewModel
+            {
+                Corners = _cornerRepository.All().OrderByDescending(c => c.NumberOfVisitors).ThenBy(c => c.Name).ToList()
+            };
+            
             return View(model);
         }
 
