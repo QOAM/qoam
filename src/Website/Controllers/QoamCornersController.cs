@@ -77,12 +77,14 @@ namespace QOAM.Website.Controllers
                     }
                     else if (VisitorIsCornerAdmin(existingCorner))
                     {
-                        var newJournals = ParseJournalsFromIssns(cornerToImport).Where(j => existingCorner.CornerJournals.All(x => x.JournalId != j.JournalId)).ToList();
+                        var journals = ParseJournalsFromIssns(cornerToImport);
+                        var newJournals = journals.Where(j => existingCorner.CornerJournals.All(x => x.JournalId != j.JournalId)).ToList();
+                        var toRemove = existingCorner.CornerJournals.Where(cj => journals.All(j => j.JournalId != cj.JournalId)).ToList();
 
-                        if (!newJournals.Any())
+                        if (!newJournals.Any() && !toRemove.Any())
                             continue;
 
-                        UpdateCorner(newJournals, existingCorner, importResult);
+                        UpdateCorner(newJournals, toRemove, existingCorner, importResult);
                     }
                     else if (!VisitorIsCornerAdmin(existingCorner))
                     {
@@ -115,14 +117,6 @@ namespace QOAM.Website.Controllers
                 //throw;
                 return View(model);
             }
-        }
-
-        static void UpdateCorner(List<CornerJournal> newJournals, Corner existingCorner, CornersImportedViewModel importResult)
-        {
-            foreach (var cornerJournal in newJournals)
-                existingCorner.CornerJournals.Add(cornerJournal);
-
-            importResult.UpdatedCorners.Add(existingCorner.Name);
         }
 
         [HttpGet, Route("cornersimported")]
@@ -159,20 +153,20 @@ namespace QOAM.Website.Controllers
 
             // A Corner Admin should not increase the visitor count, but should probably be counted for the LastVisitedOn, so that he can keep the corner alive?
             // Sergi Papaseit 2016-12-19
-            if (VisitorIsCornerAdmin(corner))
-                return;
-
-            corner.NumberOfVisitors++;
-            
-            var isUnique = corner.CornerVisitors.Any(v => v.IpAddress != Request.UserHostAddress);
-
-            if (isUnique)
+            if (!VisitorIsCornerAdmin(corner))
             {
-                corner.CornerVisitors.Add(new CornerVisitor
+                var isUnique = corner.CornerVisitors.All(v => v.IpAddress != Request.UserHostAddress || (v.IpAddress == Request.UserHostAddress && v.VisitedOn.AddMinutes(60) <= DateTime.Now));
+                
+                if (isUnique)
                 {
-                    IpAddress = Request.UserHostAddress,
-                    VisitedOn = corner.LastVisitedOn
-                });
+                    corner.NumberOfVisitors++;
+
+                    corner.CornerVisitors.Add(new CornerVisitor
+                    {
+                        IpAddress = Request.UserHostAddress,
+                        VisitedOn = corner.LastVisitedOn
+                    });
+                }
             }
 
             _cornerRepository.Save();
@@ -195,6 +189,17 @@ namespace QOAM.Website.Controllers
 
             _cornerRepository.InsertOrUpdate(corner);
             importResult.ImportedCorners.Add(corner.Name);
+        }
+
+        void UpdateCorner(IEnumerable<CornerJournal> newJournals, IEnumerable<CornerJournal> toRemove, Corner existingCorner, CornersImportedViewModel importResult)
+        {
+            foreach (var cornerJournal in newJournals)
+                existingCorner.CornerJournals.Add(cornerJournal);
+
+            foreach (var cornerJournal in toRemove)
+                _cornerRepository.RemoveJournal(cornerJournal);
+
+            importResult.UpdatedCorners.Add(existingCorner.Name);
         }
 
         #endregion

@@ -5,11 +5,13 @@
         Please, select a QOAMcorner on the left-hand side to view its journals.
     </h3>
 </div>
-<div class="row">
-    <div class="list-group">
-        <a href="javascript:void(0)" class="list-group-item active">10 most popular corners</a>
-        @foreach (var corner in Model.Corners.Take(10)) {
-            @Html.ActionLink(corner.Name, "Index", new { Corner = corner.Id }, new { @class = "list-group-item" })
-        }
+@if (Model.Corners.Any()) { 
+    <div class="row">
+        <div class="list-group">
+            <a href="javascript:void(0)" class="list-group-item active">10 most popular corners</a>
+            @foreach (var corner in Model.Corners.Take(10)) {
+                @Html.ActionLink(corner.Name, "Index", new { Corner = corner.Id }, new { @class = "list-group-item" })
+            }
+        </div>
     </div>
-</div>
+}

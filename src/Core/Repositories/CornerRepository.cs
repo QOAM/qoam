@@ -3,9 +3,11 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using LinqKit;
+using NPOI.SS.Formula.Functions;
 using PagedList;
 using QOAM.Core.Helpers;
 using QOAM.Core.Repositories.Filters;
+using Validation;
 
 namespace QOAM.Core.Repositories
 {
@@ -47,6 +49,16 @@ namespace QOAM.Core.Repositories
                 .Where(cj => cj.CornerId == cornerId);
 
             return query.Select(uj => uj.Journal).Search(filter);
+        }
+
+        public void RemoveJournal(CornerJournal entity)
+        {
+            Requires.NotNull(entity, nameof(entity));
+
+            if (entity.Id == default(int))
+                return;
+
+            DbContext.Set<CornerJournal>().Remove(entity);
         }
     }
 }
