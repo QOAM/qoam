@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "B2B Services";
+    ViewBag.Title = "Utilities";
 }
 
 <div class="container main">
@@ -14,6 +14,7 @@
                 <li><a href="#group-invite"><em>Group invitation to complete a Valuation Score Card</em></a></li>
                 <li><a href="#licenses"><em>Including licensed prices in QOAM</em></a></li>
                 <li><a href="#submission"><em>Including a submission button in QOAM</em></a></li>
+                <li><a href="#QOAMcorner"><em>Creating a QOAMcorner</em></a></li>
 
             </ul>
 
@@ -23,7 +24,7 @@
             </p>
             <p>
                 What is needed are the ISSNs of journals to be evaluated, plus names and email addresses of authors you want to invite to do so.
-                These data have to be organized in an Excel file with three required columns: "eissn" (the ISSN the journal uses for its electronic version), "Author email address" and "Author name".
+                These data must be organized in an Excel file with three required columns: "eissn" (the ISSN the journal uses for its electronic version), "Author email address" and "Author name".
                 (Multiple e-mail addresses per author can be used, separated by a semicolon or a comma, e.g.: author1@test.uni; author1@somemail.com.)
             </p>
             <p>
@@ -47,7 +48,7 @@
                 The import of licensed prices in QOAM requires an Excel file with the following format.
             </p>
             <p>
-                The main worksheet (first tab) is called ‘Universities’ and has two columns. One is ‘Domains’ with the top level domain names of concerned universities (e.g. university1.nl or university2.ac.uk). The other one is called ‘Tabs’. It has the names of the other tabs, the so called licence tabs. Usually these tabs have the name of a publisher (e.g. publisherA or, in case a publisher has more licences, publisherB1, publisherB2, etc.).  It is possible to have several comma or semicolon separated tab names in one field.
+                The main worksheet (first tab) is called ‘Universities’ and has two columns. One is ‘Domains’ with the top-level domain names of concerned universities (e.g. university1.nl or university2.ac.uk). The other one is called ‘Tabs’. It has the names of the other tabs, the so-called licence tabs. Usually these tabs have the name of a publisher (e.g. publisherA or, in case a publisher has more licences, publisherB1, publisherB2, etc.).  It is possible to have several comma or semicolon separated tab names in one field.
             </p>
             <p>
                 Every licence tab has two columns. The first one is called ‘eISSN’ and has the ISSN numbers of the digital versions of the journals included in a specific licence. The second column is called ‘Text’ and nutshells the discount for that journal in the given licence, typically as follows, “Discount of xy% on publication fee. Please contact your library for more information.”
@@ -64,7 +65,7 @@
             </p>
             <p>
                 <h4>2. Maintenance</h4>
-                All changes can be managed via existing or new Excel files. In case an existing file is changed, importing it will overwrite the old data. So, in case a university cancels a licence, skip the name of the corresponding licence tab behind the domain name of that university in the main worksheet and import the whole file again. Or import a new file with only the domain name of that university and leave the column with licence tabs blank. In that case all licences of that university will be skipped.
+                All changes can be managed via existing or new Excel files. In case an existing file is changed, importing it will overwrite the old data. So, in case a university cancels a licence, skip the name of the corresponding licence tab behind the domain name of that university in the main worksheet and import the whole file again. Or import a new file with only the domain name of that university and leave the column with licence tabs blank. In that case, all licences of that university will be skipped.
             </p>
 
             <h3 id="submission">Including a submission button in QOAM</h3>
@@ -78,19 +79,20 @@
                 The first column is named “eissn” and has the ISSNs the publisher uses for the digital versions of their journals.
                 The second column is headed “url” and has per ISSN the URL of the submission page of the journal. Mind: this URL has to start with the domain name of the journal in order to avoid mischievous redirections.
             </p>
-            
+
             <h3 id="QOAMcorner">Creating a QOAMcorner</h3>
             <p>
-                A QOAMcorner is a journal collection in QOAM for a specific clientele. This could be an institute,  a project team, a lab or even a temporary corner for a conference. A portfolio of journals subsidised by a specific funder is also an option. In fact, any selection of journals may constitute a corner in QOAM. QOAMcorners are created by libraries as a bespoke service to their authors.
+                A QOAMcorner is a journal collection in QOAM for a specific clientele. This could be an institute,  a project team, a lab or even a temporary corner for a conference. A portfolio of journals subsidized by a specific funder is also an option. In fact, any selection of journals may constitute a corner in QOAM. QOAMcorners are created by libraries as a bespoke service to their authors.
             </p>
             <p>
                 <h4>1. Creation</h4>
                 Making a corner is really simple. The only ingredients are the ISSN numbers of journals to be included in the corner plus a corner name of your own choice for it. Now, place the ISSNs in a column of an Excel file and name the column after your corner. In fact you thus can create several corners at once by filling in a column for each corner.
-                Next, log in via this button. (Make sure you are registered in QOAM. See @Html.ActionLink("‘Register’", "Register", "Account")  in QOAM’s home page). After having logged in a submit box will show up. Submit your file there. That’s all. The newly created corner will then pop up on QOAM’s web site under the button ‘QOAMcorners’ in the black beam. Corners will be sorted by popularity i.e. the number of returning visitors. At the top of the QOAMcorner page you will be mentioned as the cornerAdmin, so that you may be contacted (only by people who are logged in themselves) for questions e.g. a request to update the journal list.
+                Next, go to QOAM’s main page and click the button ‘QOAMcorners’ and then ‘(Re)make QOAM corners’. (Make sure you are logged in in QOAM.) Submit your file there. That’s all. Your newly created corner is included in the ‘Browse QOAMcorners’ list under the button ‘QOAMcorners’. At the top of the QOAMcorner page you will be mentioned as the cornerAdmin, so that you may be contacted (only by people who are logged in themselves) for questions e.g. a request to update the journal list.  
             </p>
             <p>
                 <h4>2. Maintenance</h4>
-                The cornerAdmin can maintain the corner by importing an Excel file for the same corner anew. Mind, this means that if you only want to add journals to an existing corner you have to import the whole list again, i.e. including the existing ones. The cornerAdmin can also discard a corner. NB In order to avoid obsolete corners in QOAM, a corner that has not been visited in half a year’s time will be deleted automatically.
+                The cornerAdmin can maintain their corner by importing an Excel file with the same corner name anew. The existing list will be overwritten then. The cornerAdmin can also discard a corner. The ‘Discontinue your corner’ button will be shown on the corner page of the cornerAdmin. In case a cornerAdmin wants to pass their role to someone else they simply discontinue their own corner, forward the Excel file with the corner list to their successor who then imports the list under their own name.
+                NB In order to avoid obsolete corners in QOAM, a corner that has not been visited in half a year’s time will be deleted automatically.
             </p>
         </div>
     </div>

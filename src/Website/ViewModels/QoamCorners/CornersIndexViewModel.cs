@@ -21,6 +21,7 @@ namespace QOAM.Website.ViewModels.QoamCorners
         public IList<Corner> Corners { get; set; }
         public UserProfile CornerAdmin { get; set; }
         public string CornerName { get; set; }
+        public bool IsCornerAdmin { get; set; }
 
         public override RouteValueDictionary ToRouteValueDictionary(int page)
         {

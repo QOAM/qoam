@@ -1,0 +1,48 @@
+﻿@using System.Web.Optimization
+@using QOAM.Website.Helpers
+@model QOAM.Website.ViewModels.Admin.RemoveCornerViewModel
+
+@{
+    ViewBag.Title = "Remove QOAMcorners";
+}
+
+<div class="container main">
+    <h2>@ViewBag.Title</h2>
+
+    <p>
+        Select a QOAMcorner from the list to remove it permanently.
+    </p>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                @Html.DropDownListFor(m => m.CornerId, Model.Corners.ToSelectListItems("QOAMcorners"), new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    
+    <div class="row bottommargin">
+        <div class="col-xs-11">
+            <a href="#" id="discard-corner" class="btn btn-danger">Remove selected corner</a>
+        </div>
+    </div>
+    
+    @Html.Partial("_DiscardCornerModal")
+</div>
+
+@section stylesheets
+{
+    @Styles.Render("~/styles/chosen")
+}
+
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/chosen")
+    <script type="text/javascript">
+        $(function() {
+            var adminController = new AdminController();
+            adminController.removeCorner();
+        });
+    </script>
+}
