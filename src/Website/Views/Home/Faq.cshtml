@@ -11,34 +11,63 @@
             <h2>@ViewBag.Title</h2>
 
             <ul class="list-unstyled">
+                <li><a href="#qoam-meaning"><em>What does the acronym QOAM mean?</em></a></li>
+                <li><a href="#quality"><em>How is quality measured in QOAM?</em></a></li>
+                <li><a href="#color-codes"><em>What do the journal color codes mean in QOAM?</em></a></li>
+                <li><a href="#prices"><em>Which prices do you find in QOAM?</em></a></li>
                 <li><a href="#subscription-journals"><em>Why are subscription journals not included in QOAM?</em></a></li>
+                <li><a href="#moderation"><em>Is QOAM moderated?</em></a></li>
                 <li><a href="#cant-find-journal"><em>Why don’t I find a specific journal in QOAM?</em></a></li>
-                <li><a href="#no-metrics"><em>What is meant by ‘quality’ in QOAM?</em></a></li>
-                <li><a href="#framing"><em>Is QOAM prone to improper use?</em></a></li>
                 <li><a href="#login"><em>How can I log in to QOAM?</em></a></li>
             </ul>
 
+            <h3 id="qoam-meaning">What does the acronym QOAM mean?</h3>
+            <p>
+                QOAM stands for Quality Open Access Market.
+                The price-performance ratio varies greatly for open access journals. QOAM aims at offering authors, academic institutions and research funders a better insight in these differences. Bringing these figures together in one place stimulates a quality based market for open access journals. Publishers must then compete for the choice of authors and the preference of funders.
+            </p>
+            
+            <h3 id="quality">How is quality measured in QOAM?</h3>
+            <p>
+                QOAM has two measuring points for the quality of a journal: the transparency of the journal’s website and experiences of authors who published in the journal.
+                The website of a journal should be informative about matters like the peer review process, and the role of the editorial board (and who is in it!). This makes a journal trustworthy. Library staff checks the availability of this type of information by completing a questionnaire, the <strong>Base Score Card</strong>. Author experiences may differ from a website’s promises. Therefore, QOAM also solicits author satisfaction via a short questionnaire, the <strong>Valuation Score Card</strong>.
+                So, quality in QOAM stands for the quality of the service of a journal, not directly for the quality of its content. An <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0147913" target="_blank">article by Jelte Wicherts</a> has shown, however, that the transparency of a journal’s website predicts academic quality in new journals
+            </p>
+            
+            <h3 id="color-codes">What do the journal color codes mean in QOAM?</h3>
+            <p>
+                Both the Base Score and the Valuation Score run from 1 to 5. A four color code is based on these scores.
+                If both scores are high (≥3) the journal is categorized as <strong>S</strong>trong with color code green. If both scores are low, the journal falls in the category <strong>W</strong>eaker, with color yellow. If the website score is low, but authors give a high score, the journal is color coded blue and indicated as an <strong>O</strong>pportunity (for the publisher). It then simply suffices for a publisher to improve the transparency of their journal’s website to see the journal promoted to green. The color code red is given when the website is promising, but authors are dissatisfied. These journals are seen as a <strong>T</strong>hreat (to authors) and could be phony journals.
+                In QOAM this color categorization is referred to as the <strong>SWOT</strong> matrix.
+            </p>
+            
+            <h3 id="prices">Which prices do you find in QOAM?</h3>
+            <p>
+                Open Access is a nascent market for academic publishing. Prices are dynamic. QOAM collects price information from three sources:<br/>
+                (1) Via Base Score Cards libraries mention the publication fee as quoted on a journal’s web site;<br/>
+                (2) Via Valuation Score Cards authors share the, sometimes negotiated, price they really paid for having their article published;<br />
+                (3) Increasingly, publishers settle licenses with (consortiums of) institutions, resulting in discounts on the publication fee. QOAM inquires about these discounts, if necessary with an appeal to the Freedom of Information Act.<br />
+                At the detail page of a journal under the tab ‘Price information’ all three prices are reflected.
+            </p>
+
             <h3 id="subscription-journals">Why are subscription journals not included in QOAM?</h3>
-            <p>QOAM is in the overlap of three domains: (1) Quality, (2) Open Access, (3) Market. Do subscription journals fit into these domains?<br />Ad 1. Quality. Yes. The Journal Score Cards are business model neutral.<br />Ad 2. Open Access. No. Subscription is at odds with Open Access.<br />Ad 3. Market. No. The current Big Deal packages obscure any market idea.<br />So, subscription journals do not fit in QOAM.</p>
+            <p>QOAM is in the overlap of three domains: (1) Quality, (2) Open Access, (3) Market. Do subscription journals fit into these domains?<br />Ad 1. Quality. Yes. The Journal Score Cards are business model neutral.<br />Ad 2. Open Access. No. Subscription is at odds with Open Access.<br />Ad 3. Market. No. The current Big Deal packages obscure any market idea.<br />So, subscription journals do not fit in QOAM. Hybrid journals, however, do. But limitation of QOAM to full OA journals only is a one mouse click option.</p>
+            
+            <h3 id="moderation">Is QOAM moderated?</h3>
+            <p>
+                QOAM is based on academic crowd sourcing. This means that one has to register with an academic email address before completing a score card for a journal, and only one Journal Score Card may be published for a specific journal per person. Email addresses are checked against a list of registered academic institutions.
+                If, nevertheless, some scores might seem extreme, these will be averaged out if a journal has several scores. Besides of that, score cards are weeded after two years in order to guarantee that the scores reflect the latest developments of a journal.
+                If someone is in doubt about a score, they may (when logged in themselves) click the email address of the scorer and contact him or her. Moreover, it is possible to notify the QOAM-Team via <a href="mailto:info@qoam.eu">info@qoam.eu</a>.
+                Thus, we rely on academic vigilance to avoid improper use.
+            </p>
 
             <h3 id="cant-find-journal">Why don’t I find a specific journal in QOAM?</h3>
-            <p>If an open access or hybrid journal is not included in QOAM, please notify this via QOAM’s @Html.ActionLink("Contact box", "Contact"). We will include this journal in QOAM provided that it can be found in Ulrich’s or DOAJ’s database, currently the journal record resources that QOAM relies on.</p>
+            <p>If an open access or hybrid journal is not included in QOAM, please notify this via QOAM’s @Html.ActionLink("Contact box", "Contact"). We will include this journal in QOAM provided that it can be found in JournalTOCs, our journal record provider.</p>
 
-            <h3 id="no-metrics">What is meant by ‘quality’ in QOAM?</h3>
+            <h3 id="login">How can I log in to QOAM?</h3>
             <p>
-                ‘Quality’ in QOAM does not refer directly to the quality of the articles in the journals in QOAM, but to the quality of a journal as a service to authors. QOAM  scores the transparency of a journal’s website with respect to editorial board, peer review, governance and work flow, while authors share their experiences with the journal. An article by Jelte Wicherts has shown, however, that the transparency of a journal’s website predicts academic quality in new journals.
-            </p>
-
-            <h3 id="framing">Is QOAM prone to improper use?</h3>
-            <p>
-                To avoid unqualified contributions to QOAM, only members of the academic community may log in to QOAM and publish Journal Score Cards. Per person only one JSC may be published for a specific journal. Published Journal Score Cards are non-anonymous and their authors may contact each other via the <a href="@Url.Action("Index", "Profiles")" title="Profiles section">Profiles section</a> of QOAM. Read more about QOAM’s <a href="@Url.Action("About")#privacy" title="Privacy policy">Privacy policy.</a><br />
-
-                Currently, QOAM has no resources to organize top-down social control or moderation. We have to rely on academic vigilance. Jeffrey Beall’s <a href="http://scholarlyoa.com/individual-journals/" title="list of predatory journals">list of predatory journals</a> and John Bohannon’s article <a href="http://www.sciencemag.org/content/342/6154/60.full" title="Who is Afraid of Peer Review?">Who is Afraid of Peer Review?</a> are examples of this.
-            </p>
-
-            <div id="login"><h3 id="connect-institute">How can I log in to QOAM?</h3></div>
-            <p>
-                If you want to log in for the first time, please register with your institutional email address and a password of your choice. You will receive a prompt request to confirm your registration. Confirmation will activate your account. Next time you may log in directly. We have built in the option to submit your ORCID, provided you have one. Thus, you can be identified if you change institute, hence email address. For the moment, however, this service is not yet operational and you have to update your email address yourself.
+                If you want to log in for the first time, please register with your institutional email address and a password of your choice. You will receive a prompt request to confirm your registration.  Confirmation will activate your account. Next time you may log in directly.  Read more here about QOAM’s Privacy policy.
+                We have built in the option to submit your ORCID, provided you have one. Thus, you can be identified if you change institute, hence email address. For the moment, however, this service is not yet operational and you have to update your email address yourself.
             </p>
         </div>
     </div>
