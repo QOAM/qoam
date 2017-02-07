@@ -25,5 +25,6 @@
         DateTime? LastUpdate();
         void RemoveUnpublishedScoreCards(TimeSpan toBeRemovedWindow);
         void ArchiveDuplicateScoreCards();
+        IList<ValuationScoreCard> AllPublished();
     }
 }

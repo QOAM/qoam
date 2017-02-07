@@ -16,6 +16,12 @@
         {
         }
 
+        public bool EnableProxyCreation
+        {
+            get { return DbContext.Configuration.ProxyCreationEnabled; }
+            set { DbContext.Configuration.ProxyCreationEnabled = value; }
+        }
+
         public BaseScoreCard Find(int id)
         {
             return this.DbContext.BaseScoreCards
@@ -53,6 +59,14 @@
             }
 
             return query.OrderByDescending(s => s.DatePublished).ToPagedList(filter.PageNumber, filter.PageSize);
+        }
+
+        public IList<BaseScoreCard> AllPublished()
+        {
+            return DbContext.BaseScoreCards
+                .Include(s => s.UserProfile)
+                .Include(s => s.Journal)
+                .Where(s => s.State == ScoreCardState.Published).ToList();
         }
 
         public IPagedList<BaseScoreCard> FindForUser(ScoreCardFilter filter)

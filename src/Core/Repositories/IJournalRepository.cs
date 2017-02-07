@@ -11,6 +11,7 @@
 
     public interface IJournalRepository
     {
+        bool EnableProxyCreation { get; set; }
         IList<Journal> All { get; }
 
         IQueryable<string> AllIssns { get; }
