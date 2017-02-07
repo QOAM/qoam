@@ -22,6 +22,12 @@ namespace QOAM.Core.Repositories
         {
         }
 
+        public bool EnableProxyCreation
+        {
+            get { return DbContext.Configuration.ProxyCreationEnabled; }
+            set { DbContext.Configuration.ProxyCreationEnabled = value; }
+        }
+
         public IList<Journal> All
         {
             get

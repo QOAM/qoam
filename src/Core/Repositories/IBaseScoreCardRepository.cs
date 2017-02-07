@@ -25,5 +25,7 @@
         DateTime? LastUpdate();
         void RemoveUnpublishedScoreCards(TimeSpan toBeRemovedWindow);
         void ArchiveDuplicateScoreCards();
+        IList<BaseScoreCard> AllPublished();
+        bool EnableProxyCreation { get; set; }
     }
 }

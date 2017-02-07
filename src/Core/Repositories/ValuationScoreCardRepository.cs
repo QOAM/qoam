@@ -69,6 +69,14 @@
             return query.OrderByDescending(s => s.DatePublished).ToPagedList(filter.PageNumber, filter.PageSize);
         }
 
+        public IList<ValuationScoreCard> AllPublished()
+        {
+            return DbContext.ValuationScoreCards
+                .Include(s => s.UserProfile)
+                .Include(s => s.Journal)
+                .Where(s => s.State == ScoreCardState.Published).ToList();
+        }
+
         public ScoreCardStats CalculateStats(UserProfile userProfile)
         {
             var groupedStates = this.DbContext.ValuationScoreCards.Where(s => s.UserProfileId == userProfile.Id)

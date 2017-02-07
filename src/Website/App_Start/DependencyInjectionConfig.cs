@@ -1,4 +1,6 @@
-﻿using Autofac.Core;
+﻿using System.Web.Http;
+using Autofac.Core;
+using Autofac.Integration.WebApi;
 using QOAM.Core;
 using QOAM.Core.Import.Institutions;
 using QOAM.Core.Import.Invitations;
@@ -33,11 +35,15 @@ namespace QOAM.Website
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            // Set the dependency resolver for Web API.
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
 
         private static void RegisterControllers(ContainerBuilder builder)
         {
-            builder.RegisterControllers(typeof (MvcApplication).Assembly);
+            var assembly = typeof(MvcApplication).Assembly;
+            builder.RegisterControllers(assembly);
+            builder.RegisterApiControllers(assembly);
         }
 
         private static void RegisterRepositories(ContainerBuilder builder)

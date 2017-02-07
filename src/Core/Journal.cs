@@ -1,4 +1,6 @@
-﻿namespace QOAM.Core
+﻿using System.Runtime.Serialization;
+
+namespace QOAM.Core
 {
     using System;
     using System.Collections.Generic;
