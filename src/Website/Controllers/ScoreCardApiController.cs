@@ -28,6 +28,7 @@ namespace QOAM.Website.Controllers
                 {
                     Id =c.Id,
                     Journal = c.Journal.Title,
+                    ISSN = c.Journal.ISSN,
                     DateExpiration = c.DateExpiration,
                     DatePublished = c.DatePublished,
                     DateStarted = c.DateStarted,
@@ -54,6 +55,7 @@ namespace QOAM.Website.Controllers
                 {
                     Id = c.Id,
                     Journal = c.Journal.Title,
+                    ISSN = c.Journal.ISSN,
                     DateExpiration = c.DateExpiration,
                     DatePublished = c.DatePublished,
                     DateStarted = c.DateStarted,

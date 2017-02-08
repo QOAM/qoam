@@ -8,6 +8,7 @@ namespace QOAM.Website.ViewModels.Api.ScoreCard
     {
         public int Id { get; set; }
         public string Journal { get; set; }
+        public string ISSN { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public DateTime DateStarted { get; set; }
