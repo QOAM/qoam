@@ -36,7 +36,6 @@ namespace QOAM.Website.Controllers
                     Score = c.Score,
                     State = c.State,
                     UserName = c.UserProfile.DisplayName,
-                    Email = c.UserProfile.Email,
                     Editor = c.Editor,
                     Submitted = c.Submitted
                 });
@@ -63,7 +62,6 @@ namespace QOAM.Website.Controllers
                     Score = c.Score,
                     State = c.State,
                     UserName = c.UserProfile.DisplayName,
-                    Email = c.UserProfile.Email,
                     Editor = c.Editor,
                     Submitted = c.Submitted
                 });
