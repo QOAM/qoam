@@ -1,11 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Utilities";
+    ViewBag.Title = "Tools";
 }
 
 <div class="container main">
     <div class="row">
         <div class="col-md-3">
-            @{ Html.RenderPartial("_SidebarMenu", "B2B"); }
+            @{ Html.RenderPartial("_SidebarMenu", "Tools"); }
         </div>
         <div class="col-md-9">
             <h2>@ViewBag.Title</h2>
@@ -15,6 +15,7 @@
                 <li><a href="#licenses"><em>Including licensed prices in QOAM</em></a></li>
                 <li><a href="#submission"><em>Including a submission button in QOAM</em></a></li>
                 <li><a href="#QOAMcorner"><em>Creating a QOAMcorner</em></a></li>
+                <li><a href="#data"><em>Mining QOAM's data</em></a></li>
 
             </ul>
 
@@ -28,7 +29,8 @@
                 (Multiple e-mail addresses per author can be used, separated by a semicolon or a comma, e.g.: author1@test.uni; author1@somemail.com.)
             </p>
             <p>
-                Next, go to @Html.ActionLink("https://www.qoam.eu/score/bulkrequestvaluation", "BulkRequestValuation", "Score"). If you want to send the standard invitation mail, simply import the Excel file. In case you want to send a customized mail, the button ‘Adapt invitation letter’ offers the option to adapt the invitation first. Don’t forget to insert your own email address.
+                Next, go to @Html.ActionLink("https://www.qoam.eu/score/bulkrequestvaluation", "BulkRequestValuation", "Score"). If you want to send the standard invitation mail, simply import the Excel file. In case you want to send a customized mail, the button ‘Adapt invitation letter’ offers the option to adapt the invitation first. <br />
+                <em><strong>Mind: (1) Don’t change the subject box, the message header and the text pieces starting with << and ending with >>. These parts will be customized automatically by the impoert file, (2) Don’t forget to insert your own email address.</strong></em>
             </p>
             <p>
                 After some time, depending on the length of the invitation list, a short result report pops up telling how many invitations have been sent plus a list of mails which have not been sent with a reason why. In general it concerns deficiencies in the mail addresses.  After having repaired them you may resend those mails (but take care that you do not send again the ones that went OK).
@@ -87,12 +89,17 @@
             <p>
                 <h4>1. Creation</h4>
                 Making a corner is really simple. The only ingredients are the ISSN numbers of journals to be included in the corner plus a corner name of your own choice for it. Now, place the ISSNs in a column of an Excel file and name the column after your corner. In fact you thus can create several corners at once by filling in a column for each corner.
-                Next, go to QOAM’s main page and click the button ‘QOAMcorners’ and then ‘(Re)make QOAM corners’. (Make sure you are logged in in QOAM.) Submit your file there. That’s all. Your newly created corner is included in the ‘Browse QOAMcorners’ list under the button ‘QOAMcorners’. At the top of the QOAMcorner page you will be mentioned as the cornerAdmin, so that you may be contacted (only by people who are logged in themselves) for questions e.g. a request to update the journal list.  
+                Next, go to QOAM’s main page and click the button ‘QOAMcorners’ and then ‘(Re)make QOAM corners’. (Make sure you are logged in in QOAM.) Submit your file there. That’s all. Your newly created corner is included in the ‘Browse QOAMcorners’ list under the button ‘QOAMcorners’. At the top of the QOAMcorner page you will be mentioned as the cornerAdmin, so that you may be contacted (only by people who are logged in themselves) for questions e.g. a request to update the journal list.
             </p>
             <p>
                 <h4>2. Maintenance</h4>
                 The cornerAdmin can maintain their corner by importing an Excel file with the same corner name anew. The existing list will be overwritten then. The cornerAdmin can also discard a corner. The ‘Discontinue your corner’ button will be shown on the corner page of the cornerAdmin. In case a cornerAdmin wants to pass their role to someone else they simply discontinue their own corner, forward the Excel file with the corner list to their successor who then imports the list under their own name.
                 NB In order to avoid obsolete corners in QOAM, a corner that has not been visited in half a year’s time will be deleted automatically.
+            </p>
+            
+            <h3 id="data">Mining QOAM's data</h3>
+            <p>
+                QOAM data can easily be mined via the QOAM API. Currently, the API is pretty basic. Only three requests can be performed: all journals including score information, all Base Score Cards, and all Valuation Score Cards. Requests with more refined parameters may be developed when needed. Available formats are XML and JSON. A smart online JSON-Excel converter <a href="http://www.json-xls.com/json2xls">may be found here</a>. A  <a href="https://github.com/QOAM/qoam/wiki/QOAM-API">Wiki about the API</a> is available at <a href="https://github.com/QOAM/qoam">QOAM’s GitHUB page</a>.
             </p>
         </div>
     </div>
