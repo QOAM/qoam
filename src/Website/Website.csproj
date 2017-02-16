@@ -972,7 +972,7 @@
     <Content Include="Views\MyQoam\_EmptyText.cshtml" />
     <Content Include="Views\Journals\_EmptyText.cshtml" />
     <Content Include="Views\Home\Manuals.cshtml" />
-    <Content Include="Views\Home\B2B.cshtml" />
+    <Content Include="Views\Home\Tools.cshtml" />
     <Content Include="Views\Admin\ImportSubmissionLinks.cshtml" />
     <Content Include="Views\Admin\SubmissionLinksImportSuccessful.cshtml" />
     <Content Include="Views\Admin\Statistics.cshtml" />

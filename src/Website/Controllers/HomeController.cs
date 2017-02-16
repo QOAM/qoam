@@ -74,8 +74,8 @@
             return this.View();
         }
 
-        [HttpGet, Route("b2b")]
-        public ViewResult B2B()
+        [HttpGet, Route("tools")]
+        public ViewResult Tools()
         {
             return this.View();
         }
