@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using QOAM.Core.Import.JournalTOCs;
 
 namespace QOAM.Core.Import
 {

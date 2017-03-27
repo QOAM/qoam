@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using FizzWare.NBuilder;
+using QOAM.Core.Import.JournalTOCs;
 using QOAM.Core.Import.SubmissionLinks;
 using QOAM.Website.Tests.Controllers.Stubs;
 using QOAM.Website.ViewModels;
@@ -1013,7 +1014,7 @@ namespace QOAM.Website.Tests.Controllers
 
         static JournalTocsImport CreateJournalTocsImport()
         {
-            return new JournalTocsImport(Mock.Of<IJournalTocsClient>(), Mock.Of<IBlockedISSNRepository>());
+            return new JournalTocsImport(Mock.Of<IJournalTocsClient>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IJournalTocsParser>());
         }
 
         private static IJournalRepository CreateJournalRepository()

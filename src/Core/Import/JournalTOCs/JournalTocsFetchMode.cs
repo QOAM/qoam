@@ -1,4 +1,4 @@
-﻿namespace QOAM.Core.Import
+﻿namespace QOAM.Core.Import.JournalTOCs
 {
     public enum JournalTocsFetchMode
     {

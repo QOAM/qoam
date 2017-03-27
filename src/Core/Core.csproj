@@ -178,6 +178,7 @@
     <Compile Include="Import\DoajImportRecordMap.cs" />
     <Compile Include="Import\IBulkImporter.cs" />
     <Compile Include="Import\IFileImporter.cs" />
+    <Compile Include="Import\JournalTOCs\IJournalTocsClient.cs" />
     <Compile Include="Import\Import.cs" />
     <Compile Include="Import\Institutions\CornerEntityConverter.cs" />
     <Compile Include="Import\Institutions\InstitutionEntityConverter.cs" />
@@ -185,9 +186,13 @@
     <Compile Include="Import\Invitations\AuthorToInvite.cs" />
     <Compile Include="Import\Invitations\ImportAuthorEntityConverter.cs" />
     <Compile Include="Import\Invitations\InvitationFileImporter.cs" />
-    <Compile Include="Import\JournalTocsClient.cs" />
-    <Compile Include="Import\JournalTocsFetchMode.cs" />
-    <Compile Include="Import\JournalTocsSettings.cs" />
+    <Compile Include="Import\JournalTOCs\IJournalTocsParser.cs" />
+    <Compile Include="Import\JournalTOCs\JournalTocsJsonClient.cs" />
+    <Compile Include="Import\JournalTOCs\JournalTocsClient.cs" />
+    <Compile Include="Import\JournalTOCs\JournalTocsFetchMode.cs" />
+    <Compile Include="Import\JournalTOCs\JournalTocsJsonParser.cs" />
+    <Compile Include="Import\JournalTOCs\JournalTocsSettings.cs" />
+    <Compile Include="Import\JournalTOCs\JournalTocsXmlParser.cs" />
     <Compile Include="Import\JournalUpdateProperty.cs" />
     <Compile Include="Import\Licences\IImportEntityConverter.cs" />
     <Compile Include="Import\Licences\ImportLicenseEntityConverter.cs" />
@@ -199,7 +204,7 @@
     <Compile Include="Import\SubmissionLinks\SubmissionLinksFileImporter.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionPageLink.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionPageLinkEntityConverter.cs" />
-    <Compile Include="Import\JournalTocsImport.cs" />
+    <Compile Include="Import\JournalTOCs\JournalTocsImport.cs" />
     <Compile Include="Import\WebClientWrapper.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -8,7 +8,7 @@ namespace QOAM.Core.Import
 
     public abstract class Import
     {
-        protected const string MissingPublisherName = "<none indicated>";
+        public const string MissingPublisherName = "<none indicated>";
         readonly IBlockedISSNRepository blockedIssnRepository;
 
         protected Import(IBlockedISSNRepository blockedIssnRepository)

@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using QOAM.Core.Import.JournalTOCs;
 using QOAM.Core.Import.SubmissionLinks;
 using QOAM.Website.ViewModels.Admin;
 

@@ -1,6 +1,6 @@
 using System.Configuration;
 
-namespace QOAM.Core.Import
+namespace QOAM.Core.Import.JournalTOCs
 {
     public class JournalTocsSettings : ConfigurationSection
     {

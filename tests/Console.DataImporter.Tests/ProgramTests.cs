@@ -1,4 +1,6 @@
-﻿namespace QOAM.Console.DataImporter.Tests
+﻿using QOAM.Core.Import.JournalTOCs;
+
+namespace QOAM.Console.DataImporter.Tests
 {
     using System;
     using System.Collections.Generic;

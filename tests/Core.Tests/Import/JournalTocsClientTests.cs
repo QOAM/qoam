@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Moq;
 using QOAM.Core.Import;
+using QOAM.Core.Import.JournalTOCs;
 using QOAM.Core.Tests.Import.Resources;
 using Xunit;
 

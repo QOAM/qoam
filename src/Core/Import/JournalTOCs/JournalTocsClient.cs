@@ -2,13 +2,8 @@
 using System.Text;
 using NLog;
 
-namespace QOAM.Core.Import
+namespace QOAM.Core.Import.JournalTOCs
 {
-    public interface IJournalTocsClient
-    {
-        List<string> DownloadJournals(JournalTocsFetchMode action = JournalTocsFetchMode.Update);
-    }
-
     public class JournalTocsClient : IJournalTocsClient
     {
         readonly JournalTocsSettings _settings;
