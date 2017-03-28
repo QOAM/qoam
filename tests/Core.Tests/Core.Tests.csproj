@@ -146,6 +146,7 @@
     <Compile Include="Import\InvitationModule\ImportAuthorEntityConverterTests.cs" />
     <Compile Include="Import\InvitationModule\InvitationFileImporterTests.cs" />
     <Compile Include="Import\InvitationModule\Stubs\InvitationStubs.cs" />
+    <Compile Include="Import\JournalTocsJsonClientTests.cs" />
     <Compile Include="Import\JournalTocsClientTests.cs" />
     <Compile Include="Import\JournalTocsJsonParserTests.cs" />
     <Compile Include="Import\JournalTocsXmlParserTests.cs" />

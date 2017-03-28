@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.Web.Helpers;
 using NLog;
 
 namespace QOAM.Core.Import.JournalTOCs
@@ -11,7 +11,7 @@ namespace QOAM.Core.Import.JournalTOCs
         readonly IWebClientFactory _webClientFactory;
         static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         static readonly Encoding _encoding = new UTF8Encoding(false);
-        
+
 
         public JournalTocsJsonClient(JournalTocsSettings settings, IWebClientFactory webClientFactory)
         {
@@ -21,25 +21,26 @@ namespace QOAM.Core.Import.JournalTOCs
 
         public List<string> DownloadJournals(JournalTocsFetchMode action = JournalTocsFetchMode.Update)
         {
-            _logger.Info("Downloading journals...");
+            return new List<string>();
+        }
 
-            var result = new List<string>();
+        public List<string> DownloadJournals(List<string> issns)
+        {
+            _logger.Info("Downloading journals...");
 
             using (var webClient = _webClientFactory.Create())
             {
                 webClient.Encoding = _encoding;
 
                 //_logger.Info($"\t...downloading batch #{_resumptionToken + 1}...");
+                
+                //var resultString = webClient.DownloadString("http://www.journaltocs.ac.uk/API/RSS/GetJournalByIssn.php?sui=z7CsvQxb1udh849067j6&test=true&issns[]=1697-5200&issns[]=1502-4873");
 
-                //var batch = webClient.DownloadString($"{_settings.RequestUrl}&action={action.ToString().ToLowerInvariant()}&resumptionToken={_resumptionToken}");
+                var issnParams = issns.Aggregate(new StringBuilder(), (sb, a) => sb.Append($"&issns[]={a}"), sb => sb.ToString());
 
-                var resultString = webClient.DownloadString("http://www.journaltocs.ac.uk/API/RSS/GetJournalByIssn.php?sui=z7CsvQxb1udh849067j6&test=true&issns[]=1697-5200&issns[]=1502-4873");
+                var resultString = webClient.DownloadString($"{_settings.ByIssnRequestUrl}{issnParams}");
 
-                var json = Json.Decode(resultString.Replace("prism:", "").Replace("dc:", ""));
-                    
-                _logger.Info("Finised downloading journals.");
-
-                return result;
+                return new List<string> { resultString };
             }
         }
     }

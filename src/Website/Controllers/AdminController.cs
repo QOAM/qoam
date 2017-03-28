@@ -97,10 +97,11 @@ namespace QOAM.Website.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                var journals = this.GetJournalsFromSource(model.Source);
+                var issns = GetISSNs(model);
+                var journals = _journalsTocImport.DownloadJournals(issns.ToList());
                 var journalsISSNs = journals.Select(j => j.ISSN).ToSet(StringComparer.InvariantCultureIgnoreCase);
 
-                var issns = GetISSNs(model);
+                
                 var issnsFound = issns.Intersect(journalsISSNs).ToList();
                 var issnsNotFound = issns.Except(journalsISSNs).ToList();
 

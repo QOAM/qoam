@@ -37,7 +37,7 @@ namespace QOAM.Core.Import.JournalTOCs
                 {
                     _logger.Info($"\t...downloading batch #{_resumptionToken + 1}...");
 
-                    var batch = webClient.DownloadString($"{_settings.RequestUrl}&action={action.ToString().ToLowerInvariant()}&resumptionToken={_resumptionToken}");
+                    var batch = webClient.DownloadString($"{_settings.AllJournalsRequestUrl}&action={action.ToString().ToLowerInvariant()}&resumptionToken={_resumptionToken}");
 
                     if (!batch.Contains(EndOfBatchesNotice) || !batch.Contains(Notice))
                     {
@@ -53,6 +53,11 @@ namespace QOAM.Core.Import.JournalTOCs
 
                 return result;
             }
+        }
+
+        public List<string> DownloadJournals(List<string> issns)
+        {
+            return new List<string>();
         }
     }
 }

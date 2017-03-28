@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
 using NLog;
-using QOAM.Core.Helpers;
 using QOAM.Core.Repositories;
 
 namespace QOAM.Core.Import.JournalTOCs
@@ -24,20 +21,26 @@ namespace QOAM.Core.Import.JournalTOCs
             return ExcludeBlockedIssns(ParseJournals(action));
         }
 
+        public IList<Journal> DownloadJournals(List<string> issns)
+        {
+            return ExcludeBlockedIssns(ParseJournals(issns));
+        }
+
         #region Private Methods
 
         IList<Journal> ParseJournals(JournalTocsFetchMode action = JournalTocsFetchMode.Update)
         {
-            var xml = GetXml(action);
+            var xml = _client.DownloadJournals(action);
 
             return _parser.Parse(xml);
         }
 
-        IEnumerable<string> GetXml(JournalTocsFetchMode action = JournalTocsFetchMode.Update)
+        IList<Journal> ParseJournals(List<string> issns)
         {
-            return _client.DownloadJournals(action);
-        }
+            var json = _client.DownloadJournals(issns);
 
+            return _parser.Parse(json);
+        }
 
         #endregion
     }

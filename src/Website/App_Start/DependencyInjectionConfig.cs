@@ -86,7 +86,7 @@ namespace QOAM.Website
             builder.RegisterType<UlrichsClient>().AsSelf().InstancePerRequest();
             builder.RegisterType<UlrichsImport>().AsSelf().InstancePerRequest();
             builder.RegisterType<UlrichsCache>().AsSelf().InstancePerRequest();
-            builder.RegisterType<JournalTocsClient>().As<IJournalTocsClient>().InstancePerRequest();
+            builder.RegisterType<JournalTocsJsonClient>().As<IJournalTocsClient>().InstancePerRequest();
             builder.RegisterType<SystemWebClientFactory>().As<IWebClientFactory>().InstancePerRequest();
             builder.RegisterType<JournalTocsImport>().AsSelf().InstancePerRequest();
             builder.RegisterType<JournalTocsJsonParser>().As<IJournalTocsParser>().SingleInstance();
