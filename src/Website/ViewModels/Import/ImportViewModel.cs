@@ -9,7 +9,7 @@
     {
         public ImportViewModel()
         {
-            this.Source = JournalsImportSource.Ulrichs;
+            //this.Source = JournalsImportSource.Ulrichs;
         }
 
         [DisplayName("ISSNs")]
@@ -17,6 +17,6 @@
         public string ISSNs { get; set; }
 
         [DisplayName("Source")]
-        public JournalsImportSource Source { get; set; }
+        public JournalsImportSource Source => JournalsImportSource.JournalTOCs;
     }
 }

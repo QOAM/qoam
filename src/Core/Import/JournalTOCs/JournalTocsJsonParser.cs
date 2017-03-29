@@ -8,9 +8,12 @@ namespace QOAM.Core.Import.JournalTOCs
     {
         public IList<Journal> Parse(IEnumerable<string> data)
         {
+            var journals = new List<Journal>();
             var json = Json.Decode(data.First().Replace("prism:", "").Replace("dc:", "").Replace("e-issn", "eIssn"));
 
-            var journals = new List<Journal>();
+            if ((json.status != null && json.status == "error") || json.rss?.channel?.items == null)
+                return journals;
+            
             foreach (dynamic item in json.rss.channel.items)
             {
                 journals.Add(ParseJournal(item));

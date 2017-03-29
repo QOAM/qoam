@@ -22,7 +22,7 @@
             <div class="form-group row">
                 @Html.LabelFor(m => m.ISSNs, new { @class = "col-lg-2 control-label" })
                 <div class="col-lg-2">
-                    @Html.TextAreaFor(m => m.ISSNs, new { @class = "form-control" })
+                    @Html.TextAreaFor(m => m.ISSNs, new { @class = "form-control", style = "height: 200px; width: 400px;" })
                     @Html.ValidationMessageFor(m => m.ISSNs, null, new { @class = "control-label" })
                 </div>
             </div>
@@ -30,8 +30,9 @@
             <div class="form-group row">
                 @Html.LabelFor(m => m.Source, new { @class = "col-lg-2 control-label" })
                 <div class="col-lg-2">
-                    @Html.EnumDropDownListFor(m => m.Source, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Source, null, new { @class = "control-label" })
+                    @Model.Source.ToString()
+                    @*@Html.EnumDropDownListFor(m => m.Source, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Source, null, new { @class = "control-label" })*@
                 </div>
             </div>
 

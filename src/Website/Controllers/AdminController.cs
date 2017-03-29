@@ -95,28 +95,14 @@ namespace QOAM.Website.Controllers
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult Import(ImportViewModel model)
         {
-            if (this.ModelState.IsValid)
-            {
-                var issns = GetISSNs(model);
-                var journals = _journalsTocImport.DownloadJournals(issns.ToList());
-                var journalsISSNs = journals.Select(j => j.ISSN).ToSet(StringComparer.InvariantCultureIgnoreCase);
+            if (!ModelState.IsValid)
+                return View(model);
 
-                
-                var issnsFound = issns.Intersect(journalsISSNs).ToList();
-                var issnsNotFound = issns.Except(journalsISSNs).ToList();
+            StartImport(model.ISSNs, JournalsImportMode.InsertOnly);
 
-                var journalsToImport = journals.Where(j => issnsFound.Contains(j.ISSN)).ToList();
-                this.journalsImport.ImportJournals(journalsToImport, JournalsImportMode.InsertOnly);
-
-                this.Session[FoundISSNsSessionKey] = issnsFound;
-                this.Session[NotFoundISSNsSessionKey] = issnsNotFound;
-
-                return this.RedirectToAction("Imported");
-            }
-
-            return this.View(model);
+            return RedirectToAction("Imported");
         }
-
+        
         [HttpGet, Route("manageJournalTocs")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult ManageJournalTocs()
@@ -178,25 +164,12 @@ namespace QOAM.Website.Controllers
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult Update(UpdateViewModel model)
         {
-            if (this.ModelState.IsValid)
-            {
-                var journals = this.GetJournalsFromSource(model.Source);
-                var issns = GetISSNs(model);
+            if (!ModelState.IsValid)
+                return this.View(model);
 
-                var journalsISSNs = journals.Select(j => j.ISSN).ToSet(StringComparer.InvariantCultureIgnoreCase);
-                var issnsFound = issns.Intersect(journalsISSNs).ToList();
-                var issnsNotFound = issns.Except(journalsISSNs).ToList();
+            StartImport(model.ISSNs, JournalsImportMode.UpdateOnly);
 
-                var journalsToImport = journals.Where(j => issnsFound.Contains(j.ISSN)).ToList();
-                this.journalsImport.ImportJournals(journalsToImport, JournalsImportMode.UpdateOnly);
-
-                this.Session[FoundISSNsSessionKey] = issnsFound;
-                this.Session[NotFoundISSNsSessionKey] = issnsNotFound;
-
-                return this.RedirectToAction("Updated");
-            }
-
-            return this.View(model);
+            return RedirectToAction("Updated");
         }
 
         [HttpGet, Route("updated")]
@@ -739,23 +712,13 @@ namespace QOAM.Website.Controllers
         }
 
         #region Private Methods
-
-        private static HashSet<string> GetISSNs(ImportViewModel model)
+        
+        static HashSet<string> GetISSNs(DeleteViewModel model)
         {
             return ParseISSNs(model.ISSNs);
         }
 
-        private static HashSet<string> GetISSNs(UpdateViewModel model)
-        {
-            return ParseISSNs(model.ISSNs);
-        }
-
-        private static HashSet<string> GetISSNs(DeleteViewModel model)
-        {
-            return ParseISSNs(model.ISSNs);
-        }
-
-        private static HashSet<string> ParseISSNs(string issns)
+        static HashSet<string> ParseISSNs(string issns)
         {
             return issns.ToLinesSet();
         }
@@ -801,6 +764,23 @@ namespace QOAM.Website.Controllers
                 return submissionLinkDomain == noSubdomainRegex.Match(journalLink).Value;
 
             return true;
+        }
+        void StartImport(string modelIssns, JournalsImportMode importMode)
+        {
+            var issns = ParseISSNs(modelIssns);
+            var journals = _journalsTocImport.DownloadJournals(issns.ToList());
+            var journalsISSNs = journals.Select(j => j.ISSN).ToSet(StringComparer.InvariantCultureIgnoreCase);
+
+            var issnsFound = issns.Intersect(journalsISSNs).ToList();
+            var issnsNotFound = issns.Except(journalsISSNs).ToList();
+
+            var journalsToImport = journals.Where(j => issnsFound.Contains(j.ISSN)).ToList();
+
+            if (journalsToImport.Any())
+                journalsImport.ImportJournals(journalsToImport, importMode);
+
+            Session[FoundISSNsSessionKey] = issnsFound;
+            Session[NotFoundISSNsSessionKey] = issnsNotFound;
         }
 
         #endregion
