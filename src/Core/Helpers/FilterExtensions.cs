@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Web.Helpers;
 using LinqKit;
 using PagedList;
+using QOAM.Core.Import;
 using QOAM.Core.Repositories.Filters;
 
 namespace QOAM.Core.Helpers
@@ -42,6 +43,9 @@ namespace QOAM.Core.Helpers
 
             if (filter.InstitutionalDiscounts.HasValue)
                 query = query.Where(j => j.InstitutionJournalPrices.Any() == filter.InstitutionalDiscounts.Value);
+
+            if (filter.InJournalTOCs.HasValue)
+                query = filter.InJournalTOCs.Value ? query.Where(j => j.DataSource == JournalsImportSource.JournalTOCs.ToString()) : query.Where(j => j.DataSource != JournalsImportSource.JournalTOCs.ToString());
 
             if (filter.SubmittedOnly)
                 query = query.Where(j => j.ValuationScoreCards.Any(v => v.State == ScoreCardState.Published));

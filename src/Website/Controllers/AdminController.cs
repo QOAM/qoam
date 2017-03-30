@@ -102,33 +102,6 @@ namespace QOAM.Website.Controllers
 
             return RedirectToAction("Imported");
         }
-        
-        [HttpGet, Route("manageJournalTocs")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
-        public ViewResult ManageJournalTocs()
-        {
-            return View(new JournalTocsImportViewModel());
-        }
-
-        [HttpPost, Route("manageJournalTocs")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
-        public ActionResult ManageJournalTocs(JournalTocsImportViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var journals = GetJournalsFromSource(JournalsImportSource.JournalTOCs, model.FetchMode);
-
-                var importMode = model.FetchMode == JournalTocsFetchMode.Setup ? JournalsImportMode.InsertAndUpdate : JournalsImportMode.UpdateOnly;
-                var result = journalsImport.ImportJournals(journals, importMode);
-
-                Session[ImportResultSessionKey] = result;
-
-                return RedirectToAction("JournalTocsImported");
-            }
-
-            return View(model);
-        }
 
         [HttpGet, Route("imported")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]

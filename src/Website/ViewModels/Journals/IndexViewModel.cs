@@ -58,6 +58,7 @@
         public bool? OpenAccess { get; set; }
 
         public bool? InstitutionalDiscounts { get; set; }
+        public bool? InJournalTOCs { get; set; }
 
         public JournalFilter ToFilter()
         {
@@ -76,7 +77,8 @@
                 PageSize = this.PageSize,
                 SwotMatrix = !string.IsNullOrEmpty(this.SwotMatrix) ? this.SwotMatrix.Split(',').ToList() : new List<string>(),
                 OpenAccess = OpenAccess,
-                InstitutionalDiscounts = InstitutionalDiscounts
+                InstitutionalDiscounts = InstitutionalDiscounts,
+                InJournalTOCs = InJournalTOCs
             };
         }
 
@@ -98,7 +100,8 @@
                 SwotMatrix = !string.IsNullOrEmpty(SwotMatrix) ? SwotMatrix.Split(',').ToList() : new List<string>(),
                 UserProfileId = userProfileId,
                 OpenAccess = OpenAccess,
-                InstitutionalDiscounts = InstitutionalDiscounts
+                InstitutionalDiscounts = InstitutionalDiscounts,
+                InJournalTOCs = InJournalTOCs
             };
         }
 
@@ -115,7 +118,8 @@
                 [nameof(SortBy)] = SortBy,
                 [nameof(SwotMatrix)] = SwotMatrix,
                 [nameof(OpenAccess)] = OpenAccess,
-                [nameof(InstitutionalDiscounts)] = InstitutionalDiscounts
+                [nameof(InstitutionalDiscounts)] = InstitutionalDiscounts,
+                [nameof(InJournalTOCs)] = InJournalTOCs
             };
 
             for (var i = 0; i < SelectedDisciplines.Count; i++)

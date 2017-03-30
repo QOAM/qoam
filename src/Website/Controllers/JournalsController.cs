@@ -433,5 +433,18 @@ namespace QOAM.Website.Controllers
         {
             return Json(journalRepository.Languages(query).Select(s => new { value = s }).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet, Route("notInJournalTocs")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult NotInJournalTocs(IndexViewModel model)
+        {
+            model.InJournalTOCs = false;
+
+            model.Disciplines = _subjectRepository.Active.Where(s => !string.IsNullOrWhiteSpace(s.Name)).ToList().ToSelectListItems("Search by discipline"); //NormalizeSearchStrings(model.Disciplines);
+            model.Languages = NormalizeSearchStrings(model.Languages);
+            model.Journals = journalRepository.Search(model.ToFilter());
+
+            return View("JournalsIndex", model);
+        }
     }
 }
