@@ -8,9 +8,9 @@
     using System.Web.Routing;
     using PagedList;
 
-    using QOAM.Core;
-    using QOAM.Core.Helpers;
-    using QOAM.Core.Repositories.Filters;
+    using Core;
+    using Core.Helpers;
+    using Core.Repositories.Filters;
 
     public class IndexViewModel : PagedViewModel
     {
