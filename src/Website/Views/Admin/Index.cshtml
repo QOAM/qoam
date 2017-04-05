@@ -12,7 +12,7 @@
 
     <div class="list-group">
         <a href="javascript:void(0)" class="list-group-item active">Journals</a>
-        @Html.AdminLink("Show journals not from JournalTOCs", User, "NotInJournalTocs", "Journals", "list-group-item", "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
+        @Html.AdminLink("Show journals not from JournalTOCs", User, "NotInJournalTocs", null, "list-group-item", "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
         @Html.AdminLink("Import journals", User, "Import", null, "list-group-item", "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
         @Html.AdminLink("Update journals", User, "Update", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
         @Html.JavascriptLink("Download journals", "download", User, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)

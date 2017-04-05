@@ -10,6 +10,7 @@
         public DateTime DateAdded { get; set; }
         public string Country { get; set; }
         public string Publisher { get; set; }
+        public string DataSource { get; set; }
         public string Languages { get; set; }
         public string Subjects { get; set; }
     }

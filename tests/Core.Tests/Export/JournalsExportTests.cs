@@ -15,7 +15,7 @@
 
     public class JournalsExportTests
     {
-        private const string ExpectedJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 09:52:51;Switzerland;<none indicated>;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2-10-2013 09:52:51;Denmark;Springer;English,Danish;motion pictures,films\r\n";
+        private const string ExpectedJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;DataSource;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 09:52:51;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2-10-2013 09:52:51;Denmark;Springer;Ulrich;English,Danish;motion pictures,films\r\n";
 
         [Fact]
         public void ConstructorWithNullJournalRepositoryThrowsArgumentNullException()
@@ -73,6 +73,7 @@
                            DateAdded = DateTime.Parse("2-10-2013 9:52:51"),
                            Country = new Country { Name = "Switzerland" },
                            Publisher = new Publisher { Name = "<none indicated>" },
+                           DataSource = "DOAJ",
                            Languages = new List<Language> { new Language { Name = "English" }, new Language { Name = "German" } },
                            Subjects = new List<Subject> { new Subject { Name = "library and information sciences" } }
                        },
@@ -84,6 +85,7 @@
                            DateAdded = DateTime.Parse("2-10-2013 9:52:51"),
                            Country = new Country { Name = "Denmark" },
                            Publisher = new Publisher { Name = "Springer" },
+                           DataSource = "Ulrich",
                            Languages = new List<Language> { new Language { Name = "English" }, new Language { Name = "Danish" } },
                            Subjects = new List<Subject> { new Subject { Name = "motion pictures" }, new Subject { Name = "films" } }
                        }

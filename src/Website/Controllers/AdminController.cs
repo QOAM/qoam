@@ -684,8 +684,20 @@ namespace QOAM.Website.Controllers
             return View(model);
         }
 
+        [HttpGet, Route("notInJournalTocs")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public FileResult NotInJournalTocs()
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                journalsExport.ExportJournalsNotInJournalTocs(memoryStream);
+
+                return File(memoryStream.ToArray(), "application/csv", "journals-not-in-journal-tocs.csv");
+            }
+        }
+
         #region Private Methods
-        
+
         static HashSet<string> GetISSNs(DeleteViewModel model)
         {
             return ParseISSNs(model.ISSNs);
