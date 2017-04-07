@@ -1,4 +1,6 @@
-﻿namespace QOAM.Console.DataImporter.IntegrationTests
+﻿using QOAM.Core.Import.JournalTOCs;
+
+namespace QOAM.Console.DataImporter.IntegrationTests
 {
     using Autofac;
 

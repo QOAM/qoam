@@ -42,5 +42,7 @@
         public bool? OpenAccess { get; set; }
 
         public bool? InstitutionalDiscounts { get; set; }
+
+        public bool? InJournalTOCs { get; set; }
     }
 }

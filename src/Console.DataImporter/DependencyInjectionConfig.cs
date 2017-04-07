@@ -1,4 +1,6 @@
-﻿namespace QOAM.Console.DataImporter
+﻿using QOAM.Core.Import.JournalTOCs;
+
+namespace QOAM.Console.DataImporter
 {
     using Autofac;
 
@@ -39,6 +41,7 @@
             builder.RegisterType<JournalTocsClient>().As<IJournalTocsClient>().SingleInstance();
             builder.RegisterType<SystemWebClientFactory>().As<IWebClientFactory>().SingleInstance();
             builder.RegisterType<JournalTocsImport>().SingleInstance();
+            builder.RegisterType<JournalTocsXmlParser>().As<IJournalTocsParser>().SingleInstance();
         }
 
         private static void RegisterConfigurationSections(ContainerBuilder builder)

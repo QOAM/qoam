@@ -94,7 +94,7 @@
       <Name>Console.DataImporter</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Core\Core.csproj">
-      <Project>{48695F3E-A754-4A33-B22B-86CD55939CC6}</Project>
+      <Project>{48695f3e-a754-4a33-b22b-86cd55939cc6}</Project>
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>

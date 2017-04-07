@@ -1,4 +1,6 @@
-﻿namespace QOAM.Website.Models
+﻿using QOAM.Core.Import.JournalTOCs;
+
+namespace QOAM.Website.Models
 {
     using System;
     using System.Configuration;

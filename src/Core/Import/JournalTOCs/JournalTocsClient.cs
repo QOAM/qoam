@@ -2,13 +2,8 @@
 using System.Text;
 using NLog;
 
-namespace QOAM.Core.Import
+namespace QOAM.Core.Import.JournalTOCs
 {
-    public interface IJournalTocsClient
-    {
-        List<string> DownloadJournals(JournalTocsFetchMode action = JournalTocsFetchMode.Update);
-    }
-
     public class JournalTocsClient : IJournalTocsClient
     {
         readonly JournalTocsSettings _settings;
@@ -42,7 +37,7 @@ namespace QOAM.Core.Import
                 {
                     _logger.Info($"\t...downloading batch #{_resumptionToken + 1}...");
 
-                    var batch = webClient.DownloadString($"{_settings.RequestUrl}&action={action.ToString().ToLowerInvariant()}&resumptionToken={_resumptionToken}");
+                    var batch = webClient.DownloadString($"{_settings.AllJournalsRequestUrl}&action={action.ToString().ToLowerInvariant()}&resumptionToken={_resumptionToken}");
 
                     if (!batch.Contains(EndOfBatchesNotice) || !batch.Contains(Notice))
                     {
@@ -58,6 +53,11 @@ namespace QOAM.Core.Import
 
                 return result;
             }
+        }
+
+        public List<string> DownloadJournals(List<string> issns)
+        {
+            return new List<string>();
         }
     }
 }

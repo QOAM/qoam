@@ -4,9 +4,9 @@ using Autofac.Integration.WebApi;
 using QOAM.Core;
 using QOAM.Core.Import.Institutions;
 using QOAM.Core.Import.Invitations;
+using QOAM.Core.Import.JournalTOCs;
 using QOAM.Core.Import.QOAMcorners;
 using QOAM.Core.Import.SubmissionLinks;
-using QOAM.Website.Controllers;
 
 namespace QOAM.Website
 {
@@ -86,9 +86,10 @@ namespace QOAM.Website
             builder.RegisterType<UlrichsClient>().AsSelf().InstancePerRequest();
             builder.RegisterType<UlrichsImport>().AsSelf().InstancePerRequest();
             builder.RegisterType<UlrichsCache>().AsSelf().InstancePerRequest();
-            builder.RegisterType<JournalTocsClient>().As<IJournalTocsClient>().InstancePerRequest();
+            builder.RegisterType<JournalTocsJsonClient>().As<IJournalTocsClient>().InstancePerRequest();
             builder.RegisterType<SystemWebClientFactory>().As<IWebClientFactory>().InstancePerRequest();
             builder.RegisterType<JournalTocsImport>().AsSelf().InstancePerRequest();
+            builder.RegisterType<JournalTocsJsonParser>().As<IJournalTocsParser>().SingleInstance();
 
             builder.RegisterType<LicenseFileImporter>().As<IFileImporter>().InstancePerRequest();
             builder.RegisterType<InvitationFileImporter>().Named<IFileImporter>("invitation").InstancePerRequest();

@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using FizzWare.NBuilder;
+using QOAM.Core.Import.JournalTOCs;
 using QOAM.Core.Import.SubmissionLinks;
 using QOAM.Website.Tests.Controllers.Stubs;
 using QOAM.Website.ViewModels;
@@ -29,8 +30,8 @@ namespace QOAM.Website.Tests.Controllers
     public class AdminControllerTests
     {
 
-        private const string ExpectedJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;English,Danish;motion pictures,films\r\nACIMED;1024-9435;http://scielo.sld.cu/scielo.php?script=sci_serial&pid=1024-9435&lng=en&nrm=iso;2/10/2013 9:52:51 AM;Cuba;Centro Nacional de Información de Ciencias Médicas;<none indicated>;health sciences\r\n";
-        private const string ExpectedOpenAccessJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;English,Danish;motion pictures,films\r\n";
+        private const string ExpectedJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;DataSource;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films\r\nACIMED;1024-9435;http://scielo.sld.cu/scielo.php?script=sci_serial&pid=1024-9435&lng=en&nrm=iso;2/10/2013 9:52:51 AM;Cuba;Centro Nacional de Información de Ciencias Médicas;Ulrich;<none indicated>;health sciences\r\n";
+        private const string ExpectedOpenAccessJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;DataSource;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films\r\n";
         private const string OldIssn = "2296-0597";
         private const string NewIssn = "1603-5194";
 
@@ -1013,7 +1014,7 @@ namespace QOAM.Website.Tests.Controllers
 
         static JournalTocsImport CreateJournalTocsImport()
         {
-            return new JournalTocsImport(Mock.Of<IJournalTocsClient>(), Mock.Of<IBlockedISSNRepository>());
+            return new JournalTocsImport(Mock.Of<IJournalTocsClient>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IJournalTocsParser>());
         }
 
         private static IJournalRepository CreateJournalRepository()

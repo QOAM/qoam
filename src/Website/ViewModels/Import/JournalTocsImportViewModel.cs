@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using QOAM.Core.Import;
+using QOAM.Core.Import.JournalTOCs;
 
 namespace QOAM.Website.ViewModels.Import
 {

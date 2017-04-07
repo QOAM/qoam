@@ -978,7 +978,6 @@
     <Content Include="Views\Admin\Statistics.cshtml" />
     <None Include="Ulrichs.test.config" />
     <None Include="Ulrichs.config" />
-    <Content Include="Views\Admin\ManageJournalTocs.cshtml" />
     <Content Include="Views\Admin\JournalTocsImported.cshtml" />
     <Content Include="Views\QoamCorners\CreateCorner.cshtml" />
     <Content Include="Views\QoamCorners\CornersImported.cshtml" />

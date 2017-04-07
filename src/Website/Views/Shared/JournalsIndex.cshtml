@@ -1,5 +1,4 @@
-﻿@using System.Web.Mvc.Html5
-@using System.Web.Optimization
+﻿@using System.Web.Optimization
 @using PagedList.Mvc
 @using QOAM.Core
 @using QOAM.Website.Helpers
@@ -8,6 +7,8 @@
 
 @{
     ViewBag.Title = "OA Journals";
+    var action = ViewBag.PageId == "journals-notinjournaltocs-page" ? "NotInJournalTOCs" : "Index";
+    var controller = ViewBag.PageId == "myqoam-index-page" ? "MyQoam" : "Journals";
 }
 
 <div class="container main">
@@ -19,7 +20,7 @@
                     <img src="~/Images/zoom.png" class="pull-right clearfix" style="height: 30px;" />
                 </h3>
 
-                @using (Html.BeginForm("Index", null, FormMethod.Get, new { id = "search-form" }))
+                @using (Html.BeginForm(action, controller, FormMethod.Get, new { id = "search-form" }))
                 {
                     <fieldset>
                         <legend>Search</legend>
@@ -54,8 +55,13 @@
                     {
                         <h3>Saved journals: @Model.Journals.TotalItemCount</h3>
                     }
-                    else {
-                        <h3>@Model.Journals.TotalItemCount <a id="open-access-filter" href="#">OA</a> and <a id="hybrid-filter" href="#">hybrid</a> journals; <em><a id="institutional-discount-filter" href="#">institutional discounts</a></em></h3>
+                    else if (ViewBag.PageId == "journals-notinjournaltocs-page")
+                    {
+                        <h3>Journals not in JournalTOCs: @Model.Journals.TotalItemCount</h3>
+                    }
+                    else
+                    {
+                        <h3>@Model.Journals.TotalItemCount <a id="open-access-filter" href="#">OA</a> and hybrid journals; <em><a id="institutional-discount-filter" href="#">institutional discounts</a></em></h3>
                     }
 
                 </div>

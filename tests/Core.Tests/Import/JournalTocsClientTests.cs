@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Moq;
 using QOAM.Core.Import;
+using QOAM.Core.Import.JournalTOCs;
 using QOAM.Core.Tests.Import.Resources;
 using Xunit;
 
@@ -23,7 +24,7 @@ namespace QOAM.Core.Tests.Import
 
             sut.DownloadJournals(action);
 
-            _webClient.Verify(x => x.DownloadString($"{_settings.RequestUrl}&action={action.ToString().ToLowerInvariant()}&resumptionToken=0"), Times.Once);
+            _webClient.Verify(x => x.DownloadString($"{_settings.AllJournalsRequestUrl}&action={action.ToString().ToLowerInvariant()}&resumptionToken=0"), Times.Once);
         }
 
         [Fact]
@@ -33,8 +34,8 @@ namespace QOAM.Core.Tests.Import
 
             var journalsXml = GetJournalTocsFirst500Xml();
 
-            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=0")).Returns(journalsXml);
-            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=1")).Returns(GetJournalTocsNoMoreItemsNotice());
+            _webClient.Setup(x => x.DownloadString($"{_settings.AllJournalsRequestUrl}&action=update&resumptionToken=0")).Returns(journalsXml);
+            _webClient.Setup(x => x.DownloadString($"{_settings.AllJournalsRequestUrl}&action=update&resumptionToken=1")).Returns(GetJournalTocsNoMoreItemsNotice());
 
             var result = sut.DownloadJournals();
 
@@ -49,13 +50,13 @@ namespace QOAM.Core.Tests.Import
             var firstBatch = GetJournalTocsFirst500Xml();
             var secondBatch = GetJournalTocsNext500Xml();
 
-            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=0")).Returns(firstBatch);
-            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=1")).Returns(secondBatch);
-            _webClient.Setup(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=2")).Returns(GetJournalTocsNoMoreItemsNotice());
+            _webClient.Setup(x => x.DownloadString($"{_settings.AllJournalsRequestUrl}&action=update&resumptionToken=0")).Returns(firstBatch);
+            _webClient.Setup(x => x.DownloadString($"{_settings.AllJournalsRequestUrl}&action=update&resumptionToken=1")).Returns(secondBatch);
+            _webClient.Setup(x => x.DownloadString($"{_settings.AllJournalsRequestUrl}&action=update&resumptionToken=2")).Returns(GetJournalTocsNoMoreItemsNotice());
 
             var result = sut.DownloadJournals();
 
-            _webClient.Verify(x => x.DownloadString($"{_settings.RequestUrl}&action=update&resumptionToken=0"), Times.Once());
+            _webClient.Verify(x => x.DownloadString($"{_settings.AllJournalsRequestUrl}&action=update&resumptionToken=0"), Times.Once());
             _webClient.Verify(x => x.DownloadString(It.IsAny<string>()), Times.Exactly(3));
 
             Assert.Equal(firstBatch.Replace("&", "&amp;"), result[0]);

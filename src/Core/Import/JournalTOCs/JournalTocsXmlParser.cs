@@ -1,41 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using NLog;
 using QOAM.Core.Helpers;
-using QOAM.Core.Repositories;
 
-namespace QOAM.Core.Import
+namespace QOAM.Core.Import.JournalTOCs
 {
-    public class JournalTocsImport : Import
+    public class JournalTocsXmlParser : IJournalTocsParser
     {
-        readonly IJournalTocsClient _client;
-        static readonly Logger _logger = LogManager.GetCurrentClassLogger();
-
-        public JournalTocsImport(IJournalTocsClient client, IBlockedISSNRepository blockedIssnRepository) : base(blockedIssnRepository)
+        public IList<Journal> Parse(IEnumerable<string> data)
         {
-            _client = client;
-        }
-
-        public IList<Journal> DownloadJournals(JournalTocsFetchMode action = JournalTocsFetchMode.Update)
-        {
-            return ExcludeBlockedIssns(ParseJournals(action));
-        }
-
-        #region Private Methods
-
-        IList<Journal> ParseJournals(JournalTocsFetchMode action = JournalTocsFetchMode.Update)
-        {
-            var xml = GetXml(action);
-
             var journalElements = new List<XElement>();
 
-            foreach (var doc in xml)
+            foreach (var doc in data)
                 journalElements.AddRange(XDocument.Parse(doc).Descendants("journals").Descendants("journal").ToList());
-                                   
+
             return journalElements.SelectMany(ParseJournal).Where(j => j.IsValid()).ToList();
         }
 
+        #region Private Methods
+        
         public IEnumerable<Journal> ParseJournal(XElement recordElement)
         {
             var regularJournal = new Journal
@@ -52,11 +35,7 @@ namespace QOAM.Core.Import
 
             yield return regularJournal;
         }
-
-        IEnumerable<string> GetXml(JournalTocsFetchMode action = JournalTocsFetchMode.Update)
-        {
-            return _client.DownloadJournals(action);
-        }
+        
 
         static string ParseIssn(XElement journalElement)
         {
@@ -69,7 +48,7 @@ namespace QOAM.Core.Import
         {
             var publisherInfoXmlElement = journalElement.Element("publisher");
 
-            var publisherName = publisherInfoXmlElement?.Value ?? MissingPublisherName;
+            var publisherName = publisherInfoXmlElement?.Value ?? Import.MissingPublisherName;
 
             return new Publisher { Name = publisherName };
         }
@@ -79,7 +58,7 @@ namespace QOAM.Core.Import
             return new Language { Name = languageElement.Element("Language")?.Value.Trim() };
         }
 
-        IList<Subject> ParseSubjects(XElement recordElement)
+        static IList<Subject> ParseSubjects(XElement recordElement)
         {
             var subjectsElement = recordElement.Element("subjects");
 
