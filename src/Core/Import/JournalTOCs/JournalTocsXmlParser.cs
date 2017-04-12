@@ -25,6 +25,7 @@ namespace QOAM.Core.Import.JournalTOCs
             {
                 Title = recordElement.Element("title")?.Value,
                 ISSN = ParseIssn(recordElement),
+                PISSN = recordElement.Element("p_issn")?.Value,
                 Link = recordElement.Element("homepage_url")?.Value,
                 Publisher = ParsePublisher(recordElement),
                 Subjects = ParseSubjects(recordElement),

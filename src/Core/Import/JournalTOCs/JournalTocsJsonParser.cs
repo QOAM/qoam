@@ -29,6 +29,7 @@ namespace QOAM.Core.Import.JournalTOCs
             return new Journal
             {
                 ISSN = data.eIssn ?? data.issn,
+                PISSN = data.issn,
                 Title = data.title,
                 Link = data.link,
                 Publisher = ParsePublisher(data),

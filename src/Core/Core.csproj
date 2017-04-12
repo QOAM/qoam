@@ -304,6 +304,10 @@
     <Compile Include="Migrations\201612190828433_Corner-Visitors.Designer.cs">
       <DependentUpon>201612190828433_Corner-Visitors.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704121404038_Added-pIssn-to-Journal.cs" />
+    <Compile Include="Migrations\201704121404038_Added-pIssn-to-Journal.Designer.cs">
+      <DependentUpon>201704121404038_Added-pIssn-to-Journal.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\CornerRepository.cs" />
@@ -352,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612190828433_Corner-Visitors.resx">
       <DependentUpon>201612190828433_Corner-Visitors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704121404038_Added-pIssn-to-Journal.resx">
+      <DependentUpon>201704121404038_Added-pIssn-to-Journal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />
