@@ -33,13 +33,13 @@
         public RequestValuationEmail ToRequestValuationEmail()
         {
             return new RequestValuationEmail
-                       {
-                           From = this.EmailFrom, 
-                           To = this.EmailTo, 
-                           Subject = this.EmailSubject, 
-                           Message = this.EmailBody,
-                           IsKnownEmailAddress = this.IsKnownEmailAddress,
-                       };
+            {
+                From = this.EmailFrom,
+                To = this.EmailTo,
+                Subject = this.EmailSubject,
+                Message = this.EmailBody,
+                IsKnownEmailAddress = this.IsKnownEmailAddress,
+            };
         }
     }
 }
