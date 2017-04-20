@@ -34,6 +34,9 @@ namespace QOAM.Core
         [StringLength(32)]
         public string ISSN { get; set; }
 
+        [StringLength(32)]
+        public string PISSN { get; set; }
+
         [Required]
         public string Link { get; set; }
 

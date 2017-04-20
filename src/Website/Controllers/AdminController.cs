@@ -755,11 +755,13 @@ namespace QOAM.Website.Controllers
             var issns = ParseISSNs(modelIssns);
             var journals = _journalsTocImport.DownloadJournals(issns.ToList());
             var journalsISSNs = journals.Select(j => j.ISSN).ToSet(StringComparer.InvariantCultureIgnoreCase);
+            var journalsPISSNs = journals.Select(j => j.PISSN).ToSet(StringComparer.InvariantCultureIgnoreCase);
+            var allISSNs = journalsISSNs.Concat(journalsPISSNs).ToList();
 
-            var issnsFound = issns.Intersect(journalsISSNs).ToList();
-            var issnsNotFound = issns.Except(journalsISSNs).ToList();
+            var issnsFound = issns.Intersect(allISSNs).ToList();
+            var issnsNotFound = issns.Except(allISSNs).ToList();
 
-            var journalsToImport = journals.Where(j => issnsFound.Contains(j.ISSN)).ToList();
+            var journalsToImport = journals.Where(j => issnsFound.Contains(j.ISSN) || issnsFound.Contains(j.PISSN)).Distinct().ToList();
 
             if (journalsToImport.Any())
                 journalsImport.ImportJournals(journalsToImport, importMode);
