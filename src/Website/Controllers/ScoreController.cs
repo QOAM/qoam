@@ -246,10 +246,10 @@ namespace QOAM.Website.Controllers
                                   JournalId = journal.Id,
                                   JournalTitle = journal.Title,
                                   JournalISSN = journal.ISSN,
-                                  EmailFrom = model.EmailFrom,
+                                  EmailFrom = "no-reply@qoam.eu",
                                   EmailTo = a.AuthorEmail,
                                   RecipientName = a.AuthorName,
-                                  EmailBody = $"Dear {a.AuthorName},\r\n\r\n{model.EmailBody.Replace("<<JournalTitle>>", journal.Title)}",
+                                  EmailBody = $"Dear {a.AuthorName},\r\n\r\n{model.EmailBody.Replace("<<JournalTitle>>", journal.Title)}\r\n\r\n-----------\r\n\r\nYou are being invited by: {model.EmailFrom}",
                                   EmailSubject = model.EmailSubject.Replace("<<JournalTitle>>", journal.Title).Replace("<<JournalISSN>>", journal.ISSN),
                                   IsKnownEmailAddress = IsKnownEmailAddress(a.AuthorEmail),
                                   HasKnownEmailDomain = HasKnownEmailDomain(a.AuthorEmail)
@@ -269,7 +269,7 @@ namespace QOAM.Website.Controllers
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error($"Error sending validation request to {item.Email.To}: {ex}.", ex.ToString());
+                        Logger.Error($"Error sending validation request to {item.Email.To}: {ex}.", ex);
 
                         errorWhenInvited.Add(new ErrorInvitedViewModel
                         {

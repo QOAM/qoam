@@ -10,6 +10,7 @@ namespace QOAM.Core.Import
         Languages,
         Subjects,
         OpenAccess,
-        DataSource
+        DataSource,
+        PISSN
     }
 }

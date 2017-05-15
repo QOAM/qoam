@@ -186,6 +186,11 @@
                     }
                 }
 
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.PISSN))
+                {
+                    currentJournal.PISSN = journal.PISSN;
+                }
+
                 currentJournal.LastUpdatedOn = DateTime.Now;
                 this.journalRepository.InsertOrUpdate(currentJournal);
             }
