@@ -1,0 +1,14 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "Journals import result";
+}
+
+<div class="container main">
+    <p>
+        @Model duplicated journals have been successfully remvoed
+    </p>
+    <p>
+        <a class="btn btn-default return-button" title="Back to search results" href="@Url.Action("Index")">&lt; Back to Admin page</a>
+    </p>
+</div>

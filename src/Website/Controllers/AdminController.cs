@@ -30,24 +30,27 @@ namespace QOAM.Website.Controllers
     [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.DataAdmin + "," + ApplicationRole.InstitutionAdmin)]
     public class AdminController : ApplicationController
     {
-        private const string FoundISSNsSessionKey = "FoundISSNs";
-        private const string NotFoundISSNsSessionKey = "NotFoundISSNs";
+        const string FoundISSNsSessionKey = "FoundISSNs";
+        const string NotFoundISSNsSessionKey = "NotFoundISSNs";
         const string ImportResultSessionKey = "ImportResult";
-        private const int BlockedIssnsCount = 20;
+        const int BlockedIssnsCount = 20;
 
-        private readonly JournalsImport journalsImport;
-        private readonly UlrichsImport ulrichsImport;
-        private readonly DoajImport doajImport;
-        private readonly IJournalRepository journalRepository;
-        private readonly JournalsExport journalsExport;
-        private readonly IInstitutionRepository institutionRepository;
-        private readonly IBlockedISSNRepository blockedIssnRepository;
+        readonly JournalsImport journalsImport;
+        readonly UlrichsImport ulrichsImport;
+        readonly DoajImport doajImport;
+        readonly IJournalRepository journalRepository;
+        readonly JournalsExport journalsExport;
+        readonly IInstitutionRepository institutionRepository;
+        readonly IBlockedISSNRepository blockedIssnRepository;
 
         readonly IBulkImporter<SubmissionPageLink> _bulkImporter;
         readonly IBulkImporter<Institution> _institutionImporter;
         readonly ICornerRepository _cornerRepository;
         readonly Regex _domainRegex = new Regex(@"(?<=(http[s]?:\/\/(.*?)[.?]))\b([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b", RegexOptions.Compiled);
         readonly JournalTocsImport _journalsTocImport;
+        static int _removeDuplicateCount;
+        static int _duplicateCount;
+        static int _duplicateQueueProcessedCount;
 
         public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalTocsImport journalsTocImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter, IBulkImporter<Institution> institutionImporter, ICornerRepository cornerRepository)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
@@ -471,26 +474,8 @@ namespace QOAM.Website.Controllers
         {
             if (ModelState.IsValid)
             {
-                var oldJournal = journalRepository.FindByIssn(model.OldIssn);
-                var newJournal = journalRepository.FindByIssn(model.NewIssn);
-
-                if (oldJournal != null && newJournal != null)
-                {
-                    baseScoreCardRepository.MoveScoreCards(oldJournal, newJournal);
-                    valuationScoreCardRepository.MoveScoreCards(oldJournal, newJournal);
-
+                if(PerformMoveOfScoreCards(model))
                     return RedirectToAction("MoveScoreCards", new { saveSuccessful = true });
-                }
-
-                if (oldJournal == null)
-                {
-                    ModelState.AddModelError(nameof(model.OldIssn), "ISSN does not exist.");
-                }
-
-                if (newJournal == null)
-                {
-                    ModelState.AddModelError(nameof(model.NewIssn), "ISSN does not exist.");
-                }
             }
 
             return View();
@@ -696,6 +681,74 @@ namespace QOAM.Website.Controllers
             }
         }
 
+        [HttpGet, Route("removeDuplicates")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult RemoveDuplicates()
+        {
+            return View();
+        }
+
+        [HttpPost, Route("startRemovingDuplicates")]
+        public ActionResult StartRemovingDuplicates()
+        {
+            _duplicateCount = 0;
+            _removeDuplicateCount = 0;
+            _duplicateQueueProcessedCount = 0;
+
+            var allJournals = journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects);
+
+            var duplicates = allJournals
+                .GroupBy(j => j.Title)
+                .Where(g => g.Count() > 1)
+                .Select(g => g.Key)
+                .ToList();
+
+            _duplicateCount = duplicates.Count;
+
+            foreach (var title in duplicates)
+            {
+                var journals = allJournals.Where(j => j.Title == title).ToList();
+                var downloaded = _journalsTocImport.DownloadJournals(journals.Select(j => j.ISSN).ToList());
+
+                _duplicateQueueProcessedCount++;
+
+                if(!downloaded.Any())
+                    continue;
+                
+                var journalToDelete = journals.SingleOrDefault(j => j.ISSN == downloaded.First().PISSN);
+                
+                if (journalToDelete == null)
+                    continue;
+
+                var journalToKeep = journals.SingleOrDefault(j => j.ISSN == downloaded.First().ISSN);
+
+                if (journalToKeep == null)
+                    continue;
+
+                PerformMoveOfScoreCards(new MoveScoreCardsViewModel
+                {
+                    NewIssn = journalToKeep.ISSN,
+                    OldIssn = journalToDelete.ISSN
+                });
+
+                journalRepository.Delete(journalToDelete);
+                _removeDuplicateCount++;
+            }
+
+            journalRepository.Save();
+
+            return View("DuplicatesRemoved", _removeDuplicateCount);
+        }
+
+        [HttpGet, Route("removeDuplicateCount"), OutputCache(Duration = 0)]
+        public ContentResult RemoveDuplicateCount()
+        {
+            if (_duplicateCount == 0)
+                return Content("fetching journals...");
+
+            return Content($"{_duplicateQueueProcessedCount} journals processed and {_removeDuplicateCount} deduped of {_duplicateCount} potential duplicates...");
+        }
+
         #region Private Methods
 
         static HashSet<string> GetISSNs(DeleteViewModel model)
@@ -768,6 +821,31 @@ namespace QOAM.Website.Controllers
 
             Session[FoundISSNsSessionKey] = issnsFound;
             Session[NotFoundISSNsSessionKey] = issnsNotFound;
+        }
+
+        public bool PerformMoveOfScoreCards(MoveScoreCardsViewModel model)
+        {
+            var oldJournal = journalRepository.FindByIssn(model.OldIssn);
+            var newJournal = journalRepository.FindByIssn(model.NewIssn);
+
+            if (oldJournal != null && newJournal != null)
+            {
+                baseScoreCardRepository.MoveScoreCards(oldJournal, newJournal);
+                valuationScoreCardRepository.MoveScoreCards(oldJournal, newJournal);
+
+                baseScoreCardRepository.Save();
+                valuationScoreCardRepository.Save();
+
+                return true;
+            }
+
+            if (oldJournal == null)
+                ModelState.AddModelError(nameof(model.OldIssn), "ISSN does not exist.");
+
+            if (newJournal == null)
+                ModelState.AddModelError(nameof(model.NewIssn), "ISSN does not exist.");
+
+            return false;
         }
 
         #endregion

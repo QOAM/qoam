@@ -34,5 +34,25 @@
         });
     };
 
+    AdminController.prototype.removeDuplicates = function () {
+        $("#remove-duplicates").click(function (e) {
+            $(this).hide();
+            $("#status-message").show();
+
+            e.preventDefault();
+
+            $.post("/admin/startRemovingDuplicates");
+        });
+
+        setTimeout(pollRemoveDuplicateCount, 5000);
+    };
+
+    function pollRemoveDuplicateCount() {
+        $.get("/admin/removeDuplicateCount").done(function(status) {
+            $("#status").text(status);
+            setTimeout(pollRemoveDuplicateCount, 5000);
+        });
+    }
+
     return AdminController;
 })();
