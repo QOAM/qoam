@@ -41,10 +41,19 @@
 
             e.preventDefault();
 
-            $.post("/admin/startRemovingDuplicates");
-        });
+            $.post("/admin/startRemovingDuplicates").done(function() {
+                processNextBatch();
+            });
 
-        setTimeout(pollRemoveDuplicateCount, 5000);
+            setTimeout(pollRemoveDuplicateCount, 5000);
+        });
+    };
+
+    function processNextBatch() {
+        $.post("/admin/processNextBatch").done(function(response) {
+            if (response)
+                processNextBatch();
+        });
     };
 
     function pollRemoveDuplicateCount() {
@@ -52,7 +61,7 @@
             $("#status").text(status);
             setTimeout(pollRemoveDuplicateCount, 5000);
         });
-    }
+    };
 
     return AdminController;
 })();
