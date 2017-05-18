@@ -1,4 +1,6 @@
 ﻿var AdminController = (function () {
+    var path = window.location.pathname.replace("/removeDuplicates", "");
+
     function AdminController() {
     }
     AdminController.prototype.index = function (downloadUrl) {
@@ -41,7 +43,7 @@
 
             e.preventDefault();
 
-            $.post("/admin/startRemovingDuplicates").done(function() {
+            $.post(path + "/startRemovingDuplicates").done(function() {
                 processNextBatch();
             });
 
@@ -50,7 +52,7 @@
     };
 
     function processNextBatch() {
-        $.post("/admin/processNextBatch").done(function(response) {
+        $.post(path + "/processNextBatch").done(function(response) {
             if (response)
                 processNextBatch();
             else
@@ -59,7 +61,7 @@
     };
 
     function pollRemoveDuplicateCount() {
-        $.get("/admin/removeDuplicateCount").done(function(status) {
+        $.get(path + "/removeDuplicateCount").done(function(status) {
             $("#status").text(status);
             setTimeout(pollRemoveDuplicateCount, 5000);
         });
