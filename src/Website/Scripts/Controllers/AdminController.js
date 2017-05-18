@@ -53,6 +53,8 @@
         $.post("/admin/processNextBatch").done(function(response) {
             if (response)
                 processNextBatch();
+            else
+                $("#status-message").text("Completed! ");
         });
     };
 
