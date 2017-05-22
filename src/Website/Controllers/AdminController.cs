@@ -478,7 +478,7 @@ namespace QOAM.Website.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(PerformMoveOfScoreCards(model))
+                if(PerformMoveOfScoreCards(model, true))
                     return RedirectToAction("MoveScoreCards", new { saveSuccessful = true });
             }
 
@@ -844,7 +844,7 @@ namespace QOAM.Website.Controllers
             Session[NotFoundISSNsSessionKey] = issnsNotFound;
         }
 
-        public bool PerformMoveOfScoreCards(MoveScoreCardsViewModel model)
+        public bool PerformMoveOfScoreCards(MoveScoreCardsViewModel model, bool callSaveOnJournalRepo = false)
         {
             var oldJournal = journalRepository.FindByIssn(model.OldIssn);
             var newJournal = journalRepository.FindByIssn(model.NewIssn);
@@ -856,6 +856,9 @@ namespace QOAM.Website.Controllers
 
                 baseScoreCardRepository.Save();
                 valuationScoreCardRepository.Save();
+                
+                if (callSaveOnJournalRepo)
+                    journalRepository.Save();
 
                 return true;
             }
