@@ -1,4 +1,6 @@
 ﻿var AdminController = (function () {
+    var path = window.location.pathname.replace("/removeDuplicates", "");
+
     function AdminController() {
     }
     AdminController.prototype.index = function (downloadUrl) {
@@ -41,18 +43,29 @@
 
             e.preventDefault();
 
-            $.post("/admin/startRemovingDuplicates");
-        });
+            $.post(path + "/startRemovingDuplicates").done(function() {
+                processNextBatch();
+            });
 
-        setTimeout(pollRemoveDuplicateCount, 5000);
+            setTimeout(pollRemoveDuplicateCount, 5000);
+        });
+    };
+
+    function processNextBatch() {
+        $.post(path + "/processNextBatch").done(function(response) {
+            if (response)
+                processNextBatch();
+            else
+                $("#status-message").text("Completed! ");
+        });
     };
 
     function pollRemoveDuplicateCount() {
-        $.get("/admin/removeDuplicateCount").done(function(status) {
+        $.get(path + "/removeDuplicateCount").done(function(status) {
             $("#status").text(status);
             setTimeout(pollRemoveDuplicateCount, 5000);
         });
-    }
+    };
 
     return AdminController;
 })();

@@ -48,9 +48,13 @@ namespace QOAM.Website.Controllers
         readonly ICornerRepository _cornerRepository;
         readonly Regex _domainRegex = new Regex(@"(?<=(http[s]?:\/\/(.*?)[.?]))\b([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b", RegexOptions.Compiled);
         readonly JournalTocsImport _journalsTocImport;
+
         static int _removeDuplicateCount;
         static int _duplicateCount;
         static int _duplicateQueueProcessedCount;
+        static List<IEnumerable<string>> _chunksToProcess;
+        static int _currentBatch;
+        static IList<Journal> _allJournals;
 
         public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalTocsImport journalsTocImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter, IBulkImporter<Institution> institutionImporter, ICornerRepository cornerRepository)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
@@ -474,7 +478,7 @@ namespace QOAM.Website.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(PerformMoveOfScoreCards(model))
+                if(PerformMoveOfScoreCards(model, true))
                     return RedirectToAction("MoveScoreCards", new { saveSuccessful = true });
             }
 
@@ -689,15 +693,18 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpPost, Route("startRemovingDuplicates")]
-        public ActionResult StartRemovingDuplicates()
+        public JsonResult StartRemovingDuplicates()
         {
             _duplicateCount = 0;
             _removeDuplicateCount = 0;
             _duplicateQueueProcessedCount = 0;
+            _currentBatch = 0;
+            _chunksToProcess = new List<IEnumerable<string>>();
+            _allJournals = new List<Journal>();
 
-            var allJournals = journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects);
+            _allJournals = journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects);
 
-            var duplicates = allJournals
+            var duplicates = _allJournals
                 .GroupBy(j => j.Title)
                 .Where(g => g.Count() > 1)
                 .Select(g => g.Key)
@@ -705,18 +712,30 @@ namespace QOAM.Website.Controllers
 
             _duplicateCount = duplicates.Count;
 
-            foreach (var title in duplicates)
+            _chunksToProcess = duplicates.Chunk(500).ToList();
+
+
+            return Json(true);
+        }
+
+        [HttpPost, Route("processNextBatch")]
+        public JsonResult ProcessNextBatch()
+        {
+            if(_currentBatch >= _chunksToProcess.Count)
+                return Json(false);
+
+            foreach(var title in _chunksToProcess[_currentBatch])
             {
-                var journals = allJournals.Where(j => j.Title == title).ToList();
+                var journals = _allJournals.Where(j => j.Title == title).ToList();
                 var downloaded = _journalsTocImport.DownloadJournals(journals.Select(j => j.ISSN).ToList());
 
                 _duplicateQueueProcessedCount++;
 
-                if(!downloaded.Any())
+                if (!downloaded.Any())
                     continue;
-                
+
                 var journalToDelete = journals.SingleOrDefault(j => j.ISSN == downloaded.First().PISSN);
-                
+
                 if (journalToDelete == null)
                     continue;
 
@@ -731,13 +750,15 @@ namespace QOAM.Website.Controllers
                     OldIssn = journalToDelete.ISSN
                 });
 
+                journalToDelete = journalRepository.Find(journalToDelete.Id);
                 journalRepository.Delete(journalToDelete);
                 _removeDuplicateCount++;
             }
 
+            _currentBatch++;
             journalRepository.Save();
 
-            return View("DuplicatesRemoved", _removeDuplicateCount);
+            return Json(true);
         }
 
         [HttpGet, Route("removeDuplicateCount"), OutputCache(Duration = 0)]
@@ -823,7 +844,7 @@ namespace QOAM.Website.Controllers
             Session[NotFoundISSNsSessionKey] = issnsNotFound;
         }
 
-        public bool PerformMoveOfScoreCards(MoveScoreCardsViewModel model)
+        public bool PerformMoveOfScoreCards(MoveScoreCardsViewModel model, bool callSaveOnJournalRepo = false)
         {
             var oldJournal = journalRepository.FindByIssn(model.OldIssn);
             var newJournal = journalRepository.FindByIssn(model.NewIssn);
@@ -835,6 +856,9 @@ namespace QOAM.Website.Controllers
 
                 baseScoreCardRepository.Save();
                 valuationScoreCardRepository.Save();
+                
+                if (callSaveOnJournalRepo)
+                    journalRepository.Save();
 
                 return true;
             }
