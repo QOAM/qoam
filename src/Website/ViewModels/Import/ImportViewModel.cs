@@ -3,15 +3,10 @@
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
-    using QOAM.Core.Import;
+    using Core.Import;
 
     public class ImportViewModel
     {
-        public ImportViewModel()
-        {
-            //this.Source = JournalsImportSource.Ulrichs;
-        }
-
         [DisplayName("ISSNs")]
         [Required]
         public string ISSNs { get; set; }

@@ -105,7 +105,7 @@ namespace QOAM.Website.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            StartImport(model.ISSNs, JournalsImportMode.InsertOnly);
+            StartImport(model.ISSNs, JournalsImportMode.InsertAndUpdate);
 
             return RedirectToAction("Imported");
         }
@@ -132,38 +132,38 @@ namespace QOAM.Website.Controllers
             return View(model);
         }
 
-        [HttpGet, Route("update")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
-        public ViewResult Update()
-        {
-            return this.View(new UpdateViewModel());
-        }
+        //[HttpGet, Route("update")]
+        //[Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        //public ViewResult Update()
+        //{
+        //    return this.View(new UpdateViewModel());
+        //}
 
-        [HttpPost, Route("update")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
-        public ActionResult Update(UpdateViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return this.View(model);
+        //[HttpPost, Route("update")]
+        //[ValidateAntiForgeryToken]
+        //[Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        //public ActionResult Update(UpdateViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return this.View(model);
 
-            StartImport(model.ISSNs, JournalsImportMode.UpdateOnly);
+        //    StartImport(model.ISSNs, JournalsImportMode.UpdateOnly);
 
-            return RedirectToAction("Updated");
-        }
+        //    return RedirectToAction("Updated");
+        //}
 
-        [HttpGet, Route("updated")]
-        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
-        public ViewResult Updated()
-        {
-            var model = new UpdatedViewModel
-                {
-                    FoundISSNs = (IEnumerable<string>)this.Session[FoundISSNsSessionKey],
-                    NotFoundISSNs = (IEnumerable<string>)this.Session[NotFoundISSNsSessionKey]
-                };
+        //[HttpGet, Route("updated")]
+        //[Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        //public ViewResult Updated()
+        //{
+        //    var model = new UpdatedViewModel
+        //        {
+        //            FoundISSNs = (IEnumerable<string>)this.Session[FoundISSNsSessionKey],
+        //            NotFoundISSNs = (IEnumerable<string>)this.Session[NotFoundISSNsSessionKey]
+        //        };
 
-            return this.View(model);
-        }
+        //    return this.View(model);
+        //}
 
         [HttpGet, Route("download")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
@@ -824,6 +824,7 @@ namespace QOAM.Website.Controllers
 
             return true;
         }
+
         void StartImport(string modelIssns, JournalsImportMode importMode)
         {
             var issns = ParseISSNs(modelIssns);
