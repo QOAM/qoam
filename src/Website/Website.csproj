@@ -39,6 +39,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -831,6 +832,7 @@
     <None Include="Contact.config" />
     <Content Include="Content\documents\16-06-21-QOAM-sustainability-plan.pdf" />
     <Content Include="Content\documents\Concise-comparison-of-QOAM-and-the-Dutch-Journal-Browser.pdf" />
+    <Content Include="Content\documents\Price-per-article.pdf" />
     <None Include="MachineKey.test.config" />
     <None Include="NLog.Website.test.config" />
     <None Include="Smtp.test.config" />
