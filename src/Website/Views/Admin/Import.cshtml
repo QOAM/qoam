@@ -9,7 +9,7 @@
     <h2>@ViewBag.Title</h2>
     
     <p>
-        In the textbox below you can enter ISSNs of journals to be imported.
+        In the textbox below you can enter ISSNs of journals to be imported or updated. Please note that any existing information will be overwritten, which means that the publisher, language, country and disciplines will all be overwritten.
     </p>
     
     @using (Html.BeginForm("Import", "Admin", FormMethod.Post, new { role = "form" }))

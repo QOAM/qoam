@@ -64,47 +64,47 @@
             Assert.True(ActionRequiresHttps(x => x.Imported()));
         }
 
-        [Fact]
-        public void UpdateActionRoutedToWithCorrectUrlAndVerb()
-        {
-            // Assert    
-            ApplicationRoutes.ShouldMap("~/admin/update/").To<AdminController>(HttpMethod.Get, x => x.Update());
-        }
+        //[Fact]
+        //public void UpdateActionRoutedToWithCorrectUrlAndVerb()
+        //{
+        //    // Assert    
+        //    ApplicationRoutes.ShouldMap("~/admin/update/").To<AdminController>(HttpMethod.Get, x => x.Update());
+        //}
 
-        [Fact]
-        public void UpdateActionRequiresHttps()
-        {
-            // Assert
-            Assert.True(ActionRequiresHttps(x => x.Update()));
-        }
+        //[Fact]
+        //public void UpdateActionRequiresHttps()
+        //{
+        //    // Assert
+        //    Assert.True(ActionRequiresHttps(x => x.Update()));
+        //}
 
-        [Fact]
-        public void UpdateActionWithModelRoutedToWithCorrectUrlAndVerb()
-        {
-            // Assert    
-            ApplicationRoutes.ShouldMap("~/admin/update/").To<AdminController>(HttpMethod.Post, x => x.Update(null));
-        }
+        //[Fact]
+        //public void UpdateActionWithModelRoutedToWithCorrectUrlAndVerb()
+        //{
+        //    // Assert    
+        //    ApplicationRoutes.ShouldMap("~/admin/update/").To<AdminController>(HttpMethod.Post, x => x.Update(null));
+        //}
 
-        [Fact]
-        public void UpdateActionWithModelRequiresHttps()
-        {
-            // Assert
-            Assert.True(ActionRequiresHttps(x => x.Update(null)));
-        }
+        //[Fact]
+        //public void UpdateActionWithModelRequiresHttps()
+        //{
+        //    // Assert
+        //    Assert.True(ActionRequiresHttps(x => x.Update(null)));
+        //}
 
-        [Fact]
-        public void UpdatedActionRoutedToWithCorrectUrlAndVerb()
-        {
-            // Assert    
-            ApplicationRoutes.ShouldMap("~/admin/updated/").To<AdminController>(HttpMethod.Get, x => x.Updated());
-        }
+        //[Fact]
+        //public void UpdatedActionRoutedToWithCorrectUrlAndVerb()
+        //{
+        //    // Assert    
+        //    ApplicationRoutes.ShouldMap("~/admin/updated/").To<AdminController>(HttpMethod.Get, x => x.Updated());
+        //}
 
-        [Fact]
-        public void UpdatedActionRequiresHttps()
-        {
-            // Assert
-            Assert.True(ActionRequiresHttps(x => x.Updated()));
-        }
+        //[Fact]
+        //public void UpdatedActionRequiresHttps()
+        //{
+        //    // Assert
+        //    Assert.True(ActionRequiresHttps(x => x.Updated()));
+        //}
 
         [Fact]
         public void DownloadActionRoutedToWithCorrectUrlAndVerb()
