@@ -11,6 +11,9 @@ namespace QOAM.Website.ViewModels.Institutions
     public class UpsertViewModel : IFileUploadViewModel
     {
         public int? Id { get; set; }
+        public int NumberOfBaseScoreCards { get; set; }
+        public int NumberOfScoreCards { get; set; }
+        public int NumberOfValuationScoreCards { get; set; }
 
         [Required]
         [StringLength(1000)]
@@ -31,6 +34,9 @@ namespace QOAM.Website.ViewModels.Institutions
                 Id = Id.GetValueOrDefault(),
                 Name = this.Name, 
                 ShortName = this.ShortName.Replace("http://", string.Empty).Replace("www.", string.Empty),
+                NumberOfBaseScoreCards = NumberOfBaseScoreCards,
+                NumberOfScoreCards = NumberOfScoreCards,
+                NumberOfValuationScoreCards = NumberOfValuationScoreCards
             };
         }
     }

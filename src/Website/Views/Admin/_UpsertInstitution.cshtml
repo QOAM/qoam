@@ -1,6 +1,9 @@
 ﻿@model QOAM.Website.ViewModels.Institutions.UpsertViewModel
 
 @Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.NumberOfBaseScoreCards)
+@Html.HiddenFor(m => m.NumberOfScoreCards)
+@Html.HiddenFor(m => m.NumberOfValuationScoreCards)
 
 <div class="form-group row">
     @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
