@@ -808,7 +808,10 @@ namespace QOAM.Website.Controllers
             {
                 Id = id,
                 Name = institution.Name,
-                ShortName = institution.ShortName
+                ShortName = institution.ShortName,
+                NumberOfBaseScoreCards = institution.NumberOfBaseScoreCards,
+                NumberOfScoreCards = institution.NumberOfScoreCards,
+                NumberOfValuationScoreCards = institution.NumberOfValuationScoreCards
             };
 
             return View(model);
