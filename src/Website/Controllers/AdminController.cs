@@ -326,6 +326,9 @@ namespace QOAM.Website.Controllers
         public ActionResult AddInstitution(UpsertViewModel model)
         {
             ModelState["File"].Errors.Clear();
+            ModelState["NumberOfBaseScoreCards"].Errors.Clear();
+            ModelState["NumberOfScoreCards"].Errors.Clear();
+            ModelState["NumberOfValuationScoreCards"].Errors.Clear();
             
             if (institutionRepository.Exists(model.Name))
                 ModelState.AddModelError("Name", $"There is already an institution with the name \"{model.Name}\".");
