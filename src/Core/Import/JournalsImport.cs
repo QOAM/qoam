@@ -80,7 +80,13 @@
                 this.UpdateJournals(existingJournals, countries, publishers, languages, subjects, allJournals, journalUpdateProperties);
             }
 
-            return new JournalsImportResult { NumberOfImportedJournals = distinctJournals.Count, NumberOfNewJournals = newJournals.Count };
+            return new JournalsImportResult
+            {
+                NumberOfImportedJournals = distinctJournals.Count,
+                UpdatedIssns = distinctJournals.Select(j => j.ISSN).ToList(),
+                NumberOfNewJournals = newJournals.Count,
+                NewIssns = newJournals.Select(j => j.ISSN).ToList()
+            };
         }
 
         private void InsertJournals(List<Journal> newJournals, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects)
