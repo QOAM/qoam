@@ -31,6 +31,8 @@ namespace QOAM.Website.Controllers
     public class AdminController : ApplicationController
     {
         const string FoundISSNsSessionKey = "FoundISSNs";
+        const string ImportedISSNsSessionKey = "ImportedISSNs";
+        const string UpdatedISSNsSessionKey = "UpdatedISSNs";
         const string NotFoundISSNsSessionKey = "NotFoundISSNs";
         const string ImportResultSessionKey = "ImportResult";
         const int BlockedIssnsCount = 20;
@@ -115,12 +117,14 @@ namespace QOAM.Website.Controllers
         public ViewResult Imported()
         {
             var model = new ImportedViewModel
-                        {
-                            FoundISSNs = (IEnumerable<string>)this.Session[FoundISSNsSessionKey],
-                            NotFoundISSNs = (IEnumerable<string>)this.Session[NotFoundISSNsSessionKey]
-                        };
+            {
+                FoundISSNs = (IEnumerable<string>) Session[FoundISSNsSessionKey],
+                NotFoundISSNs = (IEnumerable<string>) Session[NotFoundISSNsSessionKey],
+                ImportedISSNs = (IEnumerable<string>) Session[ImportedISSNsSessionKey],
+                UpdatedISSNs = (IEnumerable<string>) Session[UpdatedISSNsSessionKey]
+            };
 
-            return this.View(model);
+            return View(model);
         }
 
         [HttpGet, Route("journalTocsImported")]
@@ -844,9 +848,13 @@ namespace QOAM.Website.Controllers
 
             var journalsToImport = journals.Where(j => issnsFound.Contains(j.ISSN) || issnsFound.Contains(j.PISSN)).Distinct().ToList();
 
-            if (journalsToImport.Any())
-                journalsImport.ImportJournals(journalsToImport, importMode);
+            var result = new JournalsImportResult();
 
+            if (journalsToImport.Any())
+                result = journalsImport.ImportJournals(journalsToImport, importMode);
+
+            Session[ImportedISSNsSessionKey] = result.NewIssns;
+            Session[UpdatedISSNsSessionKey] = result.UpdatedIssns;
             Session[FoundISSNsSessionKey] = issnsFound;
             Session[NotFoundISSNsSessionKey] = issnsNotFound;
         }
