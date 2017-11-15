@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 using NLog;
 
 namespace QOAM.Core.Import.JournalTOCs
@@ -39,6 +40,8 @@ namespace QOAM.Core.Import.JournalTOCs
                 var issnParams = issns.Aggregate(new StringBuilder(), (sb, a) => sb.Append($"&issns[]={a}"), sb => sb.ToString());
 
                 var resultString = webClient.DownloadString($"{_settings.ByIssnRequestUrl}{issnParams}");
+
+                resultString = HttpUtility.HtmlDecode(resultString);
 
                 return new List<string> { resultString };
             }
