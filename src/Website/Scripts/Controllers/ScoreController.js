@@ -411,9 +411,7 @@
         };
 
         var scoreCardModel = function (scoreCardData) {
-
             var self = this;
-            
             ko.mapping.fromJS(scoreCardData, {}, self);
 
             var isEditorComment = $('#isEditorComment').val();
@@ -541,10 +539,12 @@
 
                 if (checked) {
                     remarksElement.val(isEditorComment);
+                    remarksElement.attr("placeholder", "");
                     remarksElement.on('focus', self.onRemarksFocus)
 								  .on('blur', self.onRemarksBlur);
                 } else {
                     remarksElement.val('');
+                    remarksElement.attr("placeholder", "Why would/wouldn’t you recommend this journal?");
                     remarksElement.off('focus', self.onRemarksFocus)
 								  .off('blur', self.onRemarksBlur);
                 }

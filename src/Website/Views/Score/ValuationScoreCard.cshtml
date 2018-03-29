@@ -9,41 +9,42 @@
 }
 
 @helper QuestionRating(QuestionKey questionKey)
-{
-    var question = Model.QuestionScores.FirstOrDefault(q => q.QuestionKey == questionKey);
-    if (question == null) {
-        return;
-    }
-    var index = Model.QuestionScores.IndexOf(question);
+    {
+        var question = Model.QuestionScores.FirstOrDefault(q => q.QuestionKey == questionKey);
+        if (question == null)
+        {
+            return;
+        }
+        var index = Model.QuestionScores.IndexOf(question);
 
-    <div class="score">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="text-left">@questionKey.ToDescription()</p>
+        <div class="score">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-left">@questionKey.ToDescription()</p>
 
-                <label>
-                    <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Absent.GetValue()" data-bind="checked: questionScores()[@index].score"/>
-                    @Score.Absent.GetValue(): @Score.Absent.GetName()
-                </label>
-                <label>
-                    <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Poor.GetValue()" data-bind="checked: questionScores()[@index].score"/>
-                    @Score.Poor.GetValue(): @Score.Poor.GetName()
-                </label>
-                <label>
-                    <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Moderate.GetValue()" data-bind="checked: questionScores()[@index].score"/>
-                    @Score.Moderate.GetValue(): @Score.Moderate.GetName()
-                </label>
-                <label>
-                    <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Good.GetValue()" data-bind="checked: questionScores()[@index].score"/>
-                    @Score.Good.GetValue(): @Score.Good.GetName()
-                </label>
-                <label>
-                    <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Excellent.GetValue()" data-bind="checked: questionScores()[@index].score" />
-                    @Score.Excellent.GetValue(): @Score.Excellent.GetName()
-                </label>
+                    <label>
+                        <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Absent.GetValue()" data-bind="checked: questionScores()[@index].score" />
+                        @Score.Absent.GetValue(): @Score.Absent.GetName()
+                    </label>
+                    <label>
+                        <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Poor.GetValue()" data-bind="checked: questionScores()[@index].score" />
+                        @Score.Poor.GetValue(): @Score.Poor.GetName()
+                    </label>
+                    <label>
+                        <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Moderate.GetValue()" data-bind="checked: questionScores()[@index].score" />
+                        @Score.Moderate.GetValue(): @Score.Moderate.GetName()
+                    </label>
+                    <label>
+                        <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Good.GetValue()" data-bind="checked: questionScores()[@index].score" />
+                        @Score.Good.GetValue(): @Score.Good.GetName()
+                    </label>
+                    <label>
+                        <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Excellent.GetValue()" data-bind="checked: questionScores()[@index].score" />
+                        @Score.Excellent.GetValue(): @Score.Excellent.GetName()
+                    </label>
+                </div>
             </div>
         </div>
-    </div>
 }
 
 <div class="container main">
@@ -212,7 +213,7 @@
 
                                                 <input type="hidden" id="isEditorComment" value="1. How high is the publication fee of your journal? What do you think of it?
 2. Does your journal have third party revenues? If so, is there any risk of a potential conflict of interest?" />
-                                                <textarea id="remarks" rows="3" class="form-control" data-bind="value: Remarks"></textarea>
+                                                <textarea id="remarks" rows="3" class="form-control" data-bind="value: Remarks" placeholder="Why would/wouldn’t you recommend this journal?"></textarea>
                                             </div>
                                         </div>
                                     </div>
