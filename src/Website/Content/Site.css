@@ -465,6 +465,22 @@ ul {
 
 .form-control .pull-left { width: 80%; }
 
+.form-control::placeholder {
+    font-style: italic;
+}
+.form-control:-ms-input-placeholder {
+    font-style: italic;
+}
+.form-control:-moz-placeholder {
+    font-style: italic;
+}
+.form-control::-moz-placeholder {
+    font-style: italic;
+}
+.form-control::-webkit-input-placeholder {
+    font-style: italic;
+}
+
 .high label {
     font-weight: normal;
     margin-bottom: 0px;

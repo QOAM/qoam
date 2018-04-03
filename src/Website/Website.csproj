@@ -380,10 +380,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\Scores.cshtml" />
-    <None Include="App_Data\OAMarket.mdf" />
-    <None Include="App_Data\OAMarket_log.ldf">
-      <DependentUpon>OAMarket.mdf</DependentUpon>
-    </None>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\chosen\chosen-sprite%402x.png" />
@@ -839,8 +835,6 @@
     <None Include="Smtp.config" />
     <None Include="MachineKey.config" />
     <None Include="NLog.Website.config" />
-    <None Include="Properties\PublishProfiles\Acceptatie.pubxml" />
-    <None Include="Properties\PublishProfiles\Productie.pubxml" />
     <Content Include="Scripts\bootstrap.min.js.map">
       <DependentUpon>bootstrap.min.js</DependentUpon>
     </Content>
@@ -897,7 +891,6 @@
     <Content Include="Views\Admin\Imported.cshtml" />
     <Content Include="Views\Admin\Updated.cshtml" />
     <Content Include="Views\Admin\Update.cshtml" />
-    <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <Content Include="Views\Admin\Check.cshtml" />
     <Content Include="Scripts\knockout.isdirty.min.js.map">
       <DependentUpon>knockout.isdirty.min.js</DependentUpon>
@@ -1077,8 +1070,6 @@
     <Content Include="Scripts\Helpers\Compatibility.min.js.map">
       <DependentUpon>Compatibility.js</DependentUpon>
     </Content>
-    <None Include="Properties\PublishProfiles\Release.pubxml" />
-    <None Include="Properties\PublishProfiles\Staging.pubxml" />
     <Content Include="Scripts\Controllers\ProfilesController.min.js.map">
       <DependentUpon>ProfilesController.min.js</DependentUpon>
     </Content>
