@@ -5,15 +5,13 @@
     using System.Linq;
     using System.Net.Mail;
     using System.Web.Helpers;
-    using EntityFramework.Extensions;
     using PagedList;
 
-    using QOAM.Core.Repositories.Filters;
+    using Filters;
 
     public class InstitutionRepository : Repository<Institution>, IInstitutionRepository
     {
-        public InstitutionRepository(ApplicationDbContext dbContext)
-            : base(dbContext)
+        public InstitutionRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
 
@@ -21,23 +19,21 @@
         {
             get
             {
-                return this.DbContext.Institutions.OrderBy(i => i.Name).ToList();
+                return DbContext.Institutions.OrderBy(i => i.Name).ToList();
             }
         }
 
         public IQueryable<string> Names(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
-            {
                 return Enumerable.Empty<string>().AsQueryable();
-            }
 
-            return this.DbContext.Institutions.Where(u => u.Name.ToLower().StartsWith(query.ToLower())).Select(j => j.Name);
+            return DbContext.Institutions.Where(u => u.Name.ToLower().StartsWith(query.ToLower())).Select(j => j.Name);
         }
 
         public IPagedList<Institution> Search(InstitutionFilter filter)
         {
-            var query = this.DbContext.Institutions.AsQueryable();
+            var query = DbContext.Institutions.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(filter.Name))
             {
@@ -49,17 +45,17 @@
 
         public Institution Find(string shortName)
         {
-            return this.DbContext.Institutions.FirstOrDefault(i => i.ShortName == shortName);
+            return DbContext.Institutions.FirstOrDefault(i => i.ShortName == shortName);
         }
 
         public Institution Find(int id)
         {
-            return this.DbContext.Institutions.Find(id);
+            return DbContext.Institutions.Find(id);
         }
         
         public Institution Find(MailAddress mailAddress)
         {
-            return this.DbContext.Institutions.FirstOrDefault(i => mailAddress.Host.Contains(i.ShortName));
+            return DbContext.Institutions.FirstOrDefault(i => mailAddress.Host.Equals(i.ShortName, StringComparison.OrdinalIgnoreCase));
         }
 
         public bool Exists(string name)
