@@ -131,5 +131,7 @@ function initDisciplinesSelect() {
         width: "100%",
         search_contains: true,
         placeholder_text_multiple: "Search by discipline"
-    });
+        });
+
+    $('#SelectedDisciplines').trigger('chosen:updated');
 }
