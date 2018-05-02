@@ -53,10 +53,16 @@
             return DbContext.Institutions.Find(id);
         }
         
-        public Institution Find(MailAddress mailAddress)
+        public Institution FindByExactHost(MailAddress mailAddress)
         {
             return DbContext.Institutions.FirstOrDefault(i => mailAddress.Host.Equals(i.ShortName, StringComparison.OrdinalIgnoreCase));
         }
+
+        public Institution Find(MailAddress mailAddress)
+        {
+            return DbContext.Institutions.FirstOrDefault(i => mailAddress.Host.Contains(i.ShortName));
+        }
+
 
         public bool Exists(string name)
         {
