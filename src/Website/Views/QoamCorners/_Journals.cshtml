@@ -45,7 +45,7 @@
                 </a>
             </th>
             <th class="publisher">Publisher</th>
-            <th class="swot"><a href="@Url.Action("JournalScoreCard", "Home")#swot">SWOT color</a></th>
+            <th class="swot"><a href="@Url.Action("JournalScoreCard", "Home")#swot">Submit</a></th>
             <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#basejournalscorecard">Base score</a></th>
             <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#valuationjournalscorecard">Valuation score</a></th>
         </tr>
@@ -63,8 +63,8 @@
                     }
                     else
                     {
-                        @:&#160;
-                                    }
+                        @:&nbsp;
+                    }
                 </td>
                 <td>@Scores.AverageScore(journal.OverallScore)</td>
                 <td>@Scores.AverageScore(journal.ValuationScore)</td>

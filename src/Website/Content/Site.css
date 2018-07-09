@@ -600,7 +600,7 @@ ul {
     height: 100%;
     text-decoration: none;
     font-size: 200%; 
-    color: #fff; 
+    color: #000; 
     font-weight: bold;
 }
 
@@ -629,16 +629,16 @@ ul {
 }
 
 .table .verdict-strong,
-.swotContainer .verdict-strong .strong { background-color: green !important;text-align: center;}
+.swotContainer .verdict-strong .strong { /*background-color: green !important;*/ text-align: center;}
 
 .table .verdict-weak,
-.swotContainer .verdict-weak .weak { background-color: orange !important; }
+.swotContainer .verdict-weak .weak { /*background-color: orange !important;*/ }
 
 .table .verdict-opportunity,
-.swotContainer .verdict-opportunity .opportunity { background-color: #0088CC !important; }
+.swotContainer .verdict-opportunity .opportunity { /*background-color: #0088CC !important;*/ }
 
 .table .verdict-threat,
-.swotContainer .verdict-threat .threat { background-color: red !important; }
+.swotContainer .verdict-threat .threat { /*background-color: red !important;*/ }
 
 .swotFilterContainer .strong { color: green; }
 

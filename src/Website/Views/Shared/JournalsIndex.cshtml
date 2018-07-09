@@ -27,7 +27,7 @@
 
                         @Html.Partial("_JournalFilters")
                         
-                        @Html.Partial("_SwotMatrix")
+                        @*@Html.Partial("_SwotMatrix")*@
 
                         <p>
                             <input id="submitForm" type="submit" value="Search" class="btn btn-primary" />
@@ -61,7 +61,8 @@
                     }
                     else
                     {
-                        <h3>@Model.Journals.TotalItemCount <a id="open-access-filter" href="#">OA</a> and hybrid journals; <em><a id="institutional-discount-filter" href="#">institutional discounts</a></em></h3>
+                        @*<h3>@Model.Journals.TotalItemCount <a id="open-access-filter" href="#">OA</a> and hybrid journals; <em><a id="institutional-discount-filter" href="#">institutional discounts</a></em></h3>*@
+                        <h3>@Model.Journals.TotalItemCount journals</h3>
                     }
 
                 </div>
@@ -83,9 +84,10 @@
                                 </a>
                             </th>
                             <th class="publisher">Publisher</th>
-                            <th class="swot"><a href="@Url.Action("JournalScoreCard", "Home")#swot">SWOT color</a></th>
-                            <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#basejournalscorecard">Base score</a></th>
-                            <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#valuationjournalscorecard">Valuation score</a></th>
+                            <th class="swot"><a href="@Url.Action("JournalScoreCard", "Home")#swot">Submit</a></th>
+                            @*<th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#basejournalscorecard">Base score</a></th>*@
+                            <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#valuationjournalscorecard">Score</a></th>
+                            <th>By</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,8 +106,9 @@
                                         @:&#160;
                                     }
                                 </td>
-                                <td>@Scores.AverageScore(journal.OverallScore)</td>
+                                @*<td>@Scores.AverageScore(journal.OverallScore)</td>*@
                                 <td>@Scores.AverageScore(journal.ValuationScore)</td>
+                                <td>@journal.NumberOfValuationReviewers</td>
                             </tr>
                         }
 
