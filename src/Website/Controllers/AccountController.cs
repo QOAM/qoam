@@ -115,7 +115,11 @@
             }
 
             var mailAddress = new MailAddress(model.Email);
-            var institution = this.institutionRepository.Find(mailAddress);
+
+            // We do first a full host comparison tu rule out similar insitution names.
+            // In case it doesn't succeed, we try a partial comparison to be sure we 
+            // include subomains of existing institutions
+            var institution = institutionRepository.FindByExactHost(mailAddress) ?? institutionRepository.Find(mailAddress);
             if (institution == null)
             {
                 this.ModelState.AddModelError("", "Sorry, the domain name in your email address does not match the name of an academic institution known to us. If you want your institution to be included in our list, please enter it’s name and web address in our contact box and we will respond promptly.");

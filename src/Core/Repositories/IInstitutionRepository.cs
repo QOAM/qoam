@@ -26,5 +26,6 @@
         bool Exists(string name);
         bool Exists(int id);
         bool DomainExists(string domain);
+        Institution FindByExactHost(MailAddress mailAddress);
     }
 }
