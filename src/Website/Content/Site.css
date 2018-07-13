@@ -591,20 +591,22 @@ ul {
 .swotContainer {
     padding: 3px 0 0 0;
     width: 155px;
+    vertical-align: middle;
+    display: table;
 }
 
-.table .verdict-strong a.submission-link,
-.swotContainer .verdict-strong a.submission-link {
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-    font-size: 200%; 
-    color: #000; 
-    font-weight: bold;
-}
+    .table a.submission-link,
+    .swotContainer a.submission-link {
+        display: table-cell;
+        width: 100%;
+        text-decoration: none;
+        font-size: 200%;
+        color: #000;
+        font-weight: bold;
+        vertical-align: middle;
+    }
 
-.table .verdict-strong a.submission-link {
+.table a.submission-link {
     font-size: 20px; 
 }
 

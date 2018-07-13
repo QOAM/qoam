@@ -5,7 +5,7 @@
 @model ValuationScoreCard
 
 @{
-    ViewBag.Title = "Valuation score card";
+    ViewBag.Title = "Score card";
 }
 
 @helper QuestionRating(QuestionKey questionKey)
@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-primary">
-                            <div class="panel-heading">Valuation Score for this journal:</div>
+                            <div class="panel-heading">Score for this journal:</div>
                             <div class="panel-body">
                                 <h1>@Model.Score.ValuationScore.AverageScore.Value.ToString("0.0")</h1>
                             </div>

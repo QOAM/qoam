@@ -9,7 +9,7 @@
 
 <link href="~/Content/scoring.css" rel="stylesheet" />
 @*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs/dt-1.10.10/datatables.min.css" />
-<link rel="stylesheet" type="text/css" href="~/Content/dataTables.custom.css" />*@
+    <link rel="stylesheet" type="text/css" href="~/Content/dataTables.custom.css" />*@
 
 <div class="container main">
     <div class="row side">
@@ -86,59 +86,15 @@
                         </div>
                     </div>
 
-                    @if (Model.NumberOfBaseReviewers > 0 && Model.NumberOfValuationReviewers > 0)
-                    {
-                        <div class="col-md-2">
-                            <div class="score swotContainer">
-                                <a href="@Url.Action("JournalScoreCard", "Home")#swot" data-select-tab="false">
-                                    <small>SWOT matrix</small>
-                                </a>
-                                <div class="table verdict-@Model.Swot">
-                                    <div class="table-row first-row no-float">
-                                        <div class="table-cell strong first-column">
-                                            @if (!string.IsNullOrWhiteSpace(Model.SubmissionPageLink) && Model.Swot == SwotVerdict.StrongJournal)
-                                            {
-                                                <a href="@Model.SubmissionPageLink" alt="Go to submission page" title="Go to submission page" class="submission-link" target="_blank">S</a>
-                                            }
-                                            else
-                                            {
-                                                @:&#160;
-                                            }
-                                        </div>
-                                        <div class="table-cell threat second-column">&#160;</div>
-                                    </div>
-                                    <div class="table-row second-row">
-                                        <div class="table-cell opportunity first-column">&#160;</div>
-                                        <div class="table-cell weak second-column">&#160;</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    }
-
                     <a href="@Url.Action("JournalScoreCard", "Home")#valuationjournalscorecard">
                         <div class="col-md-2 pull-right">
                             <div class="score big">
-                                <small>Valuation Score</small>
+                                <small>Score</small>
                                 <h2>
                                     @Scores.AverageScore(Model.ValuationScore)
                                 </h2>
 
                                 <small>Scored by @Model.NumberOfValuationReviewers</small>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="@Url.Action("JournalScoreCard", "Home")#basejournalscorecard">
-                        <div class="col-md-2 pull-right">
-                            <div class="score big">
-                                <small>Base Score</small>
-                                <h2>
-                                    @Scores.AverageScore(Model.OverallScore)
-                                </h2>
-
-                                <small>Scored by @Model.NumberOfBaseReviewers</small>
 
                                 @if (Model.DoajSeal)
                                 {
@@ -147,13 +103,22 @@
                             </div>
                         </div>
                     </a>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.SubmissionPageLink) && Model.NumberOfBaseReviewers > 0 && Model.NumberOfValuationReviewers > 0 && Model.Swot == SwotVerdict.StrongJournal)
+                    {
+                        <div class="col-md-2 pull-right">
+                            <div class="score swotContainer big">
+                                <a href="@Model.SubmissionPageLink" alt="Go to submission page" title="Go to submission page" class="submission-link" target="_blank">S</a>
+                            </div>
+                        </div>
+                    }
                 </div>
                 <div class="span-contentsearch">
                     <div class="row">
                         <div class="tabbablesearch">
                             <ul class="nav nav-tabs journal-tabs">
                                 <li class="active"><a href="#journal@(Model.Id)-tab-score" data-toggle="tab">Average subscores</a></li>
-                                <li><a href="#journal@(Model.Id)-tab-review" data-url="@Url.Action("ScoreCards", new { id = Model.Id })" data-toggle="tab">Published JSCs</a></li>
+                                <li><a href="#journal@(Model.Id)-tab-review" data-url="@Url.Action("ScoreCards", new { id = Model.Id })" data-toggle="tab">Score Cards</a></li>
                                 <li><a href="#journal@(Model.Id)-tab-prices" data-url="@Url.Action("Prices", new { id = Model.Id, RefererUrl = Request.Url.ToString() })" data-toggle="tab">Price information</a></li>
                                 <li><a href="#journal@(Model.Id)-tab-comments" data-url="@Url.Action("Comments", new { id = Model.Id })" data-toggle="tab">Additional comments</a></li>
                             </ul>
@@ -219,7 +184,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md-7a scoringbuttons not-flex">
-                                                    <a href="@Url.Action("ValuationScoreCard", "Score", new { id = Model.Id })">- Publish a Valuation Score Card</a><br />
+                                                    <a href="@Url.Action("ValuationScoreCard", "Score", new { id = Model.Id })">- Publish a Score Card</a><br />
                                                     <a class="" href="@Url.Action("RequestValuation", "Score", new {id = Model.Id})">- Invite someone else to do so</a>
                                                 </div>
                                             </div>
