@@ -164,6 +164,10 @@ fieldset legend { display: none; }
     text-align: center;
 }
 
+.score small {
+    display: block;
+}
+
 .publish {
     border: solid 1px #000;
     padding: 3px;
@@ -192,6 +196,11 @@ fieldset legend { display: none; }
     text-transform: lowercase;
 }
 
+.score h2 {
+    font-size: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .big {
     height: 111px;
 }
@@ -568,7 +577,7 @@ ul {
 .doajSeal {
     float: left; 
     position: relative;
-    top: -80px;
+    top: -95px;
 }
 
 .swotFilterContainer .table-cell {

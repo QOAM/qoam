@@ -104,23 +104,23 @@
                         </div>
                     </a>
 
-                    @if (!string.IsNullOrWhiteSpace(Model.SubmissionPageLink) && Model.NumberOfBaseReviewers > 0 && Model.NumberOfValuationReviewers > 0 && Model.Swot == SwotVerdict.StrongJournal)
+                    @*@if (!string.IsNullOrWhiteSpace(Model.SubmissionPageLink) && Model.NumberOfBaseReviewers > 0 && Model.NumberOfValuationReviewers > 0 && Model.Swot == SwotVerdict.StrongJournal)
                     {
                         <div class="col-md-2 pull-right">
                             <div class="score swotContainer big">
                                 <a href="@Model.SubmissionPageLink" alt="Go to submission page" title="Go to submission page" class="submission-link" target="_blank">S</a>
                             </div>
                         </div>
-                    }
+                    }*@
                 </div>
                 <div class="span-contentsearch">
                     <div class="row">
                         <div class="tabbablesearch">
                             <ul class="nav nav-tabs journal-tabs">
-                                <li class="active"><a href="#journal@(Model.Id)-tab-score" data-toggle="tab">Average subscores</a></li>
+                                @*<li class="active"><a href="#journal@(Model.Id)-tab-score" data-toggle="tab">Average subscores</a></li>*@
                                 <li><a href="#journal@(Model.Id)-tab-review" data-url="@Url.Action("ScoreCards", new { id = Model.Id })" data-toggle="tab">Score Cards</a></li>
-                                <li><a href="#journal@(Model.Id)-tab-prices" data-url="@Url.Action("Prices", new { id = Model.Id, RefererUrl = Request.Url.ToString() })" data-toggle="tab">Price information</a></li>
                                 <li><a href="#journal@(Model.Id)-tab-comments" data-url="@Url.Action("Comments", new { id = Model.Id })" data-toggle="tab">Additional comments</a></li>
+                                <li><a href="#journal@(Model.Id)-tab-prices" data-url="@Url.Action("Prices", new { id = Model.Id, RefererUrl = Request.Url.ToString() })" data-toggle="tab">Price information</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane" id="journal@(Model.Id)-tab-review">@{ Html.RenderPartial("_Loading"); }</div>
