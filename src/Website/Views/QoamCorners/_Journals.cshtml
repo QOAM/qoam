@@ -26,7 +26,7 @@
 </div>
 <div class="row">
     <div class="col-md-9">
-        <h3>@Model.Journals.TotalItemCount <a id="open-access-filter" href="#">OA</a> and hybrid journals; <em><a id="institutional-discount-filter" href="#">institutional discounts</a></em></h3>
+        <h3>@Model.Journals.TotalItemCount journals</h3>
     </div>
     <div class="col-md-3 text-right topmargin">
         <div class="topmargin">@Sorting.JournalSortMenu(Model.SortBy, Model.Sort)</div>
@@ -46,29 +46,31 @@
             </th>
             <th class="publisher">Publisher</th>
             <th class="swot"><a href="@Url.Action("JournalScoreCard", "Home")#swot">Submit</a></th>
-            <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#basejournalscorecard">Base score</a></th>
-            <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#valuationjournalscorecard">Valuation score</a></th>
+            @*<th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#basejournalscorecard">Base score</a></th>*@
+            <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#valuationjournalscorecard">Score</a></th>
+            <th>By</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var journal in Model.Journals)
         {
-            <tr>
-                <td class="@(journal.InstitutionJournalPrices.Any() ? "has-prices" : "")">@Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, null)</td>
-                <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name }, null)</td>
-                <td class="verdict-@journal.Swot">
-                    @if (!string.IsNullOrWhiteSpace(journal.SubmissionPageLink) && journal.Swot == SwotVerdict.StrongJournal)
-                    {
-                        <a href="@journal.SubmissionPageLink" alt="Go to submission page" title="Go to submission page" class="submission-link" target="_blank">S</a>
-                    }
-                    else
-                    {
-                        @:&nbsp;
-                    }
-                </td>
-                <td>@Scores.AverageScore(journal.OverallScore)</td>
-                <td>@Scores.AverageScore(journal.ValuationScore)</td>
-            </tr>
+        <tr>
+            <td class="@(journal.InstitutionJournalPrices.Any() ? "has-prices" : "")">@Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, null)</td>
+            <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name }, null)</td>
+            <td class="verdict-@journal.Swot">
+                @if (!string.IsNullOrWhiteSpace(journal.SubmissionPageLink) && journal.Swot == SwotVerdict.StrongJournal)
+                {
+                    <a href="@journal.SubmissionPageLink" alt="Go to submission page" title="Go to submission page" class="submission-link" target="_blank">S</a>
+                }
+                else
+                {
+                    @:&nbsp;
+                }
+            </td>
+            @*<td>@Scores.AverageScore(journal.OverallScore)</td>*@
+            <td>@Scores.AverageScore(journal.ValuationScore)</td>
+            <td>@journal.NumberOfValuationReviewers</td>
+        </tr>
         }
 
     </tbody>
