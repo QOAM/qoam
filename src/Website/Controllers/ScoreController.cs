@@ -141,7 +141,7 @@ namespace QOAM.Website.Controllers
             return this.Json(true);
         }
 
-        [HttpGet, Route("valuationscorecard/{id:int}")]
+        [HttpGet, Route("scorecard/{id:int}")]
         [Authorize]
         public ViewResult ValuationScoreCard(int id)
         {
@@ -163,7 +163,7 @@ namespace QOAM.Website.Controllers
             return this.View(scoreViewModel);
         }
 
-        [HttpPost, Route("valuationscorecard/{id:int}")]
+        [HttpPost, Route("scorecard/{id:int}")]
         [Authorize]
         [ValidateJsonAntiForgeryToken]
         public ActionResult ValuationScoreCard(int id, ValuationScoreCardViewModel model)
@@ -202,7 +202,7 @@ namespace QOAM.Website.Controllers
             return this.Json(true);
         }
 
-        [HttpGet, Route("bulkrequestvaluation")]
+        [HttpGet, Route("bulkrequestscore")]
         public ActionResult BulkRequestValuation()
         {
             var regex = new Regex(@"Dear Sir/Madam,\s*[\r\n]*", RegexOptions.Compiled);
@@ -220,7 +220,7 @@ namespace QOAM.Website.Controllers
             return View(model);
         }
 
-        [HttpPost, Route("bulkrequestvaluation")]
+        [HttpPost, Route("bulkrequestscore")]
         [ValidateAntiForgeryToken]
         public ActionResult BulkRequestValuation(BulkRequestValuationViewModel model)
         {
@@ -330,7 +330,7 @@ namespace QOAM.Website.Controllers
             return View(model);
         }
 
-        [HttpGet, Route("requestvaluation/{id:int}")]
+        [HttpGet, Route("requestscore/{id:int}")]
         public ViewResult RequestValuation(int id)
         {
             var journal = this.journalRepository.Find(id);
@@ -355,7 +355,7 @@ namespace QOAM.Website.Controllers
             return this.View(model);
         }
 
-        [HttpPost, Route("requestvaluation/{id:int}")]
+        [HttpPost, Route("requestscore/{id:int}")]
         [ValidateAntiForgeryToken]
         public ActionResult RequestValuation(RequestValuationViewModel model)
         {
@@ -382,16 +382,16 @@ namespace QOAM.Website.Controllers
             {
                 email.Send();
 
-                return this.RedirectToAction("RequestValuationResult", new { success = true });
+                return this.RedirectToAction("RequestScoreResult", new { success = true });
             }
             catch
             {
-                return this.RedirectToAction("RequestValuationResult");
+                return this.RedirectToAction("RequestScoreResult");
             }
         }
 
-        [HttpGet, Route("requestvaluationresult")]
-        public ActionResult RequestValuationResult(bool success = false)
+        [HttpGet, Route("requestscoreresult")]
+        public ActionResult RequestScoreResult(bool success = false)
         {
             this.ViewBag.Success = success;
 

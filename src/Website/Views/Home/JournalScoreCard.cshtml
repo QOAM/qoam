@@ -22,97 +22,13 @@
             <h2>@ViewBag.Title</h2>
 
             <ul class="list-unstyled">
-                <li><em><a href="#basejournalscorecard">Base Score Card</a></em></li>
-                <li><em><a href="#valuationjournalscorecard">Valuation Score Card</a></em></li>
-                <li><em><a href="#swot">The SWOT matrix</a></em></li>
+                <li><em><a href="#journalscorecard">Journal Score Card</a></em></li>
+                <li><em><a href="#swot">Robustness of a score</a></em></li>
                 <li><em><a href="#life-cycle">The life cycle of  Journal Score Cards</a></em></li>
             </ul>
-
-            <h3 id="basejournalscorecard">Base Score Card</h3>
-            <p>
-                The Base Score Card is a questionnaire on the transparency of the journal’s website with respect to the following aspects: Editorial information, Peer review, Governance and Workflow. Every aspect has four bullets and each bullet can be rated from 1 to 5. The average of these ratings is called the subscore for this aspect. The lowest subscore of these four aspects is called the <strong>Base Score</strong> of the journal.<br />
-                As a consequence a journal with a high Base Score, has a web site that addresses the four critical journal aspects adequately. On the other hand, a journal with a low Base Score has at least one weak aspect, but may still be strong in other respects. In order to climb on the list a journal must address its weakest aspect.
-            </p>
-
-            <p>1. @QuestionCategory.EditorialInformation.GetName()</p>
-            <ul>
-                <li>@QuestionKey.WebsiteContainsAimsScopeAndReadership.ToDescription()</li>
-                <li>@QuestionKey.WebsiteContainsNameAndAffiliationsOfMembersEditorialBoard.ToDescription()</li>
-                <li>@QuestionKey.ReviewsCommentsArePublished.ToDescription()</li>
-                <li>@QuestionKey.WebsiteContainsRoleOfMembersEditorialBoard.ToDescription()</li>
-            </ul>
-
-            <p>2. @QuestionCategory.PeerReview.GetName()</p>
-            <ul>
-                <li>@QuestionKey.WebsiteContainsSubmissionsReviewDetails.ToDescription()</li>
-                <li>@QuestionKey.WebsiteContainsCriteriaUsedByReviewers.ToDescription()</li>
-                <li>@QuestionKey.AuthorsAllowedToIndicateDesiredReviewers.ToDescription()</li>
-                <li>@QuestionKey.WebsiteAllowsRatingsAndCommentariesOfPapers.ToDescription()</li>
-            </ul>
-
-            <p>3. @QuestionCategory.Governance.GetName()</p>
-            <ul>
-                <li>@QuestionKey.HasClearGuidelinesConcerningSharing.ToDescription()</li>
-                <li>@QuestionKey.CopiesAreMadeInThirdPartyRepositories.ToDescription()</li>
-                <li>@QuestionKey.TakesCareOfInclusionInRelevantIndexingServices.ToDescription()</li>
-                <li>@QuestionKey.HighlightsIssuesOfPublicationEthics.ToDescription()</li>
-            </ul>
-
-            <p>4. @QuestionCategory.Process.GetName()</p>
-            <ul>
-                <li>@QuestionKey.ProvidesTrackAndTraceService.ToDescription()</li>
-                <li>@QuestionKey.PublishedPapersIncludeInformationOnDatesOfSubmissionAndAcceptance.ToDescription()</li>
-                <li>@QuestionKey.ProvidesArticlesWithDigitalObjectIdentifier.ToDescription()</li>
-                <li>@QuestionKey.DisclosesNumberOfSubmissionsPublicationsAndRejectionRates.ToDescription()</li>
-            </ul>
-
-            <p>Additional question</p>
-
-            <p>
-                <em>
-                    <label>What does the website of the journal tell about the publication fee?</label>
-                </em>
-
-                <div>
-                    <input type="radio" id="outdatedPublication-article">
-                    <em>
-                        <label for="outdatedPublication-article">Price per article</label>
-                    </em>
-                    <input type="radio" id="outdatedPublication-page">
-                    <em>
-                        <label for="outdatedPublication-page">Price per page</label>
-                    </em>
-                    <input type="radio" id="outdatedPublication-nofee">
-                    <em>
-                        <label for="outdatedPublication-nofee">No Fee</label>
-                    </em>
-                    <input type="radio" id="outdatedPublication-absent">
-                    <em>
-                        <label for="outdatedPublication-absent">Absent or unclear</label>
-                    </em>
-                </div>
-            </p>
-
-            <p>
-                Pop up box in case the first or second checkbox is ticked:
-            </p>
-
-            <p>
-                <select class="priceBox">
-                    <option value="0">US Dollar</option>
-                    <option value="1">Euro</option>
-                    <option value="2">UK Pound</option>
-                </select>
-
-                <input type="text" class="form-control inline" placeholder="Price per article">
-            </p>
-
-            <p>
-                <input type="text" class="form-control" placeholder="Free text box for supplementary comments." />
-            </p>
-
-            <h3 id="valuationjournalscorecard">Valuation Score Card</h3>
-            <p>The Valuation Score Card is a reality check, preferably based on experience as an author, editor or peer reviewer of the journal.  It has four bullets that can be rated from 1 to 5 and the average of these ratings is called the <strong>Valuation Score</strong> of the journal.</p>
+            
+            <h3 id="journalscorecard">Journal Score Card</h3>
+            <p>By completing a Journal Score Card in QOAM authors may review the quality of the services of the journal they published in. The Card has four bullets that can be rated from 1 to 5:</p>
 
             <p>@QuestionCategory.Valuation.GetName()</p>
             <ul>
@@ -121,183 +37,58 @@
                 <li>@QuestionKey.RecommendScholarsToSubmit.ToDescription()</li>
                 <li>@QuestionKey.GoodValueForMoney.ToDescription()</li>
             </ul>
-
+            
             <p>
-                <em>(NB As of May 20, 2016, the first two questions replace the question ‘I would consider the peer revview process of this journal to be transparent’ of the old version)</em>
+                Per bullet, the rating options are:<br />
+                
+                <label>
+                    <input type="radio" name="score-options)" value="@Score.Absent.GetValue()" />
+                    @Score.Absent.GetValue(): @Score.Absent.GetName() (1 pt) &nbsp;
+                </label>
+                <label>
+                    <input type="radio" name="score-options)" value="@Score.Poor.GetValue()" />
+                    @Score.Poor.GetValue(): @Score.Poor.GetName() (2 pt) &nbsp;
+                </label>
+                <label>
+                    <input type="radio" name="score-options)" value="@Score.Moderate.GetValue()" />
+                    @Score.Moderate.GetValue(): @Score.Moderate.GetName() (3 pt) &nbsp;
+                </label>
+                <label>
+                    <input type="radio" name="score-options)" value="@Score.Good.GetValue()" />
+                    @Score.Good.GetValue(): @Score.Good.GetName() (4 pt) &nbsp;
+                </label>
+                <label>
+                    <input type="radio" name="score-options)" value="@Score.Excellent.GetValue()" />
+                    @Score.Excellent.GetValue(): @Score.Excellent.GetName() (5 pt) &nbsp;
+                </label>
+            </p>
+            <p>The average of the ratings is called the Score of the journal.</p>
+            
+            <p>
+                The Score Card has a free text box for additional comments, with a placeholder question:<br />
+                <input type="text" class="form-control" placeholder="Why would/wouldn’t you recommend this journal?" />
             </p>
 
-            <p>Additional questions</p>
             <p>
-                <input type="checkbox" /> I have published an article in this journal less than a year ago <span style="font-size: 75%;">(If ‘Yes’, please tick the box)</span>
-            </p>
-
-            <p>
-                Pop up question in case of ‘Yes’:
-            </p>
-
-            <p>
-                Publishing my article in this journal did cost
-
-                <select class="priceBox">
-                    <option value="0">US Dollar</option>
-                    <option value="1">Euro</option>
-                    <option value="2">UK Pound</option>
-                </select>
-
-                <input type="text" class="form-control inline" placeholder="Price per article">
-            </p>
-
-            <p>
-                <input type="checkbox" /> I am an editor or peer reviewer of this journal <span style="font-size: 75%;">(If ‘Yes’, please tick the box)</span>
-            </p>
-            <p>In case of ‘Yes’ a text box with two questions pops up:</p>
-            <p>
-                <div style="border: 1px solid #ccc; padding: 3px;">
-                    <ol>
-                        <li><em>How high is the publication fee of your journal? What do you think of it?</em></li>
-                        <li><em>Does your journal have third party revenues? If so, is there any risk of a potential conflict of interest?</em></li>
-                    </ol>
-                </div>
+                For transparency reasons, editors are requested to tick the following box.<br/>
+                <input type="checkbox" /> I am an editor of this journal
             </p>
             <p>
-                <input type="text" class="form-control" placeholder="Free text box for supplementary comments." />
+                In that case a specific text box with a placeholder question pops up:
+                <input type="text" class="form-control" placeholder="Editor’s comment. Do you wish/foresee future developments of your journal?" />
             </p>
-
-            <h3 id="swot">The SWOT matrix</h3>
+           
+            <h3 id="swot">Robustness of a score</h3>
 
             <p>
-                Together, <a href="#basejournalscorecard">Base Score</a> and <a href="#valuationjournalscorecard">Valuation Score</a> determine the following SWOT matrix:
+                The default sorting of the @Html.ActionLink("main journal list", "Index", "Journals") is by robust scores. The robustness of a score is defined as 1 + logN, with N being the number of scorers. The position of a journal on the list is determined by journal score x robustness.<br/>
+                Sorting of the list solely by scores is optional via the button ‘Sort’ in the top right corner.
             </p>
-            <p></p>
-
-            <table border="1" class="faqtable">
-                <tr>
-                    <td colspan="2" rowspan="2">&nbsp;</td>
-                    <td colspan="2" class="faqcell">Valuation Score</td>
-                </tr>
-                <tr>
-                    <td class="faqcell">&gt; 3</td>
-                    <td class="faqcell">&#8804;&nbsp;3</td>
-                </tr>
-                <tr>
-                    <td rowspan="2" class="faqcell">Base<br />Score</td>
-                    <td class="faqcell">&gt;&nbsp;3</td>
-                    <td class="faqcell"><strong>S</strong>trong journal</td>
-                    <td class="faqcell"><strong>T</strong>hreat to author:<br />Journal may not meet its promises</td>
-                </tr>
-                <tr>
-                    <td class="faqcell">&#8804;&nbsp;3</td>
-                    <td class="faqcell"><strong>O</strong>pportunity to publisher:<br />Improve the journal's web site</td>
-                    <td class="faqcell"><strong>W</strong>eaker journal</td>
-                </tr>
-            </table>
-            <br />
-            <p>
-                Per journal this is depicted as follows.
-            </p>
-            <table class="faqtable">
-                <tr>
-                    <td><strong>S</strong>trong journal</td>
-                    <td>
-                        <div class="col-md-2">
-                            <div class="score swotContainer">
-                                <small>SWOT matrix</small>
-                                <div class="table verdict-strong">
-                                    <div class="table-row first-row">
-                                        <div class="table-cell strong first-column">&#160;</div>
-                                        <div class="table-cell threat second-column">&#160;</div>
-                                    </div>
-                                    <div class="table-row second-row">
-                                        <div class="table-cell opportunity first-column">&#160;</div>
-                                        <div class="table-cell weak second-column">&#160;</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </td>
-                </tr>
-                <tr><td colspan="2">&nbsp;</td></tr>
-                <tr>
-                    <td><strong>W</strong>eaker journal</td>
-                    <td>
-                        <div class="col-md-2">
-                            <div class="score swotContainer">
-                                <small>SWOT matrix</small>
-                                <div class="table verdict-weak">
-                                    <div class="table-row first-row">
-                                        <div class="table-cell strong first-column">&#160;</div>
-                                        <div class="table-cell threat second-column">&#160;</div>
-                                    </div>
-                                    <div class="table-row second-row">
-                                        <div class="table-cell opportunity first-column">&#160;</div>
-                                        <div class="table-cell weak second-column">&#160;</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </td>
-                </tr>
-                <tr><td colspan="2">&nbsp;</td></tr>
-                <tr>
-                    <td><strong>O</strong>pportunity to publisher</td>
-                    <td>
-                        <div class="col-md-2">
-                            <div class="score swotContainer">
-                                <small>SWOT matrix</small>
-                                <div class="table verdict-opportunity">
-                                    <div class="table-row first-row">
-                                        <div class="table-cell strong first-column">&#160;</div>
-                                        <div class="table-cell threat second-column">&#160;</div>
-                                    </div>
-                                    <div class="table-row second-row">
-                                        <div class="table-cell opportunity first-column">&#160;</div>
-                                        <div class="table-cell weak second-column">&#160;</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </td>
-                </tr>
-                <tr><td colspan="2">&nbsp;</td></tr>
-                <tr>
-                    <td><strong>T</strong>hreat to author</td>
-                    <td>
-                        <div class="col-md-2">
-                            <div class="score swotContainer">
-                                <small>SWOT matrix</small>
-                                <div class="table verdict-threat">
-                                    <div class="table-row first-row">
-                                        <div class="table-cell strong first-column">&#160;</div>
-                                        <div class="table-cell threat second-column">&#160;</div>
-                                    </div>
-                                    <div class="table-row second-row">
-                                        <div class="table-cell opportunity first-column">&#160;</div>
-                                        <div class="table-cell weak second-column">&#160;</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </td>
-                </tr>
-            </table>
-
-            <!--<img src="~/Images/swot.png" />-->
 
             <h3 id="life-cycle">The life cycle of  Journal Score Cards</h3>
             <p>
-                To avoid framing only members of the academic community can publish Journal Score Cards. Therefore,  only people with an academic email address can log in to the scoring section of QOAM. Usually, library staff publish Base Score Cards; authors, editors and peer reviewers publish Valuation Score Cards. Per person only one JSC may be published for a specific journal. In case several people publish a JSC for the same journal the subscores will be averaged. For calculating the scores the scorecards of the preceding two years are used.  A month before a scorecard  becomes ineffective its author will be notified of this and will be invited to update their JSC (provided they are still a member of the academic community). In case of no response the Journal Score Card will be open-archived in QOAM.
-            </p>
-
-            <p>
-                In order to reflect new developments of or new experiences with the journal, everybody may edit their JSC at any moment. Updated Journal Score Cards will be dealt with as newly published ones.
-            </p>
-
-            <p>
-                The Journal Score Card’s format will be evaluated periodically and possibly adapted to new insights. However, changes will not be abrupt and draft versions will be circulated for comment prior to installation. As JSCs are only effective for two years the migration period in which ‘old’ and ‘new’ subscores sit together is limited. Effectively the migration period could be shorter because everybody may renew their JSC at any time. Thus, the JSC may evolve organically.
+                To avoid framing, only members of the academic community can publish Journal Score Cards. Therefore, only people with an academic email address can register and log in to the scoring module of QOAM. Per person only one JSC may be published for a specific journal. 
+                In order to reflect new experiences with the journal, everybody may update their JSC any time. Per journal only the one hundred most recent score cards will define the score of the journal. This will keep the scores fresh.
             </p>
         </div>
     </div>

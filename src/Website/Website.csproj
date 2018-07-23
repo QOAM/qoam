@@ -953,7 +953,7 @@
     <Content Include="Views\Admin\AddedInstitution.cshtml" />
     <Content Include="Views\Admin\AddInstitution.cshtml" />
     <Content Include="Views\Emails\RequestValuation.cshtml" />
-    <Content Include="Views\Score\RequestValuationResult.cshtml" />
+    <Content Include="Views\Score\RequestScoreResult.cshtml" />
     <Content Include="Views\Admin\BlockIssn.cshtml" />
     <Content Include="Views\Admin\RemoveBlockedIssn.cshtml" />
     <Content Include="Views\Admin\_UpsertInstitution.cshtml" />
