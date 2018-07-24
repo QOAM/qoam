@@ -57,7 +57,9 @@
                     </div>
                     <div class="col-xs-9">
                         @Html.TextAreaFor(model => model.EmailBody, new { @class = "fullWidth minHeight form-control tt-input", @placeholder = "Type your message here..." })
-                        <sub>Note: an extra line containing the link to the Score Card of the journal will be added automatically at the bottom of this message.</sub>
+                        <sub class="text-muted">Note: The text of the message can be adapted to your own preferences</sub>
+                        <br />
+                        <sub class="text-muted">Note: an extra line containing the link to the Score Card of the journal will be added automatically at the bottom of this message.</sub>
                     </div>
                     <div class="col-xs-2">
                         @Html.ValidationMessageFor(model => model.EmailBody, null, new { @class = "red" })
