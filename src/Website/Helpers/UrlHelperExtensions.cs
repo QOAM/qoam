@@ -14,7 +14,6 @@
                                                                                                               {
                                                                                                                   { JournalSortMode.Name, SortDirection.Ascending },
                                                                                                                   { JournalSortMode.ValuationScore, SortDirection.Descending },
-                                                                                                                  { JournalSortMode.BaseScore, SortDirection.Descending },
                                                                                                                   { JournalSortMode.RobustScores, SortDirection.Descending },
                                                                                                               };
 

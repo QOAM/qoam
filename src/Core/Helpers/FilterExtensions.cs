@@ -95,10 +95,6 @@ namespace QOAM.Core.Helpers
                     return filter.SortDirection == SortDirection.Ascending ?
                         query.OrderBy(WeightedSort()).ThenBy(u => u.Title) :
                         query.OrderByDescending(WeightedSort()).ThenBy(u => u.Title);
-                case JournalSortMode.BaseScore:
-                    return filter.SortDirection == SortDirection.Ascending ?
-                        query.OrderBy(j => j.OverallScore.AverageScore).ThenBy(j => j.ValuationScore.AverageScore).ThenBy(j => j.Title) :
-                        query.OrderByDescending(j => j.OverallScore.AverageScore).ThenByDescending(j => j.ValuationScore.AverageScore).ThenBy(j => j.Title);
                 case JournalSortMode.ValuationScore:
                     return filter.SortDirection == SortDirection.Ascending ?
                         query.OrderBy(j => j.ValuationScore.AverageScore).ThenBy(j => j.OverallScore.AverageScore).ThenBy(j => j.Title) :
@@ -113,7 +109,7 @@ namespace QOAM.Core.Helpers
         static Expression<Func<Journal, double?>> WeightedSort()
         {
             return j => j.OverallScore.AverageScore > 0 && j.ValuationScore.AverageScore > 0 ?
-                (j.OverallScore.AverageScore * (1 + SqlFunctions.Log((double)j.NumberOfBaseReviewers))) * (j.ValuationScore.AverageScore * (1 + SqlFunctions.Log((double)j.NumberOfValuationReviewers))) : 0;
+                j.ValuationScore.AverageScore * (1 + SqlFunctions.Log((double)j.NumberOfValuationReviewers)) : 0;
         }
     }
 }

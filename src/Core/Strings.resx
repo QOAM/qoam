@@ -160,7 +160,7 @@
     <value>Sort by journal name</value>
   </data>
   <data name="JournalSortMode_ValuationScore" xml:space="preserve">
-    <value>Sort by Valuation Score</value>
+    <value>Sort by Score</value>
   </data>
   <data name="NotificationType_BadgeReceived" xml:space="preserve">
     <value>Badge received</value>

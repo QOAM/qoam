@@ -13,8 +13,6 @@
         [InlineData(JournalSortMode.Name, SortDirection.Descending, SortDirection.Ascending)]
         [InlineData(JournalSortMode.ValuationScore, SortDirection.Ascending, SortDirection.Descending)]
         [InlineData(JournalSortMode.ValuationScore, SortDirection.Descending, SortDirection.Ascending)]
-        [InlineData(JournalSortMode.BaseScore, SortDirection.Ascending, SortDirection.Descending)]
-        [InlineData(JournalSortMode.BaseScore, SortDirection.Descending, SortDirection.Ascending)]
         public void GetOrderDirectionWithJournalSortModeAndCurrentSortModeIsNewSortModeReturnsOppositeDirection(JournalSortMode sortMode, SortDirection sortDirection, SortDirection expectedSortDirection)
         {
             // Arrange
@@ -30,7 +28,6 @@
         [Theory]
         [InlineData(JournalSortMode.Name, JournalSortMode.ValuationScore, SortDirection.Ascending)]
         [InlineData(JournalSortMode.ValuationScore, JournalSortMode.Name, SortDirection.Descending)]
-        [InlineData(JournalSortMode.BaseScore, JournalSortMode.Name, SortDirection.Descending)]
         public void GetOrderDirectionWithJournalSortModeIsNotEqualToCurrentSortModeReturnsDefaultDirection(JournalSortMode newSortMode, JournalSortMode currentSortMode, SortDirection expectedSortDirection)
         {
             // Arrange

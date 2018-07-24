@@ -232,7 +232,7 @@ namespace QOAM.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sort by Valuation Score.
+        ///   Looks up a localized string similar to Sort by Score.
         /// </summary>
         public static string JournalSortMode_ValuationScore {
             get {

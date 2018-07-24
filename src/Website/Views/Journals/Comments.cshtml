@@ -1,41 +1,5 @@
 ﻿@model QOAM.Website.ViewModels.Journals.CommentsViewModel
 
-@if (Model.CommentedBaseScoreCards.Count == 0)
-{
-    <p>No base score card comments have been made on this journal</p>
-}
-else
-{
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Base Score Card Reviewer</th>
-                <th style="width: 12%">Date</th>
-                <th style="width: 48%">Comment</th>
-                <th style="width: 10%">Action</th>
-            </tr>
-        </thead>
-        <tbody id="@Model.Id-baseScoreCardComments">
-            @Html.Partial("BaseScoreCardComments", Model)
-        </tbody>
-        <tfoot id="loadMoreBaseScoreCardComments">
-            @if (Model.CommentedBaseScoreCards.HasNextPage)
-            {
-                <tr>
-                    <td colspan="4">
-                        @Ajax.ActionLink("Load more", "BaseScoreCardComments", new { Model.Id, Page = Model.Page + 1 }, new AjaxOptions
-                                                                                                                                 {
-                                                                                                                                     UpdateTargetId = this.Model.Id + "-baseScoreCardComments",
-                                                                                                                                     InsertionMode = InsertionMode.InsertAfter,
-                                                                                                                                     OnSuccess = "afterLoadMore(data, 'loadMoreBaseScoreCardComments', 'loadMoreBaseScoreCardCommentsLink')"
-                                                                                                                                 }, new { id = "loadMoreBaseScoreCardCommentsLink" })
-                    </td>
-                </tr>
-            }
-        </tfoot>
-    </table>
-}
-
 @if (Model.CommentedValuationScoreCards.Count == 0)
 {
     <p>No valuation score cards comments have been made on this journal</p>
