@@ -114,7 +114,7 @@
                             <div class="col-md-7a scoringbuttons not-flex">
                                 <a href="@Url.Action("ValuationScoreCard", "Score", new { id = Model.Id })">- Publish a Score Card</a><br />
                                 <a href="@Url.Action("RequestValuation", "Score", new {id = Model.Id})">- Invite someone else to do so</a><br />
-                                @Html.ActionLink("- Group invitation", "Tools", "Home", null, null, "group-invite", null, new { target = "_blank" })
+                                @Html.ActionLink("- Group invitation", "Tools", "Home", null, null, "group-invite", null, null)
                             </div>
                         </div>
                     </div>

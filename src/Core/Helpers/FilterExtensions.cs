@@ -93,8 +93,8 @@ namespace QOAM.Core.Helpers
             {
                 case JournalSortMode.RobustScores:
                     return filter.SortDirection == SortDirection.Ascending ?
-                        query.OrderBy(WeightedSort()).ThenBy(u => u.Title) :
-                        query.OrderByDescending(WeightedSort()).ThenBy(u => u.Title);
+                        query.OrderBy(WeightedSort()).ThenBy(j => j.Title) :
+                        query.OrderByDescending(WeightedSort()).ThenBy(j => j.Title);
                 case JournalSortMode.ValuationScore:
                     return filter.SortDirection == SortDirection.Ascending ?
                         query.OrderBy(j => j.ValuationScore.AverageScore).ThenBy(j => j.OverallScore.AverageScore).ThenBy(j => j.Title) :

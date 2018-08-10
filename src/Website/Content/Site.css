@@ -24,6 +24,10 @@ a:active, a:focus { outline-style: none; }
 
 .inline { list-style: none; }
 
+a.list-group-item {
+    color: #428bca !important;
+}
+
 ul.inline > li {
     display: inline !important;
     float: left;
@@ -606,12 +610,10 @@ ul {
 
     .table a.submission-link,
     .swotContainer a.submission-link {
-        display: table-cell;
         width: 100%;
         text-decoration: none;
         font-size: 200%;
         color: #000;
-        font-weight: bold;
         vertical-align: middle;
     }
 
