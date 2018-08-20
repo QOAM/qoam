@@ -414,8 +414,6 @@
             var self = this;
             ko.mapping.fromJS(scoreCardData, {}, self);
 
-            var isEditorComment = $('#isEditorComment').val();
-
             var categories = ko.utils.arrayGetDistinctValues(ko.utils.arrayMap(self.QuestionScores(), function (item) {
                 return item.QuestionCategory();
             }));
@@ -522,24 +520,12 @@
                 return self.progress() >= 100 && !self.publishing();
             });
 
-            self.onRemarksFocus = function () {
-                if ($(this).val() == isEditorComment) {
-                    $(this).val('');
-                }
-            };
-
-            self.onRemarksBlur = function () {
-                if ($(this).val() == '') {
-                    $(this).val(isEditorComment);
-                }
-            };
-
             self.Editor.subscribe(function (checked) {
                 var remarksElement = $('#remarks');
 
                 if (checked) {
-                    remarksElement.val(isEditorComment);
-                    remarksElement.attr("placeholder", "");
+                    remarksElement.val('');
+                    remarksElement.attr("placeholder", "Editor's comment. Do you wish/foresee future developments of your journal?");
                     remarksElement.on('focus', self.onRemarksFocus)
 								  .on('blur', self.onRemarksBlur);
                 } else {
