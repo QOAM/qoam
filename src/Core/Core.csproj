@@ -562,6 +562,8 @@
     <EmbeddedResource Include="Scripts\201403171503325_InitialCreate_MembershipTables.sql" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\JournalPricesPrice_FeeType.sql" />
+    <Content Include="Scripts\JournalPricesScoreCardId.sql" />
     <EmbeddedResource Include="Scripts\Copy after split JSC.sql" />
     <EmbeddedResource Include="Scripts\201403171503325_InitialCreate_trigger_Scorecards.Published.sql" />
     <EmbeddedResource Include="Scripts\20140409_Trigger_BaseScorecards.Published.sql" />
