@@ -98,7 +98,7 @@ namespace QOAM.Core.Helpers
                 case JournalSortMode.ValuationScore:
                     return filter.SortDirection == SortDirection.Ascending ?
                         query.OrderBy(j => j.ValuationScore.AverageScore).ThenBy(j => j.NumberOfValuationReviewers).ThenBy(j => j.Title) :
-                        query.OrderByDescending(j => j.ValuationScore.AverageScore).ThenByDescending(j => j.NumberOfValuationReviewers).ThenBy(j => j.Title);
+                        query.OrderByDescending(j => j.ValuationScore.AverageScore).ThenByDescending(j => j.NumberOfValuationReviewers).ThenByDescending(j => j.Title);
                 case JournalSortMode.Name:
                     return filter.SortDirection == SortDirection.Ascending ? query.OrderBy(j => j.Title) : query.OrderByDescending(j => j.Title);
                 default:
