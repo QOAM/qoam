@@ -18,7 +18,8 @@ AS BEGIN
 			LEFT JOIN [ValuationScoreCards] s ON (s.[JournalId] = j.[Id] AND s.[State] = 1)
             
 			-- Only update the journal scores of journals that have been updated    
-			WHERE j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted) 
+			WHERE j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted)
+                -- We only want to use the 100 most recent score cards
 				AND s.Id in (SELECT TOP 100 id from [ValuationScoreCards] ORDER BY [DateStarted] DESC)
             
 			-- Group the results by the journal id so that we can calculate the sum of the score columns
@@ -42,6 +43,7 @@ AS BEGIN
 			-- Only update the journal scores of journals that have been updated    
 			WHERE v.[Number] = 1 
 				AND j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted)
+                -- We only want to use the 100 most recent score cards
 				AND s.Id in (SELECT TOP 100 id from [ValuationScoreCards] ORDER BY [DateStarted] DESC)
             
 			-- Group the results by the journal id so that we can calculate the sum of the score columns
@@ -65,6 +67,7 @@ AS BEGIN
 			-- Only update the journal scores of journals that have been updated    
 			WHERE v.[Number] = 2 
 				AND j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted)		     
+                -- We only want to use the 100 most recent score cards
 				AND s.Id in (SELECT TOP 100 id from [ValuationScoreCards] ORDER BY [DateStarted] DESC)
             
 			-- Group the results by the journal id so that we can calculate the sum of the score columns
