@@ -1,5 +1,5 @@
 CREATE TRIGGER [dbo].[ValuationScoreCards.Modified]
-   ON [dbo].[ValuationScoreCards]
+ON [dbo].[ValuationScoreCards]
    AFTER UPDATE, DELETE
 AS BEGIN
     
@@ -18,7 +18,8 @@ AS BEGIN
 			LEFT JOIN [ValuationScoreCards] s ON (s.[JournalId] = j.[Id] AND s.[State] = 1)
             
 			-- Only update the journal scores of journals that have been updated    
-			WHERE j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted)		     
+			WHERE j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted) 
+				AND s.Id in (SELECT TOP 100 id from [ValuationScoreCards] ORDER BY [DateStarted] DESC)
             
 			-- Group the results by the journal id so that we can calculate the sum of the score columns
 			GROUP BY j.[Id]
@@ -39,7 +40,9 @@ AS BEGIN
 			LEFT JOIN [ScoreCardVersions] v ON v.Id = s.VersionId 
             
 			-- Only update the journal scores of journals that have been updated    
-			WHERE v.[Number] = 1 AND j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted)		     
+			WHERE v.[Number] = 1 
+				AND j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted)
+				AND s.Id in (SELECT TOP 100 id from [ValuationScoreCards] ORDER BY [DateStarted] DESC)
             
 			-- Group the results by the journal id so that we can calculate the sum of the score columns
 			GROUP BY j.[Id]
@@ -60,7 +63,9 @@ AS BEGIN
 			LEFT JOIN [ScoreCardVersions] v ON v.Id = s.VersionId 
             
 			-- Only update the journal scores of journals that have been updated    
-			WHERE v.[Number] = 2 AND j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted)		     
+			WHERE v.[Number] = 2 
+				AND j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted)		     
+				AND s.Id in (SELECT TOP 100 id from [ValuationScoreCards] ORDER BY [DateStarted] DESC)
             
 			-- Group the results by the journal id so that we can calculate the sum of the score columns
 			GROUP BY j.[Id]
