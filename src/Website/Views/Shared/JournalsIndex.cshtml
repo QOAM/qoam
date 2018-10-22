@@ -80,7 +80,12 @@
                             </th>
                             <th class="publisher">Publisher</th>
                             <th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#valuationjournalscorecard">Average score</a></th>
-                            <th>Scored by</th>
+                            <th>
+                                Scored by
+                                <a href="#" title="Max 100 most recent scores">
+                                    <span class="glyphicon glyphicon-info-sign"></span>
+                                </a>
+                            </th>
                             <th class="swot">
                                 <a href="@Url.Action("JournalScoreCard", "Home")#swot">Submit</a>&nbsp;&nbsp;
                                 <a href="/tools#submission" title="Including a submission button in QOAM" target="_blank">
@@ -99,9 +104,7 @@
                             <td class="text-center">
                                 @if (journal.NumberOfValuationReviewers > 100) {
                                     <span>100</span>
-                                    <a href="#" title="Max 100 most recent scores">
-                                        <span class="glyphicon glyphicon-info-sign"></span>
-                                    </a>
+                                    
                                 } else {
                                     @(journal.NumberOfValuationReviewers)
                                 }
