@@ -20,7 +20,7 @@ AS BEGIN
 			-- Only update the journal scores of journals that have been updated    
 			WHERE j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted) 
 				-- We only want the 100 most recent Valuation Score Cards
-				AND s.Id in (SELECT TOP 100 id from [ValuationScoreCards] ORDER BY [DatePublished] DESC)
+				AND s.Id in (SELECT TOP 100 id from [ValuationScoreCards] WHERE [JournalId] = j.[Id] ORDER BY [DatePublished] DESC)
             
 			-- Group the results by the journal id so that we can calculate the sum of the score columns
 			GROUP BY j.[Id]
@@ -44,7 +44,7 @@ AS BEGIN
 			WHERE v.[Number] = 1 
 				AND j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted)
 				-- We only want the 100 most recent Valuation Score Cards
-				AND s.Id in (SELECT TOP 100 id from [ValuationScoreCards] ORDER BY [DatePublished] DESC)
+				AND s.Id in (SELECT TOP 100 id from [ValuationScoreCards] WHERE [JournalId] = j.[Id] ORDER BY [DatePublished] DESC)
             
 			-- Group the results by the journal id so that we can calculate the sum of the score columns
 			GROUP BY j.[Id]
@@ -68,7 +68,7 @@ AS BEGIN
 			WHERE v.[Number] = 2 
 				AND j.[Id] IN (SELECT JournalId FROM inserted UNION SELECT JournalId FROM deleted)
 				-- We only want the 100 most recent Valuation Score Cards 
-				AND s.Id in (SELECT TOP 100 id from [ValuationScoreCards] ORDER BY [DatePublished] DESC)
+				AND s.Id in (SELECT TOP 100 id from [ValuationScoreCards] WHERE [JournalId] = j.[Id] ORDER BY [DatePublished] DESC)
             
 			-- Group the results by the journal id so that we can calculate the sum of the score columns
 			GROUP BY j.[Id]
