@@ -24,6 +24,10 @@ a:active, a:focus { outline-style: none; }
 
 .inline { list-style: none; }
 
+a.list-group-item {
+    color: #428bca !important;
+}
+
 ul.inline > li {
     display: inline !important;
     float: left;
@@ -164,6 +168,10 @@ fieldset legend { display: none; }
     text-align: center;
 }
 
+.score small {
+    display: block;
+}
+
 .publish {
     border: solid 1px #000;
     padding: 3px;
@@ -192,6 +200,11 @@ fieldset legend { display: none; }
     text-transform: lowercase;
 }
 
+.score h2 {
+    font-size: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .big {
     height: 111px;
 }
@@ -568,7 +581,7 @@ ul {
 .doajSeal {
     float: left; 
     position: relative;
-    top: -80px;
+    top: -95px;
 }
 
 .swotFilterContainer .table-cell {
@@ -591,20 +604,20 @@ ul {
 .swotContainer {
     padding: 3px 0 0 0;
     width: 155px;
+    vertical-align: middle;
+    display: table;
 }
 
-.table .verdict-strong a.submission-link,
-.swotContainer .verdict-strong a.submission-link {
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-    font-size: 200%; 
-    color: #fff; 
-    font-weight: bold;
-}
+    .table a.submission-link,
+    .swotContainer a.submission-link {
+        width: 100%;
+        text-decoration: none;
+        font-size: 200%;
+        color: #000;
+        vertical-align: middle;
+    }
 
-.table .verdict-strong a.submission-link {
+.table a.submission-link {
     font-size: 20px; 
 }
 
@@ -629,16 +642,16 @@ ul {
 }
 
 .table .verdict-strong,
-.swotContainer .verdict-strong .strong { background-color: green !important;text-align: center;}
+.swotContainer .verdict-strong .strong { /*background-color: green !important;*/ text-align: center;}
 
 .table .verdict-weak,
-.swotContainer .verdict-weak .weak { background-color: orange !important; }
+.swotContainer .verdict-weak .weak { /*background-color: orange !important;*/ }
 
 .table .verdict-opportunity,
-.swotContainer .verdict-opportunity .opportunity { background-color: #0088CC !important; }
+.swotContainer .verdict-opportunity .opportunity { /*background-color: #0088CC !important;*/ }
 
 .table .verdict-threat,
-.swotContainer .verdict-threat .threat { background-color: red !important; }
+.swotContainer .verdict-threat .threat { /*background-color: red !important;*/ }
 
 .swotFilterContainer .strong { color: green; }
 

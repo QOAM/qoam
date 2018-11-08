@@ -5,41 +5,10 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>Base Score Card Reviewer</th>
+            <th>Score Card Reviewer</th>
             <th style="width: 12%">Date</th>
-            <th style="width: 12%">@QuestionCategory.EditorialInformation.GetName()</th>
-            <th style="width: 12%">@QuestionCategory.PeerReview.GetName()</th>
-            <th style="width: 12%">@QuestionCategory.Governance.GetName()</th>
-            <th style="width: 12%">@QuestionCategory.Process.GetName()</th>
-            <th style="width: 10%">Action</th>
-        </tr>
-    </thead>
-    <tbody id="@Model.Id-baseScorecards">
-        @Html.Partial("BaseScoreCards", Model)
-    </tbody>
-    <tfoot id="@Model.Id-loadMoreBaseScoreCards">
-        @if (Model.BaseScoreCards.HasNextPage)
-        {
-            <tr>
-                <td colspan="7">
-                    @Ajax.ActionLink("Load more", "BaseScoreCards", new { Model.Id, Page = Model.Page + 1 }, new AjaxOptions
-                                                                                                                  {
-                                                                                                                      UpdateTargetId = Model.Id + "-baseScorecards",
-                                                                                                                      InsertionMode = InsertionMode.InsertAfter,
-                                                                                                                      OnSuccess = string.Format("afterLoadMore(data, '{0}-loadMoreBaseScoreCards', '{0}-loadMoreBaseScoreCardsLink')", Model.Id)
-                                                                                                                  }, new { id = Model.Id + "-loadMoreBaseScoreCardsLink" })
-                </td>
-            </tr>
-        }
-    </tfoot>
-</table>
-
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Valuation Score Card Reviewer</th>
-            <th style="width: 12%">Date</th>
-            <th style="width: 48%">@QuestionCategory.Valuation.GetName()</th>
+            @*<th style="width: 48%">@QuestionCategory.Valuation.GetName()</th>*@
+            <th style="width: 48%">Score</th>
             <th style="width: 10%">Action</th>
         </tr>
     </thead>

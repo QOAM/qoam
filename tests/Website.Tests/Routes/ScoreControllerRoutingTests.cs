@@ -53,7 +53,7 @@
         public void ValuationScoreCardActionRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            ApplicationRoutes.ShouldMap("~/score/valuationscorecard/5/").To<ScoreController>(HttpMethod.Get, x => x.ValuationScoreCard(5));
+            ApplicationRoutes.ShouldMap("~/score/scorecard/5/").To<ScoreController>(HttpMethod.Get, x => x.ValuationScoreCard(5));
         }
 
         [Fact]
@@ -67,7 +67,7 @@
         public void ValuationScoreCardActionWithModelRoutedToWithCorrectUrlAndVerb()
         {
             // Assert    
-            ApplicationRoutes.ShouldMap("~/score/valuationscorecard/5/").To<ScoreController>(HttpMethod.Get, x => x.ValuationScoreCard(5, null));
+            ApplicationRoutes.ShouldMap("~/score/scorecard/5/").To<ScoreController>(HttpMethod.Get, x => x.ValuationScoreCard(5, null));
         }
 
         [Fact]

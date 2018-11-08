@@ -1,8 +1,9 @@
 ﻿@using QOAM.Core
+@using QOAM.Core.Repositories.Filters
 
-@helper AverageScore(JournalCategoryScore journalCategoryScore)
+@helper AverageScore(JournalCategoryScore journalCategoryScore, JournalSortMode sortMode = JournalSortMode.RobustScores)
 {
-    @AverageScore(journalCategoryScore.AverageScore)
+    @AverageScore(journalCategoryScore.AverageScore, sortMode)
 }
 
 @helper AverageScore(ScoreCardCategoryScore scoreCardCategoryScore)
@@ -10,7 +11,21 @@
     @AverageScore(scoreCardCategoryScore.AverageScore)
 }
 
-@helper AverageScore(float? averageScore)
+@helper AverageScore(float? averageScore, JournalSortMode sortMode = JournalSortMode.RobustScores)
 {
-    @(averageScore == null || averageScore == 0.0f ? "N/A" : averageScore.Value.ToString("0.0"))
+    if (sortMode == JournalSortMode.ValuationScore)
+    { 
+        @*When sorting by ValuationScore, we only want to display the first decimal but *without Rounding* in order to match how we calculate the sorting *@
+        @(averageScore == null || averageScore == 0.0f ? "N/A" : AverageScoreOnOneDecimalWithouRounding(averageScore.Value).ToString())
+    }
+    else
+    {
+        @( averageScore == null || averageScore == 0.0f ? "N/A" : averageScore.Value.ToString("0.0"))
+    }
+
+}
+
+@helper AverageScoreOnOneDecimalWithouRounding(float value)
+{
+    @(Math.Floor(value * Math.Pow(10, 1)) / Math.Pow(10, 1))
 }

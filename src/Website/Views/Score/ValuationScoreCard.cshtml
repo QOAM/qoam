@@ -5,7 +5,7 @@
 @model QOAM.Website.ViewModels.Score.ValuationScoreCardViewModel
 
 @{
-    ViewBag.Title = "Valuation Score Card";
+    ViewBag.Title = "Score Card";
 }
 
 @helper QuestionRating(QuestionKey questionKey)
@@ -24,23 +24,23 @@
 
                     <label>
                         <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Absent.GetValue()" data-bind="checked: questionScores()[@index].score" />
-                        @Score.Absent.GetValue(): @Score.Absent.GetName()
+                        @Score.Absent.GetValue(): @Score.Absent.GetName() &nbsp;
                     </label>
                     <label>
                         <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Poor.GetValue()" data-bind="checked: questionScores()[@index].score" />
-                        @Score.Poor.GetValue(): @Score.Poor.GetName()
+                        @Score.Poor.GetValue(): @Score.Poor.GetName() &nbsp;
                     </label>
                     <label>
                         <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Moderate.GetValue()" data-bind="checked: questionScores()[@index].score" />
-                        @Score.Moderate.GetValue(): @Score.Moderate.GetName()
+                        @Score.Moderate.GetValue(): @Score.Moderate.GetName() &nbsp;
                     </label>
                     <label>
                         <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Good.GetValue()" data-bind="checked: questionScores()[@index].score" />
-                        @Score.Good.GetValue(): @Score.Good.GetName()
+                        @Score.Good.GetValue(): @Score.Good.GetName() &nbsp;
                     </label>
                     <label>
                         <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Excellent.GetValue()" data-bind="checked: questionScores()[@index].score" />
-                        @Score.Excellent.GetValue(): @Score.Excellent.GetName()
+                        @Score.Excellent.GetValue(): @Score.Excellent.GetName() &nbsp;
                     </label>
                 </div>
             </div>
@@ -51,7 +51,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="scoreCardAspects well">
-                <h3>Valuation Score Card</h3>
+                <h3>Score Card</h3>
                 <div class="text-center">
                     <div class="row">
                         <div class="col-md-6 col-lg-push-3">
@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="panel panel-primary">
-                                <div class="panel-heading">Valuation Score for this journal:</div>
+                                <div class="panel-heading">Score for this journal:</div>
                                 <div class="panel-body">
                                     <h1 data-bind="text: valuationScore"></h1>
                                 </div>
@@ -161,31 +161,7 @@
                                 </ul>
                                 <div class="tab-content text-center">
                                     <div class="tab-pane active" id="@(QuestionCategory.Valuation)ScoreTab">
-                                        <div class="score">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p class="text-left">
-                                                        <input type="checkbox" name="@Html.NameFor(m => m.Submitted)" data-bind="checked: Submitted" />
-
-                                                        I have published an article in this journal less than a year ago <small>(If ‘Yes’, please tick the box)</small>
-                                                    </p>
-                                                    <p>
-                                                        <div id="publicationCost" class="innerRow" data-bind="visible: Submitted">
-                                                            <div class="row high">
-                                                                <div class="col-md-12">
-                                                                    <em>
-                                                                        <label for="Price.Amount">Publication of my article in this journal did cost</label>
-                                                                    </em>
-                                                                    <select id="Price.Currency" class="priceBox" data-bind="options: Currencies, optionsText: 'Value', optionsValue: 'Key', value: Price.Currency"></select>
-                                                                    <input type="text" class="form-control inline" id="Price.Amount" name="Price.Amount" data-bind="value: Price.Amount" placeholder="Price of journal">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                        
 
 
                                         <div class="score">
@@ -210,9 +186,6 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <p>Other additional comments you like to share</p>
-
-                                                <input type="hidden" id="isEditorComment" value="1. How high is the publication fee of your journal? What do you think of it?
-2. Does your journal have third party revenues? If so, is there any risk of a potential conflict of interest?" />
                                                 <textarea id="remarks" rows="3" class="form-control" data-bind="value: Remarks" placeholder="Why would/wouldn’t you recommend this journal?"></textarea>
                                             </div>
                                         </div>

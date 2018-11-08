@@ -1,20 +1,19 @@
-﻿namespace QOAM.Website.Controllers
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using QOAM.Core.Repositories;
+using QOAM.Core.Services;
+using QOAM.Website.Helpers;
+using QOAM.Website.Models;
+using QOAM.Website.ViewModels.Home;
+using Validation;
+
+namespace QOAM.Website.Controllers
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using QOAM.Core.Repositories;
-    using QOAM.Core.Services;
-    using QOAM.Website.Helpers;
-    using QOAM.Website.Models;
-    using QOAM.Website.ViewModels.Home;
-
-    using Validation;
-
     public class HomeController : ApplicationController
     {
-        private readonly IMailSender mailSender;
-        private readonly ContactSettings contactSettings;
-        private readonly IJournalRepository journalRepository;
+        readonly IMailSender _mailSender;
+        readonly ContactSettings _contactSettings;
+        readonly IJournalRepository _journalRepository;
 
         public HomeController(
             IBaseScoreCardRepository baseScoreCardRepository, 
@@ -29,9 +28,9 @@
             Requires.NotNull(mailSender, nameof(mailSender));
             Requires.NotNull(contactSettings, nameof(contactSettings));
 
-            this.journalRepository = journalRepository;
-            this.mailSender = mailSender;
-            this.contactSettings = contactSettings;
+            _journalRepository = journalRepository;
+            _mailSender = mailSender;
+            _contactSettings = contactSettings;
         }
 
         [HttpGet, Route("")]
@@ -39,84 +38,79 @@
         {
             var model = new IndexViewModel
             {
-                NumberOfScoredJournals = this.journalRepository.BaseScoredJournalsCount()
+                NumberOfScoredJournals = _journalRepository.BaseScoredJournalsCount()
             };
-            return this.View(model);
+            return View(model);
         }
 
         [HttpGet, Route("about")]
         public ViewResult About()
         {
-            return this.View();
+            return View();
         }
 
         [HttpGet, Route("organisation")]
         public ViewResult Organisation()
         {
-            return this.View();
+            return View();
         }
 
         [HttpGet, Route("references")]
         public ViewResult References()
         {
-            return this.View();
+            return View();
         }
 
         [HttpGet, Route("faq")]
         public ViewResult Faq()
         {
-            return this.View();
+            return View();
         }
 
-        [HttpGet, Route("manuals")]
-        public ViewResult Manuals()
-        {
-            return this.View();
-        }
 
         [HttpGet, Route("tools")]
         public ViewResult Tools()
         {
-            return this.View();
+            return View();
         }
 
         [HttpGet, Route("journalscorecard")]
         public ViewResult JournalScoreCard()
         {
-            return this.View();
+            return View();
         }
 
         [HttpGet, Route("contact")]
         public ViewResult Contact()
         {
-            return this.View();
+            return View();
         }
 
         [HttpPost, Route("contact")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Contact(ContactViewModel model)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
-                    await this.mailSender.Send(model.ToMailMessage(this.contactSettings));
+                    await _mailSender.Send(model.ToMailMessage(_contactSettings));
 
-                    return this.RedirectToAction("ContactSent");
+                    return RedirectToAction("ContactSent");
                 }
                 catch
                 {
-                    this.ModelState.AddModelError("mailsender", "An error occured while trying to process the contact form. Please try again.");
+                    ModelState.AddModelError("mailsender", "An error occured while trying to process the contact form. Please try again.");
                 }
             }
 
-            return this.View();
+            return View();
         }
 
         [HttpGet, Route("contact/sent")]
         public ViewResult ContactSent()
         {
-            return this.View();
+            return View();
         }
     }
 }

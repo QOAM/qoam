@@ -11,7 +11,7 @@
             <h2>@ViewBag.Title</h2>
 
             <ul class="list-unstyled">
-                <li><a href="#group-invite"><em>Group invitation to complete a Valuation Score Card</em></a></li>
+                <li><a href="#group-invite"><em>Group invitation to complete Journal Score Cards</em></a></li>
                 <li><a href="#licenses"><em>Including licensed prices in QOAM</em></a></li>
                 <li><a href="#submission"><em>Including a submission button in QOAM</em></a></li>
                 <li><a href="#QOAMcorner"><em>Creating a QOAMcorner</em></a></li>
@@ -19,17 +19,20 @@
 
             </ul>
 
-            <h3 id="group-invite">Group invitation to complete a Valuation Score Card</h3>
+            <h3 id="group-invite">Group invitation to complete Journal Score Cards</h3>
             <p>
-                Naturally, publishers and editors-in-chief may be interested in feedback from their authors but sometimes find it difficult to organize this. Institutions may want to find out good and bad journals. Now, QOAM has developed a straightforward evaluation tool.
+                Naturally, publishers and editors-in-chief may be interested in feedback from their authors but sometimes find it difficult to organize this. 
+                Institutions may want to find out good and bad journals. 
+                Now, QOAM has developed a simple straightforward tool to invite groups of authors to review the journals they publishd in
             </p>
             <p>
                 What is needed are the ISSNs of journals to be evaluated, plus names and email addresses of authors you want to invite to do so.
                 These data must be organized in an Excel file with three required columns: "eissn" (the ISSN the journal uses for its electronic version), "Author email address" and "Author name".
-                (Multiple e-mail addresses per author can be used, separated by a semicolon or a comma, e.g.: author1@test.uni; author1@somemail.com.)
+                (Multiple e-mail addresses per author can be used, separated by a semicolon or a comma, e.g.: author1@test.uni;author1@somemail.com.)
             </p>
             <p>
-                Next, go to @Html.ActionLink("https://www.qoam.eu/score/bulkrequestvaluation", "BulkRequestValuation", "Score"). If you want to send the standard invitation mail, simply import the Excel file. In case you want to send a customized mail, the button ‘Adapt invitation letter’ offers the option to adapt the invitation first. <br />
+                Next, go to @Html.ActionLink("https://www.qoam.eu/score/bulkrequestscore", "BulkRequestValuation", "Score"). If you want to send the standard invitation mail, simply import the Excel file. 
+                In case you want to send a customized mail, the button ‘Adapt invitation letter’ offers the option to adapt the invitation first. <br />
                 Mind: (1) Don’t change the subject box, the message header and the text pieces starting with << and ending with >>. These parts will be customized automatically by the import file, (2) Don’t forget to insert your own email address.
             </p>
             <p>
@@ -38,12 +41,11 @@
 
             <h3 id="licenses">Including licensed prices in QOAM</h3>
             <p>
-                A licence is an agreement of a university with a publisher about a (discount on) the publication fee of a journal for the employees of that university. QOAM shows these discounts under the tab ‘Price information’ on the detail page of the journal.
+                A licence is an agreement of a university with a publisher about a discount on the publication fee of a journal for the employees of that university.
+                QOAM shows these discounts behind the tab ‘Price information’ on the detail page of the journal.
                 <br />
                 As a publisher or a licence manager, to have the discounts included please arrange the relevant data as instructed below and post it to info@qoam.eu. Your data will be imported the other day.
-            </p>
-            <p>
-                Alternatively, if you are a QOAM InstitutionAdmin you may use the function ‘Import licensed prices’ on the admin page of QOAM: @Html.ActionLink("https://www.qoam.eu/admin/", "Index", "Admin").
+                Alternatively, if you are a QOAM InstitutionAdmin you may use the function ‘Import licensed prices’ on the @Html.ActionLink("admin page of QOAM", "Index", "Admin").
             </p>
             <p>
                 <h4>1. Import</h4>
@@ -56,7 +58,7 @@
                 Every licence tab has two columns. The first one is called ‘eISSN’ and has the ISSN numbers of the digital versions of the journals included in a specific licence. The second column is called ‘Text’ and nutshells the discount for that journal in the given licence, typically as follows, “Discount of xy% on publication fee. Please contact your library for more information.”
             </p>
             <p>
-                If a licence is applicable to a university, the name of the corresponding licence tab is coupled to that university by placing it behind the domain of that university in the main worksheet, either in a separate field or several comma or semicolon separated licence tabs in one field.
+                If a university has a licence, the name of the corresponding licence tab is coupled to that university by placing it behind the domain of that university in the main worksheet, either in a separate field or several comma or semicolon separated licence tabs in one field.
             </p>
             <p>
                 NB<br />
@@ -72,9 +74,9 @@
 
             <h3 id="submission">Including a submission button in QOAM</h3>
             <p>
-                QOAM offers publishers the option to include a submission button for their journals in the @Html.ActionLink("SWOT", "JournalScoreCard", "Home", null, null, "swot", null, null) category ‘Strong’. The button is shown as a capital ‘S’ in the green field which marks this category.
-                <div style="text-align: center;"><img src="~/Content/images/faq/submisstion-button.png" /></div>
-                If the cursor moves over this field the text “Go to submission page” is popping up. By clicking on it you are redirected to the submission page of the journal.
+                QOAM offers publishers the option to have a submission button for their journals included. 
+                The button is shown as a capital ‘S’ both in a separate column in the main journal list as on the detail page for each journal. 
+                By clicking on it you are redirected to the submission page of the journal.
             </p>
             <p>
                 All a publisher, or an editor for that matter, has to do is sending an Excel file with two columns to the @Html.ActionLink("Contact box of QOAM", "Contact").
@@ -84,22 +86,27 @@
 
             <h3 id="QOAMcorner">Creating a QOAMcorner</h3>
             <p>
-                A QOAMcorner is a journal collection in QOAM for a specific clientele. This could be an institute,  a project team, a lab or even a temporary corner for a conference. A portfolio of journals subsidized by a specific funder is also an option. In fact, any selection of journals may constitute a corner in QOAM. QOAMcorners are created by libraries as a bespoke service to their authors.
+                A QOAMcorner is a journal collection in QOAM for a specific clientele. This could be an institute,  a project team, a lab or even a temporary corner for a conference. A portfolio of journals subsidized by a specific funder is also an option. In fact, any selection of journals may constitute a corner in QOAM. QOAMcorners are created by libraries as a bespoke service to authors of their institution, but others may set up corners as well.
             </p>
             <p>
                 <h4>1. Creation</h4>
                 Making a corner is really simple. The only ingredients are the ISSN numbers of journals to be included in the corner plus a corner name of your own choice for it. Now, place the ISSNs in a column of an Excel file and name the column after your corner. In fact you thus can create several corners at once by filling in a column for each corner.
+            </p>
+            <p>
                 Next, go to QOAM’s main page and click the button ‘QOAMcorners’ and then ‘(Re)make QOAM corners’. (Make sure you are logged in in QOAM.) Submit your file there. That’s all. Your newly created corner is included in the ‘Browse QOAMcorners’ list under the button ‘QOAMcorners’. At the top of the QOAMcorner page you will be mentioned as the cornerAdmin, so that you may be contacted (only by people who are logged in themselves) for questions e.g. a request to update the journal list.
             </p>
             <p>
                 <h4>2. Maintenance</h4>
-                The cornerAdmin can maintain their corner by importing an Excel file with the same corner name anew. The existing list will be overwritten then. The cornerAdmin can also discard a corner. The ‘Discontinue your corner’ button will be shown on the corner page of the cornerAdmin. In case a cornerAdmin wants to pass their role to someone else they simply discontinue their own corner, forward the Excel file with the corner list to their successor who then imports the list under their own name.
+                The cornerAdmin can maintain their corner by importing an Excel file with the same corner name anew. The existing list will be overwritten then. The cornerAdmin can also discard a corner. The ‘Discontinue your corner’ button will be shown on the corner page of the cornerAdmin. In case a cornerAdmin wants to pass their role to someone else they simply discontinue their own corner, forward the Excel file with the corner list to their successor who then imports the list under their own name.<br />
                 NB In order to avoid obsolete corners in QOAM, a corner that has not been visited in half a year’s time will be deleted automatically.
             </p>
             
             <h3 id="data">Mining QOAM's data</h3>
             <p>
-                QOAM data can easily be mined via the QOAM API. Currently, the API is pretty basic. Only three requests can be performed: all journals including score information, all Base Score Cards, and all Valuation Score Cards. Requests with more refined parameters may be developed when needed. Available formats are XML and JSON. A smart online JSON-Excel converter <a href="http://www.json-xls.com/json2xls">may be found here</a>. A  <a href="https://github.com/QOAM/qoam/wiki/QOAM-API">Wiki about the API</a> is available at <a href="https://github.com/QOAM/qoam">QOAM’s GitHUB page</a>.
+                QOAM data can easily be mined via the QOAM API. Currently, the API is pretty basic.
+                Only two request formats are available at the moment: all journals with their score information and all Journal Score Cards. 
+                Requests with more refined parameters may be developed when needed. 
+                Available formats are XML and JSON. A smart online JSON-Excel converter <a href="http://www.json-xls.com/json2xls">may be found here</a>. A <a href="https://github.com/QOAM/qoam/wiki/QOAM-API">Wiki about the API</a> is available at <a href="https://github.com/QOAM/qoam">QOAM’s GitHUB page</a>.
             </p>
         </div>
     </div>

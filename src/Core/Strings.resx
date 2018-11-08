@@ -160,7 +160,7 @@
     <value>Sort by journal name</value>
   </data>
   <data name="JournalSortMode_ValuationScore" xml:space="preserve">
-    <value>Sort by Valuation Score</value>
+    <value>Sort by Score</value>
   </data>
   <data name="NotificationType_BadgeReceived" xml:space="preserve">
     <value>Badge received</value>
@@ -187,10 +187,10 @@
     <value>Workflow</value>
   </data>
   <data name="QuestionCategory_Valuation" xml:space="preserve">
-    <value>Valuation</value>
+    <value>Scores</value>
   </data>
   <data name="Score_Absent" xml:space="preserve">
-    <value>Absent</value>
+    <value>Absolutely not</value>
   </data>
   <data name="Score_Excellent" xml:space="preserve">
     <value>Excellent</value>

@@ -124,7 +124,7 @@
 
             for (var i = 0; i < SelectedDisciplines.Count; i++)
             {
-                routeValueDictionary[$"{nameof(Disciplines)}[{i}]"] = SelectedDisciplines[i];
+                routeValueDictionary[$"SelectedDisciplines[{i}]"] = SelectedDisciplines[i];
             }
 
             for (var i = 0; i < Languages.Count; i++)

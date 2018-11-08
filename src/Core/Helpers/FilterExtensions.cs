@@ -93,16 +93,12 @@ namespace QOAM.Core.Helpers
             {
                 case JournalSortMode.RobustScores:
                     return filter.SortDirection == SortDirection.Ascending ?
-                        query.OrderBy(WeightedSort()).ThenBy(u => u.Title) :
-                        query.OrderByDescending(WeightedSort()).ThenBy(u => u.Title);
-                case JournalSortMode.BaseScore:
-                    return filter.SortDirection == SortDirection.Ascending ?
-                        query.OrderBy(j => j.OverallScore.AverageScore).ThenBy(j => j.ValuationScore.AverageScore).ThenBy(j => j.Title) :
-                        query.OrderByDescending(j => j.OverallScore.AverageScore).ThenByDescending(j => j.ValuationScore.AverageScore).ThenBy(j => j.Title);
+                        query.OrderBy(WeightedSort()).ThenBy(j => j.Title) :
+                        query.OrderByDescending(WeightedSort()).ThenBy(j => j.Title);
                 case JournalSortMode.ValuationScore:
                     return filter.SortDirection == SortDirection.Ascending ?
-                        query.OrderBy(j => j.ValuationScore.AverageScore).ThenBy(j => j.OverallScore.AverageScore).ThenBy(j => j.Title) :
-                        query.OrderByDescending(j => j.ValuationScore.AverageScore).ThenByDescending(j => j.OverallScore.AverageScore).ThenBy(j => j.Title);
+                        query.OrderBy(AverageScoreOnOneDecimalWithouRounding()).ThenBy(j => j.NumberOfValuationReviewers).ThenBy(j => j.Title) :
+                        query.OrderByDescending(AverageScoreOnOneDecimalWithouRounding()).ThenByDescending(j => j.NumberOfValuationReviewers).ThenBy(j => j.Title);
                 case JournalSortMode.Name:
                     return filter.SortDirection == SortDirection.Ascending ? query.OrderBy(j => j.Title) : query.OrderByDescending(j => j.Title);
                 default:
@@ -113,7 +109,12 @@ namespace QOAM.Core.Helpers
         static Expression<Func<Journal, double?>> WeightedSort()
         {
             return j => j.OverallScore.AverageScore > 0 && j.ValuationScore.AverageScore > 0 ?
-                (j.OverallScore.AverageScore * (1 + SqlFunctions.Log((double)j.NumberOfBaseReviewers))) * (j.ValuationScore.AverageScore * (1 + SqlFunctions.Log((double)j.NumberOfValuationReviewers))) : 0;
+                j.ValuationScore.AverageScore * (1 + SqlFunctions.Log10((double)j.NumberOfValuationReviewers)) : 0;
+        }
+
+        static Expression<Func<Journal, double>> AverageScoreOnOneDecimalWithouRounding()
+        {
+            return j => Math.Floor(j.ValuationScore.AverageScore * Math.Pow(10, 1)) / Math.Pow(10, 1);
         }
     }
 }
