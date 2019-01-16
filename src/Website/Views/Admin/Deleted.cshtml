@@ -5,26 +5,40 @@
 }
 
 <div class="container main">
-
-    <p>
-        The journals with the following ISSNs were successfully deleted:
-    </p>
     
-    <ul>
-        @foreach (var foundISSN in Model.FoundISSNs)
-        {
-            <li>@foundISSN</li>
-        }
-    </ul>
+    @if (Model.FoundISSNs.Any()) {
+        <p>
+            The journals with the following ISSNs were successfully deleted:
+        </p>
 
-    <p>
-        The journals with the following ISSNs were not deleted as they could not be found:
-    </p>
+        <ul>
+            @foreach (var foundISSN in Model.FoundISSNs) {
+                <li>@foundISSN</li>
+            }
+        </ul>
+    }
     
-    <ul>
-        @foreach (var notFoundISSN in Model.NotFoundISSNs)
-        {
-            <li>@notFoundISSN</li>
-        }
-    </ul>
+    @if (Model.NotFoundISSNs.Any()) {
+        <p>
+            The journals with the following ISSNs were not deleted as they could not be found:
+        </p>
+
+        <ul>
+            @foreach (var notFoundISSN in Model.NotFoundISSNs) {
+                <li>@notFoundISSN</li>
+            }
+        </ul>
+    }
+    
+    @if (Model.HaveScoreCards.Any()) {
+        <p>
+            The journals with the following ISSNs were not deleted because the journals have one or more score cards:
+        </p>
+
+        <ul>
+            @foreach (var haveScoreCards in Model.HaveScoreCards) {
+                <li>@haveScoreCards</li>
+            }
+        </ul>
+    }
 </div>

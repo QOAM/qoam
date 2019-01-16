@@ -6,5 +6,6 @@
     {
         public IEnumerable<string> NotFoundISSNs { get; set; }
         public IEnumerable<string> FoundISSNs { get; set; }
+        public IEnumerable<string> HaveScoreCards { get; set; }
     }
 }

@@ -35,6 +35,7 @@ namespace QOAM.Website.Controllers
         const string UpdatedISSNsSessionKey = "UpdatedISSNs";
         const string NotFoundISSNsSessionKey = "NotFoundISSNs";
         const string ImportResultSessionKey = "ImportResult";
+        const string JournalHasScoreCardsSessionKey = "JournalHasScoreCards";
         const int BlockedIssnsCount = 20;
 
         readonly JournalsImport journalsImport;
@@ -196,10 +197,11 @@ namespace QOAM.Website.Controllers
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult Delete(DeleteViewModel model)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var journals = this.journalRepository.All;
                 var issns = GetISSNs(model);
+                var haveScoreCards = new List<string>();
 
                 var journalsISSNs = journals.Select(j => j.ISSN).ToSet(StringComparer.InvariantCultureIgnoreCase);
                 var issnsFound = issns.Intersect(journalsISSNs).ToList();
@@ -208,18 +210,27 @@ namespace QOAM.Website.Controllers
                 var journalsToDelete = journals.Where(j => issnsFound.Contains(j.ISSN)).ToList();
                 foreach (var journal in journalsToDelete)
                 {
-                    this.journalRepository.Delete(journal);
+                    if (journal.ValuationScoreCards.Any())
+                    {
+                        haveScoreCards.Add(journal.ISSN);
+                        issnsFound.Remove(journal.ISSN);
+
+                        continue;
+                    }
+
+                    journalRepository.Delete(journal);
                 }
 
-                this.journalRepository.Save();
+                journalRepository.Save();
 
-                this.Session[FoundISSNsSessionKey] = issnsFound;
-                this.Session[NotFoundISSNsSessionKey] = issnsNotFound;
+                Session[FoundISSNsSessionKey] = issnsFound;
+                Session[NotFoundISSNsSessionKey] = issnsNotFound;
+                Session[JournalHasScoreCardsSessionKey] = haveScoreCards;
 
-                return this.RedirectToAction("Deleted");
+                return RedirectToAction("Deleted");
             }
 
-            return this.View(model);
+            return View(model);
         }
 
         [HttpGet, Route("deleted")]
@@ -228,11 +239,12 @@ namespace QOAM.Website.Controllers
         {
             var model = new DeletedViewModel
             {
-                FoundISSNs = (IEnumerable<string>)this.Session[FoundISSNsSessionKey],
-                NotFoundISSNs = (IEnumerable<string>)this.Session[NotFoundISSNsSessionKey]
+                FoundISSNs = (IEnumerable<string>) Session[FoundISSNsSessionKey],
+                NotFoundISSNs = (IEnumerable<string>) Session[NotFoundISSNsSessionKey],
+                HaveScoreCards = (IEnumerable<string>) Session[JournalHasScoreCardsSessionKey]
             };
 
-            return this.View(model);
+            return View(model);
         }
 
         [HttpGet, Route("check")]
