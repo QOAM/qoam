@@ -60,7 +60,9 @@
 
         public Institution Find(MailAddress mailAddress)
         {
-            return DbContext.Institutions.FirstOrDefault(i => mailAddress.Host.Contains(i.ShortName));
+            var institution =  DbContext.Institutions.FirstOrDefault(i => mailAddress.Host.Contains(i.ShortName));
+            // we cannot use string interpolation inside the Linq-to-Entities query
+            return mailAddress.Host.Contains($".{institution?.ShortName}") ? institution : null;
         }
 
 
