@@ -99,9 +99,9 @@ AS BEGIN
     ) u ON u.JournalId = j.Id
     WHEN MATCHED THEN 
       UPDATE SET
-      j.NumberOfValuationReviewers = u.NumberOfReviewers,
+      j.NumberOfValuationReviewers = COALESCE(u.NumberOfReviewers, 0),
       j.ValuationScore_AverageScore = (u.ValuationScore_AverageScore_v1 + u.ValuationScore_AverageScore_v2) / (CASE WHEN u.NumberOfReviewers > 0 THEN u.NumberOfReviewers ELSE 1 END),
-      j.ValuationScore_TotalScore = u.ValuationScore_TotalScore;    
+      j.ValuationScore_TotalScore = COALESCE(u.ValuationScore_TotalScore, 0);
 	  
 	  -- Update the number of valuation score cards
 	  UPDATE [dbo].[UserProfiles] 
