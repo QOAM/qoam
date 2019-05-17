@@ -41,6 +41,9 @@ namespace QOAM.Core.Helpers
             if (filter.OpenAccess.HasValue)
                 query = query.Where(j => j.OpenAccess == filter.OpenAccess.Value);
 
+            if (filter.NoFee.HasValue)
+                query = query.Where(j => j.NoFee == filter.NoFee.Value);
+
             if (filter.InstitutionalDiscounts.HasValue)
                 query = query.Where(j => j.InstitutionJournalPrices.Any() == filter.InstitutionalDiscounts.Value);
 

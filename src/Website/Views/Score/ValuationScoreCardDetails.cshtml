@@ -27,7 +27,7 @@
 
                 @Html.RadioButton(questionScoreName, Score.Absent, Score.Absent == questionScore, new { @disabled = "disabled" }) @Score.Absent.GetValue(): @Score.Absent.GetName()
                 @Html.RadioButton(questionScoreName, Score.Poor, Score.Poor == questionScore, new { @disabled = "disabled" }) @Score.Poor.GetValue(): @Score.Poor.GetName()
-                @Html.RadioButton(questionScoreName, Score.Moderate, Score.Moderate == questionScore, new { @disabled = "disabled" }) @Score.Moderate.GetValue(): @Score.Moderate.GetName()
+                @Html.RadioButton(questionScoreName, Score.Neutral, Score.Neutral == questionScore, new { @disabled = "disabled" }) @Score.Neutral.GetValue(): @Score.Neutral.GetName()
                 @Html.RadioButton(questionScoreName, Score.Good, Score.Good == questionScore, new { @disabled = "disabled" }) @Score.Good.GetValue(): @Score.Good.GetName()
                 @Html.RadioButton(questionScoreName, Score.Excellent, Score.Excellent == questionScore, new { @disabled = "disabled" }) @Score.Excellent.GetValue(): @Score.Excellent.GetName()
             </div>

@@ -13,8 +13,8 @@
         [Display(Name = "Score_Poor", ResourceType = typeof(Strings))]
         Poor,
 
-        [Display(Name = "Score_Moderate", ResourceType = typeof(Strings))]
-        Moderate,
+        [Display(Name = "Score_Neutral", ResourceType = typeof(Strings))]
+        Neutral,
 
         [Display(Name = "Score_Good", ResourceType = typeof(Strings))]
         Good,

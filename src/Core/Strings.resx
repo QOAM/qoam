@@ -198,8 +198,8 @@
   <data name="Score_Good" xml:space="preserve">
     <value>Good</value>
   </data>
-  <data name="Score_Moderate" xml:space="preserve">
-    <value>Moderate</value>
+  <data name="Score_Neutral" xml:space="preserve">
+    <value>Neutral</value>
   </data>
   <data name="Score_Poor" xml:space="preserve">
     <value>Poor</value>

@@ -19,7 +19,7 @@ namespace QOAM.Core {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -349,11 +349,11 @@ namespace QOAM.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moderate.
+        ///   Looks up a localized string similar to Neutral.
         /// </summary>
-        public static string Score_Moderate {
+        public static string Score_Neutral {
             get {
-                return ResourceManager.GetString("Score_Moderate", resourceCulture);
+                return ResourceManager.GetString("Score_Neutral", resourceCulture);
             }
         }
         

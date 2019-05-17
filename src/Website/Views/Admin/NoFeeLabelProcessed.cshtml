@@ -1,0 +1,32 @@
+﻿@model QOAM.Website.ViewModels.Import.ProcessedISSNsViewModel
+
+@{
+    ViewBag.Title = "No-Fee label process result";
+}
+
+<div class="container main">
+    
+    @if (Model.FoundISSNs.Any()) {
+        <p>
+            The No-Fee label has been @Model.CustomMessage the journals with the following ISSNs:
+        </p>
+
+        <ul>
+            @foreach (var foundISSN in Model.FoundISSNs) {
+                <li>@foundISSN</li>
+            }
+        </ul>
+    }
+    
+    @if (Model.NotFoundISSNs.Any()) {
+        <p>
+            The journals with the following ISSNs were not processed as they could not be found:
+        </p>
+
+        <ul>
+            @foreach (var notFoundISSN in Model.NotFoundISSNs) {
+                <li>@notFoundISSN</li>
+            }
+        </ul>
+    }
+</div>
