@@ -2,23 +2,23 @@
     function QoamCornersController() {
     }
     QoamCornersController.prototype.index = function (journalTitlesUrl, journalIssnsUrl, journalPublishersUrl, subjectsUrl, languagesUrl) {
-        createTypeahead("#Title", journalTitlesUrl);
-        createTypeahead("#Issn", journalIssnsUrl);
-        createTypeahead("#Publisher", journalPublishersUrl);
+        window.createTypeahead("#Title", journalTitlesUrl);
+        window.createTypeahead("#Issn", journalIssnsUrl);
+        window.createTypeahead("#Publisher", journalPublishersUrl);
         //createTypeahead('input.search-language', languagesUrl);
 
-        setupLinkFilters();
-        initialLinkFilterState();
+        window.setupLinkFilters();
+        window.initialLinkFilterState();
 
-        initDisciplinesSelect();
+        window.initDisciplinesSelect();
 
-        updateSwotMatrix('#swotFilterContainer', '#SwotMatrix');
+        //updateSwotMatrix('#swotFilterContainer', '#SwotMatrix');
 
         $("#Corner").chosen({
             search_contains: true
         });
 
-        initSwotFilter();
+        //initSwotFilter();
 
         $("#discard-corner").click(function (e) {
             var deleteUrl = this.href;

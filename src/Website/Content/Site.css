@@ -746,7 +746,7 @@ a.return-button {
     width: 400px;
 }
 
-#open-access-filter:active, #hybrid-filter:active {
+#open-access-filter:active, #hybrid-filter:active, #no-fee-filter:active {
     text-decoration: none;
 }
 

@@ -342,8 +342,8 @@
     <Compile Include="ViewModels\Home\ContactViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Import\CheckViewModel.cs" />
-    <Compile Include="ViewModels\Import\DeletedViewModel.cs" />
-    <Compile Include="ViewModels\Import\DeleteViewModel.cs" />
+    <Compile Include="ViewModels\Import\ProcessedISSNsViewModel.cs" />
+    <Compile Include="ViewModels\Import\ISSNsViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportedViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportViewModel.cs" />
     <Compile Include="ViewModels\Import\UpdatedViewModel.cs" />
@@ -995,6 +995,8 @@
     <Content Include="Views\Admin\RemoveCorner.cshtml" />
     <Content Include="Views\Admin\DuplicatesRemoved.cshtml" />
     <Content Include="Views\Admin\RemoveDuplicates.cshtml" />
+    <Content Include="Views\Admin\ProcessNoFeeLabel.cshtml" />
+    <Content Include="Views\Admin\NoFeeLabelProcessed.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

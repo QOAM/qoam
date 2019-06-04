@@ -2,10 +2,11 @@
 {
     using System.Collections.Generic;
 
-    public class DeletedViewModel
+    public class ProcessedISSNsViewModel
     {
         public IEnumerable<string> NotFoundISSNs { get; set; }
         public IEnumerable<string> FoundISSNs { get; set; }
         public IEnumerable<string> HaveScoreCards { get; set; }
+        public string CustomMessage { get; set; }
     }
 }

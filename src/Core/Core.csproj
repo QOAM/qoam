@@ -309,6 +309,10 @@
     <Compile Include="Migrations\201704121404038_Added-pIssn-to-Journal.Designer.cs">
       <DependentUpon>201704121404038_Added-pIssn-to-Journal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905130944359_NoFee-Property-in-Journal.cs" />
+    <Compile Include="Migrations\201905130944359_NoFee-Property-in-Journal.Designer.cs">
+      <DependentUpon>201905130944359_NoFee-Property-in-Journal.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\CornerRepository.cs" />
@@ -360,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704121404038_Added-pIssn-to-Journal.resx">
       <DependentUpon>201704121404038_Added-pIssn-to-Journal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905130944359_NoFee-Property-in-Journal.resx">
+      <DependentUpon>201905130944359_NoFee-Property-in-Journal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />

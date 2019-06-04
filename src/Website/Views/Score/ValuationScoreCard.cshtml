@@ -31,8 +31,8 @@
                         @Score.Poor.GetValue(): @Score.Poor.GetName() &nbsp;
                     </label>
                     <label>
-                        <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Moderate.GetValue()" data-bind="checked: questionScores()[@index].score" />
-                        @Score.Moderate.GetValue(): @Score.Moderate.GetName() &nbsp;
+                        <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Neutral.GetValue()" data-bind="checked: questionScores()[@index].score" />
+                        @Score.Neutral.GetValue(): @Score.Neutral.GetName() &nbsp;
                     </label>
                     <label>
                         <input type="radio" name="@Html.NameFor(m => m.QuestionScores[index].Score)" value="@Score.Good.GetValue()" data-bind="checked: questionScores()[@index].score" />

@@ -1,4 +1,4 @@
-﻿@model QOAM.Website.ViewModels.Import.DeleteViewModel
+﻿@model QOAM.Website.ViewModels.Import.ISSNsViewModel
 
 @{
     ViewBag.Title = "Delete journals";
@@ -21,13 +21,13 @@
             
             <div class="form-group row">
                 @Html.LabelFor(m => m.ISSNs, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-2">
-                    @Html.TextAreaFor(m => m.ISSNs, new { @class = "form-control" })
+                <div class="col-lg-5">
+                    @Html.TextAreaFor(m => m.ISSNs, new { @class = "form-control", rows = "4" })
                     @Html.ValidationMessageFor(m => m.ISSNs, null, new { @class = "control-label" })
                 </div>
             </div>
             
-            <div class="col-lg-10 col-md-offset-2">
+            <div class="col-lg-1 col-md-offset-6">
                 <input type="submit" value="Delete" class="btn btn-primary" />
             </div>
         </fieldset>

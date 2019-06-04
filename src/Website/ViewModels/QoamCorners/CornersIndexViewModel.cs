@@ -49,7 +49,9 @@ namespace QOAM.Website.ViewModels.QoamCorners
                 SwotMatrix = !string.IsNullOrEmpty(SwotMatrix) ? SwotMatrix.Split(',').ToList() : new List<string>(),
                 OpenAccess = OpenAccess,
                 InstitutionalDiscounts = InstitutionalDiscounts,
-                CornerId = Corner
+                CornerId = Corner,
+                InJournalTOCs = InJournalTOCs,
+                NoFee = NoFee
             };
         }
     }

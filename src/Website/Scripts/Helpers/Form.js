@@ -51,13 +51,13 @@ function createTypeahead(selector, remoteUrl) {
     });
 }
 
-function updateSwotMatrix(selector, input) {
-    $($(input).val().split(',')).each(function () {
-        if (this.length > 0) {
-            $(selector).find('.' + this).addClass('verdict-' + this).addClass('selected');
-        }
-    });
-}
+//function updateSwotMatrix(selector, input) {
+//    $($(input).val().split(',')).each(function () {
+//        if (this.length > 0) {
+//            $(selector).find('.' + this).addClass('verdict-' + this).addClass('selected');
+//        }
+//    });
+//}
 
 function setupLinkFilters() {
     $("#open-access-filter").on("click", function (e) {
@@ -92,19 +92,8 @@ function setupLinkFilters() {
         $("#search-form").submit();
     });
 
-    $("#institutional-discount-filter").on("click", function(e) {
-        e.preventDefault();
-        var $field = $("#InstitutionalDiscounts");
-        var currentValue = $field.val();
-
-        if (!currentValue)
-            $field.val(true);
-        else
-            $field.val("");
-
-        $(this).toggleClass("filter-enabled");
-        $("#search-form").submit();
-    });
+    toggleFilter("#institutional-discount-filter", "#InstitutionalDiscounts");
+    toggleFilter("#no-fee-filter", "#NoFee");
 }
 
 function initialLinkFilterState() {
@@ -121,6 +110,27 @@ function initialLinkFilterState() {
 
     if(institutionalDiscounts)
         $("#institutional-discount-filter").addClass("filter-enabled");
+
+    var noFee = $("#NoFee").val();
+
+    if(noFee)
+        $("#no-fee-filter").addClass("filter-enabled");
+}
+
+function toggleFilter(filterSelector, fieldSelector) {
+    $(filterSelector).on("click", function(e) {
+        e.preventDefault();
+        var $field = $(fieldSelector);
+        var currentValue = $field.val();
+
+        if (!currentValue)
+            $field.val(true);
+        else
+            $field.val("");
+
+        $(this).toggleClass("filter-enabled");
+        $("#search-form").submit();
+    });
 }
 
 function initDisciplinesSelect() {

@@ -14,7 +14,7 @@
 
         initDisciplinesSelect();
 
-        updateSwotMatrix('#swotFilterContainer', '#SwotMatrix');
+        //updateSwotMatrix('#swotFilterContainer', '#SwotMatrix');
 
         $('.remove-discipline').on('click', function(e) {
             $(this).closest('li').remove();
@@ -42,7 +42,7 @@
             return false;
         });
 
-        initSwotFilter();
+        //initSwotFilter();
 
         //$('#swotFilterContainer').on('click', 'div.table-cell', function() {
         //    $(this).toggleClass('verdict-' + $(this).attr('data-swot-type')).toggleClass('selected');
