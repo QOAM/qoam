@@ -9,16 +9,20 @@
                     <p>
                         no-fee
                     </p>
-                } else {
-                    if (Model.BaseJournalPrices.TotalItemCount == 0) {
+                } else if (Model.Journal.ListPrice == null || string.IsNullOrWhiteSpace(Model.Journal.ListPrice.Link)) {
+                    <p>Awaiting publisher quotation</p>
+
+                    @*if (Model.BaseJournalPrices.TotalItemCount == 0) {
                          <p>
                              <a href="@Model.Journal.Link">For the standard price see the web site of this journal.</a>
                          </p>
                      } else {
                          <p>Last price found on website: <br/> @Html.DisplayFor(m => Model.BaseJournalPrices[0].Price)</p>
 
-                         <p><a id="@Model.Id-viewJournalBasePrices" title="View all prices found on the website">View all prices found on the website</a></p>
-                     }
+                         <p><a href="#" id="@Model.Id-viewJournalBasePrices" title="View all prices found on the website">View all prices found on the website</a></p>*@
+                } else {
+                    <p>@Model.Journal.ListPrice.Text</p>
+                    <a href="@Model.Journal.ListPrice.Link" title="pricing information">@Model.Journal.ListPrice.Link</a>
                 }
             </div>
         </div>

@@ -1,0 +1,38 @@
+﻿@model QOAM.Website.ViewModels.Admin.JournalRelatedLinksImportedViewModel
+
+@{ ViewBag.Title = "List prices imported"; }
+
+<div class="container main">
+    <a class="btn btn-default return-button" title="Back to search results" href="@Url.Action("Index", "Admin")">&lt; Back to the Admin page</a>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <p>
+                <strong>@Model.AmountImported</strong> list prices have been imported.
+            </p>
+            @if (Model.AmountRejected > 0)
+            {
+                <p>
+                    <strong>@Model.AmountRejected</strong> list prices have been rejected.
+                </p>
+            }
+        </div>
+        <div class="panel-body">
+            @if (Model.AmountRejected > 0)
+            {
+                <div class="row bottommargin">
+                    <div class="col-xs-12">
+                        <p>
+                            The following list prices where rejected because there is no journal with the given ISSN:
+                        </p>
+                        <ul>
+                            @foreach (var rejected in Model.RejectedUrls)
+                            {
+                                <li><strong>ISSN:</strong> @rejected.ISSN. <strong>Url:</strong> @rejected.Url</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

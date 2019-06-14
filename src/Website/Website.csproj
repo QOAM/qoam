@@ -282,11 +282,11 @@
       <DependentUpon>Questions.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Account\ChangeEmailViewModel.cs" />
-    <Compile Include="ViewModels\Admin\ImportSubmissionLinksViewModel.cs" />
+    <Compile Include="ViewModels\Admin\ImportJournalRelatedLinksViewModel.cs" />
     <Compile Include="ViewModels\Admin\InstitutionsAddedViewModel.cs" />
     <Compile Include="ViewModels\Admin\RemoveCornerViewModel.cs" />
     <Compile Include="ViewModels\Admin\StatisticsViewModel.cs" />
-    <Compile Include="ViewModels\Admin\SubmissionLinksImportedViewModel.cs" />
+    <Compile Include="ViewModels\Admin\JournalRelatedLinksImportedViewModel.cs" />
     <Compile Include="ViewModels\Api\ScoreCard\SerializableScoreCard.cs" />
     <Compile Include="ViewModels\IFileUploadViewModel.cs" />
     <Compile Include="ViewModels\Import\JournalTocsImportViewModel.cs" />
@@ -997,6 +997,8 @@
     <Content Include="Views\Admin\RemoveDuplicates.cshtml" />
     <Content Include="Views\Admin\ProcessNoFeeLabel.cshtml" />
     <Content Include="Views\Admin\NoFeeLabelProcessed.cshtml" />
+    <Content Include="Views\Journals\BulkImportListPrices.cshtml" />
+    <Content Include="Views\Journals\ListPricesImportSuccessful.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

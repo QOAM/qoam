@@ -3,10 +3,10 @@ using QOAM.Core.Import.SubmissionLinks;
 
 namespace QOAM.Website.ViewModels.Admin
 {
-    public class SubmissionLinksImportedViewModel
+    public class JournalRelatedLinksImportedViewModel
     {
         public int AmountImported { get; set; }
         public int AmountRejected { get; set; }
-        public List<SubmissionPageLink> RejectedUrls { get; set; }
+        public List<JournalRelatedLink> RejectedUrls { get; set; }
     }
 }

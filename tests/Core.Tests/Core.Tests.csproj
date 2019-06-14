@@ -156,7 +156,7 @@
     <Compile Include="Import\StubHelpers\StubExtensions.cs" />
     <Compile Include="Import\SubmissionLinks\Stubs\SubmissionLinkImportStubs.cs" />
     <Compile Include="Import\SubmissionLinks\SubmissionPageLinksEntityConverterTests.cs" />
-    <Compile Include="Import\SubmissionLinks\SubmissionLinksFileImporterTests.cs" />
+    <Compile Include="Import\SubmissionLinks\JournalRelatedLinksFileImporterTests.cs" />
     <Compile Include="Import\JournalTocsImportTests.cs" />
     <Compile Include="QuestionKeyExtensionsTests.cs" />
     <Compile Include="Export\JournalsExportTests.cs" />
@@ -202,6 +202,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Import\SubmissionLinks\Stubs\Invalid column names -Submission-links.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Import\SubmissionLinks\Stubs\List-price.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Import\SubmissionLinks\Stubs\Submission-links - Invalid data.xlsx">

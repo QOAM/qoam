@@ -35,7 +35,7 @@ namespace QOAM.Website.Tests.Controllers
         private const string OldIssn = "2296-0597";
         private const string NewIssn = "1603-5194";
 
-        Mock<IBulkImporter<SubmissionPageLink>> _bulkImporter;
+        Mock<IBulkImporter<JournalRelatedLink>> _bulkImporter;
         Mock<IBulkImporter<Institution>> _institutionImporter;
         Mock<HttpPostedFileBase> _uploadFile;
 
@@ -48,7 +48,7 @@ namespace QOAM.Website.Tests.Controllers
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(nullJournalsImport, CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(nullJournalsImport, CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<JournalRelatedLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace QOAM.Website.Tests.Controllers
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), nullUlrichsImport, CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), nullUlrichsImport, CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<JournalRelatedLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace QOAM.Website.Tests.Controllers
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), nullDoajImport, CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));}
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), nullDoajImport, CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<JournalRelatedLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));}
 
         [Fact]
         public void ConstructorWithNullJournalsExportThrowsArgumentNullException()
@@ -83,7 +83,7 @@ namespace QOAM.Website.Tests.Controllers
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), nullJournalsExport, Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), nullJournalsExport, Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<JournalRelatedLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
         }
 
         [Fact]
@@ -95,7 +95,7 @@ namespace QOAM.Website.Tests.Controllers
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), nullJournalRepository, Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), nullJournalRepository, Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<JournalRelatedLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
         }
 
         [Fact]
@@ -107,7 +107,7 @@ namespace QOAM.Website.Tests.Controllers
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), nullUserProfileRepository, Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), nullUserProfileRepository, Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<JournalRelatedLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
         }
 
         [Fact]
@@ -119,7 +119,7 @@ namespace QOAM.Website.Tests.Controllers
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), nullAuthentication, Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), nullAuthentication, Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<JournalRelatedLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
         }
 
         [Fact]
@@ -131,7 +131,7 @@ namespace QOAM.Website.Tests.Controllers
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), nullBaseScoreCardRepository, Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), nullBaseScoreCardRepository, Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<JournalRelatedLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
         }
 
         [Fact]
@@ -143,14 +143,14 @@ namespace QOAM.Website.Tests.Controllers
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), nullValuationScoreCardRepository, Mock.Of<IBulkImporter<SubmissionPageLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), nullValuationScoreCardRepository, Mock.Of<IBulkImporter<JournalRelatedLink>>(), Mock.Of<IBulkImporter<Institution>>(), Mock.Of<ICornerRepository>()));
         }
 
         [Fact]
         public void ConstructorWithNullBulkImporterThrowsArgumentNullException()
         {
             // Arrange
-            IBulkImporter<SubmissionPageLink> nullBulkImporter = null;
+            IBulkImporter<JournalRelatedLink> nullBulkImporter = null;
 
             // Act
 
@@ -167,7 +167,7 @@ namespace QOAM.Website.Tests.Controllers
             // Act
 
             // Assert
-            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<SubmissionPageLink>>(), nullInstitutionImporter, Mock.Of<ICornerRepository>()));
+            Assert.Throws<ArgumentNullException>(() => new AdminController(CreateJournalsImport(), CreateUlrichsImport(), CreateDoajImport(), CreateJournalTocsImport(), CreateJournalsExport(), Mock.Of<IJournalRepository>(), Mock.Of<IUserProfileRepository>(), Mock.Of<IAuthentication>(), Mock.Of<IInstitutionRepository>(), Mock.Of<IBlockedISSNRepository>(), Mock.Of<IBaseScoreCardRepository>(), Mock.Of<IValuationScoreCardRepository>(), Mock.Of<IBulkImporter<JournalRelatedLink>>(), nullInstitutionImporter, Mock.Of<ICornerRepository>()));
         }
 
         [Fact]
@@ -942,7 +942,7 @@ namespace QOAM.Website.Tests.Controllers
         [Fact]
         public void ImportSubmissionLinksRejectsInvalidImportFilesAndShowsAnErrorToTheUser()
         {
-            var viewModel = PrepareFileUpload<ImportSubmissionLinksViewModel>();
+            var viewModel = PrepareFileUpload<ImportJournalRelatedLinksViewModel>();
 
             var controller = CreateAdminController();
             _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Throws<ArgumentException>();
@@ -955,7 +955,7 @@ namespace QOAM.Website.Tests.Controllers
         [Fact]
         public void ImportSubmissionLinksSetsTheLinkInTheCorresponsingJournal()
         {
-            var viewModel = PrepareFileUpload<ImportSubmissionLinksViewModel>();
+            var viewModel = PrepareFileUpload<ImportJournalRelatedLinksViewModel>();
 
             var data = SubmissionPageLinkStubs.Links();
             var journals = SubmissionPageLinkStubs.Journals();
@@ -974,7 +974,7 @@ namespace QOAM.Website.Tests.Controllers
         [Fact]
         public void ImportSubmissionLinksVerifiesDatTheSubmissionLinkDomainCorrespondsWithTheJournalDomain()
         {
-            var viewModel = PrepareFileUpload<ImportSubmissionLinksViewModel>();
+            var viewModel = PrepareFileUpload<ImportJournalRelatedLinksViewModel>();
 
             var data = SubmissionPageLinkStubs.InvalidLinks();
             var journals = SubmissionPageLinkStubs.Journals();
@@ -1035,7 +1035,7 @@ namespace QOAM.Website.Tests.Controllers
 
         private AdminController CreateAdminController(JournalsImport journalsImport = null, UlrichsImport ulrichsImport = null, DoajImport doajImport = null, JournalsExport journalsExport = null, IJournalRepository journalRepository = null, IUserProfileRepository userProfileRepository = null, IAuthentication authentication = null, IInstitutionRepository institutionRepository = null, IBlockedISSNRepository blockedIssnRepository = null, IBaseScoreCardRepository baseScoreCardRepository = null, IValuationScoreCardRepository valuationScoreCardRepository = null)
         {
-            _bulkImporter = new Mock<IBulkImporter<SubmissionPageLink>>();
+            _bulkImporter = new Mock<IBulkImporter<JournalRelatedLink>>();
             _institutionImporter = new Mock<IBulkImporter<Institution>>();
             return new AdminController(journalsImport ?? CreateJournalsImport(), ulrichsImport ?? CreateUlrichsImport(), doajImport ?? CreateDoajImport(), CreateJournalTocsImport(), journalsExport ?? CreateJournalsExport(), journalRepository ?? CreateJournalRepository(), userProfileRepository ?? Mock.Of<IUserProfileRepository>(), authentication ?? Mock.Of<IAuthentication>(), institutionRepository ?? Mock.Of<IInstitutionRepository>(), blockedIssnRepository ?? Mock.Of<IBlockedISSNRepository>(), baseScoreCardRepository ?? Mock.Of<IBaseScoreCardRepository>(), valuationScoreCardRepository ?? Mock.Of<IValuationScoreCardRepository>(), _bulkImporter.Object, _institutionImporter.Object, Mock.Of<ICornerRepository>());
         }

@@ -7,10 +7,11 @@
 
     using PagedList;
 
-    using QOAM.Core.Repositories.Filters;
+    using Filters;
 
     public interface IJournalRepository
     {
+        ApplicationDbContext DbContext { get; }
         bool EnableProxyCreation { get; set; }
         IList<Journal> All { get; }
 
@@ -48,5 +49,6 @@
         int ValuationScoredJournalsCount();
         int JournalsWithSwotCount();
         IList<Journal> AllWhereIncluding(Expression<Func<Journal, bool>> whereClause, params Expression<Func<Journal, object>>[] includeProperties);
+        ListPrice FindListPriceByJournalId(int journalId);
     }
 }

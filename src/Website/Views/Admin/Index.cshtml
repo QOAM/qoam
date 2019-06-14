@@ -36,14 +36,16 @@
     <div class="list-group">
         <a href="javascript:void(0)" class="list-group-item active">Institutions</a>
         @Html.AdminLink("Add institution", User, "AddInstitution", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin)
-        <a class="list-group-item non-clickable @(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin) ? "" : "disabled")">Edit insitution <sup>2</sup></a>
-        <a class="list-group-item non-clickable @(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin) ? "" : "disabled")">Delete insitution <sup>2</sup></a>
+        @Html.AdminLink("Edit and Delete institutions", User, "Index", "Institutions", "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin)
+        @*<a class="list-group-item non-clickable @(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin) ? "" : "disabled")">Edit insitution <sup>2</sup></a>
+        <a class="list-group-item non-clickable @(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin) ? "" : "disabled")">Delete insitution <sup>2</sup></a>*@
         @Html.AdminLink("Remove corner", User, "RemoveCorner", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
     </div>
 
     <div class="list-group">
         <a href="javascript:void(0)" class="list-group-item active">Prices</a>
         @Html.AdminLink("Import licensed prices", User, "BulkImportInstitutionalPrices", "Journals", "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin)
+        @Html.AdminLink("Import list prices", User, "BulkImportListPrices", "Journals", "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin)
     </div>
 
     <div class="list-group">
@@ -56,9 +58,9 @@
             <p class="@(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.DataAdmin) ? " " : "disabled")">
                 <sup>1</sup> Via 'Remove score card' on the details page of a Journal Score Card
             </p>
-            <p class="@(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin) ? " " : "disabled")">
+            @*<p class="@(User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin) ? " " : "disabled")">
                 <sup>2</sup> Via 'Edit' and 'Delete' respectively on the Institutions overview page
-            </p>
+            </p>*@
         </div>
 
     </div>

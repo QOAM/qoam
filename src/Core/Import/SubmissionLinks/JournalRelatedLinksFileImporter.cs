@@ -5,13 +5,13 @@ using NPOI.SS.UserModel;
 
 namespace QOAM.Core.Import.SubmissionLinks
 {
-    public class SubmissionLinksFileImporter : FileImporterBase
+    public class JournalRelatedLinksFileImporter : FileImporterBase
     {
         protected override string MainSheet => "Links";
 
         protected override void ProcessSheets(IWorkbook workbook, int mainSheetIndex)
         {
-            ExtractSheet(MainSheet, workbook, "eissn", "url");
+            ExtractSheet(MainSheet, workbook, "eissn", "url", "?text");
         }
 
         protected override int GetMainSheetIndex(IWorkbook workbook)

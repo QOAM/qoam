@@ -93,19 +93,19 @@ namespace QOAM.Website
 
             builder.RegisterType<LicenseFileImporter>().As<IFileImporter>().InstancePerRequest();
             builder.RegisterType<InvitationFileImporter>().Named<IFileImporter>("invitation").InstancePerRequest();
-            builder.RegisterType<SubmissionLinksFileImporter>().Named<IFileImporter>("submission-link").InstancePerRequest();
+            builder.RegisterType<JournalRelatedLinksFileImporter>().Named<IFileImporter>("journal-related-links").InstancePerRequest();
             builder.RegisterType<InstitutionFileImporter>().Named<IFileImporter>("institution").InstancePerRequest();
             builder.RegisterType<CornerFileImporter>().Named<IFileImporter>("corner").InstancePerRequest();
 
             builder.RegisterType<ImportLicenseEntityConverter>().As<IImportEntityConverter<UniversityLicense>>().InstancePerRequest();
             builder.RegisterType<ImportAuthorEntityConverter>().As<IImportEntityConverter<AuthorToInvite>>().InstancePerRequest();
-            builder.RegisterType<SubmissionPageLinkEntityConverter>().As<IImportEntityConverter<SubmissionPageLink>>().InstancePerRequest();
+            builder.RegisterType<JournalRelatedLinksEntityConverter>().As<IImportEntityConverter<JournalRelatedLink>>().InstancePerRequest();
             builder.RegisterType<InstitutionEntityConverter>().As<IImportEntityConverter<Institution>>().InstancePerRequest();
             builder.RegisterType<CornerEntityConverter>().As<IImportEntityConverter<CornerToImport>>().InstancePerRequest();
 
             builder.RegisterType<BulkImporter<UniversityLicense>>().As<IBulkImporter<UniversityLicense>>().InstancePerRequest();
             builder.RegisterType<BulkImporter<AuthorToInvite>>().As<IBulkImporter<AuthorToInvite>>().WithParameter(ResolvedParameter.ForNamed<IFileImporter>("invitation")).InstancePerRequest();
-            builder.RegisterType<BulkImporter<SubmissionPageLink>>().As<IBulkImporter<SubmissionPageLink>>().WithParameter(ResolvedParameter.ForNamed<IFileImporter>("submission-link")).InstancePerRequest();
+            builder.RegisterType<BulkImporter<JournalRelatedLink>>().As<IBulkImporter<JournalRelatedLink>>().WithParameter(ResolvedParameter.ForNamed<IFileImporter>("journal-related-links")).InstancePerRequest();
             builder.RegisterType<BulkImporter<Institution>>().As<IBulkImporter<Institution>>().WithParameter(ResolvedParameter.ForNamed<IFileImporter>("institution")).InstancePerRequest();
             builder.RegisterType<BulkImporter<CornerToImport>>().As<IBulkImporter<CornerToImport>>().WithParameter(ResolvedParameter.ForNamed<IFileImporter>("corner")).InstancePerRequest();
         }

@@ -6,27 +6,27 @@ namespace QOAM.Website.Tests.Controllers.Stubs
 {
     public static class SubmissionPageLinkStubs
     {
-        public static List<SubmissionPageLink> Links()
+        public static List<JournalRelatedLink> Links()
         { 
-            var list = new List<SubmissionPageLink>
+            var list = new List<JournalRelatedLink>
             {
-                new SubmissionPageLink { ISSN = "1687-8140", Url = "http://ade.sagepub.com/submission" },
-                new SubmissionPageLink { ISSN = "2073-4395", Url = "http://www.mdpi.com/journal/agronomy/submission" },
-                new SubmissionPageLink { ISSN = "2372-0484", Url = "http://www.aimspress.com/journal/Materials/submission" },
-                new SubmissionPageLink { ISSN = "2050-084X", Url = "http://submit.elifesciences.org/cgi-bin/main.plex" }
+                new JournalRelatedLink { ISSN = "1687-8140", Url = "http://ade.sagepub.com/submission" },
+                new JournalRelatedLink { ISSN = "2073-4395", Url = "http://www.mdpi.com/journal/agronomy/submission" },
+                new JournalRelatedLink { ISSN = "2372-0484", Url = "http://www.aimspress.com/journal/Materials/submission" },
+                new JournalRelatedLink { ISSN = "2050-084X", Url = "http://submit.elifesciences.org/cgi-bin/main.plex" }
             };
 
             return list;
         }
 
-        public static List<SubmissionPageLink> InvalidLinks()
+        public static List<JournalRelatedLink> InvalidLinks()
         {
-            var list = new List<SubmissionPageLink>
+            var list = new List<JournalRelatedLink>
             {
-                new SubmissionPageLink { ISSN = "1687-8140", Url = "http://ade.somefakedomain.com/submission" },
-                new SubmissionPageLink { ISSN = "2073-4395", Url = "http://www.darealdomain.com/journal/agronomy/submission" },
-                new SubmissionPageLink { ISSN = "2372-0484", Url = "http://www.stillbatman.com/journal/Materials/submission" },
-                new SubmissionPageLink { ISSN = "1687-7675", Url = "http://www.malicious.com/journals/aess/submission" }
+                new JournalRelatedLink { ISSN = "1687-8140", Url = "http://ade.somefakedomain.com/submission" },
+                new JournalRelatedLink { ISSN = "2073-4395", Url = "http://www.darealdomain.com/journal/agronomy/submission" },
+                new JournalRelatedLink { ISSN = "2372-0484", Url = "http://www.stillbatman.com/journal/Materials/submission" },
+                new JournalRelatedLink { ISSN = "1687-7675", Url = "http://www.malicious.com/journals/aess/submission" }
             };
 
             return list;

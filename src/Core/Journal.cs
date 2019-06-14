@@ -10,19 +10,19 @@ namespace QOAM.Core
     {
         public Journal()
         {
-            this.InstitutionJournalPrices = new List<InstitutionJournal>();
-            this.BaseJournalPrices = new List<BaseJournalPrice>();
-            this.ValuationJournalPrices = new List<ValuationJournalPrice>();
-            this.Languages = new List<Language>();
-            this.BaseScoreCards = new List<BaseScoreCard>();
-            this.ValuationScoreCards = new List<ValuationScoreCard>();
-            this.Subjects = new List<Subject>();
-            this.OverallScore = new JournalCategoryScore();
-            this.EditorialInformationScore = new JournalCategoryScore();
-            this.PeerReviewScore = new JournalCategoryScore();
-            this.GovernanceScore = new JournalCategoryScore();
-            this.ProcessScore = new JournalCategoryScore();
-            this.ValuationScore = new JournalCategoryScore();
+            InstitutionJournalPrices = new List<InstitutionJournal>();
+            BaseJournalPrices = new List<BaseJournalPrice>();
+            ValuationJournalPrices = new List<ValuationJournalPrice>();
+            Languages = new List<Language>();
+            BaseScoreCards = new List<BaseScoreCard>();
+            ValuationScoreCards = new List<ValuationScoreCard>();
+            Subjects = new List<Subject>();
+            OverallScore = new JournalCategoryScore();
+            EditorialInformationScore = new JournalCategoryScore();
+            PeerReviewScore = new JournalCategoryScore();
+            GovernanceScore = new JournalCategoryScore();
+            ProcessScore = new JournalCategoryScore();
+            ValuationScore = new JournalCategoryScore();
             CornerJournals = new List<CornerJournal>();
         }
 
@@ -39,8 +39,8 @@ namespace QOAM.Core
 
         [Required]
         public string Link { get; set; }
-
         public string SubmissionPageLink { get; set; }
+        
         public DateTime DateAdded { get; set; }
         public DateTime? LastUpdatedOn { get; set; }
         public int CountryId { get; set; }
@@ -101,6 +101,7 @@ namespace QOAM.Core
 
         public virtual Country Country { get; set; }
         public virtual Publisher Publisher { get; set; }
+        public virtual ListPrice ListPrice { get; set; }
 
         public virtual ICollection<InstitutionJournal> InstitutionJournalPrices { get; set; }
         public virtual ICollection<BaseJournalPrice> BaseJournalPrices { get; set; }
