@@ -348,7 +348,11 @@ th.title { width: 400px; }
 
 th.publisher { width: 240px; }
 
-th.swot { width: 64px; }
+th.swot { width: 90px; }
+th.quality-indicator a.quality-indicator-icon {
+    float: right;
+    margin-top: -8px;
+}
 
 th a,
 th a:hover {
