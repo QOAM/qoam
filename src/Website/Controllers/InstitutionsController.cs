@@ -12,6 +12,7 @@
     using Validation;
 
     [RoutePrefix("institutions")]
+    [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.DataAdmin + "," + ApplicationRole.InstitutionAdmin)]
     public class InstitutionsController : ApplicationController
     {
         private readonly IInstitutionRepository institutionRepository;
