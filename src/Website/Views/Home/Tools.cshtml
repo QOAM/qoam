@@ -12,6 +12,7 @@
 
             <ul class="list-unstyled">
                 <li><a href="#group-invite"><em>Group invitation to complete Journal Score Cards</em></a></li>
+                <li><a href="#list-prices"><em>Including list prices in QOAM</em></a></li>
                 <li><a href="#licenses"><em>Including licensed prices in QOAM</em></a></li>
                 <li><a href="#submission"><em>Including a submission button in QOAM</em></a></li>
                 <li><a href="#QOAMcorner"><em>Creating a QOAMcorner</em></a></li>
@@ -21,8 +22,8 @@
 
             <h3 id="group-invite">Group invitation to complete Journal Score Cards</h3>
             <p>
-                Naturally, publishers and editors-in-chief may be interested in feedback from their authors but sometimes find it difficult to organize this. 
-                Institutions may want to find out good and bad journals. 
+                Naturally, publishers and editors-in-chief may be interested in feedback from their authors but sometimes find it difficult to organize this.
+                Institutions may want to find out good and bad journals.
                 Now, QOAM has developed a simple straightforward tool to invite groups of authors to review the journals they publishd in
             </p>
             <p>
@@ -31,12 +32,18 @@
                 (Multiple e-mail addresses per author can be used, separated by a semicolon or a comma, e.g.: author1@test.uni;author1@somemail.com.)
             </p>
             <p>
-                Next, go to @Html.ActionLink("https://www.qoam.eu/score/bulkrequestscore", "BulkRequestValuation", "Score"). If you want to send the standard invitation mail, simply import the Excel file. 
+                Next, go to @Html.ActionLink("https://www.qoam.eu/score/bulkrequestscore", "BulkRequestValuation", "Score"). If you want to send the standard invitation mail, simply import the Excel file.
                 In case you want to send a customized mail, the button ‘Adapt invitation letter’ offers the option to adapt the invitation first. <br />
                 Mind: (1) Don’t change the subject box, the message header and the text pieces starting with << and ending with >>. These parts will be customized automatically by the import file, (2) Don’t forget to insert your own email address.
             </p>
             <p>
                 After some time, depending on the length of the invitation list, a short result report pops up telling how many invitations have been sent plus a list of mails which have not been sent with a reason why. In general it concerns deficiencies in the mail addresses.  After having repaired them you may resend those mails (but take care that you do not send again the ones that went OK).
+            </p>
+
+            <h3 id="list-prices">Including list prices in QOAM</h3>
+            <p>
+                The tab ‘Price information’ on the detail page of a journal refers to both the publication fee as listed on the web site of the journal and the discount an author may receive as a result of a deal or licence their institute has with a publisher.
+                Publishers can have their list prices included in QOAM by providing an Excel sheet with three columns: eissn, url, text. ‘url’ links directly to the journal’s web page with price information, ‘text’ concerns an optional informative line.
             </p>
 
             <h3 id="licenses">Including licensed prices in QOAM</h3>
@@ -74,8 +81,8 @@
 
             <h3 id="submission">Including a submission button in QOAM</h3>
             <p>
-                QOAM offers publishers the option to have a submission button for their journals included. 
-                The button is shown as a capital ‘S’ both in a separate column in the main journal list as on the detail page for each journal. 
+                QOAM offers publishers the option to have a submission button for their journals included.
+                The button is shown as a capital ‘S’ both in a separate column in the main journal list as on the detail page for each journal.
                 By clicking on it you are redirected to the submission page of the journal.
             </p>
             <p>
@@ -100,12 +107,12 @@
                 The cornerAdmin can maintain their corner by importing an Excel file with the same corner name anew. The existing list will be overwritten then. The cornerAdmin can also discard a corner. The ‘Discontinue your corner’ button will be shown on the corner page of the cornerAdmin. In case a cornerAdmin wants to pass their role to someone else they simply discontinue their own corner, forward the Excel file with the corner list to their successor who then imports the list under their own name.<br />
                 NB In order to avoid obsolete corners in QOAM, a corner that has not been visited in half a year’s time will be deleted automatically.
             </p>
-            
+
             <h3 id="data">Mining QOAM's data</h3>
             <p>
                 QOAM data can easily be mined via the QOAM API. Currently, the API is pretty basic.
-                Only two request formats are available at the moment: all journals with their score information and all Journal Score Cards. 
-                Requests with more refined parameters may be developed when needed. 
+                Only two request formats are available at the moment: all journals with their score information and all Journal Score Cards.
+                Requests with more refined parameters may be developed when needed.
                 Available formats are XML and JSON. A smart online JSON-Excel converter <a href="http://www.json-xls.com/json2xls">may be found here</a>. A <a href="https://github.com/QOAM/qoam/wiki/QOAM-API">Wiki about the API</a> is available at <a href="https://github.com/QOAM/qoam">QOAM’s GitHUB page</a>.
             </p>
         </div>
