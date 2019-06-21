@@ -7,10 +7,10 @@ using Xunit;
 
 namespace QOAM.Core.Tests.Import.SubmissionLinks
 {
-    public class SubmissionLinksFileImporterTests
+    public class JournalRelatedLinksFileImporterTests
     {
         const string MainSheet = "Links";
-        SubmissionLinksFileImporter _importer;
+        JournalRelatedLinksFileImporter _importer;
         IWorkbook _workbook;
 
         void Initialize(string fileName = "Submission-links")
@@ -20,7 +20,7 @@ namespace QOAM.Core.Tests.Import.SubmissionLinks
                 _workbook = WorkbookFactory.Create(file);
             }
 
-            _importer = new SubmissionLinksFileImporter();
+            _importer = new JournalRelatedLinksFileImporter();
         }
 
         [Fact]
@@ -40,6 +40,18 @@ namespace QOAM.Core.Tests.Import.SubmissionLinks
             Initialize("Invalid column names -Submission-links");
 
             Assert.Throws<ArgumentException>(() => _importer.Execute(_workbook));
+        }
+
+        [Fact]
+        public void OptionalColumnsAreProcessed()
+        {
+            Initialize("List-price");
+
+            var table = GetTable(MainSheet);
+
+            Assert.Equal("eissn", table.Columns[0].ColumnName);
+            Assert.Equal("url", table.Columns[1].ColumnName);
+            Assert.Equal("text", table.Columns[2].ColumnName);
         }
 
         #region Private Methods

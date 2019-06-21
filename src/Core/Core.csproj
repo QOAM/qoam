@@ -202,13 +202,14 @@
     <Compile Include="Import\Licences\UniversityLicense.cs" />
     <Compile Include="Import\QOAMcorners\CornerFileImporter.cs" />
     <Compile Include="Import\QOAMcorners\CornerToImport.cs" />
-    <Compile Include="Import\SubmissionLinks\SubmissionLinksFileImporter.cs" />
-    <Compile Include="Import\SubmissionLinks\SubmissionPageLink.cs" />
-    <Compile Include="Import\SubmissionLinks\SubmissionPageLinkEntityConverter.cs" />
+    <Compile Include="Import\SubmissionLinks\JournalRelatedLinksFileImporter.cs" />
+    <Compile Include="Import\SubmissionLinks\JournalRelatedLink.cs" />
+    <Compile Include="Import\SubmissionLinks\JournalRelatedLinksEntityConverter.cs" />
     <Compile Include="Import\JournalTOCs\JournalTocsImport.cs" />
     <Compile Include="Import\WebClientWrapper.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ListPrice.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.cs" />
     <Compile Include="Migrations\201404301016419_SplitJSC.Designer.cs">
       <DependentUpon>201404301016419_SplitJSC.cs</DependentUpon>
@@ -313,6 +314,10 @@
     <Compile Include="Migrations\201905130944359_NoFee-Property-in-Journal.Designer.cs">
       <DependentUpon>201905130944359_NoFee-Property-in-Journal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906141628300_Journal-List-Price.cs" />
+    <Compile Include="Migrations\201906141628300_Journal-List-Price.Designer.cs">
+      <DependentUpon>201906141628300_Journal-List-Price.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\CornerRepository.cs" />
@@ -367,6 +372,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905130944359_NoFee-Property-in-Journal.resx">
       <DependentUpon>201905130944359_NoFee-Property-in-Journal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906141628300_Journal-List-Price.resx">
+      <DependentUpon>201906141628300_Journal-List-Price.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />

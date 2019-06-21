@@ -10,6 +10,7 @@ namespace QOAM.Core.Import
     {
         DataSet _dataSet { get; } = new DataSet();
         protected abstract string MainSheet { get; }
+        protected virtual string OptionalColumnPrefixIndicator => "?";
 
         public DataSet Execute(IWorkbook workbook)
         {
@@ -80,7 +81,7 @@ namespace QOAM.Core.Import
         protected abstract void ValidateFile(int mainSheetIndex);
         protected void ValidateColumnNames(string[] expectedColumns, DataTable dt)
         {
-            var missingColumns = expectedColumns.Where(column => !dt.Columns.Contains(column)).ToList();
+            var missingColumns = expectedColumns.Where(column => !column.StartsWith(OptionalColumnPrefixIndicator) && !dt.Columns.Contains(column)).ToList();
 
             ThrowOnInvalidColumns(missingColumns);
         }

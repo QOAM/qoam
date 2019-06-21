@@ -1,7 +1,7 @@
 ﻿@model QOAM.Website.ViewModels.Admin.ImportJournalRelatedLinksViewModel
 
 @{
-    ViewBag.Title = "Import Submission Links";
+    ViewBag.Title = "Import List Prices";
 }
 
 <div class="container main">
@@ -9,10 +9,10 @@
     <h2>@ViewBag.Title</h2>
 
     <p>
-        Select an Excel file containing multiple Submission Page Links for journals. Importing might take a while, depending on the size of the file.
+        Select an Excel file containing multiple List Prices. Importing might take a while, depending on the size of the file.
     </p>
     <br/>
-    @using (Html.BeginForm("ImportSubmissionLinks", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("BulkImportListPrices", "Journals", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 

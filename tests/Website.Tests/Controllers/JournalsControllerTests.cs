@@ -6,6 +6,7 @@ using Moq;
 using QOAM.Core;
 using QOAM.Core.Import;
 using QOAM.Core.Import.Licences;
+using QOAM.Core.Import.SubmissionLinks;
 using QOAM.Core.Repositories;
 using QOAM.Website.Controllers;
 using QOAM.Website.Helpers;
@@ -37,6 +38,7 @@ namespace QOAM.Website.Tests.Controllers
 
         Mock<HttpPostedFileBase> _uploadFile;
         InstitutionalPricesViewModel _viewModel;
+        Mock<IBulkImporter<JournalRelatedLink>> _journalRelatedLinkBulkImporter;
 
         #endregion
 
@@ -56,8 +58,9 @@ namespace QOAM.Website.Tests.Controllers
             _userProfileRepository = new Mock<IUserProfileRepository>();
             _authentication = new Mock<IAuthentication>();
             _bulkImporter = new Mock<IBulkImporter<UniversityLicense>>();
-
-            _controller = new JournalsController(_journalRepository.Object, _baseJournalPriceRepository.Object, _valuationJournalPriceRepository.Object, _valuationScoreCardRepository.Object, _languageRepository.Object, _institutionJournalRepository.Object, _baseScoreCardRepository.Object, _userProfileRepository.Object, _authentication.Object, _institutionRepository.Object, _bulkImporter.Object, _subjectRepository.Object);
+            _journalRelatedLinkBulkImporter = new Mock<IBulkImporter<JournalRelatedLink>>();
+            
+            _controller = new JournalsController(_journalRepository.Object, _baseJournalPriceRepository.Object, _valuationJournalPriceRepository.Object, _valuationScoreCardRepository.Object, _languageRepository.Object, _institutionJournalRepository.Object, _baseScoreCardRepository.Object, _userProfileRepository.Object, _authentication.Object, _institutionRepository.Object, _bulkImporter.Object, _subjectRepository.Object, _journalRelatedLinkBulkImporter.Object);
 
             _uploadFile = new Mock<HttpPostedFileBase>();
             _viewModel = new InstitutionalPricesViewModel

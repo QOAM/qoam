@@ -16,7 +16,7 @@
             this.DbContext = dbContext;
         }
 
-        protected ApplicationDbContext DbContext { get; private set; }
+        public ApplicationDbContext DbContext { get; private set; }
 
         protected static string ConnectionString => ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 

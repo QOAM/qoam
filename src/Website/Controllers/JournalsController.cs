@@ -1,5 +1,7 @@
 ﻿using System.Data.Entity.Validation;
 using QOAM.Core.Import;
+using QOAM.Core.Import.SubmissionLinks;
+using QOAM.Website.ViewModels.Admin;
 
 namespace QOAM.Website.Controllers
 {
@@ -19,20 +21,22 @@ namespace QOAM.Website.Controllers
     [RoutePrefix("journals")]
     public class JournalsController : ApplicationController
     {
-        private const int SubjectTruncationLength = 90;
+        const int SubjectTruncationLength = 90;
 
-        private readonly IJournalRepository journalRepository;
-        private readonly IBaseJournalPriceRepository baseJournalPriceRepository;
-        private readonly IInstitutionJournalRepository institutionJournalRepository;
-        private readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
-        private readonly IInstitutionRepository institutionRepository;
-        private readonly IBulkImporter<UniversityLicense> _bulkImporter;
+        readonly IJournalRepository journalRepository;
+        readonly IBaseJournalPriceRepository baseJournalPriceRepository;
+        readonly IInstitutionJournalRepository institutionJournalRepository;
+        readonly IValuationJournalPriceRepository valuationJournalPriceRepository;
+        readonly IInstitutionRepository institutionRepository;
+        readonly IBulkImporter<UniversityLicense> _bulkImporter;
         readonly ISubjectRepository _subjectRepository;
+        readonly IBulkImporter<JournalRelatedLink> _journalRelatedLinkBulkImporter;
 
         public JournalsController(IJournalRepository journalRepository, IBaseJournalPriceRepository baseJournalPriceRepository, IValuationJournalPriceRepository valuationJournalPriceRepository,
             IValuationScoreCardRepository valuationScoreCardRepository, ILanguageRepository languageRepository,
             IInstitutionJournalRepository institutionJournalRepository, IBaseScoreCardRepository baseScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication,
-            IInstitutionRepository institutionRepository, IBulkImporter<UniversityLicense> bulkImporter, ISubjectRepository subjectRepository)
+            IInstitutionRepository institutionRepository, IBulkImporter<UniversityLicense> bulkImporter, ISubjectRepository subjectRepository,
+            IBulkImporter<JournalRelatedLink> journalRelatedLinkBulkImporter)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalRepository, nameof(journalRepository));
@@ -51,6 +55,7 @@ namespace QOAM.Website.Controllers
             this.valuationJournalPriceRepository = valuationJournalPriceRepository;
             _bulkImporter = bulkImporter;
             _subjectRepository = subjectRepository;
+            _journalRelatedLinkBulkImporter = journalRelatedLinkBulkImporter;
         }
 
         [HttpGet, Route("")]
@@ -385,6 +390,87 @@ namespace QOAM.Website.Controllers
         [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
         public ActionResult BulkImportSuccessful(InstitutionalPricesImportedViewModel model)
         {
+            return View(model);
+        }
+
+        [HttpGet, Route("import-list-prices")]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
+        public ActionResult BulkImportListPrices()
+        {
+            return View(new ImportJournalRelatedLinksViewModel());
+        }
+
+        [HttpPost, Route("import-list-prices")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        [ValidateAntiForgeryToken]
+        public ActionResult BulkImportListPrices(ImportJournalRelatedLinksViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            try
+            {
+                int imported = 0, rejected = 0;
+                var rejectedUrls = new List<JournalRelatedLink>();
+
+                var data = _journalRelatedLinkBulkImporter.Execute(model.File.InputStream);
+
+                foreach (var listPriceLink in data)
+                {
+                    var journal = journalRepository.FindByIssn(listPriceLink.ISSN);
+
+                    if (journal == null)
+                    {
+                        rejected++;
+
+                        rejectedUrls.Add(listPriceLink);
+                        continue;
+                    }
+
+                    var listPrice = journalRepository.FindListPriceByJournalId(journal.Id) ?? new ListPrice { JournalId = journal.Id };
+
+                    listPrice.Link = listPriceLink.Url;
+                    listPrice.Text = listPriceLink.Text;
+
+                    if (journal.ListPrice == null)
+                        journalRepository.DbContext.ListPrices.Add(listPrice);
+
+                    imported++;
+                }
+
+                journalRepository.Save();
+
+                return View("ListPricesImportSuccessful", new JournalRelatedLinksImportedViewModel
+                {
+                    AmountImported = imported,
+                    AmountRejected = rejected,
+                    RejectedUrls = rejectedUrls
+                });
+            }
+            catch (ArgumentException invalidFileException)
+            {
+                ModelState.AddModelError("generalError", invalidFileException.Message);
+            }
+            catch (DbEntityValidationException)
+            {
+                //foreach (var eve in e.EntityValidationErrors)
+                //{
+                //    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                //    foreach (var ve in eve.ValidationErrors)
+                //    {
+                //        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage);
+                //    }
+                //}
+                //throw;
+            }
+            catch (Exception exception)
+            {
+                while (exception.InnerException != null)
+                    exception = exception.InnerException;
+
+                ModelState.AddModelError("generalError", $"An error has ocurred: {exception.Message}");
+            }
+
             return View(model);
         }
 

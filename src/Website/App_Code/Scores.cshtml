@@ -14,18 +14,29 @@
 @helper AverageScore(float? averageScore, JournalSortMode sortMode = JournalSortMode.RobustScores)
 {
     if (sortMode == JournalSortMode.ValuationScore)
-    { 
+    {
         @*When sorting by ValuationScore, we only want to display the first decimal but *without Rounding* in order to match how we calculate the sorting *@
-        @(averageScore == null || averageScore == 0.0f ? "N/A" : AverageScoreOnOneDecimalWithouRounding(averageScore.Value).ToString())
+        @(averageScore == null || averageScore == 0.0f ? "N/A" : AverageScoreOnOneDecimalWithoutRounding(averageScore.Value).ToString())
     }
     else
     {
-        @( averageScore == null || averageScore == 0.0f ? "N/A" : averageScore.Value.ToString("0.0"))
+        @(averageScore == null || averageScore == 0.0f ? "N/A" : averageScore.Value.ToString("0.0"))
     }
 
 }
 
-@helper AverageScoreOnOneDecimalWithouRounding(float value)
+@helper RobustScore(Journal j)
 {
-    @(Math.Floor(value * Math.Pow(10, 1)) / Math.Pow(10, 1))
+    var robustScore = j.OverallScore.AverageScore > 0 && j.ValuationScore.AverageScore > 0 ? j.ValuationScore.AverageScore * (1 + Math.Log10(j.NumberOfValuationReviewers)) : 0;
+    @(robustScore != 0 ? AverageScoreOnOneDecimalWithoutRounding(robustScore).ToString() : "N/A")
+}
+
+@helper AverageScoreOnOneDecimalWithoutRounding(float value)
+{
+    @((Math.Floor(value * Math.Pow(10, 1)) / Math.Pow(10, 1)).ToString("F1"))
+}
+
+@helper AverageScoreOnOneDecimalWithoutRounding(double value)
+{
+    @((Math.Floor(value * Math.Pow(10, 1)) / Math.Pow(10, 1)).ToString("F1"))
 }

@@ -11,22 +11,23 @@
             <h2>@ViewBag.Title</h2>
 
             <p>
-                <strong>QOAM</strong> /kju:əʊm/ abbr. Quality Open Access Market. QOAM is a market place for scientific and scholarly journals which publish articles in open access. Quality scoring of the journals in QOAM is based on academic crowd sourcing; price information includes institutional licensed pricing.
+                <strong>QOAM</strong> /kju:əʊm/ abbr. Quality Open Access Market. QOAM is a market place for scientific and scholarly journals which publish articles in open access.
             </p>
 
             <p>
                 More in:
                 <ul class="list-unstyled">
-                    <li><em><a href="#journal-score-cards">Journal Reviews</a></em></li>
+                    <li><em><a href="#quality-indicator">Quality indicator</a></em></li>
                     <li><em><a href="#price-information">Price information</a></em></li>
                     <li><em><a href="#privacy">Privacy policy</a></em></li>
                 </ul>
             </p>
 
-            <h3 id="journal-score-cards">Journal Reviews</h3>
+            <h3 id="quality-indicator">Quality indicator</h3>
             <p>
-                In QOAM authors review the journals they published in by completing a 2 minute score card.
-                Publishers may use a @Html.ActionLink("light weight procedure", "Tools", "Home", null, null, "group-invite", null, null) to invite their authors to do so. Read more about the @Html.ActionLink("Journal Score Card", "JournalScoreCard", "Home").<br />
+                QOAM is based on evaluations by academic authors. Via a concise journal score card they share their experience with the peer review and editorial board, and give a price-performance appreciation. 
+                The robustness of a score is defined as 1 + logN, where N is the number of scorers. The ‘Quality indicator’ of a journal, as presented on QOAM’s journal page, is the product of the average journal score and its robustness. As a consequence, quality indicators in QOAM range from 1 (score 1 by 1 person) to 15 (score 5 by 100 persons).
+                <br/>
                 QOAM also mirrors the <a href="https://doajournals.wordpress.com/2015/06/11/doaj-seal-is-now-live-on-the-site/" target="_blank">DOAJ Seal of Approval</a>, an accrediation service for full OA journals.
             </p>
 

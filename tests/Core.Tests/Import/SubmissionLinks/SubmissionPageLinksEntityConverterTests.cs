@@ -8,13 +8,13 @@ namespace QOAM.Core.Tests.Import.SubmissionLinks
 {
     public class SubmissionPageLinkEntityConverterTests
     {
-        SubmissionPageLinkEntityConverter _converter;
+        JournalRelatedLinksEntityConverter _converter;
         DataSet _validDataSet;
 
         public void Initialize()
         {
             _validDataSet = SubmissionLinkImportStubs.CompleteDataSet();
-            _converter = new SubmissionPageLinkEntityConverter();
+            _converter = new JournalRelatedLinksEntityConverter();
         }
 
         [Fact]

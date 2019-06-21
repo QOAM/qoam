@@ -7,13 +7,9 @@ namespace QOAM.Core.Repositories
     using System.Data.Entity;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Web.Helpers;
-
-    using LinqKit;
-
     using PagedList;
 
-    using QOAM.Core.Repositories.Filters;
+    using Filters;
 
     public class JournalRepository : Repository<Journal>, IJournalRepository
     {
@@ -24,8 +20,8 @@ namespace QOAM.Core.Repositories
 
         public bool EnableProxyCreation
         {
-            get { return DbContext.Configuration.ProxyCreationEnabled; }
-            set { DbContext.Configuration.ProxyCreationEnabled = value; }
+            get => DbContext.Configuration.ProxyCreationEnabled;
+            set => DbContext.Configuration.ProxyCreationEnabled = value;
         }
 
         public IList<Journal> All
@@ -160,6 +156,11 @@ namespace QOAM.Core.Repositories
             query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
             return query.ToList();
+        }
+
+        public ListPrice FindListPriceByJournalId(int journalId)
+        {
+            return DbContext.ListPrices.FirstOrDefault(x => x.JournalId == journalId);
         }
     }
 }

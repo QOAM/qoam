@@ -47,7 +47,7 @@ namespace QOAM.Website.Controllers
         readonly IInstitutionRepository institutionRepository;
         readonly IBlockedISSNRepository blockedIssnRepository;
 
-        readonly IBulkImporter<SubmissionPageLink> _bulkImporter;
+        readonly IBulkImporter<JournalRelatedLink> _bulkImporter;
         readonly IBulkImporter<Institution> _institutionImporter;
         readonly ICornerRepository _cornerRepository;
         readonly Regex _domainRegex = new Regex(@"(?<=(http[s]?:\/\/(.*?)[.?]))\b([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b", RegexOptions.Compiled);
@@ -60,7 +60,7 @@ namespace QOAM.Website.Controllers
         static int _currentBatch;
         static IList<Journal> _allJournals;
 
-        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalTocsImport journalsTocImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<SubmissionPageLink> bulkImporter, IBulkImporter<Institution> institutionImporter, ICornerRepository cornerRepository)
+        public AdminController(JournalsImport journalsImport, UlrichsImport ulrichsImport, DoajImport doajImport, JournalTocsImport journalsTocImport, JournalsExport journalsExport, IJournalRepository journalRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication, IInstitutionRepository institutionRepository, IBlockedISSNRepository blockedIssnRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IBulkImporter<JournalRelatedLink> bulkImporter, IBulkImporter<Institution> institutionImporter, ICornerRepository cornerRepository)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalsImport, nameof(journalsImport));
@@ -657,13 +657,13 @@ namespace QOAM.Website.Controllers
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ActionResult ImportSubmissionLinks()
         {
-            return View(new ImportSubmissionLinksViewModel());
+            return View(new ImportJournalRelatedLinksViewModel());
         }
 
         [HttpPost, Route("submissionlinks")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         [ValidateAntiForgeryToken]
-        public ActionResult ImportSubmissionLinks(ImportSubmissionLinksViewModel model)
+        public ActionResult ImportSubmissionLinks(ImportJournalRelatedLinksViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -671,7 +671,7 @@ namespace QOAM.Website.Controllers
             try
             {
                 int imported = 0, rejected = 0;
-                var rejectedUrls = new List<SubmissionPageLink>();
+                var rejectedUrls = new List<JournalRelatedLink>();
 
                 var data = _bulkImporter.Execute(model.File.InputStream);
 
@@ -693,7 +693,7 @@ namespace QOAM.Website.Controllers
 
                 journalRepository.Save();
 
-                return View("SubmissionLinksImportSuccessful", new SubmissionLinksImportedViewModel
+                return View("SubmissionLinksImportSuccessful", new JournalRelatedLinksImportedViewModel
                 {
                     AmountImported = imported,
                     AmountRejected = rejected,

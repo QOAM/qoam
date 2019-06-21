@@ -20,6 +20,7 @@
 
         public DbSet<Journal> Journals { get; set; }
         public DbSet<BaseJournalPrice> BaseJournalPrices { get; set; }
+        public DbSet<ListPrice> ListPrices { get; set; }
         public DbSet<BaseScoreCard> BaseScoreCards { get; set; }
         public DbSet<ValuationScoreCard> ValuationScoreCards { get; set; }
         public DbSet<ValuationJournalPrice> ValuationJournalPrices { get; set; }
@@ -57,6 +58,7 @@
             modelBuilder.Entity<CornerJournal>().HasRequired(s => s.Corner).WithMany(u => u.CornerJournals).WillCascadeOnDelete(true);
             modelBuilder.Entity<CornerVisitor>().HasRequired(s => s.Corner).WithMany(u => u.CornerVisitors).WillCascadeOnDelete(true);
             modelBuilder.Entity<Corner>().HasRequired(s => s.CornerAdmin).WithMany(u => u.Corners).WillCascadeOnDelete(true);
+            modelBuilder.Entity<ListPrice>().HasKey(lp => lp.JournalId).HasRequired(lp => lp.Journal).WithOptional(j => j.ListPrice).WillCascadeOnDelete(true);
         }
     }
 }
