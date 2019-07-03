@@ -111,7 +111,7 @@ namespace QOAM.Core.Helpers
 
         static Expression<Func<Journal, double?>> WeightedSort()
         {
-            return j => j.OverallScore.AverageScore > 0 && j.ValuationScore.AverageScore > 0 ?
+            return j => j.ValuationScore.AverageScore > 0 ?
                 j.ValuationScore.AverageScore * (1 + SqlFunctions.Log10((double)j.NumberOfValuationReviewers)) : 0;
         }
 
