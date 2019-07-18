@@ -69,7 +69,7 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpGet, Route("{id:int}")]
-        public ActionResult Details(int id, string returnUrl)
+        public ActionResult Details(int id)
         {
             var journal = journalRepository.Find(id);
 
@@ -78,7 +78,7 @@ namespace QOAM.Website.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.ReturnUrl = returnUrl;
+            ViewBag.ReturnUrl = HttpContext.Request.UrlReferrer?.ToString();
 
             object saved;
 
