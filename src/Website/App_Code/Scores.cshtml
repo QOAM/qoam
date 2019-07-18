@@ -27,8 +27,8 @@
 
 @helper RobustScore(Journal j)
 {
-    var robustScore = j.OverallScore.AverageScore > 0 && j.ValuationScore.AverageScore > 0 ? j.ValuationScore.AverageScore * (1 + Math.Log10(j.NumberOfValuationReviewers)) : 0;
-    @(robustScore != 0 ? AverageScoreOnOneDecimalWithoutRounding(robustScore).ToString() : "N/A")
+    var robustScore = j.ValuationScore.AverageScore > 0 ? j.ValuationScore.AverageScore * (1 + Math.Log10(j.NumberOfValuationReviewers)) : 0;
+    @(Math.Abs(robustScore) > 0 ? AverageScoreOnOneDecimalWithoutRounding(robustScore).ToString() : "N/A")
 }
 
 @helper AverageScoreOnOneDecimalWithoutRounding(float value)
