@@ -214,8 +214,9 @@ namespace QOAM.Website.Controllers
 
             var currentUser = UserProfileRepository.Find(Authentication.CurrentUserId);
 
-            if (currentUser != null)
-                model.EmailFrom = currentUser.Email;
+            // 2019-09-26 Leo Waaijers requested that the From field never be automatically filled in.
+            //if (currentUser != null)
+            //    model.EmailFrom = currentUser.Email;
 
             return View(model);
         }
@@ -346,11 +347,12 @@ namespace QOAM.Website.Controllers
                                                 .Replace("<<JournalISSN>>", journal.ISSN),
                             };
 
-            var currentUser = this.UserProfileRepository.Find(this.Authentication.CurrentUserId);
-            if (currentUser != null)
-            {
-                model.EmailFrom = currentUser.Email;
-            }
+            // 2019-09-26 Leo Waaijers requested that the From field never be automatically filled in.
+            //var currentUser = this.UserProfileRepository.Find(this.Authentication.CurrentUserId);
+            //if (currentUser != null)
+            //{
+            //    model.EmailFrom = currentUser.Email;
+            //}
 
             return this.View(model);
         }
