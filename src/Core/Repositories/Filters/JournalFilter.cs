@@ -45,5 +45,6 @@
 
         public bool? InJournalTOCs { get; set; }
         public bool? NoFee { get; set; }
+        public bool? PlanS { get; set; }
     }
 }

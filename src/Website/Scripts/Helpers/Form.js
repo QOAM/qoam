@@ -94,6 +94,7 @@ function setupLinkFilters() {
 
     toggleFilter("#institutional-discount-filter", "#InstitutionalDiscounts");
     toggleFilter("#no-fee-filter", "#NoFee");
+    toggleFilter("#plan-s-filter", "#PlanS");
 }
 
 function initialLinkFilterState() {

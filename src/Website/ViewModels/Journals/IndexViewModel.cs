@@ -59,6 +59,7 @@
         public bool? InstitutionalDiscounts { get; set; }
         public bool? InJournalTOCs { get; set; }
         public bool? NoFee { get; set; }
+        public bool? PlanS { get; set; }
 
         public JournalFilter ToFilter()
         {
@@ -79,7 +80,8 @@
                 OpenAccess = OpenAccess,
                 InstitutionalDiscounts = InstitutionalDiscounts,
                 InJournalTOCs = InJournalTOCs,
-                NoFee = NoFee
+                NoFee = NoFee,
+                PlanS = PlanS
             };
         }
 
@@ -103,7 +105,8 @@
                 OpenAccess = OpenAccess,
                 InstitutionalDiscounts = InstitutionalDiscounts,
                 InJournalTOCs = InJournalTOCs,
-                NoFee = NoFee
+                NoFee = NoFee,
+                PlanS = PlanS
             };
         }
 
@@ -122,7 +125,8 @@
                 [nameof(OpenAccess)] = OpenAccess,
                 [nameof(InstitutionalDiscounts)] = InstitutionalDiscounts,
                 [nameof(InJournalTOCs)] = InJournalTOCs,
-                [nameof(NoFee)] = NoFee
+                [nameof(NoFee)] = NoFee,
+                [nameof(PlanS)] = PlanS
             };
 
             for (var i = 0; i < SelectedDisciplines.Count; i++)

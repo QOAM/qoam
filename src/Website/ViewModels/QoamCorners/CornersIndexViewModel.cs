@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Web.Mvc;
 using System.Web.Routing;
 using QOAM.Core;
 using QOAM.Core.Helpers;
@@ -51,7 +50,8 @@ namespace QOAM.Website.ViewModels.QoamCorners
                 InstitutionalDiscounts = InstitutionalDiscounts,
                 CornerId = Corner,
                 InJournalTOCs = InJournalTOCs,
-                NoFee = NoFee
+                NoFee = NoFee,
+                PlanS = PlanS
             };
         }
     }
