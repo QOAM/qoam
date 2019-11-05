@@ -995,8 +995,8 @@
     <Content Include="Views\Admin\RemoveCorner.cshtml" />
     <Content Include="Views\Admin\DuplicatesRemoved.cshtml" />
     <Content Include="Views\Admin\RemoveDuplicates.cshtml" />
-    <Content Include="Views\Admin\ProcessNoFeeLabel.cshtml" />
-    <Content Include="Views\Admin\NoFeeLabelProcessed.cshtml" />
+    <Content Include="Views\Admin\ProcessJournalLabel.cshtml" />
+    <Content Include="Views\Admin\JournalLabelProcessed.cshtml" />
     <Content Include="Views\Journals\BulkImportListPrices.cshtml" />
     <Content Include="Views\Journals\ListPricesImportSuccessful.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
