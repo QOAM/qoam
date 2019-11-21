@@ -36,7 +36,8 @@ namespace QOAM.Website.Controllers
         const string NotFoundISSNsSessionKey = "NotFoundISSNs";
         const string ImportResultSessionKey = "ImportResult";
         const string JournalHasScoreCardsSessionKey = "JournalHasScoreCards";
-        const string NoFeeLabelMessage = "NoFeeLabelMessage";
+        const string JournalLabelMessage = "JournalLabelMessage";
+        const string JournalLabelType = "JournalLabelType";
         const int BlockedIssnsCount = 20;
 
         readonly JournalsImport journalsImport;
@@ -252,20 +253,20 @@ namespace QOAM.Website.Controllers
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult AddNoFeeLabel()
         {
-            return View("ProcessNoFeeLabel", new ProcessNoFeeLabelViewModel { AddNoFeeLabel = true });
+            return View("ProcessJournalLabel", new ProcessJournalLabelViewModel { ActionMethod = "ProcessNoFeeLabel", LabelType = "No-Fee", AddJournalLabel = true });
         }
 
         [HttpGet, Route("remove-no-fee-label")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
         public ViewResult RemoveNoFeeLabel()
         {
-            return View("ProcessNoFeeLabel", new ProcessNoFeeLabelViewModel { AddNoFeeLabel = false });
+            return View("ProcessJournalLabel", new ProcessJournalLabelViewModel { ActionMethod = "ProcessNoFeeLabel", LabelType = "No-Fee", AddJournalLabel = false });
         }
 
         [HttpPost, Route("process-no-fee-label")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
-        public ActionResult ProcessNoFeeLabel(ProcessNoFeeLabelViewModel model)
+        public ActionResult ProcessNoFeeLabel(ProcessJournalLabelViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -279,33 +280,82 @@ namespace QOAM.Website.Controllers
                 var journalsToModify = journals.Where(j => issnsFound.Contains(j.ISSN)).ToList();
                 foreach (var journal in journalsToModify)
                 {
-                    journal.NoFee = model.AddNoFeeLabel;
+                    journal.NoFee = model.AddJournalLabel;
                 }
 
                 journalRepository.Save();
 
                 Session[FoundISSNsSessionKey] = issnsFound;
                 Session[NotFoundISSNsSessionKey] = issnsNotFound;
-                Session[NoFeeLabelMessage] = model.AddNoFeeLabel ? "added to" : "removed from";
+                Session[JournalLabelMessage] = model.AddJournalLabel ? "added to" : "removed from";
+                Session[JournalLabelType] = "No-Fee";
 
-                return RedirectToAction("NoFeeLabelProcessed");
+                return RedirectToAction("JournalLabelProcessed");
             }
 
-            return View(model);
+            return View("ProcessJournalLabel", model);
         }
 
-        [HttpGet, Route("processed-no-fee-label")]
+        [HttpGet, Route("add-plan-s-label")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
-        public ViewResult NoFeeLabelProcessed()
+        public ViewResult AddPlanSLabel()
+        {
+            return View("ProcessJournalLabel", new ProcessJournalLabelViewModel { ActionMethod = "ProcessPlanSLabel", LabelType = "Plan S", AddJournalLabel = true });
+        }
+
+        [HttpGet, Route("remove-plan-s-label")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult RemovePlanSLabel()
+        {
+            return View("ProcessJournalLabel", new ProcessJournalLabelViewModel { ActionMethod = "ProcessPlanSLabel", LabelType = "Plan S", AddJournalLabel = false });
+        }
+
+        [HttpPost, Route("process-plan-s-label")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ActionResult ProcessPlanSLabel(ProcessJournalLabelViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var journals = journalRepository.All;
+                var issns = GetISSNs(model);
+
+                var journalsISSNs = journals.Select(j => j.ISSN).ToSet(StringComparer.InvariantCultureIgnoreCase);
+                var issnsFound = issns.Intersect(journalsISSNs).ToList();
+                var issnsNotFound = issns.Except(journalsISSNs).ToList();
+
+                var journalsToModify = journals.Where(j => issnsFound.Contains(j.ISSN)).ToList();
+                foreach (var journal in journalsToModify)
+                {
+                    journal.PlanS = model.AddJournalLabel;
+                }
+
+                journalRepository.Save();
+
+                Session[FoundISSNsSessionKey] = issnsFound;
+                Session[NotFoundISSNsSessionKey] = issnsNotFound;
+                Session[JournalLabelMessage] = model.AddJournalLabel ? "added to" : "removed from";
+                Session[JournalLabelType] = "Plan S";
+
+                return RedirectToAction("JournalLabelProcessed");
+            }
+
+            return View("ProcessJournalLabel", model);
+        }
+
+        [HttpGet, Route("processed-journal-label")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin)]
+        public ViewResult JournalLabelProcessed()
         {
             var model = new ProcessedISSNsViewModel
             {
                 FoundISSNs = (IEnumerable<string>) Session[FoundISSNsSessionKey],
                 NotFoundISSNs = (IEnumerable<string>) Session[NotFoundISSNsSessionKey],
-                CustomMessage = (string) Session[NoFeeLabelMessage]
+                CustomMessage = (string) Session[JournalLabelMessage],
+                LabelType = (string)Session[JournalLabelType]
             };
 
-            return View(model);
+            return View("JournalLabelProcessed", model);
         }
 
         [HttpGet, Route("check")]

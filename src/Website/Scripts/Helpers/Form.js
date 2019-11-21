@@ -94,6 +94,7 @@ function setupLinkFilters() {
 
     toggleFilter("#institutional-discount-filter", "#InstitutionalDiscounts");
     toggleFilter("#no-fee-filter", "#NoFee");
+    toggleFilter("#plan-s-filter", "#PlanS");
 }
 
 function initialLinkFilterState() {
@@ -115,6 +116,11 @@ function initialLinkFilterState() {
 
     if(noFee)
         $("#no-fee-filter").addClass("filter-enabled");
+
+    var planS = $("#PlanS").val();
+
+    if(planS)
+        $("#plan-s-filter").addClass("filter-enabled");
 }
 
 function toggleFilter(filterSelector, fieldSelector) {

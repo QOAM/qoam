@@ -10,8 +10,10 @@
         public string ISSNs { get; set; }
     }
 
-    public class ProcessNoFeeLabelViewModel : ISSNsViewModel
+    public class ProcessJournalLabelViewModel : ISSNsViewModel
     {
-        public bool AddNoFeeLabel { get; set; }
+        public string LabelType { get; set; }
+        public bool AddJournalLabel { get; set; }
+        public string ActionMethod { get; set; }
     }
 }

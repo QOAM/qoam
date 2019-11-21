@@ -67,6 +67,7 @@ namespace QOAM.Core
         public string DataSource { get; set; }
         public bool OpenAccess { get; set; }
         public bool NoFee { get; set; }
+        public bool PlanS { get; set; }
 
         public string Swot
         {

@@ -1,27 +1,27 @@
-﻿@model QOAM.Website.ViewModels.Import.ProcessNoFeeLabelViewModel
+﻿@model QOAM.Website.ViewModels.Import.ProcessJournalLabelViewModel
 
 @{
-    var action = Model.AddNoFeeLabel ? "Add" : "Remove";
-    var prep = Model.AddNoFeeLabel ? "to" : "from";
+    var action = Model.AddJournalLabel ? "Add" : "Remove";
+    var prep = Model.AddJournalLabel ? "to" : "from";
 
-    ViewBag.Title = string.Format("{0} No-Fee label {1} Journals", action, prep);
+    ViewBag.Title = string.Format("{0} {1} label {2} Journals", action, Model.LabelType, prep);
 }
 
 <div class="container main">
 
     <h2>@ViewBag.Title</h2>
     
-    @if (Model.AddNoFeeLabel) {
+    @if (Model.AddJournalLabel) {
         <p>
-            In the textbox below you can enter ISSNs of journals to which the No-Fee label should be added.
+            In the text box below you can enter ISSNs of journals to which the @Model.LabelType label should be added.
         </p>
     } else {
         <p>
-            In the textbox below you can enter ISSNs of journals from which to remove the No-Fee label.
+            In the text box below you can enter ISSNs of journals from which to remove the @Model.LabelType label.
         </p>
     }
 
-    @using (Html.BeginForm("ProcessNoFeeLabel", "Admin", FormMethod.Post, new { role = "form" }))
+    @using (Html.BeginForm(Model.ActionMethod, "Admin", FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken()
 
@@ -31,7 +31,7 @@
             <div class="form-group row">
                 @Html.LabelFor(m => m.ISSNs, new { @class = "col-lg-2 control-label" })
                 <div class="col-lg-5">
-                    @Html.HiddenFor(m => m.AddNoFeeLabel)
+                    @Html.HiddenFor(m => m.AddJournalLabel)
                     @Html.TextAreaFor(m => m.ISSNs, new { @class = "form-control", rows = "4" })
                     @Html.ValidationMessageFor(m => m.ISSNs, null, new { @class = "control-label" })
                 </div>

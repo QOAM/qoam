@@ -1,14 +1,14 @@
 ﻿@model QOAM.Website.ViewModels.Import.ProcessedISSNsViewModel
 
 @{
-    ViewBag.Title = "No-Fee label process result";
+    ViewBag.Title = string.Format("{0} label process result", Model.LabelType);
 }
 
 <div class="container main">
     
     @if (Model.FoundISSNs.Any()) {
         <p>
-            The No-Fee label has been @Model.CustomMessage the journals with the following ISSNs:
+            The @Model.LabelType label has been @Model.CustomMessage the journals with the following ISSNs:
         </p>
 
         <ul>

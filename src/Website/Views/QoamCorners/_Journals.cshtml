@@ -26,7 +26,13 @@
 </div>
 <div class="row">
     <div class="col-md-9">
-        <h3>@Model.Journals.TotalItemCount journals; <a id="open-access-filter" href="#">full OA;</a> <a id="no-fee-filter" href="#">no-fee;</a> <a id="institutional-discount-filter" href="#">discounted</a></h3>
+        <h3>
+            @Model.Journals.TotalItemCount journals; <a id="open-access-filter" href="#">fully OA</a>; <a id="no-fee-filter" href="#">no-fee</a>; <a id="institutional-discount-filter" href="#">discounted</a>; 
+            <a id="plan-s-filter" href="#">Plan S</a>
+            <a href="/tools#plan-s" title="Building a Plan S-compliant journal list in QOAM" target="_blank" style="font-size: 16px; vertical-align: super">
+                <span class="glyphicon glyphicon-info-sign"></span>
+            </a>
+        </h3>
     </div>
     <div class="col-md-3 text-right topmargin">
         @*<div class="topmargin">@Sorting.JournalSortMenu(Model.SortBy, Model.Sort)</div>*@
@@ -83,7 +89,7 @@
                 <td class="verdict-strong">
                     @if (!string.IsNullOrWhiteSpace(journal.SubmissionPageLink))
                     {
-                        <a href="@journal.SubmissionPageLink" alt="Go to submission page" title="Go to submission page" class="submission-link" target="_blank">S</a>
+                        <a href="@journal.SubmissionPageLink" alt="Go to submission page" title="Go to submission page" target="_blank">Submit</a>
                     }
                     else
                     {
