@@ -24,6 +24,10 @@ a:active, a:focus { outline-style: none; }
 
 .inline { list-style: none; }
 
+.mt-20 {
+    margin-top: 20px;
+}
+
 a.list-group-item {
     color: #428bca !important;
 }
@@ -358,6 +362,11 @@ th a,
 th a:hover {
     color: #fff;
     text-decoration: none;
+}
+
+.table.borderless td, .borderless th {
+    border: none !important;
+    padding-left: 0 !important;
 }
 
 /******************* score ****************************/
