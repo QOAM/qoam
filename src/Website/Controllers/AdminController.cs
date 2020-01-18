@@ -212,7 +212,7 @@ namespace QOAM.Website.Controllers
                 var journalsToDelete = journals.Where(j => issnsFound.Contains(j.ISSN)).ToList();
                 foreach (var journal in journalsToDelete)
                 {
-                    if (journal.ValuationScoreCards.Any())
+                    if (journal.ValuationScoreCards.Any(vsc => vsc.State != ScoreCardState.Archived))
                     {
                         haveScoreCards.Add(journal.ISSN);
                         issnsFound.Remove(journal.ISSN);
