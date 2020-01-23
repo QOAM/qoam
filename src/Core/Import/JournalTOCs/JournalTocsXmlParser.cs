@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using QOAM.Core.Helpers;
@@ -9,12 +10,12 @@ namespace QOAM.Core.Import.JournalTOCs
     {
         public IList<Journal> Parse(IEnumerable<string> data)
         {
-            var journalElements = new List<XElement>();
+            var recordElements = new List<XElement>();
 
             foreach (var doc in data)
-                journalElements.AddRange(XDocument.Parse(doc).Descendants("journals").Descendants("journal").ToList());
+                recordElements.AddRange(XDocument.Parse(doc).Descendants("journals").Descendants("journal").ToList());
 
-            return journalElements.SelectMany(ParseJournal).Where(j => j.IsValid()).ToList();
+            return recordElements.SelectMany(ParseJournal).Where(j => j.IsValid()).ToList();
         }
 
         #region Private Methods
@@ -31,23 +32,23 @@ namespace QOAM.Core.Import.JournalTOCs
                 Subjects = ParseSubjects(recordElement),
                 DataSource = JournalsImportSource.JournalTOCs.ToString(),
                 OpenAccess = IsOpenAccessJournal(recordElement),
-                Country = new Country { Name = "" }
+                Country = new Country { Name = "" },
+                ArticlesPerYear = ParseArticlesPerYear(recordElement)
             };
 
             yield return regularJournal;
         }
-        
 
-        static string ParseIssn(XElement journalElement)
+        static string ParseIssn(XElement recordElement)
         {
-            var issn = journalElement.Element("e_issn")?.Value;
+            var issn = recordElement.Element("e_issn")?.Value;
 
-            return !string.IsNullOrWhiteSpace(issn) ? issn : journalElement.Element("p_issn")?.Value;
+            return !string.IsNullOrWhiteSpace(issn) ? issn : recordElement.Element("p_issn")?.Value;
         }
 
-        static Publisher ParsePublisher(XElement journalElement)
+        static Publisher ParsePublisher(XElement recordElement)
         {
-            var publisherInfoXmlElement = journalElement.Element("publisher");
+            var publisherInfoXmlElement = recordElement.Element("publisher");
 
             var publisherName = publisherInfoXmlElement?.Value ?? Import.MissingPublisherName;
 
@@ -71,9 +72,33 @@ namespace QOAM.Core.Import.JournalTOCs
             return new Subject { Name = subjectElement.Value.Trim().ToLowerInvariant() };
         }
 
-        static bool IsOpenAccessJournal(XElement journalElement)
+        static bool IsOpenAccessJournal(XElement recordElement)
         {
-            return journalElement.Element("rights")?.Value == "Open Access";
+            return recordElement.Element("rights")?.Value == "Open Access";
+        }
+
+        static List<ArticlesPerYear> ParseArticlesPerYear(XElement recordElement)
+        {
+            var articlesPerYearElement = recordElement.Element("articles-per-year");
+            var articlesIssued = articlesPerYearElement?.Elements("articles-issued").ToList();
+
+            if(articlesIssued == null || !articlesIssued.Any())
+                return new List<ArticlesPerYear>();
+
+            var parsed = articlesIssued.Select(ParseArticlesIssued).ToList();
+            return parsed.Where(a => a.Year >= 2019).ToList();
+        }
+
+        static ArticlesPerYear ParseArticlesIssued(XElement articlesPerYearElement)
+        {
+            int.TryParse(articlesPerYearElement.Value?.Trim(), out var numberOfArticles);
+            int.TryParse(articlesPerYearElement.Attribute("year")?.Value, out var year);
+
+            return new ArticlesPerYear
+            {
+                NumberOfArticles = numberOfArticles,
+                Year = year
+            };
         }
 
         #endregion

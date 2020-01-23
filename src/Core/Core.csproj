@@ -159,6 +159,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticlesPerYear.cs" />
     <Compile Include="BaseQuestionScore.cs" />
     <Compile Include="BlockedISSN.cs" />
     <Compile Include="Cleanup\CleanupMode.cs" />
@@ -322,6 +323,10 @@
     <Compile Include="Migrations\201911051152159_PlanS-Property-in-Journal.Designer.cs">
       <DependentUpon>201911051152159_PlanS-Property-in-Journal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001231830576_Journal-Articles-Per-Year.cs" />
+    <Compile Include="Migrations\202001231830576_Journal-Articles-Per-Year.Designer.cs">
+      <DependentUpon>202001231830576_Journal-Articles-Per-Year.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\CornerRepository.cs" />
@@ -382,6 +387,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911051152159_PlanS-Property-in-Journal.resx">
       <DependentUpon>201911051152159_PlanS-Property-in-Journal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001231830576_Journal-Articles-Per-Year.resx">
+      <DependentUpon>202001231830576_Journal-Articles-Per-Year.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />

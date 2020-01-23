@@ -6,24 +6,24 @@
     public class InstitutionsControllerAuthorizationTests : ControllerAuthorizationTests<InstitutionsController>
     {
         [Fact]
-        public void IndexActionDoesNotRequireAuthorizedUser()
+        public void IndexActionDoesRequireAuthorizedUser()
         {
             // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.Index(null)));
+            Assert.True(ActionRequiresAuthorizedUser(x => x.Index(null)));
         }
 
         [Fact]
-        public void DetailsActionDoesNotRequireAuthorizedUser()
+        public void DetailsActionDoesRequireAuthorizedUser()
         {
             // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.Details(null)));
+            Assert.True(ActionRequiresAuthorizedUser(x => x.Details(null)));
         }
 
         [Fact]
-        public void NamesActionDoesNotRequireAuthorizedUser()
+        public void NamesActionDoesRequireAuthorizedUser()
         {
             // Assert
-            Assert.True(ActionDoesNotRequireAuthorizedUser(x => x.Names(null)));
+            Assert.True(ActionRequiresAuthorizedUser(x => x.Names(null)));
         }
     }
 }

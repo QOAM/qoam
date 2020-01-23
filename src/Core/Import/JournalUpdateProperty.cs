@@ -11,6 +11,7 @@ namespace QOAM.Core.Import
         Subjects,
         OpenAccess,
         DataSource,
-        PISSN
+        PISSN,
+        ArticlesPerYear
     }
 }

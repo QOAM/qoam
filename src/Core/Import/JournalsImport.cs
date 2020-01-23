@@ -197,6 +197,9 @@
                     currentJournal.PISSN = journal.PISSN;
                 }
 
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.ArticlesPerYear))
+                    currentJournal.ArticlesPerYear = journal.ArticlesPerYear;
+
                 currentJournal.LastUpdatedOn = DateTime.Now;
                 this.journalRepository.InsertOrUpdate(currentJournal);
             }
@@ -327,6 +330,8 @@
 
             return importPublisherNames.Except(currentPublisherNames, StringComparer.InvariantCultureIgnoreCase).ToList();
         }
+
+
 
         private static bool ShouldInsertJournals(JournalsImportMode journalsImportMode)
         {

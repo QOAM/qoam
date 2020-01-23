@@ -13,6 +13,52 @@ http://www.sciencedirect.com/science/journal/00945765
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">257</rating>
+<articles-per-year>
+<articles-issued year="1970"> 46 </articles-issued>
+<articles-issued year="2009"> 42 </articles-issued>
+<articles-issued year="2017"> 37 </articles-issued>
+<articles-issued year="1982"> 36 </articles-issued>
+<articles-issued year="1996"> 34 </articles-issued>
+<articles-issued year="2016"> 33 </articles-issued>
+<articles-issued year="2007"> 33 </articles-issued>
+<articles-issued year="2003"> 33 </articles-issued>
+<articles-issued year="2005"> 31 </articles-issued>
+<articles-issued year="2004"> 31 </articles-issued>
+<articles-issued year="1979"> 31 </articles-issued>
+<articles-issued year="1988"> 30 </articles-issued>
+<articles-issued year="2010"> 29 </articles-issued>
+<articles-issued year="2012"> 28 </articles-issued>
+<articles-issued year="2001"> 28 </articles-issued>
+<articles-issued year="2002"> 27 </articles-issued>
+<articles-issued year="1998"> 27 </articles-issued>
+<articles-issued year="2018"> 26 </articles-issued>
+<articles-issued year="2011"> 26 </articles-issued>
+<articles-issued year="2014"> 25 </articles-issued>
+<articles-issued year="1992"> 25 </articles-issued>
+<articles-issued year="1995"> 24 </articles-issued>
+<articles-issued year="2015"> 23 </articles-issued>
+<articles-issued year="2006"> 23 </articles-issued>
+<articles-issued year="1990"> 23 </articles-issued>
+<articles-issued year="1977"> 23 </articles-issued>
+<articles-issued year="1997"> 22 </articles-issued>
+<articles-issued year="1989"> 22 </articles-issued>
+<articles-issued year="1986"> 22 </articles-issued>
+<articles-issued year="1991"> 20 </articles-issued>
+<articles-issued year="1987"> 18 </articles-issued>
+<articles-issued year="1985"> 18 </articles-issued>
+<articles-issued year="2008"> 16 </articles-issued>
+<articles-issued year="2000"> 16 </articles-issued>
+<articles-issued year="1994"> 16 </articles-issued>
+<articles-issued year="1993"> 14 </articles-issued>
+<articles-issued year="1980"> 13 </articles-issued>
+<articles-issued year="2019"> 12 </articles-issued>
+<articles-issued year="2020"> 11 </articles-issued>
+<articles-issued year="1983"> 10 </articles-issued>
+<articles-issued year="1999"> 5 </articles-issued>
+<articles-issued year="1981"> 5 </articles-issued>
+<articles-issued year="1978"> 5 </articles-issued>
+<articles-issued year="1984"> 3 </articles-issued>
+</articles-per-year>
 </journal>
 <journal>
 <title>Acta Biomaterialia</title>
@@ -28,6 +74,7 @@ http://www.sciencedirect.com/science/journal/17427061
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">25</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Acta Materialia</title>
@@ -43,6 +90,14 @@ http://www.sciencedirect.com/science/journal/13596454
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">164</rating>
+<articles-per-year>
+    <articles-issued year="2019"> 21 </articles-issued>
+    <articles-issued year="2014"> 17 </articles-issued>
+    <articles-issued year="2018"> 15 </articles-issued>
+    <articles-issued year="2017"> 11 </articles-issued>
+    <articles-issued year="2016"> 11 </articles-issued>
+    <articles-issued year="2015"> 7 </articles-issued>
+</articles-per-year>
 </journal>
 <journal>
 <title>Ad Hoc Networks</title>
@@ -58,6 +113,7 @@ http://www.sciencedirect.com/science/journal/15708705
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Advanced Engineering Informatics</title>
@@ -73,6 +129,7 @@ http://www.sciencedirect.com/science/journal/14740346
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Advances in Engineering Software</title>
@@ -89,6 +146,7 @@ http://www.sciencedirect.com/science/journal/09659978
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">23</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Advances in Water Resources</title>
@@ -104,6 +162,7 @@ http://www.sciencedirect.com/science/journal/03091708
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">35</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Aerospace Science and Technology</title>
@@ -119,6 +178,7 @@ http://www.sciencedirect.com/science/journal/12709638
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">281</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -136,6 +196,7 @@ http://www.sciencedirect.com/science/journal/14348411
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Agricultural Water Management</title>
@@ -152,6 +213,7 @@ http://www.sciencedirect.com/science/journal/03783774
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">32</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Analytica Chimica Acta</title>
@@ -167,6 +229,7 @@ http://www.sciencedirect.com/science/journal/00032670
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">38</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Annals of Nuclear Energy</title>
@@ -182,6 +245,7 @@ http://www.sciencedirect.com/science/journal/03064549
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Annals of Physics</title>
@@ -197,6 +261,7 @@ http://www.sciencedirect.com/science/journal/00034916
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Annals of Pure and Applied Logic</title>
@@ -214,6 +279,7 @@ http://www.sciencedirect.com/science/journal/01680072
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Annals of Vascular Surgery</title>
@@ -229,6 +295,7 @@ http://www.sciencedirect.com/science/journal/08905096
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Annual Reviews in Control</title>
@@ -244,6 +311,7 @@ http://www.sciencedirect.com/science/journal/13675788
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Applied Acoustics</title>
@@ -259,6 +327,7 @@ http://www.sciencedirect.com/science/journal/0003682X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">29</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Applied Catalysis A: General</title>
@@ -274,6 +343,7 @@ http://www.sciencedirect.com/science/journal/0926860X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Applied Catalysis B: Environmental</title>
@@ -289,6 +359,7 @@ http://www.sciencedirect.com/science/journal/09263373
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Applied Clay Science</title>
@@ -305,6 +376,7 @@ http://www.sciencedirect.com/science/journal/01691317
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Applied Geochemistry</title>
@@ -320,6 +392,7 @@ http://www.sciencedirect.com/science/journal/08832927
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Applied Mathematics and Computation</title>
@@ -336,6 +409,7 @@ http://www.sciencedirect.com/science/journal/00963003
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">32</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Applied Numerical Mathematics</title>
@@ -353,6 +427,7 @@ http://www.sciencedirect.com/science/journal/01689274
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Applied Ocean Research</title>
@@ -368,6 +443,7 @@ http://www.sciencedirect.com/science/journal/01411187
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Applied Radiation and Isotopes</title>
@@ -383,6 +459,7 @@ http://www.sciencedirect.com/science/journal/09698043
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Applied Soft Computing</title>
@@ -398,6 +475,7 @@ http://www.sciencedirect.com/science/journal/15684946
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Applied Surface Science</title>
@@ -413,6 +491,7 @@ http://www.sciencedirect.com/science/journal/01694332
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">22</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Applied Thermal Engineering</title>
@@ -428,6 +507,7 @@ http://www.sciencedirect.com/science/journal/13594311
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Archaeology, Ethnology and Anthropology of Eurasia</title>
@@ -444,6 +524,7 @@ http://www.sciencedirect.com/science/journal/15630110
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">21</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Artificial Intelligence</title>
@@ -459,6 +540,7 @@ http://www.sciencedirect.com/science/journal/00043702
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">93</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Artificial Intelligence in Medicine</title>
@@ -475,6 +557,7 @@ http://www.sciencedirect.com/science/journal/09333657
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Astroparticle Physics</title>
@@ -490,6 +573,7 @@ http://www.sciencedirect.com/science/journal/09276505
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Automatica</title>
@@ -505,6 +589,7 @@ http://www.sciencedirect.com/science/journal/00051098
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Automation in Construction</title>
@@ -520,6 +605,7 @@ http://www.sciencedirect.com/science/journal/09265805
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Biochemical Engineering Journal</title>
@@ -536,6 +622,7 @@ http://www.sciencedirect.com/science/journal/1369703X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Bioelectrochemistry</title>
@@ -552,6 +639,7 @@ http://www.sciencedirect.com/science/journal/15675394
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Biomaterials</title>
@@ -569,6 +657,7 @@ http://www.sciencedirect.com/science/journal/01429612
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">43</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Biomedical Signal Processing and Control</title>
@@ -584,6 +673,7 @@ http://www.sciencedirect.com/science/journal/17468094
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Biomolecular Engineering</title>
@@ -599,6 +689,7 @@ http://www.sciencedirect.com/science/journal/13890344
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Bioorganic & Medicinal Chemistry</title>
@@ -614,6 +705,7 @@ http://www.sciencedirect.com/science/journal/09680896
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">103</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Bioorganic & Medicinal Chemistry Letters</title>
@@ -629,6 +721,7 @@ http://www.sciencedirect.com/science/journal/0960894X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">87</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Bioorganic Chemistry</title>
@@ -644,6 +737,7 @@ http://www.sciencedirect.com/science/journal/00452068
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Biophysical Chemistry</title>
@@ -660,6 +754,7 @@ http://www.sciencedirect.com/science/journal/03014622
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Biophysical Journal</title>
@@ -675,6 +770,7 @@ http://www.sciencedirect.com/science/journal/00063495
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">34</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Biosensors and Bioelectronics</title>
@@ -690,6 +786,7 @@ http://www.sciencedirect.com/science/journal/09565663
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">20</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Biosystems Engineering</title>
@@ -705,6 +802,7 @@ http://www.sciencedirect.com/science/journal/15375110
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Building and Environment</title>
@@ -720,6 +818,7 @@ http://www.sciencedirect.com/science/journal/03601323
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">15</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Calphad</title>
@@ -736,6 +835,7 @@ http://www.sciencedirect.com/science/journal/03645916
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">0</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Carbohydrate Polymers</title>
@@ -752,6 +852,7 @@ http://www.sciencedirect.com/science/journal/01448617
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Carbohydrate Research</title>
@@ -767,6 +868,7 @@ http://www.sciencedirect.com/science/journal/00086215
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">27</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Carbon</title>
@@ -782,6 +884,7 @@ http://www.sciencedirect.com/science/journal/00086223
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">66</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Catalysis Communications</title>
@@ -797,6 +900,7 @@ http://www.sciencedirect.com/science/journal/15667367
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Catalysis Today</title>
@@ -812,6 +916,7 @@ http://www.sciencedirect.com/science/journal/09205861
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>CATENA</title>
@@ -827,6 +932,7 @@ http://www.sciencedirect.com/science/journal/03418162
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Cement and Concrete Composites</title>
@@ -843,6 +949,7 @@ http://www.sciencedirect.com/science/journal/09589465
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">15</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Cement and Concrete Research</title>
@@ -858,6 +965,7 @@ http://www.sciencedirect.com/science/journal/00088846
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">18</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Ceramics International</title>
@@ -873,6 +981,7 @@ http://www.sciencedirect.com/science/journal/02728842
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">24</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Chaos, Solitons & Fractals</title>
@@ -890,6 +999,7 @@ http://www.sciencedirect.com/science/journal/09600779
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -907,6 +1017,7 @@ http://www.sciencedirect.com/science/journal/02552701
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">17</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Chemical Engineering Journal</title>
@@ -923,6 +1034,7 @@ http://www.sciencedirect.com/science/journal/13858947
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">27</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Chemical Engineering Science</title>
@@ -938,6 +1050,7 @@ http://www.sciencedirect.com/science/journal/00092509
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">21</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Chemical Geology</title>
@@ -954,6 +1067,7 @@ http://www.sciencedirect.com/science/journal/00092541
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">15</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Chemical Physics</title>
@@ -969,6 +1083,7 @@ http://www.sciencedirect.com/science/journal/03010104
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Chemical Physics Letters</title>
@@ -984,6 +1099,7 @@ http://www.sciencedirect.com/science/journal/00092614
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Chemie der Erde - Geochemistry</title>
@@ -999,6 +1115,7 @@ http://www.sciencedirect.com/science/journal/00092819
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Chemometrics and Intelligent Laboratory Systems</title>
@@ -1016,6 +1133,7 @@ http://www.sciencedirect.com/science/journal/01697439
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">15</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Particuology</title>
@@ -1031,6 +1149,7 @@ http://www.sciencedirect.com/science/journal/16742001
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">0</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Chinese Journal of Aeronautics</title>
@@ -1046,6 +1165,7 @@ http://www.sciencedirect.com/science/journal/10009361
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Coastal Engineering</title>
@@ -1061,6 +1181,7 @@ http://www.sciencedirect.com/science/journal/03783839
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Cognitive Systems Research</title>
@@ -1076,6 +1197,7 @@ http://www.sciencedirect.com/science/journal/13890417
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Cold Regions Science and Technology</title>
@@ -1091,6 +1213,7 @@ http://www.sciencedirect.com/science/journal/0165232X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -1108,6 +1231,7 @@ http://www.sciencedirect.com/science/journal/09277757
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Colloids and Surfaces B: Biointerfaces</title>
@@ -1123,6 +1247,7 @@ http://www.sciencedirect.com/science/journal/09277765
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Combinatorial Chemistry - an Online Journal</title>
@@ -1138,6 +1263,7 @@ http://www.sciencedirect.com/science/journal/14643383
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -1155,6 +1281,7 @@ http://www.sciencedirect.com/science/journal/10075704
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Composite Structures</title>
@@ -1171,6 +1298,7 @@ http://www.sciencedirect.com/science/journal/02638223
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">227</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -1189,6 +1317,7 @@ http://www.sciencedirect.com/science/journal/1359835X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">161</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Composites Part B : Engineering</title>
@@ -1205,6 +1334,7 @@ http://www.sciencedirect.com/science/journal/13598368
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">208</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Composites Science and Technology</title>
@@ -1222,6 +1352,7 @@ http://www.sciencedirect.com/science/journal/02663538
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">140</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computational Biology and Chemistry</title>
@@ -1240,6 +1371,7 @@ http://www.sciencedirect.com/science/journal/14769271
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computational Geometry</title>
@@ -1255,6 +1387,7 @@ http://www.sciencedirect.com/science/journal/09257721
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computational Materials Science</title>
@@ -1271,6 +1404,7 @@ http://www.sciencedirect.com/science/journal/09270256
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">21</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computational Statistics & Data Analysis</title>
@@ -1287,6 +1421,7 @@ http://www.sciencedirect.com/science/journal/01679473
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">27</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computer Aided Geometric Design</title>
@@ -1303,6 +1438,7 @@ http://www.sciencedirect.com/science/journal/01678396
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computer Communications</title>
@@ -1318,6 +1454,7 @@ http://www.sciencedirect.com/science/journal/01403664
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computer Languages, Systems & Structures</title>
@@ -1333,6 +1470,7 @@ http://www.sciencedirect.com/science/journal/14778424
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computer Law & Security Report</title>
@@ -1350,6 +1488,7 @@ http://www.sciencedirect.com/science/journal/02673649
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computer Methods and Programs in Biomedicine</title>
@@ -1366,6 +1505,7 @@ http://www.sciencedirect.com/science/journal/01692607
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -1384,6 +1524,7 @@ http://www.sciencedirect.com/science/journal/00457825
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">20</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computer Networks</title>
@@ -1399,6 +1540,7 @@ http://www.sciencedirect.com/science/journal/13891286
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computer Physics Communications</title>
@@ -1415,6 +1557,7 @@ http://www.sciencedirect.com/science/journal/00104655
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computer Science Review</title>
@@ -1430,6 +1573,7 @@ http://www.sciencedirect.com/science/journal/15740137
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computer Speech & Language</title>
@@ -1446,6 +1590,7 @@ http://www.sciencedirect.com/science/journal/08852308
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computer Standards & Interfaces</title>
@@ -1461,6 +1606,7 @@ http://www.sciencedirect.com/science/journal/09205489
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computer Vision and Image Understanding</title>
@@ -1476,6 +1622,7 @@ http://www.sciencedirect.com/science/journal/10773142
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computer-Aided Design</title>
@@ -1491,6 +1638,7 @@ http://www.sciencedirect.com/science/journal/00104485
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computerized Medical Imaging and Graphics</title>
@@ -1507,6 +1655,7 @@ http://www.sciencedirect.com/science/journal/08956111
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers & Chemical Engineering</title>
@@ -1524,6 +1673,7 @@ http://www.sciencedirect.com/science/journal/00981354
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers & Education</title>
@@ -1540,6 +1690,7 @@ http://www.sciencedirect.com/science/journal/03601315
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">107</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers & Electrical Engineering</title>
@@ -1556,6 +1707,7 @@ http://www.sciencedirect.com/science/journal/00457906
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers & Fluids</title>
@@ -1573,6 +1725,7 @@ http://www.sciencedirect.com/science/journal/00457930
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">25</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers & Geosciences</title>
@@ -1589,6 +1742,7 @@ http://www.sciencedirect.com/science/journal/00983004
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">24</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers & Graphics</title>
@@ -1604,6 +1758,7 @@ http://www.sciencedirect.com/science/journal/00978493
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers & Industrial Engineering</title>
@@ -1620,6 +1775,7 @@ http://www.sciencedirect.com/science/journal/03608352
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers & Operations Research</title>
@@ -1635,6 +1791,7 @@ http://www.sciencedirect.com/science/journal/03050548
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers & Security</title>
@@ -1651,6 +1808,7 @@ http://www.sciencedirect.com/science/journal/01674048
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">25</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers & Structures</title>
@@ -1667,6 +1825,7 @@ http://www.sciencedirect.com/science/journal/00457949
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">29</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers and Electronics in Agriculture</title>
@@ -1684,6 +1843,7 @@ http://www.sciencedirect.com/science/journal/01681699
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers and Geotechnics</title>
@@ -1701,6 +1861,7 @@ http://www.sciencedirect.com/science/journal/0266352X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers in Biology and Medicine</title>
@@ -1718,6 +1879,7 @@ http://www.sciencedirect.com/science/journal/00104825
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers in Human Behavior</title>
@@ -1733,6 +1895,7 @@ http://www.sciencedirect.com/science/journal/07475632
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Computers in Industry</title>
@@ -1749,6 +1912,7 @@ http://www.sciencedirect.com/science/journal/01663615
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Construction and Building Materials</title>
@@ -1764,6 +1928,7 @@ http://www.sciencedirect.com/science/journal/09500618
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">17</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Continental Shelf Research</title>
@@ -1779,6 +1944,7 @@ http://www.sciencedirect.com/science/journal/02784343
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Control Engineering Practice</title>
@@ -1795,6 +1961,7 @@ http://www.sciencedirect.com/science/journal/09670661
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">40</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Corrosion Science</title>
@@ -1810,6 +1977,7 @@ http://www.sciencedirect.com/science/journal/0010938X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">22</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Cretaceous Research</title>
@@ -1825,6 +1993,7 @@ http://www.sciencedirect.com/science/journal/01956671
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Cryogenics</title>
@@ -1840,6 +2009,7 @@ http://www.sciencedirect.com/science/journal/00112275
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">44</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Current Opinion in Chemical Biology</title>
@@ -1855,6 +2025,7 @@ http://www.sciencedirect.com/science/journal/13675931
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">24</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Current Opinion in Colloid & Interface Science</title>
@@ -1870,6 +2041,7 @@ http://www.sciencedirect.com/science/journal/13590294
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Current Opinion in Solid State & Materials Science</title>
@@ -1885,6 +2057,7 @@ http://www.sciencedirect.com/science/journal/13590286
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Data & Knowledge Engineering</title>
@@ -1900,6 +2073,7 @@ http://www.sciencedirect.com/science/journal/0169023X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">21</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Decision Support Systems</title>
@@ -1916,6 +2090,7 @@ http://www.sciencedirect.com/science/journal/01679236
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -1933,6 +2108,7 @@ http://www.sciencedirect.com/science/journal/09670637
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">20</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -1950,6 +2126,7 @@ http://www.sciencedirect.com/science/journal/09670645
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">21</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Dendrochronologia</title>
@@ -1965,6 +2142,7 @@ http://www.sciencedirect.com/science/journal/11257865
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Desalination</title>
@@ -1980,6 +2158,7 @@ http://www.sciencedirect.com/science/journal/00119164
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Design Studies</title>
@@ -1995,6 +2174,7 @@ http://www.sciencedirect.com/science/journal/0142694X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">27</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Diamond and Related Materials</title>
@@ -2012,6 +2192,7 @@ http://www.sciencedirect.com/science/journal/09259635
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Digital Signal Processing</title>
@@ -2027,6 +2208,7 @@ http://www.sciencedirect.com/science/journal/10512004
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Discrete Applied Mathematics</title>
@@ -2042,6 +2224,7 @@ http://www.sciencedirect.com/science/journal/0166218X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Discrete Mathematics</title>
@@ -2057,6 +2240,7 @@ http://www.sciencedirect.com/science/journal/0012365X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Displays</title>
@@ -2072,6 +2256,7 @@ http://www.sciencedirect.com/science/journal/01419382
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">0</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Dyes and Pigments</title>
@@ -2087,6 +2272,7 @@ http://www.sciencedirect.com/science/journal/01437208
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Dynamics of Atmospheres and Oceans</title>
@@ -2103,6 +2289,7 @@ http://www.sciencedirect.com/science/journal/03770265
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Earth and Planetary Science Letters</title>
@@ -2118,6 +2305,7 @@ http://www.sciencedirect.com/science/journal/0012821X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">97</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Earth-Science Reviews</title>
@@ -2133,6 +2321,7 @@ http://www.sciencedirect.com/science/journal/00128252
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Electrochemistry Communications</title>
@@ -2148,6 +2337,7 @@ http://www.sciencedirect.com/science/journal/13882481
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">12</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Electrochimica Acta</title>
@@ -2163,6 +2353,7 @@ http://www.sciencedirect.com/science/journal/00134686
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">19</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Electronic Commerce Research and Applications</title>
@@ -2179,6 +2370,7 @@ http://www.sciencedirect.com/science/journal/15674223
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Electronic Notes in Theoretical Computer Science</title>
@@ -2194,6 +2386,7 @@ http://www.sciencedirect.com/science/journal/15710661
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Energy and Buildings</title>
@@ -2209,6 +2402,7 @@ http://www.sciencedirect.com/science/journal/03787788
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Energy Conversion and Management</title>
@@ -2225,6 +2419,7 @@ http://www.sciencedirect.com/science/journal/01968904
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Energy Economics</title>
@@ -2240,6 +2435,7 @@ http://www.sciencedirect.com/science/journal/01409883
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">27</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Engineering Analysis with Boundary Elements</title>
@@ -2255,6 +2451,7 @@ http://www.sciencedirect.com/science/journal/09557997
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -2272,6 +2469,7 @@ http://www.sciencedirect.com/science/journal/09521976
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Engineering Failure Analysis</title>
@@ -2288,6 +2486,7 @@ http://www.sciencedirect.com/science/journal/13506307
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">64</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Engineering Fracture Mechanics</title>
@@ -2304,6 +2503,7 @@ http://www.sciencedirect.com/science/journal/00137944
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">21</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Engineering Geology</title>
@@ -2319,6 +2519,7 @@ http://www.sciencedirect.com/science/journal/00137952
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Engineering Structures</title>
@@ -2334,6 +2535,7 @@ http://www.sciencedirect.com/science/journal/01410296
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">12</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Environmental Impact Assessment Review</title>
@@ -2349,6 +2551,7 @@ http://www.sciencedirect.com/science/journal/01959255
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">21</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Estuarine, Coastal and Shelf Science</title>
@@ -2364,6 +2567,7 @@ http://www.sciencedirect.com/science/journal/02727714
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">34</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>European Journal of Mechanics - A/Solids</title>
@@ -2379,6 +2583,7 @@ http://www.sciencedirect.com/science/journal/09977538
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>European Journal of Mechanics - B/Fluids</title>
@@ -2395,6 +2600,7 @@ http://www.sciencedirect.com/science/journal/09977546
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>European Journal of Medicinal Chemistry</title>
@@ -2411,6 +2617,7 @@ http://www.sciencedirect.com/science/journal/02235234
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">21</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>European Journal of Operational Research</title>
@@ -2426,6 +2633,7 @@ http://www.sciencedirect.com/science/journal/03772217
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">12</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>European Polymer Journal</title>
@@ -2443,6 +2651,7 @@ http://www.sciencedirect.com/science/journal/00143057
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">41</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Experimental Thermal and Fluid Science</title>
@@ -2459,6 +2668,7 @@ http://www.sciencedirect.com/science/journal/08941777
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">20</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Expert Systems with Applications</title>
@@ -2474,6 +2684,7 @@ http://www.sciencedirect.com/science/journal/09574174
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Expositiones Mathematicae</title>
@@ -2489,6 +2700,7 @@ http://www.sciencedirect.com/science/journal/07230869
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Finite Elements in Analysis and Design</title>
@@ -2504,6 +2716,7 @@ http://www.sciencedirect.com/science/journal/0168874X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">42</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Fire Safety Journal</title>
@@ -2519,6 +2732,7 @@ http://www.sciencedirect.com/science/journal/03797112
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Flow Measurement and Instrumentation</title>
@@ -2534,6 +2748,7 @@ http://www.sciencedirect.com/science/journal/09555986
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Global Food Security</title>
@@ -2549,6 +2764,7 @@ http://www.sciencedirect.com/science/journal/22119124
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Food Hydrocolloids</title>
@@ -2564,6 +2780,7 @@ http://www.sciencedirect.com/science/journal/0268005X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Forensic Science International</title>
@@ -2580,6 +2797,7 @@ http://www.sciencedirect.com/science/journal/03790738
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">400</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Fuel</title>
@@ -2595,6 +2813,7 @@ http://www.sciencedirect.com/science/journal/00162361
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Fuel Processing Technology</title>
@@ -2610,6 +2829,7 @@ http://www.sciencedirect.com/science/journal/03783820
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Fusion Engineering and Design</title>
@@ -2626,6 +2846,7 @@ http://www.sciencedirect.com/science/journal/09203796
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Future Generation Computer Systems</title>
@@ -2641,6 +2862,7 @@ http://www.sciencedirect.com/science/journal/0167739X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Fuzzy Sets and Systems</title>
@@ -2656,6 +2878,7 @@ http://www.sciencedirect.com/science/journal/01650114
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Geoderma</title>
@@ -2671,6 +2894,7 @@ http://www.sciencedirect.com/science/journal/00167061
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Geotextiles and Geomembranes</title>
@@ -2686,6 +2910,7 @@ http://www.sciencedirect.com/science/journal/02661144
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Geothermics</title>
@@ -2701,6 +2926,7 @@ http://www.sciencedirect.com/science/journal/03756505
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Global and Planetary Change</title>
@@ -2716,6 +2942,7 @@ http://www.sciencedirect.com/science/journal/09218181
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Gondwana Research</title>
@@ -2731,6 +2958,7 @@ http://www.sciencedirect.com/science/journal/1342937X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Government Information Quarterly</title>
@@ -2747,6 +2975,7 @@ http://www.sciencedirect.com/science/journal/0740624X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">22</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Graphical Models</title>
@@ -2763,6 +2992,7 @@ http://www.sciencedirect.com/science/journal/15240703
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>High Energy Density Physics</title>
@@ -2778,6 +3008,7 @@ http://www.sciencedirect.com/science/journal/15741818
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Hydrometallurgy</title>
@@ -2793,6 +3024,7 @@ http://www.sciencedirect.com/science/journal/0304386X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">12</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Icarus</title>
@@ -2808,6 +3040,7 @@ http://www.sciencedirect.com/science/journal/00191035
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">79</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Image and Vision Computing</title>
@@ -2823,6 +3056,7 @@ http://www.sciencedirect.com/science/journal/02628856
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Indagationes Mathematicae</title>
@@ -2838,6 +3072,7 @@ http://www.sciencedirect.com/science/journal/00193577
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Information and Computation</title>
@@ -2853,6 +3088,7 @@ http://www.sciencedirect.com/science/journal/08905401
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Information and Organization</title>
@@ -2870,6 +3106,7 @@ http://www.sciencedirect.com/science/journal/14717727
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">44</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Information and Software Technology</title>
@@ -2885,6 +3122,7 @@ http://www.sciencedirect.com/science/journal/09505849
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Information Fusion</title>
@@ -2900,6 +3138,7 @@ http://www.sciencedirect.com/science/journal/15662535
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Information Processing & Management</title>
@@ -2915,6 +3154,7 @@ http://www.sciencedirect.com/science/journal/03064573
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">104</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Information Sciences</title>
@@ -2930,6 +3170,7 @@ http://www.sciencedirect.com/science/journal/00200255
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">118</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Information Systems</title>
@@ -2945,6 +3186,7 @@ http://www.sciencedirect.com/science/journal/03064379
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Infrared Physics & Technology</title>
@@ -2960,6 +3202,7 @@ http://www.sciencedirect.com/science/journal/13504495
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Inorganic Chemistry Communications</title>
@@ -2976,6 +3219,7 @@ http://www.sciencedirect.com/science/journal/13877003
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Inorganica Chimica Acta</title>
@@ -2992,6 +3236,7 @@ http://www.sciencedirect.com/science/journal/00201693
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Insurance: Mathematics and Economics</title>
@@ -3007,6 +3252,7 @@ http://www.sciencedirect.com/science/journal/01676687
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Integration, the VLSI Journal</title>
@@ -3023,6 +3269,7 @@ http://www.sciencedirect.com/science/journal/01679260
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Intermetallics</title>
@@ -3039,6 +3286,7 @@ http://www.sciencedirect.com/science/journal/09669795
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">21</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -3056,6 +3304,7 @@ http://www.sciencedirect.com/science/journal/07351933
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Adhesion and Adhesives</title>
@@ -3072,6 +3321,7 @@ http://www.sciencedirect.com/science/journal/01437496
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -3089,6 +3339,7 @@ http://www.sciencedirect.com/science/journal/03032434
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">35</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Approximate Reasoning</title>
@@ -3104,6 +3355,7 @@ http://www.sciencedirect.com/science/journal/0888613X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Coal Geology</title>
@@ -3120,6 +3372,7 @@ http://www.sciencedirect.com/science/journal/01665162
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -3137,6 +3390,7 @@ http://www.sciencedirect.com/science/journal/01420615
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">19</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Engineering Science</title>
@@ -3154,6 +3408,7 @@ http://www.sciencedirect.com/science/journal/00207225
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Fatigue</title>
@@ -3170,6 +3425,7 @@ http://www.sciencedirect.com/science/journal/01421123
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">33</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Heat and Fluid Flow</title>
@@ -3186,6 +3442,7 @@ http://www.sciencedirect.com/science/journal/0142727X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">31</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Heat and Mass Transfer</title>
@@ -3201,6 +3458,7 @@ http://www.sciencedirect.com/science/journal/00179310
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">139</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Human-Computer Studies</title>
@@ -3216,6 +3474,7 @@ http://www.sciencedirect.com/science/journal/10715819
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Impact Engineering</title>
@@ -3233,6 +3492,7 @@ http://www.sciencedirect.com/science/journal/0734743X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Industrial Ergonomics</title>
@@ -3249,6 +3509,7 @@ http://www.sciencedirect.com/science/journal/01698141
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">12</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Information Management</title>
@@ -3264,6 +3525,7 @@ http://www.sciencedirect.com/science/journal/02684012
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">176</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -3282,6 +3544,7 @@ http://www.sciencedirect.com/science/journal/08906955
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Mass Spectrometry</title>
@@ -3297,6 +3560,7 @@ http://www.sciencedirect.com/science/journal/13873806
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Mechanical Sciences</title>
@@ -3313,6 +3577,7 @@ http://www.sciencedirect.com/science/journal/00207403
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Medical Informatics</title>
@@ -3330,6 +3595,7 @@ http://www.sciencedirect.com/science/journal/13865056
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">12</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Mineral Processing</title>
@@ -3345,6 +3611,7 @@ http://www.sciencedirect.com/science/journal/03017516
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Multiphase Flow</title>
@@ -3360,6 +3627,7 @@ http://www.sciencedirect.com/science/journal/03019322
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Non-Linear Mechanics</title>
@@ -3376,6 +3644,7 @@ http://www.sciencedirect.com/science/journal/00207462
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Plasticity</title>
@@ -3392,6 +3661,7 @@ http://www.sciencedirect.com/science/journal/07496419
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -3409,6 +3679,7 @@ http://www.sciencedirect.com/science/journal/03080161
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">17</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Production Economics</title>
@@ -3425,6 +3696,7 @@ http://www.sciencedirect.com/science/journal/09255273
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -3443,6 +3715,7 @@ http://www.sciencedirect.com/science/journal/02634368
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -3460,6 +3733,7 @@ http://www.sciencedirect.com/science/journal/13651609
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Solids and Structures</title>
@@ -3475,6 +3749,7 @@ http://www.sciencedirect.com/science/journal/00207683
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>International Journal of Thermal Sciences</title>
@@ -3491,6 +3766,7 @@ http://www.sciencedirect.com/science/journal/12900729
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>ISPRS Journal of Photogrammetry and Remote Sensing</title>
@@ -3506,6 +3782,7 @@ http://www.sciencedirect.com/science/journal/09242716
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">50</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Jornal de Pediatria</title>
@@ -3521,6 +3798,7 @@ http://www.elsevier.com/journals/jornal-de-pediatria/0021-7557
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">0</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Asian Ceramic Societies</title>
@@ -3536,6 +3814,7 @@ http://www.elsevier.com/journals/journal-of-asian-ceramic-societies/2187-0764
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of African Earth Sciences</title>
@@ -3551,6 +3830,7 @@ http://www.sciencedirect.com/science/journal/1464343X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Alloys and Compounds</title>
@@ -3566,6 +3846,7 @@ http://www.sciencedirect.com/science/journal/09258388
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Analytical and Applied Pyrolysis</title>
@@ -3581,6 +3862,7 @@ http://www.sciencedirect.com/science/journal/01652370
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Applied Geophysics</title>
@@ -3597,6 +3879,7 @@ http://www.sciencedirect.com/science/journal/09269851
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Approximation Theory</title>
@@ -3612,6 +3895,7 @@ http://www.sciencedirect.com/science/journal/00219045
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Arid Environments</title>
@@ -3627,6 +3911,7 @@ http://www.sciencedirect.com/science/journal/01401963
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -3646,6 +3931,7 @@ http://www.sciencedirect.com/science/journal/13646826
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">127</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Biomechanics</title>
@@ -3661,6 +3947,7 @@ http://www.sciencedirect.com/science/journal/00219290
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">35</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Biotechnology</title>
@@ -3676,6 +3963,7 @@ http://www.sciencedirect.com/science/journal/01681656
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">68</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Catalysis</title>
@@ -3692,6 +3980,7 @@ http://www.sciencedirect.com/science/journal/00219517
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Chemical Health and Safety</title>
@@ -3707,6 +3996,7 @@ http://www.sciencedirect.com/science/journal/18715532
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Chromatography B</title>
@@ -3722,6 +4012,7 @@ http://www.sciencedirect.com/science/journal/15700232
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">37</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Colloid and Interface Science</title>
@@ -3737,6 +4028,7 @@ http://www.sciencedirect.com/science/journal/00219797
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Complexity</title>
@@ -3752,6 +4044,7 @@ http://www.sciencedirect.com/science/journal/0885064X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Computational and Applied Mathematics</title>
@@ -3768,6 +4061,7 @@ http://www.sciencedirect.com/science/journal/03770427
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Computational Physics</title>
@@ -3784,6 +4078,7 @@ http://www.sciencedirect.com/science/journal/00219991
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">64</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Computer and System Sciences</title>
@@ -3799,6 +4094,7 @@ http://www.sciencedirect.com/science/journal/00220000
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Constructional Steel Research</title>
@@ -3814,6 +4110,7 @@ http://www.sciencedirect.com/science/journal/0143974X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Discrete Algorithms</title>
@@ -3830,6 +4127,7 @@ http://www.sciencedirect.com/science/journal/15708667
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Econometrics</title>
@@ -3846,6 +4144,7 @@ http://www.sciencedirect.com/science/journal/03044076
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">55</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Economic Dynamics and Control</title>
@@ -3861,6 +4160,7 @@ http://www.sciencedirect.com/science/journal/01651889
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">27</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Electroanalytical Chemistry</title>
@@ -3876,6 +4176,7 @@ http://www.sciencedirect.com/science/journal/15726657
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -3893,6 +4194,7 @@ http://www.sciencedirect.com/science/journal/03682048
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Electrostatics</title>
@@ -3908,6 +4210,7 @@ http://www.sciencedirect.com/science/journal/03043886
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Fluids and Structures</title>
@@ -3924,6 +4227,7 @@ http://www.sciencedirect.com/science/journal/08899746
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Fluorine Chemistry</title>
@@ -3939,6 +4243,7 @@ http://www.sciencedirect.com/science/journal/00221139
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Food Composition and Analysis</title>
@@ -3954,6 +4259,7 @@ http://www.sciencedirect.com/science/journal/08891575
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Food Engineering</title>
@@ -3969,6 +4275,7 @@ http://www.sciencedirect.com/science/journal/02608774
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Geochemical Exploration</title>
@@ -3986,6 +4293,7 @@ http://www.sciencedirect.com/science/journal/03756742
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Geodynamics</title>
@@ -4001,6 +4309,7 @@ http://www.sciencedirect.com/science/journal/02643707
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Hazardous Materials</title>
@@ -4018,6 +4327,7 @@ http://www.sciencedirect.com/science/journal/03043894
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Hydrology</title>
@@ -4033,6 +4343,7 @@ http://www.sciencedirect.com/science/journal/00221694
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">42</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Informetrics</title>
@@ -4048,6 +4359,7 @@ http://www.sciencedirect.com/science/journal/17511577
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Inorganic Biochemistry</title>
@@ -4065,6 +4377,7 @@ http://www.sciencedirect.com/science/journal/01620134
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Logic and Algebraic Programming</title>
@@ -4081,6 +4394,7 @@ http://www.sciencedirect.com/science/journal/15678326
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -4099,6 +4413,7 @@ http://www.sciencedirect.com/science/journal/09504230
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Luminescence</title>
@@ -4115,6 +4430,7 @@ http://www.sciencedirect.com/science/journal/00222313
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Magnetic Resonance</title>
@@ -4130,6 +4446,7 @@ http://www.sciencedirect.com/science/journal/10907807
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Materials Processing Technology</title>
@@ -4145,6 +4462,7 @@ http://www.sciencedirect.com/science/journal/09240136
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">15</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Mathematical Economics</title>
@@ -4160,6 +4478,7 @@ http://www.sciencedirect.com/science/journal/03044068
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Mathematical Psychology</title>
@@ -4175,6 +4494,7 @@ http://www.sciencedirect.com/science/journal/00222496
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Membrane Science</title>
@@ -4191,6 +4511,7 @@ http://www.sciencedirect.com/science/journal/03767388
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Molecular Catalysis A: Chemical</title>
@@ -4207,6 +4528,7 @@ http://www.sciencedirect.com/science/journal/13811169
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Molecular Catalysis B: Enzymatic</title>
@@ -4223,6 +4545,7 @@ http://www.sciencedirect.com/science/journal/13811177
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Molecular Graphics and Modelling</title>
@@ -4239,6 +4562,7 @@ http://www.sciencedirect.com/science/journal/10933263
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Molecular Liquids</title>
@@ -4254,6 +4578,7 @@ http://www.sciencedirect.com/science/journal/01677322
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Molecular Spectroscopy</title>
@@ -4270,6 +4595,7 @@ http://www.sciencedirect.com/science/journal/00222852
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Molecular Structure</title>
@@ -4287,6 +4613,7 @@ http://www.sciencedirect.com/science/journal/00222860
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Multivariate Analysis</title>
@@ -4304,6 +4631,7 @@ http://www.sciencedirect.com/science/journal/0047259X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Network and Computer Applications</title>
@@ -4319,6 +4647,7 @@ http://www.sciencedirect.com/science/journal/10848045
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Non-Crystalline Solids</title>
@@ -4335,6 +4664,7 @@ http://www.sciencedirect.com/science/journal/00223093
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Non-Newtonian Fluid Mechanics</title>
@@ -4351,6 +4681,7 @@ http://www.sciencedirect.com/science/journal/03770257
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Nuclear Materials</title>
@@ -4366,6 +4697,7 @@ http://www.sciencedirect.com/science/journal/00223115
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Operations Management</title>
@@ -4382,6 +4714,7 @@ http://www.sciencedirect.com/science/journal/02726963
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">20</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Organometallic Chemistry</title>
@@ -4397,6 +4730,7 @@ http://www.sciencedirect.com/science/journal/0022328X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">24</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Parallel and Distributed Computing</title>
@@ -4412,6 +4746,7 @@ http://www.sciencedirect.com/science/journal/07437315
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Petroleum Science and Engineering</title>
@@ -4428,6 +4763,7 @@ http://www.sciencedirect.com/science/journal/09204105
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Pharmaceutical and Biomedical Analysis</title>
@@ -4443,6 +4779,7 @@ http://www.sciencedirect.com/science/journal/07317085
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">29</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -4461,6 +4798,7 @@ http://www.sciencedirect.com/science/journal/10106030
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -4478,6 +4816,7 @@ http://www.sciencedirect.com/science/journal/10111344
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Physics and Chemistry of Solids</title>
@@ -4495,6 +4834,7 @@ http://www.sciencedirect.com/science/journal/00223697
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Process Control</title>
@@ -4510,6 +4850,7 @@ http://www.sciencedirect.com/science/journal/09591524
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -4527,6 +4868,7 @@ http://www.sciencedirect.com/science/journal/00224073
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Safety Research</title>
@@ -4543,6 +4885,7 @@ http://www.sciencedirect.com/science/journal/00224375
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">54</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Solid State Chemistry</title>
@@ -4558,6 +4901,7 @@ http://www.sciencedirect.com/science/journal/00224596
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Sound and Vibration</title>
@@ -4573,6 +4917,7 @@ http://www.sciencedirect.com/science/journal/0022460X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">116</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of South American Earth Sciences</title>
@@ -4589,6 +4934,7 @@ http://www.sciencedirect.com/science/journal/08959811
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Statistical Planning and Inference</title>
@@ -4604,6 +4950,7 @@ http://www.sciencedirect.com/science/journal/03783758
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Structural Geology</title>
@@ -4619,6 +4966,7 @@ http://www.sciencedirect.com/science/journal/01918141
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">26</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Supercritical Fluids</title>
@@ -4634,6 +4982,7 @@ http://www.sciencedirect.com/science/journal/08968446
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Symbolic Computation</title>
@@ -4650,6 +4999,7 @@ http://www.sciencedirect.com/science/journal/07477171
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">0</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Systems and Software</title>
@@ -4665,6 +5015,7 @@ http://www.sciencedirect.com/science/journal/01641212
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Systems Architecture</title>
@@ -4680,6 +5031,7 @@ http://www.sciencedirect.com/science/journal/13837621
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Terramechanics</title>
@@ -4695,6 +5047,7 @@ http://www.sciencedirect.com/science/journal/00224898
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of the Energy Institute</title>
@@ -4710,6 +5063,7 @@ http://www.journals.elsevier.com/journal-of-the-energy-institute/
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of the European Ceramic Society</title>
@@ -4725,6 +5079,7 @@ http://www.sciencedirect.com/science/journal/09552219
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">15</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -4743,6 +5098,7 @@ http://www.sciencedirect.com/science/journal/17516161
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of the Mechanics and Physics of Solids</title>
@@ -4758,6 +5114,7 @@ http://www.sciencedirect.com/science/journal/00225096
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">12</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Trace Elements in Medicine and Biology</title>
@@ -4774,6 +5131,7 @@ http://www.sciencedirect.com/science/journal/0946672X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -4791,6 +5149,7 @@ http://www.sciencedirect.com/science/journal/10473203
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Visual Languages & Computing</title>
@@ -4807,6 +5166,7 @@ http://www.sciencedirect.com/science/journal/1045926X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Volcanology and Geothermal Research</title>
@@ -4822,6 +5182,7 @@ http://www.sciencedirect.com/science/journal/03770273
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">15</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -4840,6 +5201,7 @@ http://www.sciencedirect.com/science/journal/01676105
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Knowledge-Based Systems</title>
@@ -4855,6 +5217,7 @@ http://www.sciencedirect.com/science/journal/09507051
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Legal Medicine</title>
@@ -4871,6 +5234,7 @@ http://www.sciencedirect.com/science/journal/13446223
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">324</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Library & Information Science Research</title>
@@ -4886,6 +5250,7 @@ http://www.sciencedirect.com/science/journal/07408188
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">981</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Lithos</title>
@@ -4902,6 +5267,7 @@ http://www.sciencedirect.com/science/journal/00244937
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Magnetic Resonance Imaging</title>
@@ -4918,6 +5284,7 @@ http://www.sciencedirect.com/science/journal/0730725X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Marine and Petroleum Geology</title>
@@ -4934,6 +5301,7 @@ http://www.sciencedirect.com/science/journal/02648172
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">20</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Marine Chemistry</title>
@@ -4950,6 +5318,7 @@ http://www.sciencedirect.com/science/journal/03044203
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Marine Environmental Research</title>
@@ -4966,6 +5335,7 @@ http://www.sciencedirect.com/science/journal/01411136
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">27</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Marine Geology</title>
@@ -4981,6 +5351,7 @@ http://www.sciencedirect.com/science/journal/00253227
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">36</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Marine Micropaleontology</title>
@@ -4996,6 +5367,7 @@ http://www.sciencedirect.com/science/journal/03778398
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Marine Policy</title>
@@ -5011,6 +5383,7 @@ http://www.sciencedirect.com/science/journal/0308597X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">58</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Marine Pollution Bulletin</title>
@@ -5026,6 +5399,7 @@ http://www.sciencedirect.com/science/journal/0025326X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">24</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Marine Structures</title>
@@ -5041,6 +5415,7 @@ http://www.sciencedirect.com/science/journal/09518339
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Materials & Design</title>
@@ -5057,6 +5432,7 @@ http://www.sciencedirect.com/science/journal/02613069
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">39</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Materials Characterization</title>
@@ -5072,6 +5448,7 @@ http://www.sciencedirect.com/science/journal/10445803
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">30</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Materials Letters</title>
@@ -5087,6 +5464,7 @@ http://www.sciencedirect.com/science/journal/0167577X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">12</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Materials Research Bulletin</title>
@@ -5104,6 +5482,7 @@ http://www.sciencedirect.com/science/journal/00255408
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">22</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Materials Science and Engineering: A</title>
@@ -5120,6 +5499,7 @@ http://www.sciencedirect.com/science/journal/09215093
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">41</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Materials Science and Engineering: B</title>
@@ -5137,6 +5517,7 @@ http://www.sciencedirect.com/science/journal/09215107
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">19</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Materials Science and Engineering: C</title>
@@ -5154,6 +5535,7 @@ http://www.sciencedirect.com/science/journal/09284931
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">19</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Materials Science and Engineering: R: Reports</title>
@@ -5170,6 +5552,7 @@ http://www.sciencedirect.com/science/journal/0927796X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Materials Science in Semiconductor Processing</title>
@@ -5186,6 +5569,7 @@ http://www.sciencedirect.com/science/journal/13698001
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Materials Today</title>
@@ -5201,6 +5585,7 @@ http://www.sciencedirect.com/science/journal/13697021
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Mathematics and Computers in Simulation</title>
@@ -5217,6 +5602,7 @@ http://www.sciencedirect.com/science/journal/03784754
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Measurement</title>
@@ -5233,6 +5619,7 @@ http://www.sciencedirect.com/science/journal/02632241
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Mechanical Systems and Signal Processing</title>
@@ -5248,6 +5635,7 @@ http://www.sciencedirect.com/science/journal/08883270
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Mechanics of Materials</title>
@@ -5264,6 +5652,7 @@ http://www.sciencedirect.com/science/journal/01676636
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">19</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Mechanics Research Communications</title>
@@ -5280,6 +5669,7 @@ http://www.sciencedirect.com/science/journal/00936413
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Mechanism and Machine Theory</title>
@@ -5295,6 +5685,7 @@ http://www.sciencedirect.com/science/journal/0094114X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Mechatronics</title>
@@ -5311,6 +5702,7 @@ http://www.sciencedirect.com/science/journal/09574158
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Medical Dosimetry</title>
@@ -5326,6 +5718,7 @@ http://www.sciencedirect.com/science/journal/09583947
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Medical Engineering & Physics</title>
@@ -5343,6 +5736,7 @@ http://www.sciencedirect.com/science/journal/13504533
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Medical Image Analysis</title>
@@ -5359,6 +5753,7 @@ http://www.sciencedirect.com/science/journal/13618415
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Metabolic Engineering</title>
@@ -5374,6 +5769,7 @@ http://www.sciencedirect.com/science/journal/10967176
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Metamaterials</title>
@@ -5390,6 +5786,7 @@ http://www.sciencedirect.com/science/journal/18731988
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Microchemical Journal</title>
@@ -5406,6 +5803,7 @@ http://www.sciencedirect.com/science/journal/0026265X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Microelectronic Engineering</title>
@@ -5421,6 +5819,7 @@ http://www.sciencedirect.com/science/journal/01679317
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Microelectronics Reliability</title>
@@ -5436,6 +5835,7 @@ http://www.sciencedirect.com/science/journal/00262714
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">15</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Microelectronics Journal</title>
@@ -5451,6 +5851,7 @@ http://www.sciencedirect.com/science/journal/00262692
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Microporous and Mesoporous Materials</title>
@@ -5468,6 +5869,7 @@ http://www.sciencedirect.com/science/journal/13871811
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Microprocessors and Microsystems</title>
@@ -5483,6 +5885,7 @@ http://www.sciencedirect.com/science/journal/01419331
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Minerals Engineering</title>
@@ -5498,6 +5901,7 @@ http://www.sciencedirect.com/science/journal/08926875
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Nano Today</title>
@@ -5513,6 +5917,7 @@ http://www.sciencedirect.com/science/journal/17480132
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">17</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Nanomedicine: Nanotechnology, Biology and Medicine</title>
@@ -5529,6 +5934,7 @@ http://www.sciencedirect.com/science/journal/15499634
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>NDT & E International</title>
@@ -5546,6 +5952,7 @@ http://www.sciencedirect.com/science/journal/09638695
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">46</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Neural Networks</title>
@@ -5562,6 +5969,7 @@ http://www.sciencedirect.com/science/journal/08936080
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Neurocomputing</title>
@@ -5577,6 +5985,7 @@ http://www.sciencedirect.com/science/journal/09252312
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>New Astronomy</title>
@@ -5592,6 +6001,7 @@ http://www.sciencedirect.com/science/journal/13841076
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">31</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -5610,6 +6020,7 @@ http://www.sciencedirect.com/science/journal/0362546X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Nonlinear Analysis: Hybrid Systems</title>
@@ -5625,6 +6036,7 @@ http://www.sciencedirect.com/science/journal/1751570X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">0</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Nonlinear Analysis: Real World Applications</title>
@@ -5641,6 +6053,7 @@ http://www.sciencedirect.com/science/journal/14681218
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Nuclear Engineering and Design</title>
@@ -5658,6 +6071,7 @@ http://www.sciencedirect.com/science/journal/00295493
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -5675,6 +6089,7 @@ http://www.sciencedirect.com/science/journal/01689002
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">19</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -5692,6 +6107,7 @@ http://www.sciencedirect.com/science/journal/0168583X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">17</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Nuclear Physics A</title>
@@ -5707,6 +6123,7 @@ http://www.sciencedirect.com/science/journal/03759474
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Nuclear Physics B</title>
@@ -5722,6 +6139,7 @@ http://www.sciencedirect.com/science/journal/05503213
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Nuclear and Particle Physics Proceedings</title>
@@ -5737,6 +6155,7 @@ http://www.sciencedirect.com/science/journal/24056014
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Ocean & Coastal Management</title>
@@ -5752,6 +6171,7 @@ http://www.sciencedirect.com/science/journal/09645691
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">71</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Ocean Engineering</title>
@@ -5767,6 +6187,7 @@ http://www.sciencedirect.com/science/journal/00298018
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Ocean Modelling</title>
@@ -5782,6 +6203,7 @@ http://www.sciencedirect.com/science/journal/14635003
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Operations Research Letters</title>
@@ -5799,6 +6221,7 @@ http://www.sciencedirect.com/science/journal/01676377
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Optical Fiber Technology</title>
@@ -5814,6 +6237,7 @@ http://www.sciencedirect.com/science/journal/10685200
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Optical Materials</title>
@@ -5829,6 +6253,7 @@ http://www.sciencedirect.com/science/journal/09253467
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Optical Switching and Networking</title>
@@ -5844,6 +6269,7 @@ http://www.sciencedirect.com/science/journal/15734277
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Optics & Laser Technology</title>
@@ -5859,6 +6285,7 @@ http://www.sciencedirect.com/science/journal/00303992
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">26</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Optics and Lasers in Engineering</title>
@@ -5874,6 +6301,7 @@ http://www.sciencedirect.com/science/journal/01438166
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">35</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Optics Communications</title>
@@ -5889,6 +6317,7 @@ http://www.sciencedirect.com/science/journal/00304018
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -5906,6 +6335,7 @@ http://www.sciencedirect.com/science/journal/00304026
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Ore Geology Reviews</title>
@@ -5921,6 +6351,7 @@ http://www.sciencedirect.com/science/journal/01691368
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Organic Electronics</title>
@@ -5937,6 +6368,7 @@ http://www.sciencedirect.com/science/journal/15661199
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Organic Geochemistry</title>
@@ -5953,6 +6385,7 @@ http://www.sciencedirect.com/science/journal/01466380
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Palaeogeography, Palaeoclimatology, Palaeoecology</title>
@@ -5968,6 +6401,7 @@ http://www.sciencedirect.com/science/journal/00310182
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Palaeoworld</title>
@@ -5983,6 +6417,7 @@ http://www.sciencedirect.com/science/journal/1871174X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Parallel Computing</title>
@@ -5998,6 +6433,7 @@ http://www.sciencedirect.com/science/journal/01678191
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Pattern Recognition</title>
@@ -6013,6 +6449,7 @@ http://www.sciencedirect.com/science/journal/00313203
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Pattern Recognition Letters</title>
@@ -6028,6 +6465,7 @@ http://www.sciencedirect.com/science/journal/01678655
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Performance Evaluation</title>
@@ -6043,6 +6481,7 @@ http://www.sciencedirect.com/science/journal/01665316
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Pervasive and Mobile Computing</title>
@@ -6059,6 +6498,7 @@ http://www.sciencedirect.com/science/journal/15741192
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -6076,6 +6516,7 @@ http://www.sciencedirect.com/science/journal/15694410
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -6094,6 +6535,7 @@ http://www.sciencedirect.com/science/journal/03784371
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Physica B: Condensed Matter</title>
@@ -6110,6 +6552,7 @@ http://www.sciencedirect.com/science/journal/09214526
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Physica C: Superconductivity</title>
@@ -6125,6 +6568,7 @@ http://www.sciencedirect.com/science/journal/09214534
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">0</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Physica D: Nonlinear Phenomena</title>
@@ -6140,6 +6584,7 @@ http://www.sciencedirect.com/science/journal/01672789
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -6157,6 +6602,7 @@ http://www.sciencedirect.com/science/journal/13869477
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Physics and Chemistry of the Earth, Parts A/B/C</title>
@@ -6174,6 +6620,7 @@ http://www.sciencedirect.com/science/journal/14747065
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Physics Letters A</title>
@@ -6189,6 +6636,7 @@ http://www.sciencedirect.com/science/journal/03759601
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">15</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Physics Letters B</title>
@@ -6204,6 +6652,7 @@ http://www.sciencedirect.com/science/journal/03702693
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Physics of Life Reviews</title>
@@ -6221,6 +6670,7 @@ http://www.sciencedirect.com/science/journal/15710645
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Physics of the Earth and Planetary Interiors</title>
@@ -6236,6 +6686,7 @@ http://www.sciencedirect.com/science/journal/00319201
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">25</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Phytochemistry</title>
@@ -6251,6 +6702,7 @@ http://www.sciencedirect.com/science/journal/00319422
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Planetary and Space Science</title>
@@ -6266,6 +6718,7 @@ http://www.sciencedirect.com/science/journal/00320633
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">97</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Polar Science</title>
@@ -6283,6 +6736,7 @@ http://www.sciencedirect.com/science/journal/18739652
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Polyhedron</title>
@@ -6298,6 +6752,7 @@ http://www.sciencedirect.com/science/journal/02775387
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Polymer</title>
@@ -6314,6 +6769,7 @@ http://www.sciencedirect.com/science/journal/00323861
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">112</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Polymer Degradation and Stability</title>
@@ -6329,6 +6785,7 @@ http://www.sciencedirect.com/science/journal/01413910
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">23</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Polymer Testing</title>
@@ -6344,6 +6801,7 @@ http://www.sciencedirect.com/science/journal/01429418
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">56</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Powder Technology</title>
@@ -6359,6 +6817,7 @@ http://www.sciencedirect.com/science/journal/00325910
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Precambrian Research</title>
@@ -6374,6 +6833,7 @@ http://www.sciencedirect.com/science/journal/03019268
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Precision Engineering</title>
@@ -6391,6 +6851,7 @@ http://www.sciencedirect.com/science/journal/01416359
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">33</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Probabilistic Engineering Mechanics</title>
@@ -6406,6 +6867,7 @@ http://www.sciencedirect.com/science/journal/02668920
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Progress in Materials Science</title>
@@ -6422,6 +6884,7 @@ http://www.sciencedirect.com/science/journal/00796425
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">23</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Progress in Nuclear Energy</title>
@@ -6437,6 +6900,7 @@ http://www.sciencedirect.com/science/journal/01491970
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">0</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Progress in Oceanography</title>
@@ -6452,6 +6916,7 @@ http://www.sciencedirect.com/science/journal/00796611
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Progress in Organic Coatings</title>
@@ -6468,6 +6933,7 @@ http://www.sciencedirect.com/science/journal/03009440
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Psychology of Sport and Exercise</title>
@@ -6483,6 +6949,7 @@ http://www.sciencedirect.com/science/journal/14690292
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Psychosomatics</title>
@@ -6497,6 +6964,7 @@ http://www.sciencedirect.com/science/journal/14690292
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Public Health</title>
@@ -6512,6 +6980,7 @@ http://www.sciencedirect.com/science/journal/00333506
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">21</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Quaternary Geochronology</title>
@@ -6527,6 +6996,7 @@ http://www.sciencedirect.com/science/journal/18711014
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Quaternary International</title>
@@ -6542,6 +7012,7 @@ http://www.sciencedirect.com/science/journal/10406182
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Quaternary Science Reviews</title>
@@ -6558,6 +7029,7 @@ http://www.sciencedirect.com/science/journal/02773791
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">18</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Radiation Measurements</title>
@@ -6573,6 +7045,7 @@ http://www.sciencedirect.com/science/journal/13504487
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Radiation Physics and Chemistry</title>
@@ -6588,6 +7061,7 @@ http://www.sciencedirect.com/science/journal/0969806X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Reactive and Functional Polymers</title>
@@ -6603,6 +7077,7 @@ http://www.sciencedirect.com/science/journal/13815148
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Reliability Engineering & System Safety</title>
@@ -6618,6 +7093,7 @@ http://www.sciencedirect.com/science/journal/09518320
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">15</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Remote Sensing of Environment</title>
@@ -6633,6 +7109,7 @@ http://www.sciencedirect.com/science/journal/00344257
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">71</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Renewable Energy</title>
@@ -6648,6 +7125,7 @@ http://www.sciencedirect.com/science/journal/09601481
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">18</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Resources, Conservation and Recycling</title>
@@ -6665,6 +7143,7 @@ http://www.sciencedirect.com/science/journal/09213449
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">23</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Resources Policy</title>
@@ -6680,6 +7159,7 @@ http://www.sciencedirect.com/science/journal/03014207
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Review of Palaeobotany and Palynology</title>
@@ -6695,6 +7175,7 @@ http://www.sciencedirect.com/science/journal/00346667
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Revista da Associação Médica Brasileira</title>
@@ -6710,6 +7191,7 @@ http://www.elsevier.com/journals/revista-da-associacao-medica-brasileira/0104-42
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">0</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Robotics and Autonomous Systems</title>
@@ -6725,6 +7207,7 @@ http://www.sciencedirect.com/science/journal/09218890
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">12</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Robotics and Computer-Integrated Manufacturing</title>
@@ -6741,6 +7224,7 @@ http://www.sciencedirect.com/science/journal/07365845
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Russian Geology and Geophysics</title>
@@ -6756,6 +7240,7 @@ http://www.sciencedirect.com/science/journal/10687971
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Safety Science</title>
@@ -6772,6 +7257,7 @@ http://www.sciencedirect.com/science/journal/09257535
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">25</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Science & Justice</title>
@@ -6788,6 +7274,7 @@ http://www.sciencedirect.com/science/journal/13550306
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">371</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Science of Computer Programming</title>
@@ -6803,6 +7290,7 @@ http://www.sciencedirect.com/science/journal/01676423
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Scripta Materialia</title>
@@ -6818,6 +7306,7 @@ http://www.sciencedirect.com/science/journal/13596462
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">40</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Sedimentary Geology</title>
@@ -6833,6 +7322,7 @@ http://www.sciencedirect.com/science/journal/00370738
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">19</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Sensors and Actuators A: Physical</title>
@@ -6848,6 +7338,7 @@ http://www.sciencedirect.com/science/journal/09244247
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">120</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Sensors and Actuators B: Chemical</title>
@@ -6863,6 +7354,7 @@ http://www.sciencedirect.com/science/journal/09254005
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">15</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Separation and Purification Technology</title>
@@ -6878,6 +7370,7 @@ http://www.sciencedirect.com/science/journal/13835866
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">10</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Signal Processing</title>
@@ -6893,6 +7386,7 @@ http://www.sciencedirect.com/science/journal/01651684
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Signal Processing: Image Communication</title>
@@ -6908,6 +7402,7 @@ http://www.sciencedirect.com/science/journal/09235965
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Simulation Modelling Practice and Theory</title>
@@ -6923,6 +7418,7 @@ http://www.sciencedirect.com/science/journal/1569190X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Soil Dynamics and Earthquake Engineering</title>
@@ -6939,6 +7435,7 @@ http://www.sciencedirect.com/science/journal/02677261
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">12</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Solar Energy</title>
@@ -6955,6 +7452,7 @@ http://www.sciencedirect.com/science/journal/0038092X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">19</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Solar Energy Materials and Solar Cells</title>
@@ -6972,6 +7470,7 @@ http://www.sciencedirect.com/science/journal/09270248
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">28</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Solid State Communications</title>
@@ -6987,6 +7486,7 @@ http://www.sciencedirect.com/science/journal/00381098
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Solid State Ionics</title>
@@ -7002,6 +7502,7 @@ http://www.sciencedirect.com/science/journal/01672738
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Solid State Nuclear Magnetic Resonance</title>
@@ -7020,6 +7521,7 @@ http://www.sciencedirect.com/science/journal/09262040
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Solid State Sciences</title>
@@ -7035,6 +7537,7 @@ http://www.sciencedirect.com/science/journal/12932558
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Solid-State Electronics</title>
@@ -7050,6 +7553,7 @@ http://www.sciencedirect.com/science/journal/00381101
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -7068,6 +7572,7 @@ http://www.sciencedirect.com/science/journal/13861425
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">17</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Spectrochimica Acta Part B: Atomic Spectroscopy</title>
@@ -7084,6 +7589,7 @@ http://www.sciencedirect.com/science/journal/05848547
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">17</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Speech Communication</title>
@@ -7099,6 +7605,7 @@ http://www.sciencedirect.com/science/journal/01676393
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">12</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Statistical Methodology</title>
@@ -7115,6 +7622,7 @@ http://www.sciencedirect.com/science/journal/15723127
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">8</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Statistics & Probability Letters</title>
@@ -7130,6 +7638,7 @@ http://www.sciencedirect.com/science/journal/01677152
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Stochastic Processes and their Applications</title>
@@ -7147,6 +7656,7 @@ http://www.sciencedirect.com/science/journal/03044149
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Structural Safety</title>
@@ -7162,6 +7672,7 @@ http://www.sciencedirect.com/science/journal/01674730
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -7180,6 +7691,7 @@ http://www.sciencedirect.com/science/journal/13552198
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Superlattices and Microstructures</title>
@@ -7195,6 +7707,7 @@ http://www.sciencedirect.com/science/journal/07496036
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Surface and Coatings Technology</title>
@@ -7210,6 +7723,7 @@ http://www.sciencedirect.com/science/journal/02578972
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">31</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Surface Science</title>
@@ -7225,6 +7739,7 @@ http://www.sciencedirect.com/science/journal/00396028
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">20</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Synthetic Metals</title>
@@ -7241,6 +7756,7 @@ http://www.sciencedirect.com/science/journal/03796779
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">4</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Systems & Control Letters</title>
@@ -7256,6 +7772,7 @@ http://www.sciencedirect.com/science/journal/01676911
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Talanta</title>
@@ -7271,6 +7788,7 @@ http://www.sciencedirect.com/science/journal/00399140
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">13</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Tectonophysics</title>
@@ -7286,6 +7804,7 @@ http://www.sciencedirect.com/science/journal/00401951
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">21</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Telecommunications Policy</title>
@@ -7301,6 +7820,7 @@ http://www.sciencedirect.com/science/journal/03085961
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">22</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Telematics and Informatics</title>
@@ -7316,6 +7836,7 @@ http://www.sciencedirect.com/science/journal/07365853
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Tetrahedron</title>
@@ -7331,6 +7852,7 @@ http://www.sciencedirect.com/science/journal/00404020
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">94</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Tetrahedron: Asymmetry</title>
@@ -7346,6 +7868,7 @@ http://www.sciencedirect.com/science/journal/09574166
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">33</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Tetrahedron Letters</title>
@@ -7361,6 +7884,7 @@ http://www.sciencedirect.com/science/journal/00404039
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">111</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>American Journal of the Medical Sciences</title>
@@ -7376,6 +7900,7 @@ http://www.journals.elsevier.com/the-american-journal-of-the-medical-sciences/
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">14</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>The Internet and Higher Education</title>
@@ -7392,6 +7917,7 @@ http://www.sciencedirect.com/science/journal/10967516
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">38</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Academic Librarianship</title>
@@ -7407,6 +7933,7 @@ http://www.sciencedirect.com/science/journal/00991333
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">796</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Chemical Thermodynamics</title>
@@ -7423,6 +7950,7 @@ http://www.sciencedirect.com/science/journal/00219614
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Mathematical Behavior</title>
@@ -7438,6 +7966,7 @@ http://www.sciencedirect.com/science/journal/07323123
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Journal of Strategic Information Systems</title>
@@ -7453,6 +7982,7 @@ http://www.sciencedirect.com/science/journal/09638687
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Theoretical and Applied Fracture Mechanics</title>
@@ -7468,6 +7998,7 @@ http://www.sciencedirect.com/science/journal/01678442
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Theoretical Computer Science</title>
@@ -7483,6 +8014,7 @@ http://www.sciencedirect.com/science/journal/03043975
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">6</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Thermochimica Acta</title>
@@ -7498,6 +8030,7 @@ http://www.sciencedirect.com/science/journal/00406031
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Thin Solid Films</title>
@@ -7514,6 +8047,7 @@ http://www.sciencedirect.com/science/journal/00406090
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Thin-Walled Structures</title>
@@ -7529,6 +8063,7 @@ http://www.sciencedirect.com/science/journal/02638231
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Transactions of Nonferrous Metals Society of China</title>
@@ -7544,6 +8079,7 @@ http://www.sciencedirect.com/science/journal/10036326
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">9</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -7561,6 +8097,7 @@ http://www.sciencedirect.com/science/journal/09658564
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">31</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>
@@ -7578,6 +8115,7 @@ http://www.sciencedirect.com/science/journal/0968090X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">20</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Tribology International</title>
@@ -7594,6 +8132,7 @@ http://www.sciencedirect.com/science/journal/0301679X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">41</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Tunnelling and Underground Space Technology</title>
@@ -7609,6 +8148,7 @@ http://www.sciencedirect.com/science/journal/08867798
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Ultramicroscopy</title>
@@ -7624,6 +8164,7 @@ http://www.sciencedirect.com/science/journal/03043991
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">2</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Ultrasonics</title>
@@ -7639,6 +8180,7 @@ http://www.sciencedirect.com/science/journal/0041624X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Ultrasonics Sonochemistry</title>
@@ -7655,6 +8197,7 @@ http://www.sciencedirect.com/science/journal/13504177
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">3</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Perspectives in Science</title>
@@ -7671,6 +8214,7 @@ http://www.journals.elsevier.com/perspectives-in-science/
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">1</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Vacuum</title>
@@ -7686,6 +8230,7 @@ http://www.sciencedirect.com/science/journal/0042207X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">12</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Vibrational Spectroscopy</title>
@@ -7703,6 +8248,7 @@ http://www.sciencedirect.com/science/journal/09242031
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Vision Research</title>
@@ -7718,6 +8264,7 @@ http://www.sciencedirect.com/science/journal/00426989
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">16</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Current Opinion in Chemical Engineering</title>
@@ -7733,6 +8280,7 @@ http://www.sciencedirect.com/science/journal/22113398
 </subjects>
 <rights>Open Access</rights>
 <rating ratingSystem="JournalTOCs">7</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Waste Management</title>
@@ -7750,6 +8298,7 @@ http://www.sciencedirect.com/science/journal/0956053X
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">11</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Water Research</title>
@@ -7765,6 +8314,7 @@ http://www.sciencedirect.com/science/journal/00431354
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">51</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Wave Motion</title>
@@ -7780,6 +8330,7 @@ http://www.sciencedirect.com/science/journal/01652125
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">5</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 <journal>
 <title>Wear</title>
@@ -7795,5 +8346,6 @@ http://www.sciencedirect.com/science/journal/00431648
 </subjects>
 <rights>Hybrid</rights>
 <rating ratingSystem="JournalTOCs">28</rating>
+<articles-per-year> </articles-per-year>
 </journal>
 </journals>
