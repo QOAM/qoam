@@ -11,21 +11,21 @@ namespace QOAM.Core.Migrations
                 "dbo.ArticlesPerYear",
                 c => new
                     {
-                        JournalId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
+                        JournalId = c.Int(nullable: false),
                         Year = c.Int(nullable: false),
                         NumberOfArticles = c.Int(nullable: false),
-                        Id = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.JournalId)
-                .ForeignKey("dbo.Journals", t => t.Id, cascadeDelete: true)
-                .Index(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Journals", t => t.JournalId, cascadeDelete: true)
+                .Index(t => t.JournalId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.ArticlesPerYear", "Id", "dbo.Journals");
-            DropIndex("dbo.ArticlesPerYear", new[] { "Id" });
+            DropForeignKey("dbo.ArticlesPerYear", "JournalId", "dbo.Journals");
+            DropIndex("dbo.ArticlesPerYear", new[] { "JournalId" });
             DropTable("dbo.ArticlesPerYear");
         }
     }

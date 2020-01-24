@@ -62,7 +62,7 @@
             modelBuilder.Entity<ListPrice>().HasKey(lp => lp.JournalId).HasRequired(lp => lp.Journal).WithOptional(j => j.ListPrice).WillCascadeOnDelete(true);
             modelBuilder.Entity<ArticlesPerYear>()
                 .ToTable("ArticlesPerYear")
-                .HasKey(apy => apy.JournalId).HasRequired(apy => apy.Journal).WithMany(j => j.ArticlesPerYear).WillCascadeOnDelete(true);
+                .HasRequired(apy => apy.Journal).WithMany(u => u.ArticlesPerYear).WillCascadeOnDelete(true);
         }
     }
 }

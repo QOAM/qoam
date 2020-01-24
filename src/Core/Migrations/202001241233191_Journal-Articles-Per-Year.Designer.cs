@@ -13,7 +13,7 @@ namespace QOAM.Core.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202001231830576_Journal-Articles-Per-Year"; }
+            get { return "202001241233191_Journal-Articles-Per-Year"; }
         }
         
         string IMigrationMetadata.Source
