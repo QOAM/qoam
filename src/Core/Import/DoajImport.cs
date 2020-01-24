@@ -21,11 +21,11 @@
 
         private readonly DoajSettings doajSettings;
 
-        private static readonly CsvConfiguration CsvConfiguration = new CsvConfiguration
+        private static readonly CsvConfiguration CsvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture)
                                                                         {
                                                                             HasHeaderRecord = true,
                                                                             Delimiter = ",",
-                                                                            TrimFields = true,
+                                                                            TrimOptions = TrimOptions.Trim,
                                                                             CultureInfo = new CultureInfo("en-US"),
                                                                             Encoding = Encoding
         };
@@ -59,14 +59,14 @@
             Logger.Info("Parsing journals...");
             
             using (var streamReader = new StringReader(csv))
-            using (var csvParser = new CsvParser(streamReader, CsvConfiguration))
-            using (var csvReader = new CsvReader(csvParser))
-            {
-                csvReader.Configuration.RegisterClassMap<DoajImportRecordMap>();
-                var importRecords = csvReader.GetRecords<DoajImportRecord>().ToList();
+                using (var csvParser = new CsvParser(streamReader, CsvConfiguration))
+                    using (var csvReader = new CsvReader(csvParser))
+                    {
+                        csvReader.Configuration.RegisterClassMap<DoajImportRecordMap>();
+                        var importRecords = csvReader.GetRecords<DoajImportRecord>().ToList();
 
-                return importRecords.Select(i => i.ToJournal()).Where(j => j.IsValid()).ToList();
-            }
+                        return importRecords.Select(i => i.ToJournal()).Where(j => j.IsValid()).ToList();
+                    }
         }
     }
 }

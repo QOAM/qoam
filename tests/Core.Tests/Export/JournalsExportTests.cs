@@ -15,7 +15,7 @@
 
     public class JournalsExportTests
     {
-        const string ExpectedJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;DateAdded;Country;Publisher;DataSource;Languages;Subjects;DoajSeal;ArticlesIn2019\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 09:52:51;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;0\r\n16:9;1603-5194;http://www.16-9.dk;2-10-2013 09:52:51;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;Yes;19\r\n";
+        const string ExpectedJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;Data source;Languages;Subjects;DOAJ Seal;Articles in 2019\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 09:52:51;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;0\r\n16:9;1603-5194;http://www.16-9.dk;2-10-2013 09:52:51;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;Yes;19\r\n";
 
         [Fact]
         public void ConstructorWithNullJournalRepositoryThrowsArgumentNullException()

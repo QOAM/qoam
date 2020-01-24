@@ -1,4 +1,6 @@
-﻿using QOAM.Core.Import;
+﻿using System.Globalization;
+using NPOI.SS.Formula.Functions;
+using QOAM.Core.Import;
 
 namespace QOAM.Core.Export
 {
@@ -9,13 +11,13 @@ namespace QOAM.Core.Export
     using CsvHelper;
     using CsvHelper.Configuration;
 
-    using QOAM.Core.Repositories;
+    using Repositories;
 
     using Validation;
 
     public class JournalsExport
     {
-        private readonly IJournalRepository journalRepository;
+        readonly IJournalRepository journalRepository;
 
         public JournalsExport(IJournalRepository journalRepository)
         {
@@ -99,13 +101,13 @@ namespace QOAM.Core.Export
                                         });
         }
 
-        private static CsvConfiguration CreateCsvConfiguration()
+        static CsvConfiguration CreateCsvConfiguration()
         {
-            return new CsvConfiguration
+            return new CsvConfiguration(CultureInfo.CurrentCulture)
             {
                 HasHeaderRecord = true,
                 Delimiter = ";",
-                TrimFields = true
+                TrimOptions = TrimOptions.Trim
             };
         }
     }
