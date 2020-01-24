@@ -30,10 +30,10 @@ namespace QOAM.Website.Tests.Controllers
     public class AdminControllerTests
     {
 
-        private const string ExpectedJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;DataSource;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films\r\nACIMED;1024-9435;http://scielo.sld.cu/scielo.php?script=sci_serial&pid=1024-9435&lng=en&nrm=iso;2/10/2013 9:52:51 AM;Cuba;Centro Nacional de Información de Ciencias Médicas;Ulrich;<none indicated>;health sciences\r\n";
-        private const string ExpectedOpenAccessJournalsCsv = "Title;ISSN;Link;DateAdded;Country;Publisher;DataSource;Languages;Subjects\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films\r\n";
-        private const string OldIssn = "2296-0597";
-        private const string NewIssn = "1603-5194";
+        const string ExpectedJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;DateAdded;Country;Publisher;DataSource;Languages;Subjects;DoajSeal;ArticlesIn2019\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;0\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;No;0\r\nACIMED;1024-9435;http://scielo.sld.cu/scielo.php?script=sci_serial&pid=1024-9435&lng=en&nrm=iso;2/10/2013 9:52:51 AM;Cuba;Centro Nacional de Información de Ciencias Médicas;Ulrich;<none indicated>;health sciences;Yes;19\r\n";
+        const string ExpectedOpenAccessJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;DateAdded;Country;Publisher;DataSource;Languages;Subjects;DoajSeal;ArticlesIn2019\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;0\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;No;0\r\n";
+        const string OldIssn = "2296-0597";
+        const string NewIssn = "1603-5194";
 
         Mock<IBulkImporter<JournalRelatedLink>> _bulkImporter;
         Mock<IBulkImporter<Institution>> _institutionImporter;
@@ -1163,7 +1163,13 @@ namespace QOAM.Website.Tests.Controllers
                         }
                     },
                     DataSource = "Ulrich",
-                    OpenAccess = false
+                    OpenAccess = false,
+                    DoajSeal = true,
+                    ArticlesPerYear = new List<ArticlesPerYear>
+                    {
+                        new ArticlesPerYear { Year = 2020, NumberOfArticles = 2 },
+                        new ArticlesPerYear { Year = 2019, NumberOfArticles = 19 }
+                    }
                 }
             };
         }

@@ -13,5 +13,7 @@
         public string DataSource { get; set; }
         public string Languages { get; set; }
         public string Subjects { get; set; }
+        public string DoajSeal { get; set; }
+        public int ArticlesIn2019 { get; set; }
     }
 }

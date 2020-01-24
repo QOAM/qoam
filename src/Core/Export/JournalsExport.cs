@@ -67,17 +67,21 @@ namespace QOAM.Core.Export
             Requires.NotNull(stream, nameof(stream));
 
             using (var streamWriter = new StreamWriter(stream))
-            using (var csvWriter = new CsvWriter(streamWriter, CreateCsvConfiguration()))
-            {
-                csvWriter.WriteRecords(journals);
-            }
+                using (var csvWriter = new CsvWriter(streamWriter, CreateCsvConfiguration()))
+                {
+                    // Add delimiter to help excel open the file in a readable format
+                    csvWriter.WriteField($"sep={csvWriter.Configuration.Delimiter}");
+                    csvWriter.NextRecord();
+
+                    csvWriter.WriteRecords(journals);
+                }
         }
 
         IEnumerable<ExportJournal> GetExportJournals(bool openAccessOnly)
         {
             var journals = openAccessOnly ? 
-                journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects) : 
-                this.journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects);
+                journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear) : 
+                journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear);
 
             return journals.Select(j => new ExportJournal
                                         {
@@ -90,6 +94,8 @@ namespace QOAM.Core.Export
                                             DataSource = j.DataSource,
                                             Languages = string.Join(",", j.Languages.Select(l => l.Name)),
                                             Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
+                                            DoajSeal = j.DoajSeal ? "Yes" : "No",
+                                            ArticlesIn2019 = j.ArticlesPerYear.SingleOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0
                                         });
         }
 
@@ -99,7 +105,7 @@ namespace QOAM.Core.Export
             {
                 HasHeaderRecord = true,
                 Delimiter = ";",
-                TrimFields = true,
+                TrimFields = true
             };
         }
     }
