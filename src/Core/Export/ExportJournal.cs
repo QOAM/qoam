@@ -19,6 +19,10 @@ namespace QOAM.Core.Export
         public string Subjects { get; set; }
         [Name("DOAJ Seal")]
         public string DoajSeal { get; set; }
+
+        [Name("Score cards in 2019")]
+        public int ScoreCardsIn2019 { get; set; }
+
         [Name("Articles in 2019")]
         public int ArticlesIn2019 { get; set; }
     }

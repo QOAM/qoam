@@ -57,6 +57,9 @@ namespace QOAM.Core.Export
                     DataSource = j.DataSource,
                     Languages = string.Join(",", j.Languages.Select(l => l.Name)),
                     Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
+                    DoajSeal = j.DoajSeal ? "Yes" : "No",
+                    ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
+                    ArticlesIn2019 = j.ArticlesPerYear.SingleOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0
                 })
                 .ToList();
 
@@ -81,9 +84,9 @@ namespace QOAM.Core.Export
 
         IEnumerable<ExportJournal> GetExportJournals(bool openAccessOnly)
         {
-            var journals = openAccessOnly ? 
-                journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear) : 
-                journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear);
+            var journals = openAccessOnly
+                ? journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards)
+                : journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards);
 
             return journals.Select(j => new ExportJournal
                                         {
@@ -97,6 +100,7 @@ namespace QOAM.Core.Export
                                             Languages = string.Join(",", j.Languages.Select(l => l.Name)),
                                             Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
                                             DoajSeal = j.DoajSeal ? "Yes" : "No",
+                                            ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
                                             ArticlesIn2019 = j.ArticlesPerYear.SingleOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0
                                         });
         }
