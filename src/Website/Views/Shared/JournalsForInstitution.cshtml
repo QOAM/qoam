@@ -1,0 +1,70 @@
+﻿@using System.Web.Optimization
+@using QOAM.Website.ViewModels.Journals
+@model JournalsForInstitutionViewModel
+
+@{
+    ViewBag.Title = string.Format("Journals for {0}", Model.Institution.Name);
+}
+
+<div class="container main">
+    <div class="row side">
+        <div class="col-md-3">
+            <div id="filter" class="well">
+                <h3>
+                    Filter
+                    <img src="~/Images/zoom.png" class="pull-right clearfix" style="height: 30px;" />
+                </h3>
+
+                @using (Html.BeginForm("JournalsForInstitution", "Journals", FormMethod.Get, new { id = "search-form" }))
+                {
+                    <fieldset>
+                        <legend>Search</legend>
+
+                        @Html.Partial("_JournalFilters")
+
+                        <p>
+                            <input id="submitForm" type="submit" value="Search" class="btn btn-primary" />
+                        </p>
+                    </fieldset>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>@Model.Institution.Name</h3>
+                </div>
+            </div>
+            @Html.Partial("_JournalTableFilters")
+            @(Model.Journals.Any() ? Html.Partial("_Journals") : Html.Partial("_EmptyText"))
+        </div>
+    </div>
+</div>
+
+@section stylesheets
+{
+    @Styles.Render("~/styles/typeahead")
+    @Styles.Render("~/styles/chosen")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/typeahead")
+    @Scripts.Render("~/scripts/chosen")
+
+    @Html.Partial("_FormScripts")
+
+    <script type="text/javascript">
+        $(function () {
+            var journalsController = new JournalsController();
+            journalsController.index(
+                '@Url.Action("Titles", null, null, this.Request.Url.Scheme)',
+                '@Url.Action("Issns", null, null, this.Request.Url.Scheme)',
+                '@Url.Action("Publishers", null, null, this.Request.Url.Scheme)',
+                '@Url.Action("Subjects", null, null, this.Request.Url.Scheme)',
+                '@Url.Action("Languages", null, null, this.Request.Url.Scheme)'
+            );
+        });
+    </script>
+}

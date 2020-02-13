@@ -12,14 +12,6 @@
     using Core.Helpers;
     using Core.Repositories.Filters;
 
-    public interface IPagedJournalListViewModel
-    {
-        JournalFilter ToFilter();
-        UserJournalFilter ToFilter(int userProfileId);
-        RouteValueDictionary ToRouteValueDictionary(int page);
-        IPagedList<Journal> Journals { get; set; }
-    }
-
     public class IndexViewModel : PagedViewModel, IPagedJournalListViewModel
     {
         public const int MinimumScoreValue = 0;
@@ -149,5 +141,7 @@
 
             return routeValueDictionary;
         }
+
+        public virtual string JournalLinkCssClass(int journalId) => "";
     }
 }
