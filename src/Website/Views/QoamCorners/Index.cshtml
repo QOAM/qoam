@@ -48,7 +48,38 @@
         </div>
 
         <div class="col-md-9">
-            @(!Model.Corner.HasValue ? Html.Partial("_EmptyText") : Html.Partial("_Journals"))
+            @if (Model.Corner.HasValue)
+            {
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>@Model.CornerName</h3>
+                    </div>
+                    <div class="col-md-8 text-right" style="margin-top: 25px;">
+                        @if (Model.CornerAdmin != null)
+                        {
+                            if (Model.IsCornerAdmin)
+                            {
+                                @Html.ActionLink("Discontinue this corner", "DeleteCorner", new { id = Model.Corner }, new { id = "discard-corner", @class = "btn btn-danger" })
+                            }
+                            else
+                            {
+                                <em class="corner-admin-name">
+                                    <span>For updating this corner please contact the cornerAdmin </span>
+                                    @Html.ActionLink(Model.CornerAdmin.DisplayName, "Details", "Profiles", new { id = Model.CornerAdmin.Id }, null)
+                                </em>
+                            }
+
+                        }
+                    </div>
+                </div>
+                
+                @Html.Partial("_JournalTableFilters")
+                @Html.Partial("_Journals")
+            }
+            else
+            {
+                @Html.Partial("_EmptyText")
+            }
         </div>
     </div>
 </div>

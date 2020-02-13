@@ -1,43 +1,7 @@
 ﻿@using PagedList.Mvc
-@using QOAM.Core
 @using QOAM.Website.Helpers
-@model QOAM.Website.ViewModels.QoamCorners.CornersIndexViewModel
+@model QOAM.Website.ViewModels.Journals.IPagedJournalListViewModel
 
-<div class="row">
-    <div class="col-md-4">
-        <h3>@Model.CornerName</h3>
-    </div>
-    <div class="col-md-8 text-right" style="margin-top: 25px;">
-        @if (Model.CornerAdmin != null)
-        {
-            if (Model.IsCornerAdmin)
-            {
-                @Html.ActionLink("Discontinue this corner", "DeleteCorner", new { id = Model.Corner }, new { id = "discard-corner", @class = "btn btn-danger"})
-            }
-            else {
-                <em class="corner-admin-name">
-                    <span>For updating this corner please contact the cornerAdmin </span>
-                    @Html.ActionLink(Model.CornerAdmin.DisplayName, "Details", "Profiles", new { id = Model.CornerAdmin.Id }, null)
-                </em>
-            }
-
-        }
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-9">
-        <h3>
-            @Model.Journals.TotalItemCount journals; <a id="open-access-filter" href="#">fully OA</a>; <a id="no-fee-filter" href="#">no-fee</a>; <a id="institutional-discount-filter" href="#">discounted</a>; 
-            <a id="plan-s-filter" href="#">Plan S</a>
-            <a href="/tools#plan-s" title="Building a Plan S-compliant journal list in QOAM" target="_blank" style="font-size: 16px; vertical-align: super">
-                <span class="glyphicon glyphicon-info-sign"></span>
-            </a>
-        </h3>
-    </div>
-    <div class="col-md-3 text-right topmargin">
-        @*<div class="topmargin">@Sorting.JournalSortMenu(Model.SortBy, Model.Sort)</div>*@
-    </div>
-</div>
 
 @{ const string title = "Italicized titles indicate institutional discounts.\nPlease click the tab 'Price information' on the detail page of the journal to find out more."; }
 
@@ -49,18 +13,18 @@
             </th>
             <th class="publisher">Publisher</th>
             <th class="quality-indicator">
-                Quality<br/>indicator
-                <a class="quality-indicator-icon" href="@Url.Action("About", "Home" )#quality-indicator" title="About: Quality indicator">
+                Quality<br />indicator
+                <a class="quality-indicator-icon" href="@Url.Action("About", "Home")#quality-indicator" title="About: Quality indicator">
                     <span class="glyphicon glyphicon-info-sign"></span>
                 </a>
             </th>
             @*<th><a class="help-window" href="@Url.Action("JournalScoreCard", "Home")#valuationjournalscorecard">Average score</a></th>*@
             @*<th>
-                Scored By
-                <a href="#" title="Max 100 most recent scores">
-                    <span class="glyphicon glyphicon-info-sign"></span>
-                </a>
-            </th>*@
+                    Scored By
+                    <a href="#" title="Max 100 most recent scores">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </a>
+                </th>*@
             <th class="swot">
                 <a href="@Url.Action("JournalScoreCard", "Home")#swot">Submit</a>&nbsp;&nbsp;
                 <a href="/tools#submission" title="Including a submission button in QOAM" target="_blank">
@@ -78,13 +42,13 @@
                 <td class="text-center">@Scores.RobustScore(journal)</td>
                 @*<td class="text-center">@Scores.AverageScore(journal.ValuationScore, Model.SortBy)</td>*@
                 @*<td class="text-center">
-                    @if (journal.NumberOfValuationReviewers > 100) {
-                        <span>100</span>
-                        
-                    } else {
-                        @(journal.NumberOfValuationReviewers)
-                    }
-                </td>*@
+                        @if (journal.NumberOfValuationReviewers > 100) {
+                            <span>100</span>
+
+                        } else {
+                            @(journal.NumberOfValuationReviewers)
+                        }
+                    </td>*@
                 @*<td class="verdict-@journal.Swot">*@
                 <td class="verdict-strong">
                     @if (!string.IsNullOrWhiteSpace(journal.SubmissionPageLink))
@@ -102,6 +66,7 @@
     </tbody>
 </table>
 @Html.PagedListPager(Model.Journals, page => Url.Action("Index", Model.ToRouteValueDictionary(page)), Html.PagedListRenderOptions())
+
 
 
 @Html.Partial("_DiscardCornerModal")

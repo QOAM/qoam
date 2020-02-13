@@ -68,6 +68,16 @@ namespace QOAM.Website.Controllers
             return View("JournalsIndex", model);
         }
 
+        [HttpGet, Route("for-institution/{institutionId:int}")]
+        public ViewResult JournalsForInstitution(int institutionId, IndexViewModel model)
+        {
+            model.Disciplines = _subjectRepository.Active.Where(s => !string.IsNullOrWhiteSpace(s.Name)).ToList().ToSelectListItems("Search by discipline"); //NormalizeSearchStrings(model.Disciplines);
+            model.Languages = NormalizeSearchStrings(model.Languages);
+            model.Journals = journalRepository.Search(model.ToFilter());
+
+            return View("JournalsIndex", model);
+        }
+
         [HttpGet, Route("{id:int}")]
         public ActionResult Details(int id)
         {
