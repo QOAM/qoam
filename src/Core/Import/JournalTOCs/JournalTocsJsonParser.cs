@@ -9,7 +9,11 @@ namespace QOAM.Core.Import.JournalTOCs
         public IList<Journal> Parse(IEnumerable<string> data)
         {
             var journals = new List<Journal>();
-            var json = Json.Decode(data.First().Replace("prism:", "").Replace("dc:", "").Replace("e-issn", "eIssn"));
+            var json = Json.Decode(data.First()
+                .Replace("prism:", "")
+                .Replace("dc:", "")
+                .Replace("e-issn", "eIssn")
+                .Replace("articles-per-year", "articlesPerYear"));
 
             if ((json.status != null && json.status == "error") || json.rss?.channel?.items == null)
                 return journals;
@@ -36,7 +40,8 @@ namespace QOAM.Core.Import.JournalTOCs
                 Subjects = ParseSubjects(data),
                 OpenAccess = data.rights == "Open Access",
                 Country = new Country { Name = "" },
-                DataSource = JournalsImportSource.JournalTOCs.ToString()
+                DataSource = JournalsImportSource.JournalTOCs.ToString(),
+                ArticlesPerYear = ParseArticlesPerYear(data)
             };
         }
 
@@ -50,6 +55,27 @@ namespace QOAM.Core.Import.JournalTOCs
         List<Subject> ParseSubjects(dynamic data)
         {
             return data.subject == null ? new List<Subject>() : new List<Subject> { new Subject { Name = data.subject } };
+        }
+
+        List<ArticlesPerYear> ParseArticlesPerYear(dynamic data)
+        {
+            var list = new List<ArticlesPerYear>();
+
+            if(data.articlesPerYear == null)
+                return list;
+
+            foreach (var entry in data.articlesPerYear)
+            {
+                var perYear = new ArticlesPerYear
+                {
+                    Year = entry[0],
+                    NumberOfArticles = entry[1]
+                };
+
+                list.Add(perYear);
+            }
+
+            return list.Where(a => a.Year >= 2019).ToList();
         }
 
         #endregion

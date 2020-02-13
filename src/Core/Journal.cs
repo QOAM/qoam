@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace QOAM.Core
+﻿namespace QOAM.Core
 {
     using System;
     using System.Collections.Generic;
@@ -24,6 +22,7 @@ namespace QOAM.Core
             ProcessScore = new JournalCategoryScore();
             ValuationScore = new JournalCategoryScore();
             CornerJournals = new List<CornerJournal>();
+            ArticlesPerYear = new List<ArticlesPerYear>();
         }
 
         [Required]
@@ -112,5 +111,6 @@ namespace QOAM.Core
         public virtual ICollection<ValuationScoreCard> ValuationScoreCards { get; set; }
         public virtual ICollection<Subject> Subjects { get; set; }
         public virtual ICollection<CornerJournal> CornerJournals { get; set; }
+        public virtual ICollection<ArticlesPerYear> ArticlesPerYear { get; set; }
     }
 }

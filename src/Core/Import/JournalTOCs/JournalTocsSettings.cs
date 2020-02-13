@@ -53,7 +53,7 @@ namespace QOAM.Core.Import.JournalTOCs
             set { this[TestPropertyName] = value; }
         }
 
-        public string AllJournalsRequestUrl => $"{BaseUrl}{AllJournalsEndpoint}?sui={Sui}&ip={Ip}&test={Test}";
+        public string AllJournalsRequestUrl => $"{BaseUrl}{AllJournalsEndpoint}?sui={Sui}&ip={Ip}&test={Test}&checkArchive=doaj";
         public string ByIssnRequestUrl => $"{BaseUrl}{ByIssnEndpoint}?sui={Sui}&ip={Ip}&test={Test}&checkArchive=doaj";
     }
 }

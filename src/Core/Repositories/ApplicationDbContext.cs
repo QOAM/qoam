@@ -38,6 +38,7 @@
         public DbSet<Corner> Corners { get; set; }
         public DbSet<CornerJournal> CornerJournals { get; set; }
         public DbSet<CornerVisitor> CornerVisitors { get; set; }
+        public DbSet<ArticlesPerYear> ArticlesPerYear { get; set; }
 
         public ObjectContext ObjectContext => ((IObjectContextAdapter)this).ObjectContext;
 
@@ -46,19 +47,22 @@
             modelBuilder.ComplexType<BaseScoreCardScore>();
             modelBuilder.ComplexType<ValuationScoreCardScore>();
 
-            modelBuilder.Entity<BaseScoreCard>().HasRequired(s => s.UserProfile).WithMany(u => u.BaseScoreCards).WillCascadeOnDelete(true);
-            modelBuilder.Entity<BaseScoreCard>().HasRequired(s => s.Journal).WithMany(u => u.BaseScoreCards).WillCascadeOnDelete(true);
-            modelBuilder.Entity<BaseJournalPrice>().HasRequired(s => s.UserProfile).WithMany(u => u.JournalPrices).WillCascadeOnDelete(true);
-            modelBuilder.Entity<BaseJournalPrice>().HasRequired(s => s.Journal).WithMany(u => u.BaseJournalPrices).WillCascadeOnDelete(true);
-            modelBuilder.Entity<ValuationScoreCard>().HasRequired(s => s.UserProfile).WithMany(u => u.ValuationScoreCards).WillCascadeOnDelete(true);
-            modelBuilder.Entity<ValuationScoreCard>().HasRequired(s => s.Journal).WithMany(u => u.ValuationScoreCards).WillCascadeOnDelete(true);
-            modelBuilder.Entity<InstitutionJournal>().HasRequired(s => s.UserProfile).WithMany(u => u.InstitutionJournalPrices).WillCascadeOnDelete(true);
-            modelBuilder.Entity<InstitutionJournal>().HasRequired(s => s.Journal).WithMany(u => u.InstitutionJournalPrices).WillCascadeOnDelete(true);
-            modelBuilder.Entity<CornerJournal>().HasRequired(s => s.Journal).WithMany(u => u.CornerJournals).WillCascadeOnDelete(true);
-            modelBuilder.Entity<CornerJournal>().HasRequired(s => s.Corner).WithMany(u => u.CornerJournals).WillCascadeOnDelete(true);
-            modelBuilder.Entity<CornerVisitor>().HasRequired(s => s.Corner).WithMany(u => u.CornerVisitors).WillCascadeOnDelete(true);
+            modelBuilder.Entity<BaseScoreCard>().HasRequired(bsc => bsc.UserProfile).WithMany(u => u.BaseScoreCards).WillCascadeOnDelete(true);
+            modelBuilder.Entity<BaseScoreCard>().HasRequired(bsc => bsc.Journal).WithMany(u => u.BaseScoreCards).WillCascadeOnDelete(true);
+            modelBuilder.Entity<BaseJournalPrice>().HasRequired(bjp => bjp.UserProfile).WithMany(u => u.JournalPrices).WillCascadeOnDelete(true);
+            modelBuilder.Entity<BaseJournalPrice>().HasRequired(bjp => bjp.Journal).WithMany(u => u.BaseJournalPrices).WillCascadeOnDelete(true);
+            modelBuilder.Entity<ValuationScoreCard>().HasRequired(vsc => vsc.UserProfile).WithMany(u => u.ValuationScoreCards).WillCascadeOnDelete(true);
+            modelBuilder.Entity<ValuationScoreCard>().HasRequired(vsc => vsc.Journal).WithMany(u => u.ValuationScoreCards).WillCascadeOnDelete(true);
+            modelBuilder.Entity<InstitutionJournal>().HasRequired(ij => ij.UserProfile).WithMany(u => u.InstitutionJournalPrices).WillCascadeOnDelete(true);
+            modelBuilder.Entity<InstitutionJournal>().HasRequired(ij => ij.Journal).WithMany(u => u.InstitutionJournalPrices).WillCascadeOnDelete(true);
+            modelBuilder.Entity<CornerJournal>().HasRequired(cj => cj.Journal).WithMany(u => u.CornerJournals).WillCascadeOnDelete(true);
+            modelBuilder.Entity<CornerJournal>().HasRequired(cj => cj.Corner).WithMany(u => u.CornerJournals).WillCascadeOnDelete(true);
+            modelBuilder.Entity<CornerVisitor>().HasRequired(cj => cj.Corner).WithMany(u => u.CornerVisitors).WillCascadeOnDelete(true);
             modelBuilder.Entity<Corner>().HasRequired(s => s.CornerAdmin).WithMany(u => u.Corners).WillCascadeOnDelete(true);
             modelBuilder.Entity<ListPrice>().HasKey(lp => lp.JournalId).HasRequired(lp => lp.Journal).WithOptional(j => j.ListPrice).WillCascadeOnDelete(true);
+            modelBuilder.Entity<ArticlesPerYear>()
+                .ToTable("ArticlesPerYear")
+                .HasRequired(apy => apy.Journal).WithMany(u => u.ArticlesPerYear).WillCascadeOnDelete(true);
         }
     }
 }

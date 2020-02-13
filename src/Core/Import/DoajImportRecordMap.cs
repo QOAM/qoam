@@ -5,9 +5,9 @@ namespace QOAM.Core.Import
     using CsvHelper;
     using CsvHelper.Configuration;
 
-    public sealed class DoajImportRecordMap : CsvClassMap<DoajImportRecord>
+    public sealed class DoajImportRecordMap : ClassMap<DoajImportRecord>
     {
-        private static readonly HashSet<string> HasSealTrueValues = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase) {"yes", "true"};
+        static readonly HashSet<string> HasSealTrueValues = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase) {"yes", "true"};
 
         public DoajImportRecordMap()
         {
@@ -21,12 +21,12 @@ namespace QOAM.Core.Import
             Map(m => m.HasSeal).ConvertUsing(MapHasSeal);
         }
 
-        private static bool MapHasSeal(ICsvReaderRow r)
+        static bool MapHasSeal(IReaderRow r)
         {
             return HasSealTrueValues.Contains(r.GetField("DOAJ Seal") ?? string.Empty);
         }
 
-        private static string MapISSN(ICsvReaderRow r)
+        static string MapISSN(IReaderRow r)
         {
             var eissn = r.GetField("Journal EISSN (online version)");
             return string.IsNullOrWhiteSpace(eissn) ? r.GetField("Journal ISSN (print version)") : eissn;

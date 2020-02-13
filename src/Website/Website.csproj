@@ -823,18 +823,28 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\documents\15-10-03-Flyer-OA-week-2015.pdf" />
     <None Include="ConnectionStrings.test.config" />
-    <None Include="ConnectionStrings.config" />
+    <None Include="ConnectionStrings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Contact.test.config" />
-    <None Include="Contact.config" />
+    <None Include="Contact.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Content\documents\16-06-21-QOAM-sustainability-plan.pdf" />
     <Content Include="Content\documents\Concise-comparison-of-QOAM-and-the-Dutch-Journal-Browser.pdf" />
     <Content Include="Content\documents\Price-per-article.pdf" />
     <None Include="MachineKey.test.config" />
     <None Include="NLog.Website.test.config" />
     <None Include="Smtp.test.config" />
-    <None Include="Smtp.config" />
-    <None Include="MachineKey.config" />
-    <None Include="NLog.Website.config" />
+    <None Include="Smtp.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MachineKey.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="NLog.Website.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Scripts\bootstrap.min.js.map">
       <DependentUpon>bootstrap.min.js</DependentUpon>
     </Content>
@@ -982,7 +992,9 @@
     <Content Include="Views\Admin\SubmissionLinksImportSuccessful.cshtml" />
     <Content Include="Views\Admin\Statistics.cshtml" />
     <None Include="Ulrichs.test.config" />
-    <None Include="Ulrichs.config" />
+    <None Include="Ulrichs.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Views\Admin\JournalTocsImported.cshtml" />
     <Content Include="Views\QoamCorners\CreateCorner.cshtml" />
     <Content Include="Views\QoamCorners\CornersImported.cshtml" />
@@ -1196,7 +1208,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50268</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44300</IISUrl>
+          <IISUrl>https://localhost:44301</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

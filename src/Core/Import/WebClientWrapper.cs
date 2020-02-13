@@ -14,9 +14,21 @@ namespace QOAM.Core.Import
     {
         IWebClient Create();
     }
-    
+
     public class SystemWebClient : WebClient, IWebClient
-    { }
+    {
+        protected override WebRequest GetWebRequest(Uri address)
+        {
+            var webRequest = base.GetWebRequest(address);
+
+            if (webRequest == null)
+                return null;
+
+            webRequest.Timeout = 5 * 60 * 1000;
+            
+            return webRequest;
+        }
+    }
 
     
     public class SystemWebClientFactory : IWebClientFactory

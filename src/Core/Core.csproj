@@ -54,9 +54,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CsvHelper, Version=13.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CsvHelper.13.0.0\lib\net45\CsvHelper.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -118,6 +117,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.Helpers.dll</HintPath>
@@ -159,6 +161,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticlesPerYear.cs" />
     <Compile Include="BaseQuestionScore.cs" />
     <Compile Include="BlockedISSN.cs" />
     <Compile Include="Cleanup\CleanupMode.cs" />
@@ -322,6 +325,10 @@
     <Compile Include="Migrations\201911051152159_PlanS-Property-in-Journal.Designer.cs">
       <DependentUpon>201911051152159_PlanS-Property-in-Journal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001241233191_Journal-Articles-Per-Year.cs" />
+    <Compile Include="Migrations\202001241233191_Journal-Articles-Per-Year.Designer.cs">
+      <DependentUpon>202001241233191_Journal-Articles-Per-Year.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\CornerRepository.cs" />
@@ -382,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911051152159_PlanS-Property-in-Journal.resx">
       <DependentUpon>201911051152159_PlanS-Property-in-Journal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001241233191_Journal-Articles-Per-Year.resx">
+      <DependentUpon>202001241233191_Journal-Articles-Per-Year.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />

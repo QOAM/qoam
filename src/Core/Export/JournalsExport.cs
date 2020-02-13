@@ -1,4 +1,6 @@
-﻿using QOAM.Core.Import;
+﻿using System.Globalization;
+using NPOI.SS.Formula.Functions;
+using QOAM.Core.Import;
 
 namespace QOAM.Core.Export
 {
@@ -9,13 +11,13 @@ namespace QOAM.Core.Export
     using CsvHelper;
     using CsvHelper.Configuration;
 
-    using QOAM.Core.Repositories;
+    using Repositories;
 
     using Validation;
 
     public class JournalsExport
     {
-        private readonly IJournalRepository journalRepository;
+        readonly IJournalRepository journalRepository;
 
         public JournalsExport(IJournalRepository journalRepository)
         {
@@ -55,6 +57,9 @@ namespace QOAM.Core.Export
                     DataSource = j.DataSource,
                     Languages = string.Join(",", j.Languages.Select(l => l.Name)),
                     Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
+                    DoajSeal = j.DoajSeal ? "Yes" : "No",
+                    ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
+                    ArticlesIn2019 = j.ArticlesPerYear.SingleOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0
                 })
                 .ToList();
 
@@ -67,17 +72,21 @@ namespace QOAM.Core.Export
             Requires.NotNull(stream, nameof(stream));
 
             using (var streamWriter = new StreamWriter(stream))
-            using (var csvWriter = new CsvWriter(streamWriter, CreateCsvConfiguration()))
-            {
-                csvWriter.WriteRecords(journals);
-            }
+                using (var csvWriter = new CsvWriter(streamWriter, CreateCsvConfiguration()))
+                {
+                    // Add delimiter to help excel open the file in a readable format
+                    csvWriter.WriteField($"sep={csvWriter.Configuration.Delimiter}");
+                    csvWriter.NextRecord();
+
+                    csvWriter.WriteRecords(journals);
+                }
         }
 
         IEnumerable<ExportJournal> GetExportJournals(bool openAccessOnly)
         {
-            var journals = openAccessOnly ? 
-                journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects) : 
-                this.journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects);
+            var journals = openAccessOnly
+                ? journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards)
+                : journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards);
 
             return journals.Select(j => new ExportJournal
                                         {
@@ -90,16 +99,19 @@ namespace QOAM.Core.Export
                                             DataSource = j.DataSource,
                                             Languages = string.Join(",", j.Languages.Select(l => l.Name)),
                                             Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
+                                            DoajSeal = j.DoajSeal ? "Yes" : "No",
+                                            ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
+                                            ArticlesIn2019 = j.ArticlesPerYear.SingleOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0
                                         });
         }
 
-        private static CsvConfiguration CreateCsvConfiguration()
+        static CsvConfiguration CreateCsvConfiguration()
         {
-            return new CsvConfiguration
+            return new CsvConfiguration(CultureInfo.CurrentCulture)
             {
                 HasHeaderRecord = true,
                 Delimiter = ";",
-                TrimFields = true,
+                TrimOptions = TrimOptions.Trim
             };
         }
     }
