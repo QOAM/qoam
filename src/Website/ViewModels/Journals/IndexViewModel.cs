@@ -59,7 +59,7 @@
         public bool? InstitutionalDiscounts { get; set; }
         public bool? InJournalTOCs { get; set; }
         public bool? NoFee { get; set; }
-        public bool? PlanS { get; set; }
+        public virtual bool? PlanS { get; set; }
 
         public JournalFilter ToFilter()
         {

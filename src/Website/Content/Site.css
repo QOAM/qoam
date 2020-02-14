@@ -773,8 +773,12 @@ a:hover.filter-enabled {
     background-color: #2a6496;
 }
 
-a.orange {
+.orange {
     color: orangered !important;
+}
+
+.blue {
+    color: #428bca;
 }
 
 .gly-spin {
@@ -826,4 +830,8 @@ a.orange {
     font-style: italic !important;
     font-size: 14px !important;
     padding: 7px !important;
+}
+
+.large-font {
+    font-size: 2em;
 }

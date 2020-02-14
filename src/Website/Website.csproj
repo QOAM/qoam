@@ -288,6 +288,7 @@
     <Compile Include="ViewModels\Admin\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\Admin\JournalRelatedLinksImportedViewModel.cs" />
     <Compile Include="ViewModels\Api\ScoreCard\SerializableScoreCard.cs" />
+    <Compile Include="ViewModels\Home\DemoPlanSViewModel.cs" />
     <Compile Include="ViewModels\IFileUploadViewModel.cs" />
     <Compile Include="ViewModels\Import\JournalTocsImportViewModel.cs" />
     <Compile Include="ViewModels\Import\MoveScoreCardsViewModel.cs" />
@@ -1015,6 +1016,8 @@
     <Content Include="Views\Journals\ListPricesImportSuccessful.cshtml" />
     <Content Include="Views\Shared\_JournalTableFilters.cshtml" />
     <Content Include="Views\Shared\JournalsForInstitution.cshtml" />
+    <Content Include="Views\Home\DemoPlanS.cshtml" />
+    <Content Include="Views\Shared\_LayoutDemoPlanS.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

@@ -2,6 +2,7 @@
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
+using QOAM.Core;
 using QOAM.Website.Helpers;
 using QOAM.Website.Models;
 using Validation;

@@ -9,6 +9,7 @@ namespace QOAM.Website.ViewModels.Journals
         public Institution Institution { get; set; }
         public List<int> InstitutionJournalIds { get; set; }
         public List<int> OpenAccessJournalIds { get; set;}
+        public override bool? PlanS => true;
 
         public override string JournalLinkCssClass(int journalId)
         {

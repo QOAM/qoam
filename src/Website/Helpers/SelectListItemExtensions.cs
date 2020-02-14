@@ -35,7 +35,7 @@
         {
             Requires.NotNull(institutions, nameof(institutions));
 
-            return institutions.Select(ToSelectListItem).ToOptionalSelectListItems(optionalText);
+            return institutions.Select(ToSelectListItem).OrderBy(i => i.Text).ToOptionalSelectListItems(optionalText);
         }
 
         public static IEnumerable<SelectListItem> ToSelectListItems(this IList<Corner> corners, string optionalText)
@@ -62,7 +62,7 @@
 
         private static SelectListItem ToSelectListItem(this Institution institution)
         {
-            return new SelectListItem { Text = institution.Name, Value = institution.Id.ToString(CultureInfo.InvariantCulture) };
+            return new SelectListItem { Text = institution.Name.Trim(), Value = institution.Id.ToString(CultureInfo.InvariantCulture) };
         }
 
         private static SelectListItem ToSelectListItem(this Corner corner)

@@ -1,0 +1,84 @@
+﻿@using System.Web.Optimization
+@model QOAM.Website.ViewModels.Home.DemoPlanSViewModel
+@{
+    ViewBag.Title = "Demo Plan S";
+    Layout = "~/Views/Shared/_LayoutDemoPlanS.cshtml";
+}
+
+<div class="container main">
+    <div class="row mt-20">
+        <div class="col-md-12 mt-20">
+            <p class="large-font">
+                Dear author,
+                <br /><br />
+                If your research is (co-)financed by a funder listed below you must retain the copyright of your published results and guarantee that they will be openly and freely available with
+                a <a href="https://wellcome.ac.uk/funding/guidance/creative-commons-attribution-licence-cc" target="_blank">CCBY license</a> upon the day of publication.
+            </p>
+            <p class="large-font">
+                These conditions will be met, and your publication fee will be waived by your funder, if you publish your article in a <span class="blue">blue journal</span> on the Plan S list.
+                The <span class="orange">orange journals</span> on this list allow you to self-archive the accepted version of your article with no embargo in a repository.
+                This also meets your funder’s conditions.
+            </p>
+            <p class="large-font">
+                The colours on the list are institution specific. Upon choosing your institution below, your institutional Plan S list appears.
+            </p>
+            <p>
+                @using (Html.BeginForm("DemoPlanS", "Home"))
+                {
+                    @Html.DropDownListFor(m => m.InstitutionId, Model.Institutions, new { @class = "form-control", onchange = "this.form.submit();" })
+                }
+            </p>
+        </div>
+    </div>
+    <div class="row mt-20">
+        <div class="col-md-12 mt-20">
+            <table class="table borderless">
+                <tbody>
+                <tr>
+                    <td>
+                        Funder X<sub>1</sub>, X<sub>2</sub>, ..
+                    </td>
+                    <td>
+                        Requirements apply to all articles published after 1 January 2020
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Funder Y<sub>1</sub>
+                    </td>
+                    <td>
+                        Requirements apply to articles resulting from grants awarded after 1 January 2021
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Funder Z
+                    </td>
+                    <td>
+                        Requirements apply …
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section stylesheets
+{
+    @Styles.Render("~/styles/chosen")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/chosen")
+
+    @Html.Partial("_FormScripts")
+
+    <script type="text/javascript">
+        $(function () {
+            var homeController = new HomeController();
+            homeController.demoPlanS();
+        });
+    </script>
+}
