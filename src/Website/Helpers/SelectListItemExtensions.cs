@@ -35,7 +35,7 @@
         {
             Requires.NotNull(institutions, nameof(institutions));
 
-            return institutions.Select(ToSelectListItem).OrderBy(i => i.Text).ToOptionalSelectListItems(optionalText);
+            return institutions.Select(ToSelectListItem).ToOptionalSelectListItems(optionalText);
         }
 
         public static IEnumerable<SelectListItem> ToSelectListItems(this IList<Corner> corners, string optionalText)

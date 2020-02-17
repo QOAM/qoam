@@ -23,6 +23,11 @@
             }
         }
 
+        public IList<Institution> WithLicenses()
+        {
+            return DbContext.Institutions.Where(i => i.InstitutionJournalPrices.Any()).OrderBy(i => i.Name).ToList();
+        }
+
         public IQueryable<string> Names(string query)
         {
             if (string.IsNullOrWhiteSpace(query))

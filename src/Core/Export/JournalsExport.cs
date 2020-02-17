@@ -101,7 +101,7 @@ namespace QOAM.Core.Export
                                             Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
                                             DoajSeal = j.DoajSeal ? "Yes" : "No",
                                             ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
-                                            ArticlesIn2019 = j.ArticlesPerYear.SingleOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0
+                                            ArticlesIn2019 = j.ArticlesPerYear.FirstOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0
                                         });
         }
 
