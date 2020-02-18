@@ -24,7 +24,7 @@ namespace QOAM.Core.Import
             if (webRequest == null)
                 return null;
 
-            webRequest.Timeout = 5 * 60 * 1000;
+            webRequest.Timeout = 25 * 60 * 1000;
             
             return webRequest;
         }
