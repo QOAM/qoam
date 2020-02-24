@@ -13,7 +13,7 @@ namespace QOAM.Website.ViewModels.Journals
 
         public override string JournalLinkCssClass(int journalId)
         {
-            return InstitutionJournalIds.Contains(journalId) || OpenAccessJournalIds.Contains(journalId) ? "" : "orange";
+            return InstitutionJournalIds.Contains(journalId) || OpenAccessJournalIds.Contains(journalId) ? "" : "green";
         }
     }
 }

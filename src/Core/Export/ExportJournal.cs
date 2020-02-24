@@ -25,5 +25,8 @@ namespace QOAM.Core.Export
 
         [Name("Articles in 2019")]
         public int ArticlesIn2019 { get; set; }
+
+        [Name("Plan S Journal")]
+        public string PlanSJournal { get; set; }
     }
 }

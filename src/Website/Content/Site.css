@@ -781,6 +781,10 @@ a:hover.filter-enabled {
     color: orangered !important;
 }
 
+.green {
+    color: green !important;
+}
+
 .blue {
     color: #428bca;
 }
