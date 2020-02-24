@@ -75,7 +75,10 @@ namespace QOAM.Website.Controllers
             model.Languages = NormalizeSearchStrings(model.Languages);
             model.Journals = journalRepository.Search(model.ToFilter());
             model.Institution = institutionRepository.Find(institutionId);
-            model.InstitutionJournalIds = institutionJournalRepository.FindAll(new InstitutionJournalFilter { InstitutionId = institutionId }).Select(ij => ij.JournalId).ToList();
+            model.InstitutionJournalIds = institutionJournalRepository
+                .FindAll(new InstitutionJournalFilter { InstitutionId = institutionId, AssociatedInstitutionIds = model.Institution.CorrespondingInstitutionIds })
+                .Select(ij => ij.JournalId)
+                .ToList();
             model.OpenAccessJournalIds = model.Journals.Where(j => j.OpenAccess).Select(j => j.Id).ToList();
 
             return View(model);

@@ -120,7 +120,7 @@ namespace QOAM.Website.Controllers
         {
             var model = new DemoPlanSViewModel
             {
-                Institutions = _institutionRepository.WithLicenses().ToSelectListItems("<Select institution>")
+                Institutions = _institutionRepository.All.ToSelectListItems("<Select institution>")
             };
 
             return View(model);

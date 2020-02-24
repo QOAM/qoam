@@ -284,7 +284,9 @@
     <Compile Include="ViewModels\Account\ChangeEmailViewModel.cs" />
     <Compile Include="ViewModels\Admin\ImportJournalRelatedLinksViewModel.cs" />
     <Compile Include="ViewModels\Admin\InstitutionsAddedViewModel.cs" />
+    <Compile Include="ViewModels\Admin\InstitutionsAssociatedViewModel.cs" />
     <Compile Include="ViewModels\Admin\RemoveCornerViewModel.cs" />
+    <Compile Include="ViewModels\Admin\SelectInstitutionsViewModel.cs" />
     <Compile Include="ViewModels\Admin\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\Admin\JournalRelatedLinksImportedViewModel.cs" />
     <Compile Include="ViewModels\Api\ScoreCard\SerializableScoreCard.cs" />
@@ -1018,6 +1020,8 @@
     <Content Include="Views\Shared\JournalsForInstitution.cshtml" />
     <Content Include="Views\Home\DemoPlanS.cshtml" />
     <Content Include="Views\Shared\_LayoutDemoPlanS.cshtml" />
+    <Content Include="Views\Admin\CorrespondingDomains.cshtml" />
+    <Content Include="Views\Admin\CorrespondingDomainsAssociated.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

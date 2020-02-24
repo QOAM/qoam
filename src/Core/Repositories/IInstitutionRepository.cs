@@ -1,4 +1,7 @@
-﻿namespace QOAM.Core.Repositories
+﻿using System;
+using System.Linq.Expressions;
+
+namespace QOAM.Core.Repositories
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -28,5 +31,6 @@
         bool DomainExists(string domain);
         Institution FindByExactHost(MailAddress mailAddress);
         IList<Institution> WithLicenses();
+        List<Institution> FindWhere(Expression<Func<Institution, bool>> whereClause);
     }
 }

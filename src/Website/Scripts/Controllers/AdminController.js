@@ -51,6 +51,12 @@
         });
     };
 
+    AdminController.prototype.correspondingDomains = function() {
+        $("#SelectedIntitutionIds").chosen({
+            search_contains: true
+        });
+    }
+
     function processNextBatch() {
         $.post(path + "/processNextBatch").done(function(response) {
             if (response)

@@ -32,6 +32,10 @@ a.list-group-item {
     color: #428bca !important;
 }
 
+a.list-group-item.active {
+    color: #fff !important;
+}
+
 ul.inline > li {
     display: inline !important;
     float: left;

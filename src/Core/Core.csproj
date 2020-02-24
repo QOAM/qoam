@@ -329,6 +329,10 @@
     <Compile Include="Migrations\202001241233191_Journal-Articles-Per-Year.Designer.cs">
       <DependentUpon>202001241233191_Journal-Articles-Per-Year.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002241318101_CorrespondingDomains-on-Institution.cs" />
+    <Compile Include="Migrations\202002241318101_CorrespondingDomains-on-Institution.Designer.cs">
+      <DependentUpon>202002241318101_CorrespondingDomains-on-Institution.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\CornerRepository.cs" />
@@ -392,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001241233191_Journal-Articles-Per-Year.resx">
       <DependentUpon>202001241233191_Journal-Articles-Per-Year.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002241318101_CorrespondingDomains-on-Institution.resx">
+      <DependentUpon>202002241318101_CorrespondingDomains-on-Institution.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />

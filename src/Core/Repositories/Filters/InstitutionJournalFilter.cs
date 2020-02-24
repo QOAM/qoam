@@ -1,4 +1,6 @@
-﻿namespace QOAM.Core.Repositories.Filters
+﻿using System.Collections.Generic;
+
+namespace QOAM.Core.Repositories.Filters
 {
     public class InstitutionJournalFilter
     {
@@ -8,5 +10,6 @@
         public int? PublisherId { get; set; }
         public int? PageNumber { get; set; }
         public int? PageSize { get; set; }
+        public List<int> AssociatedInstitutionIds { get; set; } = new List<int>();
     }
 }

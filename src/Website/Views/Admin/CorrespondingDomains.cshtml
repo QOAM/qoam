@@ -1,0 +1,52 @@
+﻿@using System.Web.Optimization
+@model QOAM.Website.ViewModels.Admin.SelectInstitutionsViewModel
+
+@{
+    ViewBag.Title = "Associate Corresponding Domains";
+}
+
+<div class="container main">
+
+    <h2>@ViewBag.Title</h2>
+
+    <p>
+        Select the institutions that you'd like to associate. Note that the drop down menu allows you to select multiple institutions.
+    </p>
+    <br />
+    @using (Html.BeginForm("CorrespondingDomains", "Admin"))
+    {
+        @Html.AntiForgeryToken()
+
+        <fieldset>
+            <legend>@ViewBag.Title</legend>
+
+            @Html.ListBoxFor(m => m.SelectedIntitutionIds, Model.Institutions, new { @class = "form-control" })
+
+            <div class="row bottommargin topmargin">
+                <div class="col-xs-12">
+                    <input type="submit" value="Associate Institutions" class="btn btn-primary" />
+                </div>
+            </div>
+        </fieldset>
+    }
+</div>
+
+@section stylesheets
+{
+    @Styles.Render("~/styles/chosen")
+}
+
+
+@section scripts
+{
+    @Html.Partial("_FormScripts")
+    @Scripts.Render("~/scripts/chosen")
+
+    <script type="text/javascript">
+        $(function () {
+            var adminController = new AdminController();
+            adminController.correspondingDomains();
+        });
+    </script>
+}
+

@@ -1,0 +1,18 @@
+﻿@model QOAM.Website.ViewModels.Admin.InstitutionsAssociatedViewModel
+
+@{
+    ViewBag.Title = "Journals import result";
+}
+
+<div class="container main">
+    <p>
+        The following institutions have been associated
+    </p>
+
+    <ul>
+        @foreach (var nameAndDomain in Model.NamesAndDomains)
+        {
+            <li>@nameAndDomain.Key (@nameAndDomain.Value)</li>
+        }
+    </ul>
+</div>
