@@ -789,6 +789,10 @@ a:hover.filter-enabled {
     color: #428bca;
 }
 
+.black {
+    color: #000 !important;
+}
+
 .gly-spin {
   -webkit-animation: spin 2s infinite linear;
   -moz-animation: spin 2s infinite linear;

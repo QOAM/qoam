@@ -11,6 +11,6 @@ namespace QOAM.Website.ViewModels.Journals
         UserJournalFilter ToFilter(int userProfileId);
         RouteValueDictionary ToRouteValueDictionary(int page);
         IPagedList<Journal> Journals { get; set; }
-        string JournalLinkCssClass(int journalId);
+        string JournalLinkCssClass(Journal journal);
     }
 }

@@ -142,6 +142,6 @@
             return routeValueDictionary;
         }
 
-        public virtual string JournalLinkCssClass(int journalId) => "";
+        public virtual string JournalLinkCssClass(Journal journal) => "";
     }
 }

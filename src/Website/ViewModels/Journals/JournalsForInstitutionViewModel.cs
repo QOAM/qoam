@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using QOAM.Core;
 
 namespace QOAM.Website.ViewModels.Journals
@@ -9,11 +8,13 @@ namespace QOAM.Website.ViewModels.Journals
         public Institution Institution { get; set; }
         public List<int> InstitutionJournalIds { get; set; }
         public List<int> OpenAccessJournalIds { get; set;}
-        public override bool? PlanS => true;
 
-        public override string JournalLinkCssClass(int journalId)
+        public override string JournalLinkCssClass(Journal journal)
         {
-            return InstitutionJournalIds.Contains(journalId) || OpenAccessJournalIds.Contains(journalId) ? "" : "green";
+            if (!journal.PlanS)
+                return "black";
+
+            return OpenAccessJournalIds.Contains(journal.Id) || InstitutionJournalIds.Contains(journal.Id) ? "" : "green";
         }
     }
 }

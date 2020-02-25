@@ -11,11 +11,18 @@
         else
         {
             <h3>
-                @Model.Journals.TotalItemCount journals; <a id="open-access-filter" href="#">fully OA</a>; <a id="no-fee-filter" href="#">no-fee</a>; 
-                @if (ViewBag.PageId != "journals-journalsforinstitution-page")
+                @Model.Journals.TotalItemCount journals; <a id="open-access-filter" href="#">fully OA</a>; <a id="no-fee-filter" href="#">no-fee</a>;
+                @if (ViewBag.PageId == "journals-journalsforinstitution-page")
                 {
-                    <a id="institutional-discount-filter" href="#">discounted</a>;
                     <a id="plan-s-filter" href="#">Plan S</a>
+                    <a href="/tools#plan-s" title="Building a Plan S-compliant journal list in QOAM" target="_blank" style="font-size: 16px; vertical-align: super">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </a>
+                }
+                else
+                {
+                    <a id="institutional-discount-filter" href="#">discounted</a>@:;
+                    @Html.ActionLink("Plan S", "DemoPlanS", "Home")
                     <a href="/tools#plan-s" title="Building a Plan S-compliant journal list in QOAM" target="_blank" style="font-size: 16px; vertical-align: super">
                         <span class="glyphicon glyphicon-info-sign"></span>
                     </a>

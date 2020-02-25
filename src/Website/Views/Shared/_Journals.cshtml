@@ -37,7 +37,7 @@
         @foreach (var journal in Model.Journals)
         {
             <tr>
-                <td>@Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, new { @class = Model.JournalLinkCssClass(journal.Id) })</td>
+                <td>@Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, new { @class = Model.JournalLinkCssClass(journal) })</td>
                 <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name }, null)</td>
                 <td class="text-center">@Scores.RobustScore(journal)</td>
                 @*<td class="text-center">@Scores.AverageScore(journal.ValuationScore, Model.SortBy)</td>*@
