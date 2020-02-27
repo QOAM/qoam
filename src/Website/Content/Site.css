@@ -32,6 +32,10 @@ a.list-group-item {
     color: #428bca !important;
 }
 
+a.list-group-item.active {
+    color: #fff !important;
+}
+
 ul.inline > li {
     display: inline !important;
     float: left;
@@ -773,6 +777,22 @@ a:hover.filter-enabled {
     background-color: #2a6496;
 }
 
+.orange {
+    color: orangered !important;
+}
+
+.green {
+    color: #00C000 !important;
+}
+
+.blue {
+    color: #428bca;
+}
+
+.black {
+    color: #000 !important;
+}
+
 .gly-spin {
   -webkit-animation: spin 2s infinite linear;
   -moz-animation: spin 2s infinite linear;
@@ -822,4 +842,8 @@ a:hover.filter-enabled {
     font-style: italic !important;
     font-size: 14px !important;
     padding: 7px !important;
+}
+
+.large-font {
+    font-size: 2em;
 }

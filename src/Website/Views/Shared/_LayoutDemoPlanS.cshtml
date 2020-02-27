@@ -1,0 +1,37 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Quality Open Access Market" />
+        <title>@ViewBag.Title - Quality Open Access Market</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="@Request.Url.Scheme://fonts.googleapis.com/css?family=Mate+SC" rel="stylesheet" type="text/css">
+
+        @Styles.Render("~/styles/application")
+
+        @RenderSection("stylesheets", required: false)
+</head>
+    <body id="@ViewBag.PageId">
+        <div id="wrap">
+            @*@Html.Partial("_Header")*@
+            @RenderBody()
+        </div>
+
+        @Html.Partial("_Footer")
+
+        @Scripts.Render("~/scripts/libraries")
+        @Scripts.Render("~/scripts/application")
+    
+        @RenderSection("scripts", required: false)
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="~/Scripts/html5shiv.js"></script>
+            <script src="~/Scripts/respond.min.js"></script>
+        <![endif]-->
+        @Html.Partial("_GoogleAnalytics")
+    </body>
+</html>

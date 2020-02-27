@@ -1,0 +1,38 @@
+﻿<div class="row">
+    <div class="col-md-9">
+        @if (ViewBag.PageId == "myqoam-index-page")
+        {
+            <h3>Saved journals: @Model.Journals.TotalItemCount</h3>
+        }
+        else if (ViewBag.PageId == "journals-notinjournaltocs-page")
+        {
+            <h3>Journals not in JournalTOCs: @Model.Journals.TotalItemCount</h3>
+        }
+        else
+        {
+            <h3>
+                @Model.Journals.TotalItemCount journals; <a id="open-access-filter" href="#">fully OA</a>; <a id="no-fee-filter" href="#">no-fee</a>;
+                @if (ViewBag.PageId == "journals-journalsforinstitution-page")
+                {
+                    <a id="plan-s-filter" href="#">Plan S</a>
+                    <a href="/tools#plan-s" title="Building a Plan S-compliant journal list in QOAM" target="_blank" style="font-size: 16px; vertical-align: super">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </a>
+                }
+                else
+                {
+                    <a id="institutional-discount-filter" href="#">discounted</a>@:;
+                    @Html.ActionLink("Plan S", "DemoPlanS", "Home")
+                    <a href="/tools#plan-s" title="Building a Plan S-compliant journal list in QOAM" target="_blank" style="font-size: 16px; vertical-align: super">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </a>
+                }
+            </h3>
+            @*<h3>@Model.Journals.TotalItemCount journals</h3>*@
+        }
+
+    </div>
+    <div class="col-md-3 text-right topmargin">
+        @*<div class="topmargin">@Sorting.JournalSortMenu(Model.SortBy, Model.Sort)</div>*@
+    </div>
+</div>

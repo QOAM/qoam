@@ -1,4 +1,7 @@
-﻿namespace QOAM.Core.Repositories
+﻿using System.Linq.Expressions;
+using System.Web.Razor.Parser.SyntaxTree;
+
+namespace QOAM.Core.Repositories
 {
     using System;
     using System.Collections.Generic;
@@ -21,6 +24,11 @@
             {
                 return DbContext.Institutions.OrderBy(i => i.Name).ToList();
             }
+        }
+
+        public IList<Institution> WithLicenses()
+        {
+            return DbContext.Institutions.Where(i => i.InstitutionJournalPrices.Any()).OrderBy(i => i.Name).ToList();
         }
 
         public IQueryable<string> Names(string query)
@@ -65,6 +73,10 @@
             return mailAddress.Host.Contains($".{institution?.ShortName}") ? institution : null;
         }
 
+        public List<Institution> FindWhere(Expression<Func<Institution, bool>> whereClause)
+        {
+            return DbContext.Institutions.Where(whereClause).ToList();
+        }
 
         public bool Exists(string name)
         {

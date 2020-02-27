@@ -56,7 +56,9 @@
 
             if (filter.InstitutionId.HasValue)
             {
-                query = query.Where(i => i.InstitutionId == filter.InstitutionId.Value);
+                query = filter.AssociatedInstitutionIds != null && filter.AssociatedInstitutionIds.Any() ? 
+                    query.Where(ij => ij.InstitutionId == filter.InstitutionId.Value || filter.AssociatedInstitutionIds.Contains(ij.InstitutionId)) : 
+                    query.Where(i => i.InstitutionId == filter.InstitutionId.Value);
             }
 
             if (filter.PublisherId.HasValue)

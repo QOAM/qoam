@@ -12,7 +12,7 @@
     using Core.Helpers;
     using Core.Repositories.Filters;
 
-    public class IndexViewModel : PagedViewModel
+    public class IndexViewModel : PagedViewModel, IPagedJournalListViewModel
     {
         public const int MinimumScoreValue = 0;
         public const int MaximumScoreValue = 5;
@@ -59,7 +59,7 @@
         public bool? InstitutionalDiscounts { get; set; }
         public bool? InJournalTOCs { get; set; }
         public bool? NoFee { get; set; }
-        public bool? PlanS { get; set; }
+        public virtual bool? PlanS { get; set; }
 
         public JournalFilter ToFilter()
         {
@@ -141,5 +141,7 @@
 
             return routeValueDictionary;
         }
+
+        public virtual string JournalLinkCssClass(Journal journal) => "";
     }
 }

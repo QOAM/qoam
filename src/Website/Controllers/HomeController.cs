@@ -14,6 +14,7 @@ namespace QOAM.Website.Controllers
         readonly IMailSender _mailSender;
         readonly ContactSettings _contactSettings;
         readonly IJournalRepository _journalRepository;
+        readonly IInstitutionRepository _institutionRepository;
 
         public HomeController(
             IBaseScoreCardRepository baseScoreCardRepository, 
@@ -21,7 +22,7 @@ namespace QOAM.Website.Controllers
             IJournalRepository journalRepository, IMailSender mailSender, 
             ContactSettings contactSettings, 
             IUserProfileRepository userProfileRepository, 
-            IAuthentication authentication)
+            IAuthentication authentication, IInstitutionRepository institutionRepository)
             : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             Requires.NotNull(journalRepository, nameof(journalRepository));
@@ -31,6 +32,7 @@ namespace QOAM.Website.Controllers
             _journalRepository = journalRepository;
             _mailSender = mailSender;
             _contactSettings = contactSettings;
+            _institutionRepository = institutionRepository;
         }
 
         [HttpGet, Route("")]
@@ -111,6 +113,23 @@ namespace QOAM.Website.Controllers
         public ViewResult ContactSent()
         {
             return View();
+        }
+
+        [HttpGet, Route("demo-plan-s")]
+        public ViewResult DemoPlanS()
+        {
+            var model = new DemoPlanSViewModel
+            {
+                Institutions = _institutionRepository.All.ToSelectListItems("<Select institution>")
+            };
+
+            return View(model);
+        }
+
+        [HttpPost, Route("demo-plan-s")]
+        public RedirectToRouteResult DemoPlanS(DemoPlanSViewModel model)
+        {
+            return RedirectToAction("JournalsForInstitution", "Journals", new { model.InstitutionId });
         }
     }
 }

@@ -17,5 +17,11 @@
             template: "<div class='popover custom-popover' role='tooltip'><div class='popover-content'></div></div>"
         });
     };
+
+    HomeController.prototype.demoPlanS = function() {
+        $("#InstitutionId").chosen({
+            search_contains: true
+        });
+    };
     return HomeController;
 })();

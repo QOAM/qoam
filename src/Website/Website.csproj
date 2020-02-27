@@ -284,10 +284,13 @@
     <Compile Include="ViewModels\Account\ChangeEmailViewModel.cs" />
     <Compile Include="ViewModels\Admin\ImportJournalRelatedLinksViewModel.cs" />
     <Compile Include="ViewModels\Admin\InstitutionsAddedViewModel.cs" />
+    <Compile Include="ViewModels\Admin\InstitutionsAssociatedViewModel.cs" />
     <Compile Include="ViewModels\Admin\RemoveCornerViewModel.cs" />
+    <Compile Include="ViewModels\Admin\SelectInstitutionsViewModel.cs" />
     <Compile Include="ViewModels\Admin\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\Admin\JournalRelatedLinksImportedViewModel.cs" />
     <Compile Include="ViewModels\Api\ScoreCard\SerializableScoreCard.cs" />
+    <Compile Include="ViewModels\Home\DemoPlanSViewModel.cs" />
     <Compile Include="ViewModels\IFileUploadViewModel.cs" />
     <Compile Include="ViewModels\Import\JournalTocsImportViewModel.cs" />
     <Compile Include="ViewModels\Import\MoveScoreCardsViewModel.cs" />
@@ -295,6 +298,8 @@
     <Compile Include="ViewModels\Import\RemoveValuationScoreCardViewModel.cs" />
     <Compile Include="ViewModels\Journals\InstitutionalPricesImportedViewModel.cs" />
     <Compile Include="ViewModels\Journals\InstitutionalPricesViewModel.cs" />
+    <Compile Include="ViewModels\Journals\IPagedJournalListViewModel.cs" />
+    <Compile Include="ViewModels\Journals\JournalsForInstitutionViewModel.cs" />
     <Compile Include="ViewModels\Journals\RemoveBlockedIssnViewModel.cs" />
     <Compile Include="Models\RequestValuationEmail.cs" />
     <Compile Include="Resources\RequestValuation.Designer.cs">
@@ -1002,7 +1007,7 @@
     <Content Include="Views\QoamCorners\_EmptyText.cshtml" />
     <Content Include="Views\Shared\_SwotMatrix.cshtml" />
     <Content Include="Views\Shared\_JournalFilters.cshtml" />
-    <Content Include="Views\QoamCorners\_Journals.cshtml" />
+    <Content Include="Views\Shared\_Journals.cshtml" />
     <Content Include="Views\Shared\_DiscardCornerModal.cshtml" />
     <Content Include="Views\Admin\RemoveCorner.cshtml" />
     <Content Include="Views\Admin\DuplicatesRemoved.cshtml" />
@@ -1011,6 +1016,12 @@
     <Content Include="Views\Admin\JournalLabelProcessed.cshtml" />
     <Content Include="Views\Journals\BulkImportListPrices.cshtml" />
     <Content Include="Views\Journals\ListPricesImportSuccessful.cshtml" />
+    <Content Include="Views\Shared\_JournalTableFilters.cshtml" />
+    <Content Include="Views\Shared\JournalsForInstitution.cshtml" />
+    <Content Include="Views\Home\DemoPlanS.cshtml" />
+    <Content Include="Views\Shared\_LayoutDemoPlanS.cshtml" />
+    <Content Include="Views\Admin\CorrespondingDomains.cshtml" />
+    <Content Include="Views\Admin\CorrespondingDomainsAssociated.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

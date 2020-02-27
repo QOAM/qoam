@@ -21,4 +21,4 @@ If everything works out, you should now see the frontpage.
 If you want to run the console applications, follow the same steps but in step 3 replace `Web.config` by `App.config`.
 
 ## License
-[Apache License 2.0](LICENSE.md)
+[MIT License](LICENSE.md)

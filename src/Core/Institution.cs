@@ -1,4 +1,8 @@
-﻿namespace QOAM.Core
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+
+namespace QOAM.Core
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -22,6 +26,15 @@
         public int NumberOfBaseScoreCards { get; set; }
         public int NumberOfValuationScoreCards { get; set; }
         public int NumberOfScoreCards { get; set; }
+
+        public string CorrespondingInstitutions { get; set; }
+
+        [NotMapped]
+        public List<int> CorrespondingInstitutionIds
+        {
+            get => CorrespondingInstitutions?.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            set => CorrespondingInstitutions = value.Select(x => x.ToString()).Aggregate((a, b) => $"{a},{b}");
+        }
 
         public virtual ICollection<InstitutionJournal> InstitutionJournalPrices { get; set; }
         public virtual ICollection<UserProfile> UserProfiles { get; set; }

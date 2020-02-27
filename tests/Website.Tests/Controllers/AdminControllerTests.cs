@@ -30,8 +30,8 @@ namespace QOAM.Website.Tests.Controllers
     public class AdminControllerTests
     {
 
-        const string ExpectedJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;Data source;Languages;Subjects;DOAJ Seal;Score cards in 2019;Articles in 2019\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;1;0\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;No;0;0\r\nACIMED;1024-9435;http://scielo.sld.cu/scielo.php?script=sci_serial&pid=1024-9435&lng=en&nrm=iso;2/10/2013 9:52:51 AM;Cuba;Centro Nacional de Información de Ciencias Médicas;Ulrich;<none indicated>;health sciences;Yes;0;19\r\n";
-        const string ExpectedOpenAccessJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;Data source;Languages;Subjects;DOAJ Seal;Score cards in 2019;Articles in 2019\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;1;0\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;No;0;0\r\n";
+        const string ExpectedJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;Data source;Languages;Subjects;DOAJ Seal;Score cards in 2019;Articles in 2019;Plan S Journal\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;1;0;No\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;No;0;0;No\r\nACIMED;1024-9435;http://scielo.sld.cu/scielo.php?script=sci_serial&pid=1024-9435&lng=en&nrm=iso;2/10/2013 9:52:51 AM;Cuba;Centro Nacional de Información de Ciencias Médicas;Ulrich;<none indicated>;health sciences;Yes;0;19;No\r\n";
+        const string ExpectedOpenAccessJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;Data source;Languages;Subjects;DOAJ Seal;Score cards in 2019;Articles in 2019;Plan S Journal\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;1;0;No\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;No;0;0;No\r\n";
         const string OldIssn = "2296-0597";
         const string NewIssn = "1603-5194";
 
@@ -988,6 +988,38 @@ namespace QOAM.Website.Tests.Controllers
             {
                 Assert.NotEqual(data[i].Url, journals[i].SubmissionPageLink);
             }
+        }
+
+        [Fact]
+        public void CorrespondingDomainsLinksInstitutionsBasedOnId()
+        {
+            var data = Builder<Institution>.CreateListOfSize(5)
+                .TheFirst(1)
+                .With(x => x.Name = "Test University")
+                .And(x => x.Id = 1)
+                .TheNext(1)
+                .With(x => x.Name = "Test University 2")
+                .And(x => x.Id = 2)
+                .TheNext(1)
+                .With(x => x.Name = "Test University 3")
+                .And(x => x.Id = 3)
+                .Build()
+                .ToList();
+
+            var institutionRepository = new Mock<IInstitutionRepository>();
+            institutionRepository
+                .Setup(x => x.FindWhere(It.IsAny<Expression<Func<Institution, bool>>>()))
+                .Returns((Expression<Func<Institution, bool>> query) => data.AsQueryable().Where(query).ToList());
+
+            var controller = CreateAdminController(institutionRepository: institutionRepository.Object);
+
+            var viewModel = new SelectInstitutionsViewModel { SelectedIntitutionIds = new List<int> { 1, 2 } };
+
+            controller.CorrespondingDomains(viewModel);
+
+            institutionRepository.Verify(x => x.InsertOrUpdate(It.Is<Institution>(i => i.Id == 1 && i.CorrespondingInstitutions == "1,2" )), Times.Exactly(1));
+            institutionRepository.Verify(x => x.InsertOrUpdate(It.Is<Institution>(i => i.Id == 2 && i.CorrespondingInstitutions == "1,2" )), Times.Exactly(1));
+            institutionRepository.Verify(x => x.Save(), Times.Exactly(1));
         }
 
         #region Private Methods

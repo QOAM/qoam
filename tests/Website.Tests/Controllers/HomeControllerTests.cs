@@ -147,7 +147,8 @@ namespace QOAM.Website.Tests.Controllers
             IMailSender mailSender = null,
             ContactSettings contactSettings = null,
             IUserProfileRepository userProfileRepository = null,
-            IAuthentication authentication = null)
+            IAuthentication authentication = null,
+            IInstitutionRepository institutionRepository = null)
         {
             return new HomeController(
                 baseScoreCardRepository ?? Mock.Of<IBaseScoreCardRepository>(),
@@ -156,7 +157,8 @@ namespace QOAM.Website.Tests.Controllers
                 mailSender ?? Mock.Of<IMailSender>(),
                 contactSettings ?? CreateContactSettings(),
                 userProfileRepository ?? Mock.Of<IUserProfileRepository>(),
-                authentication ?? Mock.Of<IAuthentication>());
+                authentication ?? Mock.Of<IAuthentication>(),
+                institutionRepository ?? Mock.Of<IInstitutionRepository>());
         }
 
         private static ContactViewModel CreateContactViewModel(HttpPostedFileBase file = null)

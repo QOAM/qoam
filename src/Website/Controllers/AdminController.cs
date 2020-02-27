@@ -45,7 +45,7 @@ namespace QOAM.Website.Controllers
         readonly DoajImport doajImport;
         readonly IJournalRepository journalRepository;
         readonly JournalsExport journalsExport;
-        readonly IInstitutionRepository institutionRepository;
+        readonly IInstitutionRepository _institutionRepository;
         readonly IBlockedISSNRepository blockedIssnRepository;
 
         readonly IBulkImporter<JournalRelatedLink> _bulkImporter;
@@ -81,7 +81,7 @@ namespace QOAM.Website.Controllers
             _journalsTocImport = journalsTocImport;
             this.journalsExport = journalsExport;
             this.journalRepository = journalRepository;
-            this.institutionRepository = institutionRepository;
+            this._institutionRepository = institutionRepository;
             this.blockedIssnRepository = blockedIssnRepository;
 
             _bulkImporter = bulkImporter;
@@ -457,17 +457,17 @@ namespace QOAM.Website.Controllers
             ModelState["NumberOfScoreCards"].Errors.Clear();
             ModelState["NumberOfValuationScoreCards"].Errors.Clear();
             
-            if (institutionRepository.Exists(model.Name))
+            if (_institutionRepository.Exists(model.Name))
                 ModelState.AddModelError("Name", $"There is already an institution with the name \"{model.Name}\".");
 
-            if (institutionRepository.DomainExists(model.ShortName))
+            if (_institutionRepository.DomainExists(model.ShortName))
                 ModelState.AddModelError("ShortName", $"There is already an institution with the domain \"{model.ShortName}\".");
 
             if (!ModelState.IsValid)
                 return View(model);
 
-            institutionRepository.InsertOrUpdate(model.ToInstitution());
-            institutionRepository.Save();
+            _institutionRepository.InsertOrUpdate(model.ToInstitution());
+            _institutionRepository.Save();
 
             return View("AddedInstitution", new InstitutionsAddedViewModel
             {
@@ -497,20 +497,20 @@ namespace QOAM.Website.Controllers
                         continue;
                     }
 
-                    if (institutionRepository.Exists(institution.Name))
+                    if (_institutionRepository.Exists(institution.Name))
                     {
                         existingNames.Add(institution);
                         continue;
                     }
 
-                    if (institutionRepository.DomainExists(institution.ShortName))
+                    if (_institutionRepository.DomainExists(institution.ShortName))
                     {
                         existingDomains.Add(institution);
                         continue;
                     }
 
-                    institutionRepository.InsertOrUpdate(institution);
-                    institutionRepository.Save();
+                    _institutionRepository.InsertOrUpdate(institution);
+                    _institutionRepository.Save();
 
                     imported++;
                 }
@@ -545,8 +545,8 @@ namespace QOAM.Website.Controllers
             if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.ShortName))
                 return View(model);
 
-            institutionRepository.InsertOrUpdate(model.ToInstitution());
-            institutionRepository.Save();
+            _institutionRepository.InsertOrUpdate(model.ToInstitution());
+            _institutionRepository.Save();
 
             return RedirectToAction("Index", "Institutions");
         }
@@ -566,7 +566,7 @@ namespace QOAM.Website.Controllers
             if (!model.Id.HasValue)
                 return new HttpNotFoundResult();
 
-            var institution = institutionRepository.Find(model.Id.Value);
+            var institution = _institutionRepository.Find(model.Id.Value);
 
             if (institution == null)
                 return new HttpNotFoundResult();
@@ -579,8 +579,8 @@ namespace QOAM.Website.Controllers
             }
 
 
-            institutionRepository.Delete(institution);
-            institutionRepository.Save();
+            _institutionRepository.Delete(institution);
+            _institutionRepository.Save();
 
             return RedirectToAction("InstitutionDeleted");
         }
@@ -900,6 +900,39 @@ namespace QOAM.Website.Controllers
             return Content($"{_duplicateQueueProcessedCount} journals processed and {_removeDuplicateCount} deduped of {_duplicateCount} potential duplicates...");
         }
 
+        [HttpGet, Route("corresponding-domains")]
+        public ViewResult CorrespondingDomains()
+        {
+            var model = new SelectInstitutionsViewModel
+            {
+                Institutions = _institutionRepository.All.ToSelectListItems("<Select institution>")
+            };
+
+            return View(model);
+        }
+
+        [HttpPost, Route("corresponding-domains")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
+        public ViewResult CorrespondingDomains(SelectInstitutionsViewModel model)
+        {
+            var institutions = _institutionRepository.FindWhere(i => model.SelectedIntitutionIds.Contains(i.Id));
+
+            foreach (var institution in institutions)
+            {
+                institution.CorrespondingInstitutionIds = model.SelectedIntitutionIds;
+                _institutionRepository.InsertOrUpdate(institution);
+            }
+
+            _institutionRepository.Save();
+
+            var associatedViewModel = new InstitutionsAssociatedViewModel
+            {
+                NamesAndDomains = institutions.ToDictionary(i => i.Name, i => i.ShortName)
+            };
+
+            return View("CorrespondingDomainsAssociated", associatedViewModel);
+        }
+
         #region Private Methods
 
         static HashSet<string> GetISSNs(ISSNsViewModel model)
@@ -929,7 +962,7 @@ namespace QOAM.Website.Controllers
 
         ActionResult FetchUpsertViewModel(int id)
         {
-            var institution = institutionRepository.Find(id);
+            var institution = _institutionRepository.Find(id);
 
             if(institution == null)
                 return new HttpNotFoundResult();

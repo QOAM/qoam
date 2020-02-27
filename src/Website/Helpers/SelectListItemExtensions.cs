@@ -62,7 +62,7 @@
 
         private static SelectListItem ToSelectListItem(this Institution institution)
         {
-            return new SelectListItem { Text = institution.Name, Value = institution.Id.ToString(CultureInfo.InvariantCulture) };
+            return new SelectListItem { Text = institution.Name.Trim(), Value = institution.Id.ToString(CultureInfo.InvariantCulture) };
         }
 
         private static SelectListItem ToSelectListItem(this Corner corner)

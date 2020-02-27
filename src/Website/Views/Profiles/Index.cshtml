@@ -43,7 +43,7 @@
         </div>
 
         <div class="col-md-9">
-            
+
             <div class="row">
                 <div class="col-md-9">
                     <h3>Profiles: @Model.Profiles.TotalItemCount</h3>
@@ -57,12 +57,12 @@
             <div class="row">
                 <table class="table table-striped table-bordered">
                     <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Institution</th>
-                        <th>Registration date</th>
-                        <th>Actions</th>
-                    </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Institution</th>
+                            <th>Registration date</th>
+                            <th>Actions</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach (var profile in Model.Profiles)
@@ -73,7 +73,7 @@
                                 <td>@profile.DateRegistered</td>
                                 <td>
                                     <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("View", "Details", "Profiles", new { id = profile.Id }, null)
-                                    
+
                                     @if (User.IsInRole(ApplicationRole.Admin))
                                     {
                                         <span class="glyphicon glyphicon-pencil"></span>
@@ -95,11 +95,13 @@
 @section stylesheets
 {
     @Styles.Render("~/styles/typeahead")
+    @Styles.Render("~/styles/chosen")
 }
 
 @section scripts
 {
     @Scripts.Render("~/scripts/typeahead")
+    @Scripts.Render("~/scripts/chosen")
 
     @Html.Partial("_FormScripts")
 

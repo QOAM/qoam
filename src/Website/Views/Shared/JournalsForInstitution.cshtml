@@ -1,11 +1,9 @@
 ﻿@using System.Web.Optimization
 @using QOAM.Website.ViewModels.Journals
-@model IndexViewModel
+@model JournalsForInstitutionViewModel
 
 @{
-    ViewBag.Title = "OA Journals";
-    var action = ViewBag.PageId == "journals-notinjournaltocs-page" ? "NotInJournalTOCs" : "Index";
-    var controller = ViewBag.PageId == "myqoam-index-page" ? "MyQoam" : "Journals";
+    ViewBag.Title = string.Format("Journals for {0}", Model.Institution.Name);
 }
 
 <div class="container main">
@@ -17,14 +15,12 @@
                     <img src="~/Images/zoom.png" class="pull-right clearfix" style="height: 30px;" />
                 </h3>
 
-                @using (Html.BeginForm(action, controller, FormMethod.Get, new { id = "search-form" }))
+                @using (Html.BeginForm("JournalsForInstitution", "Journals", FormMethod.Get, new { id = "search-form" }))
                 {
                     <fieldset>
                         <legend>Search</legend>
 
                         @Html.Partial("_JournalFilters")
-                        
-                        @*@Html.Partial("_SwotMatrix")*@
 
                         <p>
                             <input id="submitForm" type="submit" value="Search" class="btn btn-primary" />
@@ -32,19 +28,14 @@
                     </fieldset>
                 }
             </div>
-            @*@if (ViewBag.PageId == "journals-index-page")
-            {
-                <div class="well">
-                    <h3>Group invitations<img src="~/Images/scoresheet.png" class="pull-right clearfix" style="height:30px;" /></h3>
-                    <br />
-                    <p>
-                        <a href="@Url.Action("BulkRequestValuation", "Score")" class="btn btn-primary">Invitations for Valuation Score Cards</a>
-                    </p>
-                </div>
-            }*@
         </div>
 
         <div class="col-md-9">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>@Model.Institution.Name</h3>
+                </div>
+            </div>
             @Html.Partial("_JournalTableFilters")
             @(Model.Journals.Any() ? Html.Partial("_Journals") : Html.Partial("_EmptyText"))
         </div>

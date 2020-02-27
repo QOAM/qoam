@@ -198,7 +198,17 @@
                 }
 
                 if (journalUpdateProperties.Contains(JournalUpdateProperty.ArticlesPerYear))
-                    currentJournal.ArticlesPerYear = journal.ArticlesPerYear;
+                {
+                    foreach (var articlesPerYear in journal.ArticlesPerYear)
+                    {
+                        var existing = currentJournal.ArticlesPerYear.FirstOrDefault(x => x.Year == articlesPerYear.Year);
+
+                        if (existing != null)
+                            existing.NumberOfArticles = articlesPerYear.NumberOfArticles;
+                        else
+                            currentJournal.ArticlesPerYear.Add(articlesPerYear);
+                    }
+                }
 
                 currentJournal.LastUpdatedOn = DateTime.Now;
                 this.journalRepository.InsertOrUpdate(currentJournal);
