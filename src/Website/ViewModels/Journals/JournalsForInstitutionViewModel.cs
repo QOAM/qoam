@@ -14,7 +14,7 @@ namespace QOAM.Website.ViewModels.Journals
             if (!journal.PlanS)
                 return "black";
 
-            return OpenAccessJournalIds.Contains(journal.Id) || InstitutionJournalIds.Contains(journal.Id) ? "" : "green";
+            return OpenAccessJournalIds.Contains(journal.Id) || InstitutionJournalIds.Contains(journal.Id) ? "gold" : "green";
         }
     }
 }

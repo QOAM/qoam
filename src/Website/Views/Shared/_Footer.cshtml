@@ -1,7 +1,8 @@
-﻿<div id="footer">
+﻿<div id="footer" @FooterClass()>
     <div class="container text-muted">
         <p class="pull-left dark">@DateTime.Now.Year Radboud University Nijmegen (Last update @ViewBag.LastUpdate.ToShortDateString())</p>
-        <p class="pull-right dark"><a href="#">Back to top <i class="glyphicon glyphicon-circle-arrow-up"></i></a>
+        <p class="pull-right dark">
+            <a href="#">Back to top <i class="glyphicon glyphicon-circle-arrow-up"></i></a>
         </p>
         <ul class="list-inline text-center">
             <li> @Html.ActionLink("About", "About", "Home")</li>
@@ -13,3 +14,11 @@
         </ul>
     </div>
 </div>
+
+@helper FooterClass()
+{
+    if (ViewBag.PageId == "home-demoplans-page")
+    {
+        <text>class="plan-s"</text>
+    }
+}

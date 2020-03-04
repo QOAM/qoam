@@ -37,7 +37,12 @@
         @foreach (var journal in Model.Journals)
         {
             <tr>
-                <td>@Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, new { @class = Model.JournalLinkCssClass(journal) })</td>
+                <td>
+                    <div class="relative">
+                        @Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, new { @class = Model.JournalLinkCssClass(journal) })
+                        @SimilarPlanSButton(journal.Id)
+                    </div>
+                </td>
                 <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name }, null)</td>
                 <td class="text-center">@Scores.RobustScore(journal)</td>
                 @*<td class="text-center">@Scores.AverageScore(journal.ValuationScore, Model.SortBy)</td>*@
@@ -71,3 +76,12 @@
 
 
 @Html.Partial("_DiscardCornerModal")
+
+@helper SimilarPlanSButton(int journalId)
+{
+    if (ViewBag.PageId == "journals-journalsforinstitution-page")
+    {
+        <text>&nbsp;</text>
+        <a href="javascript:void(0)" class="plan-s">&asymp;</a>
+    }
+}
