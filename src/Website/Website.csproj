@@ -414,6 +414,7 @@
     <Content Include="Content\images\icon_group_active.png" />
     <Content Include="Content\images\journalscorecard.png" />
     <Content Include="Content\images\logo-big.png" />
+    <Content Include="Content\images\logo-plans.png" />
     <Content Include="Content\images\organisation-small.png" />
     <Content Include="Content\images\rate-small.png" />
     <Content Include="Content\images\rate-xtra-small.png" />
@@ -1022,6 +1023,7 @@
     <Content Include="Views\Shared\_LayoutDemoPlanS.cshtml" />
     <Content Include="Views\Admin\CorrespondingDomains.cshtml" />
     <Content Include="Views\Admin\CorrespondingDomainsAssociated.cshtml" />
+    <Content Include="Views\Shared\_Plan-S-Header.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

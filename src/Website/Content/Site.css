@@ -469,10 +469,29 @@ a.home:hover, a.home, a.home:focus { text-decoration: none; }
     padding-top: 24px;
 }
 
-#footer {
-    background-color: #357EBD;
-    height: 40px;
+.navbar.plan-s {
+    background-color: #f47115 !important;
+    border-color: #f47115 !important;
 }
+
+    .navbar.plan-s a, .navbar.plan-s li a {
+        color: #FBBE5E;
+    }
+        .navbar.plan-s a:hover, .navbar.plan-s li a:hover {
+            color: #FFF;
+        }
+
+    .navbar.plan-s .navbar-brand {
+        padding: 0;
+    }
+        .navbar.plan-s .navbar-brand img {
+            height: 50px;
+        }
+
+    #footer {
+        background-color: #357EBD;
+        height: 40px;
+    }
 
     #footer.plan-s {
         background-color: #f47115 !important;
