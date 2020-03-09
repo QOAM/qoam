@@ -1,62 +1,33 @@
-﻿@using System.Web.Optimization
-@model QOAM.Website.ViewModels.Home.DemoPlanSViewModel
-@{
-    ViewBag.Title = "Demo Plan S";
+﻿@{
+    ViewBag.Title = "Plan S Journal Checker tool";
     Layout = "~/Views/Shared/_LayoutDemoPlanS.cshtml";
 }
 
 <div class="container">
     <div class="row mt-20">
-        <div class="col-md-12 mt-20">
-            <p class="large-font">
-                Dear author,
-                <br /><br />
-                If your research is (co-)financed by a Coalition S funder you must retain the copyright of your published results and guarantee that they will be openly and freely available with
-                a <a href="https://wellcome.ac.uk/funding/guidance/creative-commons-attribution-licence-cc" target="_blank">CCBY license</a> upon the day of publication.
+        <div class="col-md-12">
+            <p class="large-font text-center">
+                Welcome to a @Html.ActionLink("demo", "PlanSInstitutionSelection") of the
+            </p>
+            <h1 class="text-center">Plan S Journal Checker tool</h1>
+            <p class="large-font mt-20">
+                The @Html.ActionLink("demo", "PlanSInstitutionSelection") is meant to give an impression of our approach to the tool.
+                It is based on a sample of (about 500) journals and (14 Dutch) universities.
+                Some buttons are not yet operational, like the similarity button &asymp; on the journals page. The colours of the journals need further fine-tuning.
             </p>
             <p class="large-font">
-                These conditions will be met, and your publication fee will be waived by your funder, if you publish your article in a <span class="gold">gold journal</span> on the Plan S list.
-                The <span class="green">green journals</span> on this list allow you to self-archive the accepted version of your article with no embargo in a repository.
-                This also meets your funder’s conditions.
-            </p>
-            <p class="large-font">
-                The non-coloured journals on the list do not meet these conditions.
-            </p>
-            <p class="large-font">
-                The colours on the list are institution specific and appear upon choosing your institution below.
-            </p>
-            <p>
-                @using (Html.BeginForm("DemoPlanS", "Home"))
-                {
-                    @Html.DropDownListFor(m => m.InstitutionId, Model.Institutions, new { @class = "form-control", onchange = "this.form.submit();" })
-                }
+                The @Html.ActionLink("contact", "Contact", "Home") button, however, is linked to the contact box of QOAM and may be used for comments and questions. We look forward to hearing from you.
             </p>
         </div>
     </div>
     <div class="row mt-20">
         <div class="col-md-12 mt-20">
             <p class="large-font">
-                NB If you submit your article to a <span class="green">green journal</span> in the list don't forget to archive the accepted version in a <a href="http://v2.sherpa.ac.uk/opendoar/">registered repository</a>
+                The project partners:<br/>
+                <a href="https://www.cwts.nl/" target="_blank">CWTS</a>, Leiden,<br />
+                <a href="http://www.qoam.eu/" target="_blank">QOAM</a>, Amsterdam,<br />
+                <a href="http://www.journaltocs.hw.ac.uk/" target="_blank">JournalTOCs</a>, Edinburgh.
             </p>
         </div>
     </div>
 </div>
-
-@section stylesheets
-{
-    @Styles.Render("~/styles/chosen")
-}
-
-@section scripts
-{
-    @Scripts.Render("~/scripts/chosen")
-
-    @Html.Partial("_FormScripts")
-
-    <script type="text/javascript">
-        $(function () {
-            var homeController = new HomeController();
-            homeController.demoPlanS();
-        });
-    </script>
-}

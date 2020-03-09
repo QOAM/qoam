@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using QOAM.Core.Repositories;
 using QOAM.Core.Services;
@@ -118,16 +120,44 @@ namespace QOAM.Website.Controllers
         [HttpGet, Route("demo-plan-s")]
         public ViewResult DemoPlanS()
         {
+            return View();
+        }
+
+        [HttpGet, Route("plan-s-institution-selection")]
+        public ViewResult PlanSInstitutionSelection()
+        {
+            var nl = new List<string>
+            {
+                "eur.nl",
+                "ou.nl",
+                "ru.nl",
+                "rug.nl",
+                "tudelft.nl",
+                "tue.nl",
+                "um.nl",
+                "universiteitleiden.nl",
+                "utwente.nl",
+                "uu.nl",
+                "uva.nl",
+                "uvt.nl",
+                "vu.nl",
+                "wur.nl"
+            };
+
             var model = new DemoPlanSViewModel
             {
-                Institutions = _institutionRepository.All.ToSelectListItems("<Select institution>")
+                Institutions = _institutionRepository
+                    .All
+                    .Where(i => nl.Contains(i.ShortName))
+                    .ToList()
+                    .ToSelectListItems("<Select institution>")
             };
 
             return View(model);
         }
 
-        [HttpPost, Route("demo-plan-s")]
-        public RedirectToRouteResult DemoPlanS(DemoPlanSViewModel model)
+        [HttpPost, Route("plan-s-institution-selection")]
+        public RedirectToRouteResult PlanSInstitutionSelection(DemoPlanSViewModel model)
         {
             return RedirectToAction("JournalsForInstitution", "Journals", new { model.InstitutionId });
         }

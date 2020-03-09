@@ -1019,11 +1019,12 @@
     <Content Include="Views\Journals\ListPricesImportSuccessful.cshtml" />
     <Content Include="Views\Shared\_JournalTableFilters.cshtml" />
     <Content Include="Views\Shared\JournalsForInstitution.cshtml" />
-    <Content Include="Views\Home\DemoPlanS.cshtml" />
+    <Content Include="Views\Home\PlanSInstitutionSelection.cshtml" />
     <Content Include="Views\Shared\_LayoutDemoPlanS.cshtml" />
     <Content Include="Views\Admin\CorrespondingDomains.cshtml" />
     <Content Include="Views\Admin\CorrespondingDomainsAssociated.cshtml" />
     <Content Include="Views\Shared\_Plan-S-Header.cshtml" />
+    <Content Include="Views\Home\DemoPlanS.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
