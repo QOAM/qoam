@@ -289,6 +289,7 @@
     <Compile Include="ViewModels\Admin\SelectInstitutionsViewModel.cs" />
     <Compile Include="ViewModels\Admin\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\Admin\JournalRelatedLinksImportedViewModel.cs" />
+    <Compile Include="ViewModels\Admin\ManageCorrespondingDomainsViewModel.cs" />
     <Compile Include="ViewModels\Api\ScoreCard\SerializableScoreCard.cs" />
     <Compile Include="ViewModels\Home\DemoPlanSViewModel.cs" />
     <Compile Include="ViewModels\IFileUploadViewModel.cs" />
@@ -1021,10 +1022,12 @@
     <Content Include="Views\Shared\JournalsForInstitution.cshtml" />
     <Content Include="Views\Home\PlanSInstitutionSelection.cshtml" />
     <Content Include="Views\Shared\_LayoutDemoPlanS.cshtml" />
-    <Content Include="Views\Admin\CorrespondingDomains.cshtml" />
+    <Content Include="Views\Admin\AssociateCorrespondingDomains.cshtml" />
     <Content Include="Views\Admin\CorrespondingDomainsAssociated.cshtml" />
     <Content Include="Views\Shared\_Plan-S-Header.cshtml" />
     <Content Include="Views\Home\DemoPlanS.cshtml" />
+    <Content Include="Views\Admin\_CorrespondingDomainsSidebarMenu.cshtml" />
+    <Content Include="Views\Admin\CorrespondingDomains.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

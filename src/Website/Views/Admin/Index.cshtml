@@ -40,7 +40,7 @@
         <a href="javascript:void(0)" class="list-group-item active">Institutions</a>
         @Html.AdminLink("Add institution", User, "AddInstitution", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin)
         @Html.AdminLink("Edit and Delete institutions", User, "Index", "Institutions", "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin)
-        @Html.AdminLink("Associate Corresponding Domains", User, "CorrespondingDomains", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin, ApplicationRole.DataAdmin)
+        @Html.AdminLink("Manage Corresponding Domains", User, "CorrespondingDomains", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.InstitutionAdmin, ApplicationRole.DataAdmin)
         @Html.AdminLink("Remove corner", User, "RemoveCorner", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
     </div>
 

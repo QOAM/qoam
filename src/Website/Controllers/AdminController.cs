@@ -903,7 +903,7 @@ namespace QOAM.Website.Controllers
         [HttpGet, Route("corresponding-domains")]
         public ViewResult CorrespondingDomains()
         {
-            var model = new SelectInstitutionsViewModel
+            var model = new ManageCorrespondingDomainsViewModel
             {
                 Institutions = _institutionRepository.All.ToSelectListItems("<Select institution>")
             };
@@ -912,8 +912,32 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpPost, Route("corresponding-domains")]
+        public ViewResult CorrespondingDomains(ManageCorrespondingDomainsViewModel model)
+        {
+            var institution = _institutionRepository.Find(model.InstitutionId.GetValueOrDefault());
+
+            if(institution == null)
+                return View(model);
+
+            model = GetManageDomainsViewModel(institution);
+
+            return View(model);
+        }
+
+        [HttpGet, Route("associate-corresponding-domains")]
+        public ViewResult AssociateCorrespondingDomains()
+        {
+            var model = new SelectInstitutionsViewModel
+            {
+                Institutions = _institutionRepository.All.ToSelectListItems("<Select institution>")
+            };
+
+            return View(model);
+        }
+
+        [HttpPost, Route("associate-corresponding-domains")]
         [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
-        public ViewResult CorrespondingDomains(SelectInstitutionsViewModel model)
+        public ViewResult AssociateCorrespondingDomains(SelectInstitutionsViewModel model)
         {
             var institutions = _institutionRepository.FindWhere(i => model.SelectedIntitutionIds.Contains(i.Id));
 
@@ -931,6 +955,36 @@ namespace QOAM.Website.Controllers
             };
 
             return View("CorrespondingDomainsAssociated", associatedViewModel);
+        }
+
+        [HttpGet, Route("dissociate-corresponding-domains/{mainInstitutionId:int}/{associatedInstitutionId:int}")]
+        [Authorize(Roles = ApplicationRole.DataAdmin + "," + ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin)]
+        public ViewResult DissociateCorrespondingDomains(int mainInstitutionId, int associatedInstitutionId)
+        {
+            var mainInstitution = _institutionRepository.Find(mainInstitutionId);
+            var associated = _institutionRepository.FindWhere(i => mainInstitution.CorrespondingInstitutionIds.Contains(i.Id));
+
+            var toRemove = associated.SingleOrDefault(i => i.Id == associatedInstitutionId);
+
+            if (toRemove != null)
+            {
+                toRemove.CorrespondingInstitutions = "";
+                _institutionRepository.InsertOrUpdate(toRemove);
+            }
+
+            associated = associated.Where(i => i.Id != associatedInstitutionId).ToList();
+            var associatedIds = associated.Select(i => i.Id).ToList();
+
+            foreach (var institution in associated)
+            {
+                institution.CorrespondingInstitutionIds = associatedIds;
+                _institutionRepository.InsertOrUpdate(institution);
+            }
+
+            _institutionRepository.Save();
+
+            var model = GetManageDomainsViewModel(mainInstitution);
+            return View("CorrespondingDomains", model);
         }
 
         #region Private Methods
@@ -1041,6 +1095,18 @@ namespace QOAM.Website.Controllers
                 ModelState.AddModelError(nameof(model.NewIssn), "ISSN does not exist.");
 
             return false;
+        }
+
+        ManageCorrespondingDomainsViewModel GetManageDomainsViewModel(Institution institution)
+        {
+            var model = new ManageCorrespondingDomainsViewModel
+            {
+                InstitutionId = institution.Id,
+                Institutions = _institutionRepository.All.ToSelectListItems("<Select institution>"),
+                CorrespondingInstitutions = _institutionRepository.FindWhere(i => institution.CorrespondingInstitutionIds.Contains(i.Id) && i.Id != institution.Id)
+            };
+
+            return model;
         }
 
         #endregion

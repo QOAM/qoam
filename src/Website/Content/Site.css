@@ -889,3 +889,13 @@ a:hover.filter-enabled {
     color: #000000;
     font-size: 17px;
 }
+
+.dissociate-domains .glyphicon-remove {
+    float: right;
+    color: #a94442;
+}
+
+.dissociate-domains li:hover {
+    background-color: #f2dede;
+    color: #a94442;
+}

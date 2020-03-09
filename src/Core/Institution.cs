@@ -32,7 +32,15 @@ namespace QOAM.Core
         [NotMapped]
         public List<int> CorrespondingInstitutionIds
         {
-            get => CorrespondingInstitutions?.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            get => CorrespondingInstitutions?.Split(',').Select(x =>
+            {
+                var success = int.TryParse(x, out var value);
+                return new { result = success, value };
+            })
+            .Where(pair => pair.result)
+            .Select(pair=> pair.value)
+            .ToList() ?? new List<int>();
+
             set => CorrespondingInstitutions = value.Select(x => x.ToString()).Aggregate((a, b) => $"{a},{b}");
         }
 

@@ -1,0 +1,15 @@
+﻿@model string
+
+@helper GetClass(string tabName)
+{
+    if (tabName == Model)
+    {
+        <text> class="active"</text>
+    }
+}
+<!--<img src="~/Content/images/@(Model.ToLowerInvariant()).png" alt="@Model" title="@Model" style="width: 50px" class="icon">-->
+<ul class="nav nav-list bs-docs-sidenav">
+    <li @GetClass("Manage")><a href="@Url.Action("CorrespondingDomains")"><i class="glyphicon glyphicon-chevron-right"></i>Manage</a></li>
+    <li @GetClass("Associate")><a href="@Url.Action("AssociateCorrespondingDomains")" ><i class="glyphicon glyphicon-chevron-right"></i>Associate</a></li>
+    @*<li @GetClass("Dissociate")><a href="@Url.Action("Faq", "Home")"><i class="glyphicon glyphicon-chevron-right"></i>Dissociate</a></li>*@
+</ul>
