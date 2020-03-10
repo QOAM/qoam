@@ -144,7 +144,7 @@ namespace QOAM.Core.Repositories
 
         public IList<Journal> AllIncluding(params Expression<Func<Journal, object>>[] includeProperties)
         {
-            DbContext.Database.CommandTimeout = 120;
+            DbContext.Database.CommandTimeout = 1200;
             IQueryable<Journal> query = this.DbContext.Journals;
             query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
