@@ -89,7 +89,7 @@ namespace QOAM.Core.Export
                 ? journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards)
                 : journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards);
 
-            var exportJournals = journals.Select(j => new ExportJournal
+            return journals.Select(j => new ExportJournal
                                         {
                                             Title = j.Title,
                                             ISSN = j.ISSN,
@@ -104,9 +104,7 @@ namespace QOAM.Core.Export
                                             ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
                                             ArticlesIn2019 = j.ArticlesPerYear.FirstOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0,
                                             PlanSJournal = j.PlanS ? "Yes" : "No"
-                                        });
-
-            return exportJournals.ToList();
+                                        }).ToList();
         }
 
         static CsvConfiguration CreateCsvConfiguration()
