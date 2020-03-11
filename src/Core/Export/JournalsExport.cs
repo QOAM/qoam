@@ -68,7 +68,7 @@ namespace QOAM.Core.Export
         }
 
         
-        void ExportJournals(Stream stream, IEnumerable<ExportJournal> journals)
+        void ExportJournals(Stream stream, List<ExportJournal> journals)
         {
             Requires.NotNull(stream, nameof(stream));
 
@@ -83,13 +83,13 @@ namespace QOAM.Core.Export
                 }
         }
 
-        IEnumerable<ExportJournal> GetExportJournals(bool openAccessOnly)
+        List<ExportJournal> GetExportJournals(bool openAccessOnly)
         {
             var journals = openAccessOnly
                 ? journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards)
                 : journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards);
 
-            return journals.Select(j => new ExportJournal
+            var exportJournals = journals.Select(j => new ExportJournal
                                         {
                                             Title = j.Title,
                                             ISSN = j.ISSN,
@@ -105,6 +105,8 @@ namespace QOAM.Core.Export
                                             ArticlesIn2019 = j.ArticlesPerYear.FirstOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0,
                                             PlanSJournal = j.PlanS ? "Yes" : "No"
                                         });
+
+            return exportJournals.ToList();
         }
 
         static CsvConfiguration CreateCsvConfiguration()
