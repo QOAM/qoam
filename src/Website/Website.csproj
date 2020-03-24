@@ -411,6 +411,7 @@
     <Content Include="Content\images\faq\invite-preparation-step-4.png" />
     <Content Include="Content\images\faq\invite-preparation-step-completion.png" />
     <Content Include="Content\images\faq\submisstion-button.png" />
+    <Content Include="Content\images\green.png" />
     <Content Include="Content\images\icon_group.png" />
     <Content Include="Content\images\icon_group_active.png" />
     <Content Include="Content\images\journalscorecard.png" />
@@ -419,6 +420,7 @@
     <Content Include="Content\images\organisation-small.png" />
     <Content Include="Content\images\rate-small.png" />
     <Content Include="Content\images\rate-xtra-small.png" />
+    <Content Include="Content\images\red.png" />
     <Content Include="Content\iPicture.css" />
     <Content Include="Content\jquery.fancybox-buttons.css" />
     <Content Include="Content\jquery.fancybox-thumbs.css" />

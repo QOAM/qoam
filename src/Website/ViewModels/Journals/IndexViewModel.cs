@@ -143,5 +143,7 @@
         }
 
         public virtual string JournalLinkCssClass(Journal journal) => "";
+        public virtual string PlanSImage(Journal journal) => "";
+        public virtual string PlanSTooltipText(Journal journal) => "";
     }
 }

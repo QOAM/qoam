@@ -42,6 +42,16 @@
             return false;
         });
 
+        $(".plan-s-image").popover({
+            container: "body",
+            trigger: "focus",
+            html: true,
+            delay: { "show": 0, "hide": 0 },
+            placement: "top",
+            content: function() {
+                return $(this).next(".popover-container").html();
+            }
+        });
         //initSwotFilter();
 
         //$('#swotFilterContainer').on('click', 'div.table-cell', function() {

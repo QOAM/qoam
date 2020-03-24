@@ -350,9 +350,9 @@ fieldset legend { display: none; }
     font-weight: normal;
 }
 
-th { vertical-align: middle !important; }
+th, td { vertical-align: middle !important; }
 
-th.title { width: 400px; }
+th.title { width: 40%; }
 
 th.publisher { width: 240px; }
 
@@ -622,6 +622,10 @@ ul {
     position: relative;
 }
 
+    .table td div.relative a:not(.plan-s) {
+        display: inline-block;
+        width: 95%;
+    }
     .table td div.relative a.plan-s {
         position: absolute;
         right: 5px;
@@ -885,10 +889,15 @@ a:hover.filter-enabled {
     font-size: 1.5em;
 }
 
-.aprox {
-    color: #000000;
-    font-size: 17px;
-}
+    .large-font img.green, .large-font img.red {
+        width: 36px;
+        height: 36px;
+    }
+
+    .aprox {
+        color: #000000;
+        font-size: 17px;
+    }
 
 .dissociate-domains .glyphicon-remove {
     float: right;
@@ -899,3 +908,20 @@ a:hover.filter-enabled {
     background-color: #f2dede;
     color: #a94442;
 }
+
+img.green, img.red {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+#plan-s-dropdown .chosen-container {
+    font-size: 14px;
+}
+    #plan-s-dropdown .chosen-container .chosen-single {
+        height: 30px;
+        line-height: 30px;
+    }
+        #plan-s-dropdown .chosen-container-single .chosen-single div {
+            top: 3px;
+        }

@@ -29,7 +29,7 @@
                 }
             </div>
             <div class="row">
-                <div class="col-md-12 text-muted">
+                <div class="col-md-12 text-muted large-font">
                     Click <span class="aprox">&asymp;</span> behind a journal to find similar journals in the Plan S list
                 </div>
             </div>
@@ -43,13 +43,6 @@
             </div>
             @Html.Partial("_JournalTableFilters")
             @(Model.Journals.Any() ? Html.Partial("_Journals") : Html.Partial("_EmptyText"))
-        </div>
-        <div class="row mt-20">
-            <div class="col-md-9 col-md-offset-3 mt-20">
-                <p class="large-font">
-                    NB If you submit your article to a <span class="green">green journal</span> in the list don't forget to archive the accepted version in a <a href="http://v2.sherpa.ac.uk/opendoar/">registered repository</a>
-                </p>
-            </div>
         </div>
     </div>
 </div>
