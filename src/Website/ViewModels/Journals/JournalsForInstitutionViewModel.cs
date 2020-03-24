@@ -30,7 +30,7 @@ namespace QOAM.Website.ViewModels.Journals
 
             return OpenAccessJournalIds.Contains(journal.Id) || InstitutionJournalIds.Contains(journal.Id)
                 ? "Publishing your article in this journal meets the open access requirements of your funder."
-                : "Self-archiving the accepted version of your article in a <a href=\"https://v2.sherpa.ac.uk/opendoar/search.html\" target=\"_blank\">registered repository</a> meets the open access requirements of your funder.";
+                : "Self-archiving the accepted version of your article in a <a href=\"https://v2.sherpa.ac.uk/opendoar/\" target=\"_blank\" rel=\"noopener\">registered repository</a> meets the open access requirements of your funder.";
         }
     }
 }
