@@ -892,6 +892,7 @@ a:hover.filter-enabled {
     .large-font img.green, .large-font img.red {
         width: 36px;
         height: 36px;
+        cursor: default;
     }
 
     .aprox {
