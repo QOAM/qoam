@@ -1,4 +1,5 @@
-﻿using QOAM.Core.Helpers;
+﻿using System.Data.Entity.Core.Objects;
+using QOAM.Core.Helpers;
 
 namespace QOAM.Core.Repositories
 {
@@ -144,6 +145,9 @@ namespace QOAM.Core.Repositories
 
         public IList<Journal> AllIncluding(params Expression<Func<Journal, object>>[] includeProperties)
         {
+            //Log to Output window...
+            //DbContext.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+
             IQueryable<Journal> query = this.DbContext.Journals;
             query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 

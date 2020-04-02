@@ -1,0 +1,54 @@
+﻿@using System.Web.Optimization
+@model QOAM.Website.ViewModels.Home.DemoPlanSViewModel
+@{
+    ViewBag.Title = "Demo Plan S";
+    Layout = "~/Views/Shared/_LayoutDemoPlanS.cshtml";
+}
+
+<div class="container">
+    <div class="row mt-20">
+        <div class="col-md-12 mt-20">
+            <p class="large-font">
+                Dear author,
+                <br /><br />
+                If your research is (co-)funded by a <a href="https://www.coalition-s.org/funders/" target="_blank">cOAlition S funder</a>, 
+                you must publish your article in a journal that meets the open access <a href="https://www.coalition-s.org/addendum-to-the-coalition-s-guidance-on-the-implementation-of-plan-s/principles-and-implementation/" target="_blank">requirements of cOAlition S</a>.
+            </p>
+            <p class="large-font">
+                This Journal Checker provides you with an institution specific list of such journals. Please select your institution below and enjoy the list.
+            </p>
+            <p>
+                @using (Html.BeginForm("PlanSInstitutionSelection", "Home", FormMethod.Post, new { id = "plan-s-dropdown" }))
+                {
+                    @Html.DropDownListFor(m => m.InstitutionId, Model.Institutions, new { @class = "form-control", onchange = "this.form.submit();" })
+                }
+            </p>
+        </div>
+    </div>
+    <div class="row mt-20">
+        <div class="col-md-12 mt-20">
+            <p class="large-font">
+                Clicking <img src="~/Content/images/green.png" class="green"/> or <img src="~/Content/images/red.png" class="red"/> in the list is informative.
+            </p>
+        </div>
+    </div>
+</div>
+
+@section stylesheets
+{
+    @Styles.Render("~/styles/chosen")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/chosen")
+
+    @Html.Partial("_FormScripts")
+
+    <script type="text/javascript">
+        $(function () {
+            var homeController = new HomeController();
+            homeController.demoPlanS();
+        });
+    </script>
+}

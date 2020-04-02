@@ -289,6 +289,7 @@
     <Compile Include="ViewModels\Admin\SelectInstitutionsViewModel.cs" />
     <Compile Include="ViewModels\Admin\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\Admin\JournalRelatedLinksImportedViewModel.cs" />
+    <Compile Include="ViewModels\Admin\ManageCorrespondingDomainsViewModel.cs" />
     <Compile Include="ViewModels\Api\ScoreCard\SerializableScoreCard.cs" />
     <Compile Include="ViewModels\Home\DemoPlanSViewModel.cs" />
     <Compile Include="ViewModels\IFileUploadViewModel.cs" />
@@ -410,13 +411,16 @@
     <Content Include="Content\images\faq\invite-preparation-step-4.png" />
     <Content Include="Content\images\faq\invite-preparation-step-completion.png" />
     <Content Include="Content\images\faq\submisstion-button.png" />
+    <Content Include="Content\images\green.png" />
     <Content Include="Content\images\icon_group.png" />
     <Content Include="Content\images\icon_group_active.png" />
     <Content Include="Content\images\journalscorecard.png" />
     <Content Include="Content\images\logo-big.png" />
+    <Content Include="Content\images\logo-plans.png" />
     <Content Include="Content\images\organisation-small.png" />
     <Content Include="Content\images\rate-small.png" />
     <Content Include="Content\images\rate-xtra-small.png" />
+    <Content Include="Content\images\red.png" />
     <Content Include="Content\iPicture.css" />
     <Content Include="Content\jquery.fancybox-buttons.css" />
     <Content Include="Content\jquery.fancybox-thumbs.css" />
@@ -440,6 +444,7 @@
     <Content Include="Images\swot.png" />
     <Content Include="Images\teamwork-128 swot.gif" />
     <Content Include="Images\Under-Construction.png" />
+    <Content Include="robots.txt" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bootstrap-slider.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -883,6 +888,7 @@
     <Content Include="Scripts\typeahead.bundle.js" />
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.jquery.js" />
+    <Content Include="sitemap.xml" />
     <Content Include="Views\Shared\_Loading.cshtml" />
     <Content Include="Views\Journals\BaseScoreCards.cshtml" />
     <Content Include="Views\Journals\BaseScoreCardComments.cshtml" />
@@ -1018,10 +1024,14 @@
     <Content Include="Views\Journals\ListPricesImportSuccessful.cshtml" />
     <Content Include="Views\Shared\_JournalTableFilters.cshtml" />
     <Content Include="Views\Shared\JournalsForInstitution.cshtml" />
-    <Content Include="Views\Home\DemoPlanS.cshtml" />
+    <Content Include="Views\Home\PlanSInstitutionSelection.cshtml" />
     <Content Include="Views\Shared\_LayoutDemoPlanS.cshtml" />
-    <Content Include="Views\Admin\CorrespondingDomains.cshtml" />
+    <Content Include="Views\Admin\AssociateCorrespondingDomains.cshtml" />
     <Content Include="Views\Admin\CorrespondingDomainsAssociated.cshtml" />
+    <Content Include="Views\Shared\_Plan-S-Header.cshtml" />
+    <Content Include="Views\Home\DemoPlanS.cshtml" />
+    <Content Include="Views\Admin\_CorrespondingDomainsSidebarMenu.cshtml" />
+    <Content Include="Views\Admin\CorrespondingDomains.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

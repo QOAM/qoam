@@ -51,7 +51,17 @@
         });
     };
 
-    AdminController.prototype.correspondingDomains = function() {
+    AdminController.prototype.viewCorrespondingDomains = function() {
+        $("#InstitutionId").chosen({
+            search_contains: true
+        });
+
+        $(".dissociate-action").click(function() {
+            window.location.href = this.href;
+        });
+    }
+
+    AdminController.prototype.associateCorrespondingDomains = function() {
         $("#SelectedIntitutionIds").chosen({
             search_contains: true
         });

@@ -350,9 +350,9 @@ fieldset legend { display: none; }
     font-weight: normal;
 }
 
-th { vertical-align: middle !important; }
+th, td { vertical-align: middle !important; }
 
-th.title { width: 400px; }
+th.title { width: 40%; }
 
 th.publisher { width: 240px; }
 
@@ -469,10 +469,33 @@ a.home:hover, a.home, a.home:focus { text-decoration: none; }
     padding-top: 24px;
 }
 
-#footer {
-    background-color: #357EBD;
-    height: 40px;
+.navbar.plan-s {
+    background-color: #f47115 !important;
+    border-color: #f47115 !important;
 }
+
+    .navbar.plan-s a, .navbar.plan-s li a {
+        color: #FBBE5E;
+    }
+        .navbar.plan-s a:hover, .navbar.plan-s li a:hover {
+            color: #FFF;
+        }
+
+    .navbar.plan-s .navbar-brand {
+        padding: 0;
+    }
+        .navbar.plan-s .navbar-brand img {
+            height: 50px;
+        }
+
+    #footer {
+        background-color: #357EBD;
+        height: 40px;
+    }
+
+    #footer.plan-s {
+        background-color: #f47115 !important;
+    }
 
 #footer a { color: #FFF; }
 
@@ -595,11 +618,25 @@ ul {
     font-style: italic;
 }
 
-.doajSeal {
-    float: left; 
+.table td div.relative {
     position: relative;
-    top: -95px;
 }
+
+    .table td div.relative a:not(.plan-s) {
+        display: inline-block;
+        width: 95%;
+    }
+    .table td div.relative a.plan-s {
+        position: absolute;
+        right: 5px;
+        font-size: 17px;
+    }
+
+    .doajSeal {
+        float: left;
+        position: relative;
+        top: -95px;
+    }
 
 .swotFilterContainer .table-cell {
     height: 50px;
@@ -793,6 +830,10 @@ a:hover.filter-enabled {
     color: #000 !important;
 }
 
+.gold {
+    color: rgb(255, 200, 0) !important;
+}
+
 .gly-spin {
   -webkit-animation: spin 2s infinite linear;
   -moz-animation: spin 2s infinite linear;
@@ -845,5 +886,43 @@ a:hover.filter-enabled {
 }
 
 .large-font {
-    font-size: 2em;
+    font-size: 1.5em;
 }
+
+    .large-font img.green, .large-font img.red {
+        width: 36px;
+        height: 36px;
+        cursor: default;
+    }
+
+    .aprox {
+        color: #000000;
+        font-size: 17px;
+    }
+
+.dissociate-domains .glyphicon-remove {
+    float: right;
+    color: #a94442;
+}
+
+.dissociate-domains li:hover {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+img.green, img.red {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+#plan-s-dropdown .chosen-container {
+    font-size: 14px;
+}
+    #plan-s-dropdown .chosen-container .chosen-single {
+        height: 30px;
+        line-height: 30px;
+    }
+        #plan-s-dropdown .chosen-container-single .chosen-single div {
+            top: 3px;
+        }

@@ -12,5 +12,7 @@ namespace QOAM.Website.ViewModels.Journals
         RouteValueDictionary ToRouteValueDictionary(int page);
         IPagedList<Journal> Journals { get; set; }
         string JournalLinkCssClass(Journal journal);
+        string PlanSImage(Journal journal);
+        string PlanSTooltipText(Journal journal);
     }
 }

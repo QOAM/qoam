@@ -1,0 +1,22 @@
+﻿# # https://www.semrush.com/bot/
+# User-agent: SemrushBot
+# Disallow: /
+
+# # http://webmeup-crawler.com/
+# User-agent: BLEXBot
+# Disallow: /
+
+# # http://www.opensiteexplorer.org/dotbot
+# User-agent: DotBot
+# Disallow: /
+
+# # https://mj12bot.com/
+# User-agent: MJ12bot
+# Disallow: /
+
+User-agent: *
+Disallow: /journals
+Disallow: /profiles
+Disallow: /register
+Disallow: /login
+Sitemap: https://qoam.eu/sitemap.xml

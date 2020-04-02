@@ -4,6 +4,7 @@
 
 @{
     ViewBag.Title = string.Format("Journals for {0}", Model.Institution.Name);
+    Layout = "~/Views/Shared/_LayoutDemoPlanS.cshtml";
 }
 
 <div class="container main">
@@ -27,6 +28,11 @@
                         </p>
                     </fieldset>
                 }
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-muted large-font">
+                    Click <span class="aprox">&asymp;</span> behind a journal to find similar journals in the Plan S list
+                </div>
             </div>
         </div>
 

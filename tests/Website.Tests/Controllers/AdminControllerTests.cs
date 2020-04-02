@@ -991,7 +991,7 @@ namespace QOAM.Website.Tests.Controllers
         }
 
         [Fact]
-        public void CorrespondingDomainsLinksInstitutionsBasedOnId()
+        public void AssociateCorrespondingDomainsLinksInstitutionsBasedOnId()
         {
             var data = Builder<Institution>.CreateListOfSize(5)
                 .TheFirst(1)
@@ -1015,10 +1015,45 @@ namespace QOAM.Website.Tests.Controllers
 
             var viewModel = new SelectInstitutionsViewModel { SelectedIntitutionIds = new List<int> { 1, 2 } };
 
-            controller.CorrespondingDomains(viewModel);
+            controller.AssociateCorrespondingDomains(viewModel);
 
             institutionRepository.Verify(x => x.InsertOrUpdate(It.Is<Institution>(i => i.Id == 1 && i.CorrespondingInstitutions == "1,2" )), Times.Exactly(1));
             institutionRepository.Verify(x => x.InsertOrUpdate(It.Is<Institution>(i => i.Id == 2 && i.CorrespondingInstitutions == "1,2" )), Times.Exactly(1));
+            institutionRepository.Verify(x => x.Save(), Times.Exactly(1));
+        }
+
+        [Fact]
+        public void DissociateCorrespondingDomainsUnlinksInstitutions()
+        {
+            var data = Builder<Institution>.CreateListOfSize(3)
+                .All()
+                .With(x => x.CorrespondingInstitutions = "1,2,3")
+                .TheFirst(1)
+                .With(x => x.Name = "Test University")
+                .And(x => x.Id = 1)
+                .TheNext(1)
+                .With(x => x.Name = "Test University 2")
+                .And(x => x.Id = 2)
+                .TheNext(1)
+                .With(x => x.Name = "Test University 3")
+                .And(x => x.Id = 3)
+                .Build()
+                .ToList();
+
+            var institutionRepository = new Mock<IInstitutionRepository>();
+            institutionRepository.Setup(x => x.Find(1)).Returns(data[0]);
+            institutionRepository.Setup(x => x.All).Returns(data);
+            institutionRepository
+                .Setup(x => x.FindWhere(It.IsAny<Expression<Func<Institution, bool>>>()))
+                .Returns((Expression<Func<Institution, bool>> query) => data.AsQueryable().Where(query).ToList());
+
+            var controller = CreateAdminController(institutionRepository: institutionRepository.Object);
+
+            controller.DissociateCorrespondingDomains(1, 2);
+
+            institutionRepository.Verify(x => x.InsertOrUpdate(It.Is<Institution>(i => i.Id == 1 && i.CorrespondingInstitutions == "1,3" )), Times.Exactly(1));
+            institutionRepository.Verify(x => x.InsertOrUpdate(It.Is<Institution>(i => i.Id == 3 && i.CorrespondingInstitutions == "1,3" )), Times.Exactly(1));
+            institutionRepository.Verify(x => x.InsertOrUpdate(It.Is<Institution>(i => i.Id == 2 && i.CorrespondingInstitutions == "" )), Times.Exactly(1));
             institutionRepository.Verify(x => x.Save(), Times.Exactly(1));
         }
 

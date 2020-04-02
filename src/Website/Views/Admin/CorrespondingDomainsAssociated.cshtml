@@ -5,14 +5,15 @@
 }
 
 <div class="container main">
-    <p>
-        The following institutions have been associated
-    </p>
+    <div class="row side"><a class="btn btn-default return-button" title="Back to search results" href="@Url.Action("CorrespondingDomains")">&lt; Manage Corresponding Domains</a>
+        <p>
+            The following institutions have been associated
+        </p>
 
-    <ul>
-        @foreach (var nameAndDomain in Model.NamesAndDomains)
-        {
-            <li>@nameAndDomain.Key (@nameAndDomain.Value)</li>
-        }
-    </ul>
+        <ul>
+            @foreach (var nameAndDomain in Model.NamesAndDomains)
+            {
+                <li>@nameAndDomain.Key (@nameAndDomain.Value)</li>
+            }
+        </ul></div>
 </div>

@@ -110,7 +110,7 @@
             var emailExists = this.userProfileRepository.FindByEmail(model.Email);
             if (emailExists != null)
             {
-                this.ModelState.AddModelError("", "Sorry, unable to register with this email address.");
+                this.ModelState.AddModelError("", "This email account is already registered. Please use your password to log in.");
                 return this.View(model);
             }
 
