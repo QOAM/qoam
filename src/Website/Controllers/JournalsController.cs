@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity.Validation;
+using QOAM.Core.Helpers;
 using QOAM.Core.Import;
 using QOAM.Core.Import.SubmissionLinks;
 using QOAM.Website.ViewModels.Admin;
@@ -342,37 +343,40 @@ namespace QOAM.Website.Controllers
                                            }).ToList();
 
                 // This is gonna be quite an expensive operation... Rethink!
-                foreach (var institutionJournal in institutionJournals.Distinct())
+                foreach (var batch in institutionJournals.Distinct().Chunk(100))
                 {
-                    var existing = institutionJournalRepository.Find(institutionJournal.JournalId, institutionJournal.InstitutionId);
-
-                    if (existing != null)
+                    foreach (var institutionJournal in batch.ToList())
                     {
-                        if (string.IsNullOrWhiteSpace(institutionJournal.Link))
+                        var existing = institutionJournalRepository.Find(institutionJournal.JournalId, institutionJournal.InstitutionId);
+
+                        if (existing != null)
                         {
-                            institutionJournalRepository.Delete(existing);
-                            deleted++;
+                            if (string.IsNullOrWhiteSpace(institutionJournal.Link))
+                            {
+                                institutionJournalRepository.Delete(existing);
+                                deleted++;
+                            }
+                            else
+                            {
+                                existing.DateAdded = DateTime.Now;
+                                existing.Link = institutionJournal.Link;
+                                existing.UserProfileId = institutionJournal.UserProfileId;
+
+                                institutionJournalRepository.InsertOrUpdate(existing);
+
+                                updated++;
+                            }
                         }
-                        else
+                        else if (!string.IsNullOrWhiteSpace(institutionJournal.Link))
                         {
-                            existing.DateAdded = DateTime.Now;
-                            existing.Link = institutionJournal.Link;
-                            existing.UserProfileId = institutionJournal.UserProfileId;
-
-                            institutionJournalRepository.InsertOrUpdate(existing);
-
-                            updated++;
+                            institutionJournalRepository.InsertOrUpdate(institutionJournal);
+                            imported++;
                         }
                     }
-                    else if (!string.IsNullOrWhiteSpace(institutionJournal.Link))
-                    {
-                        institutionJournalRepository.InsertOrUpdate(institutionJournal);
-                        imported++;
-                    }
+
+                    institutionJournalRepository.Save();
                 }
-
-                institutionJournalRepository.Save();
-
+                
                 return RedirectToAction("BulkImportSuccessful", new { amountImported = imported, amountDeleted = deleted, amountUpdated = updated });
             }
             catch (ArgumentException invalidFileException)
