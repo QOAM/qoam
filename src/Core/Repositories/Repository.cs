@@ -6,8 +6,7 @@
 
     using Validation;
 
-    public abstract class Repository<T> : IDisposable
-        where T : Entity
+    public abstract class Repository<T> : IRepository, IDisposable where T : Entity
     {
         protected Repository(ApplicationDbContext dbContext)
         {
@@ -54,6 +53,14 @@
             }
 
             this.DbContext.Set<T>().Remove(entity);
+        }
+
+        public void RefreshContext(bool autoDetectChangesEnabled = false)
+        {
+            DbContext?.Dispose();
+
+            DbContext = new ApplicationDbContext();
+            DbContext.Configuration.AutoDetectChangesEnabled = autoDetectChangesEnabled;
         }
     }
 }

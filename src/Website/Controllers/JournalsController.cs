@@ -143,7 +143,7 @@ namespace QOAM.Website.Controllers
         {
             ViewBag.RefererUrl = model.RefererUrl;
 
-            var institutionJournals = institutionJournalRepository.Find(model.ToInstitutionJournalPriceFilter());
+            var institutionJournals = institutionJournalRepository.Find(model.ToInstitutionJournalPriceFilter()).ToList();
 
             return PartialView(institutionJournals);
         }
@@ -323,60 +323,11 @@ namespace QOAM.Website.Controllers
 
             try
             {
-                int imported = 0, deleted = 0, updated = 0;
-
                 var data = _bulkImporter.Execute(model.File.InputStream);
-
-                var institutionJournals = (from u in data
-                                           let institution = institutionRepository.Find(u.Domain)
-                                           where institution != null
-                                           from info in u.Licenses
-                                           let journal = journalRepository.FindByIssn(info.ISSN)
-                                           where journal != null
-                                           select new InstitutionJournal
-                                           {
-                                               DateAdded = DateTime.Now,
-                                               Link = info.Text,
-                                               JournalId = journal.Id,
-                                               UserProfileId = Authentication.CurrentUserId,
-                                               InstitutionId = institution.Id
-                                           }).ToList();
-
-                // This is gonna be quite an expensive operation... Rethink!
-                foreach (var batch in institutionJournals.Distinct().Chunk(100))
-                {
-                    foreach (var institutionJournal in batch.ToList())
-                    {
-                        var existing = institutionJournalRepository.Find(institutionJournal.JournalId, institutionJournal.InstitutionId);
-
-                        if (existing != null)
-                        {
-                            if (string.IsNullOrWhiteSpace(institutionJournal.Link))
-                            {
-                                institutionJournalRepository.Delete(existing);
-                                deleted++;
-                            }
-                            else
-                            {
-                                existing.DateAdded = DateTime.Now;
-                                existing.Link = institutionJournal.Link;
-                                existing.UserProfileId = institutionJournal.UserProfileId;
-
-                                institutionJournalRepository.InsertOrUpdate(existing);
-
-                                updated++;
-                            }
-                        }
-                        else if (!string.IsNullOrWhiteSpace(institutionJournal.Link))
-                        {
-                            institutionJournalRepository.InsertOrUpdate(institutionJournal);
-                            imported++;
-                        }
-                    }
-
-                    institutionJournalRepository.Save();
-                }
+                var currentUserId = Authentication.CurrentUserId;
                 
+                var (imported, updated, deleted) = ProcessImportedLicenses(data, currentUserId);
+
                 return RedirectToAction("BulkImportSuccessful", new { amountImported = imported, amountDeleted = deleted, amountUpdated = updated });
             }
             catch (ArgumentException invalidFileException)
@@ -399,7 +350,7 @@ namespace QOAM.Website.Controllers
             {
                 while (exception.InnerException != null)
                     exception = exception.InnerException;
-                
+
                 ModelState.AddModelError("generalError", $"An error has ocurred: {exception.Message}");
             }
 
@@ -538,6 +489,70 @@ namespace QOAM.Website.Controllers
         public JsonResult Languages(string query)
         {
             return Json(journalRepository.Languages(query).Select(s => new { value = s }).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        (int imported, int updated, int deleted) ProcessImportedLicenses(IList<UniversityLicense> data, int currentUserId)
+        {
+            int imported = 0, deleted = 0, updated = 0;
+
+            var domains = data.Select(x => x.Domain).ToList();
+            var institutions = institutionRepository.FindWhere(i => domains.Contains(i.ShortName)).ToList();
+            var issns = data.SelectMany(x => x.Licenses).Select(l => l.ISSN).ToList();
+            var journals = journalRepository.AllWhereIncluding(j => issns.Contains(j.ISSN)).ToList();
+
+            var institutionJournals = (from u in data
+                                       let institution = institutions.FirstOrDefault(i => i.ShortName == u.Domain)
+                                       where institution != null
+                                       from info in u.Licenses
+                                       let journal = journals.FirstOrDefault(j => j.ISSN == info.ISSN)
+                                       where journal != null
+                                       select new InstitutionJournal
+                                       {
+                                           DateAdded = DateTime.Now,
+                                           Link = info.Text,
+                                           JournalId = journal.Id,
+                                           UserProfileId = currentUserId,
+                                           InstitutionId = institution.Id
+                                       }).ToList();
+
+            institutionJournalRepository.RefreshContext();
+
+            foreach (var batch in institutionJournals.Distinct().Chunk(1000))
+            {
+                foreach (var institutionJournal in batch.ToList())
+                {
+                    var existing = institutionJournalRepository.Find(institutionJournal.JournalId, institutionJournal.InstitutionId);
+
+                    if (existing != null)
+                    {
+                        if (string.IsNullOrWhiteSpace(institutionJournal.Link))
+                        {
+                            institutionJournalRepository.Delete(existing);
+                            deleted++;
+                        }
+                        else
+                        {
+                            existing.DateAdded = DateTime.Now;
+                            existing.Link = institutionJournal.Link;
+                            existing.UserProfileId = institutionJournal.UserProfileId;
+
+                            institutionJournalRepository.InsertOrUpdate(existing);
+
+                            updated++;
+                        }
+                    }
+                    else if (!string.IsNullOrWhiteSpace(institutionJournal.Link))
+                    {
+                        institutionJournalRepository.InsertOrUpdate(institutionJournal);
+                        imported++;
+                    }
+                }
+
+                institutionJournalRepository.Save();
+                institutionJournalRepository.RefreshContext();
+            }
+
+            return (imported, updated, deleted);
         }
     }
 }

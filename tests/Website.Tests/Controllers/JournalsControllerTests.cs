@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
+using Castle.Components.DictionaryAdapter;
 using Moq;
 using QOAM.Core;
 using QOAM.Core.Import;
@@ -95,30 +97,23 @@ namespace QOAM.Website.Tests.Controllers
             var journalCount = 0;
             var institutionCount = 0;
 
-            var journals = new List<Journal>();
-            var institutions = new List<Institution>();
+            var journals = (from ul in data
+                            from l in ul.Licenses
+                            select new Journal { Id = ++journalCount, ISSN = l.ISSN}).ToList();
 
-            //var institutions = 1.To(10).Select(i => new Institution { Id = i, Name = $"Test Institution #{i}", ShortName = $"www.{i}.nl"});
+            var institutions = (from ul in data
+                                select new Institution { Id = ++institutionCount, ShortName = ul.Domain }).ToList();
 
             _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
-            _institutionRepository.Setup(x => x.Find(It.IsAny<string>())).Returns<string>(s =>
-            {
-                var institution = new Institution { Id = ++institutionCount, ShortName = s };
-                institutions.Add(institution);
-
-                return institution;
-            });
-            _journalRepository.Setup(x => x.FindByIssn(It.IsAny<string>())).Returns<string>(s =>
-            {
-                var journal = new Journal { Id = ++journalCount, ISSN = s };
-                journals.Add(journal);
-
-                return journal;
-            });
+            _institutionRepository.Setup(x => x.FindWhere(It.IsAny<Expression<Func<Institution, bool>>>()))
+                .Returns((Expression<Func<Institution, bool>> query) => institutions.AsQueryable().Where(query).ToList());
+            
+            _journalRepository.Setup(x => x.AllWhereIncluding(It.IsAny<Expression<Func<Journal, bool>>>(), It.IsAny<Expression<Func<Journal, object>>[]>()))
+                .Returns((Expression<Func<Journal, bool>> query, Expression<Func<Journal, object>>[] _) => journals.AsQueryable().Where(query).ToList());
 
             _controller.BulkImportInstitutionalPrices(_viewModel);
 
-            _institutionJournalRepository.Verify(x => x.InsertOrUpdate(It.IsAny<InstitutionJournal>()), Times.Exactly(16));
+            _institutionJournalRepository.Verify(x => x.InsertOrUpdate(It.IsAny<InstitutionJournal>()), Times.Exactly(12));
         }
 
         [Fact]
@@ -132,24 +127,19 @@ namespace QOAM.Website.Tests.Controllers
             var journalCount = 0;
             var institutionCount = 0;
 
-            var journals = new List<Journal>();
-            var institutions = new List<Institution>();
+            var journals = (from ul in data
+                            from l in ul.Licenses
+                            select new Journal { Id = ++journalCount, ISSN = l.ISSN}).ToList();
+
+            var institutions = (from ul in data
+                                select new Institution { Id = ++institutionCount, ShortName = ul.Domain }).ToList();
 
             _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
-            _institutionRepository.Setup(x => x.Find(It.IsAny<string>())).Returns<string>(s =>
-            {
-                var institution = new Institution { Id = ++institutionCount, ShortName = s };
-                institutions.Add(institution);
-
-                return institution;
-            });
-            _journalRepository.Setup(x => x.FindByIssn(It.IsAny<string>())).Returns<string>(s =>
-            {
-                var journal = new Journal { Id = ++journalCount, ISSN = s };
-                journals.Add(journal);
-
-                return journal;
-            });
+            _institutionRepository.Setup(x => x.FindWhere(It.IsAny<Expression<Func<Institution, bool>>>()))
+                .Returns((Expression<Func<Institution, bool>> query) => institutions.AsQueryable().Where(query).ToList());
+            
+            _journalRepository.Setup(x => x.AllWhereIncluding(It.IsAny<Expression<Func<Journal, bool>>>(), It.IsAny<Expression<Func<Journal, object>>[]>()))
+                .Returns((Expression<Func<Journal, bool>> query, Expression<Func<Journal, object>>[] _) => journals.AsQueryable().Where(query).ToList());
 
             _institutionJournalRepository.Setup(x => x.Find(It.IsAny<int>(), It.IsAny<int>())).Returns<int, int>((i, j) => new InstitutionJournal
             {
@@ -159,7 +149,7 @@ namespace QOAM.Website.Tests.Controllers
 
             _controller.BulkImportInstitutionalPrices(_viewModel);
 
-            _institutionJournalRepository.Verify(x => x.InsertOrUpdate(It.IsAny<InstitutionJournal>()), Times.Exactly(16));
+            _institutionJournalRepository.Verify(x => x.InsertOrUpdate(It.IsAny<InstitutionJournal>()), Times.Exactly(12));
         }
 
         [Fact]
@@ -173,24 +163,19 @@ namespace QOAM.Website.Tests.Controllers
             var journalCount = 0;
             var institutionCount = 0;
 
-            var journals = new List<Journal>();
-            var institutions = new List<Institution>();
+            var journals = (from ul in data
+                            from l in ul.Licenses
+                            select new Journal { Id = ++journalCount, ISSN = l.ISSN}).ToList();
+
+            var institutions = (from ul in data
+                                select new Institution { Id = ++institutionCount, ShortName = ul.Domain }).ToList();
 
             _bulkImporter.Setup(x => x.Execute(_uploadFile.Object.InputStream)).Returns(data);
-            _institutionRepository.Setup(x => x.Find(It.IsAny<string>())).Returns<string>(s =>
-            {
-                var institution = new Institution { Id = ++institutionCount, ShortName = s };
-                institutions.Add(institution);
-
-                return institution;
-            });
-            _journalRepository.Setup(x => x.FindByIssn(It.IsAny<string>())).Returns<string>(s =>
-            {
-                var journal = new Journal { Id = ++journalCount, ISSN = s };
-                journals.Add(journal);
-
-                return journal;
-            });
+            _institutionRepository.Setup(x => x.FindWhere(It.IsAny<Expression<Func<Institution, bool>>>()))
+                .Returns((Expression<Func<Institution, bool>> query) => institutions.AsQueryable().Where(query).ToList());
+            
+            _journalRepository.Setup(x => x.AllWhereIncluding(It.IsAny<Expression<Func<Journal, bool>>>(), It.IsAny<Expression<Func<Journal, object>>[]>()))
+                .Returns((Expression<Func<Journal, bool>> query, Expression<Func<Journal, object>>[] _) => journals.AsQueryable().Where(query).ToList());
 
             _institutionJournalRepository.Setup(x => x.Find(It.IsAny<int>(), It.IsAny<int>())).Returns<int, int>((i, j) => new InstitutionJournal
             {

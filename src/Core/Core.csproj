@@ -328,6 +328,7 @@
     <Compile Include="Repositories\Filters\UserJournalFilter.cs" />
     <Compile Include="Repositories\IBlockedISSNRepository.cs" />
     <Compile Include="Repositories\ICornerRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IUserJournalRepository.cs" />
     <Compile Include="Repositories\UserJournalRepository.cs" />
     <Compile Include="Repositories\IValuationJournalPriceRepository.cs" />
