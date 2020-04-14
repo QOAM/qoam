@@ -7,10 +7,12 @@
 <div class="container main">
 
     <h2>@ViewBag.Title</h2>
-
-    <p>
+    
+    <div class="row">
+    <p class="col-sm-12">
         Are you sure you want to delete @Html.ActionLink(Model.Name, "Details", "Institutions", new { id = Model.Id }, null) ?
     </p>
+    </div>
 
     @using (Html.BeginForm("DeleteInstitution", "Admin", new { id = Model.Id }, FormMethod.Post, new { role = "form" }))
     {
@@ -19,10 +21,10 @@
         @Html.HiddenFor(m => m.Name)
         @Html.HiddenFor(m => m.ShortName)
 
-        <fieldset>
+        <fieldset class="row">
             <legend>@ViewBag.Title</legend>
 
-            <div class="col-lg-10 col-md-offset-2">
+            <div class="col-lg-10">
                 <input type="submit" value="Remove" class="btn btn-primary" />
             </div>
         </fieldset>

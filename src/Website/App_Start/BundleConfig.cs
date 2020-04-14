@@ -12,7 +12,10 @@
             BundleTable.EnableOptimizations = false;
 
             bundles.Add(new ScriptBundle("~/scripts/libraries") { Orderer = orderer }.Include("~/Scripts/jquery-{version}.js", "~/Scripts/bootstrap.js", "~/Scripts/modernizr-{version}.js", "~/Scripts/knockout-{version}.js", "~/Scripts/knockout.mapping-latest.js", "~/Scripts/knockout.isdirty.js", "~/Scripts/spin.js"));
-            bundles.Add(new ScriptBundle("~/scripts/form") { Orderer = orderer }.Include("~/Scripts/jquery.validate.js", "~/Scripts/jquery.validate.unobtrusive.js", "~/Scripts/jquery.unobtrusive-ajax.js", "~/Scripts/globalize/globalize.js", "~/Scripts/globalize/cultures/globalize.cultures.js", "~/Scripts/jquery.validate.globalize.js"));
+            bundles.Add(new ScriptBundle("~/scripts/form") { Orderer = orderer }
+                .Include("~/Scripts/cldr.js", "~/Scripts/cldr/supplemental.js", "~/Scripts/cldr/event.js", "~/Scripts/cldr/unresolved.js")
+                .Include("~/Scripts/globalize.js", "~/Scripts/globalize/number.js", "~/Scripts/globalize/plural.js", "~/Scripts/globalize/currency.js", "~/Scripts/globalize/date.js", "~/Scripts/globalize/message.js", "~/Scripts/globalize/relative-time.js", "~/Scripts/globalize/unit.js")
+                .Include("~/Scripts/jquery.validate.js", "~/Scripts/jquery.validate.unobtrusive.js", "~/Scripts/jquery.unobtrusive-ajax.js", "~/Scripts/jquery.validate.globalize.js"));
             bundles.Add(new ScriptBundle("~/scripts/application") { Orderer = orderer }.Include("~/Scripts/Helpers/*.js", "~/Scripts/Controllers/*.js"));
             bundles.Add(new ScriptBundle("~/scripts/fancybox") { Orderer = orderer }.Include("~/Scripts/jquery.ipicture.min.js", "~/Scripts/jquery.fancybox.js"));
             bundles.Add(new ScriptBundle("~/scripts/typeahead").Include("~/Scripts/typeahead.bundle.js"));

@@ -1,6 +1,6 @@
 ﻿function initializeForm(culture) {
 
-    Globalize.culture(culture);
+    loadAndSetLocales(culture);
 
     $('span.field-validation-valid, span.field-validation-error').each(function () {
         $(this).addClass('help-inline');
@@ -33,6 +33,24 @@
                 $(this).addClass('has-error');
             }
         });
+    });
+}
+
+function loadAndSetLocales(culture) {
+    $.when(
+        //$.get("cldr/main/en/ca-gregorian.json"),
+        $.get("/Scripts/cldr/supplemental/likelySubtags.json"),
+        $.get("/Scripts/cldr/supplemental/timeData.json"),
+        $.get("/Scripts/cldr/supplemental/weekData.json")
+    ).then(function() {
+
+        // Normalize $.get results, we only need the JSON, not the request statuses.
+        return [].slice.apply(arguments, [0]).map(function(result) {
+            return result[0];
+        });
+
+    }).then(Globalize.load).then(function() {
+        Globalize.locale(culture);
     });
 }
 
