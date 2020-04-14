@@ -6,7 +6,7 @@
 
     using QOAM.Core.Repositories.Filters;
 
-    public interface IInstitutionJournalRepository
+    public interface IInstitutionJournalRepository : IRepository
     {
         InstitutionJournal Find(int journalId, int institutionId);
 
