@@ -76,8 +76,9 @@
 
                                     @if (User.IsInRole(ApplicationRole.Admin))
                                     {
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                        @Html.ActionLink("Edit", "Edit", new { profile.Id, ReturnUrl = Request.Url.ToString() })
+                                        <span class="glyphicon glyphicon-pencil"></span>@Html.ActionLink("Edit", "Edit", new { profile.Id, ReturnUrl = Request.Url.ToString() })
+                                        @:&nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span>
+                                        @Html.ActionLink("Delete", "DeleteProfile", new { id = profile.Id, ReturnUrl = Request.Url.ToString() }, new { @class = "delete-profile", data_profile_name = @profile.DisplayName })
                                     }
                                 </td>
                             </tr>
@@ -88,6 +89,23 @@
                 @Html.PagedListPager(Model.Profiles, page => Url.Action("Index", new { page, Model.Name, Model.Institution, Model.Sort, Model.SortBy }), Html.PagedListRenderOptions())
             </div>
 
+        </div>
+    </div>
+</div>
+
+<div id="delete-profile-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Confirm delete</h3>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure you want to delete <strong><span id="profile-name"></span></strong>'s profile?</h4>
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="mr-20">Never mind</a><button type="button" class="btn btn-danger" data-dismiss="modal" id="confirm-delete-profile">Yes, delete.</button>
+            </div>
         </div>
     </div>
 </div>

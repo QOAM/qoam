@@ -28,6 +28,13 @@ a:active, a:focus { outline-style: none; }
     margin-top: 20px;
 }
 
+.mr-20 {
+    margin-right: 20px;
+}
+.ml-20 {
+    margin-left: 20px;
+}
+
 a.list-group-item {
     color: #428bca !important;
 }

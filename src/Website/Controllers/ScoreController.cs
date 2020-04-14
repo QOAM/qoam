@@ -212,7 +212,7 @@ namespace QOAM.Website.Controllers
                 EmailSubject = Resources.RequestValuation.Subject
             };
 
-            var currentUser = UserProfileRepository.Find(Authentication.CurrentUserId);
+            var currentUser = _userProfileRepository.Find(Authentication.CurrentUserId);
 
             // 2019-09-26 Leo Waaijers requested that the From field never be automatically filled in.
             //if (currentUser != null)
@@ -471,7 +471,7 @@ namespace QOAM.Website.Controllers
         {
             var addressList = address.Split(new[] { ',', ';' });
 
-            return addressList.All(a => !string.IsNullOrEmpty(a) && this.UserProfileRepository.FindByEmail(a) != null);
+            return addressList.All(a => !string.IsNullOrEmpty(a) && this._userProfileRepository.FindByEmail(a) != null);
         }
 
         string FillEmailUrl(RequestValuationViewModel model)

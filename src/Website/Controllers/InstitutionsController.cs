@@ -39,7 +39,7 @@
         public ViewResult Details(DetailsViewModel model)
         {
             model.Institution = this.institutionRepository.Find(model.Id);
-            model.UserProfiles = this.UserProfileRepository.Search(model.ToUserProfileFilter());
+            model.UserProfiles = this._userProfileRepository.Search(model.ToUserProfileFilter());
             model.BaseScoreCardStats = this.baseScoreCardRepository.CalculateStats(model.Institution);
             model.ValuationScoreCardStats = this.valuationScoreCardRepository.CalculateStats(model.Institution);
 

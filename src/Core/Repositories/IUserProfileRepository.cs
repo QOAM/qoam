@@ -25,5 +25,6 @@
 
         void UpdateProviderUserId(UserProfile userProfile, string providerUserId);
         void RemoveInactive(TimeSpan toBeRemovedWindow);
+        void Delete(UserProfile profile);
     }
 }
