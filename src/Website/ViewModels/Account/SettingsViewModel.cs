@@ -5,7 +5,7 @@
     public class SettingsViewModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Display name"), MaxLength(100)]
         public string DisplayName { get; set; }
 
         [Display(Name = "ORCID")]
