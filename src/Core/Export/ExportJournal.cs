@@ -1,4 +1,5 @@
-﻿using CsvHelper.Configuration.Attributes;
+﻿using System.Collections.Generic;
+using CsvHelper.Configuration.Attributes;
 
 namespace QOAM.Core.Export
 {
@@ -17,16 +18,23 @@ namespace QOAM.Core.Export
         public string DataSource { get; set; }
         public string Languages { get; set; }
         public string Subjects { get; set; }
-        [Name("DOAJ Seal")]
+        [Name("DOAJ Seal"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]
         public string DoajSeal { get; set; }
 
         [Name("Score cards in 2019")]
         public int ScoreCardsIn2019 { get; set; }
 
-        [Name("Articles in 2019")]
+        [Ignore, Name("Articles in 2019")]
         public int ArticlesIn2019 { get; set; }
 
-        [Name("Plan S Journal")]
+        [Name("Plan S Journal"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]
         public string PlanSJournal { get; set; }
+
+        public string Score { get; set; }
+        [Name("No-Fee Journal"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]
+        public string NoFee { get; set; }
+
+        [Ignore] // We will write this field manually to the csv file
+        public Dictionary<int, int> ArticlesPerYear { get; set; }
     }
 }

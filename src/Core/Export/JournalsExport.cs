@@ -1,5 +1,7 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using NPOI.SS.Formula.Functions;
+using QOAM.Core.Helpers;
 using QOAM.Core.Import;
 
 namespace QOAM.Core.Export
@@ -59,8 +61,11 @@ namespace QOAM.Core.Export
                     Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
                     DoajSeal = j.DoajSeal ? "Yes" : "No",
                     ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
-                    ArticlesIn2019 = j.ArticlesPerYear.SingleOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0,
-                    PlanSJournal = j.PlanS ? "Yes" : "No"
+                    //ArticlesIn2019 = j.ArticlesPerYear.SingleOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0,
+                    PlanSJournal = j.PlanS ? "Yes" : "No",
+                    Score = (j.ValuationScore?.AverageScore ?? 0).ToString("0.0"),
+                    NoFee = j.NoFee ? "Yes" : "No",
+                    ArticlesPerYear = j.ArticlesPerYear.DistinctBy(a => a.Year).ToDictionary(key => key.Year, value => value.NumberOfArticles)
                 })
                 .ToList();
 
@@ -79,7 +84,47 @@ namespace QOAM.Core.Export
                     csvWriter.WriteField($"sep={csvWriter.Configuration.Delimiter}");
                     csvWriter.NextRecord();
 
-                    csvWriter.WriteRecords(journals);
+                    csvWriter.WriteHeader<ExportJournal>();
+
+                    var articlesPerYear = journals.SelectMany(j => j.ArticlesPerYear).ToList();
+                    var minArticlesPerYear = articlesPerYear.Min(x => x.Key);
+                    
+                    // some journals have incorrect data on the year field, so we set the current year as a max failsafe
+                    var maxArticlesPerYear = Math.Min(articlesPerYear.Max(x => x.Key), DateTime.Now.Year);
+
+                    for (var year = minArticlesPerYear; year < maxArticlesPerYear + 1; year++)
+                    {
+                        csvWriter.WriteField($"Articles in {year}");
+                    }
+
+                    csvWriter.NextRecord();
+
+                    foreach (var j in journals)
+                    {
+                        csvWriter.WriteField(j.Title);
+                        csvWriter.WriteField(j.ISSN);
+                        csvWriter.WriteField(j.Link);
+                        csvWriter.WriteField(j.DateAdded);
+                        csvWriter.WriteField(j.Country);
+                        csvWriter.WriteField(j.Publisher);
+                        csvWriter.WriteField(j.DataSource);
+                        csvWriter.WriteField(j.Languages);
+                        csvWriter.WriteField(j.Subjects);
+                        csvWriter.WriteField(j.DoajSeal);
+                        csvWriter.WriteField(j.ScoreCardsIn2019);
+                        csvWriter.WriteField(j.PlanSJournal);
+                        csvWriter.WriteField(j.Score);
+                        csvWriter.WriteField(j.NoFee);
+
+                        for (var year = minArticlesPerYear; year < maxArticlesPerYear + 1; year++)
+                        {
+                            csvWriter.WriteField(j.ArticlesPerYear.FirstOrDefault(x => x.Key == year).Value);
+                        }
+
+                        csvWriter.NextRecord();
+                    }
+
+                    //csvWriter.WriteRecords(journals);
                 }
         }
 
@@ -102,8 +147,11 @@ namespace QOAM.Core.Export
                                             Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
                                             DoajSeal = j.DoajSeal ? "Yes" : "No",
                                             ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
-                                            ArticlesIn2019 = j.ArticlesPerYear.FirstOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0,
-                                            PlanSJournal = j.PlanS ? "Yes" : "No"
+                                            //ArticlesIn2019 = j.ArticlesPerYear.FirstOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0,
+                                            PlanSJournal = j.PlanS ? "Yes" : "No",
+                                            Score = (j.ValuationScore?.AverageScore ?? 0).ToString("0.0"),
+                                            NoFee = j.NoFee ? "Yes" : "No",
+                                            ArticlesPerYear = j.ArticlesPerYear.DistinctBy(a => a.Year).ToDictionary(key => key.Year, value => value.NumberOfArticles)
                                         }).ToList();
         }
 
