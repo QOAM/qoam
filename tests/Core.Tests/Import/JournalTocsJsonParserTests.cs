@@ -31,8 +31,9 @@ namespace QOAM.Core.Tests.Import
             var journals = parser.Parse(new List<string> { JournalTocsJson() });
 
             Assert.Equal(0, journals[0].ArticlesPerYear.Count);
-            Assert.Equal(1, journals[1].ArticlesPerYear.Count);
+            Assert.Equal(2, journals[1].ArticlesPerYear.Count);
             Assert.Equal(8, journals[1].ArticlesPerYear.Single(x => x.Year == 2019).NumberOfArticles);
+            Assert.Equal(6, journals[1].ArticlesPerYear.Single(x => x.Year == 2018).NumberOfArticles);
         }
 
         [Fact]

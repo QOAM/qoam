@@ -71,7 +71,6 @@ namespace QOAM.Core.Export
 
             ExportJournals(stream, journals);
         }
-
         
         void ExportJournals(Stream stream, List<ExportJournal> journals)
         {
@@ -84,20 +83,9 @@ namespace QOAM.Core.Export
                     csvWriter.WriteField($"sep={csvWriter.Configuration.Delimiter}");
                     csvWriter.NextRecord();
 
-                    csvWriter.WriteHeader<ExportJournal>();
+                    var (minYear, maxYear) = GetMinAndMaxColumnYears(journals);
 
-                    var articlesPerYear = journals.SelectMany(j => j.ArticlesPerYear).ToList();
-                    var minArticlesPerYear = articlesPerYear.Min(x => x.Key);
-                    
-                    // some journals have incorrect data on the year field, so we set the current year as a max failsafe
-                    var maxArticlesPerYear = Math.Min(articlesPerYear.Max(x => x.Key), DateTime.Now.Year);
-
-                    for (var year = minArticlesPerYear; year < maxArticlesPerYear + 1; year++)
-                    {
-                        csvWriter.WriteField($"Articles in {year}");
-                    }
-
-                    csvWriter.NextRecord();
+                    WriteHeaders(csvWriter, minYear, maxYear);
 
                     foreach (var j in journals)
                     {
@@ -116,16 +104,37 @@ namespace QOAM.Core.Export
                         csvWriter.WriteField(j.Score);
                         csvWriter.WriteField(j.NoFee);
 
-                        for (var year = minArticlesPerYear; year < maxArticlesPerYear + 1; year++)
+                        for (var year = minYear; year < maxYear + 1; year++)
                         {
                             csvWriter.WriteField(j.ArticlesPerYear.FirstOrDefault(x => x.Key == year).Value);
                         }
 
                         csvWriter.NextRecord();
                     }
-
-                    //csvWriter.WriteRecords(journals);
                 }
+        }
+
+        static void WriteHeaders(IWriter csvWriter, int minYear, int maxYear)
+        {
+            csvWriter.WriteHeader<ExportJournal>();
+
+            for (var year = minYear; year < maxYear + 1; year++)
+            {
+                csvWriter.WriteField($"Articles in {year}");
+            }
+
+            csvWriter.NextRecord();
+        }
+
+        static (int minYear, int maxYear) GetMinAndMaxColumnYears(List<ExportJournal> journals)
+        {
+            var articlesPerYear = journals.SelectMany(j => j.ArticlesPerYear).ToList();
+            var minYear = articlesPerYear.Any() ? articlesPerYear.Min(x => x.Key) : 2018;
+
+            // some journals have incorrect data on the year field, so we set the current year as a max failsafe
+            var maxYear = articlesPerYear.Any() ? Math.Min(articlesPerYear.Max(x => x.Key), DateTime.Now.Year) : DateTime.Now.Year;
+
+            return (minYear, maxYear);
         }
 
         List<ExportJournal> GetExportJournals(bool openAccessOnly)
