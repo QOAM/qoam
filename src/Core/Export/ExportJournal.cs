@@ -21,11 +21,11 @@ namespace QOAM.Core.Export
         [Name("DOAJ Seal"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]
         public string DoajSeal { get; set; }
 
+        [Name("Score cards in 2018")]
+        public int ScoreCardsIn2018 { get; set; }
+
         [Name("Score cards in 2019")]
         public int ScoreCardsIn2019 { get; set; }
-
-        [Ignore, Name("Articles in 2019")]
-        public int ArticlesIn2019 { get; set; }
 
         [Name("Plan S Journal"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]
         public string PlanSJournal { get; set; }

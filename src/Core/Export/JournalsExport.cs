@@ -48,25 +48,7 @@ namespace QOAM.Core.Export
 
             var journals = journalRepository
                 .AllWhereIncluding(j => j.DataSource != JournalsImportSource.JournalTOCs.ToString(), j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects)
-                .Select(j => new ExportJournal
-                {
-                    Title = j.Title,
-                    ISSN = j.ISSN,
-                    Link = j.Link,
-                    DateAdded = j.DateAdded,
-                    Country = j.Country.Name,
-                    Publisher = j.Publisher.Name,
-                    DataSource = j.DataSource,
-                    Languages = string.Join(",", j.Languages.Select(l => l.Name)),
-                    Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
-                    DoajSeal = j.DoajSeal ? "Yes" : "No",
-                    ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
-                    //ArticlesIn2019 = j.ArticlesPerYear.SingleOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0,
-                    PlanSJournal = j.PlanS ? "Yes" : "No",
-                    Score = (j.ValuationScore?.AverageScore ?? 0).ToString("0.0"),
-                    NoFee = j.NoFee ? "Yes" : "No",
-                    ArticlesPerYear = j.ArticlesPerYear.DistinctBy(a => a.Year).ToDictionary(key => key.Year, value => value.NumberOfArticles)
-                })
+                .Select(ToExportJournal)
                 .ToList();
 
             ExportJournals(stream, journals);
@@ -99,6 +81,7 @@ namespace QOAM.Core.Export
                         csvWriter.WriteField(j.Languages);
                         csvWriter.WriteField(j.Subjects);
                         csvWriter.WriteField(j.DoajSeal);
+                        csvWriter.WriteField(j.ScoreCardsIn2018);
                         csvWriter.WriteField(j.ScoreCardsIn2019);
                         csvWriter.WriteField(j.PlanSJournal);
                         csvWriter.WriteField(j.Score);
@@ -143,25 +126,7 @@ namespace QOAM.Core.Export
                 ? journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards)
                 : journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards);
 
-            return journals.Select(j => new ExportJournal
-                                        {
-                                            Title = j.Title,
-                                            ISSN = j.ISSN,
-                                            Link = j.Link,
-                                            DateAdded = j.DateAdded,
-                                            Country = j.Country.Name,
-                                            Publisher = j.Publisher.Name,
-                                            DataSource = j.DataSource,
-                                            Languages = string.Join(",", j.Languages.Select(l => l.Name)),
-                                            Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
-                                            DoajSeal = j.DoajSeal ? "Yes" : "No",
-                                            ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
-                                            //ArticlesIn2019 = j.ArticlesPerYear.FirstOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0,
-                                            PlanSJournal = j.PlanS ? "Yes" : "No",
-                                            Score = (j.ValuationScore?.AverageScore ?? 0).ToString("0.0"),
-                                            NoFee = j.NoFee ? "Yes" : "No",
-                                            ArticlesPerYear = j.ArticlesPerYear.DistinctBy(a => a.Year).ToDictionary(key => key.Year, value => value.NumberOfArticles)
-                                        }).ToList();
+            return journals.Select(ToExportJournal).ToList();
         }
 
         static CsvConfiguration CreateCsvConfiguration()
@@ -171,6 +136,29 @@ namespace QOAM.Core.Export
                 HasHeaderRecord = true,
                 Delimiter = ";",
                 TrimOptions = TrimOptions.Trim
+            };
+        }
+
+        static ExportJournal ToExportJournal(Journal j)
+        {
+            return new ExportJournal
+            {
+                Title = j.Title,
+                ISSN = j.ISSN,
+                Link = j.Link,
+                DateAdded = j.DateAdded,
+                Country = j.Country.Name,
+                Publisher = j.Publisher.Name,
+                DataSource = j.DataSource,
+                Languages = string.Join(",", j.Languages.Select(l => l.Name)),
+                Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
+                DoajSeal = j.DoajSeal ? "Yes" : "No",
+                ScoreCardsIn2018 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2018),
+                ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
+                PlanSJournal = j.PlanS ? "Yes" : "No",
+                Score = (j.ValuationScore?.AverageScore ?? 0).ToString("0.0"),
+                NoFee = j.NoFee ? "Yes" : "No",
+                ArticlesPerYear = j.ArticlesPerYear.DistinctBy(a => a.Year).ToDictionary(key => key.Year, value => value.NumberOfArticles)
             };
         }
     }
