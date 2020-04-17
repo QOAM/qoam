@@ -31,7 +31,7 @@
         public ViewResult Index(IndexViewModel model)
         {
             model.Institutions = this.institutionRepository.All.ToSelectListItems("<All institutions>");
-            model.Profiles = this.UserProfileRepository.Search(model.ToFilter());
+            model.Profiles = this._userProfileRepository.Search(model.ToFilter());
             model.NumberOfBaseScoreCards = this.baseScoreCardRepository.Count(new ScoreCardFilter { State = ScoreCardState.Published });
             model.NumberOfValuationScoreCards = this.valuationScoreCardRepository.Count(new ScoreCardFilter { State = ScoreCardState.Published });
 
@@ -41,7 +41,7 @@
         [HttpGet, Route("{id:int}")]
         public ViewResult Details(DetailsViewModel model)
         {
-            model.UserProfile = this.UserProfileRepository.Find(model.Id);
+            model.UserProfile = this._userProfileRepository.Find(model.Id);
             model.BaseScoreCards = this.baseScoreCardRepository.FindForUser(model.ToScoreCardFilter(this.GetScoreCardStateFilter(model.Id)));
             model.BaseScoreCardStats = this.baseScoreCardRepository.CalculateStats(model.UserProfile);
             model.ValuationScoreCards = this.valuationScoreCardRepository.FindForUser(model.ToScoreCardFilter(this.GetScoreCardStateFilter(model.Id)));
@@ -56,7 +56,7 @@
         {
             var model = new EditViewModel
                             {
-                                UserProfile = this.UserProfileRepository.Find(id),
+                                UserProfile = this._userProfileRepository.Find(id),
                                 ReturnUrl = returnUrl
                             };
             
@@ -75,7 +75,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, EditViewModel model)
         {
-            model.UserProfile = this.UserProfileRepository.Find(id);
+            model.UserProfile = this._userProfileRepository.Find(id);
 
             if (this.ModelState.IsValid)
             {
@@ -85,6 +85,21 @@
             }
 
             return this.View(model);
+        }
+
+        [HttpGet, Route("{id:int}/delete")]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.DataAdmin)]
+        public ActionResult DeleteProfile(int id, string returnUrl)
+        {
+            var profile = _userProfileRepository.Find(id);
+
+            if (profile != null)
+            {
+                _userProfileRepository.Delete(profile);
+                _userProfileRepository.Save();
+            }
+
+            return Redirect(returnUrl);
         }
 
         [HttpGet, Route("{id:int}/basescorecards")]
@@ -107,7 +122,7 @@
         [OutputCache(CacheProfile = CacheProfile.OneQuarter)]
         public JsonResult Names(string query)
         {
-            return this.Json(this.UserProfileRepository.Names(query).Select(s => new { value = s }).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
+            return this.Json(this._userProfileRepository.Names(query).Select(s => new { value = s }).Take(AutoCompleteItemsCount).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         private ScoreCardState? GetScoreCardStateFilter(int userProfileId)

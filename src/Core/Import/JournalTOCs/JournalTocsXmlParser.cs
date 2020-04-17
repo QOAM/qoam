@@ -86,7 +86,7 @@ namespace QOAM.Core.Import.JournalTOCs
                 return new List<ArticlesPerYear>();
 
             var parsed = articlesIssued.Select(ParseArticlesIssued).ToList();
-            return parsed.Where(a => a.Year >= 2019).ToList();
+            return parsed.Where(a => a.Year >= 2018).ToList();
         }
 
         static ArticlesPerYear ParseArticlesIssued(XElement articlesPerYearElement)

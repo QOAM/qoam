@@ -1,5 +1,5 @@
 /*!
- * Globalize v1.0.0
+ * Globalize v1.4.2
  *
  * http://github.com/jquery/globalize
  *
@@ -7,7 +7,7 @@
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2015-04-23T12:02Z
+ * Date: 2019-03-07T13:47Z
  */
 (function( root, factory ) {
 
@@ -25,7 +25,7 @@
 	} else if ( typeof exports === "object" ) {
 
 		// Node, CommonJS
-		module.exports = factory( require( "cldrjs" ), require( "globalize" ) );
+		module.exports = factory( require( "cldrjs" ), require( "../globalize" ) );
 	} else {
 
 		// Global
@@ -37,8 +37,8 @@ var alwaysArray = Globalize._alwaysArray,
 	formatMessage = Globalize._formatMessage,
 	numberNumberingSystem = Globalize._numberNumberingSystem,
 	numberPattern = Globalize._numberPattern,
+	runtimeBind = Globalize._runtimeBind,
 	stringPad = Globalize._stringPad,
-	validate = Globalize._validate,
 	validateCldr = Globalize._validateCldr,
 	validateDefaultLocale = Globalize._validateDefaultLocale,
 	validateParameterPresence = Globalize._validateParameterPresence,
@@ -59,14 +59,6 @@ var validateParameterTypeCurrency = function( value, name ) {
 
 
 
-var validatePluralModulePresence = function() {
-	validate( "E_MISSING_PLURAL_MODULE", "Plural module not loaded.",
-		Globalize.plural !== undefined, {} );
-};
-
-
-
-
 /**
  * supplementalOverride( currency, pattern, cldr )
  *
@@ -74,15 +66,14 @@ var validatePluralModulePresence = function() {
  */
 var currencySupplementalOverride = function( currency, pattern, cldr ) {
 	var digits,
-		fraction = cldr.supplemental([ "currencyData/fractions", currency ]) ||
+		fraction = "",
+		fractionData = cldr.supplemental([ "currencyData/fractions", currency ]) ||
 			cldr.supplemental( "currencyData/fractions/DEFAULT" );
 
-	digits = +fraction._digits;
+	digits = +fractionData._digits;
 
 	if ( digits ) {
-		fraction = "." + stringPad( "0", digits ).slice( 0, -1 ) + fraction._rounding;
-	} else {
-		fraction = "";
+		fraction = "." + stringPad( "0", digits ).slice( 0, -1 ) + fractionData._rounding;
 	}
 
 	return pattern.replace( /\.(#+|0*[0-9]|0+[0-9]?)/g, fraction );
@@ -162,6 +153,34 @@ var currencyNameFormat = function( formattedNumber, pluralForm, properties ) {
 
 
 
+var currencyFormatterFn = function( numberFormatter, pluralGenerator, properties ) {
+	var fn;
+
+	// Return formatter when style is "code" or "name".
+	if ( pluralGenerator && properties ) {
+		fn = function currencyFormatter( value ) {
+			validateParameterPresence( value, "value" );
+			validateParameterTypeNumber( value, "value" );
+			return currencyNameFormat(
+				numberFormatter( value ),
+				pluralGenerator( value ),
+				properties
+			);
+		};
+
+	// Return formatter when style is "symbol" or "accounting".
+	} else {
+		fn = function currencyFormatter( value ) {
+			return numberFormatter( value );
+		};
+	}
+
+	return fn;
+};
+
+
+
+
 /**
  * nameProperties( currency, cldr )
  *
@@ -205,16 +224,25 @@ var regexpNotS = /[\0-#%-\*,-;\?-\]_a-\{\}\x7F-\xA1\xA7\xAA\xAB\xAD\xB2\xB3\xB5-
  * Return pattern replacing `¤` with the appropriate currency symbol literal.
  */
 var currencySymbolProperties = function( currency, cldr, options ) {
-	var currencySpacing, pattern,
+	var currencySpacing, pattern, symbol,
+		symbolEntries = [ "symbol" ],
 		regexp = {
 			"[:digit:]": /\d/,
 			"[:^S:]": regexpNotS
-		},
-		symbol = cldr.main([
+		};
+
+	// If options.symbolForm === "narrow" was passed, prepend it.
+	if ( options.symbolForm === "narrow" ) {
+		symbolEntries.unshift( "symbol-alt-narrow" );
+	}
+
+	symbolEntries.some(function( symbolEntry ) {
+		return symbol = cldr.main([
 			"numbers/currencies",
 			currency,
-			"symbol"
+			symbolEntry
 		]);
+	});
 
 	currencySpacing = [ "beforeCurrency", "afterCurrency" ].map(function( position ) {
 		return cldr.main([
@@ -294,7 +322,10 @@ var objectOmit = function( object, keys ) {
 
 function validateRequiredCldr( path, value ) {
 	validateCldr( path, value, {
-		skip: [ /supplemental\/currencyData\/fractions\/[A-Za-z]{3}$/ ]
+		skip: [
+			/numbers\/currencies\/[^/]+\/symbol-alt-/,
+			/supplemental\/currencyData\/fractions\/[A-Za-z]{3}$/
+		]
 	});
 }
 
@@ -312,16 +343,18 @@ function validateRequiredCldr( path, value ) {
  */
 Globalize.currencyFormatter =
 Globalize.prototype.currencyFormatter = function( currency, options ) {
-	var cldr, numberFormatter, plural, properties, style;
+	var args, cldr, numberFormatter, pluralGenerator, properties, returnFn, style;
 
 	validateParameterPresence( currency, "currency" );
 	validateParameterTypeCurrency( currency, "currency" );
 
 	validateParameterTypePlainObject( options, "options" );
 
-	options = options || {};
-	style = options.style || "symbol";
 	cldr = this.cldr;
+	options = options || {};
+
+	args = [ currency, options ];
+	style = options.style || "symbol";
 
 	validateDefaultLocale( cldr );
 
@@ -341,18 +374,23 @@ Globalize.prototype.currencyFormatter = function( currency, options ) {
 
 	// Return formatter when style is "symbol" or "accounting".
 	if ( style === "symbol" || style === "accounting" ) {
-		return this.numberFormatter( options );
-	}
+		numberFormatter = this.numberFormatter( options );
+
+		returnFn = currencyFormatterFn( numberFormatter );
+
+		runtimeBind( args, cldr, returnFn, [ numberFormatter ] );
 
 	// Return formatter when style is "code" or "name".
-	validatePluralModulePresence();
-	numberFormatter = this.numberFormatter( options );
-	plural = this.pluralGenerator();
-	return function( value ) {
-		validateParameterPresence( value, "value" );
-		validateParameterTypeNumber( value, "value" );
-		return currencyNameFormat( numberFormatter( value ), plural( value ), properties );
-	};
+	} else {
+		numberFormatter = this.numberFormatter( options );
+		pluralGenerator = this.pluralGenerator();
+
+		returnFn = currencyFormatterFn( numberFormatter, pluralGenerator, properties );
+
+		runtimeBind( args, cldr, returnFn, [ numberFormatter, pluralGenerator, properties ] );
+	}
+
+	return returnFn;
 };
 
 /**

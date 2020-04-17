@@ -29,7 +29,8 @@ namespace QOAM.Core.Tests.Import
             var journals = parser.Parse(new List<string> { GetJournalTocsFirst500Xml() });
 
             var firstJournal = journals.First();
-            Assert.Equal(2, firstJournal.ArticlesPerYear.Count);
+            Assert.Equal(3, firstJournal.ArticlesPerYear.Count);
+            Assert.Equal(26, firstJournal.ArticlesPerYear.Single(x => x.Year == 2018).NumberOfArticles);
             Assert.Equal(12, firstJournal.ArticlesPerYear.Single(x => x.Year == 2019).NumberOfArticles);
             Assert.Equal(11, firstJournal.ArticlesPerYear.Single(x => x.Year == 2020).NumberOfArticles);
 

@@ -27,13 +27,13 @@
             Requires.NotNull(userProfileRepository, nameof(userProfileRepository));
             Requires.NotNull(authentication, nameof(authentication));
 
-            this.UserProfileRepository = userProfileRepository;
+            this._userProfileRepository = userProfileRepository;
             this.Authentication = authentication;
             this.valuationScoreCardRepository = valuationScoreCardRepository;
             this.baseScoreCardRepository = baseScoreCardRepository;
         }
 
-        public IUserProfileRepository UserProfileRepository { get; private set; }
+        public IUserProfileRepository _userProfileRepository { get; private set; }
         public IAuthentication Authentication { get; private set; }
         public IBaseScoreCardRepository baseScoreCardRepository { get; private set; }
         public IValuationScoreCardRepository valuationScoreCardRepository { get; private set; }
@@ -51,7 +51,7 @@
                 return;
             }
 
-            this.ViewBag.User = this.UserProfileRepository.Find(this.Authentication.CurrentUserId);
+            this.ViewBag.User = this._userProfileRepository.Find(this.Authentication.CurrentUserId);
         }
 
         private static string GetPageId(ActionExecutingContext filterContext)

@@ -75,7 +75,7 @@ namespace QOAM.Core.Import.JournalTOCs
                 list.Add(perYear);
             }
 
-            return list.Where(a => a.Year >= 2019).ToList();
+            return list.Where(a => a.Year >= 2018).ToList();
         }
 
         #endregion

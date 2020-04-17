@@ -1,5 +1,6 @@
-﻿using System.Globalization;
-using NPOI.SS.Formula.Functions;
+﻿using System;
+using System.Globalization;
+using QOAM.Core.Helpers;
 using QOAM.Core.Import;
 
 namespace QOAM.Core.Export
@@ -46,27 +47,11 @@ namespace QOAM.Core.Export
 
             var journals = journalRepository
                 .AllWhereIncluding(j => j.DataSource != JournalsImportSource.JournalTOCs.ToString(), j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects)
-                .Select(j => new ExportJournal
-                {
-                    Title = j.Title,
-                    ISSN = j.ISSN,
-                    Link = j.Link,
-                    DateAdded = j.DateAdded,
-                    Country = j.Country.Name,
-                    Publisher = j.Publisher.Name,
-                    DataSource = j.DataSource,
-                    Languages = string.Join(",", j.Languages.Select(l => l.Name)),
-                    Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
-                    DoajSeal = j.DoajSeal ? "Yes" : "No",
-                    ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
-                    ArticlesIn2019 = j.ArticlesPerYear.SingleOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0,
-                    PlanSJournal = j.PlanS ? "Yes" : "No"
-                })
+                .Select(ToExportJournal)
                 .ToList();
 
             ExportJournals(stream, journals);
         }
-
         
         void ExportJournals(Stream stream, List<ExportJournal> journals)
         {
@@ -79,8 +64,68 @@ namespace QOAM.Core.Export
                     csvWriter.WriteField($"sep={csvWriter.Configuration.Delimiter}");
                     csvWriter.NextRecord();
 
-                    csvWriter.WriteRecords(journals);
+                    var (minYear, maxYear) = GetMinAndMaxColumnYears(journals);
+
+                    WriteHeaders(csvWriter, minYear, maxYear);
+
+                    foreach (var j in journals)
+                    {
+                        csvWriter.WriteField(j.Title);
+                        csvWriter.WriteField(j.ISSN);
+                        csvWriter.WriteField(j.Link);
+                        csvWriter.WriteField(j.DateAdded);
+                        csvWriter.WriteField(j.Country);
+                        csvWriter.WriteField(j.Publisher);
+                        csvWriter.WriteField(j.DataSource);
+                        csvWriter.WriteField(j.Languages);
+                        csvWriter.WriteField(j.Subjects);
+                        csvWriter.WriteField(j.DoajSeal);
+                        csvWriter.WriteField(j.PlanSJournal);
+                        csvWriter.WriteField(j.Score);
+                        csvWriter.WriteField(j.NoFee);
+
+                        WriteDynamicFields(csvWriter, j.ScoreCardsPerYear, minYear, maxYear);
+                        WriteDynamicFields(csvWriter, j.ArticlesPerYear, minYear, maxYear);
+                        
+                        csvWriter.NextRecord();
+                    }
                 }
+        }
+
+        static void WriteHeaders(IWriter csvWriter, int minYear, int maxYear)
+        {
+            csvWriter.WriteHeader<ExportJournal>();
+
+            WriteDynamicHeaders(csvWriter, "Score cards in", minYear, maxYear);
+            WriteDynamicHeaders(csvWriter, "Articles in", minYear, maxYear);
+            
+            csvWriter.NextRecord();
+        }
+
+        static (int minYear, int maxYear) GetMinAndMaxColumnYears(List<ExportJournal> journals)
+        {
+            var articlesPerYear = journals.SelectMany(j => j.ArticlesPerYear).ToList();
+            var minYear = articlesPerYear.Any() ? articlesPerYear.Min(x => x.Key) : 2018;
+
+            // some journals have incorrect data on the year field, so we set the current year as a max failsafe
+            var maxYear = articlesPerYear.Any() ? Math.Min(articlesPerYear.Max(x => x.Key), DateTime.Now.Year) : DateTime.Now.Year;
+
+            return (minYear, maxYear);
+        }
+
+        static void WriteDynamicHeaders(IWriterRow csvWriter, string text, int minYear, int maxYear)
+        {
+            for (var year = minYear; year < maxYear + 1; year++)
+            {
+                csvWriter.WriteField($"{text} {year}");
+            }
+        }
+        static void WriteDynamicFields(IWriterRow csvWriter, Dictionary<int, int> dictionary, int minYear, int maxYear)
+        {
+            for (var year = minYear; year < maxYear + 1; year++)
+            {
+                csvWriter.WriteField(dictionary.FirstOrDefault(x => x.Key == year).Value);
+            }
         }
 
         List<ExportJournal> GetExportJournals(bool openAccessOnly)
@@ -89,22 +134,7 @@ namespace QOAM.Core.Export
                 ? journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards)
                 : journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards);
 
-            return journals.Select(j => new ExportJournal
-                                        {
-                                            Title = j.Title,
-                                            ISSN = j.ISSN,
-                                            Link = j.Link,
-                                            DateAdded = j.DateAdded,
-                                            Country = j.Country.Name,
-                                            Publisher = j.Publisher.Name,
-                                            DataSource = j.DataSource,
-                                            Languages = string.Join(",", j.Languages.Select(l => l.Name)),
-                                            Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
-                                            DoajSeal = j.DoajSeal ? "Yes" : "No",
-                                            ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
-                                            ArticlesIn2019 = j.ArticlesPerYear.FirstOrDefault(x => x.Year == 2019)?.NumberOfArticles ?? 0,
-                                            PlanSJournal = j.PlanS ? "Yes" : "No"
-                                        }).ToList();
+            return journals.Select(ToExportJournal).ToList();
         }
 
         static CsvConfiguration CreateCsvConfiguration()
@@ -114,6 +144,31 @@ namespace QOAM.Core.Export
                 HasHeaderRecord = true,
                 Delimiter = ";",
                 TrimOptions = TrimOptions.Trim
+            };
+        }
+
+        static ExportJournal ToExportJournal(Journal j)
+        {
+            return new ExportJournal
+            {
+                Title = j.Title,
+                ISSN = j.ISSN,
+                Link = j.Link,
+                DateAdded = j.DateAdded,
+                Country = j.Country.Name,
+                Publisher = j.Publisher.Name,
+                DataSource = j.DataSource,
+                Languages = string.Join(",", j.Languages.Select(l => l.Name)),
+                Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
+                DoajSeal = j.DoajSeal ? "Yes" : "No",
+                PlanSJournal = j.PlanS ? "Yes" : "No",
+                Score = (j.ValuationScore?.AverageScore ?? 0).ToString("0.0"),
+                NoFee = j.NoFee ? "Yes" : "No",
+                ScoreCardsPerYear = j.ValuationScoreCards
+                    .Where(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year >= 2018)
+                    .GroupBy(vsc => vsc.DatePublished.Value.Year)
+                    .ToDictionary(grouping => grouping.Key, grouping => grouping.Count()),
+                ArticlesPerYear = j.ArticlesPerYear.DistinctBy(a => a.Year).ToDictionary(key => key.Year, value => value.NumberOfArticles)
             };
         }
     }

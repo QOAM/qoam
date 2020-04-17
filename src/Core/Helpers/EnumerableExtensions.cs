@@ -1,4 +1,6 @@
-﻿namespace QOAM.Core.Helpers
+﻿using System;
+
+namespace QOAM.Core.Helpers
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -30,6 +32,18 @@
             {
                 yield return source.Take(chunksize);
                 source = source.Skip(chunksize);
+            }
+        }
+
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+        {
+            var seenKeys = new HashSet<TKey>();
+            foreach (var element in source)
+            {
+                if (seenKeys.Add(keySelector(element)))
+                {
+                    yield return element;
+                }
             }
         }
     }
