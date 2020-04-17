@@ -81,17 +81,13 @@ namespace QOAM.Core.Export
                         csvWriter.WriteField(j.Languages);
                         csvWriter.WriteField(j.Subjects);
                         csvWriter.WriteField(j.DoajSeal);
-                        csvWriter.WriteField(j.ScoreCardsIn2018);
-                        csvWriter.WriteField(j.ScoreCardsIn2019);
                         csvWriter.WriteField(j.PlanSJournal);
                         csvWriter.WriteField(j.Score);
                         csvWriter.WriteField(j.NoFee);
 
-                        for (var year = minYear; year < maxYear + 1; year++)
-                        {
-                            csvWriter.WriteField(j.ArticlesPerYear.FirstOrDefault(x => x.Key == year).Value);
-                        }
-
+                        WriteDynamicFields(csvWriter, j.ScoreCardsPerYear, minYear, maxYear);
+                        WriteDynamicFields(csvWriter, j.ArticlesPerYear, minYear, maxYear);
+                        
                         csvWriter.NextRecord();
                     }
                 }
@@ -101,11 +97,9 @@ namespace QOAM.Core.Export
         {
             csvWriter.WriteHeader<ExportJournal>();
 
-            for (var year = minYear; year < maxYear + 1; year++)
-            {
-                csvWriter.WriteField($"Articles in {year}");
-            }
-
+            WriteDynamicHeaders(csvWriter, "Score cards in", minYear, maxYear);
+            WriteDynamicHeaders(csvWriter, "Articles in", minYear, maxYear);
+            
             csvWriter.NextRecord();
         }
 
@@ -118,6 +112,21 @@ namespace QOAM.Core.Export
             var maxYear = articlesPerYear.Any() ? Math.Min(articlesPerYear.Max(x => x.Key), DateTime.Now.Year) : DateTime.Now.Year;
 
             return (minYear, maxYear);
+        }
+
+        static void WriteDynamicHeaders(IWriterRow csvWriter, string text, int minYear, int maxYear)
+        {
+            for (var year = minYear; year < maxYear + 1; year++)
+            {
+                csvWriter.WriteField($"{text} {year}");
+            }
+        }
+        static void WriteDynamicFields(IWriterRow csvWriter, Dictionary<int, int> dictionary, int minYear, int maxYear)
+        {
+            for (var year = minYear; year < maxYear + 1; year++)
+            {
+                csvWriter.WriteField(dictionary.FirstOrDefault(x => x.Key == year).Value);
+            }
         }
 
         List<ExportJournal> GetExportJournals(bool openAccessOnly)
@@ -153,11 +162,13 @@ namespace QOAM.Core.Export
                 Languages = string.Join(",", j.Languages.Select(l => l.Name)),
                 Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
                 DoajSeal = j.DoajSeal ? "Yes" : "No",
-                ScoreCardsIn2018 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2018),
-                ScoreCardsIn2019 = j.ValuationScoreCards.Count(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year == 2019),
                 PlanSJournal = j.PlanS ? "Yes" : "No",
                 Score = (j.ValuationScore?.AverageScore ?? 0).ToString("0.0"),
                 NoFee = j.NoFee ? "Yes" : "No",
+                ScoreCardsPerYear = j.ValuationScoreCards
+                    .Where(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year >= 2018)
+                    .GroupBy(vsc => vsc.DatePublished.Value.Year)
+                    .ToDictionary(grouping => grouping.Key, grouping => grouping.Count()),
                 ArticlesPerYear = j.ArticlesPerYear.DistinctBy(a => a.Year).ToDictionary(key => key.Year, value => value.NumberOfArticles)
             };
         }

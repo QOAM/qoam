@@ -21,11 +21,11 @@ namespace QOAM.Core.Export
         [Name("DOAJ Seal"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]
         public string DoajSeal { get; set; }
 
-        [Name("Score cards in 2018")]
-        public int ScoreCardsIn2018 { get; set; }
+        //[Name("Score cards in 2018")]
+        //public int ScoreCardsIn2018 { get; set; }
 
-        [Name("Score cards in 2019")]
-        public int ScoreCardsIn2019 { get; set; }
+        //[Name("Score cards in 2019")]
+        //public int ScoreCardsIn2019 { get; set; }
 
         [Name("Plan S Journal"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]
         public string PlanSJournal { get; set; }
@@ -36,5 +36,8 @@ namespace QOAM.Core.Export
 
         [Ignore] // We will write this field manually to the csv file
         public Dictionary<int, int> ArticlesPerYear { get; set; }
+
+        [Ignore] // We will write this field manually to the csv file
+        public Dictionary<int, int> ScoreCardsPerYear { get; set; }
     }
 }
