@@ -25,10 +25,21 @@
 
             <h3 id="quality-indicator">Quality indicator</h3>
             <p>
-                QOAM is based on evaluations by academic authors. Via a concise journal score card they share their experience with the peer review and editorial board, and give a price-performance appreciation. 
-                The robustness of a score is defined as 1 + logN, where N is the number of scorers. The ‘Quality indicator’ of a journal, as presented on QOAM’s journal page, is the product of the average journal score and its robustness. As a consequence, quality indicators in QOAM range from 1 (score 1 by 1 person) to 15 (score 5 by 100 persons).
-                <br/>
-                QOAM also mirrors the <a href="https://doajournals.wordpress.com/2015/06/11/doaj-seal-is-now-live-on-the-site/" target="_blank">DOAJ Seal of Approval</a>, an accrediation service for fully OA journals.
+                It is important to realise that ‘quality’ in the context of QOAM relates to the quality of a journal’s service to authors, rather than to a hypothesized quality of a journal’s scientific and scholarly content as based on citation metrics.
+            </p>
+            
+            <p>
+                In QOAM, academic authors score the experience they have had with the journal’s peer review and editorial board from 1 to 5 via a concise journal score card. 
+                The <strong><em>quality indicator</em></strong> of a journal is then defined as the product of the average score of the journal and the ‘robustness’ of this score.
+            </p>
+            
+            <p>
+                The robustness relates the number <strong>N</strong> of score cards to the number <strong>A</strong> of articles (read DOIs) of the journal, both measured over the same period of time. 
+                As the number of articles of a journal varies widely, some logarithmic scaling is used to bring the result within scope. Journals with less than 10 articles are left aside. 
+                The time period is a moving window over the current year and the previous two years.
+            </p>
+            <p>
+                The actual formula for the robustness is: 1 + log (<strong>N</strong>/log <strong>A</strong>), with <strong>A</strong> &ge; 10.
             </p>
 
             <h3 id="price-information">Price information</h3>
