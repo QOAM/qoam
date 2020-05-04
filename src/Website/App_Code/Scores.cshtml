@@ -27,7 +27,10 @@
 
 @helper RobustScore(Journal j)
 {
-    var robustScore = j.ValuationScore.AverageScore > 0 ? j.ValuationScore.AverageScore * (1 + Math.Log10(j.NumberOfValuationReviewers)) : 0;
+    var numberOfArticles = j.ArticlesPerYear.Where(x => x.Year >= DateTime.Now.Year - 2).Sum(x => x.NumberOfArticles);
+    var robustScore = j.ValuationScore.AverageScore > 0 && numberOfArticles >= 10 ? 
+        j.ValuationScore.AverageScore * (1 + Math.Log10(j.NumberOfValuationReviewers / Math.Log10(numberOfArticles))) : 0;
+    
     @(Math.Abs(robustScore) > 0 ? AverageScoreOnOneDecimalWithoutRounding(robustScore).ToString() : "N/A")
 }
 
