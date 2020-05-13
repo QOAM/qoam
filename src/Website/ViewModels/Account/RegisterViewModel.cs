@@ -6,7 +6,7 @@
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "User name *"), MaxLength(100)]
+        [Display(Name = "User name *"), MaxLength(100), RegularExpression(@"[\w\.@\s]+", ErrorMessage = "Not a valid username")]
         public string UserName { get; set; }
 
         public string DisplayName { get; set; }
