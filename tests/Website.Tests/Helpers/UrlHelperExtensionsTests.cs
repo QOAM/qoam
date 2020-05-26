@@ -2,7 +2,7 @@
 {
     using System.Web.Helpers;
 
-    using QOAM.Core.Repositories.Filters;
+    using Core.Repositories.Filters;
     using Website.Helpers;
     using Xunit;
 
@@ -46,8 +46,6 @@
         [InlineData(UserProfileSortMode.Institution, SortDirection.Descending, SortDirection.Ascending)]
         [InlineData(UserProfileSortMode.DateRegistered, SortDirection.Ascending, SortDirection.Descending)]
         [InlineData(UserProfileSortMode.DateRegistered, SortDirection.Descending, SortDirection.Ascending)]
-        [InlineData(UserProfileSortMode.NumberOfBaseJournalScoreCards, SortDirection.Ascending, SortDirection.Descending)]
-        [InlineData(UserProfileSortMode.NumberOfBaseJournalScoreCards, SortDirection.Descending, SortDirection.Ascending)]
         [InlineData(UserProfileSortMode.NumberOfValuationJournalScoreCards, SortDirection.Ascending, SortDirection.Descending)]
         [InlineData(UserProfileSortMode.NumberOfValuationJournalScoreCards, SortDirection.Descending, SortDirection.Ascending)]
         public void GetOrderDirectionWithUserProfileSortModeAndCurrentSortModeIsNewSortModeReturnsOppositeDirection(UserProfileSortMode sortMode, SortDirection sortDirection, SortDirection expectedSortDirection)
@@ -63,10 +61,8 @@
         }
 
         [Theory]
-        [InlineData(UserProfileSortMode.Name, UserProfileSortMode.NumberOfBaseJournalScoreCards, SortDirection.Ascending)]
         [InlineData(UserProfileSortMode.Institution, UserProfileSortMode.Name, SortDirection.Ascending)]
         [InlineData(UserProfileSortMode.DateRegistered, UserProfileSortMode.Name, SortDirection.Descending)]
-        [InlineData(UserProfileSortMode.NumberOfBaseJournalScoreCards, UserProfileSortMode.Name, SortDirection.Descending)]
         [InlineData(UserProfileSortMode.NumberOfValuationJournalScoreCards, UserProfileSortMode.Name, SortDirection.Descending)]
         public void GetOrderDirectionWithUserProfileSortModeIsNotEqualToCurrentSortModeReturnsDefaultDirection(UserProfileSortMode newSortMode, UserProfileSortMode currentSortMode, SortDirection expectedSortDirection)
         {
@@ -82,8 +78,6 @@
         [Theory]
         [InlineData(InstitutionSortMode.Name, SortDirection.Ascending, SortDirection.Descending)]
         [InlineData(InstitutionSortMode.Name, SortDirection.Descending, SortDirection.Ascending)]
-        [InlineData(InstitutionSortMode.NumberOfBaseJournalScoreCards, SortDirection.Ascending, SortDirection.Descending)]
-        [InlineData(InstitutionSortMode.NumberOfBaseJournalScoreCards, SortDirection.Descending, SortDirection.Ascending)]
         [InlineData(InstitutionSortMode.NumberOfValuationJournalScoreCards, SortDirection.Ascending, SortDirection.Descending)]
         [InlineData(InstitutionSortMode.NumberOfValuationJournalScoreCards, SortDirection.Descending, SortDirection.Ascending)]
         public void GetOrderDirectionWithInstitutionSortModeAndCurrentSortModeIsNewSortModeReturnsOppositeDirection(InstitutionSortMode sortMode, SortDirection sortDirection, SortDirection expectedSortDirection)
@@ -99,8 +93,6 @@
         }
 
         [Theory]
-        [InlineData(InstitutionSortMode.Name, InstitutionSortMode.NumberOfBaseJournalScoreCards, SortDirection.Ascending)]
-        [InlineData(InstitutionSortMode.NumberOfBaseJournalScoreCards, InstitutionSortMode.Name, SortDirection.Descending)]
         [InlineData(InstitutionSortMode.NumberOfValuationJournalScoreCards, InstitutionSortMode.Name, SortDirection.Descending)]
         public void GetOrderDirectionWithInstitutionSortModeIsNotEqualToCurrentSortModeReturnsDefaultDirection(InstitutionSortMode newSortMode, InstitutionSortMode currentSortMode, SortDirection expectedSortDirection)
         {

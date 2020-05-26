@@ -125,10 +125,6 @@ namespace QOAM.Core.Repositories
             {
                 case InstitutionSortMode.Name:
                     return filter.SortDirection == SortDirection.Ascending ? query.OrderBy(u => u.Name) : query.OrderByDescending(u => u.Name);
-                case InstitutionSortMode.NumberOfBaseJournalScoreCards:
-                    return filter.SortDirection == SortDirection.Ascending ?
-                        query.OrderBy(u => u.NumberOfBaseScoreCards).ThenBy(u => u.Name) :
-                        query.OrderByDescending(u => u.NumberOfBaseScoreCards).ThenBy(u => u.Name);
                 case InstitutionSortMode.NumberOfValuationJournalScoreCards:
                     return filter.SortDirection == SortDirection.Ascending ?
                         query.OrderBy(u => u.NumberOfValuationScoreCards).ThenBy(u => u.Name) :

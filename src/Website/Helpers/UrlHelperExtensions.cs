@@ -22,14 +22,12 @@
                                                                                                                           { UserProfileSortMode.Name, SortDirection.Ascending },
                                                                                                                           { UserProfileSortMode.Institution, SortDirection.Ascending },
                                                                                                                           { UserProfileSortMode.DateRegistered, SortDirection.Descending },
-                                                                                                                          { UserProfileSortMode.NumberOfBaseJournalScoreCards, SortDirection.Descending },
                                                                                                                           { UserProfileSortMode.NumberOfValuationJournalScoreCards, SortDirection.Descending },
                                                                                                                       };
 
         private static readonly IDictionary<InstitutionSortMode, SortDirection> DefaultSortDirectionInstitution = new Dictionary<InstitutionSortMode, SortDirection>
                                                                                                                       {
                                                                                                                           { InstitutionSortMode.Name, SortDirection.Ascending },
-                                                                                                                          { InstitutionSortMode.NumberOfBaseJournalScoreCards, SortDirection.Descending },
                                                                                                                           { InstitutionSortMode.NumberOfValuationJournalScoreCards, SortDirection.Descending },
                                                                                                                       };
 

@@ -13,7 +13,7 @@
     {
         public IndexViewModel()
         {
-            this.SortBy = InstitutionSortMode.NumberOfBaseJournalScoreCards;
+            this.SortBy = InstitutionSortMode.NumberOfValuationJournalScoreCards;
             this.Sort = SortDirection.Descending;
         }
 

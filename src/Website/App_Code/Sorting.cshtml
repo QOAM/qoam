@@ -42,7 +42,7 @@
         </a>
 
         <ul class="dropdown-menu pull-right">
-            @foreach (var sortMode in (UserProfileSortMode[])Enum.GetValues(typeof(UserProfileSortMode)))
+            @foreach (var sortMode in ((UserProfileSortMode[])Enum.GetValues(typeof(UserProfileSortMode))).Where(x => x != UserProfileSortMode.NumberOfValuationJournalScoreCards))
             {
                 var isActive = sortMode == currentSortMode;
                 var activeClass = isActive ? "active" : null;

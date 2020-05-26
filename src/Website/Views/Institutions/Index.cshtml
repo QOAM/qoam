@@ -54,13 +54,11 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Number of Base JSC's</th>
-                            <th>Number of Valuation JSC's</th>
+                            <th>Number of score cards</th>
                             <th>Actions</th>
                         </tr>
                         <tr>
                             <th>Total</th>
-                            <th>@Model.NumberOfBaseScoreCards</th>
                             <th>@Model.NumberOfValuationScoreCards</th>
                             <th></th>
                         </tr>
@@ -70,7 +68,6 @@
                         {
                             <tr>
                                 <td>@Html.ActionLink(institution.Name, "Details", "Institutions", new { id = institution.Id }, null)</td>
-                                <td>@institution.NumberOfBaseScoreCards</td>
                                 <td>@institution.NumberOfValuationScoreCards</td>
                                 <td>
                                     <span class="glyphicon glyphicon-eye-open"></span> @Html.ActionLink("View", "Details", "Institutions", new { id = institution.Id }, null)

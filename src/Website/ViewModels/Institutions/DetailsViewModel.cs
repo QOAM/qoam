@@ -11,7 +11,7 @@
     {
         public DetailsViewModel()
         {
-            this.SortBy = UserProfileSortMode.NumberOfBaseJournalScoreCards;
+            this.SortBy = UserProfileSortMode.Name;//.NumberOfBaseJournalScoreCards;
             this.Sort = SortDirection.Descending;
         }
 

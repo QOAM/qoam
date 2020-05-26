@@ -83,13 +83,13 @@
             <h3 id="submission">Including a submission button in QOAM</h3>
             <p>
                 QOAM offers publishers the option to have a submission button for their journals included.
-                The button is shown as a capital ‘S’ both in a separate column in the main journal list as on the detail page for each journal.
+                The button is shown in a separate column in the @Html.ActionLink("main journal list", "Index", "Journals").
                 By clicking on it you are redirected to the submission page of the journal.
             </p>
             <p>
                 All a publisher, or an editor for that matter, has to do is sending an Excel file with two columns to the @Html.ActionLink("Contact box of QOAM", "Contact").
                 The first column is named “eissn” and has the ISSNs the publisher uses for the digital versions of their journals.
-                The second column is headed “url” and has per ISSN the URL of the submission page of the journal. Mind: this URL has to start with the domain name of the journal in order to avoid mischievous redirections.
+                The second column is headed “url” and has per ISSN the URL of the submission page of the journal. Mind: this URL must start with the domain name of the journal in order to avoid mischievous redirections.
             </p>
 
             <h3 id="plan-s">Building a Plan S-compliant journal list in QOAM</h3>

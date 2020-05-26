@@ -96,10 +96,6 @@
                     return filter.SortDirection == SortDirection.Ascending ? query.OrderBy(u => u.DisplayName) : query.OrderByDescending(u => u.DisplayName);
                 case UserProfileSortMode.DateRegistered:
                     return filter.SortDirection == SortDirection.Ascending ? query.OrderBy(u => u.DateRegistered) : query.OrderByDescending(u => u.DateRegistered);
-                case UserProfileSortMode.NumberOfBaseJournalScoreCards:
-                    return filter.SortDirection == SortDirection.Ascending ?
-                        query.OrderBy(u => u.NumberOfBaseScoreCards).ThenBy(u => u.DisplayName) :
-                        query.OrderByDescending(u => u.NumberOfBaseScoreCards).ThenBy(u => u.DisplayName);
                 case UserProfileSortMode.NumberOfValuationJournalScoreCards:
                     return filter.SortDirection == SortDirection.Ascending ?
                         query.OrderBy(u => u.NumberOfValuationScoreCards).ThenBy(u => u.DisplayName) :
