@@ -15,7 +15,6 @@
                 <li><a href="#list-prices"><em>Including list prices in QOAM</em></a></li>
                 <li><a href="#licenses"><em>Including licensed prices in QOAM</em></a></li>
                 <li><a href="#submission"><em>Including a submission button in QOAM</em></a></li>
-                <li><a href="#plan-s"><em>Building a Plan S-compliant journal list in QOAM</em></a></li>
                 <li><a href="#QOAMcorner"><em>Creating a QOAMcorner</em></a></li>
                 <li><a href="#data"><em>Mining QOAM's data</em></a></li>
 
@@ -90,29 +89,6 @@
                 All a publisher, or an editor for that matter, has to do is sending an Excel file with two columns to the @Html.ActionLink("Contact box of QOAM", "Contact").
                 The first column is named “eissn” and has the ISSNs the publisher uses for the digital versions of their journals.
                 The second column is headed “url” and has per ISSN the URL of the submission page of the journal. Mind: this URL must start with the domain name of the journal in order to avoid mischievous redirections.
-            </p>
-
-            <h3 id="plan-s">Building a Plan S-compliant journal list in QOAM</h3>
-            <p>
-                In addition to the categories ‘fully OA’, ‘no-fee’, and ‘discounted’, QOAM now provides an initial list of Open Access journals that meet the <a href="https://www.coalition-s.org/principles-and-implementation/" target="_blank">mandatory technical conditions</a> of Plan S.
-                Preparing QOAM for the implementation of Plan S has been made possible by donations of <a href="https://www.cwi.nl/" target="_blank">Centrum Wiskunde & Informatica</a> and the <a href="https://www.fairopenaccess.org/" target="_blank">Fair Open Access Alliance.</a>
-            </p>
-            <p>
-                The technical Plan S conditions are:
-                <em>
-                    <ul>
-                        <li>Use of persistent identifiers (PIDs) for scholarly publications (with versioning, for example, in case of revisions), such as <strong>DOI</strong> (preferable), URN, or Handle.</li>
-                        <li>Deposition of content with a <strong>long-term digital preservation</strong> or archiving programme (such as CLOCKSS, Portico, or equivalent).</li>
-                        <li><strong>High-quality article level metadata</strong> in standard interoperable non-proprietary format, under a CC0 public domain dedication. Metadata must include complete and reliable information on funding provided by cOAlition S funders (including as a minimum the name of the funder and the grant number/identifier).</li>
-                        <li>Machine-readable <strong>information on the Open Access status</strong> and the license embedded in the article, in standard non-proprietary format.</li>
-                    </ul>
-                </em>
-            </p>
-            <p>
-                Publishers wishing to see their journals included can send a mail to @Html.ActionLink("QOAM’s Contact box", "Contact") stating that the attached list of journals (eISSNs suffice) meets the technical conditions of Plan S. The journals will then be added to the list after a check of a random sample of journals.
-            </p>
-            <p>
-                As soon as the Plan S requirements for transparency of costs and prices, and for transformative agreements are defined, the list will be adapted accordingly to present the journals meeting these requirements as well.
             </p>
 
             <h3 id="QOAMcorner">Creating a QOAMcorner</h3>
