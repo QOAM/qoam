@@ -1,11 +1,14 @@
 ﻿@helper MenuItemClass(string menuItem, string additionalClass = "")
 {
-    var selectedMenuItem = (string)ViewBag.SelectedMenuItem;
-    var isActive = menuItem.Contains("/") ? menuItem == selectedMenuItem : selectedMenuItem.StartsWith(menuItem);
-
-    if (isActive)
+    if(!string.IsNullOrWhiteSpace(menuItem))
     {
-        <text>class="active @(additionalClass)"</text>
+        var selectedMenuItem = (string) ViewBag.SelectedMenuItem;
+        var isActive = menuItem.Contains("/") ? menuItem == selectedMenuItem : selectedMenuItem.StartsWith(menuItem);
+
+        if (isActive)
+        {
+            <text>class="active @(additionalClass)"</text>
+        }
     }
 }
 

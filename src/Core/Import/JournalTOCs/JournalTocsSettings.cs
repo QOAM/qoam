@@ -14,43 +14,43 @@ namespace QOAM.Core.Import.JournalTOCs
         [ConfigurationProperty(UrlPropertyName, IsRequired = true)]
         public string BaseUrl
         {
-            get { return (string)this[UrlPropertyName]; }
-            set { this[UrlPropertyName] = value; }
+            get => (string)this[UrlPropertyName];
+            set => this[UrlPropertyName] = value;
         }
 
         [ConfigurationProperty(AllJournalsEndpointPropertyName, IsRequired = true)]
         public string AllJournalsEndpoint
         {
-            get { return (string)this[AllJournalsEndpointPropertyName]; }
-            set { this[AllJournalsEndpointPropertyName] = value; }
+            get => (string)this[AllJournalsEndpointPropertyName];
+            set => this[AllJournalsEndpointPropertyName] = value;
         }
 
         [ConfigurationProperty(ByIssnEndpointPropertyName, IsRequired = true)]
         public string ByIssnEndpoint
         {
-            get { return (string)this[ByIssnEndpointPropertyName]; }
-            set { this[ByIssnEndpointPropertyName] = value; }
+            get => (string)this[ByIssnEndpointPropertyName];
+            set => this[ByIssnEndpointPropertyName] = value;
         }
 
         [ConfigurationProperty(SuiPropertyName, IsRequired = true)]
         public string Sui
         {
-            get { return (string)this[SuiPropertyName]; }
-            set { this[SuiPropertyName] = value; }
+            get => (string)this[SuiPropertyName];
+            set => this[SuiPropertyName] = value;
         }
 
         [ConfigurationProperty(IpPropertyName, IsRequired = true)]
         public string Ip
         {
-            get { return (string)this[IpPropertyName]; }
-            set { this[IpPropertyName] = value; }
+            get => (string)this[IpPropertyName];
+            set => this[IpPropertyName] = value;
         }
 
         [ConfigurationProperty(TestPropertyName, IsRequired = true)]
         public bool Test
         {
-            get { return (bool)this[TestPropertyName]; }
-            set { this[TestPropertyName] = value; }
+            get => (bool)this[TestPropertyName];
+            set => this[TestPropertyName] = value;
         }
 
         public string AllJournalsRequestUrl => $"{BaseUrl}{AllJournalsEndpoint}?sui={Sui}&ip={Ip}&test={Test}&checkArchive=doaj";
