@@ -17,6 +17,7 @@ namespace QOAM.Website.Controllers
         readonly ContactSettings _contactSettings;
         readonly IJournalRepository _journalRepository;
         readonly IInstitutionRepository _institutionRepository;
+        const string AccessCode = "506a35e2-523b-46a9-8b1d-29c483ca7064";
 
         public HomeController(
             IBaseScoreCardRepository baseScoreCardRepository, 
@@ -117,15 +118,21 @@ namespace QOAM.Website.Controllers
             return View();
         }
 
-        [HttpGet, Route("demo-plan-s")]
-        public ViewResult DemoPlanS()
+        [HttpGet, Route("demo-plan-s/{code}")]
+        public ActionResult DemoPlanS(string code)
         {
+            if (string.IsNullOrWhiteSpace(code) || code.ToLower() != AccessCode)
+                return HttpNotFound("Page not found");
+
             return View();
         }
 
-        [HttpGet, Route("plan-s-institution-selection")]
-        public ViewResult PlanSInstitutionSelection()
+        [HttpGet, Route("plan-s-institution-selection/{code}")]
+        public ActionResult PlanSInstitutionSelection(string code)
         {
+            if (string.IsNullOrWhiteSpace(code) || code.ToLower() != AccessCode)
+                return HttpNotFound("Page not found");
+
             var nl = new List<string>
             {
                 "eur.nl",
