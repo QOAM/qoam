@@ -257,6 +257,7 @@
     <Compile Include="App_Start\ViewEngineConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\WebSecurityConfig.cs" />
+    <Compile Include="Areas\BonaFide\Controllers\BonaFideJournalsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\JournalsApiController.cs" />
@@ -492,6 +493,8 @@
     <Content Include="Scripts\cldr\supplemental\unitPreferenceData.json" />
     <Content Include="Scripts\cldr\supplemental\weekData.json" />
     <Content Include="Scripts\cldr\supplemental\windowsZones.json" />
+    <Content Include="Areas\BonaFide\Views\web.config" />
+    <Content Include="Areas\BonaFide\Views\BonaFideJournals\Index.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.globalize.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -852,6 +855,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Ulrichs\" />
+    <Folder Include="Areas\BonaFide\Data\" />
+    <Folder Include="Areas\BonaFide\Views\Shared\" />
     <Folder Include="lib\" />
   </ItemGroup>
   <ItemGroup>

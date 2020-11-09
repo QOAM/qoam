@@ -11,6 +11,8 @@ using Validation;
 
 namespace QOAM.Website.Controllers
 {
+    [RoutePrefix("")]
+    //[Route("{action}")]
     public class HomeController : ApplicationController
     {
         readonly IMailSender _mailSender;
