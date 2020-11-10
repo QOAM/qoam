@@ -1,19 +1,19 @@
 ﻿@if (User.Identity.IsAuthenticated && ViewBag.User != null)
 {
     <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Details", "Profiles", new { id = ViewBag.User.Id })">@ViewBag.User.DisplayName <b class="caret"></b></a>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Details", "Profiles", new { id = ViewBag.User.Id, area = "" })">@ViewBag.User.DisplayName <b class="caret"></b></a>
         <ul class="dropdown-menu">
-            <li>@Html.ActionLink("Profile", "Details", "Profiles", new { id = ViewBag.User.Id }, null)</li>
-            <li>@Html.ActionLink("Settings", "Settings", "Account")</li>
+            <li>@Html.ActionLink("Profile", "Details", "Profiles", new { id = ViewBag.User.Id, area = "" }, null)</li>
+            <li>@Html.ActionLink("Settings", "Settings", "Account", new { area = "" }, null)</li>
             <li class="divider"></li>
             <li>
-                @Html.ActionLink("Log off", "Logout", "Account")
+                @Html.ActionLink("Log off", "Logout", "Account", new { area = "" }, null)
             </li>
         </ul>
     </li>
 }
 else
 {
-    <li>@Html.ActionLink("Log in", "Login", "Account")</li>
-    <li>@Html.ActionLink("Register", "Register", "Account")</li>
+    <li>@Html.ActionLink("Log in", "Login", "Account", new { area = "" }, null)</li>
+    <li>@Html.ActionLink("Register", "Register", "Account", new { area = "" }, null)</li>
 }

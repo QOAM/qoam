@@ -392,6 +392,7 @@
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />
     <Compile Include="SwotVerdict.cs" />
+    <Compile Include="TrustedJournal.cs" />
     <Compile Include="UserJournal.cs" />
     <Compile Include="ValuationJournalPrice.cs" />
     <Compile Include="ValuationQuestionScore.cs" />

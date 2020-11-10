@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using QOAM.Core.Repositories;
 using QOAM.Website.Controllers;
 using QOAM.Website.Helpers;
+using QOAM.Website.ViewModels.BonaFideJournals;
 using QOAM.Website.ViewModels.Journals;
 
 namespace QOAM.Website.Areas.BonaFide.Controllers
@@ -22,13 +23,13 @@ namespace QOAM.Website.Areas.BonaFide.Controllers
         }
 
         [HttpGet, Route("")]
-        public ActionResult Index(IndexViewModel model)
+        public ActionResult Index(BonaFideJournalsViewModel model)
         {
             model.Disciplines = _subjectRepository.Active.Where(s => !string.IsNullOrWhiteSpace(s.Name)).ToList().ToSelectListItems("Search by discipline"); //NormalizeSearchStrings(model.Disciplines);
             model.Languages = NormalizeSearchStrings(model.Languages);
             model.Journals = _journalRepository.Search(model.ToFilter());
 
-            return View("JournalsIndex", model);
+            return View("Index", model);
         }
     }
 }

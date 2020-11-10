@@ -1015,6 +1015,14 @@ a:hover.filter-enabled {
     color: #428bca;
 }
 
+.lightblue {
+    color: lightskyblue !important;
+}
+
+.grey {
+    color: gray !important;
+}
+
 .black {
     color: #000 !important;
 }

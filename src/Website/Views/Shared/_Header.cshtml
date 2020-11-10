@@ -21,49 +21,49 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="@Url.Action("Index", "Home")">Home</a>
+            <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = ""})">Home</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li @MenuItemClass("Home/About")><a href="@Url.Action("About", "Home")"><i class="glyphicon glyphicon-info-sign"></i> About</a></li>
-                <li @MenuItemClass("Journals")><a href="@Url.Action("Index", "Journals")"><i class="glyphicon glyphicon-search"></i> Journals</a></li>
+                <li @MenuItemClass("Home/About")><a href="@Url.Action("About", "Home", new { area = ""})"><i class="glyphicon glyphicon-info-sign"></i> About</a></li>
+                <li @MenuItemClass("Journals")><a href="@Url.Action("Index", "Journals", new { area = ""})"><i class="glyphicon glyphicon-search"></i> Journals</a></li>
                 @if (User.Identity.IsAuthenticated && ViewBag.PageId == "journals-details-page")
                 {
                     <li @MenuItemClass("MyQoam", "dropdown")>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "MyQoam")"><i class="glyphicon glyphicon-home"></i> My QOAM <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "MyQoam", new { area = ""})"><i class="glyphicon glyphicon-home"></i> My QOAM <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("Add", "MyQoam")"><i class="glyphicon glyphicon-plus"></i> Add to My QOAM</a></li>
+                            <li><a href="@Url.Action("Add", "MyQoam", new { area = ""})"><i class="glyphicon glyphicon-plus"></i> Add to My QOAM</a></li>
                             @*<li role="separator" class="divider"></li>*@
-                            <li><a href="@Url.Action("Delete", "MyQoam")"><i class="glyphicon glyphicon-remove"></i> Delete from My QOAM</a></li>
+                            <li><a href="@Url.Action("Delete", "MyQoam", new { area = ""})"><i class="glyphicon glyphicon-remove"></i> Delete from My QOAM</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="@Url.Action("Index", "MyQoam")"><i class="glyphicon glyphicon-home"></i> Go to My QOAM</a></li>
+                            <li><a href="@Url.Action("Index", "MyQoam", new { area = ""})"><i class="glyphicon glyphicon-home"></i> Go to My QOAM</a></li>
                         </ul>
                     </li>
                 }
                 else if (User.Identity.IsAuthenticated && ViewBag.PageId == "myqoam-index-page")
                 {
                     <li @MenuItemClass("MyQoam", "dropdown")>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "MyQoam")"><i class="glyphicon glyphicon-home"></i> My QOAM <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "MyQoam", new { area = ""})"><i class="glyphicon glyphicon-home"></i> My QOAM <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("Empty", "MyQoam")"><i class="glyphicon glyphicon-ban-circle"></i> Empty My QOAM</a></li>
+                            <li><a href="@Url.Action("Empty", "MyQoam", new { area = ""})"><i class="glyphicon glyphicon-ban-circle"></i> Empty My QOAM</a></li>
                         </ul>
                     </li>
                 }
                 else
                 {
-                    <li @MenuItemClass("MyQoam")><a href="@Url.Action("Index", "MyQoam")"><i class="glyphicon glyphicon-home"></i> My QOAM</a></li>
+                    <li @MenuItemClass("MyQoam")><a href="@Url.Action("Index", "MyQoam", new { area = ""})"><i class="glyphicon glyphicon-home"></i> My QOAM</a></li>
                 }
                 <li @MenuItemClass("QOAMcorners", "dropdown")>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "QoamCorners")"><i class="glyphicon glyphicon-bookmark"></i> QOAMcorners <span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "QoamCorners", new { area = ""})"><i class="glyphicon glyphicon-bookmark"></i> QOAMcorners <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="@Url.Action("CreateCorner", "QoamCorners")"><i class="glyphicon glyphicon-plus"></i> (Re)make QOAMcorners</a></li>
+                        <li><a href="@Url.Action("CreateCorner", "QoamCorners", new { area = ""})"><i class="glyphicon glyphicon-plus"></i> (Re)make QOAMcorners</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="@Url.Action("Index", "QoamCorners")"><i class="glyphicon glyphicon-bookmark"></i> Browse QOAMcorners</a></li>
+                        <li><a href="@Url.Action("Index", "QoamCorners", new { area = ""})"><i class="glyphicon glyphicon-bookmark"></i> Browse QOAMcorners</a></li>
                     </ul>
                 </li>
-                <li @MenuItemClass("Profiles")><a href="@Url.Action("Index", "Profiles")"><i class="glyphicon glyphicon-user"></i> Profiles</a></li>
+                <li @MenuItemClass("Profiles")><a href="@Url.Action("Index", "Profiles", new { area = ""})"><i class="glyphicon glyphicon-user"></i> Profiles</a></li>
                 @*<li @MenuItemClass("Institutions")><a href="@Url.Action("Index", "Institutions")"><span class="icon-group"></span> Institutions</a></li>*@
-                <li @MenuItemClass("Home/Contact")><a href="@Url.Action("Contact", "Home")"><i class="glyphicon glyphicon-envelope"></i> Contact</a></li>
+                <li @MenuItemClass("Home/Contact")><a href="@Url.Action("Contact", "Home", new { area = ""})"><i class="glyphicon glyphicon-envelope"></i> Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @{ Html.RenderPartial("_LoginPartial"); }
