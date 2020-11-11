@@ -7,8 +7,11 @@ namespace QOAM.Website.ViewModels.BonaFideJournals
     {
         public override string JournalLinkCssClass(Journal journal)
         {
-            if(journal.NoFee || journal.DoajSeal || journal.InstitutionJournalPrices.Count > 0)
+            if(journal.NoFee || journal.DoajSeal || journal.InstitutionJournalPrices.Count > 0 || journal.TrustingInstitutions.Count >= 3)
                 return "";
+
+            if (journal.TrustingInstitutions.Count >= 1)
+                return "lightblue";
 
             return "grey";
         }

@@ -28,6 +28,7 @@
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Institution> Institutions { get; set; }
         public DbSet<InstitutionJournal> InstitutionJournals { get; set; }
+        public DbSet<TrustedJournal> TrustedJournals { get; set; }
         public DbSet<UserJournal> UserJournals { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Language> Languages { get; set; }
@@ -54,7 +55,9 @@
             modelBuilder.Entity<ValuationScoreCard>().HasRequired(vsc => vsc.UserProfile).WithMany(u => u.ValuationScoreCards).WillCascadeOnDelete(true);
             modelBuilder.Entity<ValuationScoreCard>().HasRequired(vsc => vsc.Journal).WithMany(u => u.ValuationScoreCards).WillCascadeOnDelete(true);
             modelBuilder.Entity<InstitutionJournal>().HasRequired(ij => ij.UserProfile).WithMany(u => u.InstitutionJournalPrices).WillCascadeOnDelete(true);
-            modelBuilder.Entity<InstitutionJournal>().HasRequired(ij => ij.Journal).WithMany(u => u.InstitutionJournalPrices).WillCascadeOnDelete(true);
+            modelBuilder.Entity<InstitutionJournal>().HasRequired(ij => ij.Journal).WithMany(j => j.InstitutionJournalPrices).WillCascadeOnDelete(true);
+            modelBuilder.Entity<TrustedJournal>().HasRequired(tj => tj.UserProfile).WithMany(u => u.TrustedJournals).WillCascadeOnDelete(false);
+            modelBuilder.Entity<TrustedJournal>().HasRequired(tj => tj.Journal).WithMany(j => j.TrustingInstitutions).WillCascadeOnDelete(true);
             modelBuilder.Entity<CornerJournal>().HasRequired(cj => cj.Journal).WithMany(u => u.CornerJournals).WillCascadeOnDelete(true);
             modelBuilder.Entity<CornerJournal>().HasRequired(cj => cj.Corner).WithMany(u => u.CornerJournals).WillCascadeOnDelete(true);
             modelBuilder.Entity<CornerVisitor>().HasRequired(cj => cj.Corner).WithMany(u => u.CornerVisitors).WillCascadeOnDelete(true);

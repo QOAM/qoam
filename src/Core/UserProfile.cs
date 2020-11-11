@@ -8,10 +8,11 @@
     {
         public UserProfile()
         {
-            this.InstitutionJournalPrices = new List<InstitutionJournal>();
-            this.JournalPrices = new List<BaseJournalPrice>();
-            this.BaseScoreCards = new List<BaseScoreCard>();
-            this.ValuationScoreCards = new List<ValuationScoreCard>();
+            InstitutionJournalPrices = new List<InstitutionJournal>();
+            TrustedJournals = new List<TrustedJournal>();
+            JournalPrices = new List<BaseJournalPrice>();
+            BaseScoreCards = new List<BaseScoreCard>();
+            ValuationScoreCards = new List<ValuationScoreCard>();
         }
 
         [Required]
@@ -40,9 +41,10 @@
         public virtual Institution Institution { get; set; }
 
         public virtual ICollection<InstitutionJournal> InstitutionJournalPrices { get; set; }
+        public virtual ICollection<TrustedJournal> TrustedJournals { get; set; }
         public virtual ICollection<BaseJournalPrice> JournalPrices { get; set; }
         public virtual ICollection<BaseScoreCard> BaseScoreCards { get; set; }
         public virtual ICollection<ValuationScoreCard> ValuationScoreCards { get; set; }
-        public virtual ICollection<Corner>  Corners { get; set; }
+        public virtual ICollection<Corner> Corners { get; set; }
     }
 }
