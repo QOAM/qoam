@@ -4,7 +4,7 @@
 @model BonaFideJournalsViewModel
 
 @{
-    ViewBag.Title = "OA Journals";
+    ViewBag.Title = "BFJ Journals";
     var action = ViewBag.PageId == "journals-notinjournaltocs-page" ? "NotInJournalTOCs" : "Index";
     var controller = ViewBag.PageId == "myqoam-index-page" ? "MyQoam" : "Journals";
 }
@@ -24,7 +24,7 @@
                         <legend>Search</legend>
 
                         @Html.Partial("_JournalFilters")
-                        
+
                         <p>
                             <input id="submitForm" type="submit" value="Search" class="btn btn-primary" />
                         </p>
@@ -37,33 +37,70 @@
             @if (Model.Journals.Any())
             {
                 <table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th class="title">
-                Title
-            </th>
-            <th class="publisher">Publisher</th>
-            </tr>
-            </thead>
-            <tbody>
-                @foreach (var journal in Model.Journals)
-                {
-                    <tr>
-                        <td>
-                            @Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, new { @class = Model.JournalLinkCssClass(journal) })
-                        </td>
-                        <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name }, null)</td>
-                    </tr>
-                }
+                    <thead>
+                        <tr>
+                            <th class="title">
+                                Title
+                            </th>
+                            <th class="publisher">Publisher</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var journal in Model.Journals)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, new { @class = Model.JournalLinkCssClass(journal), data_title = @journal.Title })
+                                </td>
+                                <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name }, null)</td>
+                            </tr>
+                        }
 
-            </tbody>
-            </table>
+                    </tbody>
+                </table>
 
-            @Html.PagedListPager(Model.Journals, page => Url.Action(@ViewContext.RouteData.Values["action"].ToString(), Model.ToRouteValueDictionary(page)), Html.PagedListRenderOptions())
+                @Html.PagedListPager(Model.Journals, page => Url.Action(@ViewContext.RouteData.Values["action"].ToString(), Model.ToRouteValueDictionary(page)), Html.PagedListRenderOptions())
             }
             else
             {
                 @Html.Partial("_EmptyText")
+            }
+        </div>
+    </div>
+</div>
+
+<div id="submit-trust-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="submit-trust-modal-title"></h3>
+            </div>
+            <div class="modal-body">
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <p>
+                        The library of <strong>@ViewBag.User.Institution.Name</strong> confirms the honesty of this journal.<br />
+                        Date: <strong>@DateTime.Today.ToString("d")</strong>. Contact: <strong>@ViewBag.User.DisplayName</strong>.
+                    </p>
+                    <form id="submit-trust-form">
+                        <label><input type="checkbox" /> I am submitting this expression of trust on behalf of my library</label>
+                    </form>
+                }
+                else
+                {
+                    <p>
+                        If you want to express your trust in this journal on behalf of your library, please @Html.ActionLink("register", "Register", "Account", new { area = "" }, null) (new user)
+                        or @Html.ActionLink("log in", "Login", "Account", new { area = "" }, null) (returning user) with your academic email address.
+                    </p>
+                }
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="download-journals">Continue</button>
+                </div>
             }
         </div>
     </div>
@@ -84,8 +121,8 @@
 
     <script type="text/javascript">
         $(function () {
-            var journalsController = new JournalsController();
-            journalsController.index(
+            var bfjController = new BfjController();
+            bfjController.index(
                 '@Url.Action("Titles", null, null, this.Request.Url.Scheme)',
                 '@Url.Action("Issns", null, null, this.Request.Url.Scheme)',
                 '@Url.Action("Publishers", null, null, this.Request.Url.Scheme)',

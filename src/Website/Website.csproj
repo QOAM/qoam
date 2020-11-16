@@ -447,6 +447,7 @@
     <Content Include="Scripts\cldr\supplemental.js" />
     <Content Include="Scripts\cldr\unresolved.js" />
     <Content Include="Scripts\Controllers\AdminController.js" />
+    <Content Include="Scripts\Controllers\BfjController.js" />
     <Content Include="Scripts\Controllers\QoamCornersController.js" />
     <Content Include="Scripts\Controllers\InstitutionsController.js" />
     <Content Include="Scripts\Controllers\InstitutionsController.min.js">

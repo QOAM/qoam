@@ -1,4 +1,5 @@
-﻿using QOAM.Core;
+﻿using System.Linq;
+using QOAM.Core;
 using QOAM.Website.ViewModels.Journals;
 
 namespace QOAM.Website.ViewModels.BonaFideJournals
@@ -7,7 +8,7 @@ namespace QOAM.Website.ViewModels.BonaFideJournals
     {
         public override string JournalLinkCssClass(Journal journal)
         {
-            if(journal.NoFee || journal.DoajSeal || journal.InstitutionJournalPrices.Count > 0 || journal.TrustingInstitutions.Count >= 3)
+            if(journal.NoFee || journal.DoajSeal || journal.InstitutionJournalPrices.Any() || journal.TrustingInstitutions.Count >= 3)
                 return "";
 
             if (journal.TrustingInstitutions.Count >= 1)
