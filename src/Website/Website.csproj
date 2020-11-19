@@ -282,6 +282,7 @@
     <Compile Include="ViewModels\Admin\ManageCorrespondingDomainsViewModel.cs" />
     <Compile Include="ViewModels\Api\ScoreCard\SerializableScoreCard.cs" />
     <Compile Include="ViewModels\BonaFideJournals\BonaFideJournalsViewModel.cs" />
+    <Compile Include="ViewModels\BonaFideJournals\SubmitTrustViewModel.cs" />
     <Compile Include="ViewModels\Home\DemoPlanSViewModel.cs" />
     <Compile Include="ViewModels\IFileUploadViewModel.cs" />
     <Compile Include="ViewModels\Import\JournalTocsImportViewModel.cs" />

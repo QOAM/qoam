@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Net;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using QOAM.Core.Repositories;
 using QOAM.Website.Controllers;
@@ -30,6 +32,12 @@ namespace QOAM.Website.Areas.BonaFide.Controllers
             model.Journals = _journalRepository.Search(model.ToFilter());
 
             return View("Index", model);
+        }
+
+        [HttpPost, Route("submit-trust")]
+        public ActionResult SubmitTrust(SubmitTrustViewModel model)
+        {
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }

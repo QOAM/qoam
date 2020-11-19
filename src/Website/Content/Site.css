@@ -1133,3 +1133,7 @@ img.green, img.red {
 #plan-s-dropdown .chosen-container-single .chosen-single div {
     top: 3px;
 }
+
+.success-status {
+    display: none;
+}

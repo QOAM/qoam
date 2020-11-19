@@ -50,7 +50,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, new { @class = Model.JournalLinkCssClass(journal), data_title = @journal.Title })
+                                    @Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, new { @class = Model.JournalLinkCssClass(journal), data_title = journal.Title, data_journalid = journal.Id })
                                 </td>
                                 <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name }, null)</td>
                             </tr>
@@ -77,29 +77,37 @@
                 <h3 id="submit-trust-modal-title"></h3>
             </div>
             <div class="modal-body">
-
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <p>
+                    <p class="default-status">
                         The library of <strong>@ViewBag.User.Institution.Name</strong> confirms the honesty of this journal.<br />
                         Date: <strong>@DateTime.Today.ToString("d")</strong>. Contact: <strong>@ViewBag.User.DisplayName</strong>.
                     </p>
-                    <form id="submit-trust-form">
-                        <label><input type="checkbox" /> I am submitting this expression of trust on behalf of my library</label>
+                    <form id="submit-trust-form"  class="default-status">
+                        <label>@Html.CheckBox("express-trust", false, new { id="trust-checkbox"}) I am submitting this expression of trust on behalf of my library</label>
                     </form>
+
+                    <p class="success-status">
+                        Trust in this journal on behalf of your library has been submitted successfully
+                    </p>
                 }
                 else
                 {
                     <p>
-                        If you want to express your trust in this journal on behalf of your library, please @Html.ActionLink("register", "Register", "Account", new { area = "" }, null) (new user)
-                        or @Html.ActionLink("log in", "Login", "Account", new { area = "" }, null) (returning user) with your academic email address.
+                        If you want to express your trust in this journal on behalf of your library, please @Html.ActionLink("register", "Register", "Account", new { area = "", returnUrl = Request.RawUrl }, null) (new user)
+                        or @Html.ActionLink("log in", "Login", "Account", new { area = "", returnUrl = Request.RawUrl }, null) (returning user) with your academic email address.
                     </p>
                 }
             </div>
             @if (User.Identity.IsAuthenticated)
             {
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="download-journals">Continue</button>
+                    <button id="submit-trust" class="btn btn-primary" data-url="@Url.Action("SubmitTrust")" data-userid="@ViewBag.User.Id" data-institutionid="@ViewBag.User.Institution.Id" disabled>
+                        <i id="submitting-trust-loader" style="display: none;" class="glyphicon glyphicon-refresh gly-spin"></i>
+                        Submit
+                    </button>
+
+                    <button class="success-status btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             }
         </div>
