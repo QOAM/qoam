@@ -17,11 +17,13 @@ namespace QOAM.Website.Areas.BonaFide.Controllers
     {
         readonly IJournalRepository _journalRepository;
         readonly ISubjectRepository _subjectRepository;
+        readonly ITrustedJournalRepository _trustedJournalRepository;
 
-        public BonaFideJournalsController(IJournalRepository journalRepository, ISubjectRepository subjectRepository, IBaseScoreCardRepository baseScoreCardRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication) : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
+        public BonaFideJournalsController(IJournalRepository journalRepository, ISubjectRepository subjectRepository, IBaseScoreCardRepository baseScoreCardRepository, ITrustedJournalRepository trustedJournalRepository, IValuationScoreCardRepository valuationScoreCardRepository, IUserProfileRepository userProfileRepository, IAuthentication authentication) : base(baseScoreCardRepository, valuationScoreCardRepository, userProfileRepository, authentication)
         {
             _journalRepository = journalRepository;
             _subjectRepository = subjectRepository;
+            _trustedJournalRepository = trustedJournalRepository;
         }
 
         [HttpGet, Route("")]
@@ -37,6 +39,9 @@ namespace QOAM.Website.Areas.BonaFide.Controllers
         [HttpPost, Route("submit-trust")]
         public ActionResult SubmitTrust(SubmitTrustViewModel model)
         {
+            _trustedJournalRepository.InsertOrUpdate(model.ToTrustedJournal());
+            _trustedJournalRepository.Save();
+
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }

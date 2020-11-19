@@ -38,8 +38,7 @@
             }, function(data) {
                 $("#submitting-trust-loader").hide();
                 $(".success-status").show();
-                
-                $("#submitting-trust-loader").hide();
+
                 $this.hide();
                 $(".default-status").hide();
             });
@@ -48,6 +47,12 @@
 
         $("#submit-trust-modal").on("hidden.bs.modal", function() {
             $("#submit-trust").prop("disabled", false);
+            $(".success-status").hide();
+                
+            $("#submitting-trust-loader").hide();
+            $("#submit-trust").show();
+            $(".default-status").show();
+            $("#trust-checkbox").prop("checked", false);
         });
 
         $('.remove-discipline').on('click', function(e) {
