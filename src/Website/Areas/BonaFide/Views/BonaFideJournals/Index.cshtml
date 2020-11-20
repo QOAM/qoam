@@ -50,7 +50,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, new { @class = Model.JournalLinkCssClass(journal), data_title = journal.Title, data_journalid = journal.Id })
+                                    @Html.ActionLink(journal.Title, "Details", "Journals", new { id = journal.Id, returnUrl = Request.RawUrl }, new { id = journal.Id, @class = Model.JournalLinkCssClass(journal), data_title = journal.Title, data_journalid = journal.Id })
                                 </td>
                                 <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name }, null)</td>
                             </tr>
@@ -83,12 +83,16 @@
                         The library of <strong>@ViewBag.User.Institution.Name</strong> confirms the honesty of this journal.<br />
                         Date: <strong>@DateTime.Today.ToString("d")</strong>. Contact: <strong>@ViewBag.User.DisplayName</strong>.
                     </p>
-                    <form id="submit-trust-form"  class="default-status">
-                        <label>@Html.CheckBox("express-trust", false, new { id="trust-checkbox"}) I am submitting this expression of trust on behalf of my library</label>
+                    <form id="submit-trust-form" class="default-status">
+                        <label>@Html.CheckBox("express-trust", false, new { id = "trust-checkbox" }) I am submitting this expression of trust on behalf of my library</label>
                     </form>
 
                     <p class="success-status">
                         Trust in this journal on behalf of your library has been submitted successfully
+                    </p>
+
+                    <p class="conflict-status">
+                        You Library had already submitted an expression of trust for this journal. No changes have been made.
                     </p>
                 }
                 else
@@ -107,7 +111,7 @@
                         Submit
                     </button>
 
-                    <button class="success-status btn btn-primary" data-dismiss="modal">Close</button>
+                    <button class="success-status conflict-status btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             }
         </div>

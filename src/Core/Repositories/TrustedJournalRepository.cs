@@ -17,6 +17,11 @@
                     select i).FirstOrDefault();
         }
 
+        public int CountTrustedByForJournal(int journalId)
+        {
+            return DbContext.TrustedJournals.Count(tj => tj.JournalId == journalId);
+        }
+
         //public IPagedList<TrustedJournal> Find(TrustedJournalFilter filter)
         //{
         //    var query = this.DbContext.TrustedJournals.Include(i => i.Institution);

@@ -39,10 +39,17 @@ namespace QOAM.Website.Areas.BonaFide.Controllers
         [HttpPost, Route("submit-trust")]
         public ActionResult SubmitTrust(SubmitTrustViewModel model)
         {
+            var existing = _trustedJournalRepository.Find(model.JournalId, model.InstitutionId);
+
+            if (existing != null)
+                return new HttpStatusCodeResult(HttpStatusCode.Conflict);
+
             _trustedJournalRepository.InsertOrUpdate(model.ToTrustedJournal());
             _trustedJournalRepository.Save();
 
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+            var trustedByCount = _trustedJournalRepository.CountTrustedByForJournal(model.JournalId);
+
+            return Json(new { trustedByCount });
         }
     }
 }

@@ -13,5 +13,6 @@
         void Delete(TrustedJournal journalPrice);
 
         void Save();
+        int CountTrustedByForJournal(int journalId);
     }
 }

@@ -1134,6 +1134,6 @@ img.green, img.red {
     top: 3px;
 }
 
-.success-status {
+.success-status, .conflict-status {
     display: none;
 }
