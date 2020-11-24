@@ -51,5 +51,23 @@ namespace QOAM.Website.Areas.BonaFide.Controllers
 
             return Json(new { trustedByCount });
         }
+
+        [HttpGet, Route("{id:int}")]
+        public ActionResult Details(int id)
+        {
+            var journal = _journalRepository.Find(id);
+
+            if (journal == null)
+            {
+                return HttpNotFound();
+            }
+
+            //ViewBag.ReturnUrl = HttpContext.Request.UrlReferrer?.ToString();
+
+            if (TempData.TryGetValue("MyQoamMessage", out var saved))
+                ViewBag.MyQoamMessage = saved.ToString();
+
+            return View(journal);
+        }
     }
 }

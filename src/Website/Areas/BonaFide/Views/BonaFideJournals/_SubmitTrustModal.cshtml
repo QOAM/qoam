@@ -1,0 +1,48 @@
+﻿<div id="submit-trust-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="submit-trust-modal-title"></h3>
+            </div>
+            <div class="modal-body">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <p class="default-status">
+                        The library of <strong>@ViewBag.User.Institution.Name</strong> confirms the honesty of this journal.<br />
+                        Date: <strong>@DateTime.Today.ToString("d")</strong>. Contact: <strong>@ViewBag.User.DisplayName</strong>.
+                    </p>
+                    <form id="submit-trust-form" class="default-status">
+                        <label>@Html.CheckBox("express-trust", false, new { id = "trust-checkbox" }) I am submitting this expression of trust on behalf of my library</label>
+                    </form>
+
+                    <p class="success-status">
+                        Trust in this journal on behalf of your library has been submitted successfully
+                    </p>
+
+                    <p class="conflict-status">
+                        You Library had already submitted an expression of trust for this journal. No changes have been made.
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        If you want to express your trust in this journal on behalf of your library, please @Html.ActionLink("register", "Register", "Account", new { area = "", returnUrl = Request.RawUrl }, null) (new user)
+                        or @Html.ActionLink("log in", "Login", "Account", new { area = "", returnUrl = Request.RawUrl }, null) (returning user) with your academic email address.
+                    </p>
+                }
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="modal-footer">
+                    <button id="submit-trust" class="btn btn-primary" data-url="@Url.Action("SubmitTrust")" data-userid="@ViewBag.User.Id" data-institutionid="@ViewBag.User.Institution.Id" disabled>
+                        <i id="submitting-trust-loader" style="display: none;" class="glyphicon glyphicon-refresh gly-spin"></i>
+                        Submit
+                    </button>
+
+                    <button id="close-subtmit-modal" class="success-status conflict-status btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -19,6 +19,87 @@
 
         });
 
+        initSubtmitTrustDialog();
+
+        $('.remove-discipline').on('click', function (e) {
+            $(this).closest('li').remove();
+
+            $('#disciplines input').each(function (index, element) {
+                $(element).attr('name', 'Disciplines[' + index + ']');
+            });
+
+            e.preventDefault();
+            $('#search-form').submit();
+
+            return false;
+        });
+
+        $('.remove-language').on('click', function (e) {
+            $(this).closest('li').remove();
+
+            $('#languages input').each(function (index, element) {
+                $(element).attr('name', 'Languages[' + index + ']');
+            });
+
+            e.preventDefault();
+            $('#search-form').submit();
+
+            return false;
+        });
+
+
+        $('a.help-window').on('click', function () {
+            window.open($(this).attr('href'), 'Help', 'width=800,height=600,toolbar=no');
+            return false;
+        });
+    };
+
+    BfjController.prototype.details = function (viewJournalPricesElementId, viewJournalPricesModalElementId, viewJournalStandardPricesElementId, viewJournalStandardPricesModalElementId) {
+
+        $("#open-submit-trust-dialog").click(function (e) {
+            var $this = $(this);
+            e.preventDefault();
+            $("#submit-trust-modal-title").html($this.data("title"));
+            $("#submit-trust").data("journalid", $this.data("journalid"));
+            $("#submit-trust-modal").modal();
+
+        });
+
+        $("#back-button").click(function(e) {
+            e.preventDefault();
+            window.history.go(-1);
+        });
+
+        initSubtmitTrustDialog();
+
+        var table = $("#licenses").DataTable({
+            "ordering": false,
+            "info": false,
+            "lengthChange": false,
+            "dom": "tp",
+            "pagingType": "numbers"
+        });
+
+        //$('#FilterInstitution').on('keyup', function () {
+        //    table.search(this.value).draw();
+        //});
+
+        //if ($('#FilterInstitution').length === 0) {
+        //    $('#licenses_paginate').hide();
+        //}
+
+        $('#' + viewJournalPricesElementId).on('click', function () {
+            $('#' + viewJournalPricesModalElementId).modal();
+            return false;
+        });
+        
+        $('#' + viewJournalStandardPricesElementId).on('click', function () {
+            $('#' + viewJournalStandardPricesModalElementId).modal();
+            return false;
+        });
+    };
+
+    function initSubtmitTrustDialog() {
         $("#trust-checkbox").change(function () {
             $("#submit-trust").prop("disabled", !$(this).prop("checked"));
         });
@@ -62,6 +143,7 @@
 
                 $journalLink.removeClass("grey");
                 $journalLink.addClass(newCssSlass);
+
             }).fail(function (error) {
                 if (error.status === 409) {
                     $(".conflict-status").show();
@@ -72,49 +154,21 @@
             });
         });
 
-
-        $("#submit-trust-modal").on("hidden.bs.modal", function () {
-            $("#submit-trust").prop("disabled", false);
-            $(".success-status, .conflict-status").hide();
-
-            $("#submitting-trust-loader").hide();
-            $("#submit-trust").show();
-            $(".default-status").show();
-            $("#trust-checkbox").prop("checked", false);
-        });
-
-        $('.remove-discipline').on('click', function (e) {
-            $(this).closest('li').remove();
-
-            $('#disciplines input').each(function (index, element) {
-                $(element).attr('name', 'Disciplines[' + index + ']');
-            });
-
-            e.preventDefault();
-            $('#search-form').submit();
-
-            return false;
-        });
-
-        $('.remove-language').on('click', function (e) {
-            $(this).closest('li').remove();
-
-            $('#languages input').each(function (index, element) {
-                $(element).attr('name', 'Languages[' + index + ']');
-            });
-
-            e.preventDefault();
-            $('#search-form').submit();
-
-            return false;
+        $("#close-subtmit-modal").click(function() {
+            window.location.reload();
         });
 
 
-        $('a.help-window').on('click', function () {
-            window.open($(this).attr('href'), 'Help', 'width=800,height=600,toolbar=no');
-            return false;
-        });
-    };
+        //$("#submit-trust-modal").on("hidden.bs.modal", function () {
+        //    $("#submit-trust").prop("disabled", false);
+        //    $(".success-status, .conflict-status").hide();
+
+        //    $("#submitting-trust-loader").hide();
+        //    $("#submit-trust").show();
+        //    $(".default-status").show();
+        //    $("#trust-checkbox").prop("checked", false);
+        //});
+    }
 
     return BfjController;
 })();
