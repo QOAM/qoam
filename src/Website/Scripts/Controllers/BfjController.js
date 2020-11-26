@@ -65,6 +65,19 @@
 
         });
 
+        $(".remove-trust").click(function(e) {
+            var $this = $(this);
+            e.preventDefault();
+
+            $("#trusting-institution").html($this.data("institution"));
+            $("#remove-trust").data("url", this.href);
+            $("#remove-trust-modal").modal();
+        });
+
+        $("#remove-trust").click(function(e) {
+            window.location.href = $(this).data("url");
+        });
+
         $("#back-button").click(function(e) {
             e.preventDefault();
             window.history.go(-1);

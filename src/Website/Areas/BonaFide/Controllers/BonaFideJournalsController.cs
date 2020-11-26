@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using QOAM.Core.Repositories;
 using QOAM.Website.Controllers;
 using QOAM.Website.Helpers;
+using QOAM.Website.Models;
 using QOAM.Website.ViewModels.BonaFideJournals;
 using QOAM.Website.ViewModels.Journals;
 
@@ -68,6 +69,19 @@ namespace QOAM.Website.Areas.BonaFide.Controllers
                 ViewBag.MyQoamMessage = saved.ToString();
 
             return View(journal);
+        }
+
+        [HttpGet, Route("{id:int}/remove-trust")]
+        [Authorize(Roles = ApplicationRole.Admin + "," + ApplicationRole.InstitutionAdmin + "," + ApplicationRole.DataAdmin)]
+        public ActionResult RemoveTrust(int id)
+        {
+            var trust = _trustedJournalRepository.Find(id);
+            var journalId = trust.JournalId;
+
+            _trustedJournalRepository.Delete(trust);
+            _trustedJournalRepository.Save();
+
+            return RedirectToAction("Details", new { id = journalId, area = "BonaFide" });
         }
     }
 }

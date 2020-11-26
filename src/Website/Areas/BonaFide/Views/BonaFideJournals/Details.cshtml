@@ -1,6 +1,7 @@
 ﻿@using System.Web.Optimization
 @using QOAM.Core
 @using QOAM.Website.Helpers
+@using QOAM.Website.Models
 @model QOAM.Core.Journal
 
 @{
@@ -21,10 +22,10 @@
                     @ViewBag.MyQoamMessage
                 </div>
             }
-            
+
             <a id="back-button" class="btn btn-default return-button" title="Back to journals" href="#">&lt; Back to journals</a>
 
-                <div class="panel panel-primary">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <a href="@Model.Link" title="Go to website">
                         <div>
@@ -93,15 +94,26 @@
                                             <th>Library of</th>
                                             <th>Date</th>
                                             <th>Contact</th>
+                                            @if (User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin, ApplicationRole.DataAdmin))
+                                            {
+                                                <th></th>
+                                            }
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var trustintInstitution in Model.TrustingInstitutions.OrderByDescending(x => x.Id))
+                                        @foreach (var trustingInstitution in Model.TrustingInstitutions.OrderByDescending(x => x.Id))
                                         {
                                             <tr>
-                                                <td>@trustintInstitution.Institution.Name</td>
-                                                <td>@trustintInstitution.DateAdded.ToString("d")</td>
-                                                <td>@trustintInstitution.UserProfile.DisplayName</td>
+                                                <td>@trustingInstitution.Institution.Name</td>
+                                                <td>@trustingInstitution.DateAdded.ToString("d")</td>
+                                                <td>@trustingInstitution.UserProfile.DisplayName</td>
+                                                @if (User.IsInRoles(ApplicationRole.Admin, ApplicationRole.InstitutionAdmin, ApplicationRole.DataAdmin))
+                                                {
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-trash"></span> 
+                                                        @Html.ActionLink("Remove", "RemoveTrust", "BonaFideJournals", new { id = trustingInstitution.Id, area = "BonaFide" }, new { @class = "remove-trust", data_institution = trustingInstitution.Institution.Name})
+                                                    </td>
+                                                }
                                             </tr>
                                         }
                                     </tbody>
@@ -140,7 +152,7 @@
                             }
                             else
                             {
-                                <p><a href="#" id="open-submit-trust-dialog" data-title = @Model.Title, data-journalid = @Model.Id>Express your trust in this journal on behalf of your library</a></p>
+                                <p><a href="#" id="open-submit-trust-dialog" data-title=@Model.Title , data-journalid=@Model.Id>Express your trust in this journal on behalf of your library</a></p>
                             }
                         </div>
                     </div>
@@ -151,6 +163,27 @@
 </div>
 
 @Html.Partial("_SubmitTrustModal")
+
+<div id="remove-trust-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Remove expression of Trust</h3>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove <strong id="trusting-institution"></strong>'s expression of trust?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="mr-20">Never mind</a>
+                <button id="remove-trust" class="btn btn-danger" data-dismiss="modal">
+                    <i id="removing-trust-loader" style="display: none;" class="glyphicon glyphicon-refresh gly-spin"></i>
+                    Yes, remove
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section stylesheets
 {

@@ -1,4 +1,6 @@
-﻿namespace QOAM.Core.Repositories
+﻿using System.Collections.Generic;
+
+namespace QOAM.Core.Repositories
 {
     using System.Linq;
 
@@ -7,6 +9,21 @@
         public TrustedJournalRepository(ApplicationDbContext dbContext)
             : base(dbContext)
         {
+        }
+
+        public bool EnableProxyCreation
+        {
+            get => DbContext.Configuration.ProxyCreationEnabled;
+            set => DbContext.Configuration.ProxyCreationEnabled = value;
+        }
+
+        public IList<Journal> ListOfTrustedJournals()
+        {
+                return DbContext.TrustedJournals.Select(tj => tj.Journal).OrderBy(j => j.Title).ToList();
+    }
+        public TrustedJournal Find(int trustedJournalId)
+        {
+            return DbContext.TrustedJournals.Find(trustedJournalId);
         }
 
         public TrustedJournal Find(int journalId, int institutionId)

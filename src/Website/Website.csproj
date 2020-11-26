@@ -257,6 +257,7 @@
     <Compile Include="App_Start\ViewEngineConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\WebSecurityConfig.cs" />
+    <Compile Include="Areas\BonaFide\Controllers\BonaFideApiController.cs" />
     <Compile Include="Areas\BonaFide\Controllers\BonaFideJournalsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -266,6 +267,7 @@
     <Compile Include="Controllers\ScoreCardApiController.cs" />
     <Compile Include="Helpers\EmailValidator.cs" />
     <Compile Include="Helpers\HttpPostedFileExtensionsAttribute.cs" />
+    <Compile Include="ModelExtensions\JournalExtensions.cs" />
     <Compile Include="Resources\Questions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -280,6 +282,7 @@
     <Compile Include="ViewModels\Admin\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\Admin\JournalRelatedLinksImportedViewModel.cs" />
     <Compile Include="ViewModels\Admin\ManageCorrespondingDomainsViewModel.cs" />
+    <Compile Include="ViewModels\Api\BfjApiDto.cs" />
     <Compile Include="ViewModels\Api\ScoreCard\SerializableScoreCard.cs" />
     <Compile Include="ViewModels\BonaFideJournals\BonaFideJournalsViewModel.cs" />
     <Compile Include="ViewModels\BonaFideJournals\SubmitTrustViewModel.cs" />

@@ -1,4 +1,6 @@
-﻿namespace QOAM.Core.Repositories
+﻿using System.Collections.Generic;
+
+namespace QOAM.Core.Repositories
 {
     public interface ITrustedJournalRepository : IRepository
     {
@@ -14,5 +16,8 @@
 
         void Save();
         int CountTrustedByForJournal(int journalId);
+        TrustedJournal Find(int trustedJournalId);
+        IList<Journal> ListOfTrustedJournals();
+        bool EnableProxyCreation { get; set; }
     }
 }

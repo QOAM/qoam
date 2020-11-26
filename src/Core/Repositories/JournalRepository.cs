@@ -29,8 +29,14 @@ namespace QOAM.Core.Repositories
         {
             get
             {
-                return this.DbContext.Journals.OrderBy(j => j.Title).ToList();
+                return DbContext.Journals.OrderBy(j => j.Title).ToList();
             }
+        }
+
+        public IList<Journal> AllWhere(Expression<Func<Journal, bool>> whereClause)
+        {
+            var query = DbContext.Journals.Where(whereClause);
+            return query.ToList();
         }
 
         public Journal FindByIssn(string issn)
