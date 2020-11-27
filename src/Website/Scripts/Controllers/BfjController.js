@@ -13,7 +13,7 @@
         $(".grey").click(function (e) {
             var $this = $(this);
             e.preventDefault();
-            $("#submit-trust-modal-title").html($this.data("title"));
+            $(".submit-trust-journal-title").html($this.data("title"));
             $("#submit-trust").data("journalid", $this.data("journalid"));
             $("#submit-trust-modal").modal();
 
@@ -59,7 +59,7 @@
         $("#open-submit-trust-dialog").click(function (e) {
             var $this = $(this);
             e.preventDefault();
-            $("#submit-trust-modal-title").html($this.data("title"));
+            $(".submit-trust-journal-title").html($this.data("title"));
             $("#submit-trust").data("journalid", $this.data("journalid"));
             $("#submit-trust-modal").modal();
 

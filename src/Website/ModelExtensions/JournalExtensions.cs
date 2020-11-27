@@ -21,5 +21,10 @@ namespace QOAM.Website.ModelExtensions
 
             return "";
         }
+
+        public static bool DisplayExpressTrustText(this Journal journal)
+        {
+            return !journal.NoFee && !journal.DoajSeal && !journal.InstitutionJournalPrices.Any();
+        }
     }
 }

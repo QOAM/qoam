@@ -1,0 +1,35 @@
+﻿@helper MenuItemClass(string menuItem, string additionalClass = "")
+{
+    if(!string.IsNullOrWhiteSpace(menuItem))
+    {
+        var selectedMenuItem = (string) ViewBag.SelectedMenuItem;
+        var isActive = menuItem.Contains("/") ? menuItem == selectedMenuItem : selectedMenuItem.StartsWith(menuItem);
+
+        if (isActive)
+        {
+            <text>class="active @(additionalClass)"</text>
+        }
+    }
+}
+
+<div class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = ""})">Home</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li @MenuItemClass("Journals")><a href="@Url.Action("Index", "BonaFideJournals", new { area = "BonaFide"})"><i class="glyphicon glyphicon-search"></i> Journals</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @{ Html.RenderPartial("_LoginPartial"); }
+            </ul>
+        </div>
+    </div>
+</div>
