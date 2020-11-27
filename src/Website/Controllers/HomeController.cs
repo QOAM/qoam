@@ -68,6 +68,12 @@ namespace QOAM.Website.Controllers
             return View();
         }
 
+        [HttpGet, Route("qoam-journal-composition")]
+        public ViewResult QoamJournalComposition()
+        {
+            return View();
+        }
+
         [HttpGet, Route("faq")]
         public ViewResult Faq()
         {
