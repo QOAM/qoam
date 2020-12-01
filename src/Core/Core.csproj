@@ -321,6 +321,10 @@
     <Compile Include="Migrations\202002241318101_CorrespondingDomains-on-Institution.Designer.cs">
       <DependentUpon>202002241318101_CorrespondingDomains-on-Institution.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011110826473_BFJ-Trusted-Journals.cs" />
+    <Compile Include="Migrations\202011110826473_BFJ-Trusted-Journals.designer.cs">
+      <DependentUpon>202011110826473_BFJ-Trusted-Journals.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\CornerRepository.cs" />
@@ -328,6 +332,8 @@
     <Compile Include="Repositories\Filters\UserJournalFilter.cs" />
     <Compile Include="Repositories\IBlockedISSNRepository.cs" />
     <Compile Include="Repositories\ICornerRepository.cs" />
+    <Compile Include="Repositories\ITrustedJournalRepository.cs" />
+    <Compile Include="Repositories\TrustedJournalRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IUserJournalRepository.cs" />
     <Compile Include="Repositories\UserJournalRepository.cs" />
@@ -389,9 +395,13 @@
     <EmbeddedResource Include="Migrations\202002241318101_CorrespondingDomains-on-Institution.resx">
       <DependentUpon>202002241318101_CorrespondingDomains-on-Institution.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011110826473_BFJ-Trusted-Journals.resx">
+      <DependentUpon>202011110826473_BFJ-Trusted-Journals.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />
     <Compile Include="SwotVerdict.cs" />
+    <Compile Include="TrustedJournal.cs" />
     <Compile Include="UserJournal.cs" />
     <Compile Include="ValuationJournalPrice.cs" />
     <Compile Include="ValuationQuestionScore.cs" />

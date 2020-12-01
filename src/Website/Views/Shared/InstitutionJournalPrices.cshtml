@@ -1,4 +1,5 @@
-﻿@using QOAM.Website.Models
+﻿@using QOAM.Core
+@using QOAM.Website.Models
 @model IList<QOAM.Core.InstitutionJournal>
 
 @foreach (var institutionJournal in Model)
@@ -14,7 +15,7 @@
             }
             else
             {
-                @Html.ActionLink(institutionJournal.Institution.Name, "InstitutionJournalText", new { id = institutionJournal.JournalId, institutionId = institutionJournal.InstitutionId })
+                @Html.ActionLink(institutionJournal.Institution.Name, "InstitutionJournalText", "Journals", new { id = institutionJournal.JournalId, institutionId = institutionJournal.InstitutionId, area = "" }, null)
             }
         </td>
     </tr>

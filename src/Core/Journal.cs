@@ -9,6 +9,7 @@
         public Journal()
         {
             InstitutionJournalPrices = new List<InstitutionJournal>();
+            TrustingInstitutions = new List<TrustedJournal>();
             BaseJournalPrices = new List<BaseJournalPrice>();
             ValuationJournalPrices = new List<ValuationJournalPrice>();
             Languages = new List<Language>();
@@ -104,6 +105,7 @@
         public virtual ListPrice ListPrice { get; set; }
 
         public virtual ICollection<InstitutionJournal> InstitutionJournalPrices { get; set; }
+        public virtual ICollection<TrustedJournal> TrustingInstitutions { get; set; }
         public virtual ICollection<BaseJournalPrice> BaseJournalPrices { get; set; }
         public virtual ICollection<ValuationJournalPrice> ValuationJournalPrices { get; set; }
         public virtual ICollection<Language> Languages { get; set; }

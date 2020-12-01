@@ -1015,6 +1015,14 @@ a:hover.filter-enabled {
     color: #428bca;
 }
 
+.lightblue {
+    color: lightskyblue !important;
+}
+
+.grey {
+    color: gray !important;
+}
+
 .black {
     color: #000 !important;
 }
@@ -1124,4 +1132,8 @@ img.green, img.red {
 
 #plan-s-dropdown .chosen-container-single .chosen-single div {
     top: 3px;
+}
+
+.success-status, .conflict-status {
+    display: none;
 }

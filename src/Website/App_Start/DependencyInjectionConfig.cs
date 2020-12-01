@@ -52,6 +52,7 @@ namespace QOAM.Website
             builder.RegisterType<BaseScoreCardRepository>().As<IBaseScoreCardRepository>().InstancePerRequest();
             builder.RegisterType<CountryRepository>().As<ICountryRepository>().InstancePerRequest();
             builder.RegisterType<InstitutionJournalRepository>().As<IInstitutionJournalRepository>().InstancePerRequest();
+            builder.RegisterType<TrustedJournalRepository>().As<ITrustedJournalRepository>().InstancePerRequest();
             builder.RegisterType<UserJournalRepository>().As<IUserJournalRepository>().InstancePerRequest();
             builder.RegisterType<InstitutionRepository>().As<IInstitutionRepository>().InstancePerRequest();
             builder.RegisterType<JournalRepository>().As<IJournalRepository>().InstancePerRequest();

@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Journal details covered by QOAM";
+}
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-3">
+            @{ Html.RenderPartial("_SidebarMenu", "References"); }
+        </div>
+        <div class="col-md-9">
+            <h2>@ViewBag.Title</h2>
+            
+            <p style="margin-top: 50px">
+                <iframe width="100%" height="450" src="https://app.powerbi.com/view?r=eyJrIjoiOGFkODI5YjQtODk0NC00YmMwLTk4MTUtZTNmZGYzYzg4N2QyIiwidCI6ImJjMmQyOWM3LTUxZGYtNDNlZS1iNDFlLWEwOWI1MjcyMjM5NyIsImMiOjl9&pageName=ReportSectiona274ebe01f7a403a6f46" frameborder="0" allowFullScreen="true" style="text-align: center"></iframe>
+            </p>
+
+            <h3>Comprehensive Dataset of Hybrid, Gold and Diamond Journals</h3>
+            <p>
+                Quality Open Access Market contains a comprehensive dataset on Open Access journals, aggregating data from JournalTOCs, DOAJ and CrossRef. The dataset comprises of 36,806 journals (per 1 July 2020). The QOAM dataset includes for each journal title the number of DOI’s listed in CrossRef of articles with publication years 2019 and after.
+                With regard to the journal types, we will use the following definitions in this document:
+            </p>
+
+            <ul>
+                <li><span>Hybrid journals: subscription journals with the option to publish on Open Access</span></li>
+                <li><span>Gold journals: OA journals based on the APC-model (often called APC-Gold journals)</span></li>
+                <li><span>Diamond journals: OA journals without any cost to the authors, supported by other financial means (often called sponsored OA journals)</span></li>
+                <li><span>Subscription-only journals: Journals based on the subscription model without the option to publish articles on Open Access</span></li>
+            </ul>
+
+
+            <h3>Interactive Dashboard</h3>
+            <p>
+                The interactive dashboard above presents an analysis by Maurits van der Graaf (Pleiade Management & Consultancy) of the QOAM dataset as downloaded on July 1, 2020.
+                The dashboard is clickable, and, with the Ctrl key, it is possible to click several items simultaneously. With the symbol in the bottom right corner, one can enlarge the dashboard. The main options to analyse the journal dataset are:
+            </p>
+
+            <ul>
+                <li><span>Type of journal: Diamond, Gold or Hybrid</span></li>
+                <li><span>Nr. of journal titles and nr. of journals with &gt;100 articles with DOI published in 2019</span></li>
+                <li><span>Number of articles with DOI published in 2019</span></li>
+                <li><span>Publishers by name and by subset of large publishers (Top 28 publishers with &gt; 10,000 articles published in 2019) and the long tail (with &lt; 10,000 articles published</span></li>
+            </ul>
+
+            <h3>A Few Conclusions</h3>
+            <ul>
+                <li><span><strong>Hybrid journals</strong> publish circa 66% of the 2019 articles and are published by a relatively limited number of publishers (n=256). This limited number of publishers publishing hybrid journals is understandable: it takes an important investment for publishers to create the option for some articles to be available as OA in their distribution systems and to adapt their financial administration systems to APC-payments. For publishers that publish only a handful of journal titles, this investment may not be worthwhile.</span></li>
+                <li><span><strong>Gold journals</strong> (OA with the APC business model) publish approximately 28% of the scientific articles in a larger number of journal titles and are published by just over 2,900 publishers.</span></li>
+                <li><span><strong>Diamond journals</strong> publish a relatively small percentage of the annual production of scientific articles and these articles are published by more than 3,800 publishers. Many Diamond publishers publish only one or two journal titles. It has to be noted that the figures of the number of journal articles published in 2019 derived from CrossRef and thus based on the assignment of a DOI per article. Walt Crawford creates every year a database on OA journals and counts articles partly manually. He reports 332,000 articles in 2019 published by Diamond journals, compared to the 125,000 articles in this dataset. This means that a large number of Diamond journals do not assign DOI’s to their articles.</span></li>
+                <li><span><strong>Subscription-only journals</strong>: Not included in the dataset of QOAM are the subscription-only journals covered by JournalTOCS. It is worth mentioning that JournalTOCs reports to cover 6.000 journals of this type, a number that has been stable over the last few years. The number of articles published in these journals is roughly estimated at 500.000.</span></li>
+                <li><span><strong>Top-28 publishers</strong> publish more than 80% of all articles covered by this dataset in circa 43% of the journal titles. This is because they publish the large majority of (86%) of titles with more than 100 articles per year.</span></li>
+                <li><span><strong>The long tail</strong>: The dataset illustrates clearly the situation with regard to the long tail: more than 5900 publisher with over 20,000 journal titles publishing a relatively minor part of the articles. To make those journal titles more visible by a clear indication of their quality is exactly the raison d‘être of QOAM.</span></li>
+            </ul>
+
+        </div>
+    </div>
+</div>

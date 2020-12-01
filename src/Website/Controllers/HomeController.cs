@@ -11,6 +11,8 @@ using Validation;
 
 namespace QOAM.Website.Controllers
 {
+    [RoutePrefix("")]
+    //[Route("{action}")]
     public class HomeController : ApplicationController
     {
         readonly IMailSender _mailSender;
@@ -62,6 +64,12 @@ namespace QOAM.Website.Controllers
 
         [HttpGet, Route("references")]
         public ViewResult References()
+        {
+            return View();
+        }
+
+        [HttpGet, Route("qoam-journal-composition")]
+        public ViewResult QoamJournalComposition()
         {
             return View();
         }

@@ -50,5 +50,6 @@
         int JournalsWithSwotCount();
         IList<Journal> AllWhereIncluding(Expression<Func<Journal, bool>> whereClause, params Expression<Func<Journal, object>>[] includeProperties);
         ListPrice FindListPriceByJournalId(int journalId);
+        IList<Journal> AllWhere(Expression<Func<Journal, bool>> whereClause);
     }
 }

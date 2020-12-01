@@ -11,6 +11,8 @@ namespace QOAM.Website
             routes.IgnoreRoute("elmah.axd");
 
             routes.MapMvcAttributeRoutes();
+
+            AreaRegistration.RegisterAllAreas();
         }
     }
 }

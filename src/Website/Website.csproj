@@ -257,6 +257,8 @@
     <Compile Include="App_Start\ViewEngineConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\WebSecurityConfig.cs" />
+    <Compile Include="Areas\BonaFide\Controllers\BonaFideApiController.cs" />
+    <Compile Include="Areas\BonaFide\Controllers\BonaFideJournalsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\JournalsApiController.cs" />
@@ -265,6 +267,7 @@
     <Compile Include="Controllers\ScoreCardApiController.cs" />
     <Compile Include="Helpers\EmailValidator.cs" />
     <Compile Include="Helpers\HttpPostedFileExtensionsAttribute.cs" />
+    <Compile Include="ModelExtensions\JournalExtensions.cs" />
     <Compile Include="Resources\Questions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -279,7 +282,10 @@
     <Compile Include="ViewModels\Admin\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\Admin\JournalRelatedLinksImportedViewModel.cs" />
     <Compile Include="ViewModels\Admin\ManageCorrespondingDomainsViewModel.cs" />
+    <Compile Include="ViewModels\Api\BfjApiDto.cs" />
     <Compile Include="ViewModels\Api\ScoreCard\SerializableScoreCard.cs" />
+    <Compile Include="ViewModels\BonaFideJournals\BonaFideJournalsViewModel.cs" />
+    <Compile Include="ViewModels\BonaFideJournals\SubmitTrustViewModel.cs" />
     <Compile Include="ViewModels\Home\DemoPlanSViewModel.cs" />
     <Compile Include="ViewModels\IFileUploadViewModel.cs" />
     <Compile Include="ViewModels\Import\JournalTocsImportViewModel.cs" />
@@ -445,6 +451,7 @@
     <Content Include="Scripts\cldr\supplemental.js" />
     <Content Include="Scripts\cldr\unresolved.js" />
     <Content Include="Scripts\Controllers\AdminController.js" />
+    <Content Include="Scripts\Controllers\BfjController.js" />
     <Content Include="Scripts\Controllers\QoamCornersController.js" />
     <Content Include="Scripts\Controllers\InstitutionsController.js" />
     <Content Include="Scripts\Controllers\InstitutionsController.min.js">
@@ -492,6 +499,11 @@
     <Content Include="Scripts\cldr\supplemental\unitPreferenceData.json" />
     <Content Include="Scripts\cldr\supplemental\weekData.json" />
     <Content Include="Scripts\cldr\supplemental\windowsZones.json" />
+    <Content Include="Areas\BonaFide\Views\web.config" />
+    <Content Include="Areas\BonaFide\Views\BonaFideJournals\Index.cshtml" />
+    <Content Include="Areas\BonaFide\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\BonaFide\Views\BonaFideJournals\Details.cshtml" />
+    <Content Include="Areas\BonaFide\Views\BonaFideJournals\_SubmitTrustModal.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.globalize.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -568,7 +580,7 @@
     <Content Include="Views\Shared\_Loading.cshtml" />
     <Content Include="Views\Journals\BaseScoreCards.cshtml" />
     <Content Include="Views\Journals\BaseScoreCardComments.cshtml" />
-    <Content Include="Views\Journals\InstitutionJournalPrices.cshtml" />
+    <Content Include="Views\Shared\InstitutionJournalPrices.cshtml" />
     <Content Include="Scripts\Helpers\Ajax.min.js.map">
       <DependentUpon>Ajax.js</DependentUpon>
     </Content>
@@ -708,6 +720,9 @@
     <Content Include="Views\Home\DemoPlanS.cshtml" />
     <Content Include="Views\Admin\_CorrespondingDomainsSidebarMenu.cshtml" />
     <Content Include="Views\Admin\CorrespondingDomains.cshtml" />
+    <Content Include="Views\Shared\_LayoutBfj.cshtml" />
+    <Content Include="Views\Shared\_Bfj-Header.cshtml" />
+    <Content Include="Views\Home\QoamJournalComposition.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -852,6 +867,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Ulrichs\" />
+    <Folder Include="Areas\BonaFide\Data\" />
+    <Folder Include="Areas\BonaFide\Views\Shared\" />
     <Folder Include="lib\" />
   </ItemGroup>
   <ItemGroup>
