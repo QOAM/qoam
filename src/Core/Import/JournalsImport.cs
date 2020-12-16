@@ -1,4 +1,7 @@
-﻿namespace QOAM.Core.Import
+﻿using System.Data.Entity.Validation;
+using QOAM.Core.Repositories.Filters;
+
+namespace QOAM.Core.Import
 {
     using System;
     using System.Collections.Generic;
@@ -16,7 +19,7 @@
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private readonly IJournalRepository journalRepository;
+        private readonly IJournalRepository _journalRepository;
         private readonly ILanguageRepository languageRepository;
         private readonly ICountryRepository countryRepository;
         private readonly ISubjectRepository subjectRepository;
@@ -32,7 +35,7 @@
             Requires.NotNull(publisherRepository, nameof(publisherRepository));
             Requires.NotNull(importSettings, nameof(importSettings));
 
-            this.journalRepository = journalRepository;
+            _journalRepository = journalRepository;
             this.languageRepository = languageRepository;
             this.countryRepository = countryRepository;
             this.subjectRepository = subjectRepository;
@@ -58,9 +61,8 @@
             var publishers = this.ImportPublishers(distinctJournals);
 
             Logger.Info("Retrieving existing journals from database...");
-            var allJournals = this.journalRepository.All;
             
-            var currentJournalIssns = this.journalRepository.AllIssns.ToList();
+            var currentJournalIssns = _journalRepository.AllIssns.ToList();
             
             var newJournals = distinctJournals.Where(j => !currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
 
@@ -77,7 +79,7 @@
 
             if (ShouldUpdateJournals(journalsImportMode))
             {
-                this.UpdateJournals(existingJournals, countries, publishers, languages, subjects, allJournals, journalUpdateProperties);
+                this.UpdateJournals(existingJournals, countries, publishers, languages, subjects, currentJournalIssns, journalUpdateProperties);
             }
 
             return new JournalsImportResult
@@ -93,6 +95,8 @@
         {
             Logger.Info("Importing journals in batches of {0}...", this.importSettings.BatchSize);
 
+            _journalRepository.RefreshContext();
+            
             var index = 1;
 
             foreach (var newJournalsChunk in newJournals.Chunk(this.importSettings.BatchSize).ToList())
@@ -110,11 +114,13 @@
             }
         }
 
-        private void UpdateJournals(List<Journal> existingJournals, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<Journal> allJournals, ISet<JournalUpdateProperty> journalUpdateProperties)
+        private void UpdateJournals(List<Journal> existingJournals, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<string> allIssns, ISet<JournalUpdateProperty> journalUpdateProperties)
         {
             Logger.Info("Updating journals in batches of {0}...", this.importSettings.BatchSize);
 
             var index = 1;
+            
+            _journalRepository.RefreshContext();
 
             foreach (var existingJournalsChunk in existingJournals.Chunk(this.importSettings.BatchSize).ToList())
             {
@@ -122,7 +128,10 @@
 
                 try
                 {
-                    this.UpdateJournalsInChunk(existingJournalsChunk.ToList(), countries, publishers, languages, subjects, allJournals, journalUpdateProperties);
+                    var exitsingJournalsChunkList = existingJournalsChunk.ToList();
+                    var databaseJournalsForChunk = _journalRepository.SearchByISSN(exitsingJournalsChunkList.Select(j => j.ISSN).ToList()).ToList();
+                    
+                    UpdateJournalsInChunk(exitsingJournalsChunkList, countries, publishers, languages, subjects, databaseJournalsForChunk, journalUpdateProperties);
                 }
                 catch (Exception ex)
                 {
@@ -131,11 +140,27 @@
             }
         }
 
-        private void UpdateJournalsInChunk(IList<Journal> existingJournalsChunk, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<Journal> allJournals, ISet<JournalUpdateProperty> journalUpdateProperties)
+        void UpdateJournalsInChunk(IList<Journal> existingJournalsChunk, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<Journal> databaseJournalsForChunk, ISet<JournalUpdateProperty> journalUpdateProperties)
         {
             foreach (var journal in existingJournalsChunk)
             {
-                var currentJournal = allJournals.First(j => string.Equals(j.ISSN, journal.ISSN, StringComparison.InvariantCultureIgnoreCase));
+                var currentJournal = databaseJournalsForChunk.FirstOrDefault(j => string.Equals(j.ISSN, journal.ISSN, StringComparison.InvariantCultureIgnoreCase));
+
+                if (currentJournal == null)
+                {
+                    Logger.Warn($"\t Journal with ISSN {journal.ISSN} not found.");
+
+                    var matchByTitle = _journalRepository.AllWhere(j => j.Title == journal.Title);
+
+                    if (matchByTitle.Count != 1)
+                        continue;
+                    
+                    
+                    currentJournal = matchByTitle.First();
+                    Logger.Info($"\tFound single match by Title. Fixing ISSN.");
+                    
+                    currentJournal.ISSN = journal.ISSN;
+                }
 
                 if (journalUpdateProperties.Contains(JournalUpdateProperty.DoajSeal))
                 {
@@ -211,27 +236,37 @@
                 }
 
                 currentJournal.LastUpdatedOn = DateTime.Now;
-                this.journalRepository.InsertOrUpdate(currentJournal);
+                _journalRepository.InsertOrUpdate(currentJournal);
             }
 
-            this.journalRepository.Save();
+            _journalRepository.Save();
+            _journalRepository.RefreshContext();
         }
 
-        private void ImportJournalsInChunk(IList<Journal> newJournalsChunk, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects)
+        void ImportJournalsInChunk(IList<Journal> newJournalsChunk, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects)
         {
-            foreach (var journal in newJournalsChunk)
+            try
             {
-                journal.Country = countries.First(p => string.Equals(p.Name, journal.Country?.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase));
-                journal.Publisher = publishers.First(p => string.Equals(p.Name, journal.Publisher.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase));
-                journal.Languages = journal.Languages.Select(l => languages.First(a => string.Equals(a.Name, l.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase))).ToSet();
-                journal.Subjects = journal.Subjects.Select(s => subjects.First(u => string.Equals(u.Name, s.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase))).ToSet();
-                journal.DateAdded = DateTime.Now;
-                journal.LastUpdatedOn = DateTime.Now;
+                foreach (var journal in newJournalsChunk)
+                {
+                    journal.Country = countries.First(p => string.Equals(p.Name, journal.Country?.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase));
+                    journal.Publisher = publishers.First(p => string.Equals(p.Name, journal.Publisher.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase));
+                    journal.Languages = journal.Languages.Select(l => languages.First(a => string.Equals(a.Name, l.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase))).ToSet();
+                    journal.Subjects = journal.Subjects.Select(s => subjects.First(u => string.Equals(u.Name, s.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase))).ToSet();
+                    journal.DateAdded = DateTime.Now;
+                    journal.LastUpdatedOn = DateTime.Now;
 
-                this.journalRepository.InsertOrUpdate(journal);
+                    _journalRepository.InsertOrUpdate(journal);
+                }
+
+                _journalRepository.Save();
+                _journalRepository.RefreshContext();
             }
-
-            this.journalRepository.Save();
+            catch (DbEntityValidationException dbEntityValidationException)
+            {
+                Console.WriteLine(dbEntityValidationException);
+                throw;
+            }
         }
 
         private IList<Country> ImportCountries(IEnumerable<Journal> journals)
@@ -255,7 +290,7 @@
         private IList<string> GetNewCountryNames(IEnumerable<Journal> journals)
         {
             var currentCountryNames = this.countryRepository.All.Select(c => c.Name.Trim().ToLowerInvariant()).ToSet(StringComparer.InvariantCultureIgnoreCase);
-            var importCountryNames = journals.Select(j => j.Country?.Name.Trim().ToLowerInvariant()).Where(c => c != null).ToSet(StringComparer.InvariantCultureIgnoreCase);
+            var importCountryNames = journals.Select(j => j.Country?.Name.Trim().ToLowerInvariant()).Where(c => !string.IsNullOrWhiteSpace(c)).ToSet(StringComparer.InvariantCultureIgnoreCase);
 
             if(!importCountryNames.Any())
                 return new List<string>();
