@@ -14,7 +14,7 @@ namespace QOAM.Core.Import
             Map(m => m.Title).Name("Journal title");
             Map(m => m.URL).Name("Journal URL");
             Map(m => m.Publisher).Name("Publisher");
-            Map(m => m.Language).Name("Full text language");
+            Map(m => m.Language).Name("Languages in which the journal accepts manuscripts");
             Map(m => m.ISSN).ConvertUsing(MapISSN);
             Map(m => m.Subjects).Name("Keywords");
             Map(m => m.Country).Name("Country of publisher");
