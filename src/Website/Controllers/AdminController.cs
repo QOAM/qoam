@@ -1047,8 +1047,15 @@ namespace QOAM.Website.Controllers
 
         void StartImport(string modelIssns, JournalsImportMode importMode)
         {
+            var journals = new List<Journal>();
             var issns = ParseISSNs(modelIssns);
-            var journals = _journalsTocImport.DownloadJournals(issns.ToList());
+
+            // Split the issns in chunks to prevent an HTTP 414 (Request-URI Too Large.)
+            foreach (var chunk in issns.Chunk(100))
+            {
+                journals.AddRange(_journalsTocImport.DownloadJournals(chunk.ToList()));
+            }
+
             var journalsISSNs = journals.Select(j => j.ISSN).ToSet(StringComparer.InvariantCultureIgnoreCase);
             var journalsPISSNs = journals.Select(j => j.PISSN).ToSet(StringComparer.InvariantCultureIgnoreCase);
             var allISSNs = journalsISSNs.Concat(journalsPISSNs).ToList();
