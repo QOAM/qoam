@@ -235,6 +235,9 @@ namespace QOAM.Core.Import
                     }
                 }
 
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.NoFee))
+                    currentJournal.NoFee = journal.NoFee;
+
                 currentJournal.LastUpdatedOn = DateTime.Now;
                 _journalRepository.InsertOrUpdate(currentJournal);
             }

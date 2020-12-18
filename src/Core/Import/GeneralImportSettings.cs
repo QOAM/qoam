@@ -9,14 +9,8 @@
         [ConfigurationProperty(BatchSizePropertyName, IsRequired = true)]
         public int BatchSize
         {
-            get
-            {
-                return (int)this[BatchSizePropertyName];
-            }
-            set
-            {
-                this[BatchSizePropertyName] = value;
-            }
+            get => (int)this[BatchSizePropertyName];
+            set => this[BatchSizePropertyName] = value;
         }
     }
 }
