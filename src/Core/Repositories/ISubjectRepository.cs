@@ -4,6 +4,7 @@
 
     public interface ISubjectRepository
     {
+        ApplicationDbContext DbContext { get; }
         IList<Subject> All { get; }
         IList<Subject> Active { get; }
         

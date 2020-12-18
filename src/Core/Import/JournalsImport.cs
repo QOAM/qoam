@@ -105,7 +105,7 @@ namespace QOAM.Core.Import
 
                 try
                 {
-                    this.ImportJournalsInChunk(newJournalsChunk.ToList(), countries, publishers, languages, subjects);
+                    this.ImportJournalsInChunk(newJournalsChunk.ToList(), countries, publishers);
                 }
                 catch (Exception ex)
                 {
@@ -243,24 +243,37 @@ namespace QOAM.Core.Import
             _journalRepository.RefreshContext();
         }
 
-        void ImportJournalsInChunk(IList<Journal> newJournalsChunk, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects)
+        void ImportJournalsInChunk(IList<Journal> newJournalsChunk, IList<Country> countries, IList<Publisher> publishers)
         {
             try
             {
-                foreach (var journal in newJournalsChunk)
+                // Using a new context for every batch (akin to calling RefreshContext) frees up memory anr resources
+                // and thus speeds up the process by orders of magnitude
+                using (var dbContext = new ApplicationDbContext())
                 {
-                    journal.Country = countries.First(p => string.Equals(p.Name, journal.Country?.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase));
-                    journal.Publisher = publishers.First(p => string.Equals(p.Name, journal.Publisher.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase));
-                    journal.Languages = journal.Languages.Select(l => languages.First(a => string.Equals(a.Name, l.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase))).ToSet();
-                    journal.Subjects = journal.Subjects.Select(s => subjects.First(u => string.Equals(u.Name, s.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase))).ToSet();
-                    journal.DateAdded = DateTime.Now;
-                    journal.LastUpdatedOn = DateTime.Now;
+                    var languages = dbContext.Languages.ToList();
+                    var subjects = dbContext.Subjects.ToList();
 
-                    _journalRepository.InsertOrUpdate(journal);
+                    foreach (var journal in newJournalsChunk)
+                    {
+                        var countryId = countries.First(p => string.Equals(p.Name, journal.Country?.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase)).Id;
+                        var publisherId = publishers.First(p => string.Equals(p.Name, journal.Publisher.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase)).Id;
+
+                        journal.Country = null;
+                        journal.CountryId = countryId;
+                        journal.Publisher = null;
+                        journal.PublisherId = publisherId;
+                        journal.Languages = journal.Languages.Select(l => languages.First(a => string.Equals(a.Name, l.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase))).ToSet();
+                        journal.Subjects = journal.Subjects.Select(s => subjects.First(u => string.Equals(u.Name, s.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase))).ToSet();
+                        journal.DateAdded = DateTime.Now;
+                        journal.LastUpdatedOn = DateTime.Now;
+
+                        dbContext.Journals.Add(journal);
+                    }
+
+                    dbContext.SaveChanges();
                 }
-
-                _journalRepository.Save();
-                _journalRepository.RefreshContext();
+                
             }
             catch (DbEntityValidationException dbEntityValidationException)
             {
@@ -277,9 +290,9 @@ namespace QOAM.Core.Import
 
             Logger.Info("Inserting {0} new countries into database...", newCountries.Count());
 
-            this.countryRepository.InsertBulk(newCountries);
+            countryRepository.InsertBulk(newCountries);
             
-            return this.countryRepository.All;
+            return countryRepository.All;
         }
 
         private IList<Country> GetNewCountries(IEnumerable<Journal> journals)
