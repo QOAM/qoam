@@ -85,7 +85,7 @@ namespace QOAM.Core.Import
             return new JournalsImportResult
             {
                 NumberOfImportedJournals = distinctJournals.Count,
-                UpdatedIssns = distinctJournals.Select(j => j.ISSN).ToList(),
+                UpdatedIssns = existingJournals.Select(j => j.ISSN).ToList(),
                 NumberOfNewJournals = newJournals.Count,
                 NewIssns = newJournals.Select(j => j.ISSN).ToList()
             };
