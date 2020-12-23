@@ -23,7 +23,7 @@ namespace QOAM.Website.Areas.BonaFide.Controllers
         {
             //_trustedJournalRepository.EnableProxyCreation = false;
 
-            var journals = _journalRepository.AllWhere(j => j.NoFee || j.DoajSeal || j.TrustingInstitutions.Any() || j.InstitutionJournalPrices.Any())
+            var journals = _journalRepository.AllWhere(j => j.NoFee || j.DataSource == "DOAJ" || j.TrustingInstitutions.Any() || j.InstitutionJournalPrices.Any())
                 .Skip(1000 * (page - 1))
                 .Take(1000)
                 .Select(j => new BfjApiDto

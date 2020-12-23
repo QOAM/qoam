@@ -504,6 +504,8 @@
     <Content Include="Areas\BonaFide\Views\_ViewStart.cshtml" />
     <Content Include="Areas\BonaFide\Views\BonaFideJournals\Details.cshtml" />
     <Content Include="Areas\BonaFide\Views\BonaFideJournals\_SubmitTrustModal.cshtml" />
+    <Content Include="Areas\BonaFide\Views\BonaFideJournals\_BfjTableFilters.cshtml" />
+    <Content Include="Areas\BonaFide\Views\BonaFideJournals\_EmptyText.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.globalize.js" />
     <Content Include="Scripts\jquery.validate.js" />

@@ -8,9 +8,11 @@
         createTypeahead('#Publisher', journalPublishersUrl);
         createTypeahead('input.search-language', languagesUrl);
 
+        setupLinkFilters();
+        initialLinkFilterState();
         initDisciplinesSelect();
 
-        $(".grey").click(function (e) {
+        $(".grey").not(".filter").click(function (e) {
             var $this = $(this);
             e.preventDefault();
             $(".submit-trust-journal-title").html($this.data("title"));

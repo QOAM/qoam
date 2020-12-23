@@ -113,6 +113,9 @@ function setupLinkFilters() {
     toggleFilter("#institutional-discount-filter", "#InstitutionalDiscounts");
     toggleFilter("#no-fee-filter", "#NoFee");
     toggleFilter("#plan-s-filter", "#PlanS");
+    toggleFilter("#blue-journals", "#Blue");
+    toggleFilter("#lightblue-journals", "#Lightblue");
+    toggleFilter("#grey-journals", "#Grey");
 }
 
 function initialLinkFilterState() {
@@ -124,21 +127,21 @@ function initialLinkFilterState() {
         else
             $("#hybrid-filter").addClass("filter-enabled");
     }
+    
 
-    var institutionalDiscounts = $("#InstitutionalDiscounts").val();
+    initLinkFilter("#InstitutionalDiscounts", "#institutional-discount-filter");
+    initLinkFilter("#NoFee", "#no-fee-filter");
+    initLinkFilter("#PlanS", "#plan-s-filter");
+    initLinkFilter("#Blue", "#blue-journals");
+    initLinkFilter("#Lightblue", "#lightblue-journals");
+    initLinkFilter("#Grey", "#grey-journals");
+}
 
-    if(institutionalDiscounts)
-        $("#institutional-discount-filter").addClass("filter-enabled");
-
-    var noFee = $("#NoFee").val();
-
-    if(noFee)
-        $("#no-fee-filter").addClass("filter-enabled");
-
-    var planS = $("#PlanS").val();
-
-    if(planS)
-        $("#plan-s-filter").addClass("filter-enabled");
+function initLinkFilter(fieldSelector, linkSelector) {
+    var value = $(fieldSelector).val();
+    
+    if(value)
+        $(linkSelector).addClass("filter-enabled");
 }
 
 function toggleFilter(filterSelector, fieldSelector) {

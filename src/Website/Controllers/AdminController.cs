@@ -1051,7 +1051,7 @@ namespace QOAM.Website.Controllers
             var issns = ParseISSNs(modelIssns);
 
             // Split the issns in chunks to prevent an HTTP 414 (Request-URI Too Large.)
-            foreach (var chunk in issns.Chunk(100))
+            foreach (var chunk in issns.Chunk(200))
             {
                 journals.AddRange(_journalsTocImport.DownloadJournals(chunk.ToList()));
             }
