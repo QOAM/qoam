@@ -148,7 +148,7 @@ namespace QOAM.Core.Import
 
                 if (currentJournal == null)
                 {
-                    Logger.Warn($"\t Journal with ISSN {journal.ISSN} not found.");
+                    Logger.Warn($"\tJournal with ISSN {journal.ISSN} not found.");
 
                     var matchByTitle = _journalRepository.AllWhere(j => j.Title == journal.Title);
 
