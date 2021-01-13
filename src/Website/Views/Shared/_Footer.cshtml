@@ -5,12 +5,12 @@
             <a href="#">Back to top <i class="glyphicon glyphicon-circle-arrow-up"></i></a>
         </p>
         <ul class="list-inline text-center">
-            <li> @Html.ActionLink("About", "About", "Home")</li>
-            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("Contact", "Contact", "Home")</li>
-            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("FAQ", "Faq", "Home")</li>
-            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("Journal Score Card", "JournalScoreCard", "Home")</li>
-            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("Organisation", "Organisation", "Home")</li>
-            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("Press", "References", "Home")</li>
+            <li> @Html.ActionLink("About", "About", "Home", new { area = ""}, null)</li>
+            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</li>
+            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("FAQ", "Faq", "Home", new { area = "" }, null)</li>
+            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("Journal Score Card", "JournalScoreCard", "Home", new { area = "" }, null)</li>
+            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("Organisation", "Organisation", "Home", new { area = "" }, null)</li>
+            <li><strong>&middot;</strong>&nbsp; @Html.ActionLink("Press", "References", "Home", new { area = "" }, null)</li>
         </ul>
     </div>
 </div>
