@@ -9,7 +9,7 @@
 
     using Filters;
 
-    public interface IJournalRepository
+    public interface IJournalRepository : IRepository
     {
         ApplicationDbContext DbContext { get; }
         bool EnableProxyCreation { get; set; }

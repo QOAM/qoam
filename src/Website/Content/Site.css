@@ -995,12 +995,20 @@ a.return-button {
 
 a.filter-enabled {
     background-color: #428bca;
-    color: #fff;
+    color: #fff !important;
     text-decoration: underline;
 }
 
 a:hover.filter-enabled {
-    background-color: #2a6496;
+    background-color: #2a6496 !important;
+}
+
+a.filter-enabled.lightblue {
+    background-color: lightskyblue;
+}
+
+a.filter-enabled.grey {
+    background-color: gray;
 }
 
 .orange {

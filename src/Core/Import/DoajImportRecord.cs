@@ -17,22 +17,24 @@
         public string Subjects { get; set; }
         public string Country { get; set; }
         public bool HasSeal { get; set; }
+        public bool NoFee { get; set; }
 
         public Journal ToJournal()
         {
             return new Journal
                        {
                            DateAdded = DateTime.Now,
-                           Title = this.Title,
-                           Link = this.URL,
-                           ISSN = this.ISSN,
-                           DoajSeal = this.HasSeal,
-                           Country = new Country { Name = this.Country },
-                           Publisher = new Publisher { Name = this.Publisher },
-                           Subjects = this.Subjects.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim().ToLowerInvariant().RemovePreamble(Encoding)).Distinct().Select(s => new Subject { Name = s }).ToSet(),
-                           Languages = this.Language.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim().ToLowerInvariant().RemovePreamble(Encoding)).Distinct().Select(s => new Language { Name = s }).ToSet(),
+                           Title = Title,
+                           Link = URL,
+                           ISSN = ISSN,
+                           DoajSeal = HasSeal,
+                           Country = new Country { Name = Country },
+                           Publisher = new Publisher { Name = Publisher },
+                           Subjects = Subjects.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim().ToLowerInvariant().RemovePreamble(Encoding)).Distinct().Select(s => new Subject { Name = s }).ToSet(),
+                           Languages = Language.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim().ToLowerInvariant().RemovePreamble(Encoding)).Distinct().Select(s => new Language { Name = s }).ToSet(),
                            DataSource = JournalsImportSource.DOAJ.ToString(),
-                           OpenAccess = true
+                           OpenAccess = true,
+                           NoFee = NoFee
                        };
         }
     }

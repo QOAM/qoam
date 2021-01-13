@@ -13,12 +13,11 @@
         {
         }
 
-        public IList<Country> All
+        public IList<Country> All => DbContext.Countries.ToList();
+
+        public Country FindByName(string name)
         {
-            get
-            {
-                return this.DbContext.Countries.ToList();
-            }
+            return DbContext.Countries.SingleOrDefault(c => c.Name == name);
         }
 
         public void InsertBulk(IEnumerable<Country> subjects)

@@ -12,6 +12,7 @@ namespace QOAM.Core.Import
         OpenAccess,
         DataSource,
         PISSN,
-        ArticlesPerYear
+        ArticlesPerYear,
+        NoFee
     }
 }

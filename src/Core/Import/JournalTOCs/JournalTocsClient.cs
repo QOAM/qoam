@@ -49,7 +49,7 @@ namespace QOAM.Core.Import.JournalTOCs
 
                 } while (fetch);
 
-                _logger.Info("Finised downloading journals.");
+                _logger.Info("Finished downloading journals.");
 
                 return result;
             }

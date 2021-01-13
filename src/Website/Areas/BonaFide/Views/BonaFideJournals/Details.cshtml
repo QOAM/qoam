@@ -88,7 +88,7 @@
                         <div class="col-xs-12">
                             @if (Model.NoFee)
                             {<h4>This is a no-fee journal</h4>}
-                            else if (Model.DoajSeal)
+                            else if (Model.IsIncludedInDoaj())
                             {<h4>This journal is included in DOAJ</h4>}
                             else if (Model.InstitutionJournalPrices.Any())
                             {

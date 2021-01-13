@@ -4,6 +4,7 @@
 
     public interface ILanguageRepository
     {
+        ApplicationDbContext DbContext { get; }
         IList<Language> All { get; }
         IList<Language> Active { get; }
 

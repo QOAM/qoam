@@ -22,6 +22,10 @@
                 {
                     <fieldset>
                         <legend>Search</legend>
+                        
+                        @Html.HiddenFor(m => m.Blue)
+                        @Html.HiddenFor(m => m.Lightblue)
+                        @Html.HiddenFor(m => m.Grey)
 
                         @Html.Partial("_JournalFilters")
 
@@ -34,6 +38,7 @@
         </div>
 
         <div class="col-md-9">
+            @Html.Partial("_BfjTableFilters")
             @if (Model.Journals.Any())
             {
                 <table class="table table-striped table-bordered">
@@ -43,17 +48,24 @@
                                 Title
                             </th>
                             <th class="publisher">Publisher</th>
+                            <th class="quality-indicator">
+                                QoS indicator
+                                <a class="quality-indicator-icon" href="@Url.Action("About", "Home", new { area = "" })#quality-indicator" title="About: Quality of Service">
+                                    <span class="glyphicon glyphicon-info-sign"></span>
+                                </a>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var journal in Model.Journals)
                         {
-                            <tr>
-                                <td>
-                                    @Html.ActionLink(journal.Title, "Details", "BonaFideJournals", new { id = journal.Id, area = "BonaFide" }, new { id = journal.Id, @class = Model.JournalLinkCssClass(journal), data_title = journal.Title, data_journalid = journal.Id })
-                                </td>
-                                <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name, area = "" }, null)</td>
-                            </tr>
+                        <tr>
+                            <td>
+                                @Html.ActionLink(journal.Title, "Details", "BonaFideJournals", new { id = journal.Id, area = "BonaFide" }, new { id = journal.Id, @class = Model.JournalLinkCssClass(journal), data_title = journal.Title, data_journalid = journal.Id })
+                            </td>
+                            <td>@Html.ActionLink(journal.Publisher.Name, "Index", "Journals", new { Publisher = journal.Publisher.Name, area = "" }, null)</td>
+                            <td class="text-center">@Scores.RobustScore(journal)</td>
+                        </tr>
                         }
 
                     </tbody>
