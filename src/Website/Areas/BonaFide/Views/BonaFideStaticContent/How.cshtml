@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "Academic libraries, guardians of the open access publishing domain";
+}
+<div class="container main">
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-9">
+            <p>
+                Under the auspices of the Centre for Science and Technology Studies (<a href="https://www.cwts.nl/">CWTS, Leiden</a>), QOAM has set up a freely available list of
+            </p>
+            <h3 class="text-center">
+                <strong>B<span class="blue">o</span>n<span class="blue">a</span> Fide Journals - BFJ <br /></strong>
+            </h3>
+            <p class="text-center">
+                <a href="https://www.qoam.eu/bfj">https://www.qoam.eu/bfj</a>
+            </p>
+
+            <p>For now, BFJ will be a subdomain of QOAM. Eventually, BFJ will have its own domain.</p>
+
+            <h3>BFJ sources</h3>
+            <p>
+                The 42.000+ listed journals (27.000 fully OA plus 15.000 hybrid) come from <a href="http://www.journaltocs.ac.uk/">JournalTOCs</a>
+            </p>
+            <p>
+                The list of bona fide journals will include:
+            </p>
+
+            <ul>
+                <li>
+                    no-fee journals (because, naturally, a no-fee journal cannot be predatory).
+                    Source: QOAM. The no-fee journals in QOAM come from DOAJ, platforms like Scielo, Redalyc, OpenEdition, African Journals Online, and from publishers upon request.
+                </li>
+                <li>
+                    journals in DOAJ (because they have passed a thorough vetting procedure).
+                    Source: DOAJ. DOAJ labels in BFJ are updated weekly.
+                </li>
+                <li>
+                    hybrid journals contracted by libraries or funders (e.g. via Transformative Agreements).
+                    Source: Plan S, publishers upon request. The Plan S Journal Checker Tool has a (complete?) list of transformative agreements: <a href="https://journalcheckertool.org/transformative-agreements">https://journalcheckertool.org/transformative-agreements</a>
+
+                </li>
+                <li>
+                    journals which have gained the trust of three or more different libraries.
+                    Source: libraries (see below).
+                </li>
+            </ul>
+            <p>
+                These journals will be coloured <span class="blue">blue</span> in the complete list of journals. Journals trusted by just one or two libraries are <span class="lightblue">light blue</span> (see below). The remaining journals are listed in <span class="grey">grey</span>.
+            </p>
+
+            <p class="text-center mt-20">
+                <img src="~/Content/images/bfj-flow.png" alt="BFJ Flow" />
+            </p>
+
+            <h3>Contribution of libraries</h3>
+            <p>
+                Clicking a grey journal produces the following line: “If you want to express your trust in this journal on behalf of your library, please register (new user) or log in (returning user) with your academic email address.” Once you are logged in the following text box pops up.
+            </p>
+            <div style="border: 1px solid black; padding: 10px">
+                <p>
+                    <strong>
+                        The library of *your institution* confirms the trustworthiness of this journal.
+                        Date *date*. Contact *your name*.
+                    </strong>
+                </p>
+                <label><input type="checkbox" />&nbsp;&nbsp;I am submitting this expression of trust on behalf of my library</label>
+            </div>
+            <p class="mt-20">
+                The text between asterisks is machine generated. Ticking the square suffices.
+            </p>
+            <p>
+                Clicking a light blue journal shows this table (with one or two institutions):
+                <br />
+                <strong>This journal is trusted by the following libraries:</strong>
+                <br />
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr style="font-weight: bold">
+                            <td>Library of</td>
+                            <td>Date</td>
+                            <td>Contact</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Institution 1</td>
+                            <td>dd-mm-yyyy</td>
+                            <td>Name</td>
+                        </tr>
+                        <tr>
+                            <td>Institution 2</td>
+                            <td>dd-mm-yyyy</td>
+                            <td>Name</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                If you want to express your trust in this journal on behalf of your library, please register (new user) or log in (returning user) with your academic email address.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+
+            <p>
+                Clicking a blue journal leads to a new window with metadata of the journal plus one of the following phrases:
+            </p>
+            <strong>
+                <ul>
+                    <li>
+                        This is a no-fee journal, or
+                    </li>
+                    <li>
+                        This journal is included in DOAJ, or
+                    </li>
+                    <li>
+                        This journal is contracted by [list of institutions], or
+                    </li>
+                    <li>
+                        This journal is trusted by the following (three or more) libraries:
+                    </li>
+                </ul>
+            </strong>
+            <p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr style="font-weight: bold">
+                            <td>Library of</td>
+                            <td>Date</td>
+                            <td>Contact</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Institution 1</td>
+                            <td>dd-mm-yyyy</td>
+                            <td>Name</td>
+                        </tr>
+                        <tr>
+                            <td>Institution 2</td>
+                            <td>dd-mm-yyyy</td>
+                            <td>Name</td>
+                        </tr>
+                        <tr>
+                            <td>Institution 3</td>
+                            <td>dd-mm-yyyy</td>
+                            <td>Name</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                If you want to express your trust in this journal on behalf of your library, please register (new user) or log in (returning user) with your academic email address.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+
+            <h3>Maintenance</h3>
+            <p>
+                BFJ’s infrastructure is pretty simple and in part based on QOAM. Maintenance will be light.
+            </p>
+            <p>
+                Data maintenance will be the main portion of BFJ’s workload.
+            </p>
+            <ul>
+                <li>The no fee journals constitute the first category in BFJ. They come from QOAM, which in turn uses DOAJ and platforms like Scielo, Redalyc, Open Edition, African Journals Online as sources. These sources are well maintained by their respective actors and easily downloadable. </li>
+                <li>The DOAJ labels for the journals in the second category are downloaded weekly from DOAJ, a renowned directory of fully OA journals. </li>
+                <li>Some reservations must be made though about the third category, the contracted journals. When contracts are not open, they cannot be incorporated in QOAM. In that case the contracted journals are missing in the blue list (unless, of course, three or more libraries have expressed their trust in a journal). It is foreseen that the pressure on publishers to open up these contracts will grow, as cOAlition S has made openness of new transformative agreements one of their requirements for Plan S compliance from 1 January 2021 onwards. Currently, the Plan S Journal Checker Tool discloses 91 transformative agreements. These are incorporated in BFJ (via QOAM). The same holds for institutional memberships or ‘subscribe-to-open’ deals.</li>
+                <li>The library community has to take care of the fourth category. Take-up by libraries remains to be seen, but a presentation of this initiative at the LIBER 2020 Conference has been promising: 80% of the attendees thought this a useful approach and 60% said they felt inspired to contribute. To make sure that the expressions of trust come from three different libraries, only one such expression may be published per library for a specific journal. A library can also remove its expression of trust. </li>
+            </ul>
+
+            <h3>Community controlled</h3>
+            <p>
+                BFJ will be good enough for the purpose. Dubious (e.g., predatory, double dipping) journals will not make it to the blue list, and consequently remain obscure. Indeed, potential frauds would have to take the following hurdles: (1) obtain three email address of different academic institutions, (2) tick three times the box “  I am submitting this expression of trust on behalf of my library.”, (3) anticipate that their email name will be visible on the web site, and (4) that other academics may contact them at their registered institutional email address. Ultimately, BFJ’s administrator may be alerted and delete improper expressions of trust. Thus, the list is community controlled.
+            </p>
+
+            <h3>GDPR compliant</h3>
+            <p>
+                BFJ is an open list of trusted journals, based on public data sources and expressions of trust coming from academic libraries. Such expressions can only be submitted by people with an academic email address. In practice this means that BFJ collects the institutional email addresses of the submitters. Their email names are publicly visible, but not the email adresses, and only registered colleagues will be able to contact them. Underlying this policy is the view that (1) anonymous expressions of trust are prone to misuse and should be avoided, and (2) academic colleagues should be able to contact each other for dialogue. No other uses of these data are foreseen. This code of conduct is in accordance with the General Data Protection Regulation (GDPR). Finally, BFJ uses the https protocol for secure exchange of data. Its data are stored in the Netherlands and governed by Dutch law.
+            </p>
+
+            <h3>Minimal viable product</h3>
+            <p>
+                The current version of B<span class="blue">o</span>n<span class="blue">a</span> Fide Journals is the minimal viable product. Feedback is solicited @Html.ActionLink("here", "Contact", "Home", new { area = ""}, null), and will be used for a community driven development of BFJ
+            </p>
+            
+            <p>January 2021.</p>
+        </div>
+    </div>
+</div>

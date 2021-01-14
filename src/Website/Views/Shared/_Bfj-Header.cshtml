@@ -27,6 +27,12 @@
             <ul class="nav navbar-nav">
                 <li @MenuItemClass("Journals")><a href="@Url.Action("Index", "BonaFideJournals", new { area = "BonaFide"})"><i class="glyphicon glyphicon-search"></i> Journals</a></li>
             </ul>
+            <ul class="nav navbar-nav">
+                <li @MenuItemClass("Why")><a href="@Url.Action("Why", "BonaFideStaticContent", new { area = "BonaFide"})"><i class="glyphicon glyphicon-eye-open"></i> Why?</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li @MenuItemClass("How")><a href="@Url.Action("How", "BonaFideStaticContent", new { area = "BonaFide"})"><i class="glyphicon glyphicon-wrench"></i> How?</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 @{ Html.RenderPartial("_LoginPartial"); }
             </ul>
