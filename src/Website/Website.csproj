@@ -406,6 +406,8 @@
     <Content Include="Content\images\banner3.jpg" />
     <Content Include="Content\images\bfj-flow-no-label.png" />
     <Content Include="Content\images\bfj-flow.png" />
+    <Content Include="Content\images\bfj-home-background.png" />
+    <Content Include="Content\images\cwts-logo.png" />
     <Content Include="Content\images\faq.png" />
     <Content Include="Content\images\faq\invite-preparation-step-3.png" />
     <Content Include="Content\images\faq\invite-preparation-step-4.png" />

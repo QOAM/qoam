@@ -1154,6 +1154,12 @@ img.green, img.red {
     display: none;
 }
 
+#bonafidehome-index-page {
+    background: top right no-repeat url(/Content/images/bfj-home-background.png);
+    background-attachment: fixed;
+    background-size: contain;
+}
+
 .bona-fide-home a {
     text-decoration: underline;
 }
@@ -1165,4 +1171,14 @@ img.green, img.red {
 .bona-fide-home .main-action {
     margin-top: 60px;
     font-size: 32px;
+}
+
+.bona-fide-home .cwts-logo {
+    position: absolute;
+    bottom: 100px;
+    left: 50px;
+}
+
+.bona-fide-home .cwts-logo img{
+    width: 75%;
 }
