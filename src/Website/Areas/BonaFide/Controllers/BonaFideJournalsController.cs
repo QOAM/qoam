@@ -12,7 +12,7 @@ using QOAM.Website.ViewModels.Journals;
 namespace QOAM.Website.Areas.BonaFide.Controllers
 {
     [RouteArea("BonaFide", AreaPrefix = "bfj")]
-    [RoutePrefix("")]
+    [RoutePrefix("journals")]
     [Route("{action}")]
     public class BonaFideJournalsController : ApplicationController
     {

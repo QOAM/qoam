@@ -14,6 +14,7 @@ html, body {
     height: 100%;
     margin: 0 auto -40px;
     padding: 0 0 40px;
+    position: relative;
 }
 
 h1, h2, h3, h4 {
@@ -38,6 +39,10 @@ a:active, a:focus {
 
 .mt-20 {
     margin-top: 20px;
+}
+
+.mt-40 {
+    margin-top: 40px;
 }
 
 .mb-20 {
@@ -1148,4 +1153,33 @@ img.green, img.red {
 
 .success-status, .conflict-status {
     display: none;
+}
+
+#bonafidehome-index-page {
+    background: top right no-repeat url(/Content/images/bfj-home-background.png);
+    background-attachment: fixed;
+    background-size: contain;
+}
+
+.bona-fide-home a {
+    text-decoration: underline;
+}
+
+.bona-fide-home a:hover {
+    text-decoration: none;
+}
+
+.bona-fide-home .main-action {
+    margin-top: 60px;
+    font-size: 32px;
+}
+
+.bona-fide-home .bfj-flow img{
+    margin-top: -50px;
+}
+
+.bona-fide-home .cwts-logo {
+    position: absolute;
+    bottom: 100px;
+    left: 50px;
 }

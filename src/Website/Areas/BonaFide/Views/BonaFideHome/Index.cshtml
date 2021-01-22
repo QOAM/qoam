@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Bona Fide Journals";
+}
+
+<div class="container main bona-fide-home">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="blue">Bona Fide Journals</h1>
+        </div>
+    </div>
+    <div class="row mt-20 mb-20">
+        <div class="col-xs-12 col-md-6">
+            <div class="row">
+                <div class="col-xs-4"><h3 class="blue">Blue</h3></div>
+                <div class="col-xs-8"><h3>= bona fide journal</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4"><h3 class="lightblue">Light blue</h3></div>
+                <div class="col-xs-8"><h3>= trusted by 1 or 2 libraries</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4"><h3 class="grey">Grey</h3></div>
+                <div class="col-xs-8"><h3>= no expressions of trust</h3></div>
+            </div>
+            <div class="row mt-20">
+                <div class="col-xs-12 text-center">
+                    <h3>@Html.ActionLink("Why?", "Why", "BonaFideStaticContent", new { area = "BonaFide" }, null)</h3>
+                </div>
+            </div>
+            <div class="row mt-20">
+                <div class="col-xs-12 text-center">
+                    <h3>@Html.ActionLink("How?", "How", "BonaFideStaticContent", new { area = "BonaFide" }, null)</h3>
+                </div>
+            </div>
+            <div class="row main-action">
+                <div class="col-xs-12 text-center">
+                    @Html.ActionLink("Journals", "Index", "BonaFideJournals", new { area = "BonaFide" }, null)
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6 bfj-flow">
+            <img class="pull-right" src="~/Content/images/bfj-flow-no-label.png" alt="BFJ Flow" />
+        </div>
+    </div>
+    <div class="cwts-logo">
+        <img src="~/Content/images/cwts-logo.png" alt="CWTS, Universiteit Leiden" />
+    </div>
+</div>
+    

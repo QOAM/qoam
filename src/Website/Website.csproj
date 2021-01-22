@@ -258,6 +258,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\WebSecurityConfig.cs" />
     <Compile Include="Areas\BonaFide\Controllers\BonaFideApiController.cs" />
+    <Compile Include="Areas\BonaFide\Controllers\BonaFideHomeController.cs" />
     <Compile Include="Areas\BonaFide\Controllers\BonaFideJournalsController.cs" />
     <Compile Include="Areas\BonaFide\Controllers\BonaFideStaticContentController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -403,7 +404,10 @@
     <Content Include="Content\images\banner.png" />
     <Content Include="Content\images\banner2.gif" />
     <Content Include="Content\images\banner3.jpg" />
+    <Content Include="Content\images\bfj-flow-no-label.png" />
     <Content Include="Content\images\bfj-flow.png" />
+    <Content Include="Content\images\bfj-home-background.png" />
+    <Content Include="Content\images\cwts-logo.png" />
     <Content Include="Content\images\faq.png" />
     <Content Include="Content\images\faq\invite-preparation-step-3.png" />
     <Content Include="Content\images\faq\invite-preparation-step-4.png" />
@@ -510,6 +514,7 @@
     <Content Include="Areas\BonaFide\Views\BonaFideJournals\_EmptyText.cshtml" />
     <Content Include="Areas\BonaFide\Views\BonaFideStaticContent\Why.cshtml" />
     <Content Include="Areas\BonaFide\Views\BonaFideStaticContent\How.cshtml" />
+    <Content Include="Areas\BonaFide\Views\BonaFideHome\Index.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.globalize.js" />
     <Content Include="Scripts\jquery.validate.js" />
