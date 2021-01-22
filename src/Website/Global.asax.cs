@@ -13,6 +13,8 @@ namespace QOAM.Website
     {
         protected void Application_Start()
         {
+            // ControllerBuilder.Current.DefaultNamespaces.Add("Gigantisch.Controllers");
+
             DependencyInjectionConfig.RegisterComponents();
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
@@ -26,12 +28,25 @@ namespace QOAM.Website
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             DatabaseConfig.Configure();
             WebSecurityConfig.Configure();
+            
         }
 
         public override void Init()
         {
             base.Init();
             this.AcquireRequestState += ShowRouteValues;
+        }
+
+        protected void Application_BeginRequest()
+        {
+            //if (!Request.Url.LocalPath.StartsWith("/bfj", StringComparison.OrdinalIgnoreCase))
+            //{
+            //    Response.RedirectToRoute(new RouteValueDictionary
+            //    {
+            //        {"controller", "BonaFideJournals"},
+            //        {"action", "Index"}
+            //    });
+            //}
         }
 
         protected void ShowRouteValues(object sender, EventArgs e)

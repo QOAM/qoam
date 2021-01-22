@@ -40,6 +40,10 @@ a:active, a:focus {
     margin-top: 20px;
 }
 
+.mt-40 {
+    margin-top: 40px;
+}
+
 .mb-20 {
     margin-bottom: 20px;
 }
@@ -1148,4 +1152,17 @@ img.green, img.red {
 
 .success-status, .conflict-status {
     display: none;
+}
+
+.bona-fide-home a {
+    text-decoration: underline;
+}
+
+.bona-fide-home a:hover {
+    text-decoration: none;
+}
+
+.bona-fide-home .main-action {
+    margin-top: 60px;
+    font-size: 32px;
 }
