@@ -14,6 +14,7 @@ html, body {
     height: 100%;
     margin: 0 auto -40px;
     padding: 0 0 40px;
+    position: relative;
 }
 
 h1, h2, h3, h4 {
@@ -1173,12 +1174,12 @@ img.green, img.red {
     font-size: 32px;
 }
 
+.bona-fide-home .bfj-flow img{
+    margin-top: -50px;
+}
+
 .bona-fide-home .cwts-logo {
     position: absolute;
     bottom: 100px;
     left: 50px;
-}
-
-.bona-fide-home .cwts-logo img{
-    width: 75%;
 }
