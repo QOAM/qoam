@@ -14,6 +14,7 @@ using QOAM.Core.Repositories;
 using QOAM.Website.Helpers;
 using QOAM.Website.Models;
 using QOAM.Website.ViewModels.Score;
+using reCAPTCHA.MVC;
 using Validation;
 
 namespace QOAM.Website.Controllers
@@ -222,10 +223,10 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpPost, Route("bulkrequestscore")]
-        [ValidateAntiForgeryToken]
-        public ActionResult BulkRequestValuation(BulkRequestValuationViewModel model)
+        [ValidateAntiForgeryToken, CaptchaValidator]
+        public ActionResult BulkRequestValuation(BulkRequestValuationViewModel model, bool captchaValid)
         {
-            if (model.File == null)
+            if (model.File == null || !captchaValid)
                 return View(model);
 
             try
@@ -358,12 +359,12 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpPost, Route("requestscore/{id:int}")]
-        [ValidateAntiForgeryToken]
-        public ActionResult RequestValuation(RequestValuationViewModel model)
+        [ValidateAntiForgeryToken, CaptchaValidator]
+        public ActionResult RequestValuation(RequestValuationViewModel model, bool captchaValid )
         {
-            if (!this.ModelState.IsValid)
+            if (!this.ModelState.IsValid || !captchaValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View(model);
             }
 
             model.IsKnownEmailAddress = IsKnownEmailAddress(model.EmailTo);

@@ -1,4 +1,5 @@
-﻿@model QOAM.Website.ViewModels.Score.RequestValuationViewModel
+﻿@using reCAPTCHA.MVC
+@model QOAM.Website.ViewModels.Score.RequestValuationViewModel
 
 @{
     ViewBag.Title = "Valuation SC request";
@@ -63,6 +64,12 @@
                     </div>
                     <div class="col-xs-2">
                         @Html.ValidationMessageFor(model => model.EmailBody, null, new { @class = "red" })
+                    </div>
+                </div>
+                <div class="row bottommargin">
+                    <div class="col-xs-12 col-xs-offset-1">
+                        @Html.Recaptcha()
+                        @Html.ValidationMessage("ReCaptcha", null, new { @class = "red" })
                     </div>
                 </div>
                 <div class="row bottommargin">
