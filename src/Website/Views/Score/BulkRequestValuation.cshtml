@@ -1,4 +1,5 @@
-﻿@model QOAM.Website.ViewModels.Score.BulkRequestValuationViewModel
+﻿@using reCAPTCHA.MVC
+@model QOAM.Website.ViewModels.Score.BulkRequestValuationViewModel
 
 @{
     ViewBag.Title = "Import Bulk Invitation File";
@@ -108,7 +109,12 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="row bottommargin">
+                    <div class="col-xs-12 col-xs-offset-1">
+                        @Html.Recaptcha()
+                        @Html.ValidationMessage("ReCaptcha", null, new { @class = "red" })
+                    </div>
+                </div>
                 <div class="row bottommargin">
                     <div class="col-xs-1 vcenter">
                     </div>
