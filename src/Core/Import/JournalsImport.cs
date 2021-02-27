@@ -79,7 +79,7 @@ namespace QOAM.Core.Import
 
             if (ShouldUpdateJournals(journalsImportMode))
             {
-                this.UpdateJournals(existingJournals, countries, publishers, languages, subjects, currentJournalIssns, journalUpdateProperties);
+                this.UpdateJournals(existingJournals, currentJournalIssns, journalUpdateProperties);
             }
 
             return new JournalsImportResult
@@ -114,7 +114,7 @@ namespace QOAM.Core.Import
             }
         }
 
-        private void UpdateJournals(List<Journal> existingJournals, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<string> allIssns, ISet<JournalUpdateProperty> journalUpdateProperties)
+        private void UpdateJournals(List<Journal> existingJournals, IList<string> allIssns, ISet<JournalUpdateProperty> journalUpdateProperties)
         {
             Logger.Info("Updating journals in batches of {0}...", this.importSettings.BatchSize);
 
@@ -128,10 +128,26 @@ namespace QOAM.Core.Import
 
                 try
                 {
-                    var exitsingJournalsChunkList = existingJournalsChunk.ToList();
-                    var databaseJournalsForChunk = _journalRepository.SearchByISSN(exitsingJournalsChunkList.Select(j => j.ISSN).ToList()).ToList();
+                    // Using a new context for every batch (akin to calling RefreshContext) frees up memory and resources
+                    // and thus speeds up the process by orders of magnitude
+                    using (var dbContext = new ApplicationDbContext())
+                    {
+                        var languages = dbContext.Languages.ToList();
+                        var subjects = dbContext.Subjects.ToList();
+                        var countries = dbContext.Countries.ToList();
+                        var publishers = dbContext.Publishers.ToList();
+
+                        var exitsingJournalsChunkList = existingJournalsChunk.ToList();
+                        //var databaseJournalsForChunk = _journalRepository.SearchByISSN(exitsingJournalsChunkList.Select(j => j.ISSN).ToList()).ToList();
+                        var issns = exitsingJournalsChunkList.Select(j => j.ISSN).ToList();
+                        var databaseJournalsForChunk = dbContext.Journals.Where(j => issns.Contains(j.ISSN)).ToList();
+                        //var subjects = _journalRepository.DbContext.Subjects.ToList();
+                        //var languages = _journalRepository.DbContext.Languages.ToList();
                     
-                    UpdateJournalsInChunk(exitsingJournalsChunkList, countries, publishers, languages, subjects, databaseJournalsForChunk, journalUpdateProperties);
+                        UpdateJournalsInChunk(exitsingJournalsChunkList, countries, publishers, languages, subjects, databaseJournalsForChunk, journalUpdateProperties, dbContext);
+
+                        dbContext.SaveChanges();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -140,7 +156,8 @@ namespace QOAM.Core.Import
             }
         }
 
-        void UpdateJournalsInChunk(IList<Journal> existingJournalsChunk, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects, IList<Journal> databaseJournalsForChunk, ISet<JournalUpdateProperty> journalUpdateProperties)
+        void UpdateJournalsInChunk(IList<Journal> existingJournalsChunk, IList<Country> countries, IList<Publisher> publishers, IList<Language> languages, IList<Subject> subjects,
+                                   IList<Journal> databaseJournalsForChunk, ISet<JournalUpdateProperty> journalUpdateProperties, ApplicationDbContext dbContext)
         {
             foreach (var journal in existingJournalsChunk)
             {
@@ -150,12 +167,11 @@ namespace QOAM.Core.Import
                 {
                     Logger.Warn($"\tJournal with ISSN {journal.ISSN} not found.");
 
-                    var matchByTitle = _journalRepository.AllWhere(j => j.Title == journal.Title);
+                    var matchByTitle = dbContext.Journals.Where(j => j.Title == journal.Title).ToList();
 
                     if (matchByTitle.Count != 1)
                         continue;
-                    
-                    
+
                     currentJournal = matchByTitle.First();
                     Logger.Info($"\tFound single match by Title. Fixing ISSN.");
                     
@@ -211,7 +227,7 @@ namespace QOAM.Core.Import
                 {
                     currentJournal.Subjects.Clear();
 
-                    foreach (var subject in journal.Subjects.Select(s => subjects.First(u => string.Equals(u.Name, s.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase))))
+                    foreach (var subject in journal.Subjects.Select(js => subjects.First(s => string.Equals(s.Name, js.Name.Trim().ToLowerInvariant(), StringComparison.InvariantCultureIgnoreCase))))
                     {
                         currentJournal.Subjects.Add(subject);
                     }
@@ -239,18 +255,18 @@ namespace QOAM.Core.Import
                     currentJournal.NoFee = journal.NoFee;
 
                 currentJournal.LastUpdatedOn = DateTime.Now;
-                _journalRepository.InsertOrUpdate(currentJournal);
+                //_journalRepository.InsertOrUpdate(currentJournal);
             }
 
-            _journalRepository.Save();
-            _journalRepository.RefreshContext();
+            //_journalRepository.Save();
+            //_journalRepository.RefreshContext();
         }
 
         void ImportJournalsInChunk(IList<Journal> newJournalsChunk, IList<Country> countries, IList<Publisher> publishers)
         {
             try
             {
-                // Using a new context for every batch (akin to calling RefreshContext) frees up memory anr resources
+                // Using a new context for every batch (akin to calling RefreshContext) frees up memory and resources
                 // and thus speeds up the process by orders of magnitude
                 using (var dbContext = new ApplicationDbContext())
                 {

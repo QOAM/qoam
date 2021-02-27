@@ -113,9 +113,9 @@ function setupLinkFilters() {
     toggleFilter("#institutional-discount-filter", "#InstitutionalDiscounts");
     toggleFilter("#no-fee-filter", "#NoFee");
     toggleFilter("#plan-s-filter", "#PlanS");
-    toggleFilter("#blue-journals", "#Blue");
-    toggleFilter("#lightblue-journals", "#Lightblue");
-    toggleFilter("#grey-journals", "#Grey");
+    toggleFilter("#blue-journals", "#Blue", "#lightblue-journals, #grey-journals", "#Lightblue, #Grey");
+    toggleFilter("#lightblue-journals", "#Lightblue", "#blue-journals, #grey-journals", "#Blue, #Grey");
+    toggleFilter("#grey-journals", "#Grey", "#blue-journals, #lightblue-journals", "#Blue, #Lightblue");
 }
 
 function initialLinkFilterState() {
@@ -144,7 +144,7 @@ function initLinkFilter(fieldSelector, linkSelector) {
         $(linkSelector).addClass("filter-enabled");
 }
 
-function toggleFilter(filterSelector, fieldSelector) {
+function toggleFilter(filterSelector, fieldSelector, disableSelectors, disableFieldSelectors) {
     $(filterSelector).on("click", function(e) {
         e.preventDefault();
         var $field = $(fieldSelector);
@@ -156,6 +156,13 @@ function toggleFilter(filterSelector, fieldSelector) {
             $field.val("");
 
         $(this).toggleClass("filter-enabled");
+
+        if (!!disableSelectors && !!disableFieldSelectors) {
+            $(disableSelectors).removeClass("filter-enabled");
+            $(disableFieldSelectors).val("");
+        }
+        
+        
         $("#search-form").submit();
     });
 }

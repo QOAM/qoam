@@ -1,4 +1,6 @@
-﻿namespace QOAM.Core.Repositories
+﻿using System.Data.Entity.Infrastructure;
+
+namespace QOAM.Core.Repositories
 {
     using System;
     using System.Configuration;
@@ -39,7 +41,11 @@
             }
             else
             {
+                var unchanged = ((IObjectContextAdapter) DbContext).ObjectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Unchanged);
+                var modified = ((IObjectContextAdapter) DbContext).ObjectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Modified);
                 this.DbContext.Entry(entity).State = EntityState.Modified;
+
+                modified = ((IObjectContextAdapter) DbContext).ObjectContext.ObjectStateManager.GetObjectStateEntries(EntityState.Modified);
             }
         }
 
