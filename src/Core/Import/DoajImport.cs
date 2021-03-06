@@ -10,7 +10,7 @@
     using CsvHelper.Configuration;
 
     using NLog;
-    using QOAM.Core.Helpers;
+    using Helpers;
     using Repositories;
     using Validation;
 
