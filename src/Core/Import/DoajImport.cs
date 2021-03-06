@@ -21,12 +21,11 @@
 
         private readonly DoajSettings doajSettings;
 
-        private static readonly CsvConfiguration CsvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture)
+        private static readonly CsvConfiguration CsvConfiguration = new CsvConfiguration(new CultureInfo("en-US"))
                                                                         {
                                                                             HasHeaderRecord = true,
                                                                             Delimiter = ",",
                                                                             TrimOptions = TrimOptions.Trim,
-                                                                            CultureInfo = new CultureInfo("en-US"),
                                                                             Encoding = Encoding
         };
 
@@ -62,7 +61,7 @@
                 using (var csvParser = new CsvParser(streamReader, CsvConfiguration))
                     using (var csvReader = new CsvReader(csvParser))
                     {
-                        csvReader.Configuration.RegisterClassMap<DoajImportRecordMap>();
+                        csvReader.Context.RegisterClassMap<DoajImportRecordMap>();
                         var importRecords = csvReader.GetRecords<DoajImportRecord>().ToList();
 
                         return importRecords.Select(i => i.ToJournal()).Where(j => j.IsValid()).ToList();

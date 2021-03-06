@@ -15,11 +15,11 @@ namespace QOAM.Core.Import
             Map(m => m.URL).Name("Journal URL");
             Map(m => m.Publisher).Name("Publisher");
             Map(m => m.Language).Name("Languages in which the journal accepts manuscripts");
-            Map(m => m.ISSN).ConvertUsing(MapISSN);
+            Map(m => m.ISSN).Convert(args => MapISSN(args.Row));
             Map(m => m.Subjects).Name("Keywords");
             Map(m => m.Country).Name("Country of publisher");
-            Map(m => m.HasSeal).ConvertUsing(MapHasSeal);
-            Map(m => m.NoFee).ConvertUsing(MapNoFee);
+            Map(m => m.HasSeal).Convert(args => MapHasSeal(args.Row));
+            Map(m => m.NoFee).Convert(args => MapNoFee(args.Row));
         }
 
         static bool MapHasSeal(IReaderRow r)
