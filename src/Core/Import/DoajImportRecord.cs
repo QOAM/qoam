@@ -34,7 +34,8 @@
                            Languages = Language.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim().ToLowerInvariant().RemovePreamble(Encoding)).Distinct().Select(s => new Language { Name = s }).ToSet(),
                            DataSource = JournalsImportSource.DOAJ.ToString(),
                            OpenAccess = true,
-                           NoFee = NoFee
+                           NoFee = NoFee,
+                           InDoaj = true
                        };
         }
     }

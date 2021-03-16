@@ -332,6 +332,10 @@
     <Compile Include="Migrations\202011110826473_BFJ-Trusted-Journals.designer.cs">
       <DependentUpon>202011110826473_BFJ-Trusted-Journals.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103161946319_In-Doaj-Flag.cs" />
+    <Compile Include="Migrations\202103161946319_In-Doaj-Flag.designer.cs">
+      <DependentUpon>202103161946319_In-Doaj-Flag.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\CornerRepository.cs" />
@@ -404,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011110826473_BFJ-Trusted-Journals.resx">
       <DependentUpon>202011110826473_BFJ-Trusted-Journals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103161946319_In-Doaj-Flag.resx">
+      <DependentUpon>202103161946319_In-Doaj-Flag.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />

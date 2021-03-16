@@ -30,7 +30,7 @@ namespace QOAM.Website.ModelExtensions
 
         public static bool IsIncludedInDoaj(this Journal journal)
         {
-            return journal.DataSource == JournalsImportSource.DOAJ.ToString();
+            return journal.InDoaj;
         }
     }
 }
