@@ -1,4 +1,5 @@
-﻿using QOAM.Core.Import.JournalTOCs;
+﻿using System.Net;
+using QOAM.Core.Import.JournalTOCs;
 
 namespace QOAM.Console.DataImporter
 {
@@ -22,6 +23,9 @@ namespace QOAM.Console.DataImporter
         {
             try
             {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
+                ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
                 var source = GetImportType(args);
 
                 ImportJournals(source, GetImportMode(source, args), GetFetchMode(source, args), GetJournalUpdateProperties(args));
