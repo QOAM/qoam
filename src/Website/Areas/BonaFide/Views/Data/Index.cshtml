@@ -1,0 +1,23 @@
+﻿@using QOAM.Core.Export.BonaFide
+@{
+    ViewBag.Title = "Academic libraries, guardians of the open access publishing domain";
+}
+<div class="container main">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Bona Fide eISSN Download</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <p>The eISSNs of the Bona Fide Journals are downloadable in various formats.</p>
+            <p>Please click the appropriate button.</p>
+        </div>
+    </div>
+    <div class="row mt-40">
+        <div class="col-sm-3">@Html.ActionLink("XML", "Download", new { fileFormat = DataMiningFormats.Xml}, new { @class = "btn btn-info btn-block" })</div>
+        <div class="col-sm-3">@Html.ActionLink("JSON", "Download", new { fileFormat = DataMiningFormats.Json}, new { @class = "btn btn-primary btn-block" })</div>
+        <div class="col-sm-3">@Html.ActionLink("CSV", "Download", new { fileFormat = DataMiningFormats.Csv}, new { @class = "btn btn-success btn-block" })</div>
+        <div class="col-sm-3">@Html.ActionLink("Excel", "Download", new { fileFormat = DataMiningFormats.Excel }, new { @class = "btn btn-warning btn-block" })</div>
+    </div>
+</div>

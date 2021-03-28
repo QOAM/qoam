@@ -81,6 +81,10 @@
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NLog.4.7.8\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -168,6 +172,16 @@
     <Compile Include="Corner.cs" />
     <Compile Include="CornerJournal.cs" />
     <Compile Include="CornerVisitor.cs" />
+    <Compile Include="Export\BonaFide\CsvDataMiner.cs" />
+    <Compile Include="Export\BonaFide\DataMinerBase.cs" />
+    <Compile Include="Export\BonaFide\DataMiningFactory.cs" />
+    <Compile Include="Export\BonaFide\DataMiningFormats.cs" />
+    <Compile Include="Export\BonaFide\DataMiningRecord.cs" />
+    <Compile Include="Export\BonaFide\DataMiningResult.cs" />
+    <Compile Include="Export\BonaFide\ExcelDataMiner.cs" />
+    <Compile Include="Export\BonaFide\IDataMiner.cs" />
+    <Compile Include="Export\BonaFide\JsonDataMiner.cs" />
+    <Compile Include="Export\BonaFide\XmlDataMiner.cs" />
     <Compile Include="Helpers\ExceptionExtensions.cs" />
     <Compile Include="Helpers\FilterExtensions.cs" />
     <Compile Include="Helpers\ValidatorExtensions.cs" />
@@ -641,6 +655,7 @@
     <Content Include="Scripts\CleanupAfterUlrichs.sql" />
     <EmbeddedResource Include="Scripts\201403171503325_InitialCreate_function_MinimumFloat.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

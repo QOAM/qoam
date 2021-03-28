@@ -261,6 +261,7 @@
     <Compile Include="Areas\BonaFide\Controllers\BonaFideHomeController.cs" />
     <Compile Include="Areas\BonaFide\Controllers\BonaFideJournalsController.cs" />
     <Compile Include="Areas\BonaFide\Controllers\BonaFideStaticContentController.cs" />
+    <Compile Include="Areas\BonaFide\Controllers\DataController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\JournalsApiController.cs" />
@@ -479,6 +480,7 @@
     <Content Include="Scripts\globalize\unit.js" />
     <Content Include="Scripts\Helpers\RequestValuationForm.js" />
     <Content Include="Scripts\Helpers\swot-filter.js" />
+    <Content Include="Areas\BonaFide\Views\Data\Index.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
