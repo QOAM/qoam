@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Web;
 
 namespace QOAM.Website
@@ -29,6 +30,8 @@ namespace QOAM.Website
             DatabaseConfig.Configure();
             WebSecurityConfig.Configure();
             
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
+            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
         }
 
         public override void Init()

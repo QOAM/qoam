@@ -33,9 +33,14 @@
                     <h3>@Html.ActionLink("How?", "How", "BonaFideStaticContent", new { area = "BonaFide" }, null)</h3>
                 </div>
             </div>
-            <div class="row main-action">
+            <div class="row main-action mt-20">
                 <div class="col-xs-12 text-center">
                     @Html.ActionLink("Journals", "Index", "BonaFideJournals", new { area = "BonaFide" }, null)
+                </div>
+            </div>
+            <div class="row mt-20">
+                <div class="col-xs-12 text-center">
+                    <h3>@Html.ActionLink("Mining data", "Index", "Data", new { area = "BonaFide" }, null)</h3>
                 </div>
             </div>
         </div>

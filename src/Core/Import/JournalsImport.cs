@@ -181,6 +181,7 @@ namespace QOAM.Core.Import
                 if (journalUpdateProperties.Contains(JournalUpdateProperty.DoajSeal))
                 {
                     currentJournal.DoajSeal = journal.DoajSeal;
+                    currentJournal.InDoaj = true;
                 }
 
                 if (journalUpdateProperties.Contains(JournalUpdateProperty.Title))
