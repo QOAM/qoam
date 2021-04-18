@@ -65,7 +65,7 @@
 
         public static HashSet<string> ToLinesSet(this string str)
         {
-            return str.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).Where(s => s.Trim().Length > 0).Select(s => s.Trim()).ToSet(StringComparer.InvariantCultureIgnoreCase);
+            return str.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).Where(s => s.Trim().Length > 0).Select(s => s.Replace("–", "-").Trim()).ToSet(StringComparer.InvariantCultureIgnoreCase);
         }
 
         public static string RemovePreamble(this string str, Encoding encoding)
