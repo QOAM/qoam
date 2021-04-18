@@ -72,7 +72,7 @@ namespace QOAM.Core.Helpers
         
         static Expression<Func<Journal, bool>> AddSwotMatrixFilter(JournalFilter filter)
         {
-            var predicate = PredicateBuilder.False<Journal>();
+            var predicate = PredicateBuilder.New<Journal>();
 
             foreach (var swot in filter.SwotMatrix)
             {
