@@ -133,22 +133,22 @@ namespace QOAM.Core.Helpers
                 return query;
             
             if(filter.Blue.HasValue && filter.Lightblue.HasValue)
-                return query.Where(j => j.NoFee || j.DataSource == "DOAJ" || j.InstitutionJournalPrices.Any() || j.TrustingInstitutions.Count >= 1);
+                return query.Where(j => j.NoFee || j.InDoaj || j.InstitutionJournalPrices.Any() || j.TrustingInstitutions.Count >= 1);
 
             if (filter.Blue.HasValue && filter.Grey.HasValue)
-                return query.Where(j => (j.NoFee || j.DataSource == "DOAJ" || j.InstitutionJournalPrices.Any() || j.TrustingInstitutions.Count >= 3) || (!j.NoFee && j.DataSource != "DOAJ" && !j.InstitutionJournalPrices.Any() && !j.TrustingInstitutions.Any()));
+                return query.Where(j => (j.NoFee || j.InDoaj || j.InstitutionJournalPrices.Any() || j.TrustingInstitutions.Count >= 3) || (!j.NoFee && !j.InDoaj && !j.InstitutionJournalPrices.Any() && !j.TrustingInstitutions.Any()));
             
             if(filter.Lightblue.HasValue && filter.Grey.HasValue)
-                return query.Where(j => !j.NoFee && j.DataSource != "DOAJ" && !j.InstitutionJournalPrices.Any() && (!j.TrustingInstitutions.Any() || (j.TrustingInstitutions.Count >= 1 && j.TrustingInstitutions.Count < 3)));
+                return query.Where(j => !j.NoFee && !j.InDoaj && !j.InstitutionJournalPrices.Any() && (!j.TrustingInstitutions.Any() || (j.TrustingInstitutions.Count >= 1 && j.TrustingInstitutions.Count < 3)));
 
             if (filter.Blue.HasValue)
-                return query.Where(j => j.NoFee || j.DataSource == "DOAJ" || j.InstitutionJournalPrices.Any() || j.TrustingInstitutions.Count >= 3);
+                return query.Where(j => j.NoFee || j.InDoaj || j.InstitutionJournalPrices.Any() || j.TrustingInstitutions.Count >= 3);
             
             if (filter.Lightblue.HasValue)
-                return query.Where(j => !j.NoFee && j.DataSource != "DOAJ" && !j.InstitutionJournalPrices.Any() && j.TrustingInstitutions.Count >= 1 && j.TrustingInstitutions.Count < 3);
+                return query.Where(j => !j.NoFee && !j.InDoaj && !j.InstitutionJournalPrices.Any() && j.TrustingInstitutions.Count >= 1 && j.TrustingInstitutions.Count < 3);
             
             if (filter.Grey.HasValue)
-                return query.Where(j => !j.NoFee && j.DataSource != "DOAJ" && !j.InstitutionJournalPrices.Any() && !j.TrustingInstitutions.Any());
+                return query.Where(j => !j.NoFee && !j.InDoaj && !j.InstitutionJournalPrices.Any() && !j.TrustingInstitutions.Any());
 
             return query;
         }
