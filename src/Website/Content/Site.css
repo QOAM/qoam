@@ -635,6 +635,10 @@ a.home:hover, a.home, a.home:focus {
 #footer {
     background-color: #357EBD;
     height: 40px;
+    position: sticky;
+    width: 100%;
+    bottom: 0;
+    margin-top: 20px;
 }
 
     #footer.plan-s {
