@@ -1187,3 +1187,8 @@ img.green, img.red {
     bottom: 100px;
     left: 50px;
 }
+
+
+.field-validation-error.has-error {
+    color: #a94442;
+}

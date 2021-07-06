@@ -48,7 +48,7 @@ namespace QOAM.Website.Tests.Controllers
             var homeController = CreateHomeController(mailSender: mailSenderMock.Object);
 
             // Act
-            await homeController.Contact(CreateContactViewModel());
+            await homeController.Contact(CreateContactViewModel(), true);
 
             // Assert
             mailSenderMock.Verify(m => m.Send(It.Is<MailMessage>(a =>
@@ -73,7 +73,7 @@ namespace QOAM.Website.Tests.Controllers
             mockFile.Setup(x => x.ContentLength).Returns((int)fileStream.Length);
 
             // Act
-            await homeController.Contact(CreateContactViewModel(mockFile.Object));
+            await homeController.Contact(CreateContactViewModel(mockFile.Object), true);
             
             // Assert
 
@@ -89,7 +89,7 @@ namespace QOAM.Website.Tests.Controllers
             var homeController = CreateHomeController();
 
             // Act
-            var actionResult = await homeController.Contact(CreateContactViewModel());
+            var actionResult = await homeController.Contact(CreateContactViewModel(), true);
 
             // Assert
             actionResult.AssertActionRedirect().ToAction("ContactSent");
@@ -105,7 +105,7 @@ namespace QOAM.Website.Tests.Controllers
             var homeController = CreateHomeController(mailSender: mailSenderMock.Object);
 
             // Act
-            await homeController.Contact(CreateContactViewModel());
+            await homeController.Contact(CreateContactViewModel(), true);
 
             // Assert
             Assert.False(homeController.ModelState.IsValid);
@@ -120,7 +120,7 @@ namespace QOAM.Website.Tests.Controllers
             homeController.ModelState.AddModelError("key", "error message");
 
             // Act
-            await homeController.Contact(CreateContactViewModel());
+            await homeController.Contact(CreateContactViewModel(), true);
 
             // Assert
             mailSenderMock.Verify(m => m.Send(It.IsAny<MailMessage>()), Times.Never());
@@ -134,7 +134,7 @@ namespace QOAM.Website.Tests.Controllers
             homeController.ModelState.AddModelError("key", "error message");
 
             // Act
-            var actionResult = await homeController.Contact(CreateContactViewModel());
+            var actionResult = await homeController.Contact(CreateContactViewModel(), true);
 
             // Assert
             Assert.IsType<ViewResult>(actionResult);

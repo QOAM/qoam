@@ -1,4 +1,5 @@
-﻿@model QOAM.Website.ViewModels.Home.ContactViewModel
+﻿@using reCAPTCHA.MVC
+@model QOAM.Website.ViewModels.Home.ContactViewModel
 @{
     ViewBag.Title = "Contact";
 }
@@ -39,7 +40,7 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.Message, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextAreaFor(m => m.Message, 5, 40, new {  @class = "form-control" })
+                            @Html.TextAreaFor(m => m.Message, 5, 40, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Message, null, new { @class = "control-label " })
                         </div>
                     </div>
@@ -51,8 +52,16 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-10 col-md-offset-2">
-                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    <div class="row bottommargin">
+                        <div class="col-lg-10 col-md-offset-2">
+                            @Html.Recaptcha()
+                            @Html.ValidationMessage("ReCaptcha", null, new { @class = "has-error" })
+                        </div>
+                    </div>
+                    <div class="row bottommargin">
+                        <div class="col-lg-10 col-md-offset-2">
+                            <input type="submit" value="Submit" class="btn btn-primary" />
+                        </div>
                     </div>
                 </fieldset>
             }

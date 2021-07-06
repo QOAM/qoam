@@ -7,6 +7,7 @@ using QOAM.Core.Services;
 using QOAM.Website.Helpers;
 using QOAM.Website.Models;
 using QOAM.Website.ViewModels.Home;
+using reCAPTCHA.MVC;
 using Validation;
 
 namespace QOAM.Website.Controllers
@@ -100,24 +101,24 @@ namespace QOAM.Website.Controllers
         }
 
         [HttpPost, Route("contact")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Contact(ContactViewModel model)
+        [ValidateAntiForgeryToken, CaptchaValidator]
+        public async Task<ActionResult> Contact(ContactViewModel model, bool captchaValid)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _mailSender.Send(model.ToMailMessage(_contactSettings));
+            if (!captchaValid || !ModelState.IsValid) 
+                return View(model);
 
-                    return RedirectToAction("ContactSent");
-                }
-                catch
-                {
-                    ModelState.AddModelError("mailsender", "An error occured while trying to process the contact form. Please try again.");
-                }
+            try
+            {
+                await _mailSender.Send(model.ToMailMessage(_contactSettings));
+
+                return RedirectToAction("ContactSent");
+            }
+            catch
+            {
+                ModelState.AddModelError("mailsender", "An error occured while trying to process the contact form. Please try again.");
             }
 
-            return View();
+            return View(model);
         }
 
         [HttpGet, Route("contact/sent")]
