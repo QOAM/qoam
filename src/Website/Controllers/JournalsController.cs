@@ -499,12 +499,15 @@ namespace QOAM.Website.Controllers
             var institutions = institutionRepository.FindWhere(i => domains.Contains(i.ShortName)).ToList();
             var issns = data.SelectMany(x => x.Licenses).Select(l => l.ISSN).ToList();
             var journals = journalRepository.AllWhereIncluding(j => issns.Contains(j.ISSN)).ToList();
+            var notFound = issns.Except(journals.Select(j => j.ISSN)).ToList();
+
+            journals = journals.Union(journalRepository.AllWhereIncluding(j => notFound.Contains(j.PISSN))).ToList();
 
             var institutionJournals = (from u in data
                                        let institution = institutions.FirstOrDefault(i => i.ShortName == u.Domain)
                                        where institution != null
                                        from info in u.Licenses
-                                       let journal = journals.FirstOrDefault(j => j.ISSN == info.ISSN)
+                                       let journal = journals.FirstOrDefault(j => j.ISSN == info.ISSN || j.PISSN == info.ISSN)
                                        where journal != null
                                        select new InstitutionJournal
                                        {
