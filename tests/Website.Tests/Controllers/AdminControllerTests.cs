@@ -30,8 +30,8 @@ namespace QOAM.Website.Tests.Controllers
     public class AdminControllerTests
     {
 
-        const string ExpectedJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;Data source;Languages;Subjects;DOAJ Seal;Plan S Journal;Score;No-Fee Journal;Score cards in 2019;Score cards in 2020;Articles in 2019;Articles in 2020\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;No;0.0;No;1;1;0;0\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;No;No;0.0;No;0;0;0;0\r\nACIMED;1024-9435;http://scielo.sld.cu/scielo.php?script=sci_serial&pid=1024-9435&lng=en&nrm=iso;2/10/2013 9:52:51 AM;Cuba;Centro Nacional de Información de Ciencias Médicas;Ulrich;<none indicated>;health sciences;Yes;No;0.0;No;0;0;19;2\r\n";
-        const string ExpectedOpenAccessJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;Data source;Languages;Subjects;DOAJ Seal;Plan S Journal;Score;No-Fee Journal;Score cards in 2018;Score cards in 2019;Score cards in 2020;Score cards in 2021;Articles in 2018;Articles in 2019;Articles in 2020;Articles in 2021\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;No;0.0;No;1;1;1;0;0;0;0;0\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;No;No;0.0;No;0;0;0;0;0;0;0;0\r\n";
+        const string ExpectedJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;Data source;Languages;Subjects;DOAJ Seal;Plan S Journal;Score;No-Fee Journal;Number of Articles (Doi Count);Score cards in 2019;Score cards in 2020\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;No;0.0;No;13;1;1\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;No;No;0.0;No;2;0;0\r\nACIMED;1024-9435;http://scielo.sld.cu/scielo.php?script=sci_serial&pid=1024-9435&lng=en&nrm=iso;2/10/2013 9:52:51 AM;Cuba;Centro Nacional de Información de Ciencias Médicas;Ulrich;<none indicated>;health sciences;Yes;No;0.0;No;21;0;0\r\n";
+        const string ExpectedOpenAccessJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;Data source;Languages;Subjects;DOAJ Seal;Plan S Journal;Score;No-Fee Journal;Number of Articles (Doi Count);Score cards in 2019;Score cards in 2020\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2/10/2013 9:52:51 AM;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;No;0.0;No;13;1;1\r\n16:9;1603-5194;http://www.16-9.dk;2/10/2013 9:52:51 AM;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;No;No;0.0;No;2;0;0\r\n";
         const string OldIssn = "2296-0597";
         const string NewIssn = "1603-5194";
 
@@ -1161,6 +1161,7 @@ namespace QOAM.Website.Tests.Controllers
                     },
                     DataSource = "DOAJ",
                     OpenAccess = true,
+                    NumberOfArticles = 13,
                     ValuationScoreCards = new List<ValuationScoreCard> 
                     {
                         new ValuationScoreCard { DatePublished = new DateTime(2018, 7, 5) },
@@ -1205,7 +1206,8 @@ namespace QOAM.Website.Tests.Controllers
                         }
                     },
                     DataSource = "Ulrich",
-                    OpenAccess = true
+                    OpenAccess = true,
+                    NumberOfArticles = 2,
                 },
                 new Journal
                 {
@@ -1238,6 +1240,7 @@ namespace QOAM.Website.Tests.Controllers
                     DataSource = "Ulrich",
                     OpenAccess = false,
                     DoajSeal = true,
+                    NumberOfArticles = 21,
                     ArticlesPerYear = new List<ArticlesPerYear>
                     {
                         new ArticlesPerYear { Year = 2020, NumberOfArticles = 2 },

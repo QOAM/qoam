@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using QOAM.Core.Import.CrossRef;
 using QOAM.Core.Import.JournalTOCs;
 
 namespace QOAM.Core.Import
@@ -9,6 +10,7 @@ namespace QOAM.Core.Import
         const string UlrichsSectionName = "ulrichs";
         const string DoajSectionName = "doaj";
         const string JournalTocsSectionName = "journaltocs";
+        const string CrossRefSectionName = "crossRef";
 
         public static ImportSettings Current { get; } = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).GetSectionGroup("import") as ImportSettings;
 
@@ -23,5 +25,8 @@ namespace QOAM.Core.Import
 
         [ConfigurationProperty(JournalTocsSectionName)]
         public JournalTocsSettings JournalTocs => (JournalTocsSettings) Sections[JournalTocsSectionName];
+
+        [ConfigurationProperty(CrossRefSectionName)]
+        public CrossRefSettings CrossRef => (CrossRefSettings) Sections[CrossRefSectionName];
     }
 }

@@ -2,6 +2,7 @@
 using Autofac.Core;
 using Autofac.Integration.WebApi;
 using QOAM.Core;
+using QOAM.Core.Import.CrossRef;
 using QOAM.Core.Import.Institutions;
 using QOAM.Core.Import.Invitations;
 using QOAM.Core.Import.JournalTOCs;
@@ -77,6 +78,7 @@ namespace QOAM.Website
             builder.Register(c => c.Resolve<OAMarketSettings>().Doaj).AsSelf().InstancePerRequest();
             builder.Register(c => c.Resolve<OAMarketSettings>().Ulrichs).AsSelf().InstancePerRequest();
             builder.Register(c => c.Resolve<OAMarketSettings>().JournalTocs).AsSelf().InstancePerRequest();
+            builder.Register(c => c.Resolve<OAMarketSettings>().CrossRef).AsSelf().InstancePerRequest();
         }
 
         private static void RegisterImportAndExportComponents(ContainerBuilder builder)
@@ -88,6 +90,8 @@ namespace QOAM.Website
             builder.RegisterType<UlrichsImport>().AsSelf().InstancePerRequest();
             builder.RegisterType<UlrichsCache>().AsSelf().InstancePerRequest();
             builder.RegisterType<JournalTocsJsonClient>().As<IJournalTocsClient>().InstancePerRequest();
+            builder.RegisterType<CrossRefClient>().As<ICrossRefClient>().InstancePerRequest();
+            builder.RegisterType<CrossRefImport>().AsSelf().InstancePerRequest();
             builder.RegisterType<SystemWebClientFactory>().As<IWebClientFactory>().InstancePerRequest();
             builder.RegisterType<JournalTocsImport>().AsSelf().InstancePerRequest();
             builder.RegisterType<JournalTocsJsonParser>().As<IJournalTocsParser>().SingleInstance();

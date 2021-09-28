@@ -71,6 +71,8 @@
         
         public bool InDoaj { get; set; }
 
+        public int NumberOfArticles { get; set; }
+
         public string Swot
         {
             get

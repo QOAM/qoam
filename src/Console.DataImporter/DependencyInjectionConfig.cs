@@ -1,4 +1,5 @@
-﻿using QOAM.Core.Import.JournalTOCs;
+﻿using QOAM.Core.Import.CrossRef;
+using QOAM.Core.Import.JournalTOCs;
 
 namespace QOAM.Console.DataImporter
 {
@@ -39,8 +40,10 @@ namespace QOAM.Console.DataImporter
             builder.RegisterType<UlrichsImport>().SingleInstance();
             builder.RegisterType<UlrichsCache>().SingleInstance();
             builder.RegisterType<JournalTocsClient>().As<IJournalTocsClient>().SingleInstance();
+            builder.RegisterType<CrossRefClient>().As<ICrossRefClient>().SingleInstance();
             builder.RegisterType<SystemWebClientFactory>().As<IWebClientFactory>().SingleInstance();
             builder.RegisterType<JournalTocsImport>().SingleInstance();
+            builder.RegisterType<CrossRefImport>().SingleInstance();
             builder.RegisterType<JournalTocsXmlParser>().As<IJournalTocsParser>().SingleInstance();
         }
 
@@ -51,6 +54,7 @@ namespace QOAM.Console.DataImporter
             builder.Register(c => c.Resolve<ImportSettings>().Doaj).SingleInstance();
             builder.Register(c => c.Resolve<ImportSettings>().Ulrichs).SingleInstance();
             builder.Register(c => c.Resolve<ImportSettings>().JournalTocs).SingleInstance();
+            builder.Register(c => c.Resolve<ImportSettings>().CrossRef).SingleInstance();
         }
 
         private static void RegisterMiscellaneousComponents(ContainerBuilder builder)

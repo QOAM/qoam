@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using QOAM.Core.Import.CrossRef;
 using QOAM.Core.Import.JournalTOCs;
 
 namespace QOAM.Console.DataImporter
@@ -10,16 +11,16 @@ namespace QOAM.Console.DataImporter
 
     using NLog;
 
-    using QOAM.Core;
-    using QOAM.Core.Import;
+    using Core;
+    using Core.Import;
 
     public static class Program
     {
-        private static IContainer Container { get; } = DependencyInjectionConfig.RegisterComponents();
+        static IContainer Container { get; } = DependencyInjectionConfig.RegisterComponents();
 
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
             try
             {
@@ -28,7 +29,7 @@ namespace QOAM.Console.DataImporter
 
                 var source = GetImportType(args);
 
-                ImportJournals(source, GetImportMode(source, args), GetFetchMode(source, args), GetJournalUpdateProperties(args));
+                ImportJournals(source, GetImportMode(source, args), GetFetchMode(source, args), GetJournalUpdateProperties(args, source));
             }
             catch (Exception ex)
             {
@@ -59,6 +60,8 @@ namespace QOAM.Console.DataImporter
                     return Container.Resolve<UlrichsImport>().GetJournals(UlrichsImport.UlrichsJournalType.OpenAccess);
                 case JournalsImportSource.JournalTOCs:
                     return Container.Resolve<JournalTocsImport>().DownloadJournals(action.GetValueOrDefault(JournalTocsFetchMode.Update));
+                case JournalsImportSource.CrossRef:
+                    return Container.Resolve<CrossRefImport>().DownloadJournals();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(importSource));
             }
@@ -76,8 +79,13 @@ namespace QOAM.Console.DataImporter
 
         public static JournalsImportMode GetImportMode(JournalsImportSource source, IList<string> args)
         {
-            if (source == JournalsImportSource.JournalTOCs)
-                return JournalsImportMode.InsertAndUpdate;
+            switch (source)
+            {
+                case JournalsImportSource.JournalTOCs:
+                    return JournalsImportMode.InsertAndUpdate;
+                case JournalsImportSource.CrossRef:
+                    return JournalsImportMode.UpdateOnly;
+            }
 
             if (args.Count < 2)
             {
@@ -95,8 +103,11 @@ namespace QOAM.Console.DataImporter
             return (JournalTocsFetchMode) Enum.Parse(typeof(JournalTocsFetchMode), args[1], true);
         }
 
-        public static ISet<JournalUpdateProperty> GetJournalUpdateProperties(IList<string> args)
+        public static ISet<JournalUpdateProperty> GetJournalUpdateProperties(IList<string> args, JournalsImportSource journalsImportSource)
         {
+            if (journalsImportSource == JournalsImportSource.CrossRef)
+                return new HashSet<JournalUpdateProperty> { JournalUpdateProperty.NumberOfArticles };
+
             if (args.Count < 3)
             {
                 var journalUpdateProperties = new HashSet<JournalUpdateProperty>((JournalUpdateProperty[]) Enum.GetValues(typeof (JournalUpdateProperty)));

@@ -7,6 +7,7 @@ namespace QOAM.Core.Import
     public interface IWebClient : IDisposable
     {
         Encoding Encoding { get; set; }
+        WebHeaderCollection Headers { get; set; }
         string DownloadString(string address);
     }
 
@@ -25,7 +26,7 @@ namespace QOAM.Core.Import
                 return null;
 
             webRequest.Timeout = 25 * 60 * 1000;
-            
+
             return webRequest;
         }
     }
