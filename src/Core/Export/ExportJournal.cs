@@ -34,10 +34,13 @@ namespace QOAM.Core.Export
         [Name("No-Fee Journal"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]
         public string NoFee { get; set; }
 
-        [Ignore] // We will write this field manually to the csv file
-        public Dictionary<int, int> ArticlesPerYear { get; set; }
+        //[Ignore] // We will write this field manually to the csv file
+        //public Dictionary<int, int> ArticlesPerYear { get; set; }
 
         [Ignore] // We will write this field manually to the csv file
         public Dictionary<int, int> ScoreCardsPerYear { get; set; }
+
+        [Name("Number of Articles (Doi Count)")]
+        public int NumberOfArticles { get; set; }
     }
 }

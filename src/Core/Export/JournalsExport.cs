@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using QOAM.Core.Helpers;
 using QOAM.Core.Import;
 
 namespace QOAM.Core.Export
@@ -83,10 +82,10 @@ namespace QOAM.Core.Export
                         csvWriter.WriteField(j.PlanSJournal);
                         csvWriter.WriteField(j.Score);
                         csvWriter.WriteField(j.NoFee);
+                        csvWriter.WriteField(j.NumberOfArticles);
 
                         WriteDynamicFields(csvWriter, j.ScoreCardsPerYear, minYear, maxYear);
-                        WriteDynamicFields(csvWriter, j.ArticlesPerYear, minYear, maxYear);
-                        
+
                         csvWriter.NextRecord();
                     }
                 }
@@ -97,18 +96,18 @@ namespace QOAM.Core.Export
             csvWriter.WriteHeader<ExportJournal>();
 
             WriteDynamicHeaders(csvWriter, "Score cards in", minYear, maxYear);
-            WriteDynamicHeaders(csvWriter, "Articles in", minYear, maxYear);
+            //WriteDynamicHeaders(csvWriter, "Articles in", minYear, maxYear);
             
             csvWriter.NextRecord();
         }
 
         static (int minYear, int maxYear) GetMinAndMaxColumnYears(List<ExportJournal> journals)
         {
-            var articlesPerYear = journals.SelectMany(j => j.ArticlesPerYear).ToList();
-            var minYear = articlesPerYear.Any() ? articlesPerYear.Min(x => x.Key) : 2018;
+            var scoreCardsPerYear = journals.SelectMany(j => j.ScoreCardsPerYear).ToList();
+            var minYear = scoreCardsPerYear.Any() ? scoreCardsPerYear.Min(x => x.Key) : DateTime.Now.Year - 2;
 
             // some journals have incorrect data on the year field, so we set the current year as a max failsafe
-            var maxYear = articlesPerYear.Any() ? Math.Min(articlesPerYear.Max(x => x.Key), DateTime.Now.Year) : DateTime.Now.Year;
+            var maxYear = scoreCardsPerYear.Any() ? Math.Min(scoreCardsPerYear.Max(x => x.Key), DateTime.Now.Year) : DateTime.Now.Year;
 
             return (minYear, maxYear);
         }
@@ -131,8 +130,8 @@ namespace QOAM.Core.Export
         List<ExportJournal> GetExportJournals(bool openAccessOnly)
         {
             var journals = openAccessOnly
-                ? journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards)
-                : journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ArticlesPerYear, j => j.ValuationScoreCards);
+                ? journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.NumberOfArticles, j => j.ValuationScoreCards)
+                : journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.NumberOfArticles, j => j.ValuationScoreCards);
 
             return journals.Select(ToExportJournal).ToList();
         }
@@ -149,6 +148,8 @@ namespace QOAM.Core.Export
 
         static ExportJournal ToExportJournal(Journal j)
         {
+            var minYear = DateTime.Now.Year - 2;
+
             return new ExportJournal
             {
                 Title = j.Title,
@@ -165,10 +166,10 @@ namespace QOAM.Core.Export
                 Score = (j.ValuationScore?.AverageScore ?? 0).ToString("0.0"),
                 NoFee = j.NoFee ? "Yes" : "No",
                 ScoreCardsPerYear = j.ValuationScoreCards
-                    .Where(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year >= 2018)
+                    .Where(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year >= minYear)
                     .GroupBy(vsc => vsc.DatePublished.Value.Year)
                     .ToDictionary(grouping => grouping.Key, grouping => grouping.Count()),
-                ArticlesPerYear = j.ArticlesPerYear.DistinctBy(a => a.Year).ToDictionary(key => key.Year, value => value.NumberOfArticles)
+                NumberOfArticles = j.NumberOfArticles
             };
         }
     }

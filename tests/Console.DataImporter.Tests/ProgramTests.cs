@@ -179,6 +179,16 @@ namespace QOAM.Console.DataImporter.Tests
             Assert.Equal(JournalsImportMode.InsertAndUpdate, journalsImportMode);
         }
 
+        [Fact]
+        public void GetImportMode_when_source_is_CrossRef_returns_UpdateOnly()
+        {
+            var args = new List<string> { "CrossRef" };
+            
+            var journalsImportMode = Program.GetImportMode(JournalsImportSource.CrossRef, args);
+            
+            Assert.Equal(JournalsImportMode.UpdateOnly, journalsImportMode);
+        }
+
         [Theory]
         [InlineData("invalid")]
         [InlineData("_InsertOnly_")]
@@ -234,16 +244,17 @@ namespace QOAM.Console.DataImporter.Tests
         }
 
         [Theory]
-        [InlineData(0)]
-        [InlineData(1)]
-        [InlineData(2)]
-        public void GetJournalUpdatePropertiesWithTooFewArgumentsReturnsSetWithAllJournalUpdatePropertiesExceptDoajSeal(int numberOfArguments)
+        [InlineData(0, JournalsImportSource.JournalTOCs)]
+        [InlineData(1, JournalsImportSource.JournalTOCs)]
+        [InlineData(2, JournalsImportSource.JournalTOCs)]
+
+        public void GetJournalUpdatePropertiesWithTooFewArgumentsReturnsSetWithAllJournalUpdatePropertiesExceptDoajSeal(int numberOfArguments, JournalsImportSource source)
         {
             // Arrange
             var args = Enumerable.Repeat("", numberOfArguments).ToList();
 
             // Act
-            var journalUpdateProperties = Program.GetJournalUpdateProperties(args);
+            var journalUpdateProperties = Program.GetJournalUpdateProperties(args, source);
 
             // Assert
             var expected = new HashSet<JournalUpdateProperty>((JournalUpdateProperty[])Enum.GetValues(typeof(JournalUpdateProperty)));
@@ -253,20 +264,20 @@ namespace QOAM.Console.DataImporter.Tests
         }
 
         [Theory]
-        [InlineData("doajseal", JournalUpdateProperty.DoajSeal)]
-        [InlineData("country", JournalUpdateProperty.Country)]
-        [InlineData("languages", JournalUpdateProperty.Languages)]
-        [InlineData("link", JournalUpdateProperty.Link)]
-        [InlineData("publisher", JournalUpdateProperty.Publisher)]
-        [InlineData("subjects", JournalUpdateProperty.Subjects)]
-        [InlineData("title", JournalUpdateProperty.Title)]
-        public void GetJournalUpdatePropertiesWithOnePropertyReturnsCorrectJournalUpdateProperty(string propertiesArgument, JournalUpdateProperty expected)
+        [InlineData("doajseal", JournalUpdateProperty.DoajSeal, JournalsImportSource.JournalTOCs)]
+        [InlineData("country", JournalUpdateProperty.Country, JournalsImportSource.JournalTOCs)]
+        [InlineData("languages", JournalUpdateProperty.Languages, JournalsImportSource.JournalTOCs)]
+        [InlineData("link", JournalUpdateProperty.Link, JournalsImportSource.JournalTOCs)]
+        [InlineData("publisher", JournalUpdateProperty.Publisher, JournalsImportSource.JournalTOCs)]
+        [InlineData("subjects", JournalUpdateProperty.Subjects, JournalsImportSource.JournalTOCs)]
+        [InlineData("title", JournalUpdateProperty.Title, JournalsImportSource.JournalTOCs)]
+        public void GetJournalUpdatePropertiesWithOnePropertyReturnsCorrectJournalUpdateProperty(string propertiesArgument, JournalUpdateProperty expected, JournalsImportSource source)
         {
             // Arrange
             var args = new List<string> { "Ulrichs", "InsertOnly", propertiesArgument };
 
             // Act
-            var journalUpdateProperties = Program.GetJournalUpdateProperties(args);
+            var journalUpdateProperties = Program.GetJournalUpdateProperties(args, source);
 
             // Assert
             Assert.Contains(expected, journalUpdateProperties);
@@ -274,17 +285,17 @@ namespace QOAM.Console.DataImporter.Tests
         }
 
         [Theory]
-        [InlineData("doajSEAL", JournalUpdateProperty.DoajSeal)]
-        [InlineData("Country", JournalUpdateProperty.Country)]
-        [InlineData("LanguageS", JournalUpdateProperty.Languages)]
-        [InlineData("LINK", JournalUpdateProperty.Link)]
-        public void GetJournalUpdatePropertiesIsCaseInsensitive(string propertiesArgument, JournalUpdateProperty expected)
+        [InlineData("doajSEAL", JournalUpdateProperty.DoajSeal, JournalsImportSource.JournalTOCs)]
+        [InlineData("Country", JournalUpdateProperty.Country, JournalsImportSource.JournalTOCs)]
+        [InlineData("LanguageS", JournalUpdateProperty.Languages, JournalsImportSource.JournalTOCs)]
+        [InlineData("LINK", JournalUpdateProperty.Link, JournalsImportSource.JournalTOCs)]
+        public void GetJournalUpdatePropertiesIsCaseInsensitive(string propertiesArgument, JournalUpdateProperty expected, JournalsImportSource source)
         {
             // Arrange
             var args = new List<string> { "Ulrichs", "InsertOnly", propertiesArgument };
 
             // Act
-            var journalUpdateProperties = Program.GetJournalUpdateProperties(args);
+            var journalUpdateProperties = Program.GetJournalUpdateProperties(args, source);
 
             // Assert
             Assert.Contains(expected, journalUpdateProperties);
@@ -292,18 +303,32 @@ namespace QOAM.Console.DataImporter.Tests
         }
 
         [Theory]
-        [InlineData("doajseal,country", JournalUpdateProperty.DoajSeal, JournalUpdateProperty.Country)]
-        [InlineData("link;subjects", JournalUpdateProperty.Link, JournalUpdateProperty.Subjects)]
-        public void GetJournalUpdatePropertiesSupportsMultiplesProperties(string propertiesArgument, JournalUpdateProperty expected1, JournalUpdateProperty expected2)
+        [InlineData("doajseal,country", JournalUpdateProperty.DoajSeal, JournalUpdateProperty.Country, JournalsImportSource.JournalTOCs)]
+        [InlineData("link;subjects", JournalUpdateProperty.Link, JournalUpdateProperty.Subjects, JournalsImportSource.JournalTOCs)]
+        public void GetJournalUpdatePropertiesSupportsMultiplesProperties(string propertiesArgument, JournalUpdateProperty expected1, JournalUpdateProperty expected2, JournalsImportSource source)
         {
             // Arrange
             var args = new List<string> { "Ulrichs", "InsertOnly", propertiesArgument };
 
             // Act
-            var journalUpdateProperties = Program.GetJournalUpdateProperties(args);
+            var journalUpdateProperties = Program.GetJournalUpdateProperties(args, source);
 
             // Assert
             var expected = new HashSet<JournalUpdateProperty> { expected1, expected2 };
+            Assert.Equal(expected, journalUpdateProperties);
+        }
+
+        [Fact]
+        public void GetJournalUpdatePropertiesUsesOnlyNumberOfArticlesForCrossRefImport()
+        {
+            // Arrange
+            var args = new List<string> { "CrossRef" };
+
+            // Act
+            var journalUpdateProperties = Program.GetJournalUpdateProperties(args, JournalsImportSource.CrossRef);
+
+            // Assert
+            var expected = new HashSet<JournalUpdateProperty> { JournalUpdateProperty.NumberOfArticles };
             Assert.Equal(expected, journalUpdateProperties);
         }
     }

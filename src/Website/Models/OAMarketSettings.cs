@@ -1,4 +1,5 @@
-﻿using QOAM.Core.Import.JournalTOCs;
+﻿using QOAM.Core.Import.CrossRef;
+using QOAM.Core.Import.JournalTOCs;
 
 namespace QOAM.Website.Models
 {
@@ -10,15 +11,16 @@ namespace QOAM.Website.Models
 
     public class OAMarketSettings : ConfigurationSectionGroup
     {
-        private const string OAMarketSectionGroupName = "oamarket";
-        private const string ContactSectionName = "contact";
-        private const string GeneralSectionName = "general";
-        private const string GeneralImportSectionName = "generalImport";
-        private const string UlrichsSectionName = "ulrichs";
-        private const string DoajSectionName = "doaj";
-        private const string JournalTocsSectionName = "journaltocs";
+        const string OAMarketSectionGroupName = "oamarket";
+        const string ContactSectionName = "contact";
+        const string GeneralSectionName = "general";
+        const string GeneralImportSectionName = "generalImport";
+        const string UlrichsSectionName = "ulrichs";
+        const string DoajSectionName = "doaj";
+        const string JournalTocsSectionName = "journaltocs";
+        const string CrossRefSectionName = "crossRef";
 
-        private static readonly Lazy<OAMarketSettings> Instance = new Lazy<OAMarketSettings>(() => WebConfigurationManager.OpenWebConfiguration("~").GetSectionGroup(OAMarketSectionGroupName) as OAMarketSettings);
+        static readonly Lazy<OAMarketSettings> Instance = new Lazy<OAMarketSettings>(() => WebConfigurationManager.OpenWebConfiguration("~").GetSectionGroup(OAMarketSectionGroupName) as OAMarketSettings);
 
         public static OAMarketSettings Current => Instance.Value;
 
@@ -39,5 +41,8 @@ namespace QOAM.Website.Models
 
         [ConfigurationProperty(JournalTocsSectionName)]
         public JournalTocsSettings JournalTocs => (JournalTocsSettings)Sections[JournalTocsSectionName];
+
+        [ConfigurationProperty(CrossRefSectionName)]
+        public CrossRefSettings CrossRef => (CrossRefSettings)Sections[CrossRefSectionName];
     }
 }

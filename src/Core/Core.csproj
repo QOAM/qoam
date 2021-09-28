@@ -187,6 +187,11 @@
     <Compile Include="Helpers\ValidatorExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Import\BulkImporter.cs" />
+    <Compile Include="Import\CrossRef\CrossRefImport.cs" />
+    <Compile Include="Import\CrossRef\CrossRefResult.cs" />
+    <Compile Include="Import\CrossRef\CrossRefSettings.cs" />
+    <Compile Include="Import\CrossRef\CrossRefClient.cs" />
+    <Compile Include="Import\CrossRef\ICrossRefClient.cs" />
     <Compile Include="Import\FileImporterBase.cs" />
     <Compile Include="Import\DoajImportRecordMap.cs" />
     <Compile Include="Import\IBulkImporter.cs" />
@@ -350,6 +355,10 @@
     <Compile Include="Migrations\202103161946319_In-Doaj-Flag.designer.cs">
       <DependentUpon>202103161946319_In-Doaj-Flag.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202109280714503_Journal-NumberOfArticles.cs" />
+    <Compile Include="Migrations\202109280714503_Journal-NumberOfArticles.designer.cs">
+      <DependentUpon>202109280714503_Journal-NumberOfArticles.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\CornerRepository.cs" />
@@ -425,6 +434,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103161946319_In-Doaj-Flag.resx">
       <DependentUpon>202103161946319_In-Doaj-Flag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109280714503_Journal-NumberOfArticles.resx">
+      <DependentUpon>202109280714503_Journal-NumberOfArticles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />

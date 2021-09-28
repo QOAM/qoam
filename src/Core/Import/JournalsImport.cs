@@ -239,6 +239,11 @@ namespace QOAM.Core.Import
                     currentJournal.PISSN = journal.PISSN;
                 }
 
+                if (journalUpdateProperties.Contains(JournalUpdateProperty.NumberOfArticles))
+                {
+                    currentJournal.NumberOfArticles = journal.NumberOfArticles;
+                }
+
                 if (journalUpdateProperties.Contains(JournalUpdateProperty.ArticlesPerYear))
                 {
                     foreach (var articlesPerYear in journal.ArticlesPerYear)
@@ -423,7 +428,7 @@ namespace QOAM.Core.Import
             }
         }
 
-        private static bool ShouldUpdateJournals(JournalsImportMode journalsImportMode)
+        static bool ShouldUpdateJournals(JournalsImportMode journalsImportMode)
         {
             switch (journalsImportMode)
             {

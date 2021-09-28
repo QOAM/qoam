@@ -4,6 +4,7 @@
     {
         DOAJ,
         Ulrichs,
-        JournalTOCs
+        JournalTOCs,
+        CrossRef
     }
 }
