@@ -130,8 +130,8 @@ namespace QOAM.Core.Export
         List<ExportJournal> GetExportJournals(bool openAccessOnly)
         {
             var journals = openAccessOnly
-                ? journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.NumberOfArticles, j => j.ValuationScoreCards)
-                : journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.NumberOfArticles, j => j.ValuationScoreCards);
+                ? journalRepository.AllWhereIncluding(j => j.OpenAccess, j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ValuationScoreCards)
+                : journalRepository.AllIncluding(j => j.Country, j => j.Publisher, j => j.Languages, j => j.Subjects, j => j.ValuationScoreCards);
 
             return journals.Select(ToExportJournal).ToList();
         }
