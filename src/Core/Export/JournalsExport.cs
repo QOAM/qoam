@@ -75,11 +75,10 @@ namespace QOAM.Core.Export
                         csvWriter.WriteField(j.DateAdded);
                         csvWriter.WriteField(j.Country);
                         csvWriter.WriteField(j.Publisher);
-                        csvWriter.WriteField(j.DataSource);
+                        csvWriter.WriteField(j.InDoaj);
+                        //csvWriter.WriteField(j.DataSource);
                         csvWriter.WriteField(j.Languages);
                         csvWriter.WriteField(j.Subjects);
-                        csvWriter.WriteField(j.DoajSeal);
-                        csvWriter.WriteField(j.PlanSJournal);
                         csvWriter.WriteField(j.Score);
                         csvWriter.WriteField(j.NoFee);
                         csvWriter.WriteField(j.NumberOfArticles);
@@ -158,11 +157,10 @@ namespace QOAM.Core.Export
                 DateAdded = j.DateAdded,
                 Country = j.Country.Name,
                 Publisher = j.Publisher.Name,
-                DataSource = j.DataSource,
+                InDoaj = j.InDoaj ? "Yes" : "No",
+                //DataSource = j.DataSource,
                 Languages = string.Join(",", j.Languages.Select(l => l.Name)),
                 Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
-                DoajSeal = j.DoajSeal ? "Yes" : "No",
-                PlanSJournal = j.PlanS ? "Yes" : "No",
                 Score = (j.ValuationScore?.AverageScore ?? 0).ToString("0.0"),
                 NoFee = j.NoFee ? "Yes" : "No",
                 ScoreCardsPerYear = j.ValuationScoreCards

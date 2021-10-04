@@ -12,7 +12,7 @@
 
     <div class="list-group">
         <a href="javascript:void(0)" class="list-group-item active">Journals</a>
-        @Html.AdminLink("Show journals not from JournalTOCs", User, "NotInJournalTocs", null, "list-group-item", "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
+        @*@Html.AdminLink("Show journals not from JournalTOCs", User, "NotInJournalTocs", null, "list-group-item", "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)*@
         @Html.AdminLink("Import or Update journals", User, "Import", null, "list-group-item", "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
         @*@Html.AdminLink("Update journals", User, "Update", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)*@
         @Html.JavascriptLink("Download journals", "download", User, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
@@ -26,9 +26,6 @@
 
         @Html.AdminLink("Add no-fee label", User, "AddNoFeeLabel", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
         @Html.AdminLink("Remove no-fee label", User, "RemoveNoFeeLabel", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
-
-        @Html.AdminLink("Add Plan S label", User, "AddPlanSLabel", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
-        @Html.AdminLink("Remove Plan S label", User, "RemovePlanSLabel", null, "list-group-item", ApplicationRole.Admin, ApplicationRole.DataAdmin)
     </div>
     <div class="list-group">
         <a href="javascript:void(0)" class="list-group-item active">Score cards</a>

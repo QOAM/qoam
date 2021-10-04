@@ -14,21 +14,21 @@ namespace QOAM.Core.Export
         public DateTime DateAdded { get; set; }
         public string Country { get; set; }
         public string Publisher { get; set; }
-        [Name("Data source")]
+        
+        [Ignore, Name("Data source")] // All Journals come from JournalTOCs, not using for now
         public string DataSource { get; set; }
+
+        [Name("In DOAJ")]
+        public string InDoaj { get; set; }
+        
         public string Languages { get; set; }
         public string Subjects { get; set; }
-        [Name("DOAJ Seal"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]
-        public string DoajSeal { get; set; }
 
         //[Name("Score cards in 2018")]
         //public int ScoreCardsIn2018 { get; set; }
 
         //[Name("Score cards in 2019")]
         //public int ScoreCardsIn2019 { get; set; }
-
-        [Name("Plan S Journal"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]
-        public string PlanSJournal { get; set; }
 
         public string Score { get; set; }
         [Name("No-Fee Journal"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]

@@ -108,15 +108,19 @@ namespace QOAM.Console.DataImporter
             if (journalsImportSource == JournalsImportSource.CrossRef)
                 return new HashSet<JournalUpdateProperty> { JournalUpdateProperty.NumberOfArticles };
 
+            HashSet<JournalUpdateProperty> journalUpdateProperties;
             if (args.Count < 3)
             {
-                var journalUpdateProperties = new HashSet<JournalUpdateProperty>((JournalUpdateProperty[]) Enum.GetValues(typeof (JournalUpdateProperty)));
+                journalUpdateProperties = new HashSet<JournalUpdateProperty>((JournalUpdateProperty[]) Enum.GetValues(typeof (JournalUpdateProperty)));
                 journalUpdateProperties.Remove(JournalUpdateProperty.DoajSeal);
-
-                return journalUpdateProperties;
             }
+            else 
+                journalUpdateProperties = new HashSet<JournalUpdateProperty>(args[2].Split(',', ';').Select(s => (JournalUpdateProperty)Enum.Parse(typeof(JournalUpdateProperty), s, true)));
 
-            return new HashSet<JournalUpdateProperty>(args[2].Split(',', ';').Select(s => (JournalUpdateProperty)Enum.Parse(typeof(JournalUpdateProperty), s, true)));
+            if (journalsImportSource == JournalsImportSource.DOAJ)
+                journalUpdateProperties.Remove(JournalUpdateProperty.DataSource);
+
+            return journalUpdateProperties;
         }
     }
 }

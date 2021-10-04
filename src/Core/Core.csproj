@@ -359,6 +359,10 @@
     <Compile Include="Migrations\202109280714503_Journal-NumberOfArticles.designer.cs">
       <DependentUpon>202109280714503_Journal-NumberOfArticles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110040801216_Remove-Plan-S.cs" />
+    <Compile Include="Migrations\202110040801216_Remove-Plan-S.designer.cs">
+      <DependentUpon>202110040801216_Remove-Plan-S.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuestionKeyExtensions.cs" />
     <Compile Include="Repositories\BlockedISSNRepository.cs" />
     <Compile Include="Repositories\CornerRepository.cs" />
@@ -437,6 +441,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202109280714503_Journal-NumberOfArticles.resx">
       <DependentUpon>202109280714503_Journal-NumberOfArticles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110040801216_Remove-Plan-S.resx">
+      <DependentUpon>202110040801216_Remove-Plan-S.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Deleted.sql" />
     <EmbeddedResource Include="Scripts\20151029_Trigger_UserProfiles.Updated.sql" />

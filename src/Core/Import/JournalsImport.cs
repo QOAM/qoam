@@ -1,30 +1,27 @@
 ﻿using System.Data.Entity.Validation;
-using QOAM.Core.Repositories.Filters;
 
 namespace QOAM.Core.Import
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Text;
     using NLog;
 
-    using QOAM.Core.Helpers;
-    using QOAM.Core.Repositories;
+    using Helpers;
+    using Repositories;
 
     using Validation;
 
     public class JournalsImport
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private readonly IJournalRepository _journalRepository;
-        private readonly ILanguageRepository languageRepository;
-        private readonly ICountryRepository countryRepository;
-        private readonly ISubjectRepository subjectRepository;
-        private readonly IPublisherRepository publisherRepository;
-        private readonly GeneralImportSettings importSettings;
+        readonly IJournalRepository _journalRepository;
+        readonly ILanguageRepository languageRepository;
+        readonly ICountryRepository countryRepository;
+        readonly ISubjectRepository subjectRepository;
+        readonly IPublisherRepository publisherRepository;
+        readonly GeneralImportSettings importSettings;
 
         public JournalsImport(IJournalRepository journalRepository, ILanguageRepository languageRepository, ICountryRepository countryRepository, ISubjectRepository subjectRepository, IPublisherRepository publisherRepository, GeneralImportSettings importSettings)
         {

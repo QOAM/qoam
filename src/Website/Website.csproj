@@ -298,7 +298,6 @@
     <Compile Include="ViewModels\Journals\InstitutionalPricesImportedViewModel.cs" />
     <Compile Include="ViewModels\Journals\InstitutionalPricesViewModel.cs" />
     <Compile Include="ViewModels\Journals\IPagedJournalListViewModel.cs" />
-    <Compile Include="ViewModels\Journals\JournalsForInstitutionViewModel.cs" />
     <Compile Include="ViewModels\Journals\RemoveBlockedIssnViewModel.cs" />
     <Compile Include="Models\RequestValuationEmail.cs" />
     <Compile Include="Resources\RequestValuation.Designer.cs">
@@ -726,7 +725,6 @@
     <Content Include="Views\Journals\BulkImportListPrices.cshtml" />
     <Content Include="Views\Journals\ListPricesImportSuccessful.cshtml" />
     <Content Include="Views\Shared\_JournalTableFilters.cshtml" />
-    <Content Include="Views\Shared\JournalsForInstitution.cshtml" />
     <Content Include="Views\Home\PlanSInstitutionSelection.cshtml" />
     <Content Include="Views\Shared\_LayoutDemoPlanS.cshtml" />
     <Content Include="Views\Admin\AssociateCorrespondingDomains.cshtml" />

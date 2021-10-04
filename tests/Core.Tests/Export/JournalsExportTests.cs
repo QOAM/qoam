@@ -15,7 +15,7 @@
 
     public class JournalsExportTests
     {
-        const string ExpectedJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;Data source;Languages;Subjects;DOAJ Seal;Plan S Journal;Score;No-Fee Journal;Number of Articles (Doi Count);Score cards in 2019;Score cards in 2020\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 09:52:51;Switzerland;<none indicated>;DOAJ;English,German;library and information sciences;No;No;0,0;No;0;1;1\r\n16:9;1603-5194;http://www.16-9.dk;2-10-2013 09:52:51;Denmark;Springer;Ulrich;English,Danish;motion pictures,films;Yes;No;0,0;No;21;1;1\r\n";
+        const string ExpectedJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;In DOAJ;Languages;Subjects;Score;No-Fee Journal;Number of Articles (Doi Count);Score cards in 2019;Score cards in 2020\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 09:52:51;Switzerland;<none indicated>;Yes;English,German;library and information sciences;0,0;No;0;1;1\r\n16:9;1603-5194;http://www.16-9.dk;2-10-2013 09:52:51;Denmark;Springer;No;English,Danish;motion pictures,films;0,0;No;21;1;1\r\n";
 
         [Fact]
         public void ConstructorWithNullJournalRepositoryThrowsArgumentNullException()
@@ -73,7 +73,8 @@
                            DateAdded = DateTime.Parse("2-10-2013 9:52:51"),
                            Country = new Country { Name = "Switzerland" },
                            Publisher = new Publisher { Name = "<none indicated>" },
-                           DataSource = "DOAJ",
+                           DataSource = "JournalTOCs",
+                           InDoaj = true,
                            Languages = new List<Language> { new Language { Name = "English" }, new Language { Name = "German" } },
                            Subjects = new List<Subject> { new Subject { Name = "library and information sciences" } },
                            DoajSeal = false,
@@ -94,7 +95,8 @@
                            DateAdded = DateTime.Parse("2-10-2013 9:52:51"),
                            Country = new Country { Name = "Denmark" },
                            Publisher = new Publisher { Name = "Springer" },
-                           DataSource = "Ulrich",
+                           DataSource = "JournalTOCs",
+                           InDoaj = false,
                            Languages = new List<Language> { new Language { Name = "English" }, new Language { Name = "Danish" } },
                            Subjects = new List<Subject> { new Subject { Name = "motion pictures" }, new Subject { Name = "films" } },
                            DoajSeal = true,

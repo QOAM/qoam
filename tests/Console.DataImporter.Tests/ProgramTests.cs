@@ -331,5 +331,21 @@ namespace QOAM.Console.DataImporter.Tests
             var expected = new HashSet<JournalUpdateProperty> { JournalUpdateProperty.NumberOfArticles };
             Assert.Equal(expected, journalUpdateProperties);
         }
+
+        [Fact]
+        public void GetJournalUpdateDoesNotUpdateDataSourceForDoajImport()
+        {
+            // Arrange
+            var args = new List<string> { "Doaj" };
+
+            // Act
+            var journalUpdateProperties = Program.GetJournalUpdateProperties(args, JournalsImportSource.DOAJ);
+
+            // Assert
+            var expected = new HashSet<JournalUpdateProperty>( (JournalUpdateProperty[]) Enum.GetValues(typeof (JournalUpdateProperty)));
+            
+            Assert.DoesNotContain(JournalUpdateProperty.DataSource,journalUpdateProperties);
+            
+        }
     }
 }

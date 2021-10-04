@@ -67,8 +67,6 @@
         public string DataSource { get; set; }
         public bool OpenAccess { get; set; }
         public bool NoFee { get; set; }
-        public bool PlanS { get; set; }
-        
         public bool InDoaj { get; set; }
 
         public int NumberOfArticles { get; set; }
