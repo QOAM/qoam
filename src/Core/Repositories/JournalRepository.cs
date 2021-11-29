@@ -41,7 +41,12 @@ namespace QOAM.Core.Repositories
 
         public Journal FindByIssn(string issn)
         {
-            return this.DbContext.Journals.FirstOrDefault(j => j.ISSN.ToLower() == issn.ToLower());
+            return DbContext.Journals.FirstOrDefault(j => j.ISSN.ToLower() == issn.ToLower());
+        }
+
+        public Journal FindByIssnOrPIssn(string issn)
+        {
+            return DbContext.Journals.FirstOrDefault(j => j.ISSN.ToLower() == issn.ToLower() || j.PISSN.ToLower() == issn.ToLower());
         }
 
         public IQueryable<string> Titles(string query)
@@ -51,7 +56,7 @@ namespace QOAM.Core.Repositories
                 return Enumerable.Empty<string>().AsQueryable();
             } 
 
-            return this.DbContext.Journals.Where(j => j.Title.ToLower().StartsWith(query.ToLower())).Select(j => j.Title);
+            return DbContext.Journals.Where(j => j.Title.ToLower().StartsWith(query.ToLower())).Select(j => j.Title);
         }
 
         public IQueryable<string> Publishers(string query)
@@ -61,7 +66,7 @@ namespace QOAM.Core.Repositories
                 return Enumerable.Empty<string>().AsQueryable();
             } 
 
-            return this.DbContext.Journals.Where(j => j.Publisher.Name.ToLower().StartsWith(query.ToLower())).Select(j => j.Publisher.Name).Distinct();
+            return DbContext.Journals.Where(j => j.Publisher.Name.ToLower().StartsWith(query.ToLower())).Select(j => j.Publisher.Name).Distinct();
         }
 
         public IQueryable<string> Issns(string query)
@@ -71,7 +76,7 @@ namespace QOAM.Core.Repositories
                 return Enumerable.Empty<string>().AsQueryable();
             } 
 
-            return this.DbContext.Journals.Where(j => j.ISSN.ToLower().StartsWith(query.ToLower())).Select(j => j.ISSN);
+            return DbContext.Journals.Where(j => j.ISSN.ToLower().StartsWith(query.ToLower())).Select(j => j.ISSN);
         }
 
         public IQueryable<string> Subjects(string query)
@@ -81,7 +86,7 @@ namespace QOAM.Core.Repositories
                 return Enumerable.Empty<string>().AsQueryable();
             }
 
-            return this.DbContext.Subjects.Where(s => s.Name.ToLower().StartsWith(query.ToLower())).Where(s => s.Journals.Any()).Select(s => s.Name);
+            return DbContext.Subjects.Where(s => s.Name.ToLower().StartsWith(query.ToLower())).Where(s => s.Journals.Any()).Select(s => s.Name);
         }
 
         public IQueryable<string> Languages(string query)
@@ -91,20 +96,20 @@ namespace QOAM.Core.Repositories
                 return Enumerable.Empty<string>().AsQueryable();
             }
 
-            return this.DbContext.Languages.Where(s => s.Name.ToLower().StartsWith(query.ToLower())).Where(s => s.Journals.Any()).Select(s => s.Name);
+            return DbContext.Languages.Where(s => s.Name.ToLower().StartsWith(query.ToLower())).Where(s => s.Journals.Any()).Select(s => s.Name);
         }
 
         public IQueryable<string> AllIssns
         {
             get
             {
-                return this.DbContext.Journals.Select(j => j.ISSN);    
+                return DbContext.Journals.Select(j => j.ISSN);    
             }
         }
 
         public IPagedList<Journal> Search(JournalFilter filter)
         {
-            var query = this.DbContext.Journals
+            var query = DbContext.Journals
                 .Include(j => j.Publisher)
                 .Include(j => j.Languages)
                 .Include(j => j.Subjects);
@@ -114,12 +119,12 @@ namespace QOAM.Core.Repositories
 
         public IQueryable<Journal> SearchByISSN(IEnumerable<string> issns)
         {
-            return this.DbContext.Journals.Where(j => issns.Contains(j.ISSN));
+            return DbContext.Journals.Where(j => issns.Contains(j.ISSN));
         }
 
         public IList<Journal> SearchAll(JournalFilter filter)
         {
-            var query = this.DbContext.Journals.AsQueryable();
+            var query = DbContext.Journals.AsQueryable();
 
             if (filter.PublisherId.HasValue)
             {
@@ -131,12 +136,12 @@ namespace QOAM.Core.Repositories
 
         public Journal Find(int id)
         {
-            return this.DbContext.Journals.Find(id);
+            return DbContext.Journals.Find(id);
         }
 
         public int BaseScoredJournalsCount()
         {
-            return this.DbContext.Journals.Count(j => j.NumberOfBaseReviewers > 0);
+            return DbContext.Journals.Count(j => j.NumberOfBaseReviewers > 0);
         }
 
         public int ValuationScoredJournalsCount()
@@ -154,7 +159,7 @@ namespace QOAM.Core.Repositories
             //Log to Output window...
             //DbContext.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
 
-            IQueryable<Journal> query = this.DbContext.Journals;
+            IQueryable<Journal> query = DbContext.Journals;
             query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
             return query.ToList();

@@ -372,7 +372,7 @@ namespace QOAM.Website.Controllers
 
                 foreach (var listPriceLink in data)
                 {
-                    var journal = journalRepository.FindByIssn(listPriceLink.ISSN);
+                    var journal = journalRepository.FindByIssnOrPIssn(listPriceLink.ISSN);
 
                     if (journal == null)
                     {
