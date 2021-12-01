@@ -404,6 +404,7 @@
     <Content Include="Content\images\banner.png" />
     <Content Include="Content\images\banner2.gif" />
     <Content Include="Content\images\banner3.jpg" />
+    <Content Include="Content\images\banner4.jpg" />
     <Content Include="Content\images\bfj-flow-no-label.png" />
     <Content Include="Content\images\bfj-flow.png" />
     <Content Include="Content\images\bfj-home-background.png" />
