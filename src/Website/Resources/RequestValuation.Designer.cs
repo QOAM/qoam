@@ -19,7 +19,7 @@ namespace QOAM.Website.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class RequestValuation {
@@ -67,7 +67,7 @@ namespace QOAM.Website.Resources {
         ///
         ///Would you mind sharing your experiences with your colleagues? If so, please click on the link at the bottom of this message. After logging in, you will be forwarded to a Score Card for this journal. It will take you less than two minutes to complete this mini questionnaire.
         ///
-        ///Your card will be added to the Quality Open Access Market (www.qoam.eu) which also includes information about the publication fees. Thus, QO [rest of string was truncated]&quot;;.
+        ///Your card will be added to the Quality Open Access Marker (www.qoam.eu) which also includes information about the publication fees. Thus, QO [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Body {
             get {

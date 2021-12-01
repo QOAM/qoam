@@ -1,10 +1,10 @@
-﻿# Quality Open Access Market
+﻿# Quality Open Access Marker
 
 [![Build status](https://ci.appveyor.com/api/projects/status/vt8kiblbqiwcb95t?svg=true)](https://ci.appveyor.com/project/ErikSchierboom/qoam)
 [![Coverage Status](https://coveralls.io/repos/QOAM/qoam/badge.svg?branch=master&service=github)](https://coveralls.io/github/QOAM/qoam?branch=master)
 
 ## Introduction
-Quality Open Access Market (QOAM) is primarily for authors who want to publish their article in open access in a high quality journal and for a reasonable price.
+Quality Open Access Marker (QOAM) is primarily for authors who want to publish their article in open access in a high quality journal and for a reasonable price.
 
 ## Building
 Building QOAM requires the following steps to be followed:
