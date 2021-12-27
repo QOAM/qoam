@@ -158,7 +158,8 @@ namespace QOAM.Core.Import
         {
             foreach (var journal in existingJournalsChunk)
             {
-                var currentJournal = databaseJournalsForChunk.FirstOrDefault(j => string.Equals(j.ISSN, journal.ISSN, StringComparison.InvariantCultureIgnoreCase));
+                var currentJournal = databaseJournalsForChunk
+                    .FirstOrDefault(j => string.Equals(j.ISSN, journal.ISSN, StringComparison.InvariantCultureIgnoreCase) || string.Equals(j.PISSN, journal.ISSN, StringComparison.InvariantCultureIgnoreCase));
 
                 if (currentJournal == null)
                 {
