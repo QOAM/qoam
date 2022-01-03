@@ -60,12 +60,13 @@ namespace QOAM.Core.Import
             Logger.Info("Retrieving existing journals from database...");
             
             var currentJournalIssns = _journalRepository.AllIssns.ToList();
+            var currentJournalPIssns = _journalRepository.AllPIssns.ToList();
             
-            var newJournals = distinctJournals.Where(j => !currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
+            var newJournals = distinctJournals.Where(j => !currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase) && !currentJournalPIssns.Contains(j.PISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
 
             Logger.Info("Found {0} new journals", newJournals.Count);
 
-            var existingJournals = distinctJournals.Where(j => currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
+            var existingJournals = distinctJournals.Where(j => currentJournalIssns.Contains(j.ISSN, StringComparer.InvariantCultureIgnoreCase) || currentJournalPIssns.Contains(j.PISSN, StringComparer.InvariantCultureIgnoreCase)).ToList();
 
             Logger.Info("Found {0} existing journals", existingJournals.Count);
 

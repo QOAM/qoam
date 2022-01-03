@@ -107,6 +107,14 @@ namespace QOAM.Core.Repositories
             }
         }
 
+        public IQueryable<string> AllPIssns
+        {
+            get
+            {
+                return DbContext.Journals.Select(j => j.PISSN);    
+            }
+        }
+
         public IPagedList<Journal> Search(JournalFilter filter)
         {
             var query = DbContext.Journals

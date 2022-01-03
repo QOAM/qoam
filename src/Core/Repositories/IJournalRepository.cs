@@ -16,6 +16,7 @@
         IList<Journal> All { get; }
 
         IQueryable<string> AllIssns { get; }
+        IQueryable<string> AllPIssns { get; }
 
         IPagedList<Journal> Search(JournalFilter filter);
 
