@@ -138,7 +138,7 @@ namespace QOAM.Core.Import
                         var exitsingJournalsChunkList = existingJournalsChunk.ToList();
                         //var databaseJournalsForChunk = _journalRepository.SearchByISSN(exitsingJournalsChunkList.Select(j => j.ISSN).ToList()).ToList();
                         var issns = exitsingJournalsChunkList.Select(j => j.ISSN).ToList();
-                        var databaseJournalsForChunk = dbContext.Journals.Where(j => issns.Contains(j.ISSN)).ToList();
+                        var databaseJournalsForChunk = dbContext.Journals.Where(j => issns.Contains(j.ISSN) || issns.Contains(j.PISSN)).ToList();
                         //var subjects = _journalRepository.DbContext.Subjects.ToList();
                         //var languages = _journalRepository.DbContext.Languages.ToList();
                     
