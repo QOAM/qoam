@@ -10,6 +10,7 @@
     public class ValuationScoreCardViewModel : IValidatableObject
     {
         public int Id { get; set; }
+        public int ScoreCardId { get; set; }
         public string Remarks { get; set; }
         public bool Submitted { get; set; }
         public bool Editor { get; set; }

@@ -111,7 +111,7 @@
             @if (User.IsInRole(ApplicationRole.Admin))
             {
                 <div class="text-center">
-                    <a href="@Url.Action("RemoveValuationScoreCard", "Admin", new { id = Model.Id })" title="Delete JSC" class="btn btn-danger" role="button">
+                    <a href="@Url.Action("RemoveValuationScoreCard", "Admin", new { id = Model.ScoreCardId })" title="Delete JSC" class="btn btn-danger" role="button">
                         Remove score card <i class="glyphicon glyphicon-remove"></i>
                     </a>
                 </div>

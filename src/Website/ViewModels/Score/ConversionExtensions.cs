@@ -31,6 +31,7 @@
             return new ValuationScoreCardViewModel
             {
                 Id = scoreCard.JournalId,
+                ScoreCardId = scoreCard.Id,
                 Remarks = scoreCard.Remarks,
                 Submitted = scoreCard.Submitted,
                 Editor = scoreCard.Editor,

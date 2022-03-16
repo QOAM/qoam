@@ -24,8 +24,6 @@
             @if (isOwner)
             {
                 <span class="glyphicon glyphicon-pencil"></span> @Html.ActionLink("Edit", "ValuationScoreCard", "Score", new { id = scoreCard.JournalId }, null)
-                @:&nbsp;&nbsp;
-                <span class="glyphicon glyphicon-remove"></span>@Html.ActionLink("Remove", "RemoveValuationScoreCard", "Admin", new { id = scoreCard.Id }, null)
             }
             else
             {
