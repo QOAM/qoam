@@ -80,6 +80,7 @@ namespace QOAM.Core.Export
                         csvWriter.WriteField(j.Languages);
                         csvWriter.WriteField(j.Subjects);
                         csvWriter.WriteField(j.Score);
+                        csvWriter.WriteField(j.OpenAccess);
                         csvWriter.WriteField(j.NoFee);
                         csvWriter.WriteField(j.NumberOfArticles);
 
@@ -162,6 +163,7 @@ namespace QOAM.Core.Export
                 Languages = string.Join(",", j.Languages.Select(l => l.Name)),
                 Subjects = string.Join(",", j.Subjects.Select(l => l.Name)),
                 Score = (j.ValuationScore?.AverageScore ?? 0).ToString("0.0"),
+                OpenAccess = j.OpenAccess ? "Yes" : "No",
                 NoFee = j.NoFee ? "Yes" : "No",
                 ScoreCardsPerYear = j.ValuationScoreCards
                     .Where(vsc => vsc.DatePublished.HasValue && vsc.DatePublished.Value.Year >= minYear)

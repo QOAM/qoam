@@ -31,6 +31,8 @@ namespace QOAM.Core.Export
         //public int ScoreCardsIn2019 { get; set; }
 
         public string Score { get; set; }
+        [Name("Open Access"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]
+        public string OpenAccess { get; set; }
         [Name("No-Fee Journal"), BooleanTrueValues("Yes"), BooleanFalseValues("No")]
         public string NoFee { get; set; }
 
