@@ -478,6 +478,7 @@
     <Content Include="Scripts\globalize\plural.js" />
     <Content Include="Scripts\globalize\relative-time.js" />
     <Content Include="Scripts\globalize\unit.js" />
+    <Content Include="Scripts\Helpers\NotificationHelper.js" />
     <Content Include="Scripts\Helpers\RequestValuationForm.js" />
     <Content Include="Scripts\Helpers\swot-filter.js" />
     <Content Include="Areas\BonaFide\Views\Data\Index.cshtml" />
@@ -737,6 +738,7 @@
     <Content Include="Views\Shared\_LayoutBfj.cshtml" />
     <Content Include="Views\Shared\_Bfj-Header.cshtml" />
     <Content Include="Views\Home\QoamJournalComposition.cshtml" />
+    <Content Include="Views\Shared\_InMemoriamNotification.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

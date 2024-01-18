@@ -15,7 +15,7 @@
 
     public class JournalsExportTests
     {
-        const string ExpectedJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;In DOAJ;Languages;Subjects;Score;Open Access;No-Fee Journal;Number of Articles (Doi Count);Score cards in 2020\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 09:52:51;Switzerland;<none indicated>;Yes;English,German;library and information sciences;0,0;Yes;No;0;1\r\n16:9;1603-5194;http://www.16-9.dk;2-10-2013 09:52:51;Denmark;Springer;No;English,Danish;motion pictures,films;0,0;Yes;No;21;1\r\n";
+        const string ExpectedJournalsCsv = "\"sep=;\"\r\nTitle;ISSN;Link;Date Added;Country;Publisher;In DOAJ;Languages;Subjects;Score;Open Access;No-Fee Journal;Number of Articles (Doi Count);Score cards in 2021\r\n027.7 : Zeitschrift fuer Bibliothekskultur;2296-0597;http://www.0277.ch/ojs/index.php/cdrs_0277;2-10-2013 09:52:51;Switzerland;<none indicated>;Yes;English,German;library and information sciences;0,0;Yes;No;0;1\r\n16:9;1603-5194;http://www.16-9.dk;2-10-2013 09:52:51;Denmark;Springer;No;English,Danish;motion pictures,films;0,0;Yes;No;21;1\r\n";
 
         [Fact]
         public void ConstructorWithNullJournalRepositoryThrowsArgumentNullException()
@@ -85,7 +85,7 @@
                            {
                                new ValuationScoreCard { DatePublished = new DateTime(2018, 5, 5) },
                                new ValuationScoreCard { DatePublished = new DateTime(2019, 7, 5) },
-                               new ValuationScoreCard { DatePublished = new DateTime(2020, 1, 5) }
+                               new ValuationScoreCard { DatePublished = new DateTime(2021, 1, 5) }
                            }
                        },
                        new Journal
@@ -105,14 +105,14 @@
                            NumberOfArticles = 21,
                            ArticlesPerYear = new List<ArticlesPerYear>
                            {
-                               new ArticlesPerYear { Year = 2020, NumberOfArticles = 2 },
+                               new ArticlesPerYear { Year = 2021, NumberOfArticles = 2 },
                                new ArticlesPerYear { Year = 2019, NumberOfArticles = 19 }
                            },
                            ValuationScoreCards = new List<ValuationScoreCard> 
                            {
                                new ValuationScoreCard { DatePublished = new DateTime(2018, 7, 5) },
                                new ValuationScoreCard { DatePublished = new DateTime(2019, 1, 5) },
-                               new ValuationScoreCard { DatePublished = new DateTime(2020, 5, 5) }
+                               new ValuationScoreCard { DatePublished = new DateTime(2021, 5, 5) }
                            }
                        }
                    };

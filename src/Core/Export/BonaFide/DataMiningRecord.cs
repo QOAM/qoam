@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 using CsvHelper.Configuration.Attributes;
-using Newtonsoft.Json;
 
 namespace QOAM.Core.Export.BonaFide
 {

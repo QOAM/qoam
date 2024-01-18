@@ -49,6 +49,14 @@ a:active, a:focus {
     margin-bottom: 20px;
 }
 
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}
+
 .mr-20 {
     margin-right: 20px;
 }

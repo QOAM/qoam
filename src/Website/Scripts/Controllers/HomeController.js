@@ -16,6 +16,9 @@
             },
             template: "<div class='popover custom-popover' role='tooltip'><div class='popover-content'></div></div>"
         });
+
+        // store that the user has seen the In Memoriam for Leo.
+        localStorage.setItem("inmemleo", "true");
     };
 
     HomeController.prototype.demoPlanS = function() {

@@ -1,0 +1,22 @@
+﻿@if (ViewBag.PageId != "home-index-page")
+{
+    <div id="in-memoriam-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Important announcement</h3>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        We have an important announcement to make.<br />
+                        Please head to the @Html.ActionLink("Home page", "Index", "Home") to read it.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="dismiss-inmemoriam-notification">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -18,6 +18,8 @@
         <div id="wrap">
             @Html.Partial("_Header")
             @RenderBody()
+            
+            @Html.Partial("_InMemoriamNotification");
         </div>
 
         @Html.Partial("_Footer")
@@ -33,5 +35,11 @@
             <script src="~/Scripts/respond.min.js"></script>
         <![endif]-->
         @Html.Partial("_GoogleAnalytics")
+        
+        <script>
+            $(function() {
+                initializeInMemoriamNotification();
+            })
+        </script>
     </body>
 </html>
