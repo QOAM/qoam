@@ -10,9 +10,20 @@
             @{ Html.RenderPartial("_SidebarMenu", "Contact"); }
         </div>
         <div class="col-md-9">
-            <h2>@ViewBag.Title</h2>
+            @*<h2>@ViewBag.Title</h2>*@
+            
+            <h2>Important announcement</h2>
+            
+            <div class="row mt-40">
+                <div class="col-xs-12">
+                    <p>
+                        We have an important announcement to make.<br />
+                        Please head to the @Html.ActionLink("Home page", "Index", "Home") to read it.
+                    </p>
+                </div>
+            </div>
 
-            @Html.ValidationSummary()
+            @*@Html.ValidationSummary()
 
             @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
             {
@@ -64,7 +75,7 @@
                         </div>
                     </div>
                 </fieldset>
-            }
+            }*@
         </div>
     </div>
 </div>
